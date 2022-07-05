@@ -1,0 +1,160 @@
+\chapter{泛函分析}
+\section{基本概念}
+
+线性空间上的范数:正定性,次可加性,齐次性;半范数:半正定性,次可加性,齐次性,满足正齐次性;赋范空间,范数诱导的度量;$Banach$ 空间;线性流形
+
+\begin{enumerate}
+\item 范数,数乘和加法都是连续函数
+\item 赋范空间上任意线性子空间的闭包是线性子空间
+\item 同一线性空间$X$的两个范数$\Vert x\Vert_1,\Vert x\Vert_2$,称范数2比范数1强是指当$\Vert x_n\Vert_2\to0$时必然有
+$\Vert x_n\Vert_1\to0$,这个条件等价于存在一个正实数$C$使得$\Vert x\Vert_1\le C\Vert x\Vert_2\forall x\in X$.
+这个“强”的意义在于强的范数诱导的度量拓扑更细,也可以这样理解,收敛的序列越少,即存在更多的开集限制序列收敛,也即拓扑越细.称两个范数等价如果他们互相强于对方,于是这也等价于存在正实数$C_2\le C_1$使得$C_2\Vert x\Vert_1\le\Vert x\Vert_2\le C_1\Vert x\Vert_1$
+\item 有限维线性空间上范数均等价
+\item 赋范空间上有限维线性子空间是闭子集
+\item 赋范空间$X$的线性子空间(范数传递下来),有限直和(范数可定义做每个分量在自身赋范空间中范数的最大值或和),关于一个闭线性子空间$Y$ 的商空间(范数是$\Vert x+Y\vert=\inf_{t\in x+Y}\Vert t\Vert_X$)都可以作为一个赋范空间;关于商空间能说的更多:商空间上范数诱导的拓扑恰好是商拓扑,并且这里自然投影是开映射;当$X$ 是$Banach$ 空间时商空间也是$Banach$
+\item 每个赋范空间的度量完备化是一个$Banach$空间,并且完备化上的范数是原本范数的延拓
+\item 区别有限无限维赋范空间的一个性质:赋范空间$X$ 是无限维的当且仅当单位闭球不是紧致的(引理:$Y$是一个真闭线性子空间,那么存在$X$中长度为1的向量$z$使得$\mid z-y\mid>\frac{1}{2},\forall y\in Y$)
+\item $V$是赋范线性空间,则$V$完备当且仅当对一列向量$v_k\in V$,倘若$\sum\Vert v_k\Vert$ 收敛那么$\sum v_k$依范数收敛.(即绝对收敛级数均在空间中收敛)
+    \begin{proof}
+  一方面,倘若空间完备,那么对于任意的绝对收敛级数$\sum_ {n=1}^{\infty}a_n$, 即满足$$\sum_{n=1}^{+\infty}\Vert a_n\Vert=a<+\infty$$
+  于是$\sum_{k=1}^n a_k$是Cauchy列,这是因为对于任意$\varepsilon>0$,存在$N$ 当$k\ge N$时$\sum_{n=k}^{\infty}\Vert a_k\Vert<\varepsilon$
+  故当$m>n>N$时有:$$\Vert\sum_{k=1}^m a_k-\sum_{k=1}^n a_k\Vert=\Vert\sum_{k=n+1}^m a_k\Vert\le\sum_{k=n+1}^m\Vert a_k\Vert<\varepsilon$$
+  从而由完备性得$\sum_{n=1}^{\infty}a_n$收敛到$V$中向量.
+
+  另一方面,倘若空间中任意绝对收敛的级数收敛到$V$中向量,任取一Cauchy 列$\{a_n\}$,首先对任意一列正实数列$\{p_n\}$满足$\sum_ {n=1}^{\infty}p_n$收敛,该Cauchy列可以取一列子列$\{a_{t_i}\}$ 满足:
+  $$\Vert a_{t_{i+1}}-a_{t_i}\Vert<p_i$$
+  这是因为,对于$p_1>0$,存在$N_1\in N$使得$\forall m,n>N$有$\Vert a_m-a_n\Vert<p_1$,取$t_1>N_1$,倘若已经构造$t_n\in N$,取$N_{n+1}\in N$使得$\forall m,n>N_{n+1}$有$\Vert a_m-a_n\Vert<p_{n+1}$,任取$t_{n+1}>\max\{t_n,N_{n+1}\}$,于是有$t_{n+1}>t_n,\Vert a_{t_{n+1}}-a_{t_n}\Vert<p_n$,于是得到要求的子列$\{a_{t_i}\}$.
+
+  于是$\sum_{n=1}^{\infty}\left(a_{t_{n+1}}-a_{t_n}\right)$是绝对收敛级数,按照条件它收敛到$V$中一个向量$a$,下面证明$\{a_n\}$收敛到向量$a$从而空间完备.对于任意$\varepsilon>0$, 有
+  $N_1$使得$m,n>N_1$时有$\Vert a_m-a_n\Vert<\frac{\varepsilon}{2}$,再取$N_2$使得$t_i>N_2$ 时有$\Vert a_{t_i}-a\Vert<\frac{\varepsilon}{2}$,于是当$n>\max\{N_1,N_2\}$, 取一个$t_i>\max\{N_1,N_2\}$ 有:$$\Vert a_n-a\Vert\le\Vert a_n-a_{t_i}\Vert+\Vert a_{t_i}-a\Vert<\varepsilon$$
+  \end{proof}
+\end{enumerate}
+
+线性空间$X$,则$(\cdot,\cdot):X\times X\to F(F=R,C)$称为半内积,如果满足:
+\begin{enumerate}
+  \item $(ax+by,z)=a(x,z)+b(y,z),\forall a,b\in F,\forall x,y,z\in X$
+  \item $(x,ay+bz)=\overline{a}(x,y)+\overline{b}(x,z),\forall a,b\in F,\forall x,y,z\in X$
+  \item $(x,x)\ge0,\forall x\in X$
+  \item $(x,y)=\overline{(y,x)}$
+\end{enumerate}
+倘若半内积$(\cdot,\cdot)$满足$(x,x)=0\Leftrightarrow x=0$,那么称它为内积.
+具备内积的线性空间称为内积空间,内积可以诱导范数:
+$$\Vert x\Vert=\sqrt{(x,x)}$$
+其中次可加性即如下性质1.如果内积空间在范数诱导出的度量拓扑是完备的,则称内积空间
+是Hilbert空间.
+
+\begin{enumerate}
+  \item 对半内积$(\cdot,\cdot)$有$Cauchy$不等式:$\mid (x,y)\mid\le\Vert x\Vert \Vert y\Vert$
+  \item 内积是$X\times X$到$R$的连续函数
+  \item $\Vert x\Vert=\max_{\Vert y\Vert=1}\mid(x,y)\mid$
+  \item 范数$\Vert x\Vert$可被内积诱导出当且仅当它满足等式:
+  $$\Vert x+y\Vert^2+\Vert x-y\Vert^2=2\Vert x\Vert^2+2\Vert y\Vert^2$$
+  \item $Hilbert$空间$H$上一个非空闭凸集$K$和$H$中任一点$x$,那么存在$K$中唯一一个点$y$ 使得:
+  $$d(x,y)=\inf_{z\in K}d(z,y)$$
+\end{enumerate}
+
+正交,正交补
+\begin{enumerate}
+  \item $a_i$两两正交,那么有:$\Vert a_1+a_2+\cdots+a_n\Vert^2=\Vert a_1\Vert^2+\Vert a_2\Vert^2+\cdots+\Vert a_n\Vert^2$
+  \item 内积空间上一个子集的正交补是一个闭的线性子空间
+  \item 子集$A$的正交补也是它闭线性包的正交补
+  \item $X$是$Hilbert$空间,$Y$是$X$的闭线性子空间,那么有直和分解$X=Y\oplus Y^{\perp}$, 并且$\left(Y^ {\perp}\right)^{\perp}=Y$(引理:内积空间上一个线性子空间$M$ 有$X$中点$x$那么存在$M$中点$y$ 有$d(x,y)$ 恰好是$d(x,M)$当且仅当$x-y\perp M$)
+  \item $Hilbert$空间一个线性子空间$A$在$H$上稠密当且仅当$A^ {\perp}=\{0\}$
+\end{enumerate}
+
+定义$Hilbert$空间$X$上关于一个闭线性子空间$M$的正交投影算子$P_{M}:X\to M$它有如下等价描述: $\forall x\in X$
+\begin{enumerate}
+  \item $p_M(x)$为直和分解$X=M\oplus M^{\perp}$对分量$M$的投影
+  \item $p_M(x)$是$Y$中和$x$距离最接近的唯一向量
+  \item $p_M(x)$是$Y$中使得$x-y$和$Y$正交的唯一向量$y$
+\end{enumerate}
+
+$Hilbert$空间$X$上正交投影算子$P_M$的基本性质:
+\begin{enumerate}
+  \item $P_M$是$X$到$M$的线性映射
+  \item $\Vert p_M(x)\Vert\le\Vert x\Vert,x\in H$
+  \item $P^2=P$
+  \item $\ker p=M^{\perp};\Im p=M$
+\end{enumerate}
+
+线性包,闭线性包
+\begin{enumerate}
+  \item 内积空间中,$y$在子集$A$的闭线性包中当且仅当每一个和全体$A$正交的向量也和$y$ 正交
+  \item $Hilbert$空间中,子集$A$的闭线性包是$\left(A^ {\perp}\right)^{\perp}$
+  \item $Hilbert$空间中,子集的闭线性包就是子集的全体线性组合在拓扑下的闭包
+\end{enumerate}
+
+标准正交集,标准正交基
+\begin{enumerate}
+  \item 由$Zorn$引理,对任意标准正交集,存在包含它的标准正交基
+  \item 任一至多可数的线性无关组可正交化为标准正交集,并且可以约定前n个向量生成的线性子空间是一致的
+  \item $\{e_n:n\ge1\}$是任意一个可数的标准正交集,$a_n\in F$,那么$\sum_{n=1}^{+\infty}a_ne_n$在$H$中收敛当且仅当$\sum_ {n=1}^{+\infty}\mid a_n\mid^2$在$R$上是收敛的
+  \item 有$Bessel$不等式:$\{e_n:n\ge1\}$是任意一个可数的标准正交集,那么有:
+  $$\sum_{n=1}^{+\infty}\mid(h,e_n)\mid^2\le\Vert h\Vert^2,\forall h\in H$$
+  于是对于任一标准正交基$\{e_i:i\in I\}$,使得$(h,e_i)\not=0$的那些$i\in I$ 是至多可数的,从而$\sum\{(h,e_i)e_i:i\in I\}$是有意义的,事实上可以利用拓扑空间的网定义这或许会不可数个向量的和:记全体$I$ 的有限子集在包含序下可作为一个有向集,它在每个点处的值定义做这有限个$(h,e_i)e_i$的和,于是它定义了一个$Hilbert$ 空间上的网,可以由柯西准则证明对任意$h\in H$,$\sum\{(h,e_i)e_i:i\in I\}$均是网收敛于$\sum_ {n=1}^{+\infty}(h,e_n)e_n$
+  的,这里$e_n$是那至多可数个使得$(h,e_i)$不为0的向量.于是这两种定义$\sum\{(h,e_i)e_i:i\in I\}$是一致的.
+\end{enumerate}
+
+$\Theta$是$H$上一个标准正交集,那么它是标准正交集等价于
+\begin{enumerate}
+  \item $\Theta^{\perp}=\{0\}$
+  \item $\Theta$的闭线性包是整个空间$H$
+  \item 对任意$h\in H$有收敛:$h=\sum\{(h,e)e:e\in\Theta\}$
+  \item 有$Parseval$恒等式:$\forall h\in H:\Vert h\Vert^2=\sum\{\mid(h,e\mid^2:e\in\Theta\}$
+\end{enumerate}
+
+$Hilbert$空间上任意两个标准正交基的势是相同的,于是可以定义为它的$Hilbert$维数.
+
+保距同构:是$Hilbert$空间之间的线性满射,保内积
+\begin{enumerate}
+  \item 一个$Hilbert$空间之间的线性映射,它保距离当且仅当它保内积
+  \item 度量空间之间的保距映射也保$Cauchy$列,于是保距同构是保完备性的
+  \item 保距同构是同胚
+  \item 两个$Hilbert$空间保距同构当且仅当他们有相同的$Hilbert$维数
+  \item $Hilbert$空间可分当且仅当它的维数是有限的或者是$\aleph_0$
+\end{enumerate}
+
+\section{线性算子,线性泛函}
+
+线性空间之间的线性算子;线性泛函,次线性泛函
+
+赋范空间上:
+\begin{enumerate}
+  \item 线性算子$A$的连续性等价于它有界,即存在一个正实数$C$使得:$\Vert Ax\Vert\le C\Vert x\Vert,\forall x\in X$
+  \item 线性泛函的连续性等价于它的$\ker$是闭线性子空间
+\end{enumerate}
+
+$Riesz$表示定理:$Hilbert$空间上的有界线性泛函可被内积函数唯一确定;连续线性泛函的等值面就是互相平行的超平面.$f$对应的$H$中的$a$就是$Kerf^{\perp}$ 中在$f$下值为1的元(唯一!)除以它范数的平方.
+
+有界线性算子空间$B(X,Y)$,对偶空间:全体有界线性泛函;自反空间
+\begin{enumerate}
+  \item $X,Y$是赋范空间,若$Y$完备,那么有界线性算子空间完备,于是对偶空间总是完备的.
+  \item 有界线性算子空间上的范数:对任一有界线性算子$L$:$$\Vert L\Vert=\sup_{\Vert h\Vert=1}\Vert L(h)\Vert=
+  \inf_{c>0}\{c:\Vert L(h)\Vert\le c\Vert h\Vert,\forall h\in X\}$$
+  \item $hilbert$空间是自反空间
+  \item 有$X$到$X''$的保距嵌入
+  \item 注意,$X$和$X''$等势不能说明$X$是自反空间
+\end{enumerate}
+
+$Hahn-Banach$定理:
+\begin{enumerate}
+  \item (实形式):$X$是$R$上线性空间,$M$是一个线性子空间,$g$是$X$上一个次线性泛函,$f$是$M$上一个线性泛函并且被$g$控制,那么$f$可以延拓至$X$上的线性泛函使得它同样被$g$控制
+  \item (复形式):$X$是$C$上线性空间,$M$是一个线性子空间,$g$是$X$上一个半范数,$f$是$M$上一个线性泛函并且被$g$控制,那么$f$可以延拓至$X$上的线性泛函使得它同样被$g$控制
+  \item 赋范空间上一个线性子空间上的有界线性泛函必可保算子范数的延拓至整个空间$X$上
+  \item 赋范空间$X$上一个非0向量$x_0$,存在一个有界线性泛函$f$使得$f(x_0)=\Vert x_0\Vert;\Vert f\Vert=1$
+\end{enumerate}
+
+重要定理:
+\begin{enumerate}
+  \item 开映射定理:$X,Y$是两个$Banach$空间,从$X$到$Y$的连续线性算子如果是满射,那么它是开映射
+  \item $Banach$逆算子定理:$X,Y$是两个$Banach$空间,从$X$到$Y$的连续线性算子如果是双射,那么它是同胚的
+  \item 闭图像定理:$X,Y$是两个赋范空间,称$X$到$Y$的线性算子$T$是闭的,如果它满足如下等价条件中的任意一个:
+  \begin{enumerate}
+  \item 它的$graph$是赋范空间$X\oplus Y$上的闭集
+  \item 只要$x_n\in X$有$x_n\to0$和$Tx_n\to y\in Y$,那么$y=0$
+  \item 只要$x_n\in X$有$x_n\to x\in X$和$Tx_n\to y\in Y$,那么$y=Tx$
+  \end{enumerate}
+  有闭图像定理:闭线性算子是连续的
+  \item 共鸣定理(一致有界原理):从$Banach$空间$X$到赋范空间$Y$的一族有界线性算子$\Theta$,如果
+  $\sup_{L\in\Theta}\Vert Lx\Vert<+\infty$,那么有$\{\Vert L\Vert:L\in\Theta\}$有上界
+\end{enumerate}

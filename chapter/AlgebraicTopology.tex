@@ -1,0 +1,1419 @@
+\chapter{代数拓扑}
+\section{基本群和覆盖空间}
+\subsection{朴素同伦范畴}
+
+代数拓扑最基本的思路就是通过函子把拓扑空间上问题转化为代数问题.但是源端的范畴不仅仅只考虑$\textbf{Top}$,也会考虑如下几个范畴.更重要的我们会考虑朴素同伦范畴.
+\begin{enumerate}
+	\item 最基本的,全体拓扑空间和连续映射构成的范畴称为拓扑空间范畴,记作$\textbf{Top}$.
+	\item 给定空间$X$,任取$x_0\in X$,称$(X,x_0)$是带基点的空间.两个带基点的空间之间的态射$f:(X,x_0)\to (Y,y_0)$约定为满足$f(x_0)=y_0$的$X\to Y$的连续映射.这个范畴记作$\textbf{Top}_*$.
+	\begin{itemize}
+		\item 两个带基点空间$(X,x_0),(Y,y_0)$的直积就是$(X\times Y,(x_0,y_0))$.
+		\item 两个带基点空间$(X,x_0),(Y,y_0)$的直积就是$X\coprod Y/\sim$,这里$\sim$是把$x_0,y_0$粘合为一个点.
+	\end{itemize}
+	\item 更一般的,给定空间$X$和子集$A$,称$(X,A)$是有序对空间.两个有序对空间之间的态射$f:(X,A)\to(Y,B)$约定为满足$f(A)\subset B$的$X\to Y$的连续映射.
+	$$\xymatrix{A\ar@{^{(}->}[r]^{i_A}\ar[d]_{f_A}&X\ar[d]^{f}\\B\ar@{^{(}->}[r]_{i_B}&Y}$$
+\end{enumerate}
+
+同伦.两个连续映射$f,g:X\to Y$称为同伦的,如果存在连续映射$F:X\times [0,1]\to Y$,满足$F(x,0)=f(x),F(x,1)=g(x)$.
+\begin{enumerate}
+	\item 同伦是集合$\mathrm{Hom}_{\textbf{Top}}(X,Y)$上的等价关系.事实上,自反性只要取$F(x,t)=f(x)$得到$f\sim f$;对称性,假设$f\sim g$,此即存在连续映射$F:X\times[0,1]\to Y$使得$F(x,0)=f(x)$和$F(x,1)=g(x)$,那么取$G(x,t)=F(x,1-t)$就得到$G(x,0)=g(x)$和$G(x,1)=f(x)$,从而$g\sim f$;传递性,假设$f\sim g$和$g\sim h$,那么存在连续映射$F,G:X\times[0,1]\to Y$,使得$F(x,0)=f(x)$,$F(x,1)=g(x)$,$G(x,0)=g(x)$和$G(x,1)=h(x)$,现在构造$H(x,t):X\times[0,1]\to Y$为,当$t\in[0,\frac{1}{2}]$时$H(x,t)=F(x,2t)$,当$t\in[\frac{1}{2},1]$时$H(x,t)=G(x,2t-1)$,连续映射的粘合引理说明$H$连续,并且有$H(x,0)=f(x)$和$H(x,1)=h(x)$,这就得到$f\sim h$.
+	\item 另外同伦这个等价关系是保复合的.即如果$f_0,f_1:X\to Y$是同伦的,$g_0,g_1:Y\to Z$是同伦的,那么有$g_0\circ f_0$同伦于$g_1\circ f_1$.事实上条件说明存在连续的$F:X\times[0,1]\to Y$使得$F(x,0)=f_0(x)$和$F(x,1)=f_1(x)$,还存在连续的$G:Y\times[0,1]\to Z$使得$G(y,0)=g_0(y)$和$G(y,1)=g_1(y)$.现在构造$H(x,t)=G(F(x,t),t):X\times[0,1]\to Z$,它连续并且满足$H(x,0)=g_0\circ f_0(x)$和$H(x,1)=g_1\circ f_1(x)$.
+\end{enumerate}
+
+定义朴素同伦范畴为,它的对象是全体拓扑空间,但它的态射是连续映射的同伦类,记作$\textbf{hTop}$.这里同伦类的复合有意义是由同伦关系保态射复合所保证的.
+\begin{enumerate}
+	\item 同伦等价映射.一个连续映射$f:X\to Y$称为同伦等价,如果存在连续映射$g:Y\to X$,使得$g\circ f\sim 1_X$和$f\circ g\sim 1_Y$.于是同伦等价就是$\textbf{hTop}$中的同构.
+	\item 伦型.如果两个拓扑空间之间存在同伦等价,就称它们是伦型相同的空间.于是伦型相同就是$\textbf{hTop}$中同构的对象.同伦大概就是说两个空间形状相同.
+	\item 零伦.如果连续映射和某个常值映射同伦,称它是零伦的.
+	\item 范畴$\textbf{hTop}$可以描述为$\textbf{Top}$的局部化.这个定义完全是模仿环的局部化定义给出的,这个定义强调了局部化是在扩大可逆态射的个数.给定范畴$\mathscr{C}$,给定态射构成的类$W$,我们定义$\mathscr{C}$在$W$上的局部化$\mathscr{C}[W^{-1}]$是如下泛映射性质所描述的范畴:存在自然的局部化函子$\mathscr{C}\to\mathscr{C}[W^{-1}]$,使得对任意范畴$\mathscr{D}$,任意的把$W$中态射映射为同构的函子$F:\mathscr{C}\to\mathscr{D}$总是唯一的经$\mathscr{C}[W^{-1}]$分解.在这个语言下,取$W$是$\textbf{Top}$中全体同伦等价构成的类,那么局部化$\textbf{Top}[W^{-1}]$就是朴素同伦范畴$\textbf{hTop}$(也即这时候态射不当作同伦等价类,而是具体的连续映射,但是约定同伦等价具有逆).
+	\item 称和单点空间伦型相同的空间为可缩空间.
+	\begin{enumerate}
+		\item 一个空间是可缩空间当且仅当它的恒等映射是零伦映射.
+		\begin{proof}
+			
+			假设$X$是可缩空间,那么存在连续映射$f:X\to\{a\}$(此时映射也是唯一的)和连续映射$g:\{a\}\to X$使得$g\circ f$和$1_X$同伦,而这里$g\circ f$是$X$上的常值映射,这就说明$X$上恒等映射是零伦的》
+			
+			反过来假设$1_X$是零伦映射,于是它和某个$X$上的恒等映射$h:x\mapsto x_0$同伦,取唯一的映射$f:X\to\{x_0\}$,以及映射$g:\{x_0\}\to X$,$x_0\mapsto x_0$.那么$f\circ g=1_{\{x_0\}}$,而$g\circ f=h\sim 1_X$,这就得到$X$可缩.
+		\end{proof}
+		\item 可缩空间是$\textbf{hTop}$上的终对象.即对任意可缩空间$Y$,总有$\mathrm{Hom}_{\textbf{Top}}(X,Y)$中任意两个连续映射同伦.
+		\begin{proof}
+			
+			事实上按照上一条得到$1_Y\sim h$,这里$h$是某个$Y$上的常值映射,比方说把$Y$上全部元素映射为某个$y_0\in Y$.于是对任意$X\to Y$的连续映射$f$,总有$f=1_Y\circ f\sim h\circ f=h'$,这里$h'$是把$X$中元素全部映射为$y_0$的常值映射,于是任意两个$X\to Y$的连续映射是同伦的.
+		\end{proof}
+		\item 不过可缩空间未必是$\textbf{hTop}$上的初对象.比方说我们考虑单点空间$X=\{a\}$,对$y\in Y$,记$f_y$是$X\to Y$的唯一映射,假设$X$是一个初对象,那么对任意的$y,y'\in Y$,会有$f_y$和$f_{y'}$同伦,也就是说存在连续映射$F:[0,1]=X\times[0,1]\to Y$使得$F(0)=y$和$F(1)=y'$,于是这种同伦存在等价于$y$和$y'$之间存在道路.但是只要$Y$不是道路连通空间就可能导致这样的同伦不存在.不过如果我们仅考虑道路连通空间则这是成立的.具体的讲$\textbf{hTop}$中道路连通空间构成的完全子范畴里,可缩空间还是一个初对象(于是此时它就是零对象).
+		\item 可缩空间总是道路连通的.给定可缩空间$X$,任取$x_0,x_1\in X$,设$f_i,i=0,1$为$X$上的分别映射为$x_0$和$x_1$的常值映射.按照$X$是$\textbf{hTop}$中的终对象,有$f_0$和$f_1$是同伦的,于是存在连续映射$F:X\times[0,1]\to X$,满足$F(x,0)=f_0(x)$和$F(x,1)=f_1(x)$.任取$x'\in X$,那么$g(t)=F(x',t)$是$[0,1]\to X$的连续映射,并且满足$g(0)=x_0$和$g(1)=x_1$,于是$X$是道路连通空间.
+		\item $\mathbb{R}^n$的凸子集$X$总是可缩空间(证明类似的,star-shaped子集也是可缩的,因为有线性同伦).事实上任取$x_0\in X$,记$h:X\to X$是把所有点映射为$x_0$的映射.我们来说明$h$和$1_X$同伦:构造$F:X\times[0,1]\to X$为$(x,t)\mapsto tx_0+(1-t)x$,这是线性映射从而是连续映射,并且有$F(x,0)=1_X$和$F(x,1)=h$,于是$X$是可缩空间.
+		\item 锥空间是可缩的.先叙述一下锥空间的定义.给定空间$X$,考虑$X\times[0,1]$上的等价关系$(x,1)\sim(x',1),x,x'\in X$,其余点自成一个等价类.商空间$X\times[0,1]/\sim$就称为空间$X$的锥空间,记作$CX$.那么锥空间总是可缩空间:$F:CX\times[0,1]\to CX$为$([x,t],s)\mapsto[x,(1-s)t+s]$.
+	\end{enumerate}
+\end{enumerate}
+
+相对同伦.
+\begin{itemize}
+	\item 设$f,g:X\to Y$的连续映射,设$A\subset X$是子空间,称它们是关于$A$同伦的,如果存在从$f$到$g$的连续变化,使得在点集$A$上始终是固定不变的.具体的讲:存在连续映射$H:X\times[0,1]\to Y$,满足$H(x,0)=f(x)$,$H(x,1)=g(x)$,对任意$a\in A$,有$H(a,t)\equiv f(a)=g(a)$.固定子集$A$的时候,相对同伦也是$\mathrm{Hom}_{\textbf{Top}}(X,Y)$上的等价关系.
+	\item 定义$\textbf{hTop}_*$为,对象是带基点的拓扑空间,两个保基点的连续映射$f,g:(X,x_0)\to (Y,y_0)$称为同伦的,如果它们关于子集$\{x_0\}$是相对同伦的.那么这个同伦关系也是保映射复合的,就把态射取为同伦等价类.
+\end{itemize}
+\newpage
+\subsection{基本群胚}
+
+空间上的道路和道路的乘积.
+\begin{itemize}
+	\item 空间$X$上的道路是指连续映射$p:[0,1]\to X$,称为从$x=p(0)$到$y=p(1)$的道路.它的逆道路$p^{-1}$定义为$p(1-s)$,这是从$y$到$x$的道路.如果满足$p(0)=p(1)$则称它为loop.每个点$x\in X$处都有一条平凡的恒取点$x$的loop,记作$c_x$.
+	\item 两个道路$p,q$称为道路同伦的,记作$p\sim q$,如果它们是关于子集$\{0,1\}$相对同伦的.换句话讲存在连续映射$H:[0,1]\times[0,1]\to X$,使得$H(x,0)=p(x)$,$H(x,1)=q(x)$,并且$H(0,t)\equiv p(0)=q(0)$,$H(1,t)\equiv p(1)=q(1)$.另外我们把道路$p$所在的同伦等价类记作$[p]$.
+	\item 设$p$是从$x$到$y$的道路,设$q$是从$y$到$z$的道路,定义道路$p$和道路$q$的积为一条从$x$到$z$的道路:
+	$$q\ast p:[0,1]\to X,s\mapsto\left\{\begin{array}{cc}f(2s)&0\le s\le\frac{1}{2}\\g(2s-1)&\frac{1}{2}\le s\le1\end{array}\right.$$
+\end{itemize}
+\begin{enumerate}
+	\item 设$\alpha:[0,1]\to[0,1]$是连续映射,满足$\alpha(0)=0,\alpha(1)=1$,那么有$p\sim p\circ\alpha$.
+	\item 结合律,在乘积有意义的前提下有$p_1\ast(p_2\ast p_3)\sim(p_1\ast p_2)\ast p_3$.
+	\item 同伦保乘积:如果$p_1\sim q_1$和$p_2\sim q_2$,那么在乘积有意义的前提下有$p_1\ast q_1\sim p_2\ast q_2$.
+	\item 设$p$是从$x$到$y$的道路,那么$p\ast p^{-1}\sim c_y$和$p^{-1}\ast p\sim c_x$.
+	\item 设$p$是从$x$到$y$的道路,那么$p\ast c_x\sim p\sim c_y\ast p$.
+\end{enumerate}
+
+空间的基本群胚和基本群.
+\begin{itemize}
+	\item 设$X$是拓扑空间,定义它的基本群胚$\Pi(X)$为这样一个范畴,对象是$X$中的点,从$x$到$y$的态射定义为从$x$到$y$的道路的同伦等价类.那么我们之前定义的道路乘积就是态射的复合,之前定义的$c_x$所在的等价类就是对象$x$上的恒等态射.这个范畴中的态射全部都是同构(所以叫群胚).
+	\item 取点$x,y\in X$,记$\Pi X(x,y)$表示$\mathrm{Hom}(x,y)$,换句话讲它是从$x$到$y$全体道路同伦等价类.固定点$x_0\in X$,那么$\Pi X(x_0,x_0)$按照态射复合构成一个群,它称为基点$x_0$处的基本群,记作$\pi_1(X,x_0)$.
+	\item 函子性.设$f:X\to Y$是连续映射,它诱导了范畴之间的态射也即一个函子$\Pi(f):\Pi(X)\to\Pi(Y)$为,在对象上把$x\in X$映为$f(x)in Y$,在态射上把$x_1$到$x_2$的道路同伦类$[p]$映射为$f(x_1)$到$f(x_2)$的道路同伦类$[f\circ p]$.它诱导了基本群之间的群同态$\pi_1(f):\pi_1(X,x_0)\to\pi_1(Y,f(x_0))$为把基点$x_0$处的loop同伦类$[u]$映射为$f(x_0)$的loop同伦类$[f\circ u]$.
+\end{itemize}
+\begin{enumerate}
+	\item $\pi_1(X,x_0)$可理解为只由对象$x_0$构成的$\Pi(X)$的完全子范畴.于是得到一个完全忠实的包含函子$\pi_1(X,x_0)\to\Pi(X)$.倘若空间$X$是道路连通的,那么$x_0$和$X$中任意一个点作为$\Pi(X)$对象是同构的,这说明这个包含函子还是本质满的,于是此时该包含函子是范畴等价函子,此时$\pi_1(X,x_0)$和$\Pi(X)$是范畴等价的.
+	\item 基点的改变.任取点$x_0,x_1\in X$,假设$x_0,x_1$之间存在道路,任取一条从$x_0$到$x_1$的道路$\beta$,那么$[\alpha]\mapsto[\beta\ast\alpha\ast\beta^{-1}]$是从$\pi_1(X,x_0)$到$\pi_1(X,x_1)$的同构.但是这个同构依赖于道路$\beta$的选取,于是这个同构不是典范的.
+	\item 设$x_0\in X$所在的道路分支为$X_0$,那么包含映射$j:X_0\subset X$诱导了基本群的同构$\pi_1(X_0,x_0)\cong\pi_1(X,x_0)$.
+	\begin{proof}
+		
+		满射是平凡的,因为以$x_0$为基点的loop肯定落在$X_0$中.再证$\ker j_*=0$.任取$[p]\in\ker j_*$,那么$p$是以$x_0$为基点的$X_0$中的loop.有$j\circ p$在$X$里关于$\{0,1\}$同伦等价于$c_{x_0}$的.于是有这两个道路之间的同伦映射$H:[0,1]\times[0,1]\to X$为$(s,t)\mapsto H(s,t)$,但是$[0,1]\times[0,1]$是道路连通的,并且$H(0,0)=x_0$,所以$H$的像实际落在$X_0$中,所以$H$可视为打到$X_0$的连续映射,这说明$p$在$X_0$中也是零伦的,所以$\ker j_*=0$.
+	\end{proof}
+    \item 设$(X,x_0)$和$(Y,y_0)$是两个带基点的空间,积空间上典范的投影映射就诱导了如下同构:
+    $$\pi_1(X\times Y,(x_0,y_0))\cong\pi_1(X,x_0)\times\pi_1(Y,y_0)$$
+    \begin{proof}
+    	
+    	记两个典范投影映射$p:X\times Y\to X$和$q:X\times Y\to Y$.它们也是保基点的连续映射.于是有同态$(p_*,q_*):\pi_1(X\times Y,(x_0,y_0))\to\pi_1(X,x_0)\times\pi_1(Y,y_0)$.具体写出来是,任取以$(x_0,y_0)$为基点的loop记作$f:[0,1]\to X\times Y$,那么$(p_*,q_*)[f]=([p\circ f],[q\circ f])$.构造它的逆映射为,任取$([f],[g])\in\pi_1(X,x_0)\times\pi_1(Y,y_0)$,设$h:I\to X\times Y$为$t\mapsto(f(t),g(t))$,定义$([f],[g])$映射为$[h]$.验证它们互为逆映射.
+    \end{proof}
+	\item 同伦诱导的自然同构.设$f,g:X\to Y$是同伦的两个连续映射,记同伦映射为$H:X\times[0,1]\to Y$,我们解释了$\Pi(f)$和$\Pi(g)$是两个函子,记$H^x=H(x,t):[0,1]\to Y$是$Y$上的道路,我们断言$\{[H^x]\mid x\in X\}$是$\Pi(f)\to\Pi(g)$的自然同构.
+	\begin{proof}
+		
+		任取$X$的一条从$x_0$到$x_1$的道路$p$.我们期望证明有如下交换图表:
+		$$\xymatrix{\Pi(f)(x_0)\ar[rr]^{[H^{x_0}]}\ar[d]_{[f\circ p]}&&\Pi(g)(x_0)\ar[d]^{[g\circ p]}\\\Pi(f)(x_1)\ar[rr]_{[H^{x_1}]}&&\Pi(g)(x_1)}$$
+		
+		换句话讲我们要证明有道路的同伦$g\circ p\ast H^{x_0}\sim H^{x_1}\ast f\circ p$.为此考虑$[0,1]\times[0,1]\to Y$的连续映射$F:(s,t)\mapsto H(p(s),t)$.那么$F(t,0)=f\circ p$,$F(0,t)=H^{x_0}(t)$,$F(1,t)=H^{x_1}(t)$,$F(t,1)=g\circ p$.所以只要构造$F(\lambda t,(1-\lambda)t)\ast F(\lambda+(1-\lambda)t,(1-\lambda)+\lambda t)$就是从$g\circ p\ast H^{x_0}$到$H^{x_1}\ast f\circ p$的道路同伦.
+	\end{proof}
+    \item 上一条说明如果$H$是从$f$到$g$的同伦,那么$\Pi(Y)(g(x),g(y))\to\Pi(Y)(f(x),f(y))$的映射$[\alpha]\mapsto[H^y]^{-1}[\alpha][H^x]$是同构.
+    \item 如果$f:X\to Y$是同伦等价,那么诱导的$\Pi(f):\Pi(X)\to\Pi(Y)$是范畴等价函子.于是特别的诱导的$f_*:\Pi(X)(x,y)\to\Pi(Y)(f(x),f(y))$是双射.特别的诱导的$\pi_1(f):\pi_1(X,x_0)\to\pi_1(Y,f(x_0))$是群同构.
+\end{enumerate}
+\newpage
+\subsection{Van Kampen定理}
+
+取空间$X$的一个子集族$\{U_i\}$,如果$U_i\subset U_j$,就取包含映射$f_{ij}:U_i\to U_j$,那么$\{U_i,f_{ij}\}$构成一个正向系统.Van Kampen定理是说,在一些合适的条件下,$\Pi(X)$就是$\{\Pi(U_i),\Pi(f_{ij})\}$的正向极限;$\pi_1(X,x_0)$就是$\{\pi_1(U_i,x_0),\pi_1(f_{ij})\}$的正向极限.下面是一些版本的Van Kampen定理:
+\begin{enumerate}
+	\item (May)设$\{U_i\}$是$X$的一族由道路连通开子集构成的开覆盖,满足在有限交下封闭.如果$U_i\subset U_j$就记$f_{ij}:U_i\to U_j$是包含映射,那么$\{\Pi(U_i),\Pi(f_{ij})\}$是群胚范畴中的正向系统,它的正向极限恰好是整个$\Pi(X)$,即有$\Pi(X)\cong\lim\limits_{\rightarrow}\Pi(U_i)$.
+	\item (May)设$(X,x_0)$是带基点的道路连通空间,设$\{U_i\}$是它的道路连通开集构成的开覆盖,满足$x_0\in U_i$.并且这个开集族在有限交下封闭.如果$U_i\subset U_j$就记$f_{ij}:U_i\to U_j$是包含映射,那么$\{\pi_1(U_i,x_0),g_{ij}=\pi_1(f_{ij})\}$是群范畴中的正向系统,它的正向极限就是$\pi_1(X,x_0)$.换句话讲有$\pi_1(X,x_0)\cong\ast_i\pi_1(U_i,x_0)/N$,其中$N$是由全体形如$g_{ij}(w)g_{ji}(w)^{-1}$,其中$w\in\pi_1(U_i\cap U_j,x_0)$生成的自由积上的正规子群.
+	\item (Hatcher)设$(X,x_0)$未必道路连通,设$\{U_i\}$是道路连通的开覆盖,其中每个$U_i$都包含基点$x_0$.如果所有$U_i\cap U_j$都是道路连通的,那么典范映射$\Phi:\ast_i\pi_1(U_i,x_0)\to\pi_1(X,x_0)$是满射.如果额外的还有所有$U_i\cap U_j\cap U_k$都是道路连通的,那么$\Phi$的核可被$g_{ij}(w)i_{ji}(w)^{-1}$,其中$w\in\pi_1(U_i\cap U_j,x_0)$生成,这里$g_{ij}$表示典范的$\pi_1(U_i\cap U_j,x_0)\to\pi_1(U_i,x_0)$.
+	\item (Brown)设$U,V$是空间$X$的子空间,满足它们的内点集覆盖了整个$X$,设$i_U:U\cap V\to U$,$i_V:U\cap V\to V$,$j_U:U\to X$,$j_V:V\to X$均为包含映射.我们断言如下图表是群胚范畴中的pushout(纤维和).
+	$$\xymatrix{\Pi(U\cap V)\ar[rr]^{\Pi(i_U)}\ar[d]_{\Pi(i_V)}&&\Pi(U)\ar[d]^{\Pi(j_U)}\\\Pi(V)\ar[rr]_{\Pi(j_V)}&&\Pi(X)}$$
+	\begin{proof}
+		
+		取群胚$Y$,取函子$h_U:\Pi(U)\to Y$和函子$h_V:\Pi(V)\to Y$,满足$h_U\circ\Pi(i_U)=\Pi(i_V)\circ h_V$.我们要证明存在唯一的函子$h:\Pi(X)\to Y$使得图表交换:
+		$$\xymatrix{\Pi(U\cap V)\ar[rr]^{\Pi(i_U)}\ar[d]_{\Pi(i_V)}&&\Pi(U)\ar[d]^{\Pi(j_U)}\ar@/^1pc/[ddrr]^{h_U}&&\\\Pi(V)\ar[rr]_{\Pi(j_V)}\ar@/_1pc/[drrrr]_{h_V}&&\Pi(X)\ar[drr]^h&&\\&&&&Y}$$
+		
+		首先$h$在对象层面必然是存在并且唯一确定的,因为$\Pi(X)$的对象就是$X$的点.现在任取$\Pi(X)$中的态射,也即一个道路同伦类$[w]$.这里$w$是$[0,1]\to X$的连续映射,按照$[0,1]$是紧度量空间,就有勒贝格数引理,于是可取足够多的等分点$0=t_0<t_1<\cdots<t_m=b$使得每个$w([t_i,t_{i+1}])$都落在$U^{\circ}$或者$V^{\circ}$中.记$\gamma:\{0,1,\cdots,m\}\to\{U,V\}$使得$w([t_i,t_{i+1}])\subset\gamma(i)^{\circ}$.所以有:
+		$$[w]=\Pi(j_{\gamma(m)})[w_m]\circ\cdots\Pi(j_{\gamma(0)}[w_0])$$
+		
+		于是如果$h$存在那么必须要满足如下等式,这说明$h$如果存在则必须唯一.
+		$$h[w]=h_{\gamma(m)}[w_m]\circ\cdots\circ h_{\gamma(0)}[w_0]$$
+		
+		为了说明存在性就要说明这个定义的良性,也就是要说明无论我们改变等分点的选取,还是改变道路同伦类$[w]$的代表元$w$,得到的结果都是同伦的.第一个问题只要把两种分割合并为一个分割即可.第二个问题可以把$[0,1]\times[0,1]$等分为足够小的小正方形,使得每个小正方形在同伦下打到$U^{\circ}$或者$V^{\circ}$中.
+	\end{proof}
+    \item 设$U,V$是$X$的子空间,使得它们的内点集覆盖了整个$X$.按照上一条定义$i_U,i_V,j_U,j_V$四个包含映射.设$X$的基点为$x_0$,设$U,V,U\cap V$都是包含了点$x_0$的道路连通子空间,那么如下图表是群范畴中的pushout.
+    $$\xymatrix{\pi_1(U\cap V,x_0)\ar[rr]^{\pi_1(i_U)}\ar[d]_{\pi_1(i_V)}&&\pi_1(U,x_0)\ar[d]^{\pi_1(j_U)}\\\pi_1(V,x_0)\ar[rr]_{\pi_1(j_V)}&&\pi_1(X,x_0)}$$
+    \begin{proof}
+    	
+    	我们解释过如果$Z$是道路连通空间,那么包含函子$\pi_1(Z,z_0)\to\Pi(Z)$是范畴等价,于是有完全忠实的伴随函子$r_Z:\Pi(Z)\to\pi_1(Z,z_0)$(这自然不是唯一的,具体写出来就是按照道路连通性对每个点$z\in Z$取从$z$到$z_0$的道路$u_z$,约定$u_{z_0}=c_{z_0}$是平凡loop,定义$r_Z$把$\Pi(Z)$中每个从$x$到$y$的道路$\alpha$映射为$u_y\alpha u_x^{-1}$).适当选取$r_U,r_V,r_{U\cap V}$能使得有如下两个交换图表:
+    	$$\xymatrix{\Pi(U)\ar[d]_{r_U}&&\Pi(U\cap V)\ar[ll]\ar[rr]\ar[d]^{r_{U\cap V}}&&\Pi(V)\ar[d]^{r_V}\\\pi_1(U,x_0)&&\pi_1(U\cap V,x_0)\ar[rr]\ar[ll]&&\pi_1(V,x_0)}$$
+    	
+    	现在任取群$G$,设有两个同态$g_U:\pi_1(U,x_0)\to G$和$g_V:\pi_1(V,x_0)\to G$,使得$g_U\circ\pi_1(i_U)=\pi_1(i_V)\circ g_V$.把$G$看作群胚,把群同态看作函子,那么$(G,g_U\circ r_U,g_V\circ r_V)$是$\Pi(U\cap V)\to\Pi(U),\Pi(U\cap V)\to\Pi(V)$的余锥,于是按照上一条,存在唯一的函子$h':\Pi(X)\to G$.把它限制在子范畴$\pi(X,x_0)$上得到群同态$h:\pi_1(X,x_0)\to G$,它满足$h\circ\pi_1(j_U)=g_U$和$h\circ\pi_1(j_V)=g_V$.得证.
+    	$$\xymatrix{\pi_1(U,x_0)\ar[d]\ar@/^1pc/[ddrr]^{g_U}&&\\\pi_1(X,x_0)\ar[drr]^h&&\\&&G}\qquad\xymatrix{\Pi(U)\ar[dd]\ar[dr]^{r_U}&&\\&\pi_1(U,x_0)\ar[dr]^{g_U}&\\\Pi(X)\ar[rr]^{h'}&&G}$$
+    \end{proof}
+\end{enumerate}
+
+$S^1=\{x\in\mathbb{C}\mid\Vert x\Vert=1\}$的基本群.
+\begin{enumerate}
+	\item 如果$X$是道路连通空间,并且基本群平凡,则称它是单连通空间.等价于讲每个$\Pi(X)(x,y)$都是单点集,于是此时态射构成的集合可以记作$X\times X$,元素$(x,y)$就对应于唯一的从$x$到$y$的道路同伦类.
+	\item 记$U=S^1-\{1\}$和$V=S^1-\{-1\}$,这是$S^1$的两个可缩开子集,但是$U\cap V$不是道路连通的,所以不能对基本群用Van Kampen定理,但是我们可以对群胚用.
+	\begin{itemize}
+		\item 记$G$表示这样一个群胚,它的元素是$S^1$的点,它的态射是$S^1\times\mathbb{R}$的点,一个态射$(a,t)$的源端是$a$,终端是$a\exp(2\pi it)$,约定复合为$(a\exp(2\pi is),t)\circ(a,s)=(a,s+t)$.
+		\item 按照$U,V$都是单连通的,记$\Pi(U)$中唯一的从$a$到$b$的态射为$(a,b)_U$,记$\Pi(V)$中唯一的从$a$到$b$的态射为$(a,b)_V$.
+		\item 记$f_U:(0,1)\to U$和$f_V:(-1/2,1/2)\to V$都为$t\mapsto\exp(2\pi it)$.
+		\item 定义函子$\gamma_U:\Pi(U)\to G$为对象上是恒等映射,态射上把$(a,b)_U$打为$(a,f_U^{-1}(b)-f_U^{-1}(a))$.
+		\item 定义函子$\gamma_V:\Pi(V)\to G$为对象上是恒等映射,态射上把$(a,b)_V$打为$(a,f_V^{-1}(b)-f^{-1}_V(a))$.
+		\item 定义函子$\xi:G\to\Pi(S^1)$为对象上是恒等映射,态射上把$(a,t)$映射为道路$[0,1]\to S^1$,$s\mapsto a\exp(2\pi its)$所在的同伦类.于是有如下交换图表:
+	\end{itemize}
+	$$\xymatrix{&\Pi(U)\ar@/^1pc/[drrr]^{\Pi(j_U)}\ar[dr]^{\gamma_U}&&&\\\Pi(U\cap V)\ar[ur]^{\Pi(i_U)}\ar[dr]_{\Pi(i_V)}&&G\ar[rr]^{\xi}&&\Pi(S^1)\\&\Pi(V)\ar[ur]_{\gamma_V}\ar@/_1pc/[urrr]_{\Pi(j_V)}&&&}$$
+	
+	我们断言$\xi$是同构,于是特别的考虑$G$上对象$1\in S^1$的Hom集合$\pi_1(S^1,1)$为全体$(a,t)$使得$a\exp(2\pi it)=a$,这一一对应于整数,并且群运算就是整数上的加法,于是有$\pi_1(S^1,1)\cong\mathbb{Z}$.
+	\begin{proof}
+		
+		按照群胚上的Van Kampen定理,有$\Pi(S^1)$是pushout,于是存在函子$\gamma:\Pi(S^1)\to G$,并且泛性质说明$\xi\circ\gamma=\mathrm{id}_{\Pi(S^1)}$.我们只需验证$\gamma\circ\xi=\mathrm{id}_G$.考虑如下交换图表,这归结为证明$G$中的态射都可以表示为$\gamma_U$和$\gamma_V$像的复合.任取$G$中的从$a$到$b$的态射$(a,t)$,记$t=t_1+t_2+\cdots+t_m$,使得每个$|t_i|<1/2$.记$a_0=a$,$a_j=a\exp(2\pi j(t_1+t_2+\cdots+t_j))$,那么有$(a,t)=(a_{m-1},t_m)\circ\cdots\circ(a_1,t_2)\circ(a,t_1)$.这里每个$(a_{j-1},t_j)$作为道路的像肯定落在$U,V$中的某个,不妨设为$U$,那么有$(a_{j-1},t_j)=\gamma_U(a_{j-1},a_j)_U$.得证.
+		$$\xymatrix{\Pi(U)\ar[dr]^{r_U}\ar@/^1pc/[drr]^{\Pi(j_U)}\ar@/^2pc/[drrrr]^{r_U}&&&&\\&G\ar[r]^{\xi}&\Pi(S^1)\ar[rr]^{\gamma}&&G\\\Pi(V)\ar[ur]_{r_U}\ar@/_1pc/[urr]_{\Pi(j_U)}\ar@/_2pc/[urrrr]_{r_U}&&&&}$$
+	\end{proof}
+    \item 映射度的定义.记$[S^1,S^1]$表示$S^1\to S^1$的连续映射的自由同伦等价类,记$[S^1,S^1]^0$表示赋予$S^1$基点$1\in\mathbb{C}$后的保基点连续映射的相对同伦等价类,我们断言遗忘基点的映射$v:[S^1,S^1]\to[S^1,S^1]^0$是双射.特别的,这件事说明有同构$d:[S^1,S^1]\cong[S^1,S^1]^0\cong\pi_1(S^1,1)\cong\mathbb{Z}$,对$S^1\to S^1$的连续映射$f$,就定域$d(f)=d([f])$为它的映射度.
+    \begin{proof}
+    	
+    	设$f:S^1\to S^1$是连续映射,取$S^1$上的从$1$到$f(1)^{-1}$的道路$w$,那么$(x,t)\mapsto f(x)w(t)$是从$f$到保基点连续映射的同伦,于是$v$是满射.单射是说如果两个保基点连续映射$f,g:S^1\to S^1$是自由同伦的,那也是关于基点相对同伦的.如果记自由同伦为$H:S^1\times[0,1]\to S^1$,取$(x,t)\mapsto H(x,t)H(1,t)^{-1}$是关于基点的相对同伦.
+    \end{proof}
+    \item 实际上求$S^1$基本群唯一的重要步骤是证明$S^1$上的道路必然同伦于形如$[0,1]\to S^1$,$a\exp(2\pi ias)$的道路(同伦于匀速的道路).在我们这里的范畴证明中抽象出来的$G$就是提取全部匀速道路构成的范畴,进而证明和$\Pi(S^1)$范畴同构.而在大部分代数拓扑教材上是要先给出$p:\mathbb{R}\to S^1$的道路提升定理和同伦提升定理.任取$S^1$上的道路$w$,提升为$\mathbb{R}$中的道路,按照$\mathbb{R}$中这样的道路同伦于匀速的,得到原本的$w$同伦于匀速的.
+\end{enumerate}
+\newpage
+\subsection{覆盖空间}
+
+定义.设$p:\widetilde{X}\to X$是连续映射.
+\begin{itemize}
+	\item 称开集$U\subset X$被$p$均匀覆盖(evenly covered),如果$p^{-1}(U)$作为$\widetilde{X}$的子空间是一族开集$\{S_i\mid i\in I\}$的无交并,使得$p$限制在每个$S_i$上是到$U$的同胚.称这样的$S_i$是关于$U$的薄片(sheet).
+	\item 一个连续满映射$p:\widetilde{X}\to X$称为覆盖空间,如果$X$存在由被$p$均匀覆盖的开子集构成的开覆盖.称$p$是覆盖投影,$X$的被$p$均匀覆盖的开子集称为$p$容许的(admissible).
+	\item 给定空间$X$,定义它的覆盖空间范畴$\textbf{Cov}(X)$的对象是覆盖空间$p:\widetilde{X}\to X$,两个覆盖空间之间的态射定义为使得如下图表交换的连续映射$\varphi$:
+	$$\xymatrix{\widetilde{X}\ar[dr]_{p}\ar[rr]^{\varphi}&&\widetilde{X}'\ar[dl]^{p'}\\&X&}$$
+\end{itemize}
+\begin{enumerate}
+	\item 例如$p:\mathbb{R}\to\mathbb{S}^1$,$t\mapsto\exp(2\pi it)$是一个覆盖空间.
+	\item $\widetilde{X}$上的薄片构成了拓扑基.
+	\item 覆盖投影是局部同胚映射,因为覆盖投影在薄片上的限制是同胚.
+	\item 设$p:\widetilde{X}\to X$是覆盖空间,如果$\widetilde{X}$是道路连通的,那么$X$也是道路连通的(满射像);如果$X$是局部道路连通的,那么$\widetilde{X}$也是局部道路连通的.
+\end{enumerate}
+
+关于提升的定义和引理.
+\begin{itemize}
+	\item 给定任意连续映射$p:\widetilde{X}\to X$,一个连续映射$f:Y\to X$关于$p$的提升是指使得如下图表交换的连续映射$\widetilde{f}$:
+	$$\xymatrix{&&\widetilde{X}\ar[d]^p\\Y\ar[rr]_f\ar[urr]^{\widetilde{f}}&&X}$$
+	\item 同伦提升条件.设$p:\widetilde{X}\to X$是任意连续映射,称它关于空间$Y$满足同伦提升条件,如果任取$H:Y\times[0,1]\to X$是任取两个连续映射$f(y)=H(y,0)$和$g(y)=H(y,1)$的同伦,任取$f$关于$p$的提升记作$\widetilde{f}$,那么$H$总可以提升到$\widetilde{X}$上,使得这个提升同伦$\widetilde{H}$满足$\widetilde{H}(y,0)=\widetilde{f}(y)$.
+	$$\xymatrix{Y\ar[rr]^{\widetilde{f}}\ar[d]_{x\mapsto(x,0)}&&\widetilde{X}\ar[d]^p\\Y\times[0,1]\ar[rr]_H\ar@{-->}[urr]_{\widetilde{H}}&&X}$$
+	\item 纤维化.如果连续映射$p:\widetilde{X}\to X$对任意空间$Y$都满足同伦提升条件,就称$p$是纤维化(fibration).
+\end{itemize}
+\begin{enumerate}
+	\item 引理.设$p:\widetilde{X}\to X$是覆盖空间,记$(p,p)$的纤维积为$Z$,也即有$Z=\{(x,y)\in\widetilde{X}\times\widetilde{X}\mid p(x)=p(y)\}$,那么对角线$D=\{(x,x)\in\widetilde{X}\times\widetilde{X}\}$是$Z$的开闭子集.
+	\begin{proof}
+		
+		证明$D$是$Z$中的开集:取$x\in\widetilde{X}$,取覆盖点$x$的薄片$U_x$,那么有$Z\cap(U_x\times U_x)\subset D$,所以$D$是$Z$中的开集.
+		
+		\qquad
+		
+		证明$D$是$Z$中的闭集:任取$x\not=y\in\widetilde{X}$,使得$p(x)=p(y)$,取分别覆盖$x,y$的薄片是$U_x$和$U_y$使得$U_x\cap U_y$是空集,于是$Z\cap(U_x\times U_y)$就是$(x,y)\in Z$的开集,并且和$D$不交,这说明$Z-D$是开集,于是$D$是$Z$中闭集.
+	\end{proof}
+	\item 提升唯一性.设$p:\widetilde{X}\to X$是覆盖空间,如果$\widetilde{f}_1,\widetilde{f}_2$都是某个连续映射$f:Y\to X$的提升,并且$\widetilde{f}_1,\widetilde{f}_2$在某个点取值相同,并且$Y$是连通空间,那么就有$\widetilde{f}_1=\widetilde{f}_2$.
+	\begin{proof}
+		
+		按照$p\circ\widetilde{f}_1=p\circ\widetilde{f}_2$,记$(p,p)$的纤维积是$Z$,按照纤维积的泛性质,存在唯一的连续映射$h:Y\to Z$使得如下图表交换:
+		$$\xymatrix{X\ar@/^1pc/[drrrr]^{\widetilde{f}_1}\ar[drr]^{h}\ar@/_1pc/[ddrr]_{\widetilde{f}_2}&&&&\\&&Z\ar[rr]\ar[d]&&\widetilde{X}\ar[d]^p\\&&\widetilde{X}\ar[rr]_p&&}$$
+		
+		按照条件$h^{-1}(D)$是$X$的非空子集,但是引理说明了$D$是开闭子集,所以$h^{-1}(D)$是$X$的非空开闭子集,所以有$h^{-1}(D)=X$,也即$\widetilde{f}_1=\widetilde{f}_2$.
+	\end{proof}
+	\item 积空间的投影映射$p:X\times Y\to X$总是纤维化.
+	\begin{proof}
+		
+		设$H:Z\times[0,1]\to X$是从$f:Z\to X$到$g:Z\to X$的同伦,设$f$提升为$\widetilde{f}:Z\to X\times Y$.那么有$\widetilde{f}=(f,f')$.直接取$\widetilde{H}(x,t)=(H(x,t),f'(x))$就是满足图表交换的提升.
+		$$\xymatrix{Z\ar[rr]^{\widetilde{f}=(f,f')}\ar[d]_{x\mapsto(x,0)}&&X\times Y\ar[d]^p\\Z\times[0,1]\ar[rr]_H\ar@{-->}[urr]_{\widetilde{H}}&&X}$$
+	\end{proof}
+	\item 覆盖投影$p:\widetilde{X}\to X$总是纤维化.
+	\begin{proof}
+		
+		取定$Y\to X$的两个连续映射$f,g$,以及从$f$到$g$的同伦$H$,取定$f$关于$p$的提升$\widetilde{f}$.当$U$跑遍$X$的容许开集时构成$X$的开覆盖.于是存在足够大的正整数$n$,对每个点$x\in Y$可以取定一个开邻域$V_x$,使得每个$V_x\times[i/n,(i+1)/n]$在$H$下的像落在某个容许开集中.但是当$U$是容许开集的时候$p^{-1}(U)$同胚于$U\times B$,其中$B$是某个离散空间.所以上一条说明$p$限制在$p^{-1}(U)\to U$是纤维化,所以$H$在每个$V_x\times[i/n,(i+1)/n]$上的限制都可以提升到$\widetilde{X}$上.
+		
+		\qquad
+		
+		至此我们证明了$H$在适当的局部上可以提升.下面说明这些局部提升是可以粘合为一个整体提升的.首先考虑$V_x\times[0,1/n]$上的提升,我们断言$x$跑遍$Y$的时候$V_x\times[0,1/n]$上的提升在相交的地方是相同的,这是因为固定任意点$x\in Y$,那么$\{x\}\times[0,1/n]$是连通空间,条件保证了$H(x,0)=\widetilde{H}(x,0)$,我们解释过固定初始条件并且源端为连通空间的映射的提升是唯一的.这就说明这些局部上的提升可以统一粘合为$Y\times[0,1/n]$上的提升.接下来再考虑$V_x\times[1/n,2/n]$,做归纳即得到整体粘合的提升,这得证.
+	\end{proof}
+	\item 推论.设$p:\widetilde{X}\to X$是覆盖空间.任取$X$中的从$x_0$到$x_1$的道路,任取$p^{-1}(x_0)$中的点$\widetilde{x_0}$,那么这个道路可唯一的提升为$\widetilde{X}$中的源端为$\widetilde{x_0}$的道路.证明只要在覆盖投影是纤维化定义中把$Y$取为单点空间即可.
+	\item 推论.设$p:\widetilde{X}\to X$是覆盖空间.如果$f,g$是$\widetilde{X}$上的两条源端相同的道路,那么它们是同伦当且仅当它们在$X$中的像是同伦的道路.证明只要在覆盖投影是纤维化定义中把$Y$取为$[0,1]$即可.
+	\item 推论.设$p:\widetilde{X}\to X$是覆盖空间.取点$x_0\in X$,取$x_0$纤维中的点$\widetilde{x_0}$,那么$p_*:\pi_1(\widetilde{X},\widetilde{x_0})\to\pi_1(X,x_0)$是单射.于是$p_*(\pi_1(\widetilde{X},\widetilde{x_0}))$总可视为$\pi_1(X,x_0)$的子群.
+	\begin{proof}
+		
+		设$f$是以$\widetilde{x_0}$为基点的道路,如果$p\circ f$是$X$中以$x_0$为基点的零伦道路,即$p\circ f$同伦于恒等道路$c_{x_0}$,所以在$\widetilde{X}$中有提升道路$f$同伦于$c_{\widetilde{x_0}}$,这说明$f$是零伦的,也即$p_*$是单射.
+	\end{proof}
+	\item 提升准则.设$Y$是局部道路连通和道路连通的空间,固定$X$的基点$x_0$,连续映射$f:(Y,y_0)\to(X,x_0)$能提升到$\widetilde{f}:Y\to\widetilde{X}$,如果记$\widetilde{f}(y_0)=\widetilde{x_0}$,当且仅当$f_*(\pi_1(Y,y_0))\subset p_*\pi_1(\widetilde{X},\widetilde{x_0})$.
+	$$\xymatrix{&&(\widetilde{X},\widetilde{x_0})\ar[d]^{p}\\(Y,y_0)\ar[rr]_f\ar@{-->}[urr]^{\widetilde{f}}&&(X,x_0)}$$
+	\begin{proof}
+		
+		必要性是直接的,从$f=p\circ\widetilde{f}$得到$f_*\pi_1(Y,y_0)=p_*\widetilde{f}_*\pi_1(Y,y_0)\subsetneqq p_*\pi_1(\widetilde{X},\widetilde{x_0})$.
+		
+		\qquad
+		
+		充分性,我们来构造提升映射$\widetilde{f}$.任取$y\in Y$,按照道路连通性可取从$y_0$到$y$的道路$u$,于是$f\circ u$就是$X$中的以$x_0$为源端的道路,它可以提升为$\widetilde{X}$中的以$\widetilde{x_0}$为源端的道路$\widetilde{f\circ u}$,定义$\widetilde{f}(y)$是这个道路的终端.下面验证定义是良性的,如果取第二条从$y_0$到$y$的道路$u'$,那么$h_0=(fu')^{-1}\ast(fu)$是以$x_0$为基点的loop,于是$[h_0]\in f_*\pi_1(Y,y_0)\subset p_*\pi_1(\widetilde{X},\widetilde{x_0})$.于是存在以$\widetilde{x_0}$为基点的loop记作$\widetilde{h_1}$,使得$h_0$和$h_1=p\circ\widetilde{h_1}$是同伦的.按照同伦提升条件,这个同伦可以提升为$\widetilde{h_1}$到$\widetilde{h_0}$的同伦,其中$\widetilde{h_0}$是$h_0$的提升.导致$\widetilde{h_0}$也是以$\widetilde{x_0}$为基点的loop.按照道路提升的唯一性,$\widetilde{h_0}$的前半部分就是$fu$的提升,后半部分就是$(fu')^{-1}$的提升,于是必然有$\widetilde{fu}(1)=\widetilde{fu'}(1)$.这说明了定义不依赖于道路$u$的选取.
+		
+		\qquad
+		
+		最后验证$\widetilde{f}$是连续的.任取点$y\in Y$,固定一条从$y_0$到$y$的道路$u_1$.按照$Y$是局部道路连通的,它的局部道路连通开集构成拓扑基,所以可取$y$的局部道路连通开邻域$V$,使得$f(V)$落在某个容许开集$U\subset X$中.有$\widetilde{f}(y)\in p^{-1}(f(x))$,可取包含$\widetilde{f}(y)$的经$p$同胚到$U$的薄片为$\widetilde{U}$.在$V$上我们断言恒有$\widetilde{f}(y')=p^{-1}f(y')$,这里$p^{-1}$是从$U$到$\widetilde{U}$的同胚.断言成立是因为任取$y'\in V$,就可取包含在$V$内的从$y$到$y'$的道路$u_2$,那么$fu_2\ast fu_1$就可以提升为道路$\widetilde{fu_2}\ast\widetilde{fu_1}$,并且$\widetilde{f}(y')$按照定义是这个道路的终端,所以和$\widetilde{fu_1}$的部分没什么关系,而$\widetilde{fu_2}$整个落在$\widetilde{U}$中,于是有$\widetilde{f}(y')=\widetilde{fu_2}(1)=p^{-1}fu_2(1)=p^{-1}f(y')$.于是在$V$上就有$\widetilde{f}=p^{-1}f$,这得到连续性.
+	\end{proof}
+	\item 推论.如果$Y$是单连通和局部道路连通的,那么$Y\to X$的连续映射总可以提升到覆盖空间$\widetilde{X}$上.
+	\item 设$X$是道路连通和局部道路连通的空间,它的两个道路连通的覆盖空间之间的态射$h:(\widetilde{X}',\widetilde{x_0}')\to(\widetilde{X},\widetilde{x_0})$也是一个覆盖空间.
+	$$\xymatrix{(\widetilde{X}',\widetilde{x_0})\ar@{-->}[rr]^h\ar[dr]_q&&(\widetilde{X},\widetilde{x_0})\ar[dl]^p\\&(X,x_0)&}$$
+	\begin{proof}
+		
+		首先我们说明$h$是满射.任取$\widetilde{x}\in\widetilde{X}$,可取从$\widetilde{x_0}$到$\widetilde{x}$的道路$\widetilde{u}$,那么$u=p\circ\widetilde{u}$是从$x_0$到某个点$x$的道路.这条道路就可以唯一的提升到$\widetilde{X}'$中,记作$\widetilde{u}'$,唯一性是因为$\widetilde{X}'$是连通的.那么$h\circ\widetilde{u}'$和$\widetilde{u}$都是$u$在$\widetilde{X}$中的以$\widetilde{x_0}$为源端的提升.按照$\widetilde{X}$是连通的,这个提升是唯一的,所以$h$把$\widetilde{u}'$的终端打到$\widetilde{x}$,这得到满射.
+		
+		\qquad
+		
+		证明$h$是覆盖空间.取$\widetilde{x}\in\widetilde{X}$,记$x=p(\widetilde{x})$,我们可以选取$x$的开邻域$U$使得它同时是$p$容许的和$q$容许的和道路连通的,因为这三个东西都构成拓扑基.那么有$p^{-1}(U)=\coprod_jS_j$,其中$S_j$是$\widetilde{X}$中不交的薄片,每个都经$p$同胚于$U$.可设$\widetilde{x}$所在的薄片为$S_{j_0}$.我们就证明$S_{j_0}$是$h$容许的.按照$\widetilde{x}$的一般性就说明$h$是覆盖空间.
+		
+		\qquad
+		
+		记$q^{-1}(U)=\coprod_kT_k$,每个$T_k$都是$\widetilde{X}'$的薄片,经$q$同胚于$U$.于是$T_k$都是道路连通的,所以每个$h(T_k)$包含在某个$S_j$中.从$q=ph$得到$q^{-1}(U)=h^{-1}p^{-1}(U)$,于是$\coprod_kT_k=h^{-1}(\coprod_jS_j)$.按照$h$是满射,就有$hh^{-1}(A)=A$,所以有$\coprod_kh(T_k)=\coprod_jS_j$.我们已经说明了左边每个$h(T_k)$恰好包含在右边的一项中,所以固定$j$时$h^{-1}(S_j)$恰好是那些满足$h(T_k)\subset S_j$的$T_k$的无交并.取定$T_k$使得满足$h(T_k)\subset S_{j_0}$,那么$q\mid_{T_k}$和$p\mid_{S_{j_0}}$都是同胚,于是$h\mid_{T_k}$是同胚,于是$S_{j_0}$是$h$容许的.
+	\end{proof}
+\end{enumerate}
+
+函子$T:\textbf{Cov}(X)\to\textbf{Sets}^{\Pi(X)}$.
+\begin{enumerate}
+	\item 在对象上,函子$T$把覆盖空间$p:\widetilde{X}\to X$映射为函子$T_p:\Pi(X)\to\textbf{Sets}$.这个函子满足:
+	\begin{itemize}
+		\item 对$\Pi(X)$的对象$x_0$,此即$X$中的点,映射为集合$F_{x_0}=p^{-1}(x_0)$,即$x_0$在$p$下的纤维.
+		\item 对$\Pi(X)$的态射$[c]$,即从某个$x_0$到某个$x_1$的道路同伦类,映射为集合之间的映射$F_{x_0}\to F_{x_1}$定义为,任取$\widetilde{x_0}\in F_{x_0}$,那么$c$可提升为源端为$\widetilde{x_0}$的道路,这个提升道路的终端定义为映射在$\widetilde{x_0}$下的像.这个定义不依赖于$[c]$代表元$c$的选取.
+	\end{itemize}
+	\item 在态射上,函子$T$把覆盖空间之间的映射$\varphi:(\widetilde{X},p)\to(\widetilde{X}',p')$映射为函子之间的自然变换$T_{p}\to T_{p'}$,就定义为集合映射$\varphi$在$T_{p}\to T_{p'}$的限制映射.
+	$$\xymatrix{T_p(x_0)\ar[rr]^{\varphi}\ar[d]_{[c]}&&T_{p'}(x_0)\ar[d]^{[c]}\\T_p(x_1)\ar[rr]^{\varphi}&&T_{p'}(x_1)}$$
+	\item 半局部单连通.一个空间$X$称为半局部单连通,如果每个点$x\in X$都存在开邻域$U$使得包含映射诱导的$i_*:\pi_1(U,x)\to\pi_1(X,x)$都是平凡映射(暂且称$U$是半局部开集),换句话讲对每个点$x$,都存在开邻域$U$,使得那些整个包含在$U$中的以$x$为基点的道路总是在$X$中零伦的.
+	\item 如果$X$是道路连通,局部道路连通,半局部单连通的空间,那么函子$T$是范畴等价函子.
+	\begin{proof}
+		
+		我们来构造$T$的拟逆函子$T':\textbf{Sets}^{\Pi(X)}\to\textbf{Cov}(X)$.任取函子$\Phi:\Pi(X)\to\textbf{Sets}$.需要构造覆盖空间$p:T'(\Phi)\to X$,并且对两个函子$\Phi_1,\Phi_2:\Pi(X)\to\textbf{Sets}$的自然变换$\alpha:\Phi_1\to\Phi_2$,要构造覆盖空间之间的态射$\alpha:T'(\Phi_1)\to T'(\Phi_2)$.最后要验证$T$和$T'$互相是拟逆函子.
+		\begin{enumerate}
+			\item $T'(\Phi)$作为集合是无交并$\coprod_{x\in X}\Phi(x)$.取$p$就是投影映射$\coprod_{x\in X}\Phi(x)\to X$.
+			\item $X$的道路连通且半局部开集构成了拓扑基,任取这样的开集$U$,任取点$x_0\in U$,定义$\varphi_{U,x_0}:U\times\Phi(x_0)\to p^{-1}(U)=\coprod_{x\in U}\Phi(x)$为$(x,y)\mapsto\Phi(w)y$,其中$w$是$U$中的从$x_0$到$x$的道路.
+			\begin{itemize}
+				\item 这个映射的定义不依赖于道路同伦类$[w]$代表元$w$的选取.因为如果选取不同的$U$中的从$x_0$到$x$的道路,按照半局部单连通开子集的定义,这些道路是同伦的,所以诱导的是相同的集合映射$\Phi(w)$.
+				\item $\varphi_{U,x_0}$总是双射.这是因为$\Pi(X)$中的态射总是同构,导致$\Phi(w)$总是双射,于是固定$x\in U$时$\varphi_{U,x_0}$是$\{x\}\times\Phi(x_0)\to\Phi(x)$的双射,就说明$\varphi_{U,x_0}$是双射.
+			\end{itemize}
+			\item 定义$T'(\Phi)$上的拓扑是使得所有$\varphi_{U,x_0}$都是同胚的拓扑,这里我们约定$\Phi(x)$上总取离散拓扑.此时$p$是连续的.但是为了验证这个拓扑定义良性需要验证对任意两个开集中的点$x_0\in U$和$x_1\in V$,如下映射是同胚:
+			$$\varphi_{V,x_1}^{-1}\circ\varphi_{U,x_0}:(U\cap V)\times\Phi(x_0)\to(U\cap V)\times\Phi(x_1)$$
+			
+			这个映射具体写出来的话,取$(x,y)\in(U\cap V)\times\Phi(x_0)$,任取从$x_0$到$x$的在$U$中的道路$w_1$,任取$x_1$到$x$的在$V$中的道路$w_2$,那么存在$y'\in\Phi(x_1)$使得$\Phi(w_1)y=\Phi(w_2)y'$.这个映射具体写出来就是把$(x,y)$映射到$(x,y')$,但是$\Phi(x)$赋予的都是离散拓扑,所以这个映射连续的.
+			\item 现在设$\alpha:\Phi_1\to\Phi_2$是自然变换,就定义$T'(\Phi_1)\to T'(\Phi_2)$是$\alpha$作为集合映射诱导的$\coprod_{x\in X}\Phi_1(x)\to\coprod_{x\in X}\Phi_2(x)$,同样用记号$\alpha$表示.我们需要验证它是覆盖空间之间的态射,但是如下图表交换性是清楚的,所以归结为证明$\alpha$是连续的.
+			$$\xymatrix{T'(\Phi_1)\ar[dr]_{p_1}\ar[rr]^{\alpha}&&T'(\Phi_2)\ar[dl]^{p_2}\\&X&}$$
+			
+			按照如下两个交换图表,说明$\alpha$视为$U\times\Phi_1(x_0)\to U\times\Phi_2(x_0)$的映射是$(x,y)\mapsto(x,\alpha(x_0)(y))$,按照$\Phi_i(x)$上总赋予离散拓扑,这就是连续映射.
+			$$\xymatrix{U\times\Phi_1(x_0)\ar[rr]^{\alpha}\ar@{=}[d]&&U\times\Phi_2(x_0)\ar@{=}[d]\\p_1^{-1}(U)\ar[rr]^{\alpha}&&p_2^{-1}(U)}$$
+			$$\xymatrix{\Phi_1(x_0)\ar[rr]^{\alpha}\ar[d]_{\Phi_1(w)}&&\Phi_2(x_0)\ar[d]^{\Phi_1(w)}\\\Phi_1(x)\ar[rr]^{\alpha}&&\Phi_2(x)}$$
+			\item 最后验证$T,T'$互为拟逆函子.
+		\end{enumerate}
+	\end{proof}
+	\item 一个覆盖空间$(\widetilde{X},p)$称为泛覆盖空间,如果它是单连通空间.按照提升准则,单连通的覆盖空间必须是$\textbf{Cov}(X)$中的初对象.这里我们证明在上一条的条件下泛覆盖空间总是存在的.
+	\begin{proof}
+		
+		考虑$\Pi(X)\to\textbf{Sets}$的函子$\Phi=\Pi(x_0,-)$,按照定义$\widetilde{X}=T'(\Phi)$作为点集是$\coprod_{x\in X}\Pi(x_0,x)$.它的拓扑可以这样描述:设$U\subset X$是开集,取以$x_0$为源端的道路$u$,定义$(U,[u])$表示所有的道路类$[v\ast u]$,其中$v$是以$u(1)$为源端的道路,使得$v\ast u$落在$U$中,那么全体$(U,[u])$就构成了$\widetilde{X}$的拓扑基.
+		
+		\qquad
+		
+		任取$X$中的以$x_0$为源端的道路$u$,我们断言它在$\widetilde{X}$中的提升道路的终端就是$[u]$自己.因为记$u_t(s)=u(ts)$,每个$u_t$都是$X$的一条以$x_0$为源端的道路.其中$u_0$是$x_0$处的常值道路,$u_1=u$.定义$\widetilde{u}:[0,1]\to\widetilde{X}$为$\widetilde{u}(t)=[u_t]$,于是有$\widetilde{u}(0)=\widetilde{x_0}$为$x_0$处的常值道路,$\widetilde{u}(1)=[u]$.并且有$p\widetilde{u}(t)=p[u_t]=u_t(1)=u(t)$,即$p\widetilde{u}=u$.为证明断言我们只需验证$\widetilde{u}$是连续的.
+		
+		\qquad
+		
+		取$t_0\in[0,1]$,考虑$\widetilde{u}(t_0)$的开邻域$(U,\widetilde{u}(t_0))$,按照$f$是连续的,存在$t_0$在$[0,1]$中的连通开邻域$V$使得$u(V)\subset U$.我们断言有$\widetilde{u}(V)\subset(U,\widetilde{u}(t_0))$.因为如果$t\in V$,无论$t>t_0$还是$t<t_0$都有$u_t$是$u_{t_0}$的包含在$U$中的延长道路,这说明$\widetilde{u}(V)\subset(U,\widetilde{u}(t_0))$.
+		
+		\qquad
+		
+		现在任取$[u]\in\pi_1(X,x_0)$,我们解释了它可以提升为从$\widetilde{x_0}$(此即$x_0$处的常值道路)到$[u]$的道路$\widetilde{u}$.有$[u]\in p_*\pi_1(\widetilde{X},\widetilde{x_0})$当且仅当$\widetilde{u}$是以$\widetilde{x_0}$为基点的loop.也即等价于$[u]=\widetilde{x_0}$.所以$[u]\in p_*\pi_1(\widetilde{X},\widetilde{x_0})$当且仅当$u$是零伦的道路,这说明$p_*\pi_1(\widetilde{X},\widetilde{x_0})$是平凡群,但是$p_*$理应是单射,说明$\pi_1(\widetilde{X},\widetilde{x_0})$是平凡群,也即$(\widetilde{X},p)$是泛覆盖空间.
+	\end{proof}
+\end{enumerate}
+
+函子$J_{x_0}:\textbf{Sets}^{\Pi(X)}\to G-\textbf{Sets}$.这里$G=\pi(x_0)=\Pi(X)(x_0,x_0)$.
+\begin{enumerate}
+	\item 在对象上,函子$J_{x_0}$把函子$\Phi:\Pi(X)\to\textbf{Sets}$映射为$G=\pi(x_0)$集合$\Phi(x_0)$.这里$G$作用约定为$G\times\Phi(x_0)\to\Phi(x_0)$为,$([u],y)\mapsto\Phi([u])(y)\in\Phi(x_0)$.
+	\item 在态射上,设$\Phi_1,\Phi_2:\Pi(X)\to\textbf{Sets}$是函子,设$\alpha:\Phi_1\to\Phi_2$是自然变换,它对应的$G$同态定义为$\alpha(x_0):\Phi_1(x_0)\to\Phi_2(x_0)$.这是$G$同态因为自然性保证了任取$[w]\in G$都有如下交换图表:
+	$$\xymatrix{\Phi_1(x_0)\ar[rr]^{\alpha(x_0)}\ar[d]_{\Phi_1([w])}&&\Phi_2(x_0)\ar[d]^{\Phi_2([w])}\\\Phi_1(x_0)\ar[rr]^{\alpha(x_0)}&&\Phi_2(x_0)}$$
+	\item 设$X$是道路连通空间,验证函子是完全忠实的.
+	\begin{proof}
+		
+		我们要验证的是从$\Phi_1$到$\Phi_2$的自然变换到从$\Phi_1(x_0)$到$\Phi_2(x_0)$的$G$同态的映射$\alpha\mapsto\alpha(x_0)$是双射.为此任取$G$同态$\beta:\Phi_1(x_0)\to\Phi_2(x_0)$,我们只要说明存在且仅存在一个自然变换$\alpha:\Phi_1\to\Phi_2$使得$\alpha(x_0)=\beta$.任取点$x\in X$,任取从$x$到$x_0$的道路$[w_1]$,那么$\Phi_i([w_1])$是同构,所以存在唯一的态射$\alpha(x)$使得如下图表交换:
+		$$\xymatrix{\Phi_1(x_0)\ar[rr]^{\beta}\ar@{=}[d]_{\Phi_1[w_1]}&&\Phi_2(x_0)\ar@{=}[d]^{\Phi_2[w_1]}\\\Phi_1(x)\ar[rr]^{\alpha(x)}&&\Phi_2(x)}$$
+		
+		我们要说明这个定义不依赖于道路$w_1$的选取,为此再取一条道路$w_2:x\to x_0$,那么$w_2\ast w_1^{-1}$是以$x_0$为基点的道路,所以按照$\beta$是$G$同态就得到如下交换图表上面小方块交换,所以下面整个大图表交换,这说明从$w_2$定义的$\alpha(x)$是一致的.
+		$$\xymatrix{\Phi_1(x_0)\ar[rr]^{\beta}\ar@{=}[d]_{\Phi_1[w_2\ast w_1^{-1}]}&&\Phi_2(x_0)\ar@{=}[d]^{\Phi_2[w_2\ast w_1^{-1}]}\\\Phi_1(x_0)\ar[rr]^{\beta}\ar@{=}[d]_{\Phi_1[w_1]}&&\Phi_2(x_0)\ar@{=}[d]^{\Phi_2[w_1]}\\\Phi_1(x)\ar[rr]^{\alpha(x)}&&\Phi_2(x)}$$
+		
+		最后验证$\alpha$是自然变换,任取点$x_1,x_2\in X$,任取$x_1$到$x_2$的道路$w$,按照$X$是道路连通的存在从$x_1$到$x_0$的道路$w_1$和$x_0$到$x_2$的道路$w_2$.考虑如下交换图表,每个小方格都是交换的,所以整个大图表是交换的,也即$\alpha$是自然变换.
+		$$\xymatrix{\Phi_1(x_1)\ar[rr]^{\alpha(x_1)}\ar[d]_{\Phi_1[w_1]}&&\Phi_2(x_1)\ar[d]^{\Phi_2[w_1]}\\\Phi_1(x_0)\ar[rr]^{\beta}\ar[d]_{\Phi_1[w_2^{-1}\ast w\ast w_1^{-1}]}&&\Phi_2(x_0)\ar[d]^{\Phi_2[w_2^{-1}\ast w\ast w_1^{-1}]}\\\Phi_1(x_0)\ar[rr]^{\beta}\ar[d]_{\Phi_1[w_2]}&&\Phi_2(x_0)\ar[d]^{\Phi_2[w_2]}\\\Phi_1(x_2)\ar[rr]^{\alpha(x_2)}&&\Phi_2(x_2)}$$
+	\end{proof}
+	\item 设$X$是道路连通空间,验证函子是本质满的.
+	\begin{proof}
+		
+		如果$A$是右$G$集合,$B$是左$G$集合,定义$A\times_GB$表示笛卡尔积集合$A\times B$在等价关系$(ag,b)\sim(a,gb),a\in A,g\in G,b\in B$下的商集合.现在给定(左)$G$集合$A$,我们要构造函子$\Phi:\Pi(X)\to\textbf{Sets}$使得$J_{x_0}\Phi=A$.
+		
+		\qquad
+		
+		任取$x\in X$,有$\Pi(X)(x_0,x)$是右$G$集合,作用定义为$g_1g_2=g_1\circ g_2:x_0\to x,\forall g_1\in\Pi(X)(x_0,x),\forall g_2\in G=\pi(x_0)=\pi(X)(x_0,x_0)$.构造函子$\Phi=\Pi(X)(x_0,-)\times_GA:\Pi(X)\to\textbf{Sets}$为,对对象$x\in X$,取$\Phi(x)=\Pi(X)(x_0,x)\times_GA$;对态射$[u]:x_1\to x_2$,取$\Phi([u]):\Pi(X)(x_0,x_1)\times_GA\to\Pi(X)(x_0,x_2)\times_GA$为$(g,a)\mapsto([u]\circ g,a)$.按照如下图表,其中第一行定义为$(g_1,(g_2,a))\mapsto(g_1g_2,a)$,第二行是$A$本身$G$作用结构,这个图表交换说明$J_{x_0}\Phi$同构于$A$:
+		$$\xymatrix{G\times(\Pi(X)(x_0,x_0)\times_GA)\ar[rr]\ar[d]&&\Pi(X)(x_0,x_0)\times_GA\ar[d]\\G\times A\ar[rr]&&A}$$
+	\end{proof}
+	\item 综上我们证明了$X$是道路连通空间时有$J_{x_0}:\textbf{Sets}^{\Pi(X)}\to\pi(x_0)-\textbf{Sets}$总是范畴等价函子.
+\end{enumerate}
+
+轨道范畴(orbit category).设$G$是群,$G$-$\textbf{Set}$范畴的由单轨道$G$集合构成的完全子范畴称为$G$的轨道范畴,记作$\textbf{Or}(G)$.这里群在集合上的作用总约定为左作用.
+\begin{enumerate}
+	\item 设$H$是$G$的子群,全体左陪集构成的集合记作$G/H$,存在其上的$G$作用是$g'(gH)=g'gH$.这是单轨道的$G$集合,我们把带这个群作用的$G$集合同样记作$G/H$.
+	\item 单轨道$G$集合总是同构于某个$G/H$.
+	\begin{proof}
+		
+		设$S$是单轨道$G$集合,任取$s_0\in S$,记稳定子群$H=G_{s_0}=\{g\in G\mid gs_0=s_0\}$.构造$G/H\to S$为$gH\mapsto gs_0$.这个定义良性因为如果$g_1^{-1}g_2\in H$,就有$g_1^{-1}g_2s_0=s_0$,也即$g_1s_0=g_2s_0$.这是单射因为$gs_0=s_0$导致$g\in H$导致$gH=H$.这是满射因为单轨道.最后它满足如下图表交换,于是是$G$集合态射.
+		$$\xymatrix{G\times G/H\ar[rr]\ar[d]&&G\times S\ar[d]\\G/H\ar[rr]&&S}$$
+	\end{proof}
+	\item 设$S$是单轨道$G$集合,记$H=G_{s_0}$,那么$\mathrm{Aut}_G(S)\cong\mathrm{N}_G(H)/H$.
+	\begin{proof}
+		
+		取$n\in\mathrm{N}_G(H)$,定义$G$集合同构$\varphi_n:S\to S$把$gs_0$映射为$ngs_0$.这个定义是良性的因为$g_1s_0=g_2s_0$时有$g_2^{-1}g_1\in H$,导致$ng_1s_0=ng_2s_0$.于是这是$\mathrm{N}_G(H)\to\mathrm{Aut}_G(S)$的群同态.这是满同态因为任取$S$自身的$G$同态$\varphi$,记$\varphi(s_0)=ns_0$,那么$n\in\mathrm{N}_G(H)$,并且有$\varphi=\varphi_n$.最后如果$\varphi_n=1_S$,那么$s_0=\varphi_n(s_0)=ns_0$,于是$n\in H$,于是有$\mathrm{N}_G(H)/H\cong\mathrm{Aut}_G(S)$.
+	\end{proof}
+	\item 设$H,K$是$G$的两个子群,我们来刻画所有$G$同态$\varphi:G/H\to G/K$.首先这样的同态被$\varphi(H)=g_0K$所唯一决定.而$g_0\in G$能够使得存在$G$同态$\varphi:G/H\to G/K$满足$\varphi(H)=g_0K$等价于讲对任意$g\in H$有$gg_0K=g\varphi(H)=\varphi(H)=g_0K$,也即等价于$g_0^{-1}Hg_0\subset K$.但是不同的$g_0$可以诱导相同的$\varphi$,区别在于它们在$K$的相同左陪集里,整理下有$\mathrm{Hom}_G(G/H,G/K)$是乘性子集$M=\{g\in G\mid g^{-1}Hg\subset K\}$模去等价关系$g_1\sim g_2:g_1^{-1}g_2\in K$.
+	\item $\textbf{Or}(G)$范畴等价于这样一个范畴:它的对象是$G/H$,其中$H$是$G$的子群(此时$G/H$理解为全体$H$的左陪集构成的集合).两个对象之间的态射$G/H\to G/K$由上一条描述.
+\end{enumerate}
+
+复合函子$L_{x_0}:\xymatrix{\textbf{Cov}(X)\ar[r]^T&\textbf{Sets}^{\Pi(X)}\ar[r]^{J_{x_0}}&\pi_1(X,x_0)-\textbf{Sets}}$.
+\begin{enumerate}
+	\item 对象上它把覆盖空间$(\widetilde{X},p)$映射为$G$集合$F_{x_0}=p^{-1}(x_0)$,其中$G$作用定义为,任取$\widetilde{x_0}\in F_{x_0}$,任取$g=[u]\in G$,那么$[u]$在同伦意义下唯一提升为$\widetilde{X}$中的一条道路,就定义$g\widetilde{x_0}$定义为这个道路的终端.
+	\item 态射上它把覆盖空间之间的态射$\varphi:(\widetilde{X}_1,p_1)\to(\widetilde{X}_2,p_2)$映射为$G$同态$p^{-1}_1(x_0)\to p_2^{-1}(x_0)$就定义为$\alpha(x_0)$.
+	\item 整理一下我们前文证明的结论.如果$X$是道路连通,局部道路连通,半局部单连通空间.取定点$x_0\in X$,那么$L_{x_0}$是范畴等价.另外在这个对应下,我们断言道路连通覆盖空间对应的是单轨道$G$集合,于是连通覆盖空间构成的$\textbf{Cov}(X)$的完全子范畴$\textbf{Cov}^0(X)$是范畴等价于$G-\textbf{Sets}$的完全子范畴$\textbf{Or}(G)$.
+    \begin{proof}
+    	
+    	一方面如果$(\widetilde{X},p)$是道路连通的覆盖空间,任取$F_{x_0}$中的两个点$a,b$,就有从$a$到$b$的道路$\widetilde{u}$,那么$u=p\circ\widetilde{u}$就满足$[u]a=b$,这说明作用是单轨道的.另一方面如果$G$在$F_{x_0}$上的作用是单轨道的,任取$\widetilde{x}\in\widetilde{X}$,记$p(\widetilde{x})=x$,那么有从$x$到$x_0$的道路$u$,它就可以提升为$\widetilde{X}$中从$\widetilde{x}$到$F_{x_0}$中某个点$\widetilde{x_0}'$的道路$\widetilde{u}$.再按照单轨道条件,有从$\widetilde{x_0}'$到$\widetilde{x_0}$的道路,这说明了任意点$\widetilde{x}$都有到$\widetilde{x_0}$的道路,所以$\widetilde{X}$是道路连通的.
+    \end{proof}
+\end{enumerate}
+
+这个范畴等价能提供如下全部信息,但是它的条件很强,下面我们仅考虑道路连通的覆盖空间,此时$X$必须是道路连通的,有些命题需要局部道路连通条件.
+\begin{enumerate}
+	\item $\pi_1(X,x_0)$单轨道作用在$Y=p^{-1}(x_0)$上,点$\widetilde{x_0}\in Y$的稳定子是$p_*(\pi_1(\widetilde{X},\widetilde{x_0}))$.特别的$|Y|=[\pi_1(X,x_0):p_*(\pi_1(\widetilde{X},\widetilde{x_0}))]$.
+	\begin{proof}
+		
+		这个群作用定义为,任取$[u]\in\pi_1(X,x_0)$,任取$\widetilde{x_0}\in Y$,那么$u$在同伦意义下唯一的提升为$\widetilde{X}$中一条源端为$\widetilde{x_0}$的道路,就定义$[u]\widetilde{x_0}$是这条道路的终端.这个作用是单轨道的是因为$\widetilde{X}$是道路连通的,所以任取$\widetilde{x_0}'\in Y$都存在从$\widetilde{x_0}$到$\widetilde{x_0}'$的道路$v$,那么$v$是以$x_0$为基点的道路$p\circ v$的提升,这说明$[p\circ v]\widetilde{x_0}=\widetilde{x_0}'$.
+		
+		\qquad
+		
+		如果以$x_0$为基点的道路类$[u]$满足$[u]\widetilde{x_0}=\widetilde{x_0}$,也即$u$提升为$\widetilde{X}$中以$\widetilde{x_0}$为源端的道路时终端仍然是$\widetilde{x_0}$.于是提升道路$\widetilde{u}\in\pi_1(\widetilde{X},\widetilde{x_0})$,所以$[u]\in p_*\pi_1(\widetilde{X},\widetilde{x_0})$.反过来这个像集必然作用在$\widetilde{x_0}$上平凡,于是$\widetilde{x_0}\in Y$的稳定子就是$p_*\pi_1(\widetilde{X},\widetilde{x_0})$.
+		
+		\qquad
+		
+		此时可直接构造$\pi_1(X,x_0)/p_*\pi_1(\widetilde{X},\widetilde{x_0})$到$Y$的(甚至是$G$集合范畴上的)同构.
+	\end{proof}
+	\item 任取$x_0,x_1$,记$Y_i=p^{-1}(x_i)$,那么有$|Y_0|=|Y_1|$.于是道路连通条件下$X$上点的纤维的势不依赖于点的选取,这个势称为覆盖空间$(\widetilde{X},p)$的重数.
+	\begin{proof}
+		
+		取$\widetilde{x_i}\in Y_i,i=0,1$.取从$\widetilde{x_0}$到$\widetilde{x_1}$的道路$\widetilde{u}$,那么$u=p\circ\widetilde{u}$是$x_0$到$x_1$的道路,有如下交换图表,这里$p_*$是单射,就得到$[\pi_1(X,x_0):p_*\pi_1(\widetilde{X},\widetilde{x_0})]=[\pi_1(X,x_1):p_*\pi_1(\widetilde{X},\widetilde{x_1})]$,也即$|Y_1|=|Y_2|$.
+		$$\xymatrix{\pi_1(\widetilde{X},\widetilde{x_0})\ar[rrr]^{[\widetilde{f}]\mapsto[\widetilde{u}\ast\widetilde{f}\ast\widetilde{u}^{-1}]}\ar[d]_{p_*}&&&\pi_1(\widetilde{X},\widetilde{x_1})\ar[d]^{p_*}\\\pi_1(X,x_0)\ar[rrr]_{[f]\mapsto[u\ast f\ast u^{-1}]}&&&\pi_1(\widetilde{X},\widetilde{x_1})}$$
+	\end{proof}
+	\item 如果$\widetilde{x_0},\widetilde{x_0}'\in Y$,那么$p_*\pi_1(\widetilde{X},\widetilde{x_0})$和$p_*\pi_1(\widetilde{X},\widetilde{x_0}')$是共轭的.另外如果有$\pi_1(X,x_0)$的子群$H$共轭于$p_*\pi_1(\widetilde{X},\widetilde{x_0})$,那么存在$\widetilde{x_0}'\in Y$使得$H=p_*\pi_1(\widetilde{X},\widetilde{x_0}')$.
+	\begin{proof}
+		
+		上一条证明中的图表就说明我们这里第一个断言.因为如果记下行的共轭映射是$\sigma$,上行的共轭映射是$\Sigma$,那么有:
+		$$p_*\pi_1(\widetilde{X},\widetilde{x_0}')=p_*\Sigma\pi_1(\widetilde{X},\widetilde{x_0})=\sigma p_*\pi_1(\widetilde{X},\widetilde{x_0})$$
+		
+		证明第二件事.设有$x_0$为基点的道路$u$使得$H=[u]p_*\pi_1(\widetilde{X},\widetilde{x_0})[u]$,那么$u$可以提升为$\widetilde{X}$中的以$\widetilde{x_0}$为源端的道路$\widetilde{u}$,它的终端是$Y$中的某个点$\widetilde{x_0}'$.同样考虑上一条证明中的图表,就得到:
+		$$H=\sigma p_*\pi_1(\widetilde{X},\widetilde{x_0})=p_*\Sigma\pi_1(\widetilde{X},\widetilde{x_0})=p_*\pi_1(\widetilde{X},\widetilde{x_0}')$$
+	\end{proof}
+	\item 设$(X,x_0)$是局部道路连通的,设$p:(\widetilde{X},\widetilde{x_0})\to(X,x_0)$和$q:(\widetilde{X}',\widetilde{x_0}')\to(X,x_0)$是覆盖空间,如果有$q_*\pi_1(\widetilde{X}',\widetilde{x_0}')=p_*\pi_1(\widetilde{X},\widetilde{x_0})$,那么存在唯一的覆盖空间之间的态射$h:(\widetilde{X},\widetilde{x_0})\to(\widetilde{X}',\widetilde{x_0}')$,并且它是同胚.
+	\begin{proof}
+		
+		$\widetilde{X}$是局部道路连通和道路连通的,从提升准则就得到$h$的存在性和唯一性.下面仅需验证$h$是同胚.类似的可以证明存在态射$k:(\widetilde{X}',\widetilde{x_0}')\to(\widetilde{X},\widetilde{x_0})$,那么$hk$是固定点$\widetilde{x_0}'$的$\widetilde{X}'$上的Deck变换,但是恒等映射也是固定这个点的Deck变换,按照提升唯一性就说明有$hk=1_{\widetilde{X}'}$.同理有$kh=1_{\widetilde{X}}$.于是$h$是同胚.
+	\end{proof}
+	\item 设$(X,x_0)$是局部道路连通的,设$(\widetilde{X},p)$和$(\widetilde{X}',q)$是两个覆盖空间,取定$\widetilde{x_0}\in p^{-1}(x_0)$和$\widetilde{x_0}'\in q^{-1}(x_0)$.
+	\begin{itemize}
+		\item 有子群的包含关系$q_*\pi_1(\widetilde{X}',\widetilde{x_0}')\subset p_*\pi_1(\widetilde{X},\widetilde{x_0})$当且仅当存在唯一的带基点的覆盖空间之间的态射$h:(\widetilde{X}',\widetilde{x_0}')\to(\widetilde{X},\widetilde{x_0})$.
+		\item 如果不加带基点的要求,子群的共轭包含关系$g(q_*\pi_1(\widetilde{X}',\widetilde{x_0}'))g^{-1}\subset p_*\pi_1(\widetilde{X},\widetilde{x_0})$和不加基点的覆盖空间之间的态射$h:\widetilde{X}'\to\widetilde{X}$是一一对应的.
+		\item 特别的,这两个覆盖空间是不要求基点意义下同构的当且仅当$p_*\pi_1(\widetilde{X},\widetilde{x_0})$和$q_*\pi_1(\widetilde{X}',\widetilde{x_0}')$是$\pi_1(X,x_0)$的互相共轭的子群.
+	\end{itemize}
+	\begin{proof}
+		
+		第一件事就是提升准则,$\widetilde{X}'$的连通性就说明态射的唯一性.第二件事是因为共轭实际上就是基点在纤维中的变化.
+	\end{proof}
+    \item 设$X$是局部道路连通空间,设$x_0\in X$,两个覆盖空间$(\widetilde{X},p)$和$(\widetilde{X}',q)$同构当且仅当$p^{-1}(x_0)$和$q^{-1}(x_0)$作为$\pi_1(X,x_0)$集合是同构的.
+    \begin{proof}
+    	
+    	取定$\widetilde{x_0}\in p^{-1}(x_0)$和$\widetilde{x_0}'\in q^{-1}(x_0)$.上一条说明这两个覆盖空间同构当且仅当$H_1=p_*\pi_1(\widetilde{X},\widetilde{x_0})$和$H_2=q_*\pi_1(\widetilde{X}',\widetilde{x_0}')$作为$G=\pi_1(X,x_0)$子群是共轭的.但是我们解释过这说明$G/H_1$和$G/H_2$作为$G$集合是同构的.而这两个$G$集合分别$G$同构于$p^{-1}(x_0)$和$q^{-1}(x_0)$.这得到结论.
+    \end{proof}
+\end{enumerate}
+
+Deck变换.这里覆盖空间总约定为道路连通的.覆盖空间$p:\widetilde{X}\to X$在$\textbf{Cov}(X)$中的自同构群称为Deck变换群,记作$\mathrm{Deck}(\widetilde{X}/X)$,其中的态射称为Deck变换.换句话讲,覆盖空间$p:\widetilde{X}\to X$的Deck变换是指使得如下图表交换的同胚$\varphi$:
+$$\xymatrix{\widetilde{X}\ar[dr]_{p}\ar[rr]^{\varphi}&&\widetilde{X}\ar[dl]^{p}\\&X&}$$
+\begin{enumerate}
+	\item 设$h$是覆盖空间$\widetilde{X}$上的Deck变换,如果$h$不是恒等映射,那么它必须没有不动点.因为否则的话按照提升的唯一性得到$h=1_{\widetilde{X}}$.
+	\item 类似上一条,如果$\widetilde{X}$的两个Deck变换在某个点取值相同,按照提升的唯一性,就导致它们是相同的映射.
+	\item $X$的道路连通覆盖空间$(\widetilde{X},p)$称为正则覆盖空间,如果$p_*\pi_1(\widetilde{X},\widetilde{x_0})$是$\pi_1(X,x_0)$的正规子群对某个$x_0\in X$成立(则对任意$x_0\in X$成立).如果$X$是局部道路连通的,取$x_0\in X$,那么覆盖空间$(\widetilde{X},p)$是正则的当且仅当$\mathrm{Deck}(\widetilde{X}/X)$在$F_{x_0}$上的作用是单轨道的.
+	\begin{proof}
+		
+		必要性,如果$(\widetilde{X},p)$是正则的,任取$\widetilde{x_0},\widetilde{x_0}'\in F_{x_0}=p^{-1}(x_0)$,那么有$p_*\pi_1(\widetilde{X},\widetilde{x_0})=p_*\pi_1(\widetilde{X},\widetilde{x_0}')$.我们证明过这说明存在唯一的带基点的覆盖空间之间的态射$h:(\widetilde{X},\widetilde{x_0})\to(\widetilde{X},\widetilde{x_0}')$,所以有Deck变换$h$使得$h(\widetilde{x_0})=\widetilde{x_0}'$,于是$h\mid p^{-1}(x_0)$是单轨道的.
+		
+		\qquad
+		
+		充分性,如果$\mathrm{Deck}(\widetilde{X}/X)$在$p^{-1}(x_0)$上的作用是单轨道的,任取$\widetilde{x_0},\widetilde{x_0}'\in p^{-1}(x_0)$,就存在Deck变换$h$使得$h(\widetilde{x_0})=\widetilde{x_0}'$,并且按照提升的唯一性,这样的$h$是同胚,于是有$h_*\pi_1(\widetilde{X},\widetilde{x_0})=\pi_1(\widetilde{X},\widetilde{x_0}')$.再从$p=ph$得到$p_*\pi_1(\widetilde{X},\widetilde{x_0})=p_*h_*\pi_1(\widetilde{X},\widetilde{x_0})=p_*\pi_1(\widetilde{X},\widetilde{x_1})$.这对任意的$\widetilde{x_0}'\in p^{-1}(x_0)$成立,说明$p_*\pi_1(\widetilde{X},\widetilde{x_0})$是$\pi_1(X,x_0)$的正规子群,所以$(\widetilde{X},p)$是正则覆盖空间.
+	\end{proof}
+    \item 取定点$x_0\in X$,设$X$是局部道路连通的,那么从$h\mapsto h\mid p^{-1}(x_0)$是如下群同构:
+    $$\mathrm{Deck}(\widetilde{X}/X)\cong\mathrm{Aut}_G(p^{-1}(x_0))$$
+    \item 设$X$是局部道路连通空间,任取$x_0\in X$和$\widetilde{x_0}\in p^{-1}(x_0)$,那么有:
+    \begin{itemize}
+    	\item $$\mathrm{Deck}(\widetilde{X}/X)\cong\frac{\mathrm{N}_G(p_*\pi_1(\widetilde{X},\widetilde{x_0}))}{p_*\pi_1(\widetilde{X},\widetilde{x_0})}$$
+    	\item 特别的,如果$(\widetilde{X},p)$是正则覆盖空间,就有:
+    	$$\mathrm{Deck}(\widetilde{X}/X)\cong\frac{\pi_1(\widetilde{X},\widetilde{x_0})}{p_*\pi_1(\widetilde{X},\widetilde{x_0})}$$
+    	\item 特别的,如果$(\widetilde{X},p)$是泛覆盖空间,就有:
+    	$$\mathrm{Deck}(\widetilde{X}/X)\cong\pi_1(\widetilde{X},\widetilde{x_0})$$
+    \end{itemize}
+\end{enumerate}
+
+\newpage
+\section{基本同伦论}
+\subsection{loop空间和suspension}
+
+关于函数空间的补充.
+\begin{enumerate}
+	\item 设$X,Y$是拓扑空间,我们用$Y^X$表示全体从$X\to Y$的连续映射构成的集合.这个集合上如果不加说明,我们总考虑的是紧开拓扑,它是指形如$(K;U)\subset Y^X$的子集作为子基生成的拓扑(即全体有限交作为基元素),其中$K\subset X$是紧集,$U\subset Y$是开集:
+	$$(K;U)=\{f\in Y^X\mid f(K)\subset U\}$$
+	\item 设$X,Y$是拓扑空间,其中$Y$是局部紧Hausdorff空间,$X^Y$赋予紧开拓扑,那么映射$e:X^Y\times Y\to X$,$(f,y)\mapsto f(y)$是连续映射,它称为evaluation.
+	\begin{proof}
+		
+		取$(f_0,y_0)\in X^Y\times Y$,取$x_0=f(y_0)\in X$的开邻域$U$,按照$f$是连续映射,可取$y_0$的开邻域$V$使得$f(V)\subset U$.按照$Y$是局部紧Hausdorff空间,可取$y_0$的开邻域$W$使得$\overline{W}$是紧集,并且满足$y_0\in W\subset\overline{W}\subset V$.那么有$e((\overline{W};U))\subset U$,于是$e$是连续映射.
+	\end{proof}
+	\item 设$X,Y,Z$是集合,我们有如下互为逆的映射:
+	\begin{itemize}
+		\item $\mathrm{Hom}(Z\times Y,X)\to\mathrm{Hom}(Z,X^Y)$为$F\mapsto F^{\#}$,满足$F^{\#}(z)(y)=F(z,y)$.
+		\item $\mathrm{Hom}(Z,X^Y)\to\mathrm{Hom}(Z\times Y,X)$为$G\mapsto G^{\mathrm{b}}$,满足$G^{\mathrm{b}}(z,y)=G(z)(y)$.
+	\end{itemize}
+
+    如果$X,Y,Z$是拓扑空间,$Y$是局部紧Hausdorff空间,$X^Y$赋予紧开拓扑,那么一个映射$F:Z\times Y\to X$连续当且仅当$F^{\#}:Z\to X^Y$是连续映射.
+    \begin{proof}
+    	
+    	首先如果$F^{\#}$是连续映射,那么有$Z\times Y\to X^Y\times Y\to X$是连续映射的复合,这里用到了上一条中$e$是连续映射.反过来如果$F$是连续映射,任取$z_0\in Z$,取包含$F^{\#}(z_0)$的开子集$(K;U)$,其中$K\subset Y$是紧集,$U\subset X$是开集.那么$F^{\#}(z_0)(K)\subset U$.于是$F^{-1}(U)$是包含了$\{z_0\}\times K$的开子集.于是$F^{-1}(U)\cap(Z\times K)$是$Z\times K$的包含$\{z_0\}\times K$的开子集,按照管状引理(Tube lemma),存在$z_0$的开邻域$W$使得$W\times K\subset F^{-1}(U)$,于是$F^{\#}(W)\subset(K;U)$,于是$F^{\#}$是连续映射.
+    \end{proof}
+    \item 推论.设$X,Y,Z$是拓扑空间,$Y$是局部紧Hausdorff空间,一个映射$g:Z\to X^Y$是连续映射当且仅当如下复合映射是连续映射:
+    $$\xymatrix{Z\times Y\ar[r]^{g\times1}&X^Y\times Y\ar[r]^e&X}$$
+\end{enumerate}
+
+$\textbf{hTop}_*$上的群对象和余群对象.
+\begin{enumerate}
+	\item 设$\mathscr{A}$是具有有限积的范畴,约定这包含空集上积的情况,也即终对象$Z$.一个对象$G$称为它的群对象,如果存在三个态射$\mu:G\times G\to G$,$\eta:G\to G$和$\varepsilon:Z\to G$,分别充当二元运算,逆元运算和幺元,满足如下条件:
+	\begin{itemize}
+		\item 结合律:
+		$$\xymatrix{G\times G\times G\ar[rr]^{1\times\mu}\ar[d]_{\mu\times1}&&G\times G\ar[d]^{\mu}\\G\times G\ar[rr]^{\mu}&&G}$$
+		\item 幺元.其中$\lambda_i$是投影映射:
+		$$\xymatrix{G\times Z\ar[r]^{1\times\varepsilon}\ar[dr]_{\lambda_1}&G\times G\ar[d]^{\mu}&Z\times G\ar[l]_{\varepsilon\times1}\ar[dl]^{\lambda_2}\\&G&}$$
+		\item 逆元:
+		$$\xymatrix{G\ar[r]^{(1,\eta)}\ar[d]_{\exists!}&G\times G\ar[d]^{\mu}&G\ar[l]_{(\eta,1)}\ar[d]^{\exists!}\\Z\ar[r]_{\varepsilon}&G&Z\ar[l]^{\varepsilon}}$$
+	\end{itemize}
+
+    对偶的,设$\mathscr{A}$是具有有限余积的范畴,记初对象$A$存在.一个对象$C$称为余群对象,如果存在三个态射$m:C\to C\coprod C$,$h:C\to C$和$e:C\to A$.满足如下条件:
+    \begin{itemize}
+    	\item 余结合律:
+    	$$\xymatrix{C\ar[rr]^m\ar[d]_m&&C\coprod C\ar[d]^{1\coprod m}\\C\coprod C\ar[rr]_{m\coprod 1}&&C\coprod C\coprod C}$$
+    	\item 余幺元:
+    	$$\xymatrix{C\coprod A&C\coprod C\ar[l]_{1\coprod e}\ar[r]^{e\coprod1}&A\coprod C\\&C\ar[u]^e\ar[ur]\ar[ul]&}$$
+    	\item 余逆元:
+    	$$\xymatrix{C&C\coprod C\ar[l]_{(1,h)}\ar[r]^{(h,1)}&C\\A\ar[u]&C\ar[l]^e\ar[r]_e\ar[u]_m&A\ar[u]}$$
+    \end{itemize}
+    \item 设$\mathscr{A}$是具有有限积和终对象的范畴,一个对象$G$是群对象当且仅当$\mathrm{Hom}_{\mathscr{A}}(-,G)$在$\textbf{Grp}$中取值,这是指对每个对象$X$,有$\mathrm{Hom}_{\mathscr{A}}(X,G)$总具有一个群结构,使得每个态射$g:X\to Y$诱导的映射$g^*:\mathrm{Hom}_{\mathscr{A}}(Y,G)\to\mathrm{Hom}_{\mathscr{A}}(X,G)$,$f\mapsto f\circ g$是群同态.
+    \begin{proof}
+    	
+    	如果$G$是群对象,对每个对象$X$,把共变函子$\mathrm{Hom}_{\mathscr{A}}(X,-)$作用在群对象定义中的三个交换图表上,结合直积与$\mathrm{Hom}$函子的交换性$\mathrm{Hom}(X,G\times G)\cong\mathrm{Hom}(X,G)\times\mathrm{Hom}(X,G)$,说明每个$\mathrm{Hom}(X,G)$是$\textbf{Sets}$中的群对象,也即群.并且乘法$\mathrm{Hom}(X,G)\times\mathrm{Hom}(X,G)\to\mathrm{Hom}(X,G)$为$f\bullet g=\mu(f,g)$,其中$(f,g):X\to G\times G$.如果取$h:X\to Y$和$f,g:Y\to G$,就有:
+    	$$h^*(f\bullet g)=h^*\mu(f,g)=\mu(f,g)h=\mu(fh,gh)=\mu(h^*f,h^*g)=h^*f\bullet h^*g$$
+    	
+    	反过来设$\mathrm{Hom}_{\mathscr{A}}(-,G)$在$\textbf{Grp}$中取值.对每个对象$X$,记$\mathrm{Hom}(X,G)$中的乘法为$M_X$.我们定义:
+    	\begin{itemize}
+    		\item 考虑同构$\mathrm{Hom}(X,G)\times\mathrm{Hom}(X,G)\cong\mathrm{Hom}(X,G\times G)$,有$M_{G\times G}:\mathrm{Hom}(G\times G,G\times G)\to\mathrm{Hom}(G\times G,G)$.定义$\mu:G\times G\to G$为$M_{G\times G}(1_{G\times G})$.
+    		\item 记$\mathrm{Hom}(X,G)$上的逆元映射为$\eta_X$,记$\eta:G\to G$为$\eta_G(1_G)$.
+    		\item 取$\varepsilon\in\mathrm{Hom}(Z,G)$是群中的幺元.
+    	\end{itemize}
+    
+        现在我们证明$(G,\mu,\eta,\varepsilon)$满足群对象定义中的三个图表,以结合律图表为例.按照$\mathrm{Hom}(X,G)$上的二元运算$M_X$满足结合律,有如下交换图表:
+        $$\xymatrix{\mathrm{Hom}(X,G\times G\times G)\ar[rr]^{M_X\times1}\ar[d]_{1\times M_X}&&\mathrm{Hom}(X,G\times G)\ar[d]^{M_X}\\\mathrm{Hom}(X,G\times G)\ar[rr]_{M_X}&&\mathrm{Hom}(X,G)}$$
+        
+        我们有自然变换$M=(M_X):\mathrm{Hom}(-,G\times G)\to\mathrm{Hom}(-,G)$,上述交换图表得到自然变换的交换图表$M(M\times1)=M(1\times M):\mathrm{Hom}(-,G^{\times3})\to\mathrm{Hom}(-,G)$.按照米田引理,记$u=M_{G\times G}(M_{G\times G}\times1)(1_{G\times G\times G})=M_{G\times G}(\mu\times1)=\mu(\mu\times1)$(最后一步也是因为米田引理:因为$M:\mathrm{Hom}(-,G\times G)\to\mathrm{Hom}(-,G)$对应于$(M_{G\times G}(1_{G\times G}))^*=\mu^*$),那么有$M(M\times1)=u^*=(\mu(\mu\times1))^*$.同理有$M(1\times M)=(\mu(1\times\mu))^*$,把它们作用在$1_{G\times G\times G}$上就得到$\mu(\mu\times1)=\mu(1\times\mu)$.
+    \end{proof}
+    \item 对偶的,设$\mathscr{A}$是具有有限余积和初对象的范畴,一个对象$G$是余群对象当且仅当$\mathrm{Hom}_{\mathscr{A}}(G,-)$在$\textbf{Grp}$中取值.
+    \item 引理.单点空间是$\textbf{hTop}_*$中的零对象,另外$\textbf{hTop}_*$中总存在有限积和有限余积.事实上$\textbf{Top}_*$中的二元积和二元余积也是$\textbf{hTop}_*$中的.
+    \begin{proof}
+    	
+    	二元积:如果带基点的连续映射$f_1:X\to C_1$和$f_2:X\to C_2$,把它们替换为同伦的映射,那么诱导的$X\to C_1\times C_2$也是同伦的.只要取同伦的乘积.
+    	
+    	\qquad
+    	
+    	二元余积:如果同伦$f_1\sim f_1':C_1\to X$记作$H_1$,同伦$f_2\sim f_2':C_2\to X$记作$H_2$,考虑如下$(C_1\vee C_2)\times[0,1]\to X$映射:
+    	$$H(x,t)=\left\{\begin{array}{cc}H_1(x,t)&x\in C_1\\H_2(x,t)&x\in C_2\end{array}\right.$$
+    	
+    	这是连续映射因为它是如下映射$H_1\coprod H_2$在商空间中的提升:
+    	$$\xymatrix{(C_1\vee C_2)\times[0,1]\ar[rr]&&X\\(C_1\times[0,1])\coprod(C_2\times[0,1])\ar[u]\ar@/_1pc/[urr]_{\qquad H_1\coprod H_2}&&}$$
+    \end{proof}
+    \item $\textbf{hTop}_*$中存在零对象,所以定义幺元和余幺元的态射就是恒取基点的态射.所以一个带基点的空间放在$\textbf{hTop}_*$中是群对象或者余群对象等价于如下描述:
+    \begin{itemize}
+    	\item $(X,x_0)$放在$\textbf{hTop}_*$中是群对象当且仅当存在连续映射$\mu:X\times X\to X$和$\eta:X\to X$满足如下相对同伦关系,其中$j_1:X\to X\times X$为$x\mapsto(x,x_0)$,$j_2:X\to X\times X$,$x\mapsto(x_0,x)$,并且$c$是$X\to X$的恒取$x_0$的映射.
+    	$$\mu(1_X\times\mu)\simeq\mu(\mu\times1_X)$$
+    	$$\mu j_1\simeq 1_X\simeq\mu j_2$$
+    	$$\mu(1_X,\eta)\simeq c\simeq\mu(\eta,1_X)$$
+    	\item $(X,x_0)$放在$\textbf{hTop}_*$中是余群对象当且仅当存在连续映射$m:X\to X\vee X$和$h:X\to X$,满足有如下相对同伦关系:
+    	$$(1_X\vee m)m\simeq(m\vee 1)m$$
+    	$$q_1m\simeq 1_X\simeq q_2m$$
+    	$$(1_X,h)m\simeq c\simeq(h,1_X)m$$
+    \end{itemize}
+\end{enumerate}
+
+loop空间和suspension.
+\begin{enumerate}
+	\item 设$(X,x_0)$是带基点的空间,它的loop空间定义为赋予紧开拓扑的空间$\Omega(X,x_0)=(X,x_0)^{(S^1,1)}$.没有歧义时简记作$\Omega(X)$.如果$f:(X,x_0)\to(Y,y_0)$是连续映射,定义$\Omega(f)$把$(X,x_0)$中的loop记作$u$映射为$f\circ u$,这是$(Y,y_0)$中的loop.我们断言这实际上是$\textbf{hTop}_*\to\textbf{hTop}_*$的函子.
+	\begin{proof}
+		
+		首先我们说明$\Omega(f)$是连续的.考虑如下交换图表.这里$S^1$是紧Hausdorff空间,所以$f\circ e$是连续的,所以$e\circ(\Omega(f)\times1)$是连续的,我们解释过这等价于$\Omega(f)\times1$是连续的,于是$\Omega(f)$是连续的.
+		$$\xymatrix{X^{S^1}\times S^1\ar[rr]^{\Omega(f)\times1}\ar[d]_e&&Y^{S^1}\times S^1\ar[d]^e\\X\ar[rr]_f&&Y}$$
+		
+		至此说明了$\Omega$是$\textbf{Top}_*\to\textbf{Top}_*$的函子.为了说明它是$\textbf{hTop}_*$自身上的函子,只需验证如果$H:f\simeq g$是带基点空间之间的同伦映射,那么有$\Omega(f)\simeq\Omega(g)$.取$\widetilde{H}:\Omega(X)\times[0,1]\to\Omega(Y)$为$(u,t)\mapsto F_t\circ u$,我们只要说明这是连续的.有如下交换图表,其中$I=[0,1]$,并且$u:X^I\times I\times I\to X^I\times I\times I$为$(u,s,t)\mapsto(u,t,s)$.和上一段相同的,从$H\circ(e\times1)\circ u$连续得到$e\circ(\widetilde{H}\times1)$连续,而这等价于$\widetilde{H}\times1$连续,于是$\widetilde{H}$是连续的.
+		$$\xymatrix{X^I\times I\times I\ar[rr]^{\widetilde{H}\times1}\ar[d]_{(e\times1)u}&&Y^I\times I\ar[d]^e\\X\times I\ar[rr]_H&&Y}$$
+	\end{proof}
+    \item $\Omega(X)$放在$\textbf{hTop}_*$中总是群对象.
+    \begin{proof}
+    	
+    	取$\mu:\Omega(X)\times\Omega(X)\to\Omega(X)$就是道路的乘积.先要验证这是连续映射.我们解释过这等价于验证如下复合映射是连续的:
+    	$$\xymatrix{\Omega(X)\times\Omega(X)\times I\ar[r]^{\mu\times1}&\Omega(X)\times I\ar[r]^e&X}$$
+    	
+    	在$\Omega(X)\times\Omega(X)\times[0,\frac{1}{2}]$上这个映射就是如下连续映射,其中$p_1:\Omega(X)\times\Omega(X)\to\Omega(X)$是第一个分量的投影映射,$q_1$是$t\to2t$.
+    	$$\xymatrix{\Omega(X)\times\Omega(X)\times[0,\frac{1}{2}]\ar[r]^{p_1\times q_1}&\Omega(X)\times I\ar[r]^e&X}$$
+    	
+    	在$\Omega(X)\times\Omega(X)\times[0,\frac{1}{2}]$上这个映射就是如下连续映射,其中$p_1:\Omega(X)\times\Omega(X)\to\Omega(X)$是第一个分量的投影映射,$q_2$是$t\to2t-1$.
+    	$$\xymatrix{\Omega(X)\times\Omega(X)\times[\frac{1}{2},1]\ar[r]^{p_2\times q_2}&\Omega(X)\times I\ar[r]^e&X}$$
+    	
+    	接下来要验证群对象定义中的三个交换图表,以结合律为例,我们要构造$\mu(\mu\times1)$和$\mu(1\times\mu)$之间的同伦映射$G:\Omega(X)\times\Omega(X)\times\Omega(X)\times I\to\Omega(X)$.但是我们解释过由于$I$是紧Hausdorff空间,这等价于连续映射$F:\Omega(X)\times\Omega(X)\times\Omega(X)\times I\times I\to X$,但是这个构造和道路乘积的结合律是一样的.类似可以构造群对象定义中的$\eta$,以及验证另外两个同伦交换图表.
+    \end{proof}
+    \item suspension(约化双角锥).设$(X,x_0)$是带基点的空间,它的约化双角锥$\Sigma(X)$定义为商空间:
+    $$\Sigma(X)=(X\times I)/((X\times\{0,1\})\cup(\{x_0\}\times I))$$
+    
+    图像上它是$X$的双角锥再把$\{x_0\}\times[0,1]$粘合为基点.设$f:(X,x_0)\to(Y,y_0)$是带基点空间之间的连续映射,定义$\Sigma(f)$是它诱导的$f\times1:X\times I\to Y\times I$在商空间的提升.我们断言$\Sigma$实际上是$\textbf{hTop}_*\to\textbf{hTop}_*$的函子.
+    \begin{proof}
+    	
+    	我们只要证明如果$f\simeq g:X\to Y$是相对同伦的,那么有$\Sigma(f)\simeq\Sigma(g)$.为此只需证明如下引理:如果$f\simeq g:(X,A)\to(Y,B)$是同伦的,把同伦记作$H:(X\times I,A\times I)\to(Y,B)$,那么诱导的带基点的商空间之间的映射$\widetilde{f},\widetilde{g}:(X/A,\ast)\to(Y/B,\ast)$也是同伦的.这件事的证明也是容易的,存在唯一的态射$\widetilde{H}$使得如下图表交换,它是$\widetilde{f}$到$\widetilde{g}$的同伦,但是还需要验证$\widetilde{H}$是连续的,这是因为$u=p\times1$是一个identification(终端的子集是开集当且仅当原像是开集),导致$u\circ h$连续当且仅当$h$连续.
+    	$$\xymatrix{X\times I\ar[rr]^H\ar[d]_{p\times1}&&Y\ar[d]^q\\X/A\times I\ar[rr]_{\widetilde{H}}&&Y/B}$$   	
+    \end{proof}
+    \item $\Sigma$和$\Omega$是互相伴随的函子,环境友好就对任意带基点空间$X,Y$,有:
+    $$[\Sigma X,Y]^0\cong[X,\Omega Y]^0$$
+    \begin{proof}
+    	
+    	很好构造,如果$[F]:\Sigma X\to Y$,将$F$和典范商映射$X\times I\to\Sigma X$复合得到连续映射$X\times I\to Y$,它对应于连续映射$F^{\#}:X\to Y^I$,但是像落在$\Omega Y$中.就定义$[F]\mapsto[F^{\#}]$.这是同伦意义的是因为如果有$F_1,F_2$之间的同伦映射$H:\Sigma X\times I\to Y$,那么它对应的$H^{\#}:X\times I\to\Omega Y$是$F_1^{\#}$和$F_2^{\#}$的同伦.逆映射也是容易的.
+    \end{proof}
+    \item $\Sigma X$在$\textbf{hTop}_*$中总是余群对象.
+    \begin{proof}
+    	
+    	我们证明过$\Omega Y$是群对象,所以函子$[-,\Omega Y]$在$\textbf{Grp}$中取值.存在$[\Sigma X,Y]$上唯一的群结构使得自然同构$\tau:[\Sigma X,Y]\cong[X,\Omega Y]$是群同构.任取连续映射$\varphi:Y\to Y'$,那么有如下交换图表,我们断言$(\Omega[\varphi])_*$是群同态,这结合$\tau$是群同构,就得到$[\varphi]_*$也是群同态.这说明$\Sigma X$在$\textbf{hTop}_*$中是余群对象.
+    	$$\xymatrix{[\Sigma X,Y]\ar[rr]^{[\varphi]_*}\ar[d]_{\tau}&&[\Sigma X,Y']\ar[d]^{\tau}\\[X,\Omega Y]\ar[rr]_{(\Omega[\varphi])_*}&&[X,\Omega Y']}$$
+    	
+    	一般的如果$G,H$是群对象,如果有如下交换图表:
+    	$$\xymatrix{G\times G\ar[rr]^{f\times f}\ar[d]_{\mu}&&H\times H\ar[d]^{\mu}\\G\ar[rr]^f&&H}$$
+    	
+    	把$\mathrm{Hom}(X,-)$作用在这个交换图表上,就得到$f_*:\mathrm{Hom}(X,G)\to\mathrm{Hom}(X,H)$是群同态.所以在我们这里只需验证有如下交换图表,这是直接的:
+    	$$\xymatrix{\Omega Y\times\Omega Y\ar[rr]^{\Omega[\varphi]}\ar[d]_{\mu}&&\Omega Y'\times\Omega Y'\ar[d]^{\mu}\\\Omega Y\ar[rr]_{\Omega[\varphi]}&&\Omega Y'}$$
+    \end{proof}
+\end{enumerate}
+
+例子.记局部紧Hausdorff空间$X$的单点紧致化为$X^{\infty}=X\cup\{\infty\}$,按照定义它的拓扑由所有原本的开集和所有$(X-K)\cup\{\infty\}$构成,其中$K\subset X$跑遍紧子集.另外如果$X,Y$是带基点空间,它们的smash积定义为$X\wedge Y=(X\times Y)/(X\vee Y)$.这个积明显依赖于基点选取.
+\begin{enumerate}
+	\item 设$X$是局部紧Hausdorff带基点空间,那么有同胚$\Sigma X\cong X\wedge S^1$.
+	\begin{proof}
+		
+		因为$X$是局部紧Hausdorff的,并且$\exp:I\to S^1$是identification,得到$1\times\exp: X\times I\to X\times S^1$也是identification.记典范商映射$v:X\times S^1\to X\wedge S^1$,那么$h=v(1\times\exp):X\times I\to X\wedge S^1$也是identification.但是$\ker h=(\{x_0\}\times I)\cup(X\times\{0,1\})$,并且从$h$是identification得到有诱导同胚$\Sigma X=(X\times I)/\ker h\cong X\wedge S^1$.
+	\end{proof}
+    \item 设$X,Y$是局部紧Hausdorff空间,紧致化中添加的单点约定为基点,那么有同胚$X^{\infty}\wedge Y^{\infty}\cong(X\times Y)^{\infty}$.
+    \begin{proof}
+    	
+    	$X^{\infty}\vee Y^{\infty}$是Hausdorff空间$X^{\infty}\times Y^{\infty}$的紧子集,于是是闭子集.一般的如果$A$是紧Hausdorff空间$X$的闭子集,那么有同胚$X/A\cong(X-A)^{\infty}$(这个同胚直接可以构造出来).于是这里$X^{\infty}\wedge Y^{\infty}$是$X^{\infty}\times Y^{\infty}-X^{\infty}\vee Y^{\infty}$的单点紧致化.但是按照如下等式,这个差就是$X\times Y$本身,这得证.
+    	$$X^{\infty}\times Y^{\infty}=(X\times Y)\cup(\{\infty\}\times Y^{\infty})\cup(X^{\infty}\times\{\infty\})$$
+    	$$X^{\infty}\vee Y^{\infty}=(\{\infty\}\times Y^{\infty})\cup(X^{\infty}\times\{\infty\})$$
+    \end{proof}
+    \item 对每个$n\ge0$有同胚$\Sigma S^n\cong S^{n+1}$.特别的$S^n,n\ge1$总是$\textbf{hTop}_*$中的余群对象.
+    \begin{proof}
+    	
+    	首先$n=0$的情况是平凡的.下面设$n\ge1$,就有:
+    	$$\Sigma S^n=S^n\wedge S^1=(\mathbb{R}^n)^{\infty}\wedge(\mathbb{R})^{\infty}=(\mathbb{R}^n\times\mathbb{R})^{\infty}=(\mathbb{R}^{n+1})^{\infty}=S^{n+1}$$
+    \end{proof}
+\end{enumerate}
+\newpage
+\subsection{纤维列和余纤维列}
+
+正合列.
+\begin{itemize}
+	\item $\textbf{Set}_*$或者$\textbf{Top}_*$中的如下映射列称为正合的(exact),如果有$g^{-1}(c_0)=f(A)$.
+	$$\xymatrix{(A,a_0)\ar[r]^f&(B,b_0)\ar[r]^g&(C,c_0)}$$
+	\item $\textbf{hTop}_*$中的如下映射列称为正合的或者$h-$正合的:
+	$$\xymatrix{A\ar[r]^f&B\ar[r]^g&C}$$
+	
+	如果对任意拓扑空间$X$,有如下带基点集合的正合列,这里$[X,Y]$表示$\mathrm{Hom}_{\textbf{hTop}_*}(X,Y)$,这里$X,Y$是带基点空间的简记.
+	$$\xymatrix{[X,A]\ar[r]^{f_*}&[X,B]\ar[r]^{g_*}&[X,C]}$$
+	\item $\textbf{hTop}_*$中的如下映射列称为余正合的(coexact)或者$h-$余正合的:
+	$$\xymatrix{A\ar[r]^f&B\ar[r]^g&C}$$
+	
+	如果对任意拓扑空间$X$,有如下带基点集合的正合列,这里$X,Y$是带基点空间的简记.
+	$$\xymatrix{[X,A]\ar[r]^{f_*}&[X,B]\ar[r]^{g_*}&[X,C]}$$
+\end{itemize}
+
+余纤维列(cofibre sequence).给定连续映射$f:X\to Y$,有如下$\textbf{hTop}_*$中的余正合列,称为余纤维列(一些定义写在下面).
+$$\xymatrix{X\ar[r]^f&Y\ar[r]^{f_1}&C(f)\ar[r]^{p(f)}&\Sigma X\ar[r]^{\Sigma f\circ i}&\Sigma Y\ar[r]^{\Sigma f_1\circ i}&\Sigma C(f)\ar[r]^{\Sigma p(f)\circ i}&\Sigma^2 X\ar[r]&\cdots}$$
+\begin{enumerate}
+	\item 锥空间.给定带基点的空间$(X,x_0)$,简记作$X$,它的锥空间定义为$CX=X\times[0,1]/((X\times\{0\})\cup(\{x_0\}\times[0,1]))$.基点约定为商空间粘合的点.有典范拓扑嵌入$i_1:X\to CX$为$x\mapsto[x,1]$.
+	\item 映射锥.设$f:X\to Y$是连续映射,映射锥定义为$C(f)=CX\vee Y/\{(x,1)\simeq f(x)\}$.换句话讲它是$\textbf{Top}_*$中的如下pushout:
+	$$\xymatrix{X\ar[rr]^f\ar[d]_{i_1}&&Y\ar[d]^{f_1}\\CX\ar[rr]^j&&C(f)}$$
+	\item 我们断言有如下$h-$余正合序列:
+	$$\xymatrix{X\ar[r]^f&Y\ar[r]^{f_1}&C(f)}$$
+	
+	进而反复归纳,得到如下$h-$余正合列:
+	$$\xymatrix{X\ar[r]^f&Y\ar[r]^{f_1}&C(f)\ar[r]^{f_2}&C(f_1)\ar[r]^{f_3}&C(f_2)\ar[r]&\cdots}$$
+	\begin{proof}
+		
+		我们要说明对任意带基点空间$(B,b_0)$,有如下正合列:
+		$$\xymatrix{[C(f),B]\ar[r]^{(f_1)_*}&[Y,B]\ar[r]^{f_*}&[X,B]}$$
+		
+		事实上如下图表交换等价于讲,如果记$h:CX\to B$的提升记作$H:X\times[0,1]\to B$,那么$H(x,0)$是$b_0$处的恒等道路,$H(x,1)=\alpha\circ f(x)$.即图表等价于$\alpha\circ f$是零伦的,并且同伦就是$h$诱导的.
+		$$\xymatrix{X\ar[rr]^f\ar[d]_{i_1}&&Y\ar[d]^{\alpha}\\CX\ar[rr]_j&&C(f)}$$
+		
+		所以一方面,pushout定义本身的图表说明$f_1\circ f$是零伦的,也即$\mathrm{im}(f_1)_*\subset\ker f_*$.另一方面如果$\alpha\in\ker f_*$,此即$\alpha\circ f$是零伦的,就有诱导的$h:CX\to C(f)$使得上述图表交换,但是pushout的泛性质说明存在$C(f)\to B$使得图表交换,此即$\alpha\in\mathrm{im}(f_1)_*$.
+		$$\xymatrix{&Y\ar[d]^{f_1}\ar@/^1pc/[ddr]^{\alpha}&\\CX\ar[r]_j\ar@/_1pc/[drr]_h&C(f)\ar[dr]_{\beta}&\\&&B}$$
+	\end{proof}
+	\item 引理.考虑如下$\textbf{Top}_*$中的交换图表,$j:A\to X$是单射,左侧是pushout,$p,q$是商映射,那么$F$诱导的映射$\overline{F}$是同胚.
+	$$\xymatrix{A\ar[r]^j\ar[d]_f&X\ar[r]^p\ar[d]_F&X/A\ar[d]_{\overline{F}}\\B\ar[r]^J&Y\ar[r]^q&Y/B}$$
+	\begin{proof}
+		
+		routine,验证$\overline{F}$是单射满射和开映射.
+	\end{proof}
+    \item 引理.考虑如下交换图表,上一条引理说明$\alpha$和$\beta$都是同胚,但是这里$CX/i_1X$同胚于$\Sigma X$,所以第三列的每一个空间都同胚于$\Sigma X$.断言这里商映射$q(f)$是同伦等价.
+    $$\xymatrix{X\ar[r]^{i_1}\ar[d]_f&CX\ar[r]^p\ar[d]_j&CX/i_1X\ar[d]_{\alpha}\\Y\ar[r]^{f_1}\ar[d]_{i_1}&C(f)\ar[r]^{p(f)}\ar[d]_{f_2}&C(f)/f_1Y\ar[d]_{\beta}\\CY\ar[r]^{j_1}&C(f_1)\ar[r]^{q(f)}&C(f_1)/j_1CY}$$
+    \begin{proof}
+    	
+    	首先按照定义$C(f_1)=CY\vee Z/(y,1)\simeq f_1(y)$,其中$Z=C(f)$,此即$C(f_1)=CY\vee CX\vee Y/\{(x,1)\simeq f(x),(y,1)\simeq y\}$.此即$C(f_1)=CX\vee CY/\{(x,1)\simeq(f(x),1)\}$.这里商映射$q(f)$是把子集$CY$做粘合,等价于把$CX$的$X\times{1}$粘合,所以同胚于$\Sigma X$.
+    	
+    	\qquad
+    	
+    	构造$s(f):\Sigma X\to C(f_1)$为,对$X\times[0,1/2]$的部分($\Sigma X$图形的下方三角),映射为$C(f_1)$中的$CX$部分为$(x,s)\mapsto(x,2s)$.对$X\times[1/2,1]$的部分(上方三角的部分),映射为$C(f_1)$中的$CY$部分为$(x,s)\mapsto(f(x),2-2s)$.粘合引理说明这是连续的.
+    	
+    	\qquad
+    	
+    	我们有$q(f)\circ s(f):\Sigma X\to\Sigma X$为$(x,s)\mapsto(x,\min\{2s,1\})$同伦于$\Sigma X$上的恒等映射,因为对$s\in[0,1]$有$\min\{2s,1\}$同伦于$s$.另一方面,$s(f)\circ q(f):C(f_1)\to C(f_1)$为,在$CX$上定义为$(x,s)\mapsto\left\{\begin{array}{cc}(x,2s)&s\in[0,1/2]\\(f(x),2-2s)&s\in[1/2,1]\end{array}\right.$.在$CY$上定义为$(y,s)\mapsto(y,0)$.
+    	
+    	\qquad
+    	
+    	这个映射同伦等价于$C(f_1)$上的恒等映射只需构造$h_t:C(f_1)\times[0,1]\to C(f_1)$为在$CX$上定义$h_t(x,s)=\left\{\begin{array}{cc}(x,(1+t)s)&(1+t)s\le1\\(f(x),2-(1+t)s)&(1+t)s\ge1\end{array}\right.$,在$CY$上定义$h_t(y,s)=(y,(1-t)s)$.粘合引理可验证这是连续的.最后$h_1=q(f)\circ s(f)$,$h_0$是$C(f_1)$上的恒等映射,综上$q(f)$是同伦等价.
+    \end{proof}
+    \item 上一条说明有如下实线交换图表,
+    $$\xymatrix{C(f)\ar[r]^{f_2}\ar[dr]_{p(f)}&C(f_1)\ar[r]^{f_3}\ar[d]_{q(f)}\ar[dr]_{p(f_1)}&C(f_2)\ar[d]^{q(f_1)}\\&\Sigma X\ar@{-->}[r]_{\Sigma(f)\circ i}&\Sigma Y}$$
+    
+    我们断言虚线的$\Sigma(f)\circ i$,其中$i:\Sigma X\to\Sigma X$为$(x,s)\mapsto(x,1-s)$,使得以虚线为边的这个小三角形在$\textbf{hTop}_*$中交换.在$\textbf{hTop}_*$中替换同构(这里就是同伦等价)不影响一个序列是正合与余正合的,于是我们得到如下长正合列:
+    $$\xymatrix{X\ar[r]^f&Y\ar[r]^{f_1}&C(f)\ar[r]^{p(f)}&\Sigma X\ar[r]^{\Sigma(f)\circ i}&\Sigma Y}$$
+    \begin{proof}
+    	
+    	我们要证明的是有同伦$\Sigma(f)\circ i\circ q(f)\simeq p(f_1)$.我们解释过$q(f)$的同伦逆是$s(f)$,于是等价于证明$\Sigma(f)\circ i\simeq p(f_1)\circ s(f)$.这里左侧是$(x,s)\mapsto(f(x),1-s)$,右侧是$(x,s)\mapsto(f(x),\min\{1,2(1-s)\})$.但是$1-s$和$\min\{1,2(1-s)\}$在$s\in[0,1]$上是同伦的.
+    \end{proof}
+    \item 我们断言有同胚映射$\tau_1:C(\Sigma f)\cong\Sigma C(f)$,使得如下图表交换:
+    $$\xymatrix{\Sigma Y\ar[rr]^{\Sigma(f_1)}\ar[dr]_{(\Sigma f)_1}&&\Sigma C(f)\\&\Sigma C(f)\ar[ur]_{\tau_1}&}$$
+    
+    于是我们之前的长正合列就变成余纤维列:
+    $$\xymatrix{X\ar[r]^f&Y\ar[r]^{f_1}&C(f)\ar[r]^{p(f)}&\Sigma X\ar[r]^{\Sigma f\circ i}&\Sigma Y\ar[r]^{\Sigma f_1\circ i}&\Sigma C(f)\ar[r]^{\Sigma p(f)\circ i}&\Sigma^2 X\ar[r]&\cdots}$$
+    \begin{proof}
+    	
+    	首先$C\Sigma X$和$\Sigma CX$都是$X\times I\times I$的粘合,并且在交换这两个$I=[0,1]$的意义下粘合方式是相同的,说明交换这两个$I$诱导了同胚映射$\tau:C\Sigma X\cong\Sigma CX$.把左伴随函子$\Sigma$作用在如下pushout图表上:
+    	$$\xymatrix{X\ar[rr]^f\ar[d]&&Y\ar[d]^{f_1}\\CX\ar[rr]&&C(f)}$$
+    	
+    	得到pushout图表:
+    	$$\xymatrix{\Sigma X\ar[rr]^{\Sigma f}\ar[d]&&\Sigma Y\ar[d]^{\Sigma f_1}\\\Sigma CX\ar[rr]&&\Sigma C(f)}$$
+    	
+    	另一方面$\Sigma f$诱导的映射锥的定义的pushout图表为:
+    	$$\xymatrix{\Sigma X\ar[rr]^{\Sigma f}\ar[d]&&\Sigma Y\ar[d]^{(\Sigma f)_1}\\C\Sigma X\ar[rr]&&C(\Sigma f)}$$
+    	
+    	按照泛性质,$\Sigma Y$上的恒等映射和$\tau:C\Sigma X\cong\Sigma CX$诱导了典范同构$\tau_1:C(\Sigma(f))\cong\Sigma C(f)$.
+    \end{proof}
+\end{enumerate}
+
+纤维列(fibre sequence).给定连续映射$f:X\to Y$,有如下$h-$正合列:
+$$\xymatrix{\cdots\ar[r]&\Omega^2Y\ar[r]^{l\circ\Omega(i(f))}&\Omega(FY)\ar[r]^{l\circ\Omega(f^1)}&\Omega X\ar[r]^{l\circ\Omega f}&\Omega Y\ar[r]^{i(f)}&F(f)\ar[r]^{f^1}&X\ar[r]^f&Y}$$
+\begin{enumerate}
+	\item 锥空间的对偶,余锥空间.对空间$Y$,定义$FY=\{w\in Y^I\mid w(0)=y_0\}$,即源端为$y_0$的道路构成的$Y^I$的子空间,这里$Y^I$仍然取紧开拓扑.$FY$的基点约定为$y_0$的恒等道路.有典范映射$e^1:FY\to Y$为把道路映射为终端.它是evaluation映射在子空间上的限制,所以是连续的.
+	\item 映射锥的对偶,映射余锥.设$f:X\to Y$是连续映射,映射余锥定义为$F(f)=\{(x,w)\in X\times FY\mid f(x)=w(1)\}$.换句话讲它是$\textbf{Top}_*$的如下回拉,其中$f^1(x,w)=x$,$q(x,w)=w$.
+	$$\xymatrix{F(f)\ar[rr]^q\ar[d]_{f^1}&&FY\ar[d]^{e^1}\\X\ar[rr]^f&&Y}$$
+	\item 断言有如下$h-$正合列:
+	$$\xymatrix{F(f)\ar[r]^{f^1}&X\ar[r]^f&Y}$$
+	
+	进而反复归纳,得到如下$h-$正合列:
+	$$\xymatrix{\cdots\ar[r]&F(f^2)\ar[r]^{f^3}&F(f^1)\ar[r]^{f^2}&F(f)\ar[r]^{f^1}&X\ar[r]^f&Y}$$
+	\begin{proof}
+		
+		证明和余纤维列的情况是对偶的,只要注意到如下图表交换等价于讲$f\circ\alpha$是零伦的,这里同伦就是$h:B\to FY$视为$B\times I\to Y$.
+		$$\xymatrix{B\ar[rr]^h\ar[d]_{\alpha}&&FY\ar[d]^{e^1}\\X\ar[rr]^f&&Y}$$
+	\end{proof}
+    \item 引理.考虑如下$\textbf{Top}_*$中的交换图表,右侧是回拉图表,那么$F$限制在子空间上得到的$\overline{F}$是同胚.
+    $$\xymatrix{\ker f\ar[r]\ar[d]_{\overline{F}}&A\ar[r]^f\ar[d]_F&B\ar[d]_G\\\ker g\ar[r]&C\ar[r]_g&D}$$
+    \item 引理.考虑如下交换图表,上一条引理说明这里$\alpha$和$\beta$都是同胚,但是这里$\ker e^1\cong\Omega X$,所以第一列每个空间都同胚于$\Omega X$.我们断言这里$j(f)$是同伦等价.
+    $$\xymatrix{\ker q^1\ar[r]^{j(f)}\ar[d]_{\alpha}&F(f^1)\ar[r]^{q^1}\ar[d]_{f^2}&FX\ar[d]_{e^1}\\\ker f^1\ar[r]\ar[d]_{\beta}&F(f)\ar[r]^{f^1}\ar[d]_q&X\ar[d]_f\\\Omega Y\ar[r]&FY\ar[r]^{e^1}&Y}$$
+    \item 有如下实线交换图表,其中$i(f)=f^2\circ j(f)$.
+    $$\xymatrix{F(f^2)\ar[r]^{f^3}&F(f^1)\\\Omega X\ar@{-->}[r]_{l\circ\Omega f}\ar[u]^{j(f^1)}\ar[ur]_{i(f^1)}&\Omega Y\ar[u]_{j(f)}}$$
+    
+    断言虚线的$l\circ\Omega f$,其中$l:\Omega X\to\Omega X$把loop取为逆loop,使得以虚线为边的这个小三角形在$\textbf{hTop}_*$中交换.在$\textbf{hTop}_*$中替换同构(这里就是同伦等价)不影响一个序列是$h-$正合的,于是我们得到如下长正合列:
+    $$\xymatrix{\Omega X\ar[r]^{l\circ\Omega f}&\Omega Y\ar[r]^{i(f)}&F(f)\ar[r]^{f^1}&X\ar[r]^f&Y}$$
+    \item 断言有同胚映射$\tau^1:F\Omega(f)\cong\Omega F(f)$使得如下图表交换:
+    $$\xymatrix{F\Omega(f)\ar[rr]^{(\Omega f)^1}\ar[dr]_{\tau^1}&&\Omega X\\&\Omega F(f)\ar[ur]_{\Omega(f^1)}&}$$
+    
+    于是我们之前的长正合列就变成纤维列:
+    $$\xymatrix{\cdots\ar[r]&\Omega^2Y\ar[r]^{l\circ\Omega(i(f))}&\Omega(FY)\ar[r]^{l\circ\Omega(f^1)}&\Omega X\ar[r]^{l\circ\Omega f}&\Omega Y\ar[r]^{i(f)}&F(f)\ar[r]^{f^1}&X\ar[r]^f&Y}$$
+\end{enumerate}
+\newpage
+\subsection{余纤维化}
+
+映射筒.
+\begin{itemize}
+	\item 设$f:X\to Y$是连续映射,它的映射筒定义为如下纤维和,其中$i_0:x\mapsto (x,0)$,换句话讲它是$X\times I\coprod Y$上模去等价关系$(x,0)\simeq f(x)$.
+	$$\xymatrix{X\ar[rr]^f\ar[d]_{i_0}&&Y\ar[d]\\X\times[0,1]\ar[rr]&&Z(f)}$$
+	\item 我们解释过带基点空间的二元直和与二元直积放在$\textbf{hTop}_*$中仍然是二元直和与二元直积.但是纤维积和纤维和不行,例如总有如下两个纤维和图表,其中$\mathrm{pt}$表示单点空间,$D^2$同伦等价于单点空间,但是$S^2$和单点空间不是同伦的.
+	$$\xymatrix{S^1\ar[rr]\ar[d]&&\mathrm{pt}\ar[d]\\\mathrm{pt}\ar[rr]&&\mathrm{pt}}\qquad\xymatrix{S^1\ar[rr]\ar[d]&&D^2\ar[d]\\D^2\ar[rr]&&S^2}$$
+	
+	但是考虑$\textbf{hTop}_*$中的纤维积和纤维和也是不够的,我们提到所谓的同伦极限指的是极限函子的右导出函子.两个连续映射$f:A\to B$,$g:A\to C$的双映射筒$Z(f,g)$就是它们的同伦纤维和,它是如下$\textbf{Top}_*$上的纤维和,换句话讲它是$B\coprod A\times[0,1]\coprod C$模去等价关系$f(a)\simeq(a,0)$和$g(a)\simeq(a,1)$.而映射筒就是$f:A\to B$和$1_A:A\to A$的同伦纤维和.
+	$$\xymatrix{A\coprod A\ar[rr]^{f\coprod g}\ar[d]_{(i_0,i_1)}&&B\coprod C\ar[d]\\A\times[0,1]\ar[rr]&&Z(f,g)}$$
+\end{itemize}
+
+余纤维化.
+\begin{itemize}
+	\item 延拓是和提升对偶的概念.设$i:A\to X$是映射,一个映射$f:A\to Y$的经$i$的延拓是指映射$F:X\to Y$使得如下图表交换.我们这里考虑的延拓都是连续的映射.
+	$$\xymatrix{&&X\ar[dll]_F\\Y&&A\ar[u]^i\ar[ll]^f}$$
+	\item 一个连续映射$i:A\to X$称为关于空间$Y$满足同伦延拓性质(homotopy extension property),如果对任意同伦$h:A\times I\to Y$,和初始条件$f:X\to Y$,这是指$fi(a)=h(a,0)$,那么存在$h$的延拓$H:X\times I\to Y$使得如下图表交换,称这样的$H$是$h$关于初始条件$f$的延拓.注意这里不要求$H$的唯一性,否则就变成纤维和图表了.
+	$$\xymatrix{A\ar[rr]^{i_0}\ar[d]_i&&A\times I\ar[d]^{i\times1}\ar@/^1pc/[ddrr]^h&&\\X\ar[rr]_{i_0}\ar@/_1pc/[drrrr]_f&&X\times I\ar@{-->}[drr]^H&&\\&&&&Y}$$
+	\item 如果连续映射$i:A\to X$关于任何空间$Y$都有同伦延拓性质,就称它是余纤维化(cofibration).
+\end{itemize}
+\begin{enumerate}
+    \item 按照$I=[0,1]$是紧Hausdorff空间,我们总可以把$X\times I\to Y$的连续映射等同于一个连续映射$X\to Y^I$.那么$i:A\to X$关于空间$Y$满足同伦延拓条件就是指对任意连续的$f:X\to Y$和任意的$h:A\to Y^I$使得如下图表交换,总存在虚线连续映射$H$使得图表交换.这里$e^0:Y^I\to Y$为$f\mapsto f(0)$.
+    $$\xymatrix{A\ar[rr]^h\ar[d]_i&&Y^I\ar[d]^{e^0}\\X\ar[rr]^f\ar@{-->}[urr]^H&&Y}$$
+    \item 设$i:A\to X$是连续映射,那么如下命题互相等价:
+    \begin{itemize}
+    	\item $i$是余纤维化.
+    	\item $i$关于映射筒$Z(i)$满足同伦延拓性质.
+    	\item 典范映射$s:Z(i)\to X\times I$具有连续左逆.这个典范映射是纤维和泛性质得到的如下映射:
+    	$$\xymatrix{A\ar[rr]^{i_0}\ar[d]_i&&A\times I\ar[d]\ar@/^1pc/[ddrr]^{i\times1}&&\\X\ar[rr]\ar@/_1pc/[drrrr]_{i_0}&&Z(i)\ar@{-->}[drr]^s&&\\&&&&X\times I}$$
+    \end{itemize}
+    \begin{proof}
+    	
+    	1推2是直接的.假设$i$关于$Z(i)$满足同伦延拓性质,那么又存在连续的$r$使得如下图表交换,但是按照纤维和的泛性质,复合$r\circ s$只能是$1_{Z(i)}$,所以$s$有连续左逆.
+    	$$\xymatrix{A\ar[rr]^{i_0}\ar[d]_i&&A\times I\ar[d]^{i\times1}\ar@/^1pc/[ddrr]&&\\X\ar[rr]_{i_0}\ar@/_1pc/[drrrr]&&X\times I\ar@{-->}[drr]^r&&\\&&&&Z(i)}$$
+    	
+    	最后如果$s$存在连续左逆$r:X\times I\to Z(i)$,任取如下实线交换图表,那么取$H=\sigma\circ r$就使得图表交换,这里$\sigma$是$Z(i)$作为纤维和的泛性质得到的连续映射.
+    	$$\xymatrix{A\ar[rr]^{i_0}\ar[d]_i&&A\times I\ar[d]^{i\times1}\ar@/^1pc/[ddrr]^h&&\\X\ar[rr]_{i_0}\ar@/_1pc/[drrrr]_f&&X\times I\ar@{-->}[drr]^H&&\\&&&&Y}$$
+    \end{proof}
+    \item 余纤维化总是拓扑嵌入.
+    \begin{proof}
+    	
+    	首先记$i_1:A\to Z(i)$,这是拓扑嵌入因为它首先是单射,其次对任意开集$U\subset A$有$i_1(U)=i_1(A)\cap(U\times[0,\frac{1}{2}))$.再按照$i_1=rsi_1=ri_1^Xi$就得到$i$是拓扑嵌入:如果有连续映射$\xymatrix{X\ar[r]^h&Y\ar[r]^g&Z}$,把复合记作$f$,那么$f$是拓扑嵌入得到$h$也是.这是因为$h$也是单射,并且如果对开集$U\subset X$有$f(U)=f(X)\cap W$,那么就有$h(U)=h(X)\cap g^{-1}(W)$.
+    \end{proof}
+    \item 给定如下$\textbf{Top}$中的纤维和图表,如果$j$关于空间$Z$满足同伦延拓条件,那么$J$也关于空间$Z$满足同伦延拓条件.于是特别的$j$是余纤维化能推出$J$也是.
+    $$\xymatrix{A\ar[rr]^f\ar[d]_j&&A'\ar[d]^{J}\\X\ar[rr]^F&&X'}$$
+    \begin{proof}
+    	
+    	考虑如下交换图表,其中左侧和右侧的梯形都是纤维和图表,按照$j:A\to X$关于空间$Z$满足同伦延拓条件,说明存在虚线$H:X\times I\to Z$使得图表交换,但是按照右侧纤维和图表的泛性质,这又导致存在虚线态射$\widetilde{H}:X'\times I\to Z$使得图表交换,这说明$J$关于空间$Z$满足同伦延拓条件.
+    	$$\xymatrix{A\ar[rrrr]^{i_0}\ar[dddd]_j\ar[dr]^f&&&&A\times I\ar[dddd]^{i\times1}\ar[dl]_{f\times1}\\&A'\ar[rr]\ar[dd]&&A'\times I\ar[dd]\ar[dl]_h&\\&&Y&&\\&X'\ar[rr]\ar[ur]&&X'\times I\ar@{-->}[ul]_{\widetilde{H}}&\\X\ar[ur]\ar[rrrr]_{i_0}&&&&X\times I\ar[ul]\ar@/^2pc/@{-->}[uull]^{H}}$$
+    \end{proof}
+\end{enumerate}
+
+
+
+
+
+
+
+
+\newpage
+\section{奇异同调}
+\subsection{单形}
+	
+仿射集和凸集.欧氏空间中一个子集$A$称为仿射集,如果$A$中任意两个不同点所确定的直线仍然包含于$A$.称子集$A$是凸集如果$A$中任意两个不同点所确定的闭线段仍然包含于$A$.给定$\mathbb{R}^n$中的$m+1$个点$p_0,p_1,\cdots,p_m$,它们的仿射组合是指可以表示为$\sum_{0\le i\le m}t_ip_i$,其中$\sum_{0\le i\le m}t_i=1$的点.如果再添加条件每个$t_i\ge0$,这样的点称为凸组合.
+\begin{enumerate}
+	\item 仿射集必然是凸集,反之未必.
+	\item 一族仿射集/凸集之交仍然为仿射集/凸集.由此我们定义欧氏空间中的一个子集生成的仿射集/凸集是全体包含了这个子集的仿射集/凸集的交.
+	\item 欧氏空间上点集生成的仿射集/凸集恰好就是任意有限子集的仿射组合/凸组合构成的集合.
+	\begin{proof}
+		
+		以仿射情况为例.先考虑有限点集$X=\{p_0,p_1,\cdots,p_m\}$的情况,设它全体仿射组合构成的集合是$S$.需要验证$S$本身是一个仿射集,并且每个包含了$X$的仿射集包含了$S$.事实上任取$S$中两个点,可表示为$x=\sum_{0\le i\le m}t_ip_i$和$y=\sum_{0\le i\le m}s_ip_i$.它们确定的直线上的点可以表示为$kx+(1-k)y,k\in\mathbb{R}$,而$kx+(1-k)y$落在$S$中,因而$S$是仿射集.
+		
+		另一方面如果$S'$是包含了$X$的仿射集,我们来对$m$归纳证明有$S\subset S'$:如果$m=0$,那么$X=S=\{p_0\}$,此时自然有$S\subset S'$.假设对$m-1$成立,任取$\{p_0,p_1,\cdots,p_m\}$的仿射组合$x=\sum_{0\le i\le m}t_ip_i$,其中$\sum_{0\le i\le m}t_i=1$.那么$t_i$中必然存在一个元不为1,不妨设$t_m\not=1$,那么按照归纳假设有$y=\sum_{0\le i\le m-1}\frac{t_i}{1-t_m}p_i\in S'$.于是得到$x=(1-t_m)y+t_mp_m\in S'$,于是$S\subset S'$.
+	\end{proof}
+\end{enumerate}
+	
+称欧氏空间中$m+1$个有序点$\{p_0,p_1,\cdots,p_m\}$是仿射无关的,如果$\{p_1-p_0,p_2-p_0,\cdots,p_m-p_0\}$作为向量是线性无关集.下面的性质会证明这个定义实际上不依赖于点的排序.
+\begin{enumerate}
+	\item 按照定义,仿射无关集生成的仿射集实际上就是一个子线性空间平移一个向量.
+	\item $\mathbb{R}^n$上的一个线性无关集必然是仿射无关集.
+	\item 空集通常约定为线性无关集,于是单点集总是仿射无关集.
+	\item 充要条件.给定$\mathbb{R}^n$上的有序点列$\{p_0,p_1,\cdots,p_m\}$,那么如下三个结论两两等价.这里第三条中唯一的分解中的$\{t_i\}$称为该点的质心坐标.
+	\begin{enumerate}
+		\item 有序点列$\{p_0,p_1,\cdots,p_m\}$是仿射无关集.
+		\item 如果实数$s_i,0\le i\le m$满足$\sum_{0\le i\le m}s_ip_i=0$和$\sum_{0\le i\le m}s_i=0$,那么有$s_i=0,\forall 0\le i\le m$.
+		\item 设这个点集生成的仿射集为$A$,对$A$中每个点$x$,存在唯一的形如$x=\sum_{0\le i\le m}t_ip_i,\sum_{0\le i\le m}t_i=1$的表示.
+	\end{enumerate}
+	\begin{proof}
+		
+		1推2,假设实数列$s_i$满足条件中两个等式,那么有$\sum_{1\le i\le m}s_i(p_i-p_0)=0$,按照$\{p_1-p_0,p_2-p_0,\cdots,p_m-p_0\}$是线性无关的,就得到$s_1=s_2=\cdots=s_m=0$,进而$s_0=0$.
+		
+		2推3,首先这个可表示性也就是指点集生成的仿射集就是点集的仿射组合构成的集合.下面需要证明的是表示的唯一性.若否,假设存在某个$x\in A$它具有两种表示$x=\sum_{0\le i\le m}t_ip_i=\sum_{0\le i\le m}r_ip_i$,其中$\sum_{0\le i\le m}t_i=\sum_{0\le i\le m}r_i=0$,那么做差得到$\sum_{0\le i\le m}(t_i-r_i)p_i=0$,其中$\sum_i(t_i-r_i)=0$,而按照两种表示不同得到某个$i$使得$t_i-r_i\not=0$,这就和2的条件矛盾.
+		
+		3推1,若否,那么$\{p_1-p_0,p_2-p_0,\cdots,p_m-p_0\}$不是线性无关集,于是存在不全为零的系数$s_i$使得$\sum_{1\le i\le m}s_i(p_i-p_0)=0$,如果设$s_0=-\sum_{1\le i\le m}s_i$,那么得到$\sum_{0\le i\le m}s_ip_i=0$,其中系数$s_i$不全为零,并且$\sum_{0\le i\le m}s_i=0$.现在任取$x\in A$,设它唯一的表示是$x=\sum_{0\le i\le m}t_ip_i$,其中$\sum_{0\le i\le m}t_i=1$.但是把上述等式加上去,得到$x=\sum_{0\le i\le m}(t_i+s_i)p_i$,并且$\sum_{0\le i\le m}(t_i+s_i)=1$,这就和表示的唯一性相矛盾.
+	\end{proof}
+	\item 特别的,这些充要条件说明仿射无关性和点的排序无关.另外排序无关结合定义说明一个仿射无关集的子集仍然是仿射无关的.
+\end{enumerate}
+	
+$m$单形.给定一个有序的仿射无关集$\{p_0,p_1,\cdots,p_m\}$,称由它生成的凸集为有序$m$单形,记作$\Delta^m=[p_0,p_1,\cdots,p_m]$.其中如果$n+1$个点取为$p_0=(1,0,\cdots,0),p_1=(1,0,\cdots,0),\cdots,p_n=(0,0,\cdots,1)$,就称此时$[p_0,p_1,\cdots,p_n]$为标准有序$n$-单形.
+\begin{enumerate}
+	\item 按照$m$-单形是端点$\{p_0,p_1,\cdots,p_m\}$生成的凸集,得到这个凸集中的每个点$x$可以唯一的表示为形式$x=\sum_{0\le i\le m}t_ip_i,\sum_{0\le i\le m}t_i=1,t_i\ge0$.
+	\item 0-单形$[p_0]$就是空间上的单点;1-单形$[p_0,p_1]$就是空间上两个不重合的点之间的闭线段;2-单形$[p_0,p_1,p_2]$就是空间上三个不共线的点确定的闭三角形;3-单形$[p_0,p_1,p_2,p_3]$就是四个三三不共面的点确定的闭四面体.
+	\item 给定一个$m$单形$\Delta=[p_0,p_1,\cdots,p_m]$,用记号$[p_0,\cdots,\hat{p_i},\cdots,p_m]$表示删去顶点$p_i$剩下的$m$个仿射无关的顶点所生成的$m-1$-单形,它称为$\Delta$的第$i$个面.于是一个$m$单形具有$m+1$个面.更一般的,对单形$\Delta$,它的顶点集记作$\mathrm{Vert}(\Delta)$,称$k$单形$\Delta'$是$\Delta$的$k$面,如果它满足$\mathrm{Vert}(\Delta')\subset\mathrm{Vert}(\Delta)$.如果面$\Delta'$满足$\mathrm{Vert}(\Delta')\subsetneqq\mathrm{Vert}(\Delta)$就称$\Delta'$是$\Delta$的真面.
+	\item 关于定向.$m$单形上给定的序是指顶点集的一个排列,我们称两个排列等价,如果它们作为置换的奇偶性相同.这个等价关系的等价类称为定向,于是$m$单形($m\ge2$)上恰好有两个定向.
+\end{enumerate}
+
+给定仿射无关集$\{p_0,p_1,\cdots,p_m\}\subset\mathbb{R}^n$,记它生成的仿射集为$A$,称映射$T:A\to\mathbb{R}^k$是仿射映射,如果对每组满足$\sum_{0\le j\le m}t_j=1$的实数$t_0,t_1,\cdots,t_m$,总有$T(\sum_jt_jp_j)=\sum_jt_jT(p_j)$.
+\begin{enumerate}
+	\item $A$上的仿射映射被它在仿射无关集$\{p_0,p_1,\cdots,p_m\}$上的取值完全决定.因为一旦确定$\{p_0,p_1,\cdots,p_m\}$上的取值,按照$A$上每个点可以唯一的表示为$x=\sum_jt_jp_j$,其中$\sum_jt_j=1$,就说明$A$中每个点的取值被决定$T(x)=\sum_jt_jT(p_j)$.
+	\item 仿射映射实际上是线性映射复合一个平移,具体的讲就是$T(x)-T(0)$总是一个线性映射.于是仿射映射总会是欧氏空间上的连续映射.
+	\item 这一条我们证明任意两个$m$单形会经仿射映射同胚.给定两个$m$-单形$\Delta_1=[p_0,p_1,\cdots,p_m]$和$\Delta_2=[q_0,q_1,\cdots,q_m]$.构造仿射映射$T:\Delta_1\to\Delta_2$为$p_i\mapsto q_i$,仿射映射$T':\Delta_2\to\Delta_1$为$q_i\mapsto p_i$.它们恰好就是$\Delta_1$和$\Delta_2$之间的双射.
+	\item 经拉伸可得到$m$单形总是同胚于$\mathbb{D}^m$的.【】
+\end{enumerate}
+
+\newpage
+\subsection{绝对奇异同调}
+
+奇异复形.奇异复形是定义在任意拓扑空间上的.
+\begin{enumerate}
+	\item 给定空间$X$,$X$上的\textbf{奇异$n$单形}是指一个连续映射$\sigma:\Delta^n\to X$,这里$\Delta^n$表示标准$n$单形.于是奇异0单形可理解为$X$中的点;奇异1单形可理解为$X$中的道路.
+	\item 给定空间$X$,定义$S_n(X)$表示$X$上全体奇异$n$单形作为基生成的自由阿贝尔群,这其中的元称为\textbf{奇异$n$链},这里约定$S_{-1}(X)=0$.
+	\item 边界算子$\partial_n:S_n(X)\to S_{n-1}(X)$.先定义如下映射$\varepsilon_i^n:\mathbb{R}^n\to\mathbb{R}^{n+1}$:
+	$$\varepsilon_0^n:(t_0,t_1,\cdots,t_{n-1})\mapsto(0,t_0,t_1,\cdots,t_{n-1})$$
+	$$\varepsilon_i^n:(t_0,t_1,\cdots,t_{n-1})\mapsto(t_0,\cdots,t_{i-1},0,t_i,\cdots,t_{n-1}),i\ge1$$
+	
+	对$S_n(X)$中每个基元素$\sigma$,定义$\partial_n(\sigma)=\sum_{i=0}^n(-1)^i\sigma(\varepsilon_i^n)\in S_{n-1}(X)$.再线性延拓至整个自由阿贝尔群.另外对$n=1$的情况,道路的边界定义为终端减去起始点.
+	\item 边界算子满足$\partial_n\circ\partial_{n+1}=0$.事实上注意到总有$\varepsilon_j^{n+1}\varepsilon_k^n=\varepsilon_k^{n+1}\varepsilon_{j-1}^n:\Delta^{n-1}\to\Delta^{n+1}$,任取奇异$n+1$单形$\sigma$:
+	\begin{align*}
+	\partial\circ\partial(\sigma)&=\partial\left(\sum_j(-1)^j\sigma\varepsilon_j^{n+1}\right)\\
+	&=\sum_{j,k}(-1)^{j+k}\sigma\varepsilon_j^{n+1}\varepsilon_k^n\\
+	&=\sum_{j\le k}(-1)^{j+k}\sigma\varepsilon_j^{n+1}\varepsilon_k^n+\sum_{k<j}(-1)^{j+k}\sigma\varepsilon_j^{n+1}\varepsilon_k^n\\
+	&=\sum_{j\le k}(-1)^{j+k}\sigma\varepsilon_j^{n+1}\varepsilon_k^n+\sum_{k<j}(-1)^{j+k}\sigma\varepsilon_k^{n+1}\varepsilon_{j-1}^n\\
+	&=\sum_{j\le k}(-1)^{j+k}\sigma\varepsilon_j^{n+1}\varepsilon_k^n+\sum_{k\le j}(-1)^{j+k+1}\sigma\varepsilon_k^{n+1}\varepsilon_j^n=0\\
+	\end{align*}
+	\item 综上得到下述链复形,它称为空间$X$的奇异复形.记$Z_n(X)=\ker\partial_n$,其中的元素称为奇异$n$圈;记$B_n(X)=\mathrm{im}\partial_{n+1}$,其中的元素称为奇异$n$边界.于是$\partial\circ\partial=0$保证了$B_n(X)\subset Z_n(X)$,称$H_n(X)=\frac{Z_n(X)}{B_n(X)}$为空间$X$的第$n$个奇异同调群.奇异$n$圈$z_n\in Z_n(X)$对应的同调群中的元$z_n+B_n(X)$称为$z_n$所在的同调类,记作$\mathrm{cls}(z_n)$.
+	$$\xymatrix@C=0.5cm{
+		\cdots \ar[rr]^{} && S_{n+1}(X) \ar[rr]^{\partial_{n+1}} && S_n(X) \ar[rr]^{\partial_n} && S_{n-1}(X) \ar[rr]^{} &&\cdots }$$
+	\item 
+	函子性.拓扑空间取奇异复形是$\textbf{Top}\to\textbf{Comp}(\textbf{Ab})$的函子.给定连续映射$f:X\to Y$,对$X$上的每个奇异$n$单形$\sigma:\Delta^n\to X$,有$f\circ\sigma:\Delta^n\to Y$是$Y$上的一个奇异$n$单形.经线性延拓这得到了一个群同态$f_{\#}:S_n(X)\to S_n(Y)$为$f_{\#}(\sum m_{\sigma}\sigma)=\sum m_{\sigma}(f\circ\sigma),m_{\sigma}\in\mathbb{Z}$.为验证它是链映射只需验证和边界算子可交换.复形取同调是$\textbf{Comp}(\textbf{Ab})\to\textbf{Ab}$的加性函子.给定链映射$f=(f_n):(S_*,d_*)\to (S'_*,d'_*)$,其中$f_n:S_n\to S_n'$它诱导的同调群之间的同态$H_n\to H_n'$为,把$S_*$中的$n$圈$z_n$所在的同调类映射为$S_*'$中的$n$圈$f_nz_n$所在的同调类.这里$f_nz_n$为$n$圈是由$f_n(Z_n(S_*))\subset Z_n(S_*')$保证的;而它的确是两个同调群之间的同态是由$f_n(B_n(S_*))\subset B_n(S_*')$保证的.
+	
+	于是奇异同调列$H_n$总是$\textbf{Top}\to\textbf{Ab}$的函子.对于连续映射$f:X\to Y$,它诱导的同调群之间的同态$H_n(f):H_n(X)\to H_n(Y)$为,$\mathrm{cls}(z_n)\mapsto\mathrm{cls}f_{\#}(z_n)$.
+\end{enumerate}
+
+两个最简单的例子.
+\begin{enumerate}
+	\item 我们可以形式的考虑空集的奇异同调群.按照空集生成的自由阿贝尔群就是$\{0\}$,于是空集的全体奇异同调群都是$\{0\}$.
+	\item 单点空间的奇异同调群,这个结论通常称为维数公理:如果$X$是单点空间,那么它的奇异同调群列为$\{\mathbb{Z},0,0,\cdots\}$.事实上每个单形$\Delta^n$到单点空间的连续映射只有一个,记作$\sigma_n$,于是每个$S_n(X)=\mathbb{Z}$.下面计算边界映射:$\partial_n(\sigma_n)=\sum_{i=0}^n\sigma_n\varepsilon_i=\left(\sum_{i=0}^n(-1)^i\right)\sigma_{n-1}$.于是当$n$是奇数时边界算子$\partial_n:\sigma_n\mapsto0$,当$n$是偶数时边界算子$\partial_n:\sigma_n\mapsto\sigma_{n-1}$.于是奇异复形为下图,于是奇异同调列为$\{\mathbb{Z},0,0,\cdots\}$.
+	$$\xymatrix{\cdots\ar[r]&S_2(X)=\mathbb{Z}\ar[r]^{\mathrm{id}}&S_1(X)=\mathbb{Z}\ar[r]^{0}&S_0(X)=\mathbb{Z}\ar[rr]^{0}&&0}$$
+\end{enumerate}
+
+道路分支和奇异同调.设$\{X_j,j\in J\}$是空间$X$的全部道路分支,那么对每个$n\ge0$有$H_n(X)\cong\oplus_jH_n(X_j)$.
+\begin{proof}
+	
+	首先我们断言对每个$n\ge0$总有$S_n(X)\cong\oplus_{j\in J}S_n(X_j)$.任取$S_n(X)$中的元$\sum_i m_i\sigma_i$,由于$\sigma_i$是道路连通空间$\Delta^n$到$X$的连续映射,于是它的像集也必然道路连通,于是$\sigma_i$也可以视为恰好某个$X_j$中的奇异单形.这样分类$\sigma_i$会得到唯一的分解$\sum_i)=m_i\sigma_i=\sum_j\eta_j$,其中$\eta_j\in S_n(X_j)$.这得到了一个同态$S_n(X)\to\oplus_{j\in J}S_n(X_j)$.容易验证它是同构.
+	
+	接下来容易验证$\partial(\sum_j\eta_j)=\sum_j\partial^{(j)}\eta_j$.特别的这说明$\sum_j\eta_j\in Z_n(X)$当且仅当每个$\eta_j\in Z_n(X_j)$.于是可构造同态$\theta:Z_n(X)\to\oplus_{j\in J}Z_n(X_j)/B_n(X_j)$.这自然是一个满射,为证明命题仅需验证这个同态的核恰好是$B_n(X)$.一方面任取$\sum_j\eta_j\in B_n(X)$,那么每个$\eta_j\in B_n(X_j)$,于是$\theta(\sum_j\eta_j)=0$.另一方面任取$\sum_j\eta_j$满足每个$\eta_j\in B_n(X_j)$,对于那些不为零的$\eta_j$,取$\alpha_j\i B_{n+1}(X_j)$使得$\partial_{n+1}(\alpha_j)=\eta_j$,其余的$\alpha_j$均取零,那么$\alpha=\sum_j\alpha_j\in S_{n+1}(X)$,并且$\partial_{n+1}(\alpha)=\eta$.
+\end{proof}
+
+零维奇异同调群度量道路连通分支个数.道路连通空间$X$满足$H_0(X)\cong\mathbb{Z}$.于是结合上一定理,说明对任意空间$X$,总有$H_0(X)$同构于以$X$的全体道路分支作为基的自由阿贝尔群.
+\begin{proof}
+	
+	设$X$道路连通,考虑复形$\xymatrix{S_1(X)\ar[r]^{\partial_1}&S_0(X)\ar[r]^{\partial_0}&0}$.这里$S_0(X)=Z_0(X)=\{\sum_{x\in X}^fm_xx\mid m_x\in\mathbb{Z}\}$,这里$\sum^f$强调这个求和实际上是有限和.我们断言有$B_0(X)=\mathrm{im}\partial_1=\{\sum^f_{x\in X}m_xx\mid\sum_x^fm_x=0\}$.
+	
+	因为一方面任取$S_1(X)$中的元$\sigma=\sum_im_i\sigma_i$,其中$\sigma_i$是$X$上的道路,设它的起始点是$s(i)$,终点是$t(i)$,那么$\partial_1(\sigma)=\sum_im_i(t(i)-s(i))$,这个整理成$\sum_x^fm_xx$的形式后自然有$\sum_x^fm_x=0$.
+	
+	另一方面任取$\alpha=\sum_x^fm_xx$满足$\sum_x^fm_x=0$.任取$X$中的点$x_0$,那么$\alpha=\sum_x^fm_x(x-x_0)$.按照道路连通条件,存在以$x_0$为起始点,$x$为终点的道路$\sigma_x$,那么$\beta=\sum_x^fm_x\sigma_x\in S_1(X)$就满足$\partial_1(\beta)=\alpha$.综上得到$B_0(X)=\{\sum_x^fm_xx\mid\sum_x^f=0\}$.
+	
+	最后考虑$Z_0(X)\to\mathbb{Z}$的同态为$\sum_x^fm_xx\mapsto\sum_x^fm_x$,这是一个满射并且核就是$B_0(X)$,于是$H_0(X)\cong Z_0(X)/B_0(X)\cong\mathbb{Z}$.
+\end{proof}
+
+同伦链映射.给定链复形$(S_*,\partial_*)$和$(S_*',\partial_*')$,称两个链映射$f_*=(f_n),g_*=(g_n):(S_*,\partial_*)\to(S_*',\partial_*')$是同伦的,如果存在次数为1的链映射$c=(c_n:S_n\to S_{n+1}')$满足$f_n-g_n=\partial_{n+1}'c_n+c_{n-1}\partial_n$.此时称$c=(c_n)$是同伦链映射.那么如果两个链映射同伦,就有它们诱导的同调之间的同态总是相同的,即$\forall n\ge0$有$H_n(f_*)=H_n(g_*)$.
+$$\xymatrix{\cdots\ar[r]&S_{n+1}\ar[r]^{\partial_{n+1}}&S_n\ar[r]^{\partial_n}\ar[dl]_{c_n}&S_{n-1}\ar[r]^{\partial_{n-1}}\ar[dl]^{c_{n-1}}&\cdots\\\cdots\ar[r]&S_{n+1}'\ar[r]_{\partial_{n+1}}&S_n'\ar[r]_{\partial_n}&S_{n-1}'\ar[r]_{\partial_{n-1}}&\cdots}$$
+\begin{proof}
+	
+	事实上按照定义,$H_n(f_*)$把$z+B_{n+1}$映射为$f_n(z)+B_{n+1}'$,那么从$\partial_nz=0$得到$(f_n-g_n)z=\partial_{n+1}'c_nz+c_{n-1}\partial_nz=\partial_{n+1}'c_nz\in B_n'$,于是有$\mathrm{cls}(f_nz)=\mathrm{cls}(g_nz)$,于是$H_n(f_*)=H_n(g_*),\forall n\ge0$.
+\end{proof}
+
+欧氏空间的(非空)凸集的奇异同调列为$\{\mathbb{Z},0,0,\cdots\}$.在证明同伦公理后这个结论可以加强为任意可缩空间的奇异同调列是$\{\mathbb{Z},0,0,\cdots\}$,注意我们证明过可缩空间总是道路连通的.
+\begin{proof}
+	
+	设$X$是欧氏空间的非空凸子集,那么$X$是道路连通空间,于是$H_0(X)=\mathbb{Z}$.下面证明$n\ge1$时有$H_n(X)=0$.我们的思路是直接构造$X$奇异复形$S=(S_*,\partial_*)$上恒等链映射$1_S$与零映射$0_S$之间的同伦映射$c=\{c_n\}$,此即满足$\partial_{n+1}c_n+c_{n-1}\partial_n=1_S-0_S=1_S,\forall n\ge1$的次数为1(也即把每个$S_n$映射到$S_{n+1}$)的链映射$c=\{c_n\}$.一旦构造出来,按照上一定理得到$H_n(1_S)=H_n(0_S)$,导致$H_n(X)=0,\forall n\ge1$.
+	
+	现在我们构造$c=\{c_n\}$.取定一个点$b\in X$,对每个奇异$n$单形$\sigma:\Delta^n\to X$,定义$c_n(\sigma)$为奇异$n+1$单形:
+	$$c_n(\sigma)(t_0,t_1,\cdots,t_{n+1})=\left\{\begin{array}{cc}b&t_0=1\\ t_0b+(1-t_0)\sigma\left(\frac{t_1}{1-t_0},\frac{t_2}{1-t_0},\cdots,\frac{t_{n+1}}{1-t_0}\right)&t_0\not=1\end{array}\right.$$
+	
+	这个具体构造实际上就是把$\Delta^{n+1}$视为它的$n$面$[t_1,t_2,\cdots,t_{n+1}]$关于顶点$t_0$的锥空间.现在我们验证$\partial_{n+1}c_n(\sigma)=\sigma-c_{n-1}\partial_n(\sigma)$,一旦得证,经线性延拓至整个$S_n(X)$就构造了同伦链映射$c=\{c_n\}$.注意到$(c_n\sigma)\varepsilon_i^{n+1}=c_{n-1}(\sigma\varepsilon_{i-1}^n),i\ge1$,于是:
+	\begin{align*}
+	\partial_{n+1}c_n(\sigma)&=\sum_{i=0}^{n+1}(-1)^i(c_n\sigma)\varepsilon_i\\&=(c_n\sigma)\varepsilon_0+\sum_{i=1}^{n+1}(-1)^ic_{n-1}(\sigma\varepsilon_{i-1})\\&=\sigma-\sum_{j=0}^n(-1)^jc_{n-1}(\sigma\varepsilon_j)\\&=\sigma-c_{n-1}\left(\sum_{j=0}^n(-1)^j\sigma\varepsilon_j\right)\\&=\sigma-c_{n-1}\partial_n\sigma
+	\end{align*}
+\end{proof}
+
+\textbf{同伦公理}.对两个同伦的连续映射$f,g:X\to Y$,有$H_n(f)=H_n(g)$.这里我们先解释下证明思路.定义$\lambda_i^X:X\to X\times[0,1]$为$x\mapsto(x,i)$.设$f,g$的同伦映射为$F:X\times[0,1]\to Y$,那么有$f=F\circ\lambda_0^X$和$g=F\circ\lambda_1^X$.倘若我们可以证明$H_n(\lambda_0^X)=H_n(\lambda_1^X)$,那么有$H_n(f)=H_n(F)H_n(\lambda_0^X)=H_n(F)H_n(\lambda_1^X)=H_n(g)$.
+\begin{proof}
+    
+    为了证明$H_n(\lambda_0^X)=H_n(\lambda_1^X)$,我们来对$n$归纳的构造同伦链映射$p=\{p_n^X:S_n(X)\to S_{n+1}(X\times[0,1])\}$,也即满足$(\lambda_{1\#}^X)_n-(\lambda_{0\#}^X)_n=\partial_{n+1}'p_n^X+p_{n-1}^X\partial_n$.为了证明归纳步骤,我们加强归纳假设的条件,不仅要$p=(p_n)$满足同伦链映射的定义,还要满足对任意奇异$n$单形$\sigma:\Delta^n\to X$,有如下交换图成立,也即满足$(\sigma\times1)_{\#}p_n^{\Delta^n}=p_n^X\sigma_{\#}$.
+	$$\xymatrix{S_n(\Delta^n)\ar[rr]^{p_n^{\Delta^n}}\ar[d]_{\sigma_{\#}}&&S_{n+1}(\Delta^n\times[0,1])\ar[d]^{(\sigma\times1)_{\#}}\\S_n(X)\ar[rr]_{p_n^X}&&S_{n+1}(X\times[0,1])}$$
+	
+	首先约定$p_{-1}^X=0$.取奇异0单形$\sigma:\Delta^0=\{e_0\}\to X$,定义$p_0^X(\sigma)$是$X\times[0,1]$上的奇异1单形,换句话讲它是$\Delta^1\to X\times[0,1]$的连续映射,它把$t$映射为$(\sigma(e_0),t)$.我们定义$p_0:S_0(X)\to S_1(X\times[0,1])$就是上述的定义经线性延拓至整个自由阿贝尔群$S_0(X)$.
+	
+	现在我们验证归纳假设的两个条件,首先对每个奇异$0$单形$\sigma:\Delta^0\to X$,记它对应的$X$中的点为$x'$,那么$(\lambda_i^X)_0(\sigma)$是$X\times[0,1]$上的奇异0单形,分别对应于点$(x',0)$和$(x',1)$.另一侧有$(\partial_1p_0^X+p_{-1}^X\partial_0)(\sigma)=\partial_1p_0^X(\sigma)=\partial_1(\sigma(e_0),t)=(x',1)-(x',0)$.再验证上述交换图,注意到$\Delta^0=\{e_0\}$中只有一个奇异0单形,把它记作$\delta$,那么$\delta(e_0)=e_0$.一方面$p_0^X\sigma_{\#}(\delta)=p_0^X(\sigma\circ\delta)=p_0^X(\sigma)$是$t\mapsto(\sigma(e_0),t)$的$\Delta^1\to X\times[0,1]$的连续映射;另一方面$(\sigma\times1)_{\#}p_0^{\Delta^0}(\delta)$为$t\mapsto(\sigma\times1)_{\#}(\delta(e_0),t)=(\sigma(e_0),t)$.于是图表交换.
+	
+	下面假设$n>0$,我们来构造$p_n$.首先对每个$\gamma\in S_n(X)$,总有如下等式,这里第一步等式是因为$\lambda_i$是链映射,第二步等式是归纳假设,第三步等式是因为$\partial\partial=0$:
+	\begin{align*}
+	\partial_n((\lambda_1^{\Delta^n})_n-(\lambda_0^{\Delta^n})_n-p_{n-1}^{\Delta^n}\partial_n)&=(\lambda_1^{\Delta^{n-1}})_{n-1}\partial_n-(\lambda_0^{\Delta^{n-1}})_{n-1}\partial_n-\partial_np_{n-1}^{\Delta^n}\partial_n\\
+	&=(\lambda_1^{\Delta^{n-1}})_{n-1}\partial_n-(\lambda_0^{\Delta^{n-1}})_{n-1}\partial_n\\&-\left((\lambda_1^{\Delta^{n-1}})_{n-1}-(\lambda_0^{\Delta^{n-1}})_{n-1}-p_{n-2}^{\Delta}\partial_{n-1}\right)\partial_n\\&=0
+	\end{align*}
+	
+	现在取$\Delta^n$上的恒等映射$\delta$,那么$\delta\in S_n(\Delta^n)$,于是有$c_n=((\lambda_1)_{\#}-(\lambda_0)_{\#}-p_{n-1}\partial_n)(\delta)\in Z_n(\Delta^n\times[0,1])$.但是按照$\Delta^n\times[0,1]$是凸集,于是$n\ge1$的时候总有$H_n(\Delta^n\times[0,1])=0$,于是存在$\beta_{n+1}\in S_{n+1}(\Delta^n\times[0,1])$,满足$\partial_{n+1}\beta_{n+1}=c_n$.我们就定义$p_n^X:S_n(X)\to S_{n+1}(X\times[0,1])$是对任意奇异$n$单形$\sigma$定义$p_n^X(\sigma)=(\sigma\times1)_{\#}(\beta_{n+1})$所延拓而成.最后只需验证归纳假设中的两个条件.
+	
+	验证第一个条件,任取$\sigma:\Delta^n\to X$是奇异$n$单形,那么:
+	\begin{align*}
+	\partial_{n+1}p_n^X(\sigma)&=\partial_{n+1}(\sigma\times1)_{\#}(\beta_{n+1})\\&=(\sigma\times1)_{\#}\partial_{n+1}(\beta_{n+1})\\&=(\sigma\times1)_{\#}\left((\lambda_1^{\Delta})_n-(\lambda_0^{\Delta})_n-p_{n-1}^{\Delta}\partial_n\right)(\delta)\\&=\left(\lambda_1^X-\lambda_0^X-p_{n-1}^X\partial_n\right)(\sigma)
+	\end{align*}
+	
+	验证第二个条件,任取$\tau:\Delta^n\to\Delta^n$是$\Delta^n$中的奇异$n$单形,那么对每个$X$中的奇异$n$单形$\sigma:\Delta^n\to X$,有:
+	$$(\sigma\times1)_{\#}p_n^{\Delta}(\tau)=(\sigma\tau\times1)_{\#}(\beta_{n+1})$$
+	$$p_n^X\sigma_{\#}(\tau)=p_n^X(\sigma\tau)=(\sigma\tau\times1)_{\#}(\beta_{n+1})$$
+\end{proof}
+
+几个推论.
+\begin{enumerate}
+	\item 如果$X,Y$是具有相同伦型的空间,那么$\forall n\ge0$有$H_n(X)=H_n(Y)$.
+	\item 特别的,对可缩空间$X$,总有它的奇异同调群列为$\{\mathbb{Z},0,0,\cdots\}$.
+	\item 特别的,如果$A$是$X$的形变收缩,记包含映射$i:A\to X$,那么有$H_n(i),n\ge0$总是同构.
+\end{enumerate}
+\newpage
+\subsection{相对奇异同调}
+
+给定空间$X$的子空间$A$,记它们的奇异复形分别为$S_*(X)$和$S_*(A)$,那么$S_*(A)$是复形$S_*(X)$的子复形.定义有序对空间$(X,A)$的相对奇异同调群是商复形$S_*(X)/S_*(A)$的同调列.
+\begin{enumerate}
+	\item 首先如果取$A=\emptyset$,那么$S_*(A)$是零复形,于是$H_n(X,\emptyset)=H_n(X)$.于是绝对奇异同调是相对奇异同调的特例.
+	\item 如果$A$是$X$的子空间,对每个$n\ge0$,$S_n(X)/S_n(A)$实际上仍为一个自由阿贝尔群,它的基是全体$X$中的不满足$\mathrm{im}\sigma\subset A$的那些奇异$n$单形$\sigma$构成的.
+	\item 函子性.我们之前定义过范畴$\textbf{Top}^2$,它的对象是有序对空间$(X,A)$,这里$A\subset X$,它的态射$f:(X,A)\to(Y,B)$是$X\to Y$的连续映射,并且满足$f(A)\subset B$.现在我们定义函子$\textbf{Top}^2\to\textbf{Comp}$为,把有序对空间$(X,A)$映射为奇异复形的商复形$S_*(X)/S_*(A)$.现在定义诱导的态射,给定态射$f:(X,A)\to(Y,B)$,诱导的态射$f_*$应该是$S_*(X)/S_*(A)\to S_*(Y)/S_*(B)$的链映射,就定义$\gamma_n+S_n(A)\mapsto f_{\#}(\gamma_n)+S_n(B)$.这里定义的良性是由$f(A)\subset B$所保证的.
+	\item 相对同调群的另一种等价定义.给定有序对空间$(X,A)$,定义它的相对$n$圈群为$Z_n(X,A)=\{\gamma\in S_n(X)\mid \partial_n\gamma\in S_{n-1}(A)\}$,定义相对$n$边界群为$B_n(X,A)=\{\gamma\in S_n(X)\mid\exists\gamma'\in S_n(A),\gamma-\gamma'\in B_n(X)\}=B_n(X)+S_n(A)$.那么相对同调群同样可定义为$H_n(X,A)\cong Z_n(X,A)/B_n(X,A)$.
+	\begin{proof}
+		
+		设$(X,A)$对应的相对奇异复形为$(S_*',\partial_*')$,那么按照初始定义有$H_n(X,A)=\ker\partial_n'/\mathrm{im}\partial_{n+1}'$.但是现在$\ker\partial_n'=Z_n(X,A)/S_n(A)$,$\mathrm{im}\partial_{n+1}'=B_n(X,A)/S_n(A)$,结合群的第三同构定理得到二者同构.
+	\end{proof}
+\end{enumerate}
+
+在同调代数中有如下结论:给定链复形的短正合列,它将会诱导出同调群列的长正合列,另外连接映射具有自然性.据此我们得到如下计算相对同调群列的做法:
+\begin{enumerate}
+	\item 给定有序对空间$(X,A)$,记$X,A$分别的奇异复形为$S_*(X)$和$S_*(A)$,于是得到链复形的短正合列$0\to S_*(A)\to S_*(X)\to S_*(X)/S_*(A)\to0$.于是它诱导了如下长正合列,其中$d$是连接映射:
+	$$\xymatrix{\cdots\ar[r]&H_n(A)\ar[r]&H_n(X)\ar[r]&H_n(X,A)\ar[r]^d&H_{n-1}(A)\ar[r]&\cdots}$$
+	
+	另外连接映射$d$具有自然性,也就是说如果有态射$f:(X,A)\to(Y,B)$,这会诱导交换图:
+	$$\xymatrix{\cdots\ar[r]&H_n(A)\ar[r]\ar[d]&H_n(X)\ar[r]\ar[d]&H_n(X,A)\ar[r]\ar[d]&H_{n-1}(A)\ar[r]\ar[d]&\cdots\\\cdots\ar[r]&H_n(B)\ar[r]&H_n(Y)\ar[r]&H_n(Y,B)\ar[r]&H_{n-1}(B)\ar[r]&\cdots}$$
+	\item 更一般的,如果有关系$A'\subset A\subset X$,这会诱导奇异复形的商复形之间的短正合列$0\to S_*(A)/S_*(A')\to S_*(X)/S_*(A')\to S_*(X)/S_*(A)\to0$.于是得到如下长正合列:
+	$$\xymatrix{\cdots\ar[r]&H_n(A,A')\ar[r]&H_n(X,A')\ar[r]&H_n(X,A)\ar[r]&H_{n-1}(A,A')\ar[r]&\cdots}$$
+	
+	同样的,按照$d$具有自然性,如果有态射$f:(X,A,A')\to(Y,B,B')$,这是指连续映射$f:X\to Y$满足$f(A)\subset B$和$f(A')\subset B'$.此时有交换图:
+	$$\xymatrix{\cdots\ar[r]&H_n(A,A')\ar[r]\ar[d]&H_n(X,A')\ar[r]\ar[d]&H_n(X,A)\ar[r]\ar[d]&H_{n-1}(A,A')\ar[r]\ar[d]&\cdots\\\cdots\ar[r]&H_n(B,B')\ar[r]&H_n(Y,B')\ar[r]&H_n(Y,B)\ar[r]&H_{n-1}(B,B')\ar[r]&\cdots}$$
+\end{enumerate}
+
+相对奇异同调的一些性质.
+\begin{enumerate}
+	\item 如果$A$是$X$的形变收缩,我们证明过此时包含映射$i$诱导的同调群之间的映射$H_n(A)\to H_n(X)$总是同构,结合上面的长正合列,从$H_n(A)\to H_n(X)$都是同构得到$H_n(X,A)$都为0.即形变收缩的相对同调群都是0.
+	\item 如果$X$是道路连通空间,$A$是任意非空子空间,那么$H_0(X,A)=0$.事实上我们只要说明$Z_0(X,A)=B_0(X,A)$即可.而这里$Z_0(X,A)=S_0(X,A)$就是以不在$A$中的$X$中的点为基生成的自由阿贝尔群.现在任取一个基元素$b$,它是落在$X-A$中的元,按照$X$道路连通,取$a\in A$,存在道路$\gamma$的初始点是$b$,终端为$a$,那么$b-a=\partial_1(\gamma)\in B_0(X)$,于是$b=(b-a)+a\in B_0(X)+S_0(A)=B_0(X,A)$,于是$B_0(X,A)=Z_0(X,A)$.
+	\item 类似于绝对奇异同调群,如果$\{X_i,i\in I\}$是$X$的道路分支,那么对每个$n\ge0$有同构$H_n(X,A)\cong\oplus_iH_n(X_i,A\cap X_i)$.
+	\item 于是上两条说明,$H_0(X,A)$是一个秩为$\mathrm{card}\{i\in I\mid A\cap X_i=\emptyset\}$的自由阿贝尔群.特别的,如果$X$的道路分支的势是无穷的$\alpha$,那么任意$x_0\in X$有$H_0(X,x_0)$是秩为$\alpha$的自由阿贝尔群;如果$X$的道路分支个数是有限的$r+1$,那么对任意$x_0\in X$,有$H_0(X,x_0)$是秩为$r$的自由阿贝尔群.简单说,$H_0(X,x_0)$相比$H_0(X)$划去一个直和项$\mathbb{Z}$.
+	\item 任取$x_0\in X$,那么对任意$n\ge1$,总有$H_n(X,x_0)\cong H_n(X)$.事实上考虑长正合列定理,当$n\ge2$的时候有正合列$H_n(\{x_0\})\to H_n(X)\to H_n(X,x_0)\to H_{n-1}(\{x_0\})$,按照维数公理有$H_{n-1}(\{x_0\})=H_n(\{x_0\})=0$,于是$H_n(X)\cong H_n(X,x_0),\forall n\ge2$.下面只需验证明$H_1(X,x_0)\cong H_1(X)$.
+	\begin{proof}
+		
+		首先按照长正合列定理和维数公式,有如下同调群的长正合列:
+		$$\xymatrix{0\ar[r]&H_1(X)\ar[r]^g&H_1(X,x_0)\ar[r]&H_0(\{x_0\})=\mathbb{Z}\ar[r]^h&H_0(X)\ar[r]^k&H_0(X,x_0)\ar[r]&0}$$
+		
+		那么$g$是单射,我们期望证明它还是个满射.倘若证明$h$是单射,那么按照正合性就得到$g$是满射.首先$h\not=0$,否则和$k$不是单射相矛盾.但是如果$\ker h\not=0$,那么$H_0(X)$就会包含一个同构于$\mathbb{Z}/\ker h$的子群,这个$\mathbb{Z}/\ker h$是非平凡有限阶群,但是$H_0(X)$是非平凡的自由阿贝尔群,这就矛盾.
+	\end{proof}
+    \item 于是上两条说明我们可以不损失信息的把奇异同调视为带基点的拓扑空间范畴$\textbf{Top}_*\to\textbf{Ab}$的函子.
+\end{enumerate}
+
+既约奇异同调.给定空间$X$的奇异复形$(S_*(X),\partial)$,定义$\widetilde{S}_{-1}(X)$是由形式符号$[\quad]$生成的循环群,定义边界算子$\widetilde{\partial}_0:S_0(X)\to\widetilde{S}_{-1}(X)$为$\sum_xm_xx\mapsto(\sum_xm_x)[\quad]$.那么总有$\widetilde{\partial}_0\circ\partial_1=0$,于是如下交换图构成了一个链复形,它称为$X$的既约奇异复形,记作$(\widetilde{S}_*(X),\widetilde{\partial}_*)$,这个复形的同调列称为$X$的既约奇异同调群,记作$\widetilde{H}_n(X)$.
+$$\xymatrix{\cdots\ar[r]&S_2(X)\ar[r]^{\partial_2}&S_1(X)\ar[r]^{\partial_1}&S_0(X)\ar[r]^{\widetilde{\partial}_0}&\widetilde{S}_{-1}(X)\ar[r]&0}$$
+
+既约奇异同调的意义在于如下公式:$\forall n\ge0$有$\widetilde{H}_n(X)\cong H_n(X,x_0)$.
+\begin{proof}
+	
+	对于$n\ge1$我们已经证明过了,此时$\partial_n$都不变,于是$\widetilde{H}_n(X)=\ker\partial_n/\mathrm{im}\partial_{n+1}=H_n(X)=H_n(X,x_0)$.现在来处理$n=0$.按照$\widetilde{\partial}_0$是满射,存在$\alpha\in S_0(X)$使得$\widetilde{\partial}_0(\alpha)=1\cdot[\quad]$,现在我们断言有$S_0(X)=\ker\widetilde{\partial}_0\oplus\langle\alpha\rangle$.右侧两个子群的交平凡是容易的,现在任取$y=\sum_xm_xx\in S_0(X)$,记$\widetilde{\partial}_0(y)=n$,那么$y=n\alpha+(y-n\alpha)\in\langle\alpha\rangle\oplus\ker\widetilde{\partial}_0$.现在$S_0(X)=Z_0(X)$并且$B_0(X)=\mathrm{im}\partial_1\subset\ker\widetilde{\partial}_0$,于是得到$H_0(X)=S_0(X)/B_0(X)=(\ker\widetilde{\partial}_0\oplus\langle\alpha\rangle)/B_0(X)\cong\widetilde{H_0}(X)\oplus\mathbb{Z}$.最后按照$H_0(X)$是以道路分支集合为基的自由阿贝尔群,而$H_0(X,x_0)$是道路分支集合去掉一个元(也即$x_0$所在的道路分支)作为基的自由阿贝尔群,于是这个等式说明了$\widetilde{H}_0(X)\cong H_0(X,x_0)$.
+\end{proof}
+
+$\textbf{Top}^2$上的同伦.给定两个态射$f,g:(X,A)\to(Y,B)$,称它们是同伦的,如果存在连续映射$F:(X\times[0,1],A\times[0,1])\to(Y,B)$,满足$F(x,0)=f(x)$和$F(x,1)=g(x)$,这个条件也称作$f,g$在$\mathrm{mod} A$下同伦,记作$f\sim g(\mathrm{mod} A)$.
+
+$\textbf{Top}^2$上的公理.我们将要在后文给出的关于同调的Eilenberg-Steenrod公理包含四个公理,这里我们给出其中三个,第四个切除公理留在下一节.
+\begin{enumerate}
+	\item 同伦公理.如果$f_0,f_1:(X,A)\to(Y,B)$是同伦的态射,那么总有$H_n(f_0)=H_n(f_1):H_n(X,A)\to H_n(Y,B),\forall n\ge0$.这个证明类似于绝对同调中我们给出的证明.
+	\item 正合性公理.给定有序对空间$(X,A)$,记两个包含映射$i:(A,\emptyset)\to(X,\emptyset)$和$j:(X,\emptyset)\to(X,A)$,那么它诱导了长正合列:
+	$$\xymatrix{\cdots\ar[r]&H_n(A,\emptyset)\ar[r]^{H_n(i)}&H_n(X,\emptyset)\ar[r]^{H_n(j)}&H_n(X,A)\ar[r]^{d_n}&H_{n-1}(A,\emptyset)\ar[r]&\cdots}$$
+	\item 维数公理.如果$X$是单点空间,那么有$H_n(X,\emptyset)=0,\forall n\ge1$.其中$H_0(X,\emptyset)$被称作系数群.
+\end{enumerate}
+\newpage
+\subsection{切除公理}
+
+我们先给出两个版本的切除公理是等价的.
+\begin{enumerate}
+	\item 切除公理1.给定子空间链$U\subset A\subset X$,满足$\overline{U}\subset A^{\circ}$.那么包含态射$i:(X-U,A-U)\to(X,A)$诱导了相对同调群的同构$H_n(X-U,A-U)\cong H_n(X,A),\forall n\ge0$.
+	\item 切除公理2.给定$X$的子空间$X_1$和$X_2$,满足$X=X_1^{\circ}\cup X_2^{\circ}$.那么包含态射$j:(X_1,X_1\cap X_2)\to(X_1\cup X_2,X_2)=(X,X_2)$诱导了相对同调群的同构$H_n(X_1,X_1\cap X_2)\cong H_n(X,X_2),\forall n\ge0$.
+\end{enumerate}
+\begin{proof}
+	
+	假设切除公理1成立.记$X=X_1^{\circ}\cup X_2^{\circ}$.取$A=X_2$,取$U=X-X_1$,于是我们只需验证$\overline{U}\subset A^{\circ}$.注意到$\overline{U}=\overline{X-X_1}\subset X-X_1^{\circ}=(X_1^{\circ}\cup X_2^{\circ})-X_1^{\circ}\subset X_2^{\circ}=A^{\circ}$.
+	
+	假设切除公理2成立.设$U\subset A\subset X$,取$X_2=A$,取$X_1=X-U$,那么$A-U=X_1\cap X_2$.于是我们只需验证$X=X_1^{\circ}\cup X_2^{\circ}$.但是从$\overline{U}\subset A^{\circ}$得到$X_1^{\circ}\cup X_2^{\circ}=(X-U)^{\circ}\cup A^{\circ}\supset(X-\overline{U})^{\circ}\cup A^{\circ}=(X-\overline{U})\cup A^{\circ}\supset(X-A^{\circ})\cup A^{\circ}=X$.
+\end{proof}
+
+为了证明切除公理,具体的讲是切除公理2,我们需要如下定理:如果$X_1,X_2$是$X$的子空间,满足$X=X_1^{\circ}\cup X_2^{\circ}$.那么奇异复形的包含映射$S_*(X_1)\oplus S_*(X_2)\to S_*(X)$诱导了同调群列的同构.这里我们先来说明它可以推出切除公理2.
+\begin{proof}
+	
+	首先考虑如下链复形的短正合列:
+	$$\xymatrix{0\ar[r]&S_*(X_1)\oplus S_*(X_2)\ar[r]^i&S_*(X)\ar[r]&S_*(X)/(S_*(X_1)\oplus S_*(X_2))\ar[r]&0}$$
+	
+	按照假设有$i$诱导了同调群之间的同构,于是从长正合列得出每个$H_n(S_*(X)/(S_*(X_1)\oplus S_*(X_2)))=0,\forall n\ge0$.接下来考虑如下短正合列:
+	$$\xymatrix{0\ar[r]&S_*(X_1)\oplus S_*(X_2)/S_*(X_2)\ar[r]^j&S_*(X)/S_*(X_2)\ar[r]&S_*(X)/(S_*(X_1)\oplus S_*(X_2))\ar[r]&0}$$
+	
+	考虑它诱导的长正合列得到每个$H_n(j),n\ge0$是同构.最后注意到有链同构$l:S_*(X_1)/(S_*(X_1\cap X_2))\to S_*(X_1)\oplus S_*(X_2)/S_*(X_2)$,于是复合的链映射$S_*(X_1)/S_*(X_1\cap X_2)\to S_*(X_1)\oplus S_*(X_2)/S_*(X_2)\to S_*(X)/S_*(X_2)$诱导了同构的同调群,于是有$H_n(X_1,X_1\cap X_2)\cong H_n(X,X_2),n\ge0$.
+\end{proof}
+
+在给出这个定理的证明前,我们先来给出它的一般情况.取空间$X$的一个子集族$\mathscr{U}$,约定$\cup_{U\in\mathscr{U}}U=X$,记$S_n^{\mathscr{U}}(X)=\oplus_{U\in\mathscr{U}}S_n(U)$,它是$S_n(X)$的子群.于是边界算子限制在$S_n^{\mathscr{U}}(X)$中的确落在$S_{n-1}^{\mathscr{U}}(X)$中,于是$(S_*^{\mathscr{U}}(X),\partial_*)$是$(S_*(X),\partial_*)$的子复形.我们断言此时包含映射$i:S_*^{\mathscr{U}}(X)\to S_*(X)$诱导了同调群列的同构.对于$\mathscr{U}=\{X_1,X_2\}$的情况,此即上述定理.
+
+我们接下来的目标是证明切除公理.为此需要证明在条件下有$S_*(X_1)\oplus S_*(X_2)\to S_*(X)$诱导了同调群列的同构.倘若$X$中的$n$圈都可以表示为$X_1$中的链与$X_2$中的链的和,那么这个同构是自然的.但是遗憾的是$X$中奇异单形的像未必整个落在$X_1$或$X_2$.我们的思路是将每个单形$\Delta^n$分解为更小的分块,使得在每个小分块上奇异单形$\sigma$的像的确整个落在$X_1$或者$X_2$中.这种分解称为重心分解.
+
+重心分解.给定$n$单形$\Delta^n$,我们对$n$归纳的定义,$\Delta^n$的质心分解$\mathrm{Sd}\Delta^n$是一族$n$单形.
+\begin{enumerate}
+	\item $\mathrm{Sd}\Delta^0=\Delta^0$.
+	\item 如果$s_0,s_1,\cdots,s_{n+1}$是$\Delta^{n+1}$的全部$n$面,记$b$是$\Delta^{n+1}$的重心,那么$\mathrm{Sd}(\Delta^{n+1})$是全体这样的$n+1$单形构成的集合,它由$b$和$\mathrm{Sd}(s_i)$中$n$单形生成.于是归纳法说明对于仿射$n$单形$\Delta^n$,$\mathrm{Sd}(\Delta^n)$由$(n+1)!$个$n$单形构成.
+\end{enumerate}
+
+对于一般凸集$E$,定义重心分解是一族映射$\{\mathrm{Sd}_n:S_n(E)\to S_n(E)\}$,对于$S_n(E)$的生成元$\gamma:\Delta^n\to E$,满足:
+\begin{enumerate}
+	\item $n=0$时约定$\mathrm{Sd}_0(\gamma)=\gamma$.
+	\item $n>0$时约定$\mathrm{Sd}_n(\gamma)$是以$\gamma(b_n)$为顶点,这里$b_n$表示$\Delta^n$的重心,由$\mathrm{S}_{n-1}(\partial_n\gamma)$生成的锥,
+\end{enumerate}
+
+对于一般空间$X$,定义重心分解是一族映射$\{\mathrm{Sd}_n:S_n(X)\to S_n(X)\}$,满足在每个$S_n(X)$的生成元$\sigma:\Delta^n\to X$处的取值是$\mathrm{Sd}_n(\sigma)=\sigma_{\#}\mathrm{Sd}_n(1_n)$,这里$1_n$表示的是$\Delta^n$上的恒等映射.
+\begin{enumerate}
+	\item 上述两种定义是相容的,即如果$X$是凸集,那么这两种定义互相等价.
+	\item 设$f:X\to Y$是连续映射,那么$f_{\#}$和$\mathrm{Sd}$可交换:
+	$$\xymatrix{S_n(X)\ar[rr]^{\mathrm{Sd}}\ar[d]_{f_{\#}}&&S_n(X)\ar[d]^{f_{\#}}\\S_n(Y)\ar[rr]_{\mathrm{Sd}}&&S_n(Y)}$$
+	\begin{proof}
+		
+		任取$S_n(X)$的生成元$\sigma$,记$\mathrm{Sd}_n(1_n)=\sum m_i\tau_i\in S_n(\Delta^n)$,其中$m_i\in\mathbb{Z}$,那么$\mathrm{Sd}_n(\sigma)=\sum_im_i\sigma\tau_i$.于是$f_{\#}\mathrm{Sd}(\sigma)=\sum_if\sigma\tau_i$.另一方面$\mathrm{Sd}f_{\#}(\sigma)=\mathrm{Sd}(f\sigma)=\sum_im_if\sigma\tau_i$,二者相同.
+	\end{proof}
+	\item $\mathrm{Sd}$是$S_*(X)\to S_*(X)$的链映射.
+	\begin{proof}
+		
+		先设$X$是凸集.我们对$n$归纳证明,对每个奇异$n$单形$\tau:\Delta^n\to X$,总有$\mathrm{Sd}_{n-1}\circ\partial_n(\tau)=\partial_n\circ\mathrm{Sd}_n(\tau)$.首先$\partial_0=0$,于是初始步得证,接下来设$n>0$有:(注意这里第二个等号是因为我们证明过奇异复形的锥在边界算子下有公式$\partial(b.\gamma)=\gamma-b.\partial\gamma$)
+		\begin{align*}
+		\partial_n\circ\mathrm{Sd}_n(\tau)&=\partial_n(\tau(b_n).\mathrm{Sd}_{n-1}(\partial_n\tau))\\
+		&=\mathrm{Sd}_{n-1}\partial_n\tau-\tau(b_n).(\partial_{n-1}\mathrm{Sd}_{n-1}(\partial_n\gamma))\\
+		&=\mathrm{Sd}_{n-1}\partial_n\tau-\tau(b_n).(\mathrm{Sd}_{n-2}\partial_{n-1}\partial_n(\gamma))\\
+		&=\mathrm{Sd}_{n-1}\partial_n\tau
+		\end{align*}
+		
+		完成归纳.再设$X$是一般空间,对每个奇异$n$单形$\sigma:\Delta^n\to X$,有:
+		\begin{align*}
+		\partial\mathrm{Sd}(\sigma)&=\partial\sigma_{\#}\mathrm{Sd}(1_n)\\
+		&=\sigma_{\#}\partial\mathrm{Sd}(1_n)\\&=\sigma_{\#}\mathrm{Sd}\partial(1_n)\\&=\mathrm{Sd}\sigma_{\#}\partial(1_n)\\&=\mathrm{Sd}\partial\sigma_{\#}(1_n)\\&=\mathrm{Sd}\partial\sigma
+		\end{align*}		
+	\end{proof}
+	\item 重心分解诱导的同调群映射是恒等映射,即$\forall n\ge0$有$H_n(\mathrm{Sd})=1_{H_n(X)}$.
+	\begin{proof}
+		
+		构造同伦映射,占坑.【】
+	\end{proof}
+\end{enumerate}
+
+仿射单形和仿射链.设$E$是欧式空间的一个子集,称奇异单形$\sigma:\Delta^n\to E$是仿射的,如果$\sigma(\sum_it_ie_i)=\sum_it_i\sigma(e_i)$对任意的$e_i\in\Delta^n$和任意的$t_i\ge0$,$\sum_it_i=1$成立.设$E$是欧式空间的子集,其上的一个$n$链$\gamma=\sum_im_i\sigma_i$称为仿射的,如果每个奇异$n$单形$\sigma_i$都是仿射的.
+\begin{enumerate}
+	\item $\Delta^n$上的恒等映射$1_n$自然是仿射的.
+	\item 如果奇异单形$\sigma$是仿射的,那么它的每个面都是仿射的奇异单形.这说明仿射链在边界算子下的像是仿射链.
+	\item 如果$E$是凸集,$E$上的奇异单形$\sigma$是仿射的,那么单形锥$b.\sigma$总是仿射的.特别的,这说明如果$\sigma$是仿射的,那么$\mathrm{Sd}(\sigma)$也是仿射的.
+\end{enumerate}
+
+设$E$是欧式空间的子集,设$\gamma=\sum_im_i\sigma_i\in S_n(E)$,其中$m_i\not=0$,定义$\mathrm{mesh}\gamma=\sup_i\{\mathrm{diam}\sigma_i(\Delta^n)\}$.注意由于$\Delta^n$是紧集,于是$\sigma_i(\Delta^n)$也是紧集,于是它的直径存在.
+
+记一个$n$单形$\Delta=[p_0,p_1,\cdots,p_n]$,那么它的重心就是$b=\frac{1}{n+1}\sum_{0\le i\le n}p_i$,此时有$|p_i-b|\le\frac{n}{n+1}\mathrm{diam}\Delta$.这个结论可以说明对于欧式空间的子集$E$,以及其上一个$n$链$\gamma$,总有$\mathrm{mesh}\mathrm{Sd}\gamma\le n/(n+1)\mathrm{mesh}\gamma$.于是迭代$q$次得到总有:
+$$\mathrm{mesh}\mathrm{Sd}^q(\gamma)\le(\frac{n}{n+1})^q\mathrm{mesh}\gamma$$
+
+我们现在可以证明切除公理了.我们已经解释过为证明切除公理,仅需说明如果$X$的两个子空间$X_1,X_2$满足$X=X_1^{\circ}\cup X_2^{\circ}$,那么链复形的包含映射$S_*(X_1)+S_*(X_2)\to S_*(X)$诱导了同调群之间的同构.
+\begin{proof}
+	
+	任取$\sigma$是$X$的一个$n$单形,我们先来说明存在正整数$q$满足$\mathrm{Sd}^q\sigma\in S_n(X_1)+S_n(X_2)$.【】
+	
+\end{proof}
+
+切除公理的一个重要结论是Mayer-Vietoris定理,它是计算奇异同调群的重要工具.
+\begin{enumerate}
+	\item 一个代数引理.考虑如下交换图,其中第一行与第二行都是正合列:
+	$$\xymatrix{\cdots\ar[r]&A_n\ar[r]^{i_n}\ar[d]^{f_n}&B_n\ar[r]^{p_n}\ar[d]^{g_n}&C_n\ar[r]^{d_n}\ar[d]^{h_n}&A_{n-1}\ar[r]\ar[d]^{f_{n-1}}&\cdots\\\cdots\ar[r]&A_n'\ar[r]_{j_n}&B_n'\ar[r]_{q_n}&C_n'\ar[r]_{\Delta_n}&A_{n-1}'\ar[r]&\cdots}$$
+	
+	并且每第三个列映射$h_n$是同构.那么这诱导了如下正合列:
+	$$\xymatrix{\cdots\ar[r]&A_n\ar[r]^{(i_n,f_n)}&B_n\oplus A_n'\ar[r]^{g_n-j_n}&B_n'\ar[r]^{d_nh_n^{-1}q_n}&A_{n-1}\ar[r]&\cdots}$$
+	\item Mayer-Vietoris定理.设$X_1,X_2$是$X$的子空间,满足$X=X_1^{\circ}\cup X_2^{\circ}$.那么有如下奇异同调群的长正合列,其中$i_1,i_2,g,j$都是包含映射,$D=dh_*^{-1}q_*$,其中$q,h$是包含映射,$d$是$(X_1,X_1\cap X_2)$的连接映射.
+	$$\xymatrix{\cdots\ar[r]&H_n(X_1\cap X_2)\ar[rr]^{((i_1)_{\#},(i_2)_{\#})}&&H_n(X_1)\oplus H_n(X_2)\ar[rr]^{g_{\#}-j_{\#}}&&H_n(X)\ar[r]^D&H_{n-1}(X_1\cap X_2)}$$
+	$$\xymatrix{\cdots\ar[r]&H_0(X_1\cap X_2)\ar[r]&H_0(X_1)\oplus H_0(X_2)\ar[r]&H_0(X)\ar[r]&0}$$
+	\begin{proof}
+		
+		首先考虑$\textbf{Top}^2$中的如下交换图,其中每个映射都是包含映射:
+		$$\xymatrix{(X_1\cap X_2,\emptyset)\ar[r]^{i_1}\ar[d]^{i_2}&(X_1,\emptyset)\ar[r]^p\ar[d]^g&(X_1,X_1\cap X_2)\ar[d]^h\\(X_2,\emptyset)\ar[r]_j&(X,\emptyset)\ar[r]_q&(X,X_2)}$$
+		
+		按照连接映射的自然性,得到如下交换图表:
+		$$\xymatrix{\cdots\ar[r]&H_n(X_1\cap X_2)\ar[r]^{(i_1)_{\#}}\ar[d]^{(i_2)_{\#}}&H_n(X_1)\ar[r]^{p_{\#}}\ar[d]^{g_{\#}}&H_n(X_1,X_1\cap X_2)\ar[r]^d\ar[d]^{h_{\#}}&H_{n-1}(X_1\cap X_2)\ar[r]\ar[d]^{(i_2)_{\#}}&\cdots\\\cdots\ar[r]&H_n(X_2)\ar[r]_{j_{\#}}&H_n(X)\ar[r]_{q_{\#}}&H_n(X,X_2)\ar[r]_{\Delta}&H_{n-1}(X_2)\ar[r]&\cdots}$$
+		
+		那么切除公理2保证了每第三个列映射$h_*$是同构,于是上一条说明这诱导结论中的长正合列.
+	\end{proof}
+    \item 稍微做些修改可得到既约版本的Mayer-Vietoris定理:设$X_1,X_2$是空间$X$的子空间,满足$X=X_1^{\circ}\cup X_2^{\circ}$,并且$X_1\cap X_2\not=\emptyset$,那么存在如下既约同调群的长正合列.这个证明只要把上述证明中$\textbf{Top}^2$中的交换图表中每个$\emptyset$改为固定的$x_0\in X_1\cap X_2$即可.$$\xymatrix{\cdots\ar[r]&\widetilde{H}_n(X_1\cap X_2)\ar[r]&\widetilde{H}_n(X_1)\oplus\widetilde{H}_n(X_2)\ar[r]&\widetilde{H}_n(X)\ar[r]&\widetilde{H}_{n-1}(X_1\cap X_2)\ar[r]&\cdots}$$
+    $$\xymatrix{&&&}$$
+    $$\xymatrix{\cdots\ar[r]&\widetilde{H}_0(X_1\cap X_2)\ar[r]&\widetilde{H}_0(X_1)\oplus\widetilde{H}_0(X_2)\ar[r]&\widetilde{H}_0(X)\ar[r]&0}$$
+    \item Mayer-Vietoris序列是自然的.如果给定两个空间$X,X'$,分别有子集$\{U,V\}$和$\{U',V'\}$,使得$U,V$内部覆盖$X$,$U',V'$内部覆盖$X'$,现在有连续映射$f:X\to X'$使得$f(U)\subset U'$,$f(V)\subset V'$,那么有交换图:
+    $$\xymatrix{\cdots\ar[r]^{\delta}&H_n(U\cap V)\ar[d]^{f_*}\ar[r]^{g_*}&H_n(U)\oplus H_n(V)\ar[d]^{f_*\oplus f_*}\ar[r]^{h_*}&H_n(X)\ar[d]^{f_*}\ar[r]^{\delta}&H_{n-1}(U\cap V)\ar[d]^{f_*}\ar[r]&\cdots\\\cdots\ar[r]^{\delta}&H_n(U\cap V)\ar[r]^{g_*}&H_n(U)\oplus H_n(V)\ar[r]^{h_*}&H_n(X)\ar[r]^{\delta}&H_{n-1}(U\cap V)\ar[r]&\cdots}$$
+\end{enumerate}
+
+$S^n$的同调群列以及一些推论.
+\begin{enumerate}
+	\item 这一条我们来证明$S^n$的既约同调群列:当$n=0$时为$\{\mathbb{Z},0,0,\cdots\}$,当$n\ge1$时$\widetilde{H}_m(S^n)$在$m=0,n$的时候为$\mathbb{Z}$,其余的$m$都是0.
+	\begin{proof}
+		
+		首先注意按照定义$S^0$是两个点的离散空间,于是它的同调群列是$\{\mathbb{Z}\oplus\mathbb{Z},0,0,\cdots\}$,于是它的既约同调群列是$\{\mathbb{Z},0,0,\cdots\}$.
+		
+		现在设$n\ge1$,任取$S^n$中的两个不同点$a,b$,取$X_1=S^n-\{a\}$和$X_2=S^n-\{b\}$,那么有$S^n=X_1^{\circ}\cup X_2^{\circ}$,于是可运用Mayer-Vietoris序列.注意到$S^n$扣掉一个点同胚于$\mathbb{R}^{n-1}$,而$\mathbb{R}^n$扣掉一个点同伦于$S^{n-1}$.于是$X_1,X_2$是可缩空间,$X_1\cap X_2$同伦于$S^{n-1}$,于是Mayer-Vietoris定理得到:
+		$$\xymatrix{0=\widetilde{H}_p(X_1)\oplus\widetilde{H}_p(X_2)\ar[r]&\widetilde{H}_p(S^n)\ar[r]&\widetilde{H}_{p-1}(X_1\cap X_2)\ar[r]&0}$$
+		
+		这就得到总有$\widetilde{H}_p(S^n)\cong\widetilde{H}_{p-1}(S^{n-1})$.反复运用这个公式得到结论.
+	\end{proof}
+    \item $S^n$不会是$D^{n+1}$的收缩,否则如果存在收缩$r:D^{n+1}\to S^n$,它诱导了$H_n(r):0=H_n(D^{n+1})\to H_n(S^n)=\mathbb{Z}$,这明显不会是一个满射,但是$H_n(r)\circ H_n(i)$是$H_n(S^n)=\mathbb{Z}$上的恒等映射,这导致$H_n(r)$是满射矛盾.
+    \item Brouwer不动点定理:$\mathbb{D}^n$自身上的连续映射必然有不动点.假设这个结论不成立,存在$\mathbb{D}^n$上的连续映射$f$使得恒有$f(x)\not=x$,那么考虑$x$到$f(x)$的射线,它交$\mathbb{D}^n$的边界$\mathbb{S}^{n-1}$为点$g(x)$,那么$g$是连续的,它是$\mathbb{D}^n\to\mathbb{S}^{n-1}$的收缩,这和上一条矛盾.
+    \item 由于同调群列不同,说明$m\not=n$的时候$S^n$和$S^m$不同胚,它们甚至不具有相同的伦型.另外这个结论说明$\mathbb{R}^m$和$\mathbb{R}^n$在$m\not=n$的时候不同胚,否则有它们分别扣掉单点也是同胚的,但是这导致$S^{m-1}$和$S^{n-1}$具有相同的伦型,这是矛盾的.
+\end{enumerate}
+
+映射度.给定$S^n,n>0$上的连续映射$f$,那么它诱导了同调群之间的同态$H_n(f):H_n(S^n)\to H_n(S^n)$,而我们计算过$H_n(S^n)=\mathbb{Z}$,这个循环群上的自同态恰好可以被它在生成元$1$处的取值所决定.如果这个取值是$m$,我们就称$f$的映射读为$m$,记作$d(f)=m$.
+
+如果$f,g$是$S^n,n>0$上的两个连续映射,
+\begin{enumerate}
+	\item $d(g\circ f)=d(g)(f)$.
+	\item $d(1_{S^n})=1$.
+	\item 如果$f$是常值映射,那么$d(f)=0$.(可把$f$视为$S^n\to\{*\}\to S^n$的复合,作用同调函子得到$H_n(f)=0$).
+	\item 如果$f,g$是同伦的,那么$d(f)=d(g)$.(逆命题同样成立,不是特别平凡).
+	\item 如果$f$是同伦等价,那么$d(f)=\pm1$.
+	\item 如果$f$不是满射,那么$d(f)=0$.事实上条件下可取$x_0\in S^n$使得$x_0\not\in\mathrm{im}f$.那么$f$可分解为复合$S^n\to S^n-\{x_0\}\to S^n$,那么$H_n(f)$也就分解为这样两个映射的复合,但是这里$H_n(S^n-\{x_0\})=0$,于是$H_n(f)$是零映射,也即$d(f)=0$.
+\end{enumerate}
+
+对顶映射的映射度.记$x=(x_1,x_2,\cdots,x_{n+1})\in S^n$,它的对顶点是指$-x=(-x_1,-x_2,\cdots,-x_{n+1})$.定义$S^n$上的对顶映射$\alpha^n$是指$x\mapsto -x$.那么$\alpha^n$的映射度是$(-1)^{n+1}$.
+\begin{proof}
+	
+	首先我们对$n$归纳证明$f:S^n\to S^n$为$(x_1,x_2,\cdots,x_{n+1})\mapsto(-x_1,x_2,\cdots,x_{n+1})$的映射度为$-1$.我们记$X_1=S^n-\{(0,0,\cdots,0,1)\}$,$X_2=S^n-\{0,0,\cdots,0,-1\}$,那么$f(X_i)\subset X_i,i=1,2$.对$n=1$的情况,MV序列诱导了如下交换图,按照$H_1(X_1)\otimes H_1(X_2)=0$得到这里$D$是单射.
+	$$\xymatrix{H_1(S^1)\ar[rr]^D\ar[d]_{f_*}&&H_0(X_1\cap X_2)\ar[d]^{g_*}\\H_1(S^1)\ar[rr]^D&&H_0(X_1\cap X_2)}$$
+	
+	【】
+\end{proof}
+
+关于映射度更多的结论.
+\begin{enumerate}
+	\item 如果$f:S^n\to S^n$没有不动点,那么$f$同伦于对顶映射$\alpha$.特别的,如果$f$没有不动点,那么$d(f)=(-1)^{n+1}$
+	\begin{proof}
+		
+		先说明$f$没有不动点的时候$(1-t)\alpha(x)+tf(x)\not=0,\forall t\in[0,1],\forall x\in S^n$.否则有$x_0,t_0$满足$f(x_0)=\frac{1-t_0}{t_0}(-x)$,取范数(注意$f(x_0)$和$x_0$的范数都是1)得到$t_0=\frac{1}{2}$,得到$f(x_0)=x_0$矛盾.
+		
+		接下来直接构造$\alpha$和$f$的同伦映射为$F(x,t)=\frac{(1-t)\alpha(x)+tf(x)}{\Vert (1-t)\alpha(x)+tf(x)\Vert}$.
+	\end{proof}
+	\item 如果$f$是零伦的,那么它有不动点.这是因为倘若$f$没有不动点,那么上一条说明$d(f)=\pm1$,但是零伦说明$d(f)=0$,矛盾.
+	\item $S^{2n}$上的连续映射要么有不动点,要么它把某个点映射到对顶点.这个命题对$S^{2n-1}$不成立.
+	\begin{proof}
+		
+		假设结论不成立,也即$f$和$-f$都没有不动点,那么$f$和$-1$都同伦于对顶映射$\alpha^{2n}$,于是$d(af)=d(f)=(-1)^{2n+1}=-1$,但是$d(a)=(-1)^{2n+1}=-1$,于是$d(af)=d(a)d(f)=1$矛盾.
+	\end{proof}
+	\item $S^{2n}$上不存在非零向量场.非零向量场是$S^{2n}\to\mathbb{R}^{2n+1}$的处处不取零的映射.
+	\begin{proof}
+		
+		取$S^{2n}$上的向量场,如果它处处非零,模去范数得到$S^{2n}\to S^{2n}$的连续映射$f$,如果存在$x_0\in S^{2n}$使得$f(x_0)=\pm x_0$,那么$(x_0,f(x_0))=\pm1$,这和向量场定义中$(x_0,f(x_0))=0$矛盾.于是$f$和$-f$都没有不动点,这和上一条结论矛盾.
+	\end{proof}
+\end{enumerate}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+空间上的一个$\Delta$复形结构是指一族映射$\sigma_{\alpha}:\Delta^n\to X$,这里$n$依赖于指标$\alpha$,它满足:
+\begin{enumerate}
+	\item 每个映射$\sigma_{\alpha}$在单形的内点集上单射,并且每个$X$中的点可恰好找到唯一一个映射$\sigma_{\alpha}$,使得这个点落在单形的内点集上的映射的像集中.
+	\item 每个$\sigma_{\alpha}$在任一面上的限制也落在这个复形结构内.
+	\item (约定拓扑)一个子集$A\subset X$是开集当且仅当对每个$\alpha$有$\sigma_{\alpha}^{-1}(A)$在$\Delta^n$中开集.
+\end{enumerate}
+
+关于$\Delta$复形的一些注解.
+\begin{enumerate}
+	\item 
+\end{enumerate}
+
+
+
+\newpage
+\section{单纯复形}
+
+一些定义.
+\begin{enumerate}
+	\item 对$q$单形$s=[v_0,v_1,\cdots,v_q]$,记$\mathrm{Vert}{s}=\{v_0,v_2,\cdots,v_q\}$,称为$s$的顶点集.
+	\item 对单形$s$,称单形$s'$是它的面(face),如果$\mathrm{Vert}(s')\subset\mathrm{Vert}(s)$.如果这个包含关系不取等号,就称$s'$是$s$的真面(proper face).
+	\item 一个有限单纯复形$K$是指某个$\mathbb{R}^d$中的有限个单形构成的集合,满足:
+	\begin{enumerate}
+		\item 若$s\in K$,那么$s$的每个面都在$K$中.
+		\item 若$s,t\in K$,那么$s\cap t$要么是空集,要么是$s$和$t$的一个公共的面.
+	\end{enumerate}
+    \item 对有限单纯复形$K$,记$\mathrm{Vert}(K)$为它包含的全部0单形构成的集合,换句话讲,这个集合就是$K$中全部复形的顶点集的并.
+    \item 有限单纯复形$K$按照定义是某个$\mathbb{R}^d$中有限个单形构成的集合,这些单形作为$\mathbb{R}^d$的子集的并记作$|K|$,称为$K$的底空间.
+    \item 称一个拓扑空间$X$为多面体(polyhedron),如果存在有限单纯复形$K$,使得存在底空间$|K|$到$X$的同胚$h$.此时称$(K,h)$为$X$的一个三角化(triangulation).
+\end{enumerate}
+
+几个例子.
+\begin{enumerate}
+	\item 考虑$\mathbb{R}^3$中的标准2单形$\Delta^2$,它的全部真面构成了一个有限单纯复形,它的底空间同胚于$S^1$.更一般的,考虑$\mathbb{R}^{n+1}$中的标准$n$单形,它的全部真面构成的有限单纯复形的底空间同胚于$S^{n-1}$.于是全部$S^n$都是多面体.
+	\item 如果我们考虑两个2单形$S,T$拼成的正方形,将两个对边粘合会得到Torus.但是这并不是Torus的三角化,因为两个2单形$S,T$的交不是它们各自的单个面.不过如果我们把正方形做$3\times3$的划分,每个小矩形都画相同方向的对角线,将大正方形对边粘合,这样得到的18个2单形以及它们的真面(27个1单形和9个0单形)构成的集合是三角化Torus的有限单纯复形.
+\end{enumerate}
+
+开单形.对$q$单形$s$,若$q=0$,记$s^{\circ}=s$称为开$0$单形;若$q>0$,记$s^{\circ}$为$s$减去全部真面构成的集合,称为开$q$单形.设$K$是有限单纯复形,对点$p\in\mathrm{Vert}(K)$,记$\mathrm{st}(p)=\cup_{s\in K,p\in\mathrm{Vert}(s)}s^{\circ}$,它是底空间$|K|$的子空间.
+\begin{enumerate}
+	\item 一个单纯复形的底空间是开单形的无交并,于是底空间中每个点都唯一的包含于某个开单形中.
+	\item 注意开单形未必是底空间的开子集.
+	\item 设$K$是有限单纯复形,底空间的子集$L$是闭子集当且仅当对每个$s\in K$有$L\cap s$是$s$中闭子集.这是因为有限单纯复形$K$的底空间是有限个闭子集$s\in K$的并.
+	\item $\forall p\in |K|$,$\mathrm{st}(p)$总是开集.这是因为$|K|-\mathrm{st}(p)$就是那些不为$s$的$K$中单形的并,这是有限个闭集的并.
+	\item $p_0,p_1,\cdots,p_n\in\mathrm{Vert}(K)$张成$K$中一个$n$单形当且仅当$\cap_{1\le i\le n}\mathrm{st}(p_i)$非空.事实上一方面若张成一个单形$s\in K$,那么$s^{\circ}$落在这个交中;另一方面若交非空,按照不同的开单形是无交的,说明这个交中至少存在一个开单形,于是这$n+1$个点是这个开单形对应单形的顶点,于是这些顶点生成的面落在$K$中,这说明这些点作为顶点的单形在$K$中.
+\end{enumerate}
+
+维数.设$K$是单纯复形,它的维数定义为$\dim K=\sup_{s\in K}\{\dim s\}$.两个具有同胚底空间的有限单纯复形的维数必然是相同的,由此可定义多面体空间的维数,就是它任一三角化的维数.
+\begin{proof}
+	
+	我们设$K$,$L$是两个有限单纯复形,底空间之间存在同胚$f:|K|\to|L|$.假设$m=\dim K>\dim L=n$.取$K$的一个$m$单形$\sigma$,那么$f(\sigma^{\circ})$是$|L|$中的开子集.于是存在$L$中的$p$单形$\tau$,满足$f(\sigma^{\circ})\cap\tau^{\circ}=W$是$L$中非空开集.这里$p\le n<m$.这个$W$同时是$f(\sigma^{\circ})$和$\tau^{\circ}$的非空开子集.但是按照维数不变性,$W$同时是$\mathbb{R}^m$和$\mathrm{R}^p$的开子集,这和维数不变性矛盾.
+\end{proof}
+
+单纯复形之间的态射.给定两个(有限)单纯复形$K,L$,一个单纯映射$\phi:K\to L$是指顶点集之间的映射$\phi:\mathrm{Vert}(K)\to\mathrm{Vert}(L)$,使得只要$\{p_0,p_1,\cdots,p_q\}$张成$K$中一个单形,那么$\{\phi(p_0),\phi(p_1),\cdots,\phi(p_q)\}$张成了$L$中一个单形.注意这里允许$\phi(p_i)$中有相同的元.
+
+函子性.给定单纯映射$\phi:K\to L$,我们来定义它诱导的连续映射$|\phi|:|K|\to|L|$.对每个$s\in K$,定义$f_s:s\to|L|$是被$\phi\mid_{\mathrm{Vert}(s)}$确定的仿射映射,按照单纯复形定义中要求的两个单形的交要么空集要么是一个公共的面,并且这个面也属于复形,说明对任意$s,t\in K$,$f_s$和$f_t$在$s\cap t$上取值相同.于是全体有限个$f_s,s\in K$粘合成一个连续映射$|\phi|:|K|\to|L|$.可验证全体有限单纯复形和单纯映射构成一个范畴,称为单纯复形范畴,记作$\mathscr{K}$.
+
+能表示为$|\phi|:|K|\to|L|$的连续映射称为分段线性映射.下一个问题是给定两个底空间,它们之间一般的连续映射能否被分段线性映射逼近.但是当固定两个底空间的时候,之间的分段线性映射仅有有限个,导致即便在同伦意义下,我们也不能说底空间之间的连续映射被分段线性映射逼近.为了解决这个问题,我们继续借助重心分解(证明奇异同调的切除公理那里用到过).
+
+给定两个单纯复形$K,L$,设$\phi:K\to L$是单纯映射,设$f:|K|\to|L|$是连续映射,称$\phi$是$f$的单纯逼近,如果对每个$p\in\mathrm{Vert}(K)$,总有$f(\mathrm{st}(p))\subset\mathrm{st}(\phi(p))$.这个定义的理由是,对$|\phi|$总有$|\phi|(\mathrm{st}(p))\subset\mathrm{st}(\phi(p))$,于是$f$满足这个性质时我们可以说$\phi$是$f$的某种逼近.
+\begin{enumerate}
+	\item 一个单纯映射$\phi:K\to L$是$f:|K|\to|L|$的单纯逼近当且仅当,对每个$x\in|K|$和每个$s\in L$满足$f(x)\in s^{\circ}$,总有$|\phi|(x)\in s$.
+	\begin{proof}
+		
+		必要性,任取$x\in|K|$,设$f(x)\in s^{\circ}$,其中$s\in L$.【】
+	\end{proof}
+    \item 如果$\phi:K\to L$是$f:|K|\to|L|$的单纯逼近,那么$|\phi|$和$f$同伦.【】
+    \item 按照$S^1$上同伦类无限个,结合上一条,说明存在这样的底空间之间的连续映射不存在单纯逼近.
+\end{enumerate}
+
+单纯复形的重心分解.如果$s$是单形,记它的重心为$b^s$.设$K$是单纯复形,它的重心分解定义为这样一个单纯复形$\mathrm{Sd}K$,它的顶点集为$\mathrm{Vert}(\mathrm{Sd}K)=\{b^s,s\in K\}$.它包含单形定义为具有形式$[b^{s_0},b^{s_1},\cdots,b^{s_q}]$,其中$s_0\subset s_1\subset\cdots\subset s_q$是$K$中满足严格包含关系的单形.
+\begin{enumerate}
+	\item 对单纯复形$K$,总有$|\mathrm{sd}K|=|K|$.
+	\item 设单纯映射$\phi:\mathrm{Vert}(\mathrm{Sd}K)\to\mathrm{Vert}(K)$满足$\phi(b^s)\in\mathrm{Vert}(s)$,那么$\phi$总是恒等映射$|\mathrm{Sd}K|\to|K|$的单纯逼近.
+	\item 设$X$是多面体空集,那么存在三角化$(K,h)$,满足存在某个$v\in\mathrm{Vert}(K)$使得$x=h(v)$.
+	\item 设$s_0\subset s_1\subset\cdots\subset s_q$是某个欧式空间中严格包含的单形,那么$\{b^{s_0},b^{s_1},\cdots,b^{s_q}\}$是仿射无关的.
+\end{enumerate}
+
+单纯逼近定理.设$K,L$是两个单纯复形,设$f:|K|\to|L|$是连续映射,那么存在正整数$q$,使得存在$f$的单纯逼近$\phi:\mathrm{Sd}^qK\to L$.【】
+
+子复形.单纯复形$K$的子复形$L$是指它的一个子集,并且自身构成一个单纯复形.单纯复形$K$的$q$骨架,是指全部维数不超过$q$的单形所构成的$K$的子复形,记作$K^{(q)}$.
+\begin{enumerate}
+	\item 设$\phi:K\to L$是单纯映射,按照维数不变性,对每个$q\ge0$总有$\phi(K^{(q)})\subset L^{(q)}$.特别的,如果$\dim K=n$,那么$\mathrm{im}|\phi|\subset|L^{(n)}|$.
+	\item 若$m<n$,那么连续映射$f:S^m\to S^n$总是零伦的.于是特别的,$n\ge2$时$S^1\to S^n$的连续映射总是零伦的,于是$S^n,n\ge2$总是单连通空间.
+	\begin{proof}
+		
+		取$S^m$的三角化$K$,取$S^n$的三角化$L$,那么$\dim K=m$,$\dim L=n$.取$q\ge1$使得存在$f$的单纯逼近$\phi:\mathrm{Sd}^qK\to L$.这里$\dim\mathrm{Sd}^qK=\dim K=m$,于是上一条说明$\mathrm{im}\phi\subset|L^{(m)}|$,于是$|\phi|:S^m\to S^n$不是满射,它可以分解为$S^m\to S^n-\{x_0\}\to S^n$,这里$S^n-\{x_0\}$是可缩空间,于是$|\phi|$是零伦的,按照$f$和$|\phi|$同伦得到$f$是零伦的.
+	\end{proof}
+\end{enumerate}
+
+抽象单纯复形.
+\begin{enumerate}
+	\item 设$V$是一个有限集,一个抽象单纯复形$K$是指$V$的一个子集族,满足$V$的每个单点子集都在$K$中,并且倘若$s\in K$,那么$s$的全部非空子集都属于$K$.这里$V$依旧称为$K$的顶点集,记作$\mathrm{Vert}(K)$.$K$中的集合称为单形,一个单形如果具有$q+1$个不同的点,就称它是一个$q$单形.
+	\item 给定两个抽象单纯复形$K,L$,一个单纯映射$\phi:K\to L$是指顶点集之间的映射$\phi:\mathrm{Vert}(K)\to\mathrm{Vert}(L)$,使得只要$\{v_0,v_1,\cdots,v_q\}$是$K$的一个单形,那么$\{\phi(v_0),\phi(v_1),\cdots,\phi(v_q)\}$是$L$的一个单形.这里允许$\phi(v_i)$中某些取相同的点.
+	\item 全部抽象单纯复形和全部单形映射构成一个范畴,记作$\mathscr{K}^a$,它和(有限)单纯复形范畴$\mathscr{K}$是范畴同构的.构造$\mathscr{K}\to\mathscr{K}^a$的函子是直接的,这里我们记单纯复形$K$对应的典范的抽象单纯复形为$K^a$.现在我们构造反方向的函子$u:\mathscr{K}^a\to\mathscr{K}$.任取抽象单纯复形$L$,它的顶点集记作$\{v_0,v_1,\cdots,v_n\}$.取标准$n$单形$\Delta^n$,记它的顶点集为$\{e_0,e_1,\cdots,e_n\}$.如果$\{v_{i_0},v_{i_1},\cdots,v_{i_q}\}$是$L$的一个单形,就取$\Delta^n$的面$s'=[e_{i_0},e_{i_1},\cdots,e_{i_q}]$落在$u(L)$中.容易验证$u(L)$是一个单纯复形,并且$u$是一个函子.这两个函子满足$K\cong u(K^a)$和$L\cong(uL)^a$.
+	\item 如果$L$是抽象单纯复形,我们称$u(L)$的底空间$|u(L)|$是它的一个几何实现.于是按照函子保同构,说明同构的抽象单纯复形具有同胚的几何实现.
+\end{enumerate}
+
+定向.(抽象)单纯复形$K$上的定向是指顶点集上赋予一个线性序,使得它限制在每个单形的顶点集上构成了这个单形的线性序.注意重心分解后的单纯复形总是具备一个自然的定向,即对$\mathrm{Sd}K$,它的$n$单形总可以表示为$[b^{s_0},b^{s_1},\cdots,b^{s_n}]$,其中$s_i$是$K$的某个$i$面,$b^{s_i}$是$s_i$的重心,并且$s_0\subset s_1\subset\cdots\subset s_n$.
+
+单纯同调.注意这里定义的同调群是依赖于单纯复形上定向的选取的,我们会在后文证明它实际上不依赖于定向的选取.
+\begin{enumerate}
+	\item 设$K$是定向单纯复形,对$q\ge0$,记$C_q(K)$表示这样一个交换群:它的生成元集是全体$q+1$点对$(p_0,p_1,\cdots,p_q)$,其中$p_i\in\mathrm{Vert}(K)$,使得$\{p_0,p_1,\cdots,p_q\}$张成$K$中一个单形.它的关系约定为,$(p_0,p_1,\cdots,p_q)=0$,如果$p_i$中有两项相同;$(p_0,p_1,\cdots,p_q)=(\mathrm{sgn}\pi(p_{\pi0},p_{\pi1},\cdots,p_{\pi q}))$.我们把$(p_0,p_1,\cdots,p_q)$在$C_q(K)$中的像记作$\langle p_0,p_1,\cdots,p_q\rangle$.
+	\item 定义边界算子$\partial_q:C_q(K)\to C_{q-1}(K)$为$\partial_q(\langle p_0,p_1,\cdots,p_q\rangle)=\sum_{0\le i\le q}(-1)^i\langle p_0,p_1,\cdots,\hat{p_i},\cdots,p_q\rangle$.
+	\item 容易验证$\partial\circ\partial=0$,我们得到如下链复形.称$C_q(K)$中的元为$K$上的单纯$q$链.定义$Z_q(K)=\ker\partial_n$,其中的元称为单纯$q$圈.定义$B_q(K)=\mathrm{im}\partial_{q+1}$,其中的元称为单纯$q$边界.定义$H_q(K)=Z_q(K)/B_q(K)$称为$q$次单纯同调群.
+	$$\xymatrix{0\ar[r]&C_m(K)\ar[r]^{\partial_m}&\cdots\ar[r]&C_1(K)\ar[r]^{\partial_1}&C_0(K)\ar[r]&0}$$
+	\item 同调的函子性.设$K,L$是两个定向单纯复形,设$\phi:K\to L$是单纯映射,它诱导了$\phi_q:C_q(K)\to C_q(L)$的映射为$\langle p_0,p_1,\cdots,p_q\rangle\mapsto\langle\phi(p_0),\phi(p_1),\cdots,\phi(p_q)\rangle$.这个映射和边界算子可交换,于是$\phi_q$把$B_q(K)$中的元映入$B_q(L)$,于是它诱导了同调群之间的同态$H_q(K)\to H_q(L)$.可验证$H_q$是$\mathscr{K}\to\textbf{Ab}$的函子.
+	\item 相对单纯同调.类似奇异同调的情况,如果$K$是定向单纯复形,$L$是它的子复形,约定$L$上的定向为$\mathrm{Vert}(K)$上线性序在$\mathrm{Vert}(L)$上的限制.这样$C_*(L)$是$C_*(K)$的子链复形,定义$K$关于$L$的相对单纯同调群为$H_q(K,L)=H_q(C_*(K)/C_*(L))$.
+\end{enumerate}
+
+一些性质.
+\begin{enumerate}
+	\item 首先$C_q(K)$实际上是自由阿贝尔群,它的一组基是全体符号$\langle p_0,p_1,\cdots,p_q\rangle$,其中$\{p_0,p_1,\cdots,p_q\}$张成$K$的一个单形,并且$p_0<p_1<\cdots<p_q$.特别的,这说明$H_q(K)$都是有限生成交换群,如果$K$中有$\alpha_q$个单形,那么$H_q(K)$至多由$\alpha_q$个元生成.
+	\item 另外如果记$\dim K=m$,当$q>m$时总有$C_q(K)=0$.特别的,这说明$q>m$时总有$H_q(K)=0$.
+	\item 按照$C_{m+1}(K)=0$,得到$B_m(K)=0$,于是$H_m(K)=Z_m(K)$总是自由阿贝尔群.但是它可能是平凡群.
+\end{enumerate}
+
+【有限单纯复形的单纯同调和底空间的奇异同调相同】
+
+\newpage
+\section{CW复形}
+
+黏附胞腔.给定空间$X,Y$,设$A$是$X$的闭子集,设$f:A\to Y$是连续映射,$X$经$f$黏附的空间是指拓扑空间和(无交并)上的商空间$X\coprod Y/\sim$,这里等价关系取为$\forall a\in A$有$a\sim f(a)$.这个新空间记作$X\coprod_fY$,其中$f$称为黏附映射.连续映射的复合$\Phi:X\to X\coprod Y\to X\coprod_fY$称为特征映射.
+
+一个$n$胞腔$e^n$是指一个同胚于开球$D^n-S^{n-1}$的空间.设$Y$是Hausdorff空间,设$f:S^{n-1}\to Y$是连续映射,那么空间$D^n\coprod_fY$称为$Y$经$f$黏附$n$胞腔的空间,记作$Y_f$.
+
+
+\newpage
+\section{Eilenberg-Steenrod公理}
+
+
+\subsection{带系数的同调}
+
+设$(X,A)$是空间对(即$A\subset X$),设$G$是一个阿贝尔群,记$(S_*(X,A),\partial_*)$是空间对的奇异复形,定义它的系数为$G$的奇异复形为如下复形,它的第$n$个同调群$H_n(X,A;G)=\frac{\ker(\partial_n\otimes1)}{\mathrm{im}\partial_{n+1}\otimes1}$称为$(X,A)$的系数为$G$的$n$次同调群.
+$$\xymatrix{\cdots&S_{n+1}(X,A)\otimes_G\ar[r]^{\partial_{n+1}\otimes1}&S_n(X,A)\otimes G\ar[r]^{\partial_n\otimes1}&S_{n-1}(X,A)\otimes G\ar[r]&\cdots}$$
+
+【】
+
+
+
+\newpage
+\section{上同调}
+
+固定阿贝尔群$G$,那么$\mathrm{Hom}(-,G)$是$\textbf{Ab}$上的逆变函子.于是对空间$X$及其上的奇异复形$(S_*(X),\partial_*)$,作用这个函子得到如下复形,记作$\mathrm{Hom}(S_*(X),G)$:
+$$\xymatrix{0\ar[r]&\mathrm{Hom}(S_0(X),G)\ar[r]^{\partial_1^{\#}}&\mathrm{Hom}(S_1(X),G)\ar[r]^{\partial_2^{\#}}&\mathrm{Hom}(S_2(X),G)\ar[r]&\cdots}$$
+
+定义$X$的系数为$G$的$n$余链为$\mathrm{Hom}(S_n(X),G)$中的元,$X$的系数为$G$的$n$余圈定义为$\ker\partial_{n+1}^{\#}$中的元,记作$Z^n(X;G)$;$X$的系数为$G$的$n$边界定义为$\mathrm{im}\partial_n^{\#}$中的元,记作$B^n(X;G)$;定义$X$的第$n$个系数在$G$中的上同调群为$H^n(X;G)=Z^n(X;G)/B^n(X;G)$.容易验证$H^n(-;G)$是$\textbf{Top}\to\textbf{Ab}$的函子.
+
+相对上同调群.设$A$是$X$的子空间,对每个$n\ge0$,定义系数$G$的第$n$个相对上同调群为$H^n(X,A;G)=H_{-n}\mathrm{Hom}(S_*(X)/S_*(A),G)$.
+
+我们接下来验证上同调满足对偶版本的Eilenberg-Steenrod公理.
+\begin{enumerate}
+	\item 维数公理.设$X$是单点集合,那么$H^0(X;G)=G$,$H^p(X;G)=0,\forall p>0$.
+	\item 同伦公理.设$f,g:X\to Y$是同伦的,那么它们诱导了相同的上同调群之间的同态$H^n(Y;G)\to H^n(X;G),\forall n\ge0$.
+	\item 正合性公理.设$(X,A)$是空间对,那么有长正合列:
+	$$\xymatrix{0\ar[r]&H^0(X,A;G)\ar[r]&H^0(X;G)\ar[r]&H^0(A;G)\ar[r]&H^1(X,A;G)\ar[r]&H^1(X;G)\ar[r]&\cdots}$$
+	\begin{proof}
+		
+		短正合列$0\to S_n(A)\to S_n(X)\to S_n(X)/S_n(A)$实际上是一个各项都为自由阿贝尔群的分裂短正合列.对任意交换群$G$,按照函子$\mathrm{Hom}(-,G)$和直和可交换,说明有复形的短正合列$0\to\mathrm{Hom}(S_*(X)/S_*(A),G)\to\mathrm{Hom}(S_*(X),G)\to\mathrm{Hom}(S_*(A),G)\to0$.取它诱导的长正合列就是结论.
+	\end{proof}
+    \item 切除公理.设$X_1,X_2$是$X$的子空间满足$X=X_1^{\circ}\cup X_2^{\circ}$,那么典范的包含映射$(X_1,X_1\cap X_2)\to(X,X_2)$诱导了上同调群的同构$H^n(X,X_2;G)\cong H^n(X_1,X_1\cap X_2;G),\forall n\ge0,\forall G$.
+\end{enumerate}
+
+和同调对偶的一些结论.
+\begin{enumerate}
+	\item 设$\{X_i,i\in I\}$为$X$的全部道路分支,那么$\forall n\ge0$和$\forall$交换群$G$,总有$H^n(X;G)\cong\prod_iH^n(X_i;G)$.
+	\item Mayer-Vietoris序列.设$X_1,X_2$是$X$的子空间满足$X=X_1^{\circ}\cup X_2^{\circ}$,那么有长正合列:
+	$$\xymatrix{\cdots\ar[r]&H^n(X;G)\ar[r]&H^n(X_1;G)\otimes H^n(X_2;G)\ar[r]&H^n(X_1\cap X_2;G)\ar[r]&H^{n+1}(X;G)\ar[r]&\cdots}$$
+\end{enumerate}
+
+交换群上的Ext函子.每个阿贝尔群$G$都具有长度至多为2的自由预解,因为如果任取自由阿贝尔群$F$使得$F\to G$是满射,那么这个映射的核作为自由阿贝尔群$F$的子群总是自由阿贝尔的.于是特别的,总有$\mathrm{Ext}^n_{\mathbb{Z}}(A,B)=0,\forall n\ge2,\forall A,B$交换群.
+
+另外按照$\mathbb{Z}$是PID,其上投射模等价于自由模,平坦模等价于无挠模,内射模等价于可除模,这里可除交换群$G$的定义为,$\forall x\in G$核$\forall n>0$,总存在$y\in G$使得$ny=x$.
+
+
+
+
+
+
+
+
+
+
+
+
+

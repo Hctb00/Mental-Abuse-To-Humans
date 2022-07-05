@@ -1,0 +1,1279 @@
+gtm 52  
+II.1:20,21
+II.2:ok
+II.3:7,20-22
+II.4:4,5,7,10,12
+II.5:1,2,4,6,7,8,9,10,11,12,13,14,15,16,17,18
+II.6:1,2,3,4,5,6,7,8,9,10,11,12
+
+Harari:1.25;1.31;1.39;
+
+范畴第一卷:2.10;2.11;2.14-16
+
+EGA4:5.3,5.5(matsumura已经证过了),8.2.13;8.11节到8.14.
+
+
+
+
+称一个连通代数群是半单的,如果它是正维数的并且没有非平凡的交换连通闭正规子群.一个李代数称为半单的,如果它是正维数的并且没有非平凡的交换理想.【】
+
+\item 设$K$是整体域,它的阿代尔环$A_K$是限制直积$\prod_{v\in\Sigma_K}(K_v,\mathscr{O}_v)$赋予限制直积拓扑.$K$典范的嵌入到$A_K$中,并且作为离散(从而闭)子群.
+\item 设$V$是域$k$上的代数簇,设$K/k$是域扩张.对每个赋值$v$,定义$V$在$K$上的阿代尔空间为限制直积空间$V_{A_K}=\prod_v(V(K_v),V(\mathscr{O}_v))$.
+
+The standard Tate $K$-algebra of a Tate $K$-algebra $A_K$ is a $A_k$ algebra with the following form, where $f_0,\cdots,f_m\in A_K$ generated unit ideal:
+$$B_K=A_K\{Z_1,\cdots,Z_m\}/(f_1-f_0Z_1,\cdots,f_m-f_0Z_m)$$
+Then the canonical homomorphism $A_K\to B_K$ induces a bijective from $\mathrm{Spm}B_K$ to the following subset of $\mathrm{Spm}A_K$, which we call a standard open subset of $\mathrm{Spm}A_K$:
+$$U=\{x\in\mathrm{Spm}A_K\mid|f_i(x)|\le |f_0(x)|,\forall 1\le i\le m\}$$
+
+如果$A,B$是两个$G$模,交换群$\mathrm{Hom}_G(A,B)$上定义的$G$模结构为$(g\phi)(a)=g(\phi(g^{-1}a))$.交换群$A\otimes_GB$上定义的$G$模结构为$g(a\otimes b)=ga\otimes gb$.
+
+A l'origine, les topologies de Grothendieck sont apparues comme sous-jacentes a sa theorie de la descente; l'usage des theories de cohomologie correspondantes est plus tardif. La meme demarche est suivie ici: en formalisant les notions classiques de localisation, de propriete locale et de recollement, on degage le concept general de topologie de Grothendieck, pour en justifier l'introduction en geometrie algebrique, on demontre un theoreme de descente fidelement plate, generalisation du classique theoreme 90 de Hilbert.
+
+Le lecteur troivera une exposition plus complete, ais concise, du formalisme dans Giraud. Les notes de M.Artin: XX restent egalement utiles. Les 866 pages des XXX sont precieuses lorsqu'on considere des topologies exotiques, telle celle qui donne naissance a la cohomologie cristalline;  pour utiliser la topologie etale, si proche de l'intuition classique, il n'est pas indispensable de les lire
+
+设$X$是拟紧概形,一个可逆层$\mathscr{L}$称为丰沛层(ample sheaf),如果对每个有限生成拟凝聚层$\mathscr{F}$,都存在$n_0>0$,使得当$n\ge n_0$时有$\mathscr{F}\otimes\mathscr{L}^{\times n}$被整体截面生成.特别的,对诺特概形$X$,它的可逆层$\mathscr{L}$称为丰沛的,如果对每个凝聚层$\mathscr{F}$都存在$n_0>0$,使得当$n\ge n_0$时$\mathscr{F}\otimes\mathscr{L}^{\otimes n}$被整体截面生成.丰沛是相对概形来讲的,是一个绝对概念,而极丰沛是相对于态射来讲的,是一个相对概念.
+\begin{enumerate}
+	
+	\item 我们之前证明了如果$\mathscr{L}$是环$A$上的射影概形$X$上的极丰沛可逆层,那么它是丰沛层.这个逆命题不对.
+	
+	\item 设$X$是环$A$上的有限型概形,设$X$是诺特的或者结构态射$f$是分离的,设$\mathscr{L}$是$X$上的可逆层,那么$\mathscr{L}$是丰沛层当且仅当存在某个正整数$m$使得$\mathscr{L}^{\otimes m}$是关于$\mathrm{Spec}A$的极丰沛可逆层.
+	\begin{proof}
+		
+		充分性是平凡的,并且不需要任何添加的条件,因为$\mathscr{L}^{\otimes m}$是极丰沛可逆层推出它是丰沛层,而上一条说明$\mathscr{L}$就是丰沛层.下面证明必要性.我们先断言对$x\in X$,存在一个正整数$n$依赖于$x$,以及一个截面$s\in\mathscr{L}^{\otimes n}$使得$X_s=\{y\in X\mid s_y\not\in\mathfrak{m}_y\mathscr{L}_y^{\otimes n}\}$是$x$的仿射开邻域.先设$U$是$x$的仿射开邻域使得$\mathscr{L}\mid_U$是自由的.取$\mathscr{O}_X$的拟凝聚理想层$\mathscr{J}$使得$\mathscr{J}$定义了$X-U$上的既约闭子概型结构.由于对任意$y\in X$有$\mathscr{L}_y^n$是自由$\mathscr{O}_{X,y}$模,说明$\mathscr{J}\otimes\mathscr{L}^n$典范同构于$\mathscr{J}\mathscr{L}^n\subseteq\mathscr{L}^n$对任意$n\ge1$成立.按照条件,有在$n$足够大时$\mathscr{J}\mathscr{L}^n$被整体截面生成,于是特别的存在$s\in(\mathscr{J}\mathscr{L}^n)(X)\subseteq\mathscr{L}^n(X)$使得$s_x\not\in\mathfrak{m}_x(\mathscr{J}\mathscr{L}^n)_x$.这说明有$x\in X_s\subseteq U$:首先从$x\in U$得到$\mathscr{O}_{X,x}=\mathscr{J}_x$,于是$s_x\not\in\mathfrak{m}_x(\mathscr{J}\mathscr{L}^n)_x=\mathfrak{m}_x\mathscr{L}^n_x$,于是$x\in X_s$.下面任取$y\in X_s$,也即$s_y\not\in\mathfrak{m}_y\mathscr{L}_y^n$.但是由于$s\in\Gamma(X,\mathfrak{J}\mathfrak{L}^n)$,得到$s_y\in\mathfrak{J}_y\mathscr{L}_y^n$.倘若$\mathscr{J}_y$是真理想,那么$s_y\in\mathfrak{m}_y\mathscr{L}_y^n$矛盾,于是$\mathscr{J}_y=\mathscr{O}_{X,y}$,也即$y\in U$.最后如果记$s\mid_U=f$,那么$X_s=U_f$是仿射的.完成断言的证明.
+		
+		\qquad
+		
+		由于$X$是拟紧的,我们可以用有限个形如$X_{s_i}$的并且满足上述条件的仿射开子集覆盖整个空间.其中$s_i\in\mathscr{L}^{n_i}(X)$.但是把$s_i$替换为次幂不改变主开集,于是可以取一个不依赖于$i$的正整数$n$使得所有$s_i\in\mathscr{L}^n(X)$.按照有限型概形的定义,有$\mathscr{O}_X(X_{s_i})=A[f_{ij}]$,这里$f_{ij}$只有有限个.我们之前给出过的一个引理解释了在$X$是诺特或者结构态射分离的情况下,可取正整数$r\ge1$使得$X_{s_i}$上的截面$s_i^r\otimes f_{ij}$可以延拓为$\mathscr{L}^{nr}(X)$中的截面$s_{ij}$.我们可以选取一个足够大的$r$使得这个结论对每个$f_{ij}$都成立.我们就断言$\mathscr{L}^{nr}$是关于$A$的极丰沛可逆层.
+		
+		\qquad
+		
+		因为$s_i$已经在$X_{s_i}$上生成了$\mathscr{L}^n$,于是整体截面族$\{s_i^r,\forall i\}$生成了$\mathscr{L}^{nr}$,特别的$\{s_i^r,s_{ij}\}_{i,j}$生成了$\mathscr{L}^{nr}$.我们解释过这导致存在态射$\pi:X\to\mathrm{Proj}A[S_i,S_{ij}]$.取终端的仿射开子集$U_i=D_+(S_i)$,那么$X_{s_i}=\pi^{-1}(U_i)$,并且$\mathscr{O}(U_t)\to\mathscr{O}_X(X_{s_t})$就是$A[S_i,S_{ij},1/S_t]\to A[f_{ij}]$把$S_{ij}/S_i$映为$f_{ij}$,于是这是满同态,于是$\pi$可以分解为$X\to U=\cup_iU_i\subseteq\mathrm{Proj}A[S_i,S_{ij}]$,前者是闭嵌入,后者是开嵌入.于是$\pi$是嵌入,于是$\mathscr{L}^{nr}$是关于$A$的极丰沛可逆层.
+	\end{proof}
+	
+	\item 设$X$是诺特概形,或者是拟紧和分离的概形.设$\mathscr{L}$是$X$上的可逆层.
+	\begin{enumerate}
+		\item 如果存在$s_1,\cdots,s_r\in\mathscr{L}(X)$使得每个$X_{s_i}$都是仿射的,并且$X=\cup_{1\le j\le r}X_{s_j}$,那么$\mathscr{L}$是丰沛层.
+		\begin{proof}
+			
+			设$\mathscr{F}$是$X$上的有限生成的拟凝聚层,设$f_1,\cdots,f_q\in\mathscr{F}(X_{s_1})$是生成元集.按照我们之前的引理,存在$n\ge1$使得$f_i\otimes s_1^n\mid_{X_{s_1}}$可延拓为$(\mathscr{F}\otimes\mathscr{L}^n)(X)$的截面对任意$i$成立.又因为$s_1^n$是$\mathscr{L}^n\mid_{X_{s_1}}$的基,说明$(\mathscr{F}\otimes\mathscr{L}^n)(X_{s_1})=\mathscr{F}(X_{s_1})\otimes_{\mathscr{O}_X(X_{s_1})}\mathscr{L}^n(X_{s_1})$被全体$f_i\otimes s_1^n\mid_{X_{s_1}}$生成.换句话讲,我们证明了存在正整数$n$使得$\mathscr{F}\otimes\mathscr{L}^n\mid_{X_{s_1}}$被整体截面生成.这里$s_i$只有有限个,所以选取足够大的$n$保证$\mathscr{F}\otimes\mathscr{L}^n$是被整体截面生成的.于是$\mathscr{L}$是丰沛层.
+		\end{proof}
+		\item 设$U\subseteq X$是拟紧的开子概型,如果$\mathscr{L}$是丰沛层,那么$\mathscr{L}\mid_U$也是丰沛层.
+		\begin{proof}
+			
+			问题归结为证明$\mathscr{L}\mid_U$的某个张量积次幂是丰沛层.我们解释过如果把$\mathscr{L}$适当替换为张量积次幂,可以要求存在$s_1,\cdots,s_r\in\mathscr{L}(X)$满足上一条中的条件.接下来每个$U\cap X_{s_j}$都是仿射概形$X_{s_j}$的有限个主开集$D(h_{ij})$的并,这里$h_{ij}\in\mathscr{O}_X(X_{s_j})$.我们之前也解释过适当把$\mathscr{L}$和$s_j$替换为次幂,可以要求$s_jh_{ij}$可以延拓为截面$t_{ij}\in\mathscr{L}(X)$.记$t_{ij}\mid_U=s_{ij}\in\mathscr{L}(U)$,那么每个$U_{s_{ij}}=D(h_{ij})$是仿射的,这满足上一条的条件(取$X=U$和$\{s_1,\cdots,s_r\}=\{s_{ij}\}$),于是$\mathscr{L}\mid_U$是丰沛层.
+		\end{proof}
+	\end{enumerate}
+	\item 设$X$是环$A$上的有限型概形,设$X$是诺特的或者$f$是分离的.那么$X$是环$A$上的拟射影概形当且仅当$X$存在丰沛层.
+	\begin{proof}
+		
+		一方面如果$X\to\mathrm{Spec}A$是拟射影态射,那么它要经嵌入$X\to\mathbb{P}_A^r$分解,这导致$X$上存在关于$A$的极丰沛可逆层,特别的,它是丰沛层.反过来如果$X$上存在丰沛层,那么它的某个张量积次幂是关于$A$的极丰沛可逆层,这导致$X\to\mathrm{Spec}A$是拟射影态射.
+	\end{proof}
+\end{enumerate}
+
+
+
+
+\begin{enumerate}
+	
+	\item 设$Y$是诺特概形,那么$X$是$Y$上射影概形等价于是$Y$上紧合概形,并且存在$X$上的关于$Y$的极丰沛层.这个定理实际上什么都没说:首先射影态射自然都是紧合态射,并且此时取射影态射定义中的闭嵌入$i:X\to\mathbb{P}_Y^r$,就有$i^*(\mathscr{O}(1))$是一个极丰沛层.反过来存在极丰沛层就导致结构态射$X\to Y$是拟射影态射,但是由于$X\to\mathbb{P}_Y^r\to Y$是紧合态射,而$\mathbb{P}_Y^r\to Y$是分离的,导致$i:X\to\mathbb{P}_Y^r$实际上是闭映射,而它又是嵌入,所以它是闭嵌入.
+	
+	\item 设$X$是环$A$上的射影概形.设$F$是$X$上的有限生成的拟凝聚层,那么存在从$\oplus_{1\le i\le N}\mathscr{O}(n_i)\to F$的满态射.换句话讲此时$X$上的有限生成拟凝聚层都可以写作有限个扭曲模层直和的商层.
+	\begin{proof}
+		
+		我们证明过存在足够大的正整数$n$使得存在正合列$\oplus_{i=1}^N\mathscr{O}_X\to F(n)\to0$.按照张量是右正合的,张量$\mathscr{O}_X(-n)$得到$\oplus_{i=1}^N\mathscr{O}_X(-n)\to F\to0$.
+	\end{proof}
+	\item 设$k$是域,设$A$是有限生成$k$代数,设$X$是$A$上的射影概形,设$F$是凝聚$\mathscr{O}_X$模层.那么$\Gamma(X,F)$是有限$A$模.特别的,在$A=k$时有$\Gamma(X,F)$是有限维$k$线性空间.(这个证明见gtm52,更一般的结论见射影概形的Serre有限性定理,可见上同调工具的威力)
+	\item 设$f:X\to Y$是域$k$上有限型概形之间的射影态射,设$F$是$X$上的凝聚层,那么$f_*F$是$Y$上的凝聚层.
+	\begin{proof}
+		
+		问题是局部的,不妨设$Y=\mathrm{Spec}A$是仿射的,其中$A$是有限生成$k$代数.按照$X$是诺特概形,我们证明过此时$f_*F$总是拟凝聚层.所以有$f_*F=\widetilde{\Gamma(Y,f_*F)}=\widetilde{\Gamma(X,F)}$.但是上一条我们证明了$\Gamma(X,F)$是有限$A$模,这导致$f_*F$是凝聚层.
+	\end{proof}
+\end{enumerate}
+
+
+
+
+
+\subsection{线性系统}
+
+设$X/k$是代数闭域上的光滑射影概形.此时它的Cartier除子和Weil除子一致,并且除子类群就是皮卡群.
+\begin{enumerate}
+	\item 对$X$上的可逆层$\mathscr{L}$,任取非零整体截面$s\in\Gamma(X,\mathscr{L})$.在那些$\mathscr{L}$平凡的开子集$U$上,取一个同构$\varphi:\mathscr{L}\mid_U\cong\mathscr{O}_U$,那么$\{(U,\varphi^{-1}(1))\}$就是$X$上的Cartier除子.这称为$s$的零点除子记作$(s)_0$.这总是有效的,并且每个有效除子在线性等价意义下具有该形式,并且诱导了相同零点除子的整体截面相差一个$k^*$中的元.综上全体和$D_0$线性等价的有效除子集合具有如下表示,这样的集合可以作为$k$上某个射影空间的闭点集,这样的集合称为$X$上的完全线性系统.
+	$$|D_0|=(\Gamma(X,\mathscr{L})-\{0\})/k^*$$
+	\item $X$上的一个线性系统$\mathfrak{o}$指的是某个完全线性系统$|D_0|$作为射影空间的子空间.于是$\mathfrak{o}$对应于$\Gamma(X,\mathscr{L})$的一个子空间$V=\{s\in\Gamma(X,\mathscr{L})\mid(s)_0\in\mathfrak{o}\}\cup\{0\}$.线性系统的维数定义为$\dim\mathfrak{o}=\dim V-1$.
+	\item 设$\mathfrak{o}$是$X$上的线性系统,称$p\in X$是该线性系统的基点(base point),如果对任意$D\in\mathfrak{o}$都有$p\in\mathrm{Supp}D$.记$\mathfrak{o}$对应于子空间$V\subseteq\Gamma(X,\mathscr{L})$.那么$p\in X$是$\mathfrak{o}$的基点当且仅当对任意$s\in V$有$s_p\in\mathfrak{m}_p\mathscr{L}_p$.特别的,$\mathfrak{o}$无基点(base point free)当且仅当$\mathscr{L}$被整体截面生成.
+	\item 我们之前解释过这样一件事:设$X/k$是射影概形,那么$f:X\to\mathbb{P}_k^n$的态射恰好对应于$X$上的被整体截面生成的可逆层诱导.并且如果记这些整体截面生成了子空间$V\subseteq\Gamma(X,\mathscr{L})$,那么$f$是闭嵌入具有一个刻画.用这里的语言就是说:
+	\begin{enumerate}[(1)]
+		\item 给定一个态射$X\to\mathbb{P}_k^n$等价于给定$X$上一个无基点的线性系统.选取不同的生成$\mathscr{L}$的整体截面族得到的的态射只差一个$\mathbb{P}_k^n$的自同构.
+		\item $f$是闭嵌入当且仅当:
+		\begin{itemize}
+			\item 线性系统$\mathfrak{o}$分离$X$中的闭点:对任意不同闭点$p,q\in X$,存在$D\in\mathfrak{o}$使得$\mathrm{Supp}D$恰好只包含$p,q$之中的一个.
+			\item 线性系统$\mathfrak{o}$分离$X$闭点的切向量:对任意闭点$p$,对任意切向量$t\in\mathrm{T}_p(X)=(\mathfrak{m}_p/\mathfrak{m}_p^2)^{\vee}$,都存在$D\in\mathfrak{o}$使得$p\in\mathrm{Supp}D$但$t\not\in\mathrm{T}_p(D)$(这里$D$视为它作为有效除子对应的局部主正则闭子概型,于是$\mathrm{T}_p(D)$典范的视为$\mathrm{T}_p(X)$的子空间).
+		\end{itemize}
+	\end{enumerate}
+	\item 设$X/k$是光滑射影概形,设$\mathfrak{o}$是$X$上的线性系统,设$i:Y\to X$是闭嵌入,设$\mathfrak{o}$对应的可逆层为$\mathscr{L}$,对应的子空间是$V\subseteq\Gamma(X,\mathscr{L})$.考虑$Y$上的可逆层$i^*\mathscr{L}$以及$V$在典范映射$\Gamma(X,\mathscr{L})\to\Gamma(Y,i^*\mathscr{L})$下的原像$W$,定义$i^*\mathscr{L}$和$W$对应的$Y$上的线性系统为$\mathfrak{o}\mid_Y$,称为$\mathfrak{o}$关于$Y$的迹(trace).
+	\begin{enumerate}[(1)]
+		\item $\mathfrak{o}\mid_Y$恰好由除子$D.Y$构成,其中$D\in\mathfrak{o}$跑遍支集不包含$Y$的除子.
+		\item 即便$\mathfrak{o}$是完全线性系统,也未必有$\mathfrak{o}\mid_Y$是完全线性系统.
+	\end{enumerate}
+	\item 例子.
+	\begin{enumerate}[(1)]
+		\item 设$X=\mathbb{P}_k^n$.设$d\ge1$,那么全体次数为$d$的有效除子构成一个完全线性系统,维数是$\left(\begin{array}{c}n+d\\n\end{array}\right)-1$.它对应的可逆层就是$\mathscr{O}(d)$.
+		\item 设$i:X\to\mathbb{P}_k^n$是光滑射影概形,那么$i$是射影正规的(此即齐次坐标环是正规整环)当且仅当对任意$d\ge1$有$\mathbb{P}_k^n$上$\mathscr{O}(d)$对应的完全线性系统在$X$上的迹也是完全的.
+	\end{enumerate}
+\end{enumerate}
+
+For a local noetherian ring A, do the properties of A "transfer" to its complement A? For example, if A is reduced (resp. integral, resp. integral and completely closed), is the same true for A? Most of these questions are related to local properties of the formal fibers of A (recall that these are the fibers of the canonical morphism Spec(A) -> Spec(A)). An exception is formed by properties related to the notion of dimension, for instance the property of being equidimensional; it is then the condition of chains and its various refinements that play the essential role.
+
+For a locally noetherian preschema X (in particular for an affine schema Spec(A)), is the set of A:eX where local panel 6y^ has a certain property (e.g. being completely closed, or Cohen-Macaulay, or regular) open?
+
+For an integral ring A, is the integral closure of A in a finite extension of its fraction field an A-module of finite type? Of course, this question can be translated for Noetherian preschemas (II, 6.3).
+
+Problems of type B) or G) can also be posed for local rings, but it is not enough in general that they are solved affirmatively for any local ring Ap of a ring A for them to be solved for A (cf. (6.13.6)).
+
+Let us further emphasize that in the study of these problems, we have systematically concerned ourselves with whether the affirmative answer to any of them is stable for the two most important operations of Commutative Algebra: localization and passage to a finite type algebra.
+
+The results obtained in the study of these problems lead to the definition of of a class of noetherian rings whose behavior in this respect is the best possible 
+
+Translated with www.DeepL.com/Translator (free version)
+
+\item 零维情况.设$X$是域$k$上的有限型概型,如下条件互相等价:
+\begin{itemize}[(1)]
+	\item $\dim X=0$.
+	\item $X$是仿射的,整体截面环$\mathscr{O}_X(X)$是有限维$k$代数,并且$\mathscr{O}_X(X)=\prod_x\mathscr{O}_{X,x}$.
+	\item $X$上的拓扑是离散的.
+	\item $X$只有有限个点.
+\end{itemize}
+\begin{proof}
+	
+	按照$X$是域$k$上有限型概型,说明它是拟紧并且局部诺特的,于是1推3推4是成立的.下证明4推1,仅需验证此时每个点都是闭点.假设全体非闭点集合$U$非空,按照$X$是有限集合,得到$U$是开集.但是我们证明条件下的闭点集是非常稠密的,导致$U$必须是空集.
+	
+	如果2成立,此时$X$是阿廷环的素谱,于是此时空间是有限和离散的.反过来如果$X$是有限和离散的,那么$X$是仿射的,于是它是阿廷环的仿射概型,这可说明2成立.
+\end{proof}
+\item 如果$X$是域$k$上的零维整有限型概型,那么$X\cong\mathrm{Spec}(L)$,其中$k\subseteq L$是有限扩张.事实上这个条件下上一条说明$X$是仿射的,设为$X=\mathrm{Spec}(A)$,它的结构由一个整扩张$k\subseteq A$提供,但是域上的整扩张只能有$A$是域.另外上一条说明$A$是有限$k$线性空间,于是扩张是有限的.
+\item 设$X$是不可约的有限型$k$概型,设一般点为$\eta$.对每个闭点$x\in X$,都有$\dim\mathscr{O}_{X,x}=\dim X$.
+\begin{proof}
+	
+	按照上一条有$\dim U=\dim X$,并且不可约空间的非空开子集是不可约的,说明我们可以把问题归结为证明$X$是仿射的情况.记$X=\mathrm{Spec}(A)$,此时$A$是有限生成$k$整环.每个点$x\in X$对应于一个素理想$p_x$,并且$\mathscr{O}_{X,x}$的维数就是以$p_x$为最大端的素理想长度的上确界.但是按照有限生成$k$整环是catenary的,每个极大理想的余维数都是环的维数,这说明$\dim\mathscr{O}_{X,x}=\dim X$.
+\end{proof}
+\item 设$X$是域$k$上的局部有限型概型,设$k\subset K$是域扩张,设$x\in X$是闭点,设$\overline{x}\in X_K$是$x$的一个提升,那么$\dim\mathscr{O}_{X,x}=\dim\mathscr{O}_{X_K,\overline{x}}$.
+\begin{proof}
+	
+	不妨把$X$替换为$x$的一个仿射开邻域,并且把不包含$x$的不可约分支扣去,于是不妨设$\dim X=\dim\mathscr{O}_{X,x}$.那么有$\dim\mathscr{O}_{X,x}=\dim X=\dim X_K\ge\dim\mathscr{O}_{X_K,\overline{x}}$.
+	
+	按照$\overline{x}$是$X_K$的闭点,可取$\overline{x}$的开邻域$U\subset X_K$使得$\dim U=\dim\mathscr{O}_{X_K,\overline{x}}$.按照投影态射$p:X_K\to X$是开的,说明$p(U)$是$x$的一个开邻域,于是$\dim\mathscr{O}_{X,x}\le\dim p(U)\le\dim U=\dim\mathscr{O}_{X_K,\overline{x}}$.
+\end{proof}
+
+\item 设$X$是域$k$上的等维数$n$的概形,设$K/k$是代数扩张,那么$K$概形$X_K$也是等维数$n$的.
+\begin{proof}
+	
+	我们先解释下问题归结为仿射情况.任取$X_K$的一般点$\overline{x}$,我们知道它在投影态射下的像$x\in X$也是$X$的一般点.取$x$的仿射开邻域$U$,那么$U_K$也是$\overline{x}$的仿射开邻域.记$X$的全部不可约分支为$\{X_i\mid i\in I\}$,设$J\subseteq I$使得$i\in J$时$X_i\cap U$非空.那么$i\in J$时$X_i\cap U$就是不可约空间$X_i$的非空开集,于是有$\dim X_i=\dim X_i\cap U$(一个不可约局部有限型概形的非空开子集维数不变因为,比方说,取既约闭子概型不影响维数,但是此时概形是整的,它的非空开集维数全相同【所以这里要局部有限型条件?】).于是从$X$等维数$n$得到$U$是等维数$n$的.倘若我们能证明$U_K$也是等维数$n$的,就说明$\overline{x}$所在的$X_K$的不可约分支的维数也是$n$,这就得到$X_K$是等维数$n$的.
+	
+	\qquad
+	
+	下面证明仿射情况,我们要证明的是如果$k$代数$A$的每个极小素理想的高度都是$n$,如果$K/k$是代数扩张,那么$B=A\otimes_kK$的极小素理想的高度也都是$n$.因为$K/k$是代数扩张,说明$A\to B$是整扩张,所以它满足素理想的上升条件.又因为$K$在$k$上平坦,得到$A\to B$是平坦扩张,所以它还满足素理想的下降条件.任取$B$的极小素理想$\mathfrak{q}_0$,设它的高度是$m$,那么存在不可延长的素理想链$\mathfrak{q}_0\subsetneqq\cdots\subsetneqq\mathfrak{q}_m$,设$\mathfrak{p}_i=\mathfrak{q}_i\cap A$,按照这个环扩张同时满足上升和下降条件,说明$\mathfrak{p}_0\subsetneqq\cdots\subsetneqq\mathfrak{p}_m$是$A$中的不可延长的素理想链,特别的$\mathfrak{p}_0$是$A$的极小素理想,并且有$m\le n$.接下来按照$\mathfrak{p}_0$的高度是$n$,所以存在不可延长的素理想链$\mathfrak{p}_0\subsetneqq\mathfrak{p}_1'\subsetneqq\cdots\subsetneqq\mathfrak{p}_n'$.按照上升条件有$B$中的素理想链$\mathfrak{q}_0\subsetneqq\mathfrak{q}_1'\subsetneqq\cdots\subsetneqq\mathfrak{q}_n'$,这就说明$n\le m$,于是$n=m$得证.
+\end{proof}
+
+推论.设$Y/k$是局部有限型等维数概形,那么子概型$Z$的底空间和$Y$不同当且仅当$\dim Z<\dim Y$.
+\begin{proof}
+	
+	设$z$是$Z$的一般点,把$Y$替换为$Y$的包含$z$的赋予既约闭子概型结构的不可约分支,我们可以不妨设$Y$是以$y$为一般点的整概形.再把$Y$替换为包含$z$的仿射开子集,又可以不妨设$Y=\mathrm{Spec}A$是仿射的,并且$Z$是$Y$的闭子概型,可记$Z=\mathrm{Spec}A/\mathfrak{a}$.按照诺特正规化引理,存在$x_1,\cdots,x_n\in A$,它们在$k$上代数无关,并且$A$在$B=k[x_1,\cdots,x_n]$上整.还可以设$\mathfrak{a}\cap B$被$x_1,\cdots,x_p$生成(加细版本的诺特正规化引理,这个子集可能是空集).设$B\to A$对应的有限支配态射为$g:Y\to\mathrm{Spec}B=\mathbb{A}_k^n$.按照$C=B/\mathfrak{a}\cap B\cong k[x_{p+1},\cdots,x_n]$,有$g$诱导了有限支配态射$Z\to\mathbb{A}_k^{n-p}$,于是$\mathrm{tr.deg}_k\kappa(y)=n$和$\mathrm{tr.deg}_k\kappa(z)=n-p$.如果$p=0$,按照$y$是$Y$的唯一的在$g$映射下是$\mathbb{A}_k^n$的一般点,于是有$z=y$,于是$$
+	
+\end{proof}
+
+\item 如果$f:X\to Y$是态射,并且作为连续映射是开映射,那么$\dim f(X)\le\dim X$.另外在这个证明中我们得到这样一个结论:如果态射$f:X\to Y$拓扑层面是开映射,任取$x\in X$,任取$y=f(x)$的一般化$y'$,那么存在$x$的一般化$x'\in X$使得$f(x')=y'$.
+\begin{proof}
+	
+	不妨用$f(X)$替代$Y$,可设$f$是满射.需要验证的是,如果有两两不同的$\{y_i,0\le i\le n\}\subseteq Y$使得每个$y_{i-1}\in\overline{\{y_i\}}$,那么有两两不同的$\{x_i,0\le i\le n\}\subseteq X$使得每个$x_{i-1}\in\overline{\{x_i\}}$,其中每个$f(x_i)=y_i$.对$n$归纳,归结为证明这样一件事:如果$f:X\to Y$是概形之间的态射,并且作为连续映射是开映射,如果$x\in X$,记$y=f(x)$,对$y$的任意一般化$y'$,都存在$x$的一般化$x'$满足$y'=f(x')$.
+	
+	\qquad
+	
+	因为开集包含它每个点的一般化,所以问题在终端和源端都是局部的,不妨射$X=\mathrm{Spec}B$和$Y=\mathrm{Spec}A$,那么$x$的所有一般化构成的集合$Z$就是$\cap_tD(t)$,其中$t$跑遍$B-\mathfrak{p}_x$中的元,这个集合$Z$典范同构于$\mathrm{Spec}\mathscr{O}_{X,x}$.按照$f$是开映射,每个$f(D(t))$都是$y$的开邻域,于是包含了$y'$,这说明$f_t=d\mid_{D(t)}$总满足$f_t^{-1}(y')$是非空的.另一方面,假设$y'\not\in f(Z)$.记复合映射$\mathrm{Spec}\mathscr{O}_{X,x}\to X\to Y$,那么$g^{-1}(y')=\mathrm{Spec}(\mathscr{O}_{X,x}\otimes_A\kappa(y'))$是空集.但是这里$\mathscr{O}_{X,x}\otimes_A\kappa(y')=\lim\limits_{\substack{\rightarrow\\t\in B-\mathfrak{p}_x}}(B_t\otimes_A\kappa(y'))=0$,这导致某个$B_t\otimes_A\kappa(y')=0$,导致$f_t^{-1}(y')=\mathrm{Spec}(B_t\otimes_A\kappa(y'))=0$,矛盾.
+\end{proof}
+\item 零维概型.一个环是零维的当且仅当每个素理想都是极大的,一个诺特环是零维的当且仅当它是阿廷环.设$X$是局部诺特概型,这是指它的每个仿射开子集对应的环都是诺特环.那么$X$上的如下条件互相等价:
+\begin{enumerate}
+	\item $\dim X=0$.
+	\item $X$上的拓扑是离散拓扑.
+	\item $X$上的所有茎都是阿廷局部环.
+	\item 典范态射$\coprod_{x\in X}\mathrm{Spec}(\mathscr{O}_{X,x})\to X$是同构.
+\end{enumerate}
+\item 设$\varphi:\mathrm{Spec}A\to\mathrm{Spec}B$由一个整扩张诱导.
+\begin{enumerate}
+	\item 按照整扩张满足提升条件,$\varphi$的每个纤维都是非空的.
+	\item 按照整扩张满足不可比条件(如果$q_1,q_2\in\mathrm{Spec}B$都是$p\in\mathrm{Spec}A$的提升素理想,满足$q_1\subseteq q_2$,那么有$q_1=q_2$),它的每个纤维都是零维的.
+	\item 按照整扩张满足上升条件,有$\dim A=\dim B$.
+\end{enumerate}
+\item 按照交换代数,如果$R$是诺特环,那么有$\dim R[X_1,\cdots,X_n]=\dim R+n$.特别的这说明如果$X$是局部诺特概形,那么有$\dim\mathbb{A}_X^n=\dim\mathbb{P}_X^n=\dim X+n$.
+
+
+如果$A$本身是$m$-adic完备的,对任意真理想$I$,有$\widehat{(A/I)}\cong\widehat{A}/I\widehat{A}=A/I$(这里完备化取$m$-adic的),于是对于完备局部诺特环$A$,对任意真理想$I$,有$A/I$也是(关于唯一极大理想)完备的.
+
+可逆$\mathscr{O}_X$模层的同构类以张量积为乘法,构成一个群,称为$X$上的Picard群,记作$\mathrm{Pic}(X)$.它的幺元是$\mathscr{O}_X$本身,可逆模层$\mathscr{F}$的逆元是$\mathscr{F}^{\vee}=\mathrm{HOM}_{\mathscr{O}_X}(\mathscr{F},\mathscr{O}_X)$.
+\item 戴德金整环上Picard群同构于类群.给定戴德金整环$A$,任取$A$的分式理想$I$,我们断言$I$对应于一个可逆层.也即我们需要找一组元$\{a_i\}$生成整个$A$,使得对每个$i$有$A_{a_i}$模同构$I_{a_i}\cong A_{a_i}$.为此,任取素理想$p_i$,我们知道$A_{p_i}$是一个DVR,选取$f_i\in I$使得$v_{p_i}(f_i)$最小.选取$a_i\not\in p_i$,但是包含于$f_i$所在的其它极大理想,这使得$f_iA_{a_i}\cong I_{a_i}$.这种对应得到了分式理想群到Picard群之间的同态,验证它的核恰好是主分式理想,并且这是满射,于是Picard群同构于类群.
+
+
+设$X$是概形,设$\mathscr{F}$是一个$\mathscr{O}_X$模层.
+\begin{itemize}
+	\item 
+	\item 称$\mathscr{F}$在点$x\in X$平坦,如果$\mathscr{F}_x$作为$\mathscr{O}_{X,x}$模是平坦的.称$\mathscr{F}$是平坦模层,如果它在$X$上处处平坦.
+	\item 更一般的,如果我们有概形之间的态射$f:X\to Y$,如果$\mathscr{F}$是$\mathscr{O}_X$模层,我们称$\mathscr{F}$在点$x\in X$关于$Y$平坦,或者称$\mathscr{F}$在点$x\in X$是$f$平坦的,如果$\mathscr{F}_x$在$\mathscr{O}_{Y,f(x)}\to\mathscr{O}_{X,x}$下作为$\mathscr{O}_{Y,f(x)}$模是平坦的.称$\mathscr{F}$是$f$平坦模层,如果它在$X$的每个点都是$f$平坦的.
+	\item 特别的,如果$f:X\to Y$是概形之间的态射,称$f$是平坦态射,或者$X$在$Y$上平坦,如果$\mathscr{O}_X$在$Y$上平坦,换句话讲$\mathscr{O}_{Y,f(x)}\to\mathscr{O}_{X,x}$是平坦同态.
+\end{itemize}
+\begin{enumerate}
+	
+	\item 仿射情况的平坦模层.设$\varphi:A\to B$是环同态,对应的态射记作$f:X=\mathrm{Spec}B\to Y=\mathrm{Spec}A$.那么一个$B$模$M$是平坦$A$模当且仅当对任意$\mathfrak{p}\in\mathrm{Spec}A$,记$\varphi^{-1}(\mathfrak{p})=\mathfrak{q}$,总有$M_{\mathfrak{p}}$是平坦$A_{\mathfrak{q}}$模.而按照定义这等价于讲$\widetilde{M}$是$f$平坦的.
+\end{enumerate}
+
+
+\begin{enumerate}
+	\item 关于可分代数的补充.设$B$是$A$代数,我们有典范的环同态$B\otimes_AB\to B$为$x\otimes y\mapsto xy$,这使得$B$是一个$B\otimes_AB$模,如果这个模是投射的,就称$B$是可分$A$代数.
+	\begin{enumerate}
+		\item 设$B$是有限投射$A$代数,那么$B$是可分$A$代数当且仅当$A$模同态$\varphi:B\to\mathrm{Hom}_A(B,A)$,$\varphi(x)(y)=\mathrm{Tr}_{B/A}(xy)$是一个同构.
+		\begin{proof}
+			
+			我们先设投射$A$代数$B$满足$\varphi$是一个同构.引理,我们断言此时对任意$A$代数同态$f:B\to A$,都存在一个$A$代数$C$和一个$A$代数同构$B\cong A\times C$,使得$f$恰好就是这个同构和投影映射的复合$B\cong A\times C\to A$.
+			
+			\qquad
+			
+			引理的证明.按照$\varphi$是同构,所以存在$e\in B$,使得对任意$x\in B$都有$f(x)=\mathrm{Tr}(ex)$.我们先证明$e$是幂等元,也即$e^2=e$.带入$x=1$得到$\mathrm{Tr}(e)=1$,按照$\mathrm{Tr}$是$A$线性的,而$f$是$A$代数同态,于是对任意$x,y\in B$就有$\mathrm{Tr}(exy)=f(xy)=f(x)f(y)=f(x)\mathrm{Tr}(ey)=\mathrm{Tr}(f(x)ey)$.但是按照$\varphi$是双射,就有$ex=f(x)e,\forall x\in B$成立.这个等式说明$e$把$\ker f$零化.【按照短正合列验证$\mathrm{Tr}(e)=f(e)$】,于是有$f(e)=1$,在$ex=f(x)e$中带入$x=e$就得到$e^2=e$.接下来构造$A\oplus\ker f\to B$为$(a,x)\mapsto ae+x$,这明显是一个$A$模同构,又因为$e$是幂等元,这也是一个$A$代数同构.
+			
+			\qquad
+			
+			
+		\end{proof}
+		
+		
+	\end{enumerate}
+	
+	
+	
+	
+	\item 有限平展态射的等价描述.$f:X\to Y$是态射,如下命题互相等价:
+	\begin{enumerate}
+		\item $f$是有限平展态射,即它是有限,平坦,非分歧态射.
+		\item 存在$Y$的仿射开覆盖$\{V_i=\mathrm{Spec}A_i\}$,使得每个$f^{-1}(V_i)=\mathrm{Spec}B_i$是仿射的,并且$B_i$是一个自由可分$A_i$代数.
+		\item 对$Y$的每个仿射开子集$V=\mathrm{Spec}A$,都有$f^{-1}(V)=\mathrm{Spec}B$是仿射的,并且$B$是一个投射可分$A$代数.
+	\end{enumerate}
+\end{enumerate}
+
+
+
+【liuqing2.3.22
+我们给出一个在概形范畴和环空间范畴中商对象不一致的例子.设$k$是特征为零的域,取$G=\mathbb{Z}$,设$\mathbb{Z}$在$k[T]$上的自同构是$[n]:T\mapsto T+n$.于是这诱导了$\mathbb{Z}$在$\mathbb{A}_k^1$上的群作用.我们下面断言在概形范畴中$\mathbb{A}_k^1$关于$\mathbb{Z}$的商概形是$\mathrm{Spec}k$.任取概形$Z$,任取关于$\mathbb{Z}$固定的态射$f:\mathbb{A}_k^1\to Z$.我们要证明存在唯一的态射$\widetilde{f}$使得如下图表交换:
+$$\xymatrix{\mathrm{Spec}k\ar[rr]^{\widetilde{f}}&&Z\\\mathbb{A}_k^1\ar[u]^p\ar@/_1pc/[urr]_f&&}$$
+
+首先连续映射部分是容易的,如果记$\mathbb{A}_k^1$的yi'ban'd    
+
+.那么按照$\mathbb{A}_k^1$的被$\mathbb{Z}$固定的非空开子集只有全集本身,可以验证】
+
+
+一些应用.
+\begin{enumerate}
+	
+	
+	\item 有限域扩张原理.设$k$是域,设$\textbf{P}$是一个关于$k$代数的性质,满足:
+	\begin{enumerate}
+		\item 如果$R\to R'$是$k$代数同态,如果$R$满足$\textbf{P}$,那么$R'$也满足$\textbf{P}$.
+		\item 如果$\{R_i\}$是$k$代数的一个正向系统,它的正向极限记作$R$,如果$R$满足$\textbf{P}$,那么存在某个指标$i$使得$R_i$满足$\textbf{P}$.
+		\item 至少存在一个$k$代数$R$满足$\textbf{P}$.
+	\end{enumerate}
+	
+	那么存在有限扩张$K/k$使得$k$代数$K$满足$\textbf{P}$,特别的任意包含$k$的代数闭域都满足$\textbf{P}$.
+	\begin{proof}
+		
+		设$R$是(c)中定义的满足$\textbf{P}$的$k$代数.把它写成有限型$k$子代数的正向极限,那么(b)保证了存在某个有限型$k$代数$A$满足$\textbf{P}$.又按照Hilbert零点定理,$A$关于极大理想的商是$k$的有限扩张,于是从(a)得到存在某个有限扩张$K/k$满足$\textbf{P}$.
+	\end{proof}
+	\item 推论.设$k$是域,设$X,Y$是有限型$k$概形,设$R$是$k$代数.
+	\begin{enumerate}
+		\item 设有$R$态射$X_R\to Y_R$,那么存在有限扩张$K/k$使得存在$K$态射$X_K\to Y_K$.并且只要$\Omega$是包含$k$的某个代数闭域,那么有存在$\Omega$态射$X_{\Omega}\to Y_{\Omega}$.
+		\item 设$\textbf{Q}$是概形之间态射的一个性质,满足在基变换下不变,在复合下不变,并且和环的正向极限是兼容的.设存在$R$态射$X_R\to Y_R$满足$\textbf{Q}$,那么存在有限扩张$K/k$和一个$K$态射$X_K\to Y_K$也具有性质$\textbf{Q}$.
+		\item 设有$R$同构$X_R\cong Y_R$,那么存在有限域扩张$K/k$使得存在同构$X_K\cong Y_K$.并且对任意包含$k$的代数闭域$\Omega$,都有$\Omega$同构$X_{\Omega}\to Y_{\Omega}$.
+	\end{enumerate}
+	\begin{proof}
+		
+		(a)把有限域扩张原理用在性质$\textbf{P}$为存在$R$态射$X_R\to Y_R$,再验证三个条件,这里第一个条件就是做基变换,第三个条件是条件里给出的,第二个条件是因为一般的我们解释过有限表示态射是和环的正向极限兼容的,而这里域上的有限型态射等价于有限表示态射.(b)把有限域扩张原理用在性质$\textbf{P}$为存在$R$态射$X_R\to Y_R$满足性质$\textbf{Q}$.(c)就是把$\textbf{Q}$取为同构.
+	\end{proof}
+\end{enumerate}
+
+
+
+EGA4-3-P38【on notera d'autre part que 6,7,11 sont en fait des conditions sur les fibres f^{-1}(y) des morphismes envisages, compte tenu de la transitivite des fibres par changement de base XX.
+
+la condition 6 signifie en effet que toutes les fibres doivent etre non vides, la condition 7 qu'elles doivent etre radicielles I.3.5.8 et la condition 11 qu'elles doivent etre finies( XXX, compte tenu de ce que f et les f_i sont des morphismes de type fini par 1.5.4(v)). le theoreme dans ces trois cas sera donc encore consequence d'un resultat general sur ce type de proprietes ne concernant que les fibres, qui sera etabli dans 9.3.3, nous repoussons donc jusqu'a ce moment-la la demonstration du theoreme dans le cas 11 ( bien entendu, le lecteur pourra verifier que, sauf aux 8.11 et 8.12, nous ne ferons pas usage du theoreme dans ce cas jusqu'a 9.3.3 et que 8.11 et 8.12 ne seront pas utilises avant 9.3.3).】
+
+considerons en particulier trois S-preschemas de presentation finie X,Y,Z et deux S-morphismes f:X->Z, g:Y->Z, de sorte que le produit X*_ZY relatif a ces morphismes est encore un S-preschema de presentation finie. Alors il resulte de ce qui precede et de I.3.3.11 que l'on peut ecrire X*_ZY=(X_i*_{Z_i}Y_i)*_{S_i}S pour un i convenable, X_i,Y_i,Z_i etant des S_i-preschemas de presentation finie, on peut donc dire que la determination des  S-preschema de presentation finie par la donnee des S_i-preschemas de presentation finie est <compatible avec les produits fibres>.
+
+on a vu d'autre part 8.6.3 que si g est une immersion, on peut supposer qu'il en est de meme de g_i:Y_i->Z_i, identifiant Y ( resp. Y_i) avec un sous-preschema de Z (resp. Z_i), on voit donc que l'on peut ecrire, pour un i convenable, f^{-1}(Y)=f_i^{-1}(Y_i)*_{S_i}S (I.4.4.1), il y a donc aussi <compatibilite avec la formation des images reciproques de sous-preschemas>.
+
+plus particulierement, si f_1,f_2 sont deux S-morphismes de X dans Y, on appelle noyau de ce couple de morphismes l'image reciproque N du sous-preschema diagonal de Y*_SY par le S-morphisme (f_1,f_2)_S, pn deduit de ce qui precede que l'on aura pour i convenable N=N_i*_{S_i}S, ou N_i est le noyau du couple de S_i-morphismes (f_{1i},f_{2i}) de X_i dans Y_i. ces remarques s'etendent a des produits finis quelconques et aux <noyaux> de systemes finis quelconques de S-morphismes d'un S-preschema de presentation finie dans un autre, on en conclut que d'une facon generale la formation des S-preschemas de presentation finie par la donnee des S_i-preschemas de presentation finie est <compatible avec les limites projectives finies>, une telle limite etant par definition le noyau d'un systeme fini de morphismes d'un meme S-preschema dans un produit de S-preschemas.
+
+
+设$I$是一个有向集(directed set),设$\{(A_i)_{i\in I},(\varphi_{ji}:A_i\to A_j)_{i\le j}\}$是环范畴上的正向系统(也即归纳系统),记正向极限为$A=\varinjlim A_i$.取指标$i_0$,取$A_{i_0}$概形$X_{i_0}$,对$i_0\le i$取$A_i$概形$X_i=X_{i_0}\times_{A_{i_0}}A_i$,再取$A$概形$X=X_{i_0}\times_{A_{i_0}}A$.如果记$I'=\{i\in I\mid i\ge i_0\}$,那么$I'$也是一个有向集,并且它有最小元$i_0$,并且$(X_i)_{i\in I'}$构成一个概形范畴上的逆向系统(投射系统),我们会证明(8.2.5)$X$就是它的逆向极限.
+
+我们要探究的是如果P是关于概形的一个性质,那么对$X_i$或者$A_i$添加什么条件,可以保证这个逆向极限和P是兼容的,这是指:概形$X$具有性质P,当且仅当存在一个指标$i\ge i_0$,使得对任意$j\ge i$都有$X_j$具有性质P.我们还会对$\mathscr{O}_X$模层,$A$态射,$A$概形讨论类似的性质.我们还会在(8.9.1)证明给出一个有限表示$A$概形,本质上等价于对足够大的$i$给出了有限表示$A_i$概形,进而对这样足够大的$i$有$X\cong X_i\times_{A_i}A$.我们还会对$\mathscr{O}_X$有限表示模层,它们之间的态射,还有有限表示$A$概形之间的态射做相同的事情.和逆向极限兼容这个条件具有很多应用:
+\begin{enumerate}
+	\item 设$Y$是概形,设$y\in Y$,设$\{U_i=\mathrm{Spec}A_i,i\in I\}$是$y$的全体仿射开邻域,如果有$U_j\subseteq U_i$,这个典范包含态射对应的环同态就记作$\varphi_{ji}:A_i\to A_j$,并且约定$i\le j$,那么$I$在这个偏序下构成有向集,并且$\{(A_i)_{i\in I},(\varphi_{ji})\}$构成环的正向系统,而这个正向系统的极限就是局部环$A=\mathscr{O}_{Y,y}$.如果对指标$i$,记$y$在$A_i$中对应的素理想为$\mathfrak{p}_i$,那么对任意固定的指标$j$,都有$\{(A_j)_f\mid f\in A_j-\mathfrak{p}_j\}$是正向系统$\{A_i\mid i\in I\}$的共尾子集(cofinal),因为$U_j$的全体主开集$D(f)$构成了$y\in U_j$的开邻域基,于是也是$y\in Y$的开邻域基.
+	
+	
+\end{enumerate}
+
+
+
+\begin{enumerate}
+	\item 设$N$是秩为$n$的自由阿贝尔群,记对偶群为$M=\mathrm{Hom}_{\mathbb{Z}}(N,\mathbb{Z})$,记$V=N\otimes_{\mathbb{Z}}\mathbb{R}$和$V^*=\mathrm{Hom}_{\mathbb{R}}(V,\mathbb{R})\cong\mathrm{Hom}_{\mathbb{Z}}(N,\mathbb{R})$.称$V$中的一个有理凸多面锥(rational convex polyhedral cone)$\sigma$是指如下形式的子集:
+	$$\sigma=\{r_1v_1+\cdots+r_kv_k\mid r_i\ge0,\forall i\}$$
+	
+	其中$v_1,\cdots,v_k\in N$.定义它的对偶锥是:
+	$$\sigma^{\vee}=\{u\in V^*\mid u(v)\ge0,\forall v\in\sigma\}$$
+	
+	$M\cap\sigma^{\vee}$是一个加法幺半群,它在域$k$上生成的代数记作$k[M\cap\sigma^{\vee}]$,换句话讲这个$k$代数是$\oplus_{u\in M\cap\sigma^{\vee}}k\chi^u$,其中乘法定义为$\chi^u\chi^{u'}=\chi^{u+u'}$.我们断言$U_{\sigma}=\mathrm{Spec}k[M\cap\sigma^{\vee}]$是域$k$上的有限型概形.
+	\begin{enumerate}[(1)]
+		\item 我们先证明$\sigma^{\vee}$同样是一个有理凸多面锥(rational convex polyhedral cone).
+		\begin{proof}
+			
+			对$0\le i\le k$,记$\sigma^{\vee}_i=\{u\in V^*\mid u(v_j)\ge0,\forall 1\le j\le i\}$.那么$\sigma^{\vee}_0=V^*$本身是$V^*$的有理凸多面锥.而$\sigma^{\vee}_k=\sigma^{\vee}$,所以对$k$做归纳,归结为证明如果$\sigma$是$V$的一个有理凸多面锥,如果$w\in M\subseteq V^*$,那么$\sigma_w=\{x\in\sigma\mid w(x)\ge0\}$构成一个有理凸多面锥.
+			
+			【】
+		\end{proof}
+		\item 证明命题,也即$k[M\cap\sigma^{\vee}]$是有限型$k$代数,也即证明幺半群$M\cap\sigma^{\vee}$是有限生成的.
+		\begin{proof}
+			
+			我们已经证明了$\sigma^{\vee}$是有理凸多面锥,所以存在一个有限集合$W=\{w_1,\cdots,w_t\}\subseteq M$,使得$\sigma^{\vee}=\{r_1w_1+\cdots+r_tw_t\mid r_i\ge0,\forall i\}$.再设$\Delta=\{\delta_1w_1+\cdots+\delta_tw_t\mid0\le\delta_i<1,\forall i\}$,这是$V^*$的有界子集,而$M$是离散空间,于是$M\cap\Delta$是有限集合.我们就断言有限集合$W\cup(M\cap\Delta)$是幺半群$M\cap\Sigma^{\vee}$的生成元集:
+			
+			\qquad
+			
+			任取$w\in M\cap\sigma^{\vee}$,可记$w=\lambda_1w_1+\cdots+\lambda_tw_t$,记$\lambda_i=n_i+\delta_i$,其中$n_i$是自然数,而$0\le\delta_i<1$.那么有$w=\sum_in_iw_i+\sum_i\delta_iw_i$,于是$\sum_i\delta_iw_i=w-\sum_in_iw_i\in M\cap\Delta$,这说明$w$的确被$W\cap(M\cap\Delta)$生成.
+		\end{proof}
+	\end{enumerate}
+	\item $\sigma$的一个面(face)$\tau$定义为具有形式$\tau=\sigma\cap u^{\perp}$的子集,其中$u\in\sigma^{\vee}$.我们用记号$\tau\prec\sigma$表示$\tau$是$\sigma$的面.我们可以选取$u\in M\cap\sigma^{\vee}$使得:
+	$$M\cap\tau^{\vee}=M\cap\sigma^{\vee}+\mathbb{Z}(-u)$$
+	
+	证明对任意$\tau\prec\sigma$,我们有典范的开嵌入(open immersion)$U_{\tau}\to U_{\sigma}$;也有典范的闭嵌入$U_{\sigma}(\tau)=\mathrm{Spec}k[M\cap\sigma^{\vee}\cap\tau^{\perp}]\to U_{\sigma}$.
+	\begin{enumerate}[(1)]
+		\item 先证明面$\tau\prec\sigma$本身也是有理凸多面锥.
+		\begin{proof}
+			
+			我们记$\sigma=\{r_1v_1+\cdots+r_kv_k\mid r_i\ge0,\forall 1\le i\le k\}$.按照面的定义,存在$u\in\sigma^{\vee}$使得$\tau=\sigma\cap u^{\perp}$.不妨重排$\{v_1,\cdots,v_k\}$的次序,使得恰好前$s$项满足$u(v_i)=0$.那么$\tau=\{r_1v_1+\cdots+r_sv_s\mid r_i\ge0,1\le i\le s\}$.这说明$\tau$也是有理凸多面锥.
+		\end{proof}
+		\item 证明命题.
+		\begin{proof}
+			
+			为证明有典范开嵌入$U_{\tau}\to U_{\sigma}$,只需证明$k[M\cap\tau^{\vee}]$是$k[M\cap\sigma^{\vee}]$关于某个元的局部化.我们可以选取$u\in M\cap\sigma^{\vee}$使得$M\cap\tau^{\vee}=M\cap\sigma^{\vee}+\mathbb{Z}(-u)$.这说明$k[M\cap\tau^{\vee}]$是$k[M\cap\sigma^{\vee}]$关于元$\chi^u$的局部化.
+			
+			\qquad
+			
+			为证明有典范闭嵌入$U_{\sigma}(\tau)\to U_{\sigma}$,只需证明$k[M\cap\sigma^{\vee}\cap\tau^{\perp}]$是$k[M\cap\sigma^{\vee}]$的商.重排$\{v_1,\cdots,v_k\}$的次序,使得恰好前$s$项满足$u(v_i)=0$.我们有$M\cap\sigma^{\vee}\cap\tau^{\perp}=\{u\in M\cap\sigma^{\vee}\mid u(v_1),\cdots,u(v_s)=0\}$,于是如果记$S=\{u\in M\cap\sigma^{\vee}\mid u(v_1),\cdots,u(v_s)\text{中至少有一个}>0\}$,记$\{\chi^s,s\in S\}$在$k[M\cap\sigma^{\vee}]$中生成的理想为$I$,那么有$k[M\cap\sigma^{\vee}]/I\cong k[M\cap\sigma^{\vee}\cap\tau^{\perp}]$.
+		\end{proof}
+	\end{enumerate}
+	\item $V$的一个fan是指$V$中有限个有理凸多面锥构成的集合$\Sigma$,满足:
+	\begin{enumerate}
+		\item $\{0\}$是$\Sigma$中每个锥的面.
+		\item $\Sigma$中每个锥的面都还在$\Sigma$中.
+		\item 如果$\sigma,\sigma'\in\Sigma$,那么$\sigma\cap\sigma'$同时是$\sigma$和$\sigma'$的面.
+	\end{enumerate}
+	
+	对$\sigma,\sigma'\in\Sigma$,按照2我们知道$U_{\sigma\cap\sigma'}$同时是$U_{\sigma}$和$U_{\sigma'}$的开子概型,于是我们可以把$\Sigma$中的所有$U_{\sigma}$粘合,得到的概形记作$X_{\Sigma}$,它是域$k$上的有限型概形,称为关于$\Sigma$的环面概形(toric scheme).记$|\Sigma|=\cup_{\sigma\in\Sigma}\sigma$.我们断言$X_{\Sigma}$是$k$上的proper概形当且仅当$|\Sigma|=V$.
+	\begin{proof}
+		
+		$X_{\Sigma}\to\mathrm{Spec}k$明显是有限型的,它是可分的因为它有仿射开覆盖$\{U_{\sigma}\mid\sigma\in\Sigma\}$,满足对任意$\sigma,\sigma'\in\Sigma$有$U_{\sigma}\cap U_{\sigma'}=U_{\sigma\cap\sigma'}$是仿射的.还剩证明它是可分的.
+		
+		
+	\end{proof}
+	
+\end{enumerate}
+
+
+
+
+
+
+
+
+
+
+
+\item 引理3.如果环扩张$A\subseteq B$使得$B$是有限$A$模(等价于讲$A\subseteq B$是整扩张也是有限型代数),那么$\mathrm{Isol}(B/A)=\mathrm{Spec}B$,即$B$的所有素理想都是纤维孤立点.如果$A'$是有限型代数$A\subseteq B$的子代数,满足如下两个要求之一:要么$A'$是有限$A$模,要么$A'$是$A$在$B$中的整闭包,并且$A'$是有限型$A$代数.那么有$\mathrm{Isol}(B/A)=\mathrm{Isol}(B/A')$.
+\begin{proof}
+	
+	如果$A\subseteq B$是整扩张也是有限型代数,那么$B$的所有素理想都满足不可比条件,换句话讲$B$的所有素理想在相应纤维中都是极大素理想和极小素理想,在有限型代数条件下这等价于讲$B$的所有素理想在相应纤维中都是孤立点.
+	
+	\qquad
+	
+	或者用$B$是有限$A$模的可以这样证:换句话讲对应的态射$f:X=\mathrm{Spec}B\to Y=\mathrm{Spec}A$是有限态射,那么它的纤维态射$X_y\to\mathrm{Spec}\kappa(y)$作为$f$的基变换也是有限态射,那么$X_y=\mathrm{Spec}A$是仿射的,并且$A$是有限$\kappa(y)$模,导致$A$是零维环,于是$\mathrm{Spec}A$是有限离散空间,其中都是孤立点.换句话讲此时$X$的每个点都是$f$的纤维孤立点.
+	
+	\qquad
+	
+	现在设$A'$是$A\subseteq B$的中间环,那么有$\mathrm{Isol}(B/A)\subseteq\mathrm{Isol}(B/A')$.我们只需证明另一侧的包含关系.记$X=\mathrm{Spec}B$,$Z=\mathrm{Spec}A'$和$Y=\mathrm{Spec}A$.再记$y\in Y$,于是有典范映射$X_y\to Z_y$,它和$Z_y\to\mathrm{Spec}\kappa(y)$的复合就是$X_y\to\mathrm{Spec}\kappa(y)$.另一侧包含关系就是要证明如果$x\in X_y$在$X_y\to Z_y$下的像是$z$,如果$x$是$X_z$的孤立点,那么$x$是$X_y$的孤立点.但是在命题中的两个条件下总有$Z_y$是离散空间,于是$X_z$是$X_y$的既开又闭子集,于是$x\in X_z$是孤立点当且仅当$x\in X_y$是孤立点.
+\end{proof}
+
+
+设$X$是局部诺特概形,设$\mathscr{F}$是凝聚层,如果某个$x\in X$满足$\mathscr{F}_x$是秩$n$自由$\mathscr{O}_{X,x}$模,那么存在$x$的开邻域$U$使得$\mathscr{F}\mid_U$是秩$n$自由模层.
+\begin{proof}
+	
+	问题是局部的,不妨设$X=\mathrm{Spec}A$是诺特环的素谱,设凝聚层$\mathscr{F}$被一个有限$A$模$M$诱导.设素理想$\mathfrak{p}$满足$M_{\mathfrak{p}}$是秩$n$自由$A_{\mathfrak{p}}$模.可取$M$中的$n$个元$\{m_1,\cdots,m_n\}$使得它们在$M_{\mathfrak{p}}$中的像构成了$M_{\mathfrak{p}}$的一组$A_{\mathfrak{p}}$基.考虑使得$\sum_ia_im_i=0$的$(a_1,\cdots,a_n)\in A^n$构成的模$N$,按照$A$是诺特环,得到$N$是有限模,所以它的支集$\mathrm{Supp}(N)=\{\mathfrak{q}\in\mathrm{Spec}A\mid N_{\mathfrak{q}}\not=0\}$是闭集,它的补集是包含$\mathfrak{p}$的开集$U$,可取包含$\mathfrak{p}$的主开集$D(f)\subseteq U$,在这个开集上就满足$M_f$是秩$n$自由$A_f$模.
+\end{proof}
+
+
+\item 对任意的$\overline{x}\in X_K$是$x$的提升,都有完备局部环$\widehat{\mathscr{O}}_{X_K,\overline{x}}\cong K[[T_1,\cdots,T_d]]$.
+
+
+
+多复变函数的一些性质.
+\begin{enumerate}
+	\item Hartogs定理.设$U=\{(z_1,z_2)\mid|z_1|,|z_2|<r\}\subset\mathbb{C}^2$,设$V=\{(z_1,z_2)\mid|z_1|,|z_2|<r'\}$,并且$r'<r$.那么$U-V$上的一个全纯函数$f$可以延拓为$U$上的全纯函数.这个性质在一元的情况不成立.
+	\begin{proof}
+		
+		设$F(z_1,z_2)=\frac{1}{2\pi\sqrt{-1}}\int_{|w_2|=r}\frac{f(z_1,w_2)\mathrm{d}w_2}{w_2-z_2}$.它关于$z_2$是全纯的,而$f$对$\overline{z_1}$的偏导数为零说明$F$关于$z_1$也是全纯的,于是$F$是$U$上的全纯函数.假设$|z_1|>r'$,按照柯西积分公式就得到$F(z_1,z_2)=f(z_1,z_2)$,这说明$F\mid U-V=f$.
+	\end{proof}
+	
+	\item 引理.在一元情况下,每个全纯函数可以唯一的局部的表示为$f(z)=(z-z_0)^nu(z)$,使得$u(z_0)\not=0$.这个结论可以延拓到多元:设$n\ge2$,设$\mathbb{C}^n$的坐标函数是$\{z_1,z_2,\cdots,z_{n-1},w\}$.一个Weierstrass多项式是指形如$w^d+a_1(z)w^{d-1}+\cdots+a_d(z)$的多项式,这里$a_i(z)$是关于变量$z$的全纯函数并且满足$a_i(0)=0,\forall i$.如果$f$在原点附近全纯,并且不在$w$轴恒为零,满足$f(0)=0$,那么$f$在原点的某个开邻域上可以唯一的表示为$gh$,其中$g$是一个关于$w$的$d$次的Weierstrass多项式,而$h(0)\not=0$.
+	\begin{proof}
+		
+		按照$f$不在$w$轴上恒为零,它在零点的幂级数展开中包含某项$aw^d$,其中$a\not=0$,可选取合适的$r,\delta,\varepsilon>0$,使得对全部$|w|=r$总有$|f(0,w)|\ge\delta>0$.并且对$|w|=r,|z|<\varepsilon$有$|f(z,w)|\ge\frac{\delta}{2}$.按照Picard定理,这里$f$在$z=0$时有$d$个根,导致当$|z|<\varepsilon$时$|w|<r$上至多有$d$个根.按照留数定理,这些根$b_1,b_2,\cdots,b_d$的幂方和都是解析函数:
+		$$b_1^q+b_2^q+\cdots+b_d^q=\frac{1}{2\pi\sqrt{-1}}\int_{|w|=r}\frac{w^q\frac{\partial f}{\partial}(z,w)}{f(z,w)}\mathrm{d}w$$
+		
+		我们知道有限个元的幂方和与它们的初等对称多项式之间可以互相转化,并且如果每个幂方和都是解析函数,那么$\{b_1,b_2,\cdots,b_d\}$的初等对称多项式也都是$|z|<\varepsilon,|w|<r$上的解析函数,记作$\sigma_1(z),\sigma_2(z),\cdots\sigma_d(z)$.如果记:
+		$$g(z,w)=w^d-\sigma_1(z)w^{d-1}+\cdots+(-1)^d\sigma_d(z)$$
+		
+		考虑$h(z,w)=\frac{f(z,w)}{g(z,w)}$,当固定点$|z|<\varepsilon$时$h$只有可去奇点,这说明$h$可延拓为$|z|<\varepsilon,|w|<r$上的关于$w$的全纯函数.而延拓后也是$z$的全纯函数可按照如下积分等式得到:
+		$$h(z,w)=\frac{1}{2\pi\sqrt{-1}}\int_{|w|=r}\frac{h(z,u)}{u-w}\mathrm{d}u$$
+		
+		至此我们证明了命题中分解的存在性.唯一性是直接的,因为这里的Weierstrass多项式的零点必须恰好和预先给定的全纯函数$f$一致,这迫使多项式的系数是那些$b_i$的初等对称多项式,而这被幂方和所唯一决定.
+	\end{proof}
+	\item 推论.解析函数$f(z_1,z_2,\cdots,z_{n-1},w)$如果不在$w$轴上恒取零,那么它的零点集【】
+	\item 多元版本的Riemann延拓定理.如果$f(z,w)$在圆盘$\Delta\subset\mathbb{C}^n,n\ge2$上全纯.设$g(z,w)$在$\overline{\Delta}-{f=0}$上全纯并且有界,那么$g$可以延拓为$\Delta$上的一个全纯函数.
+\end{enumerate}
+
+解析簇.开集$U\subset\mathbb{C}^n$的子集$V$称为解析簇,如果对任意$p\in U$,都存在开邻域$U'$使得$V\cap U'$是有限个全纯函数的公共零点集.如果解析簇$V$局部上总是单一非零解析函数的零点集,就称它是解析超曲面.一个解析簇$V\subseteq U\subset\mathbb{C}^n$称为不可约的,如果它不能表示为两个更小的解析簇的并.
+\begin{enumerate}
+	\item 解析簇的结构层就是全纯函数在开子集上的限制.解析簇$V$在点$p\in V$处的局部环就是全体对$(U',f)$,其中$U'$是$p$的开邻域,$f$是$U'$上的全纯函数,在等价关系$(U',f)\sim(V',g)$当且仅当$f\mid U'\cap V'=g\mid U'\cap V'$下的等价类构成的环.这是一个局部环,记作$\mathscr{O}_{V,p}$,它的唯一极大理想$m_p$是那些在点$p$处取零的全纯函数构成的理想.
+	\item $\mathscr{O}_{\mathbb{C}^n,p}$总是一个UFD.
+	\begin{proof}
+		
+		不妨设$p=0$,我们对$n$归纳.$n=1$的时候,0附近的每个全纯函数$f$可以唯一的表示为$f(z)=z^ng(z)$,其中$n$是固定的,而$g(z)$是0附近的可逆全纯函数.而$z$是$\mathscr{O}_{\mathbb{C},0}$中的不可约元,这说明$\mathscr{O}_{\mathbb{C}^1,0}$是UFD.
+		
+		现在假设$\mathscr{O}_{\mathbb{C}^{n-1},0}$是UFD.任取$f\in\mathscr{O}_{\mathbb{C}^n,p}$.不妨设$f(0,0,\cdots,0,w)\not\equiv0$,否则$f$已经是$\mathbb{C}^{n-1}$中的全纯函数.可记$f=gu$,其中$u\in\mathscr{O}_{\mathbb{C}^n,0}$是一个单位,而$g\in\mathscr{O}_{\mathbb{C}^{n-1},0}[w]$是一个Weierstrass多项式.按照$\mathscr{O}_{\mathbb{C}^{n-1},0}$是UFD,高斯引理说明$\mathscr{O}_{\mathbb{C}^{n-1},0}[w]$是UFD,于是$g$可分解为若干不可约多项式的乘积$g=g_1g_2\cdots g_m$,于是$f=g_1g_2\cdots g_mu$.这里$g_i$在相差一个单位的意义下唯一.并且这里$g_i$一定是$\mathscr{O}_{\mathbb{C}^n,0}$中的不可约元:如果$g_i=h_1h_2$,其中$h_1,h_2\in\mathscr{O}_{\mathbb{C}^n,0}$,可记$h_1=s_1u_1$,$h_2=s_2u_2$,其中$s_1,s_2\in\mathscr{O}_{\mathbb{C}^{n-1},0}[w]$,而$u_1,u_2$是单位,按照引理中我们证明的这种分解是唯一的,说明$g_i=s_1s_2$,$u_1u_2=1$.于是按照$g_i$在$\mathscr{O}_{\mathbb{C}^{n-1},0}[w]$上是不可约元,说明$s_1,s_2$中必然有一个是单位,导致$h_1,h_2$中必然有一个是单位.至此说明$\mathscr{O}_{\mathbb{C}^n,0}$中的非零非单位可以表示为不可约元的乘积.
+		
+		下面说明乘积的唯一性.假设有不可约元分解$f=f_1f_2\cdots f_k$.每个$f_i=g_i'u_i$,其中$g_i'$是Weierstrass多项式,那么$f=g_1'g_2'\cdots g_k'u$,其中$u=\prod u_i$是单位.而$g_1'g_2'\cdots g_k'$是Weierstrass多项式.但是我们解释过这种分解是唯一的,导致$g=g_1'g_2'\cdots g_k'$.于是分解是唯一的.
+	\end{proof}
+	\item 如果$f,g$在$\mathscr{O}_{\mathbb{C}^n,0}$中是互素的,那么对模长足够小的$z$,总有$f,g$在$\mathscr{O}_{\mathbb{C}^n,z}$中也是互素的.
+	\begin{proof}
+		
+		如果每个和$f$有关的自变量(换句话讲$f$对这个自变量的偏导数不为零)都是和$g$无关的自变量,那么明显的$f,g$的最大公约式是1,此时它们互素.于是我们不妨设自变量$z_n$和$f,g$都是有关的.此时不妨设$f,g$本身都是关于$z_n$的Weierstrass多项式,因为可逆的那一部分不影响这两个全纯函数的互素性.
+		
+		可取$\alpha,\beta\in\mathscr{O}_{\mathbb{C}^{n-1},0}[w]$使得$\alpha f+\beta g=\gamma\in\mathscr{O}_{\mathbb{C}^{n-1},0}$在足够小的$0$的开邻域上成立.现在设模长足够小的$z_0$满足$f(z_0)=g(z_0)=0$,并且$f,g$在$\mathscr{O}_{\mathbb{C}^n,z_0}$上具有公因子$h(z',z_n)$,于是$h\mid f,h\mid g$导致$h\mid\gamma$,这导致$h\in\mathscr{O}_{\mathbb{C}^{n-1},0}$.但是我们把$z_0$的前$n-1$个分量带入【】
+	\end{proof}
+	\item Weierstrass带余除法.设$g(z,w)\in\mathscr{O}_{\mathbb{C}^{n-1},0}[w]$是一个$k$次的Weierstrass多项式,那么对任意$f\in\mathscr{O}_{\mathbb{C}^n,0}$,有$f=gh+r$,其中$r(z,w)$是关于$w$次数$<k$的Weierstrass多项式.
+	\begin{proof}
+		
+		对足够小的$\varepsilon>0,\delta>0$,定义$|z|<\varepsilon,|w|<\delta$上的全纯函数:
+		$$h(z,w)=\frac{1}{2\pi\sqrt{-1}}\int_{|u|=\delta}\frac{f(z,u)}{g(z,u)}\frac{\mathrm{d}u}{u-w}$$
+		
+		于是$r=f-gh$也是全纯函数,并且它可以表示为:
+		$$\frac{1}{2\pi\sqrt{-1}}\int_{|u|=\delta}\left(f(z,u)-g(z,w)\frac{f(z,u)}{g(z,u)}\right)\frac{\mathrm{d}u}{u-w}=\frac{1}{2\pi\sqrt{-1}}\int_{|u|=\delta}\frac{f(z,u)}{g(z,u)}\frac{g(z,u)-g(z,w)}{u-w}\mathrm{d}u$$
+		
+		但是这里$g(z,-)$是Weierstrass多项式,导致$u-w$是整除$g(z,u)-g(z,w)$的,于是$r(z,w)$也是Weierstrass多项式.按照$g(z,u)$关于$u$是$k$次的,导致$\frac{g(z,u)-g(z,w)}{u-w}$关于$w$至多是$k-1$次的.
+	\end{proof}
+	\item  弱零点定理.如果$f\in\mathscr{O}_{\mathbb{C}^n,p}$是不可约元,并且$h\in\mathscr{O}_{\mathbb{C}^n,p}$在点集$\{f=0\}$上恒为零,那么在局部环上有$f\mid h$.
+	\begin{proof}
+		
+		不妨设$f$本身是$k$次Weierstrass多项式,因为单位的部分和问题无关.按照$f$是不可约的,比较次数可说明$f$和$\frac{\partial f}{\partial w}$是在$\mathscr{O}_{\mathbb{C}^{n-1},0}[w]$上互素的.于是有$\alpha f+\beta\frac{\partial f}{\partial w}=\gamma\in\mathscr{O}_{\mathbb{C}^{n-1},0}$.对固定的$z=z_0$,倘若$f(z_0,w)$有重根$w=u$,那么$f(z_0,u)=\frac{\partial f}{\partial w}(z_0,u)=0$,于是$\gamma(z_0)=0$.这说明$f(z,w)$对固定的$z$有$k$个不同根当且仅当$\gamma(z)\not=0$,
+		
+		最后按照带余除法,记$h=fg+r$,其中$r\in\mathscr{O}_{\mathbb{C}^{n-1}}[w]$,并且$r$的关于$w$的次数严格小于$k$.但是在$\{\gamma(z)=0\}$以外的点$z$总有$f(z,w)$关于$w$至少有$k$个不同根,导致$h$也至少有这$k$个不同根,但是$r$关于$w$的次数严格小于$k$,迫使$r(z,w)=0$对$z\not\in\{\gamma(z)=0\}$成立.导致$r\equiv0$【】,于是$h=fg$.
+	\end{proof}
+	\item 称解析簇$V$在点$p\in V$是不可约的,如果存在$p$的某个开邻域$U'$使得$V\cap U'$是不可约的.例如设$f\in\mathscr{O}_{\mathbb{C}^n,0}$是不可约元,那么解析簇$V=\{f=0\}$在点$0$是不可约的:如果$V$可以表示为两个更小的解析簇的并$V_1\cup V_2$,那么可取全纯函数$f_1,f_2$使得$f_i$在$V_i$上恒为零,在另一个小解析簇上不恒为零.那么按照零点定理,$f\mid f_1f_2$,按照$f$不可约,不妨设$f\mid f_1$,导致$V\subseteq V_1$矛盾.
+	\item 设$0\in V\subseteq U\subset\mathbb{C}^n$是被全纯函数$f$定义的解析超曲面.按照$\mathscr{O}_{\mathbb{C}^n,0}$是UFD,于是$f$可唯一分解为$f_1f_2\cdots f_r$,这些$f_i$都是不可约元.那么$V_i=\{f_i=0\}$都是在0处不可约的解析簇,并且$V=V_1\cup V_2\cup\cdots\cup V_r$.这说明解析超曲面局部上总可以唯一的表示为有限个互相不包含的不可约解析超曲面的并.
+\end{enumerate}
+
+\item 法向量丛(normal bundle).设$(M,g)$是$n$维黎曼流形,设$S\subseteq M$是$k$维黎曼子流形.对点$p\in S$,称$v\in\mathrm{T}_pM$是$S$的法向量,如果$v$和$\mathrm{T}_pS$中每个向量正交.全体这样的法向量构成的子空间$\mathrm{N}_pS\subseteq\mathrm{T}_pM$称为$S$在点$p$的法空间,当$p\in S$变动时全体法空间的无交并$\mathrm{N}S$是$\mathrm{T}M\mid_S$的秩$n-k$的子丛,称为$S$的法丛.
+
+\item 一个黎曼流形$(M,g)$称为平坦的,或者称$g$是平坦度量,如果$(M,g)$和$\mathbb{R}^n$上标准度量是局部等距的.对黎曼度量$(M,g)$有如下命题互相等价:
+\begin{enumerate}
+	\item $g$是平坦度量.
+	\item $M$的每个点都存在局部坐标使得$g$在该坐标下可以表示为$g=\delta_{ij}\mathrm{d}x^i\mathrm{d}x^j$.
+	\item $M$被一族光滑坐标卡覆盖,使得每个坐标卡上的局部标架都是正交的.
+	\item $M$被一族光滑坐标卡覆盖,使得每个坐标卡上的局部标架都是交换的(即标架中任意两个元可交换).
+\end{enumerate}
+
+离散赋值.设$(K,|\bullet|,v)$是域$K$上的非阿基米德赋值,它称为离散赋值,如果$v(K^*)$是$\mathbb{R}$的离散子群(也即同构于$\mathbb{Z}$),等价于讲$v(K^*)=\lambda\mathbb{Z}$.称离散赋值$v$是规范的,如果这里$\lambda=1$,于是每个离散赋值都等价于一个规范离散赋值.
+\begin{enumerate}
+	\item 考虑规范离散赋值,可取$\pi\in\mathscr{O}_K$使得$v(\pi)=1$,那么$K$中每个元可以唯一的表示为$\varepsilon\pi^n$,其中$\varepsilon$赋值为零(是单位),$n$是整数.
+	\item 考虑规范离散赋值,那么$\pi\in\mathscr{O}_K$是素元当且仅当极大理想$m=\pi\mathscr{O}_K$,当且仅当$v(\pi)=1$.
+	\item 数域$K$的非阿基米德赋值$v_p$总是离散赋值.它的赋值环的全部非零理想是$p^kK_p,k\ge0$.唯一极大理想是$pK_p$.另外$x\in K_p$是单位当且仅当$x\not\in pK_p$,也即$|x|_p=1$.
+	\item 有环的典范同构$\mathbb{Z}[[X]]/(X-p)\cong\mathbb{Z}_p$.
+	\begin{proof}
+		
+		有满的环同态$\theta:\mathbb{Z}[[X]]\to\mathbb{Z}_p$为把形式幂级数$\sum_{n\ge0}a_nX^n$映射为$\sum_{n\ge0}a_np^n$.那么有$(X-p)\subset\ker\theta$.反过来假设形式幂级数$f(X)=\sum_{n\ge0}a_nX^n$满足$f(p)=0$,那么有$a_0+a_1p+\cdots+a_{n-1}p^{n-1}\equiv0(\mathrm{mod}p^n)$.于是可记$b_{n-1}=-\frac{1}{p^n}(a_0+a_1p+\cdots+a_{n-1}p^{n-1})\in\mathbb{Z}$.于是有$a_0=-pb_0$,$a_1=b_0-pb_1$归纳得到$a_n=b_{n-1}-pb_n$.这说明有$\sum_{n\ge0}a_nX^n=(X-p)\sum_{n\ge0}b_nX^n$,也即$f(X)\in(X-p)$.
+	\end{proof}
+\end{enumerate}
+
+阿贝尔范畴上的投射对象和内射对象.给定阿贝尔范畴$\mathscr{A}$,称对象$P$是投射对象,如果对每个满态射$f:A\to B$,每个态射$\phi:P\to B$可提升为态射$\phi'$,即满足$f\circ\phi'=\phi$;称对象$Q$是内射对象,如果对每个单态射$g:X\to Y$,每个态射$\psi:X\to Q$可提升为态射$\psi':Y\to Q$,即满足$\psi'\circ g=\psi$.特别的,在$R$模范畴中投射对象和内射对象就是投射模和内射模.
+$$\xymatrix{&P\ar[d]^{\phi}\ar[dl]_{\phi'}\\A\ar@{^{(}->}[r]_f&B}\quad\quad\quad\xymatrix{X\ar[d]_{\psi}\ar@{->>}[r]^g&Y\ar[dl]^{\psi'}\\Q&}$$
+
+阿贝尔范畴上的投射预解.
+\begin{enumerate}
+	\item 在阿贝尔范畴中,形如$P=\xymatrix{\cdots\ar[r]&P_2\ar[r]^{d_2}&P_1\ar[r]^{d_1}&P_0\ar[r]^{\varepsilon}&A\ar[r]&0}$的正合正项复形称为对象$A$的投射预解,如果每个$P_n$都是投射对象.如果每个$P_n$都是自由模或者都是平坦模,就称$P$是$A$的自由预解或者平坦预解.
+	\item 称阿贝尔范畴$\mathscr{A}$具有足够多的投射对象,如果对每个对象$A$,总存在投射对象$P$以及满态射$P\to A$.那么如果阿贝尔范畴$\mathscr{A}$上具有足够多的投射对象,则$\mathscr{A}$中每个对象都存在投射预解.
+	\begin{proof}
+		
+		任取对象$A$,取投射对象$P_0$以及满态射$\varepsilon:P_0\to A$,记$\ker\varepsilon=K_1$,于是得到短正合列:$\xymatrix{0\ar[r]&K_1\ar[r]^{i_1}&P_0\ar[r]^{\varepsilon}&A\ar[r]&0}$.又可取投射对象$P_1$和满态射$\varepsilon_1:P_1\to K_1$,取$\ker d_1=K_2$,那么有短正合列:$\xymatrix{0\ar[r]&K_2\ar[r]^{i_2}&P_1\ar[r]^{\varepsilon_1}&A\ar[r]&0}$.现在取$d_1:P_1\to P_0$为复合$i_1\circ\varepsilon_1$,那么$\ker d_1=\ker(i_1\circ\varepsilon_1)=\ker\varepsilon_1=K_2$,$\mathrm{im}d_1=K_1$.
+		
+		据此可归纳构造一列投射对象$\{P_n,n\ge0\}$,一列对象$\{K_n,n\ge0\}$,和两列态射$\{i_n,\varepsilon_n,n\ge1\}$,满足$\varepsilon_n:P_n\to K_n$的满态射,而$i_n:K_n\to P_{n-1}$的单态射,并且$K_n$就是$\varepsilon_{n-1}$的核.取$d_n=i_n\circ\varepsilon_n$,就得到$\mathrm{im}d_n=\mathrm{im}\varepsilon_n=K_n$,$\ker d_{n+1}=\ker\varepsilon_{n+1}=K_n$,于是这样构造的复形$(P_n,d_n)$处处是正合的.
+		$$\xymatrix{0\ar[dr]&&0&&0\ar[dr]&&0&&&&\\&K_4\ar[dr]^{i_4}\ar[ur]&&&&K_2\ar[ur]\ar[dr]^{\varepsilon_2}&&&&&\\\cdots\ar[ur]\ar[rr]&&P_3\ar[dr]_{i_3}\ar[rr]^{d_3}&&P_2\ar[ur]^{i_2}\ar[rr]^{d_2}&&P_1\ar[dr]_{i_1}\ar[rr]^{d_1}&&P_0\ar[r]^{\varepsilon}&A\ar[r]&0\\&&&K_3\ar[dr]\ar[ur]_{\varepsilon_3}&&&&K_1\ar[dr]\ar[ur]_{\varepsilon_1}&&&\\&&0\ar[ur]&&0&&0\ar[ur]&&0&&}$$
+	\end{proof}
+	\item 特别的,环的模范畴上总存在足够多的投射对象,于是环上每个左或右模总存在投射预解.另外事实上每个左或右模总存在一个自由模或者平坦模到它的满同态,套用上述证明可得,环的模范畴上每个左或右模总存在平坦预解和自由预解.
+	\item 给定对象$A$的投射预解$P=(P_n,d_n)$,按照第二条证明中的内容,记$K_0=\ker\varepsilon$,记$K_n=\ker d_n=\mathrm{im}d_{n+1},n\ge1$.这里的$K_n$称为投射预解$P$的第n个syzygy.
+\end{enumerate}
+
+阿贝尔范畴上的内射预解.
+\begin{enumerate}
+	\item 在阿贝尔范畴中,形如$E=\xymatrix{0\ar[r]&A\ar[r]^{\eta}&E^0\ar[r]^{d^0}&E_1\ar[r]^{d^1}&E^2\ar[r]&}$的正合负项复形称为对象$A$的内射预解,如果每个$P_n$都是内射对象.
+	\item 称阿贝尔范畴$\mathscr{A}$具有足够多的内射对象,如果对每个对象$A$,总存在内射对象$E$以及单态射$A\to E$.那么如果阿贝尔范畴$\mathscr{A}$上具有足够多的内射对象,则$\mathscr{A}$中每个对象都存在内射预解.特别的,环的模范畴上总存在足够多的内射对象,于是环上每个左或右模总存在内射预解.
+	\item 给定对象$A$的内射预解$E=(E^n,d^n)$,记$V^0=\mathrm{coker}\eta$,记$V^n=\mathrm{coker}d^{n-1},n\ge1$.这里的$V^n$称为内射预解$E$的第n个cosyzygy.
+\end{enumerate}
+
+
+
+形变收缩.设空间$X$有子空间$A$,设包含映射为$i:A\to X$,称$A$是$X$的形变收缩,如果存在连续映射$r:X\to A$满足$r\circ i=1_A$和$i\circ r$同伦于$1_X$.
+\begin{enumerate}
+	\item 按照定义,如果$A$是$X$的形变收缩,则$X$和$A$的伦型相同.
+	\item $n\ge1$时$S^n$总是$\mathbb{R}^{n+1}-\{0\}$的形变收缩.记$X=\mathbb{R}^{n+1}-\{0\}$和$A=S^n$,记$i:A\to X$是包含映射,取$r:X\to A$为$x\mapsto x/\Vert x\Vert$.那么有$r\circ i=1_A$,需要验证$r'=i\circ r:X\to X$和$1_X$同伦.我们构造$F:X\times[0,1]\to X$为$(x,t)\mapsto\left((1-t)\Vert x\Vert+t\right)x/\Vert x\Vert$.
+	\item 特别的上一条说明$\mathbb{R}^{n+1}$扣去一个点总和$S^n$是同伦的.
+	\item 这一条需要同调论.如果存在形变收缩,我们作用函子会得到$F(r)\circ F(i)=1_{FA}$,于是$F(r)$会是满射,$F(i)$是单射.这个操作可以用来说明某些情况下不存在形变收缩.我们来说明不存在$\mathbb{D}^n\to\mathbb{S}^{n-1}$的收缩,这是因为取$n-1$阶同调群,得到$H_{n-1}(\mathbb{D}^n)=0$和$H_{n-1}(\mathbb{S}^{n-1})=\mathbb{Z}$.但是不存在$0$到$\mathbb{Z}$的满同态.
+	\item 关于形变收缩的一个有趣的结论:两个空间是同伦等价的当且仅当它们可以作为同一个大空间的形变收缩.
+\end{enumerate}
+
+\subsubsection{射影空间$\mathbb{P}_A^n$上的闭嵌入}
+\begin{enumerate}
+	\item 零点概型.尽管我们之前定义零点概型的时候需要一个整体截面,但是对于射影空间,虽然齐次多项式$f(x_0,x_1,\cdots,x_n)$不是整体截面,但是依旧可以定义零点概型:在$D(x_i)$上取闭子概型$V(f(x_{0/i},\cdots,x_{n/i}))$,在$U_i\cap U_j$上仅差一个不含零点的齐次因子,于是这些闭子概型可以粘合为一个整体闭子概型.类似的我们可以定义一族齐次多项式定义的零点(闭子)概型.
+	\item 射影空间的被一个单一$d$次齐次多项式定义的零点概型称为$d$次超曲面.如果$d=1$就称为超平面.如果$n=2$就称它是一条曲线,其中$d=1$称为直线,$d=2$称为圆锥曲线.如果$n=3$称它是一个曲面.
+	\item 射影概型的闭子概型.
+	\begin{itemize}
+		\item 如果$\varphi:S\to R$是分次环之间的满分次同态,那么它诱导的射影概型之间的态射$\varphi^*:\mathrm{Proj}R\to\mathrm{Proj}S$是闭嵌入.这是因为$\varphi$是满射允许我们归结为证明$D_+(\varphi(a))\to D_+(a)$的情况,而这被环同态$S_{(a)}\to R_{(\varphi(a))}$所诱导,这是一个满的环同态,导致它诱导了仿射概型之间的闭嵌入,于是闭嵌入粘合得到闭嵌入$\varphi^*$.
+		\item 反过来射影概型的每个闭子概型都是这样得到的.换句话讲,如果$X\to\mathrm{Proj}S$是闭嵌入,这里设$S$是$A$分次环,那么存在齐次理想$I$使得$X\to\mathrm{Proj}S$同构于$\mathrm{Proj}S/I\to\mathrm{Proj}S$.
+		\item 我们之前定义的$A$上射影概型是指一个有限生成$A$分次环的$\mathrm{Proj}$,上面的结论说明$A$射影空间的闭子概型必然是射影$A$概型.反过来任取射影$A$概型,我们在Veronese子环那里解释过可以不妨设构造它的有限生成$A$分次环$S$是被有限个1次元生成的,据此可以构造一个多项式环到$S$的分次环满同态,于是$S$是某个$A$射影空间的闭子概型.综上$A$射影概型等价定义为$A$射影空间的闭子概型.
+	\end{itemize}
+	\item 一个例子.考虑分次环的分次同态$\varphi:k[w,x,y,z]\to k[s,t]$为$(w,x,y,z)\mapsto(s^3,s^2t,st^2,t^3)$.分别考虑$D(s)$和$D(t)$说明这诱导了一个闭嵌入$\mathbb{P}^1_k\to\mathbb{P}^3_k$.另外这个环同态是到$k[s,t]$的Veronese子环$k[s,t]_{3\bullet}$的满同态,我们解释过Veronese子环对应的射影概型和原本的分次环是一致的.于是这个闭嵌入同构于$\mathrm{Proj}k[w,x,y,z]/(wz-xy,x^2-wy,y^2-xz)$.于是特别的这说明$\mathbb{P}^1_k\cong\mathrm{Proj}k[w,x,y,z]/(wz-xy,x^2-wy,y^2-xz)$.
+	\item 设$R$是有限生成$A$代数,那么选取$n$个$A$代数$R$的生成元等价于把$\mathrm{Spec}R$闭嵌入到$\mathbb{A}_A^n$中.这一条我们解释射影概型的类似结论.设$S$是被有限个一次元生成的分次环,那么$S_1$是$S_0$的有限生成模,并且无关理想$S_+$被一次元生成.设$S$被$n+1$个一次元$\{x_0,x_1,\cdots,x_n\}$生成,那么我们断言$\mathrm{Proj}S$可视为$\mathbb{P}^n_A$的闭子概型,其中$A=S_0$:设$A^{\oplus(n+1)}$是以$\{t_0,t_1,\cdots,t_n\}$为基的自由模,定义满的分次环同态$\mathrm{Sym}(A^{\oplus})=A[t_0,t_1,\cdots,t_n]\to S$为$t_i\mapsto x_i$.我们解释过诱导了同构$S\cong A[t_0,t_1,\cdots,t_n]/I$.换句话讲,如果一个分次环被一次元有限生成,那么它可视为某个射影空间的闭子概型.
+	\item 如果$k$是代数闭域,那么$\mathbb{P}^n_k$的闭点一一对应于过原点的直线.更一般的,设$S$是代数闭域$k$上的有限生成代数,被一次元$\{x_0,x_1,\cdots,x_n\}$生成.那么这诱导了闭嵌入$\mathrm{Spec}S\to\mathbb{A}_k^{n+1}$以及闭嵌入$\mathrm{Proj}S\to\mathbb{P}_k^n$.这说明存在$\mathrm{Proj}S$的闭点和$\mathrm{Spec}S$中的过原点的直线之间的一一对应.
+	\item 关于有限态射是闭映射的一个证明.设$\varphi:X\to Y$是有限态射,按照有限态射是仿射终端局部性质,闭集也是一个局部性质,说明仅需验证$Y$是仿射的情况.但是终端为仿射概型的有限态射即射影概型的结构态射,按照消除理论基本定理,这是一个闭映射.
+\end{enumerate}
+
+Veronese嵌入.
+\begin{enumerate}
+	\item 一个例子.设$S=k[x,y]$,那么$S_{2\bullet}=k[x^2,xy,y^2]$.于是经$u\mapsto x^2,v\mapsto xy,w\mapsto y^2$得到同构$k[u,v,w]/(uw-v^2)\cong S_{2\bullet}$.据此得到一个闭嵌入$\mathbb{P}_k^1\to\mathbb{P}_k^2$,于是$\mathbb{P}_k^1$可视为$\mathbb{P}_k^2$中的一条圆锥曲线(即二次曲线).
+	\item 设$k$是特征非2的代数闭域,每个三元二次型都可以对角化,于是每个三元二次型可以换元等价于三个平方项的和,两个平方项的和,一个平方项.于是上一条我们证明的是,特征非2的代数闭域上的平面圆锥曲线如果等价于三个平方项的和,那么它同构于$\mathbb{P}_k^1$.
+	\item 一般的,记$S=k[x,y]$,那么$\mathrm{Proj}S_{d\bullet}$由多项式组$y_0/y_1=y_1/y_2=\cdots=y_{d-1}/y_d$提供.我们之前给过$d=3$的情况.这样定义的闭子概型称为$d$次有理正规曲线.更一般的,如果$S=k[x_0,x_1,\cdots,x_n]$,那么有闭嵌入$\mathrm{Proj}S_{d\bullet}\to\mathbb{P}_k^{N-1}$,其中$N$为$\left(\begin{array}{c}n+d\\d\end{array}\right)$.这个闭嵌入$\mathrm{Proj}S\to\mathbb{P}_k^{N-1}$称为Veronese嵌入.
+\end{enumerate}
+
+仿射锥和射影锥.
+\begin{enumerate}
+	\item 仿射锥的定义.设$S$是有限生成分次环,射影概型$\mathrm{Proj}S$的仿射锥定义为$\mathrm{Spec}S$.这个定义不够良好,因为它依赖于$S$而不是$\mathrm{Proj}S$.我们解释过即便两个不是同构的分次环,它们诱导的射影概型可能同构.
+	\item 如果$\mathrm{Proj}S$是环$A$上的射影概型,那么存在典范的态射$\mathrm{Spec}S-V(S_+)\to\mathrm{Proj}S$.它把分次环$S$的每个不包含$S_+$的素理想$p$映射为一个齐次素理想$q$:即为它的全部齐次元生成的理想(这样生成的必然是素理想).【】
+	\item 射影锥的定义.射影概型$\mathrm{Proj}S$的射影锥定义为$\mathrm{Proj}S[T]$,这里$T$是一个代数无关的次数1的元.射影锥的主开集$D(T)$恰好就是$\mathrm{Proj}S$的仿射锥.另外$\mathrm{Proj}S$可视为$\mathrm{Proj}S[T]$的由$T=0$定义的零点闭子概型.
+\end{enumerate}
+
+
+
+
+
+
+
+
+
+
+
+
+态射的像集.我们解释过一些特定条件下态射可以是闭映射,例如有限态射,此时像集是闭子集.我们会在后面证明一个稍微更强的结论,所谓的消除理论基本定理:射影概型的结构态射总是闭映射.我们还会证明一些特定条件下态射是开映射(例如平坦加上一些有限性条件).但是一般来讲态射的像集是非常不规则的,例如$\mathbb{A}_k^2\to\mathbb{A}_k^2$的态射$(x,y)\mapsto(x,xy)$的像集是仿射平面扣去$y$轴再补上原点,这既不是开集也不是闭集.
+
+
+
+\item 本条开始给出Chevalley定理的一些应用.首先是证明弱零点定理,即证明如果域扩张$k\subset K$使得$K$是有限生成$k$代数那么这个扩张是有限维的域扩张:设$K=k[x_1,x_2,\cdots,x_n]$,只需证明每个$x_i$都是$k$上的代数元.假设存在某个$x_i$不是$k$上的代数元,那么环的包含映射$k[x_i]\to K$诱导了$k$概型之间的支配态射$\varphi:\mathrm{Spec}K\to\mathbb{A}_k^1$.这里$\mathrm{Spec}K$是单点集,像集也自然是单点集,但是我们解释过$\mathbb{A}_k^1$的一般点不构成可构造子集,于是按照Chevalley定理得到像集只能是一个闭点,但是这和支配条件矛盾.
+\item 终端为域的拟有限态射是有限态射.设$\varphi:X\to\mathrm{Spec}k$是拟有限态射,按照有限态射是仿射源端局部性质,不妨约定$X$是仿射的,记作$\mathrm{Spec}A$,那么$A$是有限生成$k$代数.我们解释过有限态射等价于局部有限和整性的态射,于是只需证明$A$中每个元都是$k$上的代数元.假设存在$x\in A$不在$k$上代数,那么包含映射$k[x]\to A$诱导了概型的态射$\mathrm{Spec}A\to\mathrm{Spec}k[x]$.按照拟有限条件,这里$X$是有限点集,于是$\mathrm{Spec}A$也是有限点集.【】
+\item 后面会定义域$k$上的簇是指$k$上的既约可分有限型概型,两个$k$簇之间的态射是它们作为$k$概型之间的态射.这样的态射自动是有限型的.这一条我们解释$k$簇之间的态射$\varphi:X\to Y$是集合意义上的满射当且仅当它在闭点子集上是满射,换句话讲当且仅当$Y$中每个闭点的原像非空.【】
+
+自由对象.给定一个具体范畴$\mathscr{C}$,这也等价于说存在忠实函子$F:\mathscr{C}\to\textbf{Set}$.取定一个集合$X$,称为基,称一个对象$F(X)$和一个$X\to F(X)$的集合映射$i$构成的对$(F(X),i)$是范畴$\mathscr{C}$上关于$X$的自由对象,如果满足如下泛映射性质:对任意对象$B$和任意的集合上的映射$f:X\to B$,存在唯一的态射$\varphi:F(X)\to B$满足如下图表交换:
+$$\xymatrix{F(X)\ar[r]^{\varphi}&B\\
+	X\ar[u]^{i}\ar[ur]_f&}$$
+
+一个范畴上具有相同势的集合上的自由对象是同构的,反过来不一定成立.
+
+
+\item 例如齐次环同态$\mathbb{C}[x,y,z]\to\mathbb{C}[s,t]$,$x\mapsto s^2,y\mapsto st,z\mapsto t^2$诱导了射影概型之间的态射$\mathbb{CP}^1\to\mathbb{CP}^2$,按照齐次坐标表示为$[s,t]\mapsto[s^2,st,t^2]$.
+\item 不同的分次环同态可能诱导相同的射影概型之间的态射.例如取分次环:
+$$R=k[x,y,z]/(xz,yz,z^2),S=k[a,b,c]/(ac,bc,c^2)$$
+
+约定这里$\{x,y,z,a,b,c\}$的次数都是1.那么按照$k[x,y,z]/(xz,yz,z^2)\to k[s,t]$,$x\mapsto s,y\mapsto t,z\mapsto0$是分次环同构,得到$\mathrm{Proj}S\cong\mathrm{Proj}S\cong\mathbb{P}_k^1$.但是这里$(a,b,c)\mapsto(x,y,z)$和$(a,b,c)\mapsto(x,y,0)$都得到了同构$\mathrm{Proj}R\cong\mathrm{Proj}S$.
+
+
+我们解释过单射(拓扑层面是单射)未必在基变换下不变,为此我们考虑泛单射,即所有基变换下为单射的态射.
+\begin{enumerate}
+	\item 单态射在集合层面都是单射,单态射在基变换下不变,于是单态射总是泛单射.
+	\item 泛单射是终端局部性质.
+	\item 如果$X\to Y\to Z$是泛单射,那么$X\to Y$是泛单射,这是因为$Y\to Z$的对角态射总是泛单射.
+	\item $\pi:X\to Y$是泛单射当且仅当对角态射$X\to X\times_YX$是满射.特别的,这说明泛单射总是可分态射.
+	\begin{proof}
+		
+		
+	\end{proof}
+	\item 代数闭域上的有限型概型之间的态射是泛单射当且仅当它在闭点集上是单射.
+	\begin{proof}
+		
+		
+	\end{proof}
+\end{enumerate}
+
+\item 首先我们解释仿射锥的构造中的确是一个概型的态射.即考虑映射$\varphi:\mathbb{A}_k^{n+1}-\{0\}\to\mathbb{P}_k^n$为$(x_0,x_1,\cdots,x_n)\mapsto[x_0,x_1,\cdots,x_n]$,我们断言这是概型的态射.为此只需说明它在每个主开集上是态射即可.取$R=k[x_0,x_1,\cdots,x_n]$的正次齐次元$f$,主开集$D(f)$上的截面环为$R_{(f)}$,任取其中这样一个元$g^m/f^n$,满足$m\deg g=n\deg f$.在$D(x_i)\cap D(f)$上这个截面映射到$s_i=g^m(x_0,\cdots,x_{i-1},1,x_{i+1},\cdots,x_n)/f^n(x_0,\cdots,x_{i-1},1,x_{i+1},\cdots,x_n)$,那么$s_i$和$s_j$在交$D(x_i)\cap D(x_j)$上的限制是相同的,于是这些$\{s_i\}$粘合为一个$\varphi^{-1}(D(f))$上的截面.
+\item 更一般的,设$B$是一个环,设$X$是$B$概型,设$\{f_0,f_1,\cdots,f_n\}$是$n+1$个$X$上的没有公共零点的函数,那么$[f_0,f_1,\cdots,f_n]$是$B$概型之间的态射$X\to\mathbb{P}_B^n$.特别的如果取$\{x_0,x_1,\cdots,x_n\}$得到上一条中的态射.另外假设$g$是$X$上处处不取零的函数,那么$[f_0,f_1,\cdots,f_n]$和$[gf_1,gf_2,\cdots,gf_n]$是相同的态射.但是注意这并不能描述全部以射影概型为终端的态射.
+
+诺特概型的纤维积未必是诺特概型.
+
+唯一分解概型.一个概型称为唯一分解概型,如果每个点处的局部环都是唯一分解整环.按照UFD总是正规整环,说明唯一分解概型都是正规概型.
+\begin{enumerate}
+	\item UFD的局部化仍然是UFD,于是UFD对应的仿射概型总是唯一分解概型,并且如果概型存在仿射开覆盖由UFD诱导,那么它是唯一分解概型.这两个命题的逆命题都不成立,例如代数闭域上的椭圆曲线是唯一分解概型,但是它的每个仿射开子集对应的环都不是唯一分解整环.
+	\item 
+\end{enumerate} 
+
+\subsubsection{态射的概形意义像}
+
+我们已经解释了态射的集合像一般来讲是很糟糕的,现在来定义概型像.设$Z$是$Y$的闭子概型,设包含态射为$i$,那么有短正合列$0\to\mathscr{I}_{Z/Y}\to\mathscr{O}_Y\to i_*\mathscr{O}_Z\to0$.称态射$\varphi:X\to Y$的像落在$Z$中,如果态射的复合$\mathscr{I}_{Z/Y}\to\mathscr{O}_Y\to\varphi_*\mathscr{O}_X$是零态射,换句话讲,在$Z$上取零的函数拉回到$X$上仍然是零函数.定义$\varphi$的概型像是最小的包含像的闭子概型,也即全部包含像的闭子概型的交.
+\begin{enumerate}
+	\item 如果$Y$是仿射概型,那么$\varphi:X\to Y$的概型像是那些拉回$X$上为零函数的$Y$上的整体函数定义的零点态射.一些例子:
+	\begin{itemize}
+		\item 定义态射$\mathrm{Spec}k[\varepsilon]/(\varepsilon^2)\to\mathrm{Spec}k[x]$由环同态$x\mapsto\varepsilon$诱导,那么它的概型像为$\mathrm{Spec}k[x]/(x^2)$.
+		\item 定义态射$\mathrm{Spec}k[\varepsilon]/(\varepsilon^2)\to\mathrm{Spec}k[x]$由环同态$x\mapsto0$诱导,那么它的概型像为$\mathrm{Spec}k[x]/(x)$.
+		\item 定义态射$\mathrm{Spec}k[t,t^{-1}]\to\mathrm{Spec}k[u]$由环同态$u\mapsto t$诱导,那么拉回去的整体函数只有零多项式,于是概型像是整个$\mathrm{Spec}k[u]$.这里集合像是$\mathbb{A}_k^1-\{0\}$,集合像的闭包是概型像.
+		\item 记$X=\coprod_{n\ge1}\mathrm{Spec}k[\varepsilon_n]/(\varepsilon_n^n)$,记$Y=\mathrm{Spec}k[x]$,定义$\varphi:X\to Y$是在第$n$分量上取$x\mapsto\varepsilon_n$诱导的概型态射.于是$Y$上一个函数倘若拉回到$X$上是零函数,那么这个多项式在零处的泰勒展开为零,于是这个函数是零,于是这个态射的概型像是整个$\mathrm{Spec}k[x]$.但是它的集合像是闭点$(x)$,此时集合像的闭包不是概型像.
+	\end{itemize}
+	\item 处理了仿射情况后,我们期望仿射情况的像可以粘合为整体像.任取$\mathrm{Spec}B\subset Y$,定义理想$\mathscr{I}(B)\subset B$为拉回$X$上是零的函数构成的理想.要想这个理想层定义了一个闭子概型,我们解释过一个条件是对任意$g\in B$,有$\mathscr{I}(B)\otimes_BB_g\to\mathscr{I}(B_g)$是同构.于是问题归结为:如果$r/g^n$是$D(g)$上的函数,拉回$\varphi^{-1}(D(g))$上是零,那么存在正整数$m$使得$rg^m$拉回$\varphi^{-1}(\mathrm{Spec}B)$上为零.如下条件下这个问题是成立的:
+	\begin{itemize}
+		\item $\varphi^{-1}(\mathrm{Spec}B)$是既约的.此时只要取$m=1$即可:$r$在$D(g)$的拉回上取零,$g$在$V(g)$的拉回上取零.于是$rg$在整个$\varphi^{-1}(\mathrm{Spec}B)$上取零.
+		\item $\varphi^{-1}(\mathrm{Spec}B)$是仿射的.记作$\mathrm{Spec}A$,记$r$和$g$回拉函数为$r'$和$g'$.如果在$D(g')$上有$r'=0$,此即存在$m$使得在$D(g')$上有$r'(g')^m=0$.
+		\item $\varphi^{-1}(\mathrm{Spec}B)$是拟紧的.这是因为此时它存在有限仿射开覆盖,在每个仿射开子集上,按照上一条存在正整数$m$使得$rg^m$回拉是零函数.取这有限个$m$中的最大元即得$rg^m$的回拉是零函数.
+	\end{itemize}
+	\item 总结一下,设$\varphi:X\to Y$是概型之间的态射,如果$X$是既约的,或者$\varphi$是拟紧态射,那么概型像可以仿射的粘合:在$Y$的每个仿射开子集上取概型像,这些概型像的粘合是$\varphi$的概型像.
+	\item 设$\varphi:X\to Y$是概型之间的态射,如果$X$是既约的,或者$\varphi$是拟紧态射,那么$\varphi$的集合像的闭包是它的概型像(的底空间).特别的,这说明如果集合像是闭子集,那么它的集合像就是概型像的底空间.
+	\item 如果$X$是既约概型,那么$\varphi:X\to Y$的概型像是既约的.
+	\item 概型闭包.设$X$是$Y$的局部闭子概型,那么$X$的闭包定义为包含态射的概型像.
+\end{enumerate}
+
+子概型的交.给定$X$的两个子概型$U$和$V$,它们的交定义为纤维积$U\times_XV$.
+关于上一条有如下更一般的结论:如下三个条件中前两条互相等价,并且都能推出第三条,但是一般的第三条不能推出前两条.证明只要注意到按照图表表述有1推2和1推3,而2推1是上一条给出的.
+\begin{itemize}
+	\item $V\subset X$是一个开子概型和一个闭子概型的(概型意义的)交.等价于讲有如下纤维积图表:
+	$$\xymatrix{V\ar[rr]^{\text{open emb.}}\ar[d]_{\text{closed emb.}}&&K\ar[d]^{\text{closed emb.}}\\U\ar[rr]_{\text{ope emb.}}&&X}$$
+	\item $V$是$X$的一个闭子概型的开子概型.等价于讲有如下图表:
+	$$\xymatrix{V\ar[rr]^{\text{open emb.}}&&K\ar[d]^{\text{closed emb.}}\\&&X}$$
+	\item $V$是$X$的局部闭子概型.等价于讲有如下图表:
+	$$\xymatrix{V\ar[d]_{\text{closed emb.}}&&\\U\ar[rr]_{\text{ope emb.}}&&X}$$
+\end{itemize}
+
+\item 既约闭子概型在基变换下不变.即如果$X,Y$是$S$概型,那么典范映射$X_{\mathrm{red}}\to X$和$Y_{\mathrm{red}}\to Y$诱导了态射$X_{\mathrm{red}\times_SY_{\mathrm{red}}}\to X\times_SY$,而这诱导了既约闭子概型的同构:
+$$\left(X_{\mathrm{red}}\times_{S_{\mathrm{red}}}Y_{\mathrm{red}}\right)_{\mathrm{red}}=\left(X_{\mathrm{red}}\times_SY_{\mathrm{red}}\right)_{\mathrm{red}}\cong\left(X\times_SY\right)_{\mathrm{red}}$$
+\begin{proof}
+	
+	首先按照$S_{\mathrm{red}}\to S$是单态射,得到$X_{\mathrm{red}}\times_{S_{\mathrm{red}}}Y_{\mathrm{red}}=X_{\mathrm{red}}\times_SY_{\mathrm{red}}$.接下来按照$X_{\mathrm{red}}\to X$和$Y_{\mathrm{red}}\to Y$都是满的嵌入,说明基变换$X_{\mathrm{red}}\times_SY_{\mathrm{red}}\to X\times_SY$是满的嵌入.这个基变换映射诱导了既约闭子概型上的映射,它在拓扑层面是同胚,并且是单态射和满态射,于是它是概型的同构.
+\end{proof}
+\item 设$P$是一个保复合和保基变换的关于态射的性质.那么如果$\pi:X\to Y$满足性质$P$,则$\pi^{\mathrm{red}}:X^{\mathrm{red}}\to Y^{\mathrm{red}}$满足性质$P$.这件事只要注意到如下图表:
+$$\xymatrix{X^{\mathrm{red}}\ar@/^2pc/[rrrr]^{\pi^{\mathrm{red}}}\ar[rr]\ar[drr]&&X\times_YY^{\mathrm{red}}\ar[rr]\ar[d]&&Y^{\mathrm{red}}\ar[d]\\&&X\ar[rr]^{\pi}&&Y}$$
+
+
+\item 理想层.设$\varphi:X\to Y$是闭嵌入,那么诱导的层态射$\varphi^{\#}:\mathscr{O}_Y\to\varphi_*\mathscr{O}_X$是满态射.这个态射的核是$\mathscr{O}_Y$的理想层$\mathscr{I}$,换句话讲,对每个开集$U\subset Y$,有$\mathscr{I}(U)$是$\mathscr{O}_Y(U)$的理想.于是我们得到了如下短正合列:
+$$\xymatrix{0\ar[r]&\mathscr{I}\ar[r]&\mathscr{O}_Y\ar[r]&\varphi_*\mathscr{O}_X\ar[r]&0}$$
+\item 设$\mathscr{I}$是由闭嵌入$\varphi:X\to Y$诱导的理想层.如果$\mathrm{Spec}B$是$Y$的仿射开子集,取$f\in B$,那么典范映射$\mathscr{I}(B)_f\to\mathscr{I}(B_f)$是同构.
+\item 理想层未必总是由一个闭嵌入诱导.考虑仿射概型$X=\mathrm{Spec}k[x]_{(x)}$,这是仿射线在原点处的局部环的素谱,它由两个点构成,一个闭点和一个一般点$\eta$.定义理想层$\mathscr{I}(X)={0}\subset\mathscr{O}_X(X)=k[x]_{(x)}$,和$\mathscr{I}(\{\eta\})=k(x)=\mathscr{O}_X(\{\eta\})$.如果这个理想层被闭嵌入诱导,将会和上一条结论矛盾.
+\item 一个准则.设$Y$是概型,设$\mathscr{I}$是$Y$上的理想层.如果对$Y$的每个仿射开子集$\mathrm{Spec}B$,对每个$f\in B$,都诱导了同构$\mathscr{I}(B_f)\cong\mathscr{I}(B)_f$,那么这个理想层被一个闭嵌入诱导.换句话讲,对$Y$的每个仿射开子集$\mathrm{Spec}B$,需要验证闭嵌入$\mathrm{Spec}B/\mathscr{I}(B)\to\mathrm{Spec}B$粘合为一个闭嵌入$X\to Y$.
+\item 零点概型.设$Y$是概型,取一个整体截面$s$,它取零的点(即在剩余类域中取零的点)构成了一个闭子集,记作$V(s)$.现在定义其上的闭子概型结构.对每个仿射开子集$U=\mathrm{Spec}A$,定义$U\cap V(s)$上的闭子概型结构为$\mathrm{Spec}A/(s\mid U)$.这称为$s$定义的零点概型.这是仿射概型上记号$V(\bullet)$的推广.另外如果整体截面$u$是可逆的,自然有$V(s)=V(su)$.另外我们可以类似定义$V(S)$,其中$S$是一族整体截面.
+\item 闭子概型的有限并和任意交.我们可以取仿射开覆盖,在每个仿射开子集上定义交或者并,再粘合为一个整体概型.于是问题归结为仿射情况.我们把仿射概型$\mathrm{Spec}A$的两个闭子概型$\mathrm{Spec}A/I$和$\mathrm{Spec}A/J$的并定义为$\mathrm{Spec}A/I\cap J$(把$I\cap J$替换为$IJ$似乎也是一个合适的定义,我们不这样约定是因为我们期望闭子概型和自身的并还是自身).一族闭子概型$\mathrm{Spec}A/I_i$的交定义为$\mathrm{Spec}A/\cap_iI_i$.此时概型意义上的有限并和任意交也是集合意义上的有限并和任意交.二元交还可以用纤维积描述:给定$X$的两个闭子概型$U$和$V$,定义它们的交是$U\times_XV$.按照$(A/I)\otimes_A(A/J)\cong A/(I+J)$说明这个定义吻合于之前的定义.
+
+
+
+射影空间的其他描述.
+\begin{enumerate}
+	\item 在经典几何中,$n$维射影空间可视为$n+1$维仿射空间上把每个一维线性子空间粘合.这个粘合对应于一个从$n+1$维仿射空间到$n$维射影空间的连续映射,这个连续映射是闭映射.但它不是一个开映射.此时$\mathbb{P}^{n+1}$可视为一个$\mathbb{A}^{n+1}$和$\mathbb{P}^n$的无交并,其中$\mathbb{A}^{n+1}$对应于齐次坐标的最后一个分量不取零,而$\mathbb{P}^n$对应于齐次坐标最后一个分量取零.
+	\item 仿射锥和射影锥.给定射影空间$\mathbb{P}^n$的子集$S$,它在典范的连续粘合映射$\mathbb{A}^{n+1}\to\mathbb{P}^n$下的原像(这个映射实际上扣去了仿射空间的原点,在取原像的时候约定填上原点)称为$S$的仿射锥.$S\subset\mathbb{P}^n$的仿射锥是$\mathbb{A}^{n+1}$的子集,我们解释了$\mathbb{P}^{n+1}$是$\mathbb{P}^n$和$\mathbb{A}^{n+1}$的无交并,那么$S$和它仿射锥的并自然的是$\mathbb{P}^{n+1}$的子集,这个子集称为$S$的射影锥.
+\end{enumerate}
+
+射影闭子集.在射影空间上可以讨论零点的是齐次多项式.一族齐次多项式$\{f_i\}$的公共零点集称为射影闭子集,记作$V(f_i)$.因为射影空间可以粘合定义,于是射影闭子集也可以由仿射闭子集粘合得到:举例来讲,考虑$\mathbb{P}^2$上的多项式$f=x_0^2+x_1^2-x_2^2$.它在粘合的三个2维仿射平面上对应的代数集分别是$V(1+x_1^2-x_2^2),V(x_0^2+1-x_2^2),V(x_0^2+x_1^2-1)$,这些代数集的粘合就是$V(f)$.
+
+\begin{enumerate}
+	\item (概型和簇的对应)设$k$是代数闭域,$I\subset k[X_1,X_2,\cdots,X_n]$是理想,设$A=k[X_1,X_2,\cdots,X_n]/I$,$X=\mathrm{Spec}A$,设$X$的闭点构成的子空间为$X_0$,设$Y$是仿射空间$\mathbb{A}^n(k)$的由$I$定义的仿射代数集.
+	\begin{itemize}
+		\item 证明$X_0$和$Y$同胚.
+		\item 证明$U\mapsto U\cap X_0$是从$X$的开集到$X_0$开集的双射.于是$X$和$X_0$对应的开集范畴是同构的,这导致$\textbf{Sh}(X)\cong\textbf{Sh}(X_0)$.
+	\end{itemize}
+	\begin{proof}
+		
+		第一问.$Y$是$I$的公共零点集,$X_0$是包含$I$的极大理想.$(a_1,a_2,\cdots,a_n)\in Y\mapsto(X_1-a_1,X_2-a_2,\cdots,X_n-a_n)\in X_0$是一个单射,弱零点定理说明这是满射.这是同胚因为$Y$上一般的闭集具有形式$V_1(I+J)=V_1(I)\cap V_1(J)$,它对应于极大理想集合$V_2(I+J)$.
+		
+		\qquad
+		
+		第二问.满射是子空间的定义,单射等价于证对闭子集$E,F\subset X$,从$E\cap X_0=F\cap X_0$可推出$E=F$.换句话讲$V(I)$包含的极大理想唯一确定了$V(I)$,但是这是零点定理:如果$R$是有限型$k$代数,其中$k$代数闭域,那么每个真理想$I$的根理想是全体包含它的极大理想的交.(所以如果$V_{\mathrm{max}}(I)=V_{\mathrm{max}}(J)$,取极大理想的交得到$\sqrt{I}=\sqrt{J}$,从而$V(I)=V(J)$).
+		
+		\qquad
+		
+		补充:如果$X$的子集$X_0$满足题目中的条件(即开集那个对应双射),称$X_0$是$X$的very dense子集.它有个等价描述是$X$的每个非空局部闭子集(局部闭子集是能写成一个开集和一个闭集交的集合)都和$X_0$有交.这题就是说代数闭域上的有限型仿射概型上闭点集是very dense的.如果改成代数闭域上的局部有限型概型结论也是对的,借助上面这个等价描述就可以证.(适当缩小这个非空局部闭子集可以使得它是某个仿射开子集的闭子集,但是仿射情况下闭点总存在,因为极大理想总存在,还要用到一件事是一般来讲子空间的闭点未必是原空间的闭点,但是局部有限型概型上仿射开子集的闭点肯定是原空间的闭点).取闭点子空间这个对应就是概型和簇的对应.
+	\end{proof}
+	\item 
+	\item 射影空间和射影概型.
+	\begin{enumerate}
+		\item 环上的(或者域上的)射影空间有两种定义方式,一个是用仿射空间粘合定义,一个是具体的$\mathrm{Proj}$构造.这一条先说粘合定义.$n$维射影空间定义为$n+1$个仿射空间$\mathbb{A}_R^n$的粘合.
+		\begin{itemize}
+			\item 对每个$0\le i\le n$,记$U_i$是坐标为$\{x_{0/i},x_{1/i},\cdots,x_{i-1/i},x_{i+1/i},\cdots,x_{n/i}\}$的$n$维仿射空间.对$j\not=i$,取$U_i$的开子集$U_{ij}=D(x_{j/i})$.那么有典范的同构$\varphi_{ij}:U_{ij}\to U_{ji},x_{j/i}\mapsto x_{i/j}$其余的$x_{k/i},k\not=i,j$映射为$x_{k/j}$.粘合得到的概型称为$R$上的$n$维射影概型,记作$\mathbb{P}_R^n$.
+			\item 如果$k$是代数闭域,射影空间中的闭点可以表示为$[a_0,a_1,\cdots,a_n]$,其中$a_i\in k$是不全为零的元,如果$a_i\not=0$,那么这个点落在$U_i$中,它的坐标是$\left(\frac{a_0}{a_i},\frac{a_1}{a_i},\cdots,\frac{a_n}{a_i}\right)$.
+		\end{itemize}
+		\item $\mathrm{Proj}$构造.粗略的讲,$S=R[X_0,X_1,\cdots,X_n]$上具有分次环结构,系数$R$约定为零次的,每个$X_i$约定1次的.$\mathrm{Proj}S$作为集合是$S$的全体齐次素理想构成的集合.给定齐次理想$I$,记$V_+(I)$是全体包含$I$的齐次素理想构成的集合,那么全体$V_+(I)$满足闭集公理,这个拓扑也叫做Zariski拓扑,这个拓扑实际上就是$\mathrm{Proj}S$作为$\mathrm{Spec}S$的子空间拓扑,主开集$D_+(f)$依旧构成拓扑基.它的结构层和$\mathrm{Spec}$一样可以两种方式定义:
+		\begin{itemize}
+			\item 要么直接对开集$U\subset\mathrm{Proj}(S)$,定义截面环$\mathscr{O}_{\mathrm{Proj}(S)}(U)$是全体这样的映射$s:U\to\coprod_{p\in\mathrm{Proj}(S)}S_{(p)}$,这里$S_{(p)}$表示局部化$S_p$自然的作为$\mathbb{Z}$分次环(对$S$中齐次元$a$和$S-p$中齐次元$f$,定义$a/f$的次数是$\deg a-\deg f$)后全体零次元构成的子环.$s$满足如下两个条件:对每个$p\in U$有$s(p)\in S_{(p)}$;对每个$p\in U$,存在$p$的开邻域$U_p\subset U$,以及同次数的齐次元$a,f\in S$,使得对每个$q\in U_p$,有$f\not\in q$,并且恒有表达式$s(q)=\frac{a}{f}\in S_{(q)}$.这里限制映射就定义为映射限制在更小的开集上.
+			\item 要么先定义主开集$D_+(f)$(这里$f$是齐次多项式)上的截面环是$S_{(f)}$(这表示$S_f$这个分次环的零次子环).
+		\end{itemize}
+		
+		无论哪种方式定义结构层,都可以说明结构层在$D_+(f)$上的限制恰好是素谱$\mathrm{Spec}S_{(f)}$的结构层,这导致$\mathrm{Proj}S$是概型.
+		\item 射影$R$概型也有两种定义方式:它是$R$射影空间的闭子概型,也等价于是$R$上某个分次环的$\mathrm{Proj}$.
+		\item 另外$\mathrm{Spec}$有个非常好的性质是说作为概型之间的态射恰好是环同态诱导的.$\mathrm{Proj}$不满足这个性质:分次环之间的同态理应考虑的是保次数的分次环同态($S=\oplus_{n\ge0}S_n$和$R=\oplus_{n\ge0}R_n$,一个环同态$\varphi:R\to S$是保次数的如果存在正整数$d$使得$\varphi(S_n)\subset R_{dn},\forall n\ge0$成立).一个保次数的分次环同态会诱导相应$\mathrm{Proj}$之间的概型态射,但是反过来它们之间的概型态射未必是这样诱导出来的,而且不同的分次环同态可能诱导相同的概型态射.
+	\end{enumerate}
+	
+	
+	
+\end{enumerate}
+
+
+
+
+
+
+
+习题2.
+\begin{enumerate}
+	\item Ex2第二问.这个问题就是说谱空间和拟紧连续映射(拟紧开子集的原像拟紧)构成的$\textbf{Top}$的子范畴上逆向极限总是存在的.我只做了一部分:
+	\begin{proof}
+		
+		一般范畴上的逆向极限存在等价于讲积和等化子总是存在的,于是可以验证这个子范畴上积和等化子总存在.我证了积存在:设$X=\prod_iX_i$,其中每个$X_i$都是谱空间,设$\pi_i:X\to X_i$是连续的投影映射.
+		\begin{itemize}
+			\item $X$是拟紧的:这是Tychonoff定理,拟紧空间的积总是拟紧的.
+			\item $X$是拟可分的:任取$X$的两个拟紧开子集$U,V$,它们可以表示为形如$\prod_iW_i$的开集的并,其中$W_i\subset X_i$是开子集,并且对几乎所有指标$i$有$W_i=X_i$.按照每个$X_i$上拟紧开子集构成拓扑基,说明这些$W_i$总可以取为$X_i$的拟紧开子集.于是可设$U=\cup_iU_i$和$V=\cup_jV_j$,其中$U_i,V_j$是形如$\prod_kW_k$的开子集,并且$W_k\subset X_k$是拟紧开子集,并且对几乎所有指标$k$有$W_k=X_k$.按照$U,V$是拟紧的,可抽有限子覆盖$U=\cup_{1\le i\le s}U_i$和$V=\cup_{1\le j\le t}V_j$,于是$U\cap V=(\cup_iU_i)\cap(\cup_jV_j)=\cup_{i,j}(U_i\cap V_j)$.这里每个$U_i\cap V_j$拟紧是Tychonoff定理和每个$X_i$拟可分保证的,拟紧开子集的有限并是拟紧的,这说明$U\cap V$是拟紧开子集.
+			\item $X$上拟紧开子集构成拓扑基:任取$U_{i_j}\subset X_{i_j}$是拟紧开子集,那么$\prod_{1\le j\le n}U_{i_j}\times\prod_{k\not=i_j}X_k$是$X$的拟紧开子集,这种形式的拟紧开子集构成拓扑基.另外这件事还说明$\pi_i:X\to X_i$都是拟紧映射.
+			\item $X$是Sober的:因为$T_0$空间是保积拓扑的,只需验证$X$的每个非空不可约闭子集$E$都存在一般点.设$\pi_i(E)$在$X_i$中的闭包为$Y_i$,那么$Y_i$是不可约的:如果$Y_i=F_1\cup F_2$是两个闭集的并,那么$E\subset\pi_i^{-1}(F_1)\cup\pi_i^{-1}(F_2)$,$E$的不可约性导致不妨设$E\subset\pi_i^{-1}(F_1)$,于是$\pi_i(E)\subset\pi_i(\pi_i^{-1}(F_1))\subset F_1$,于是$Y_i=\overline{\pi_i(E)}\subset F_1$,于是$Y_i$是不可约的.
+			
+			我们断言有$E=\prod_iY_i$,一旦这件事得证,按照每个$X_i$是Sober的,可设$Y_i=\overline{\{y_i\}}$,于是点$y=\prod_iy_i\in X$满足$\overline{\{y\}}=E$,这就得证.
+			
+			证明$E=\prod_iY_i$可以不妨归结为设$Y_i=X_i$,即每个$\pi_i(E)$在$X_i$中稠密,要证的就是$E$恰好是整个空间$X$.假设这不成立.那么可在$X-E$中取到一个非空基元素$U_{i_1}\times U_{i_2}\times\cdots\times U_{i_n}\times\prod_{k\not=i_j}X_k$.其中$U_{i_j}$是$X_{i_j}$的非空开子集.设$Z_{i_j}=X_{i_j}-U_{i_j}$,设$E_j=Z_{i_j}\times\prod_{k\not=i_j}X_k$,这是$X$的闭子集,那么有$E\subset\cup_{1\le j\le n}E_j$,不可约性导致$E\subset$某个$E_t$,但是这导致$\pi_t:E\to X_t$的像不在$X_t$里稠密,这矛盾.
+		\end{itemize}
+		
+		等化子的部分.$\textbf{Top}$上等化子总存在:如果$f,g:X\to Y$是连续映射,等化子是$X$的子空间$E=\{x\in X\mid f(x)=g(x)\}$,典范映射$e:E\to X$就是包含映射.
+		$$\xymatrix{E\ar[r]^e&X\ar@<0.5ex>[r]^f\ar@<-0.5ex>[r]_g&Y}$$
+		
+		我们要证明如果$X,Y$是谱空间,$f,g$是拟紧映射那么$E$是谱空间.$E$是拟紧的部分是容易的:按照$X$是拟可分的,说明$X\to X\times X$是拟紧的,而$f\times g:X\times X\to Y\times Y$是拟紧的,于是复合映射$X\to X\times X\to Y\times Y$是拟紧的.而$E$就是$Y\times Y$的对角线$\Delta(Y)=\{(y,y)\in Y\times Y\mid y\in Y\}$在这个复合映射下的原像.于是归结为证明$\Delta(Y)$是拟紧的.但是它是对角映射$Y\to Y\times Y$的像集,拟紧集的连续像是拟紧的,这得到$E$是拟紧的.
+		
+		其余部分还在想......
+	\end{proof}
+	\item Ex3第二问.
+\end{enumerate}
+
+
+第七节.
+\begin{enumerate}
+	\item 设$(f,f^{\#}):(X,\mathscr{O}_X)\to(Y,\mathscr{O}_Y)$是环空间之间的态射.取$Y$的开子集$V$,按照正向极限的泛性质有如下交换图表:
+	$$\xymatrix{\mathscr{O}_Y(V)\ar[r]^{f^{\#}(V)}\ar[d]&\mathscr{O}_X(f^{-1}(V))\ar[d]&\\\mathscr{O}_{Y,f(x)}\ar[r]&(f_*\mathscr{O}_X)_{Y,f(x)}\ar[dr]&\\&&\mathscr{O}_{X,x}}$$
+	
+	从而总有如下交换图表:
+	$$\xymatrix{\mathscr{O}_Y(V)\ar[rr]^{f^{\#}(V)}\ar[d]&&\mathscr{O}_X(f^{-1}(V))\ar[d]\\\mathscr{O}_{Y,f(x)}\ar[rr]_{f^{\#}_x}&&\mathscr{O}_{X,x}}$$
+	\item 关于$X_f$(讲义里的记号是$D(f)$).设$X$是局部环空间,设$f\in\mathscr{O}_X(X)$是一个整体截面,记$X_f=\{x\in X\mid f_x\not\in m_x\subset\mathscr{O}_{X,x}\}$.
+	\begin{itemize}
+		\item $X_f$总是一个开子集.
+		\begin{proof}
+			
+			任取$x\in X_f$,那么$f_x$在$\mathscr{O}_{X,x}$中是单位,于是它有逆元$g_x$满足$f_xg_x=1$.于是可取足够小的$x$的开邻域$U$使得存在$g\in\mathscr{O}_X(U)$满足$(f\mid U)g=1$,这说明$U\subset X_f$,于是$X_f$是开子集.
+		\end{proof}
+		\item $f$在$X_f$上的限制是$\mathscr{O}_X(X_f)$中的可逆元.这个只要注意到局部上可逆,按照逆唯一说明局部的逆可以粘合为$X_f$上的一个整体逆元.
+	\end{itemize}
+\end{enumerate}
+
+
+ 设$X\subseteq\mathbb{P}_k^n$是维数至少为1的射影概型.对$\mathbb{P}_k^n$的任意超曲面$H$(即闭集$H$的每个不可约分支在射影空间中的余维数是1),总有$H$和$X$的交非空.
+	\begin{proof}
+		
+		设$A=k[X_0,X_1,\cdots,X_n]$.设$X=V_+(I)$,其中$I$是一个不包含无关理想$(X_0,X_1,\cdots,X_n)$的齐次理想,设$H=V_+(f)$,其中$f$是一个齐次多项式.设$X$和$H$在$\mathbb{A}_k^{n+1}$中的仿射锥为$\widetilde{X}$和$\widetilde{H}$.问题等价于证明$\widetilde{X}\cap\widetilde{H}=\widetilde{X\cap H}$含一个不是原点的点.
+		
+		我们有$\widetilde{X\cap H}=V(I+(f))$,设$p$是包含在$(X_0,X_1,\cdots,X_n)$中的$I+(f)$上的极小素理想.它对应于$\widetilde{X\cap H}$的一个不可约分支.如果$p\not=(X_0,X_1\cdots,X_n)$,那么它对应的不可约分支不是单个原点,于是$\widetilde{X\cap H}$中含有非原点的点,于是交非空.
+		
+		再设$p=(X_0,X_1,\cdots,X_n)$,在$A/I$上用Krull主理想定理,说明包含$I$的以$p$为终端的素理想严格包含链的长度至多为1.但是按照$X$的维数至少为1,说明至少存在两个不为无关理想$p$的素理想$q,q'$满足$I\subseteq q\subsetneqq q'\subsetneqq p$,这得到一个终端为$p$的包含$I$的素理想严格包含链长度为2,这矛盾.
+	\end{proof}
+	
+
+
+
+
+
+子概型的交.设$f:X\to Y$是概型的态射,设$i:Z\to Y$是嵌入,我们解释过基变换$i_{(X)}:Z\times_YX\to X$也是嵌入,另外它的像集实际上就是$f^{-1}(Z)$,是$X$中的局部闭子集.给定概型$X$的两个子概型$Y,Z$,设包含映射为$i:Y\to X$和$j:Z\to X$.定义它们在概型意义上的交$Y\cap Z$为$Y\times_XZ=i^{-1}(Z)=j^{-1}(Y)$.对于仿射情况.设$X=\mathrm{Spec}(A)$是仿射概型,设两个闭子集为$Y=V(I)$和$Z=V(J)$,那么它们的概型交就是$V(a)\cap V(b)=V(a+b)$.
+
+
+
+
+
+
+$L$值点.设$k$是域,设$X$是$k$概型,取域扩张$k\subset L$,定义$X(L)=\mathrm{Hom}_k(\mathrm{Spec}(L),X)$为$X$上的$L$值点集合.这诱导了典范的同态$\mathrm{Spec}(L)\to\mathrm{Spec}(\kappa(x))\to X\to\mathrm{Spec}(k)$,进而得到了域扩张$k\subset\kappa(x)\subset L$.记$k$概型$X$上的全部$L$值点构成的集合为$X(L)$.
+\begin{enumerate}
+	\item 我们描述过源端为域上素谱的态射,态射$\mathrm{Spec}(L)\to X$一一对应于$(x,l)$,其中$x\in X$,而$l:\kappa(x)\to L$是域扩张.于是$k$概型上的$L$值点一一对应于$X$中的点$x$及一个$k$嵌入$\kappa(x)\subset L$.
+	\item 设$X$是$k$上的局部有限型概型,我们解释过一个点$x\in X$是闭点当且仅当$\kappa(x)$是$k$的有限扩张,也等价于代数扩张.于是如果$k\subset L$是代数扩张,那么每个$L$值点的像是$X$中的闭点.
+	\item 设$X$是$k$上局部有限型概型,取平凡的域扩张$k\subset L=k$,此时$k$值点也称为$k$有理点.它一一对应于$X$中这样的点$x$,使得典范映射$k\to\kappa(x)$是同构.
+	\item 如果$k$是代数闭域,$X$是局部有限型$k$概型,那么每个代数扩张$k\to\kappa(x)$都是同构,于是此时$X$上的$k$有理点集$X(k)$恰好就是闭点集.
+	\item 有不存在$k$有理点的例子.取一个非平凡的域扩张$k\subset L$,那么$\mathrm{Spec}(L)$视为$k$概型不存在$k$值点,因为这会导致$k\subset L\subset k$是恒等同态,这矛盾.
+\end{enumerate}
+
+设$G$是一个由$L$上的$k$自同构构成的群.可定义$G$在集合$X(L)$上的作用为$(g,x)\mapsto x^*\circ g^*$.
+\begin{enumerate}
+	\item 给定$G$的子群$H$,记$X(L)^H$为$X(L)$上所有在$H$下固定的点构成的子集.我们断言有$X(L^H)=X(L)^H$.
+	\begin{proof}
+		
+		先证明仿射情况,记$X=\mathrm{Spec}(A)$,那么$A$是$k$代数,可记$A=k[T_i]/(f_j),i\in I,j\in J$.此时有$X(L)=\mathrm{Hom}_k(A,L)=\{(t_i)\in K^I\mid f_j(t_i)=0,\forall j\in J\}$.于是$(t_i)\in X(L)^H$当且仅当$\sigma(t_i)=t_i,\forall\sigma\in H,\forall i\in I$,当且仅当$t_i\in L^H$,也即$(t_i)\in X(L^H)$.
+		
+		再设$X$是一般概型,记仿射开覆盖$X=\cup_{\alpha}U_{\alpha}$,那么$X(L)^H=\cup_{\alpha}U_{\alpha}(L)^H=\cup_{\alpha}U_{\alpha}(L^H)=X(L^H)$.
+	\end{proof}
+	\item 于是如果$L$是$k$的Galois扩张,记$G=\mathrm{Gal}(L/k)$,就有$X(L)^G=X(L^G)=X(k)$,即在$G$下不变的$L$值点恰好就是$k$有理点.
+	\item 现在取$k$的代数闭包$\overline{k}$.记$G$为$\overline{k}$上的$k$自同构.记$X$是局部有限型$k$概型,记$\mathrm{Spec}(\overline{k})$中唯一点为$x_0$,那么映射$\alpha:X(\overline{k})\to X$,$f\mapsto f(x_0)$是从$X(\overline{k})$上的$G$轨道到$X$中闭点的双射.
+	\begin{proof}
+		
+		我们解释过$\overline{k}$值点一一对应于点$x\in X$及一个$k$嵌入$\kappa(x)\subset\overline{k}$.我们还解释过这个嵌入是代数扩张当且仅当$x$是闭点.这说明了每个$f(x_0)$都是$X$的闭点,反过来每个闭点都对应于这样一个代数扩张.最后需要说明两个$\overline{k}$值点$f,g$满足$f(x_0)=g(x_0)$当且仅当它们在$G$下的同一轨道中:$f(x_0)=g(x_0)=s$当且仅当这两个$\overline{k}$值点对应于$(s,l_1)$和$(s,l_2)$,其中$l_i:\kappa(s)\to\overline{k}$.这两个$k$嵌入可以延拓为$\overline{k}$上的$k$自同构,于是存在$\overline{k}$上的$k$自同构$\sigma$使得$\sigma\circ l_1=l_2$.
+	\end{proof}
+\end{enumerate}
+
+
+\subsubsection{B\'ezout定理}
+
+域$k$上的射影平面曲线是指$\mathbb{P}_k^2$的可表示为$V_+(f)$的闭子概型,其中$0\not=f\in k[X,Y,Z]$是一个非常数的齐次多项式.$f$的次数称为这个平面曲线的次数.
+\begin{enumerate}
+	\item 我们证明过平面曲线总是等余维数1的.如果记$f=f_1^{e_1}f_2^{e_2}\cdots f_r^{e_r}$,那么$V_+(f)$的全部不可约分支为$V_+(f_i^{e_i})=V_+(f_i)$.概型$V_+(f)$是既约的当且仅当$\sqrt{f}=f$,也即唯一分解中全部指数$e_i=1$.
+	\item 设$0\not=f,g\in k[X,Y,Z]$是两个非常数齐次多项式,那么$\dim V_+(f,g)=0$当且仅当$f,g$没有公共因子,换句话讲它们没有公共不可约分支.
+	\item 于是如果两个平面曲线$V_+(f)$和$V_+(g)$没有公共不可约分支,按照我们之前给出的域上有限型零维概型的等价刻画,说明此时$Z=V_+(f,g)$是一个有限维$k$代数的素谱,$Z$只包含了有限个点$\{z_1,z_2,\cdots,z_n\}$,并且它就是无交并$\coprod_{1\le i\le n}\mathrm{Spec}(\mathscr{O}_{Z,z_i})$.
+\end{enumerate}
+
+设$C,D\subset\mathbb{P}_k^2$是两个平面曲线,设$Z=C\cap D$是零维的$k$概型.定义$C$和$D$的相交数$i(C,D)=\dim_k\Gamma(Z,\mathscr{O}_Z)$.定义$C$和$D$在点$z\in Z$处的相交数为$i_z(C,D)=\dim_k\mathscr{O}_{Z,z}$.
+\begin{enumerate}
+	\item 我们解释过零维有限型概型上满足$\mathscr{O}_Z(Z)=\prod_{z\in Z}\mathscr{O}_{Z,z}$.于是有$i(C,D)=\sum_{z\in Z}i_z(C,D)$.
+	\item 引理1.设$k\subset K$是域扩张,记$C_K=C\otimes_kK$和$D_K=D\otimes_kK$,那么$C_K=V_+(f_K)\subset\mathbb{P}_K^2$,这里$f_K$是把$f$视为$K$系数的齐次多项式,类似定义$D_K$,那么有$i(C,D)=i(C_K,D_K)$.这个定理允许我们只考虑代数闭域的情况.
+	\begin{proof}
+		
+		我们有$C_K\cap D_K=C_K\times_{\mathbb{P}_K^2}D_K=(C\times_{\mathbb{P}_k^2}D)\otimes_kK=(C\cap D)\otimes_kK=(C\cap D)_K$.于是记$A=\Gamma(C\cap D,\mathscr{O}_{C\cap D})$,就有$i(C_K,D_K)=\dim_K(A\otimes_kK)=\dim_kA=i(C,D)$.
+	\end{proof}
+	\item 引理2.记$S=k[X,Y,Z]$,记$\deg f=n$和$\deg g=m$.记$S$上的分次$k$代数结构为$S=\oplus_dS_d$.记$I=(f,g)$,那么$B=S/I$上也自然具备一个分次$k$代数结构$B=\oplus_dB_d$.那么$\dim_kS_d=\left(\begin{array}{c}d+2\\2\end{array}\right)$,这说明$B_d$总是有限维$k$线性空间.这里我们证明$d\ge n+m$时$\dim_kB_d=nm$.
+	\begin{proof}
+		
+		我们有如下正合列,其中$\mu(s)=(gs,-fs)$和$v(s',s'')=fs'+gs''$.
+		$$\xymatrix{0\ar[r]&S_{d-n-m}\ar[r]^{\mu}&S_{d-n}\oplus S_{d-m}\ar[r]^v&S_d\ar[r]&B_d\ar[r]&0}$$
+		
+		于是有维数等式$\dim_kB_d=\dim_kS_d-\dim_kS_{d-n}-\dim_kS_{d-m}+\dim_kS_{d-n-m}=mn$.
+	\end{proof}
+	\item B\'ezout定理.设$k$是域,设两个平面曲线$C=V_+(f)$和$D=V_+(g)$没有公共不可约分支,那么有$i(C,D)=\deg f\deg g$.
+	\begin{proof}
+		
+		【】
+	\end{proof}
+\end{enumerate}
+
+
+
+
+
+\begin{enumerate}
+	\item 给定范畴$\mathscr{C}$,对每个对象$X$,考虑函子$h_X:\mathscr{C}^{\mathrm{op}}\to\textbf{Sets}$为,把对象$S$映射为集合$h_X(S)=\mathrm{Hom}_{\mathscr{C}}(S,X)$,把$\mathscr{C}$中的态射$u:S'\to S$映射为集合之间的映射$h_X(S)\to h_X(S')$,$x\mapsto x\circ u$.
+	\item 如果$f:X\to Y$是$\mathscr{C}$中的态射,那么它诱导了$h_X\to h_Y$的自然变换$h_f$:即对每个对象$S$,有$h_f(S):h_X(S)\to h_Y(S)$为$g\mapsto f\circ g$.
+	\item 这个概念的重要性在于Yoneda引理:给定范畴$\mathscr{C}$,$h_X$的定义同上,如果$F$是任意一个$\mathscr{C}^{\mathrm{op}}\to\textbf{Sets}$的函子,那么映射$\mathrm{Nat}(h_X,F)\to F(X)$,$\alpha\mapsto \alpha(X)(\mathrm{id}_X)$是双射,并且关于$X$是函子性的,这里函子性是指,对任意$\mathscr{C}$中的态射$f:X\to Y$,总有如下图表交换:
+	$$\xymatrix{\mathrm{Nat}(h_X,F)\ar[rr]\ar[d]&&F(X)\ar[d]\\\mathrm{Nat}(h_Y,F)\ar[rr]&&F(Y)}$$
+	\begin{proof}
+		
+		我们来直接构造逆映射.对每个$\xi\in F(X)$,对每个对象$Y$,构造$\alpha_{\xi}(Y):h_X(Y)\to F(Y)$为$f\mapsto F(f)(\xi)$.函子性直接验证.
+	\end{proof}
+	
+\end{enumerate}
+
+
+\item 特别的如果$Y$是$\mathscr{C}$的对象,那么Yoneda引理说明存在自然的同构$\mathrm{Hom}_{\mathscr{C}}(X,Y)\cong\mathrm{Nat}(h_X,h_Y)$.换句话讲,如果全体$h_X,x\in\mathrm{Obj}(\mathscr{C})$作为对象,自然变换作为态射构成的函子范畴记作$\hat{\mathscr{C}}$,那么函子$X\mapsto h_X$是$\mathscr{C}\to\hat{\mathscr{C}}$的完全忠实函子.
+\item 固定概型$S$,把范畴$\mathscr{C}$取为$S$概型范畴,于是对$S$概型$X$,$h_X$是$\textbf{S-Sch}^{\mathrm{op}}\to\textbf{Sets}$的函子.它把$S$概型$T$映射为$h_X(T)=\mathrm{Hom}_{\textbf{S-Sch}}(T,X)$,我们把这个集合记作$X(T)$,如果$T$是关于环$A$的仿射概型,把它记作$X(A)$.另外对一般的函子$F:\textbf{S-Sch}^{\mathrm{op}}\to\textbf{Sets}$,我们称$F(T)$中的元素是$T$值点.
+\item 把Yoneda引理用在这种情况上说明如下信息是互相等价的(互相唯一决定的).这里1和2等价即Yoneda引理,2和3等价是因为概型态射的粘合.
+\begin{enumerate}
+	\item 一个$S$概型之间的态射$f:X\to Y$.
+	\item 对每个$S$概型$T$给定一个集合间的映射$f(T):X_S(T)\to Y_S(T)$,使得这族映射关于$T$是函子性的,也即对任意态射$u:T'\to T$,有如下图表交换:
+	$$\xymatrix{X_S(T)\ar[rr]^{f(T)}\ar[d]_{X_S(u)}&&Y_S(T)\ar[d]^{Y_S(u)}\\X_S(T')\ar[rr]_{f(T')}&&Y_S(T')}$$
+	\item 对每个$S$仿射概型$T=\mathrm{Spec}(B)$,给定一个集合间的映射$f(T):X_S(T)\to Y_S(T)$,使得这族映射关于$B$是函子性的.
+\end{enumerate}
+\item 于是我们有理由期望$S$概型态射$f:X\to Y$和映射族$f_S(T):X_S(T)\to Y_S(T)$的某些性质可以互相转化.这里给出一个例子:概型的态射$f:X\to Y$是集合意义的满射当且仅当对每个域$k$和每个$Y$的$k$值点$y:\mathrm{Spec}(k)\to Y$,存在$k$的域扩张$L$以及一个$x\in X(L)$,满足$f(L)(x)=y_L$,这里$y_L$是$y$在$Y(k)\to Y(L)$下的像.特别的,如果对每个域$k$,态射$f:X\to Y$诱导的$X(k)\to Y(k)$都是满射,那么$f$是一个满射(这个逆命题不成立).
+\begin{proof}
+	
+	充分性.任取点$y_0\in Y$,取$k=\kappa(y_0)$,设$y$是态射$\mathrm{Spec}(\kappa(y_0))\to Y$.按照条件如下图表交换,并且两个方向态射的复合都是$y_L$.于是如果记$x$像集中唯一的点为$x_0$,就有$f(x_0)=y_0$,也即$f$是满射.
+	
+	$$\xymatrix{\mathrm{Spec}(L)\ar[rr]^x\ar[d]&&X\ar[d]^f\\\mathrm{Spec}(\kappa(y_0))\ar[rr]_y&&Y}$$
+	
+	必要性.假设$f$是满射,设$y\in Y(k)$,设$y$像集中唯一的点为$y_0\in Y$.设$x_0\in X$满足$f(x_0)=y_0$.考虑延拓$\kappa(y_0)\to\kappa(x_0)$.取$\kappa(y_0)$的延拓$L$使得存在从$\kappa(x_0)$和$k$分别的$\kappa(y_0)$嵌入,例如取$L$是$\kappa(x_0)\otimes_{\kappa(y_0)}k$模去一个极大理想.考虑如下图表,按照$L$的构造说明左边小方块交换,按照$f(x_0)=y_0$得到右边小方块交换,于是大矩形图表交换,如果取$x\in X(L)$为态射的复合$\mathrm{Spec}(L)\to\mathrm{Spec}(\kappa(x_0))\to X$,那么大矩形交换就是要证的$f(L)(x)=y_L$.
+	$$\xymatrix{\mathrm{Spec}(L)\ar[rr]\ar[d]&&\mathrm{Spec}(\kappa(x_0))\ar[rr]\ar[d]&&X\ar[d]\\\mathrm{Spec}(k)\ar[rr]&&\mathrm{Spec}(\kappa(y_0))\ar[rr]&&Y}$$
+\end{proof}
+
+
+
+
+
+
+
+习题2.
+\begin{enumerate}
+	\item 
+	\begin{itemize}
+		\item 如果环同态$\varphi:A\to B$,满足$B$中每个元可以表示为$\varphi(a)h$的形式,这里$h$是$B$中的一个单位,那么它诱导的素谱之间的连续映射$^a\varphi:\mathrm{Spec}(B)\to\mathrm{Spec}(A)$是单射,并且它甚至是$\mathrm{Spec}(B)$到像空间$\mathrm{im}^a\varphi$的同胚.
+		\begin{proof}
+			
+			我们先来说明$^a\varphi$是单射.如果$p_1,p_2\in\mathrm{Spec}(B)$满足$\varphi^{-1}(p_1)=\varphi^{-1}(p_2)$.任取$b\in p_1\subset B$,按照定义它可以表示为$b=\varphi(a)h$,其中$h$是$B$中单位,那么$\varphi(a)=bh^{-1}\in p_1$,于是$a\in\varphi^{-1}(p_1)=\varphi^{-1}(p_2)$,于是$\varphi(a)=bh^{-1}\in p_2$,于是$b\in p_2$.这说明$p_1\subset p_2$,同理有$p_2\subset p_1$,于是$p_1=p_2$,于是$^a\varphi$是单射.
+			
+			于是$^a\varphi$就是$\mathrm{Spec}(B)\to\mathrm{im}^a\varphi$的连续双射,为证明它是同胚,仅需验证它是闭映射.任取$\mathrm{Spec}(B)$中的闭集$Y'=V(E')$,其中$E'\subset B$.如果我们把$E'$中某个元乘以一个单位,不会改变$V(E')$,于是按照条件$E'$中的元肯定表示为$\varphi(A)$中的元乘以一个单位,我们不妨约定$E'\subset\varphi(A)$.记$E'=\varphi(E)$,$E\subset A$.那么得到$Y'=V(E')=V(\varphi(E))=(^a\varphi)^{-1}(V(E))$.按照$^a\varphi$是双射得到$^a\varphi(Y')=V(E)$是闭集.这里用到了一步一般成立的等式$V(\varphi(E))=(^a\varphi)^{-1}V(E)$.
+		\end{proof}
+		\item 借助上述引理,得到如下两个结论:典范满同态$A\to A/I$诱导了素谱$\mathrm{Spec}(A/I)$到$\mathrm{Spec}(A)$的闭子集$V(I)$的同胚,于是$\mathrm{Spec}(A/I)$就可以视为$\mathrm{Spec}(A)$的闭子集$V(I)$;对任意乘性闭子集$S$,典范同态$A\to S^{-1}A$诱导了素谱$\mathrm{Spec}(S^{-1}A)$到$\mathrm{Spec}(A)$的全部和$S$无交的素理想构成的子空间之间的同胚,特别的,局部化$A_f,f\in A$的素谱可视为$\mathrm{Spec}(A)$的开子集$D(f)$.
+	\end{itemize}
+	\item 如果$f:X\to Y$是不可约拓扑空间之间的连续映射,分别有一般点$\xi\in X$和$\eta\in Y$,并且$Y$是$T_0$的,那么$f(X)$在$Y$中稠密当且仅当$f(\xi)=\eta$.
+	\begin{proof}
+		
+		充分性是容易的,此时$Y=\overline{\{\eta\}}=\overline{f(\xi)}\subset\overline{f(X)}$,于是$\overline{f(X)}=Y$.
+		
+		必要性.这里$Y$是$T_0$的用处只在于$Y$上恰有一个一般点.我们有$f(X)=f(\overline{\{\xi\}})\subset\overline{f(\xi)}$,于是有$Y=\overline{f(X)}\subset\overline{f(\xi)}$,这迫使$f(\xi)=\eta$.
+	\end{proof}
+	\item 第四题.首先一般结论是这样的(模范畴上):正向极限保右正合列,一般不保左正合列,但是如果指标集是有向集(directed set条件),那么它是保正合列的;对偶的逆向极限保左正合列,一般不保右正合列,但是如果指标集为$\mathbb{N}$(偏序约定为常用的偏序),并且逆向系统中的每个态射$K_{i+1}\to K_i$都是满射,那么逆向极限是保正合列的.
+	\begin{itemize}
+		\item 给定指标集相同为$I$的三个正向系统:
+		$$\{A_i,\alpha_j^i:A_i\to A_j\},\{B_i,\beta_j^i:B_i\to B_j\},\{C_i,\gamma_j^i:C_i\to C_j\}$$
+		
+		如果正向系统之间的态射$r=(r_i:A_i\to B_i),s=(s_i:B_i\to C_i)$满足总有右正合列$\xymatrix{A_i\ar[r]^{r_i}&B_i\ar[r]^{s_i}&C_i\ar[r]&0}$,那么有正向极限的右正合列:
+		$$\xymatrix{\lim\limits_{\rightarrow}A_i\ar[r]^{r'}&\lim\limits_{\rightarrow}B_i\ar[r]^{s'}&\lim\limits_{\rightarrow}C_i\ar[r]&0}$$
+		\begin{proof}
+			
+			先回顾下不带有向集条件的正向极限的构造.以$\{A_i,\alpha_j^i\}$为例,它的正向极限是$\oplus_iA_i/S_A$,这里$S_A$是由全体$\{\lambda_j\alpha^i_ja_i-\lambda_ia_i,\forall a_i\in A_i,i\le j\}$生成的$\oplus_iA_i$的子模.这里$\lambda_i$是典范映射$A_i\to\oplus_iA_i$.
+			
+			另外如果$r=(r_i:A_i\to B_i)$是两个正向系统之间的态射,这是指对每个$i\le j$总有如下交换图表:
+			$$\xymatrix{A_i\ar[rr]^{\alpha_j^i}\ar[d]_{r_i}&&A_j\ar[d]^{r_j}\\B_i\ar[rr]_{\beta_j^i}&&B_j}$$
+			
+			这个正向系统态射诱导的正向极限之间的态射为典范的直和同态$\oplus_ir_i:\oplus_iA_i\to\oplus_iB_i$诱导的商同态$\oplus_iA_i/S_A\to\oplus_iB_i/S_B$.为验证定义良性需要证明$\oplus_ir_i$把$S_A$映入$S_B$.这是容易的:$S_A$的生成元具有形式$\lambda_j\alpha^i_ja_i-\lambda_ia_i$,它在这个直和映射下的像是$\lambda_jr_j\alpha^i_ja_i-\lambda_ir_ia_i$,但是上面交换图说明$r_j\alpha^i_j=\beta_j^ir_i$,于是记$b_i=r_ia_i$就得到这个像是$\lambda_j\beta^i_jb_i-\lambda_ib_i$,这是$S_B$生成元的形式.
+			
+			验证右正合性:$s'$是满射因为每个$s_i$是满射导致$\oplus_is_i:\oplus_iB_i\to\oplus_iC_i$是满射,于是诱导的商映射$s'$自然也是满射.
+			
+			$\mathrm{im}r'\subset\ker s'$是函子性直接保证的.最后验证$\ker s'\subset\mathrm{im}r'$:假设$(b_i)\in\ker s'\subset\oplus_iB_i/S_B$,那么$(s_ib_i)\in S_B$,于是$(s_ib_i)$可以表示为某些$\lambda_j\beta^i_jb_i-\lambda_ib_i$的基域上的线性组合,记作$(s_ib_i)=\sum k_{p,q}(\lambda_q\gamma_p^qc_p-\lambda_pc_p)$.按照$s_i$都是满射,存在$b_p\in B_p$使得$s_i(b_p)=c_p$,于是$(s_ib_i)=\sum k_{p,q}(\lambda_q\gamma_p^qs_pb_p-\lambda_ps_pb_p)$.按照之前的交换图表,有$\gamma_p^qs_p=s_q\beta_p^q$.于是有$(s_ib_i)=\sum k_{p,q}(\lambda_qs_q\beta_p^qb_p'-\lambda_ps_pb_p')=(s_i)\sum k_{p,q}(\lambda_q\beta_p^qb_p'-\lambda_pb_p')$,于是$(b_i)-\sum k_{p,q}(\lambda_q\beta_p^qb_p'-\lambda_pb_p')$落在$\ker\oplus_is_i=\mathrm{im}\oplus_ir_i$中,于是这个差可以表示为$(r_ia_i)$,其中$(a_i)\in\oplus_iA_i$.于是$(b_i)\in\mathrm{im}\oplus_iA_i+S_B$,这说明$\ker s'\subset\mathrm{im}r'$.
+		\end{proof}
+		\item 如果额外添加$I$是有向集条件,那么正向极限函子还是保左正合列的.
+		\begin{proof}
+			
+			只需证明如果每个$r_i$都是单射,那么$r'$是单射.如果$r'(x)=0$,其中$x\in\oplus_iA_i/S_A$,那么有$x=\lambda_ia_i+S_A$(按理说$x=\sum_i\lambda_ia_i+S_A$,但是有向集条件可以让这个有限和不断约化为单一的项).于是$\lambda_ir_ia_i\in S_B$.但是有向集条件下这等价于讲存在某个$j\ge i$使得$\beta_j^i(r_ia_i)=0$,再按照正向系统之间态射要满足的交换图表,得到$0=\beta_j^i(r_ia_i)=r_j\alpha_j^ia_i$,按照$r_i$是单射,得到$\alpha_j^ia_i=0$,于是$x=\lambda_ia_i+S_A=0$.
+		\end{proof}
+	\end{itemize}
+\end{enumerate}
+
+
+Neukirch
+1.2的2和3
+
+
+
+\subsection{素谱}
+
+
+
+Boolean代数.一个Boolean代数是指一个集合$A$上指定两个元$1$和$0$分别称为最大元和最小元,以及$A$上的两个二元运算$\land$和$\wedge$,以及$A$上的一个单元运算$\neg$,满足如下六个性质:
+\begin{enumerate}
+	\item 二元运算满足分配律$a\land(b\land c)=(a\land b)\land c$和$a\wedge(b\wedge c)=(a\wedge b)\wedge c$.
+	\item 二元运算满足交换律$a\land b=b\land a$和$a\wedge b=b\wedge a$.
+	\item 消去律$a\land(a\wedge b)=a$和$a\wedge(a\land b)=a$.
+	\item 恒等律$a\land 0=a$和$a\wedge 1=a$.
+	\item 分配律$a\wedge(b\land c)=(a\wedge b)\land(a\wedge c)$和$a\land(b\wedge c)=(a\land b)\wedge(a\land c)$.
+	\item 补性质$a\land\neg a=1$和$a\wedge\neg a=0$.
+\end{enumerate}
+
+Boolean代数和Boolean环可互相转化.如果$R$是一个Boolean代数,对任意$a,b\in R$取$a+b=(a\land b)\wedge\neg(a\wedge b)$和$ab=a\wedge b$.反过来如果$R$是Boolean环,取最大最小元分别是$1$和$0$,取$x\wedge y=xy$,$x\land y=x+y+xy$和$\neg x=1-x$.
+
+一个拓扑空间$X$上的全体开闭集构成集合$A$,把最大元取为全集,最小元取为空集,$\wedge$约定为交,$\land$约定为并,$\neg$约定为取补集,这就得到一个Boolean代数,记作$B(X)$.Stone定理断言的是每个Boolean代数必然是某个紧致Hausdorff空间$X$诱导的$B(X)$.事实上任取Boolean代数$R$,那么它对应于Boolean环,取素谱$X$,这是一个紧致Hausdorff空间,并且我们证明过开闭集恰好对应于$D(a),a\in R$,于是$B(X)$就是给定的Boolean代数.
+
+极大谱.给定交换环$R$,它的全部极大理想构成了素谱的一个子空间,称为极大谱,记作$\mathrm{Max}(R)$.通常来讲极大谱没有很好的函子性,因为极大理想在环同态下的原像未必是极大理想.
+
+设$X$是紧致Hausdorff空间,其上的全部实值连续函数在加法和乘法下构成了一个交换环,记作$C(X)$.对每个$x\in X$,记全部在$x$处取零的实值连续函数为$m_x$,那么它是满同态$C(X)\to\mathbb{R}$,$f\mapsto f(x)$的核,于是$m_x$总是$C(X)$的极大理想.如果记$C(X)$的极大谱为$X'$,这就得到了一个映射$\mu:X\to X'$为$x\mapsto m_x$.实际上$\mu$是一个同胚:
+\begin{enumerate}
+	\item $\mu$是满射,换句话说$C(X)$的每个极大理想均具有形式$m_x$.任取$C(X)$的极大理想$m$,记$V=\{x\in X\mid f(x)=0,\forall f\in m\}$,如果可以说明$V$非空,任取$x\in V$,就得到$m\subset m_x$,按照极大性就说明$m=m_x$.
+	
+	现在假设$V$是空集,则对任意$x\in X$,可找到$f_x\in m$使得$f_x(x)\not=0$.按照$f_x$连续,只可取$x$的开邻域$U_x$使得$f_x$在其上处处不取零.现在$\{U_x,x\in X\}$构成了$X$的开覆盖,紧致性说明可取有限子覆盖$\{U_{x_1},U_{x_2},\cdots,U_{x_r}\}$.取连续的$f=\sum_{1\le i\le r}f_{x_i}^2$,那么$f\in m$并且处处不取零,导致$f$是$C(X)$中的单位,这和$m$不是单位理想矛盾.
+	\item $\mu$是单射.紧致Hausdorff条件说明$X$上满足Urysohn引理,任取两个不同点$x,y$,则可取$X$上的连续函数在$x$处取零,在$y$处不取零.这说明$m_x\not=m_y$.
+	\item $\mu$是同胚,需要验证的是$\mu(U)$是$X'$中开集当且仅当$U$是$X$中开集.为此我们验证两组拓扑基.对$f\in C(X)$,记$U_f=\{x\in X\mid f(x)\not=0\}$和$V_f=\{m\in X'\mid f\not\in m\}$,它们分别是$X$和$X'$中的开集.下面断言$\{U_f\}$和$\{V_f\}$分别是$X$和$X'$的拓扑基.
+	
+	任取开集$U\subset X$,那么补集$E$是闭集,对每个$x\in U$,有$E$和$\{x\}$是不交闭集,从Urysohn引理得到连续函数$f_x$在$E$上取零,在$x$处取1,于是$U_{f_x}$是包含点$x$的$U$内的开集,于是$U=\cup_{x\in U}U_{f_x}$.这就说明$\{U_f\}$是$X$上的拓扑基.由于素谱上主开集构成拓扑基,于是子空间上主开集仍然构成拓扑基,于是$\{V_f\}$是$X'$的拓扑基.
+	
+	最后注意到$\mu(U_f)=V_f$,这就得到$\mu(U)=\mu(\cup_fU_f)=\cup_f\mu(U_f)=\cup V_f$是开集.反过来$\mu^{-1}(V)=\mu^{-1}(\cup_fV_f)=\cup_f\mu^{-1}(V_f)=\cup_fU_f$是开集.这就说明了$\mu$是同胚.
+\end{enumerate}
+
+
+\newpage
+
+
+交换环$R$称为Boolean环,如果对任意$r\in R$有$r^2=r$.设Boolean环$R$的素谱为$X$:
+\begin{enumerate}
+	\item Boolean环总满足$2r=0,\forall r\in R$.事实上按照$(r+1)^2=r+1$和$r^2=r$,直接得到$2r=0$.
+	\item Boolean环是零维的,即素理想总是极大理想,并且对素理想$p$总有$R/p\cong\mathbb{F}_2$.事实上只需说明后一断言,任取不在$p$中的元$r\in R$,从$r^2=r$得到$r(r-1)\in p$,导致$r-1\in p$,于是$r+P=1+P$,于是$R/p$中恰好只有两个元$0+p$和$1+p$.
+	\item Boolean环的有限生成理想总是主理想,这是只要按照等式$(x,y)=(x+y+xy)$归纳.
+	\item Boolean环上总满足$r^n=r,\forall r\in R,n\ge1$,这导致Boolean环上每个理想都是根理想.
+	\item 对每个$r\in R$,从$r(r-1)=0$说明每个素理想$p$恰好包含了$r$和$r-1$中的一个,于是$X=V(r)\cup V(r-1)$是一个无交并.这说明了每个主开集$D(r)$总是既开又闭的,并且它的补集恰好就是$D(r-1)$.
+	\item $X$中既开又闭的子集恰好具有形式$D(r),r\in R$.事实上任取$X$的既开又闭的子集$Y$,它是若干主开集的并$Y=\cup_{r\in I}D(r)$.我们证明过素谱总是准紧致的,于是闭子集$Y$继承了准紧致性,于是$Y$是有限个主开集的并.最后第三条说明了对任意$r_1,r_2,\cdots,r_n\in R$,总有$D(r_1)\cup D(r_2)\cup\cdots\cup D(r_n)=D(r)$,其中$r$是$R$中某个元.
+	\item $X$是紧致的(即准紧致+Hausdorff),事实上任取两个素理想$p,q$,它们都是极大理想所以互不包含,任取$r\in p-q$,那么$V(r)$是包含$p$的开集,$D(r)$是包含$q$的开集,并且$V(r)$和$D(r)$不交.
+\end{enumerate}
+
+
+
+
+
+
+
+分式化的素谱.
+\begin{enumerate}
+	
+	\item 给定环同态$f:A\to B$,设$X=\mathrm{Spec}(A)$和$Y=\mathrm{Spec}(B)$,那么$f$诱导了连续映射$f':Y\to X$.取$A$中的乘性闭子集$S$,那么$f(S)$是$B$中的一个乘性闭子集.记$\mathrm{Spec}(S^{-1}A)$在$X$中的像是$X_1$,记$\mathrm{Spec}(f(S)^{-1}B)$在$Y$中的像是$Y_1$.我们断言$(S^{-1}f)':Y_1\to X_1$即为$f'$在$Y_1$上的限制,并且此时有$Y_1=(f')^{-1}(X_1)$.
+	\begin{proof}
+		
+		任取$f(S)^{-1}B$中的素理想$f(S)^{-1}q$,它被$(S^{-1}f)'$映射为$(S^{-1}f)^{-1}(f(S)^{-1}q)=S^{-1}(f^{-1}(q))$.此即把$Y_1$中的$q$映射为$X_1$中的$f^{-1}(q)$.
+	\end{proof}
+	\item 给定环同态$f:A\to B$,设$I$是$A$的理想,而$f(I)$生成的$B$中理想记作$I^e$.记$f$诱导的$A/I\to B/I^e$的映射为$f_1$.把$\mathrm{Spec}(A/I)$等同于$\mathrm{Spec}(A)$的子集$V(I)$,把$\mathrm{Spec}(B/I^e)$等同于$\mathrm{Spec}(B)$的子集$V(I^e)$.证明$f_1'$即$f'$在$V(I^e)$上的限制.
+	\begin{proof}
+		
+		任取$\mathrm{Spec}(B/I^e)$中的素理想$Q/I^e$,按照定义有$f_1'$把它映射为$f_1^{-1}(Q/I^e)=f^{-1}(Q)/I$.此即把$V(I^e)$中的$Q$映射为了$V(I)$中的$f^{-1}(Q)$.
+	\end{proof}
+	\item 给定环同态$f:A\to B$,任取$A$的素理想$p$,取乘性闭子集$S=A-p$,我们断言$(f')^{-1}(p)$同胚于$\mathrm{Spec}(B_p/pB_p)=\mathrm{Spec}(k(p)\otimes_AB)$,其中$k(p)$是$A$在$p$处的剩余类域.这一性质也导致我们称$\mathrm{Spec}(k(p)\otimes_AB)$为$f'$在$p$处的纤维.
+	\begin{proof}
+		
+		考虑如下交换图,其中未标注的态射均为典范映射:
+		$$\xymatrix{A\ar[r]\ar[d]_f&S^{-1}A\ar[r]\ar[d]^{S^{-1}f}&S^{-1}A/S^{-1}p\ar[d]^{(S^{-1}f)_1}\\B\ar[r]&S^{-1}B\ar[r]&S^{-1}B/(S^{-1}p)^e}$$
+		
+		将环到素谱的逆变函子作用其上,得到如下交换图:
+		$$\xymatrix{\mathrm{Spec}(A)&\mathrm{Spec}(S^{-1}A)\ar[l]&\mathrm{Spec}(S^{-1}A/S^{-1}p)\ar[l]\\\mathrm{Spec}(B)\ar[u]^{f'}&\mathrm{Spec}(S^{-1}B)\ar[u]_{(S^{-1}f)'}\ar[l]&\mathrm{Spec}(S^{-1}B/(S^{-1}p)^e)\ar[u]_{(S^{-1}f)_1'}\ar[l]}$$
+		
+		第四条说明$(S^{-1}f)_1'$是$(S^{-1}f)'$在$V((S^{-1}p)^e)$上的限制,第三条说明$(S^{-1}f)'$是$f'$在$(f')^{-1}(X_1)$上的限制,其中$X_1$是$\mathrm{Spec}(S^{-1}A)$在$\mathrm{Spec}(A)$上的像.于是$(f')^{-1}(p)$即等同于$\mathrm{Spec}(S^{-1}B/(S^{-1}p)^e)$,也即$\mathrm{Spec}(S^{-1}B/(S^{-1}p)S^{-1}B)$.最后注意到如下同构式,即完成证明:
+		\begin{align*}
+			S^{-1}B/(S^{-1}p)S^{-1}B&\cong S^{-1}A/S^{-1}p\otimes_{S^{-1}A}S^{-1}B\\
+			&\cong S^{-1}(A/p)\otimes_{S^{-1}A}S^{-1}B\\
+			&\cong (A/p\otimes_AS^{-1}A)\otimes_{S^{-1}A}S^{-1}B\\
+			&\cong A/p\otimes_A(S^{-1}A\otimes_{S^{-1}A}S^{-1}B)\\
+			&\cong A/p\otimes_AS^{-1}B\\
+			&\cong A/p\otimes_A(S^{-1}A\otimes_AB)\\
+			&\cong k(p)\otimes_AB
+		\end{align*}
+	\end{proof}
+	\item 取$A$的素理想$p$,那么$\mathrm{Spec}(A_p)$即等同于$\mathrm{Spec}(A)$中点$p$的全体开邻域的交,此即局部化名字由来.事实上每个点$p$所包含的主开集$D_f$必然满足$f\in A$不在$p$中,于是全体这种主开集的交恰好就是全体包含于$p$的素理想构成的集合,此即$\mathrm{Spec}(A_p)$视为$\mathrm{Spec}(A)$的子集.
+\end{enumerate}
+
+
+\item 给定环同态$f:A\to B$,使得它诱导了$B$的平坦$A$代数.那么如下条件两两等价:
+\begin{enumerate}
+	\item 对$A$的理想$I$总有$I^{ec}=I$.
+	\item $f'$是满射.
+	\item 对$A$的每个极大理想$m$,总有$m^e\not=(1)$.
+	\item 对$A$的每个非零模$M$,总有$M\otimes_AB\not=0$,换句话讲$B$是忠实平坦$A$模.
+	\item 对每个$A$模$M$,有$M\mapsto B\otimes_AM$为$x\mapsto 1\otimes x$是单射.
+\end{enumerate}
+\begin{proof}
+	
+	1推2,按照$A$中每个理想可表示为$b^c$的形式,从第二条得到这成立.2推3,假设存在$A$的极大理想$m$满足$m^e=(1)$,按照条件存在$B$中素理想$p$使得$p^c=m$,于是$(1)=m^e=p^{ce}\subset p$,这矛盾.
+	
+	3推4,首先我们断言只需证明非零有限生成模$M'$总有$B\otimes_AM'\not=0$.这是因为取非零模$B$的有限生成非零子模$M'$,那么从$B$是平坦$A$模得到$B\otimes_AM'\to B\otimes_AM$是单射,导致后者非零.现在假设存在一个有限生成非零模$M'$导致$B\otimes_AM'=0$.借助如下事实:如果$f:A\to B$是环同态,如果$M$是有限生成$A$模,那么$\mathrm{Supp}(B\otimes_AM)=(f')^{-1}(\mathrm{Supp}(M))$.于是这个假设等价于$(f')^{-1}(\mathrm{Supp}(M'))=\emptyset$.而$M$的支集非空,并且$\mathrm{Supp}(M)=V(\mathrm{Ann}(M))$(因为$M$有限生成),于是$(f')^{-1}(\mathrm{Supp}(M))=V(\mathrm{Ann}(M)^e)$.而按照条件$\mathrm{Ann}(M)^e$不是单位理想,导致这不该为空集,矛盾.
+	
+	4推5,设这个映射的核为$M$的子模$M'$,于是$0\to M'\to M\to M\otimes_AB$是正合列,于是将其张量$A$模$B$仍为正合列.接下来利用如下事实:如果$f:A\to B$是环同态,设$N$是$B$模,设$N'=N\otimes_AB$,那么$g:N\to N'$为$y\mapsto 1\otimes y$是单射.(这一事实只需注意到,构造模同态$p:N'\to N$为$b\otimes y\mapsto by$会导致$p\circ g=1_N$,于是$g$必然是单射).据此得到$M\otimes_AB\to (M\otimes_AB)\otimes_AB$是单射,于是$M'\otimes_AB=0$,于是从条件得到$M'=0$,也即该映射是单射.
+	
+	5推1,直接取$M=A/I$,那么$A/I=M\to M\otimes_AB=B/I^e$是单射.即$f(a)\in I^e$当且仅当$a\in I$,即$f(I)=I^e$,于是$I^{ec}=I$,得证.
+\end{proof}
+
+
+
+
+
+
+
+
+给定环同态$\phi:A\to B$,对$A$的理想$a$,$\phi(a)$通常不是$B$的理想,记它生成的$B$中理想为$a^e$,于是$(-)^e$是从$A$的理想集到$B$的理想集之间的映射.对$B$中的理想$b$,$\phi^{-1}(b)$总是$A$中的理想,记为映射$b^c$,于是$(-)^c$是从$B$的理想集到$A$的理想集之间的映射.两个映射$(-)^e,(-)^c$满足如下关系:
+\begin{enumerate}
+	\item 它们是保序的映射,即如果$A$中有理想关系$a\subset a'$,那么$B$中有理想关系$a^e\subset(a')^e$;如果$B$中有理想关系$b\subset b'$,那么$A$中有理想关系$b^c\subset(b')^c$.
+	\item 对$A$的理想$a$和$B$的理想$b$,有关系式$b^{ce}\subset b$和$a\subset a^{ec}$.
+	\item 一次和三次复合固定点集,即对$A$的理想$a$和$B$的理想$b$,恒有关系式$a^e=a^{ece}$以及$b^c=b^{cec}$.
+	\item $(-)^e,(-)^c$如果限制为$A$的具有形式$b^c$的理想和$B$的具有形式$a^e$的理想之间的映射,那么它们都是双射且互为逆映射.
+\end{enumerate}
+
+\subsection{模层和凝聚层}
+
+
+
+
+
+
+
+习题.设$M$是$A$诺特模,那么$A/\mathrm{Ann}(M)$是一个诺特环.特别的,这一事实说明存在忠实诺特摸的环是诺特环.
+\begin{proof}
+	
+	记$A'=A/\mathrm{Ann}(M)$,那么$M$可视为$A'$摸.并且$M$作为$A$模和$A'$模的子模是一致的,因此$M$同样是$A'$诺特模.于是我们不妨约定$\mathrm{Ann}(M)=0$,于是$A=A'$.现在设$M=(m_1,m_2,\cdots,m_n)$,于是存在单同态$A\to M^n$为$r\mapsto(rm_1,rm_2,\cdots,rm_n)$,从$M^n$是诺特$A$模,就得到子模$A$是诺特$A$模,此即$A$是诺特环.
+\end{proof}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+总结一下我们定义的两个映射$I,V$.其中$V$是从$k[x_1,x_2,\cdots,x_n]$的子集到$\mathbb{A}_k^n$的代数集的映射;而$I$是从代数集到理想的映射.它们都是反序的映射;并且二次作用总会使点集变大,即$Y\subset V(I(Y))$和$a\subset I(V(a))$;并且一次作用和三次作用是相同的,即$I(Y)=I(V(I(Y)))$和$V(a)=V(I(V(a)))$.
+
+取仿射空间的子集$S$,那么$V(I(S))=\overline{S}$.一方面有$S\subset V(I(S))$,现在任取覆盖$S$的闭集$E$,可记$E=V(a)$,那么有$V(I(S))\subset V(I(E))=V(I(V(a)))=V(a)=E$.于是按照点集闭包是全体包含该点集的闭集的交,得到$V(I(S))=\overline{S}$.
+
+这一事实说明,如果把两个映射限制为闭集和根理想之间的映射,那么$I$是单射,$V$是满射.但是它们未必双射.例如在$\mathbb{A}_{\mathbb{R}}^1$上取$f(x)=x(x^2+1)$,此时$V(f)=\{0\}$,于是$I(V(f))=\langle x\rangle$,但是$\sqrt{(f)}=(f)$.为了使得它是双射,需要添加的条件是$k$为代数闭域,此时有$I(V(a))=\sqrt{a}$,这称为希尔伯特零点定理.此时就有仿射空间$\mathbb{A}_k^n$的仿射代数集和多项式环$k[x_1,x_2,\cdots,x_n]$的根理想之间是反序一一对应的.
+
+在给出证明前,我们先来证明弱希尔伯特零点定理.给定代数闭域$k$,那么$A=k[x_1,x_2,\cdots,x_n]$的极大理想具有形式$(x_1-a_1,x_2-a_2,\cdots,x_n-a_n)$,其中$(a_1,a_2,\cdots,a_n)\in\mathbb{A}_k^n$.这导致一组$A$中的多项式如果没有公共零点,那么它们在$A$中生成了单位理想.另外,弱零点定理可以视为代数基本定理的一种推广,因为代数基本定理说的是复数域的一元多项式环上的极大理想具有形式$x-c,c\in\mathbb{C}$,弱零点定理则把它推广至$n$元多项式环.
+\begin{proof}
+	
+	先来说明$I=(x_1-a_1,x_2-a_2,\cdots,x_n-a_n)$的确是$A$的一个极大理想.为此只要验证$A\to k$的满同态$x_i\mapsto a_i$的核是$I$.于是$A/I\cong k$说明$I$是极大理想.为此等价于证明如果$n$元多项式$f\in A$满足$f(a_1,a_2,\cdots,a_n)=0$,那么$f\in I$.我们来对$n$归纳.$n=1$的时候$f(a_1)=0$说明$f(x_1)=(x_1-a_1)q(x_1)\in(x_1-a_1)$.倘若对$n-1$成立,现在考虑$n$元多项式$f\in A$.将$f$视为$k(x_1,\cdots,x_{n-1})$上关于$x_n$的多项式,可得$f=q_1+q_2(x_n-a_n)$,其中$q_1\in k[x_1,x_2,\cdots,x_{n-1}]$,$q_2\in A$.并且带入点$(a_1,a_2,\cdots,a_n)$说明$q_1(a_1,a_2,\cdots,a_{n-1})=0$.于是按照归纳假设,有$q_1(x_1,x_2,\cdots,x_{n-1})=g_1(x_1-a_1)+\cdots+g_{n-1}(x_{n-1}-a_{n-1})$,带入就说明$f\in(x_1-a_1,x_2-a_2,\cdots,x_n-a_n)$.
+	
+	比较困难的是说明每个极大理想都具有这样的形式.任取$A$的极大理想$m$,那么$K=A/m$是$k$的一个域扩张.按照$A$是有限生成$k$代数,说明$K$是有限生成$k$代数.在域论中我们证明过此时$k\subset K$是代数扩张.但是基域$k$已经是代数闭域,这就说明$k\subset K$实际上是一个域同构.设$x_i+m\in K$同构到$k$中的元是$a_i$.于是$x_i-a_i\in m$,于是$(x_1-a_1,x_2-a_2,\cdots,x_n-a_n)\subset m$.但是我们已经说明了前者是极大理想,这就说明这个包含式实际上取等.
+	
+	最后一个结论是因为如果该多项式集生成的不是单位理想,设它包含在的极大理想是$m$,但是按照我们所证$m$理应恰好有一个公共零点,这矛盾.
+\end{proof}
+
+下面我们证明经典版本的希尔伯特零点定理.定理断言的是对任意理想$I$,总有$I(V(a))=\sqrt{a}$.于是需要证明的是如果多项式$g$在$V(a)$上处处取0,那么存在某个次幂$g^r\in a$.
+\begin{proof}
+	
+	记$a=(f_1,f_2,\cdots,f_m)$,任取$I(V(a))$中的一个非零多项式$g$.将$f_i,g$视为$k[x_1,x_2,\cdots,x_n,x_{n+1}]$中的元,考虑$n+1$元的多项式集合$\{f_1,f_2,\cdots,f_n,x_{n+1}g-1\}$,如果点$P=(P_0,p_{n+1})$是一个公共零点,那么$f_i(P_0)=0$说明$P_0\in V(a)$,于是得到$g(P_0)=0$,但是$x_{n+1}g-1\mid_P=-1$,这说明这个多项式集合没有公共零点,于是从弱零点定理得到$(f_1,f_2,\cdots,f_m,x_{n+1}g-1)=k[x_1,x_2,\cdots,x_{n+1}]$.于是存在$n+1$元多项式$Q_1,Q_2,\cdots,Q_{n+1}$满足:
+	$$1=Q_1f_1+\cdots+Q_nf_n+Q_{n+1}(x_{n+1}g-1)$$
+	
+	取同态$k[x_1,x_2,\cdots,x_{n+1}]\to k(x_1,x_2,\cdots,x_n)$为$x_{n+1}\mapsto 1/g$,得到上述等式在$k(x_1,x_2,\cdots,x_n)$中变为等式:$g^s=P_1f_1+P_2f_2+\cdots+P_nf_n$,其中$P_i\in k[x_1,x_2,\cdots,x_n]$.这说明$g\in\sqrt{a}$,完成证明.
+\end{proof}
+
+
+
+本节最后我们整理一个关于非单连通域共形变换为非单连通域的例子.首先我们注意共形变换作为解析双射,它必然也是一个同胚,而单连通性是拓扑不变性,这说明了不会存在非单连通域共形变换为单连通域.其次,在复平面上单连通域具有这样一个等价描述,一个开集是单连通域当且仅当它在复平面中的补集是连通的.由此可定义多连通域,称一个开集是$n$连通域,如果它在复平面中的补集具有$n$个连通分支.多联通域上同样具有类似黎曼映射定理的结论,以二连通区域为例,每个二连通区域都可共形变换变换为圆环$1<|z|<R$.这里的$R$被原二联通区域所决定,不能任意选取.事实上对$1<R_1<R_2$,总有$1<|z|<R_1$和$1<|z|<R_2$不是共形等价的.这个定理的证明比较困难,不过这里我们可以处理一个更为简单的特殊情况:两个不交圆周,其中一个圆周的内部包含另一个圆周,所围成的二连通域(通常称为偏心圆环),一定可以用分式线性变换将其映射为圆环.
+
+为此我们先来介绍复平面上的一些解析几何.
+\begin{enumerate}
+	\item 直线方程.给定复平面上的一条直线$L$,它的法向量可对应于一个复数$B$,取定直线上的点$z_0$,那么直线上的点$z$可满足等式$\Re(B\overline{z-z_0})=0$.展开等价于讲存在实数$C$使得$\Re(B\overline{z})=-C/2$,也等价于$z$满足的方程为$\overline{B}z+B\overline{z}+C=0$.
+	\item 圆周方程.设圆心$z_0$,半径$R$,那么方程为$|z-z_0|=R$,等价于$(z-z_0)(\overline{z}-\overline{z_0})=R^2$,展开可得方程为$A|z|^2+\overline{B}z+B\overline{z}+C=0$,其中$A,C$是实数,$B$是复数,满足$|B|^2>AC$.
+	\item 关于直线的对称点.给定直线$\overline{B}z+B\overline{z}+C=0$,如果$z_1,z_2$是关于直线的对称点,也即$(z_1+z_2)/2$落在直线上,整理可得这当且仅当满足$\overline{B}z_1+B\overline{z_2}+C=0$.
+	\item 关于圆周的对称点.称分别落在圆周两侧的两个点$z_1,z_2$是关于这个圆周对称的,如果它们和圆心$z_0$三个点共线,并且满足等式$|z_1-z_0||z_2-z_0|=R^2$.这个要求等价于讲,$z_1,z_2$满足$(z_1-z_0)=\frac{R^2}{\overline{z_2}-\overline{z_0}}$.另外可验证如果圆周的方程是$Az\overline{z}+\overline{B}z+B\overline{z}+C=0$,那么两个不同点$z_1,z_2$关于这个圆周对称当且仅当满足$Az_1\overline{z_2}+\overline{B}z_1+B\overline{z_2}+C=0$.最后注意按照定义圆心和无穷远点是圆周的一对对称点.
+\end{enumerate}
+
+接下来给出分式线性变换的一些性质.设$f(z)=\frac{az+b}{cz+d}$,其中$ad-bc\not=0$,这保证了这个分式线性变换不是常值函数.称方程$z(cz+d)=(az+b)$的至多两个的解为该分式线性函数的不动点.
+
+称$z\mapsto z+a$是平移变换;$z\mapsto e^{i\theta}z$为旋转变换;$z\mapsto rz,r>0$是伸缩变换;$z\mapsto 1/z$是反演变换.于是一个分式线性变换必然是上述四种变换的复合.这个描述可以用来说明分式线性变换把圆周映射为圆周.圆周在前三个变换下仍为圆周是平凡的.我们只需说明反演变换把圆周映射为圆周.设圆周的方程为$Az\overline{z}+\overline{B}z+B\overline{z}+C=0$,其中$A,C$是实数,$B$是复数,并且满足$|B|^2>AC$.做代换$w=1/z$,验证所得方程仍然满足圆的方程即可.
+
+这一段我们说明,如果分式线性变换把圆周$C_1$映射为圆周$C_2$,那么它会把$C_1$的一对对称点映射为$C_2$的一对对称点.同样的,对圆做平移旋转伸缩变换会把对称点映射为新的圆周的对称点.我们还是只需说明反演变换也是成立的,对此只要做代换$w=1/z$,结合对称点满足的方程即得.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+测地线.给定曲面$S$上两个点$p,q$,称连接这两个点的曲面上的曲线$\gamma(t)=(u(t),v(t))$是一条测地线,如果它是最短的一条连接这两个点的曲面上的曲线.按照定义,测地线充当了欧氏空间中直线段这个概念.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+最后因为法空间是切空间在$\mathbb{R}^3$的正交补,故也不依赖于参数的选取.在每点处的和切平面垂直的单位法向量是$n=\frac{s_u\times s_v}{|s_u\times s_v|}$.它生成的$\mathbb{R}^3$的子空间称为法空间,它也就是切空间在$\mathbb{R}^3$中的正交补.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+\chapter{几何学基础}
+\section{仿射几何}
+
+一个点集$X$上的仿射结构,是指一个线性空间$V$,以及一个映射$\phi:X\times X\to V$,即把点对$(a,b)$映射为一个$V$中的元(通常称为向量)$\overrightarrow{ab}$,这个映射满足:
+\begin{enumerate}
+	\item 对任意$X$中的点$a$,诱导出的$X\to V$的映射$\phi_a:b\mapsto\overrightarrow{ab}$总是一个双射.
+	\item 对任意$X$中的点$a,b,c$,总满足$\overrightarrow{ab}+\overrightarrow{bc}=\overrightarrow{ac}$.这一条可以直接说明总有$\overrightarrow{aa}=0$和$\overrightarrow{ab}=-\overrightarrow{ba}$.
+\end{enumerate}
+
+称具备仿射结构的点集为一个仿射空间.于是一个仿射空间由三个要素构成$(X,V,\phi)$,在不引起歧义的前提下我们把仿射空间简单记作单个字母$X$.称$V$是仿射空间$X$的向量集.称$V$作为线性空间的维数是仿射空间$X$的维数.
+
+仿射子空间.仿射空间$X$的子集$Y$称为仿射子空间,如果对任意的$Y$中的点$a$,有$\phi_a(Y)$是$V$的相同的一个线性子空间.在实际验证时,我们只需验证$Y$中一个点$a$满足$\phi_a(Y)$是$V$的线性子空间即可说明$Y$是仿射子空间.这是因为如果任取$Y$中另一个点$b$,那么$\phi_b(Y)=\phi_a(Y)+\overrightarrow{ba}=\phi_a(Y)$.通常把一维仿射子空间称为直线,二维仿射子空间称为平面,而0维仿射子空间就是单点.
+
+反过来,仿射子空间可以被仿射空间中的点和$V$的线性子空间唯一确定:设$W$是$V$的线性子空间,任取$X$中的点$a$,那么恰好存在一个以$W$为向量集的经过点$a$的仿射子空间.它就是$\{x\in X\mid \overrightarrow{ax}\in W\}$.
+
+一族仿射子空间的交是仿射子空间.设$\{Y_i\}_{i\in I}$是$X$的一族仿射子空间,不妨设交$Y=\cap_{i\in I}Y_i$非空.任取一个点$a\in Y$,那么每个$W_i=\phi_a(Y_i)$都是$X$的向量集$V$的线性子空间.记$\cap_{i\in I}W_i=W$,我们知道$W$是$V$的线性子空间.于是$X$中的一个点$x$在$Y$中当且仅当它在全部$Y_i$中,也就是说当且仅当$\overrightarrow{ax}$在全部$W_i$中,也即$\overrightarrow{ax}\in W$.这就说明$Y$是以$W$为向量集的仿射子空间.
+
+于是我们可以定义仿射空间的一个子集生成的仿射子空间是全部包含这个子集的仿射子空间的交,它也就是包含这个子集的全体仿射子空间在包含序下的唯一的极小元.例如,对于一个有限集$S=\{a_0,a_1,\cdots,a_k\}$,它生成的仿射子空间可以描述为:经过点$a_0$,并且向量集是由$\overrightarrow{a_0a_1},\cdots,\overrightarrow{a_0a_k}$生成的$V$的线性子空间.特别的我们看到这个仿射子空间的维数至多是$k$.
+
+仿射空间$X$中的$k+1$个点$a_0,a_1,\cdots,a_k$称为仿射无关的,如果它们生成的仿射子空间的维数是$k$.如果这$k+1$个点是仿射无关的,并且仿射子空间的维数就是$X$的维数,此时称这$k+1$个点构成了$X$的一个仿射标架.这个概念可以说明一些我们在欧氏空间中所熟知的性质:两不同点确定一条直线,三个不共线的点确定一个平面.
+
+仿射标架更为主要的用处是提供坐标.给定仿射空间$X$的一个仿射标架$\{a_0,a_1,\cdots,a_n\}$,通常把$a_0$称为标架的原点.任意给定$X$中的点$x$,它可以等同于向量$\overrightarrow{a_0x}$.这个向量在基$\{\overrightarrow{a_0a_1},\overrightarrow{a_0a_2},\cdots,\overrightarrow{a_0a_n}\}$下的线性表示的系数项分别记作$\{k_1,k_2,\cdots,k_n\}$,我们就称它为点$x$在该仿射标架下的笛卡尔坐标.
+
+仿射子空间的坐标表示.【】
+
+平行概念.给定$X$的两个仿射子空间$Y_1,Y_2$,称它们平行,如果它们具有相同的向量集.仿射空间上满足我们在中学几何中所默认的平行公理,即给定一条直线和不在这个直线上的点,那么可做出唯一一条过该点和该直线平行的直线.转化为我们仿射空间的语言,等价于讲两个平行的仿射子空间要么不交要么相同.为此,假设两个平行的仿射子空间$Y_1,Y_2$的交非空,任取交中的点$a$,但是我们知道过点$a$的以一个固定的$V$的线性子空间为方向集的仿射子空间是唯一存在的,这说明$Y_1=Y_2$.
+
+仿射映射.仿射映射是保仿射结构的映射.设$X_1$和$X_2$是分别以线性空间$V_1,V_2$为方向集的仿射空间,称映射$f:X_1\to X_2$是仿射映射,如果存在线性映射$g:V_1\to V_2$满足对任意$a,b\in X_1$有$g(\overrightarrow{ab})=\overrightarrow{f(a)f(b)}$.
+
+
+
+
+
+\section{欧氏几何}
+
+\section{投射几何}
+
+
+
+
+
+
+
+
+
+
+

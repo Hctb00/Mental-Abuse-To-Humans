@@ -1,0 +1,396 @@
+\chapter{集合论}
+
+集合论在现代数学上扮演了一个非常独特的角色,除了一些极少的特例,大多数被研究被分析的数学实体都会是一个集合或者一个类.这就是说大部分数学分支都是以集合论为基石的.于是很多数学基本问题都会归结为集合论的问题.
+
+人们经常会考虑这样一个不寻常的问题:数字是什么?几百年来,数学家和哲学家们对这个问题的尝试,极大的推动了数学基础的发展.例如Weierstrass,Dedekind,Kronec\-
+ker,Frege,Peano,Russell等人对整数,有理数,实数的分类.但是数的本质这一谜题并不是在19世纪起源的.早在古希腊,数学家Eudoxus提出了一个对我们现在称为无理数的一个严格处理.可以说后来人们对集合论一般公理的建立是受到Eudoxus的启发的.
+
+然而集合论的真正发展并不是从尝试回答数是什么这一问题直接得到的,而是从1870年左右Cantor在无穷级数和相关分析内容的研究开始的,这一内容引导他走向对无限集合还有真类的研究.Cantor通常被认为是集合论的创始人.他在1874年发表了著名的不存在全体实数到全体自然数的双射.在1878年他提出了集合等价的这一基本概念(即存在双射).明显两个有限集合存在双射当且仅当它们元素个数相同.元素个数的概念由此推广到无限集合上,得到了集合的势这一概念.哲学上讲,Cantor工作的革命性方面是,他把无限集合作为同等于数字和有限集合这样的数学实体.从历史上讲无穷这一概念在数学发展上扮演了一个和数字概念同样重要的角色.
+
+但是在早期,无穷集作为一个数学实体并没有被广泛接受.人们普遍认为逻辑作为一种源自经验的论证手段必须是有限的.把逻辑从有限推广至无限需要承担很大风险.直到各种悖论的提出,这种逻辑灾难的预言便成真了.Dedekind停止出版他的《Was sind und was sollen die Zahlen》,Frege则直接承认他的《Grundgesetze der Arithmetik》 的数学基础被破坏了.
+
+尽管如此集合论仍然获得了足够的支持以幸存于这场灾难.Poincare呼吁人们寻找解决办法,他承诺这会获得“医生治疗一种病态但优美的疾病的喜悦”.并且此时Zermelo和Russell已经在寻找能够构造坚固的集合论理论的基本准则.
+
+从这个角度看,公理化集合论似乎是为了解决悖论而产生的,但是也有观点认为即便没有出现悖论,集合论自身的发展也会通往公理化.正如Dedekind和Frege在算术上的工作并不是因为畏惧悖论,而是从经验和逻辑出发期望寻找一种基本准则.
+
+在集合论的早期历史里人们发现了选择公理和连续统假设.其中连续统假设是Cantor为了解决欧式空间中一条直线上有多少点这个问题而提出的.选择公理是指,给定一族非空的集合族,其中的集合两两不交,那么存在一个集合,恰好包含集族中每个集合中的一个点.选择公理在大量主要数学领域中都有涉及,导致它的地位成为公理.
+
+按照Cantor的观点,“一个集合是人们所感知的或者思想中一些确定的,并且能够相互区别的数学实体汇集而成的整体”.这种朴素的定义会导致经典的Russell悖论:全体不是自身元素的集合构成的集合,它既不能是自身元素,也不能不是自身元素.在集合论的发展中出现了两种解决这一悖论的方案.要么我们舍弃任意指定的一个数学实体整体都能成为集合这一观念;要么我们区分至少两种数学实体整体,把任意指定的一族数学实体整体称为类,其中某些特殊的类称为集合.类,或者说指定的一个数学实体整体,源自于我们的直觉,它不能随意丢弃.所以一个令人满意的集合理论应该允许我们严格的讨论类.随后出现了多种方式发展这一观点,比较经典的是GB(G\"odel-Bernays)集合论和ZF(Zermelo-Fraenkel)集合论.
+
+在GB集合论中Russell悖论通过区分两种不同的类来解决,即集合与真类.集合是可以作为其他类的元素的类.而真类以集合为元素,但是自身不会称为其他类的元素.在这个理论中有三个基本概念:集合,类,属于关系.
+
+在ZF集合论中只有两个基本概念,集合与属于关系.类的概念仅仅是权宜之计,是为了严格讨论集合而提出但不讨论的概念.所以ZF集合论仅仅讨论集合,而GB集合论可以同时讨论集合与类.有些在GB集合论中的定理不会在ZF集合论中成立.但是GB集合论可以视为ZF集合论的一种延续,即ZF集合论中良性表述的公式是可证的当且仅当在GB集合论中是可证的.
+\newpage
+\section{ZFC公理}
+
+ZFC九条公理.
+\begin{enumerate}
+\item\textbf{外延公理}:两个集合相同当且仅当它们具有相同的元素.
+
+\item\textbf{配对公理}:给定任意集合$x,y$,存在集合$z=\{x,y\}$.
+
+\item\textbf{分离公理模式}:设$P$是关于集合的一个性质,以$P(u)$表示集合$u$满足性质$P$,则对任意集合$X$存在集合$Y=\{u\in X\mid P(u)\}$.
+
+\item\textbf{并集公理}:任意集合$A$,$A$中全部元素的并构成了一个集合.即$\cup X=\{u:\exists v\in X,s.t.u\in v\}$.
+
+\item\textbf{幂集公理}:任意集合$X$,它的全体子集构成一个集合$P(X)=\{u\mid u\in X\}$.
+
+\item\textbf{无穷公理}:无穷公理指的是存在归纳集.$I$称为归纳集是指,它包含空集,并且对每个$I$中元素$x$,有$I$包含$x\cup\{x\}$.
+
+\item\textbf{替换公理模式}:设$F$是以集合$X$为定义域的映射,则存在集合$F(x)=\{F(x)\mid x\in X\}$.
+
+\item\textbf{正则公理}:对每个集合$A$,都存在一个元素$x$满足$x$和$A$是不交的.
+
+\item\textbf{选择公理}:设集合$X$的每个元素非空,则存在映射$g:X\to\cup X$,使得$\forall x\in X$,有$g(x)\in x$.
+\end{enumerate}
+
+这里来对九条公理做一些解释:
+\begin{enumerate}
+	\item 首先无穷公理说明集合存在.
+	\item 在分离公理模式中我们粗略的定义$P$表示性质或者说公式.严格讲需要用到一阶逻辑,即非逻辑对象,量词,谓词,联词,变量等等一阶逻辑拼凑而成的公式.在集合论里除了相等谓词,还会涉及到一个常用的谓词是从属关系$\in$.集合论中的公式由两个基本公式$x\in y$和$x=y$,用各种逻辑联词$\phi\wedge\psi$,$\phi\vee\psi$,$\neg\phi$,$\phi\rightarrow\psi$和量词$\forall x$,$\exists x$相拼凑而成.一个公式通常记作$\phi(u_1,\cdots,u_n)$,其中$u_1,\cdots,u_n$为公式的全部自由变量.
+	
+	另外分离公理之所以称为模式,是因为对每一个由上述一阶逻辑拼凑而成的公式$P$,都对应了一个公理,这个公理族称为一个公理模式.
+	\item 尽管在ZFC中处理的是集合,定义类的概念是有益的.给定公式$\phi(x,p_1,\cdots,p_n)$,称$C=\{x\mid \phi(x,p_1,\cdots,p_n)\}$是一个类.它的元素是满足$\phi(x,p_1,\cdots,p_n)$的集合$x$.所有集合都可以看作是类,一个不是集合的类称为真类.
+	
+	两个类称为相等,如果它们具有相同的元素.严格写就是,若$C=\{x\mid \phi(x,p_i)\}$,$D=\{x\mid\psi(x,q_i)\}$,那么$C=D$当且仅当$\forall x,\phi(x,p_i)\leftrightarrow \psi(x,q_i)$.另外还可以做如下若干约定.
+	\begin{enumerate}
+		\item 类$C$称为类$D$的子类,即$C\subset D$,当且仅当$\forall x,x\in C\rightarrow x\in D$.
+		\item $C\cap D=\{x\mid (x\in C)\wedge(x\in D)\}$.
+		\item $C\cup D=\{x\mid (x\in C)\vee(x\in D)\}$.
+		\item $C-D=\{x\mid (x\in C)\wedge(\neg x\in D)\}$.
+	\end{enumerate}
+	\item 如果两个集合$X,Y$具有相同的元素,那么它们自然是同一个集合.外延定理是指这个命题的逆命题成立,即如果集合$X=Y$,那么它们具有相同的元素.换句话说集合$X=Y$当且仅当$\forall u,(u\in X\leftrightarrow u\in Y)$.
+	\item 在配对公理中取$x=y$,就得到对任意集合$x$,存在以$x$为唯一元素的集合$\{x\}$.另外配对公理允许我们定义有序对的概念.即有序对$(x,y)$定义为$\{\{x\},\{x,y\}\}$.那么两个有序对$(a,b)=(c,d)$当且仅当$a=c,b=d$.由此还可以定义有序三元对为$(a,b,c)=((a,b),c)$,直至有序$n$元对$(a_1,a_2,\cdots,a_n)=((a_1,a_2,\cdots,a_{n-1}),a_n)$.那么两个同长度的有序对$(a_1,a_2,\cdots,a_n)$和$(b_1,b_2,\cdots,b_n)$相等当且仅当$a_i=b_i,1\le i\le n$.
+	\item 分离公理模式可以说明集合的子类总是集合.于是两个集合的交,两个集合的差都是集合.空集$\emptyset$的形式定义为$\{u\in X\mid u\not=u\}$,其中$X$是任意集合.外延公理可以空集的定义无关$X$的选取.两个集合称为不交的,如果满足$X\cap Y=\emptyset$.
+	\item 正则公理可以解决Russel悖论,即没有集合是自身的元素.事实上任取集合$A$,那么按照配对公理$\{A\}$是集合,按照正则公理必有$\{A\}$的一个元(这时只能是$A$)和$\{A\}$不交,也就是说$A$不以自身为元素.这说明全体集合构成的类不会是集合,它是真类.
+	\item 正则公理还有一个推论是对任意集合$A$,不存在无穷的从属链$\cdots A_2\in A_1\in A$.因为假定这样的集合列存在,记$S=\{A_1,A_2,\cdots\}$是集合,那么理应存在$S$的一个元$A_t$和$S$不交,但是它们的交至少包含了$A_{t+1}$,这就矛盾.
+	\item 给定由集合构成的一个类$C$,记$\cap C=\{u\mid \forall X\in C,u\in X\}$,按照分离公理模式这是集合,称为一族集合的交集.
+	\item 通常把并集公理中的$X$视为一族集合,$\cup X$就相应的写作$\cup_{v\in X}v$.另外注意交集运算可以从分离公理模式给出定义.
+	\item 笛卡尔积.给定两个集合$X,Y$,可定义积为$X\times Y=\{(x,y)\mid x\in X,y\in Y\}$.那么$X\times Y$是$X\cup Y$的幂集的幂集的子集,于是它是集合.继续可以定义三元积$X\times Y\times Z=(X\times Y)\times Z$,直至定义到$n$元积$X_1\times\cdots\times X_n=(X_1\times\cdots\times X_{n-1})\times X_n$.
+	\item 记全体集合构成的真类为$V$,可定义笛卡尔积$V^n$,它的子类称为一个$n$元关系.特别的,当$n=2$时子类$R$称为二元关系.有时把$(x,y)\in R$记作$xRy$.称一个二元关系$f\subset V^2$是映射,如果$(x,y)\in f\wedge (x,z)\in f\rightarrow y=z$.这里唯一的集合$y$称为$f$在$x$的取值,记作$y=f(x)$.换句话说$(x,y)\in f$记作$f(x)=y$.对一个映射$f$,记$\mathrm{dom}(f)=\{u\mid \exists (u,v)\in f\}$,称为$f$的定义域;记$\mathrm{im}(f)=\{v\mid (u,v)\in f\}$,称为$f$的值域.定义域和值域都是真类$V$的子类.如果记$V$的两个子类为$Y,X$,那么全体以$X$为定义域,以$Y$为值域的映射构成的真类为$Y^X$.
+	
+	替换公理模式说的是,如果$f$的定义域$X$是集合,那么值域$Y=f(X)$也是集合.如果$X,Y$都是集合,那么$Y^X\subset P(X\times Y)$,即此时全体以$X$为定义域以$Y$为值域的映射构成了集合.由于对每个映射$F$都对应了一个公理,因此这条公理和分离公理一样称为公理模式.
+	
+	给定任意的映射$f$,记定义域$X$,值域$Y$:
+	\begin{enumerate}
+		\item 称$f$是单射,如果$f(x)=f(y)$推出集合$x=y$.当$f$是单射时,可定义逆映射$f^{-1}$为$f^{-1}(x)=y$当且仅当$f(y)=x$.
+		\item 给定$V$的子类$X'$,称$f$在$X'$上的限制映射为$f\mid X'=\{(x,y)\in f\mid x\in X'\}$.
+		\item 如果$f,g$是映射,满足$\mathrm{ran}(g)\subset\mathrm{dom}(f)$,则可定义复合映射$f\circ g$为$(f\circ g)(x)=f(g(x))$.
+		\item 对于集合的情况,通常来讲会把映射记作$f:A\to B$,其中集合$A$是定义域,但是约定$B$是包含了值域的一个集合.因为对于具体情况通常写出值域是比较麻烦的,而且值域的具体描述往往不是我们关注点,仅需给它约定一个范围.这时称映射$f$是满射,如果恰好值域就是$B$.如果$f:A\to B$是单射也是满射,就称它是双射,此时$f^{-1}$是定义域为$B$,值域为$A$的映射.
+	\end{enumerate}
+    \item 等价关系.给定$V$(全体集合构成的真类)的子类$X$,称$X$上的一个二元关系$R$是等价关系,如果它满足:
+    \begin{enumerate}
+    	\item 恒等性:$(x,x)\in R,\forall x\in X$.
+    	\item 对称性:$(x,y)\in R\rightarrow (y,x)\in R$.
+    	\item 传递性:$(x,y)\in R,(y,z)\in R\rightarrow (x,z)\in R$.
+    \end{enumerate}
+
+    对任意$x\in X$,记$[x]=\{y\in X\mid (x,y)\in R\}$,称为$x$所在的等价类.记$X/R=\{[x]\mid x\in R\}$为全体等价类构成的类.那么给定类上的一个等价关系相当于给定类上的一个划分.例如全体集合构成的类$V$上可约定等价关系为,$x\cong y$当且仅当存在$x$和$y$之间的双射.双射的复合还是双射保证了传递性.
+    \item 事实上无穷公理本意是存在无穷集,但是为了定义无穷的概念就要先定义有限的概念.通常来讲定义有限概念需要自然数,但是眼下我们并没有定义它.的确存在一种方式不涉及数的概念的定义有限性.也即归纳集的概念.
+    \item 替换公理模式可推出分离公理模式.给定公式$\phi$,取映射$F=\{(x,x)\mid\phi(x)\}$,那么有$F(X)={x\in X\mid \phi(x)}$,其中$X$是集合.按照替换公理模式推出$F(x)$是集合,于是${x\in X\mid\phi(x)}$是集合.
+\end{enumerate}
+
+这里我们插入对自然数集的定义和讨论.记全体归纳集的交为$\mathbb{N}$,称它为自然数集.那么$\mathbb{N}$是归纳集,因为如果$x$属于交,也即$x$属于任意归纳集,那么$x\cup\{x\}$属于任意归纳集,于是$x\cup\{x\}$属于交.将空集记作0.在$\mathbb{N}$的元上定义后继函数$+1$,即对$n\in\mathbb{N}$,记$n+1=n\cup\{n\}$.称集合$T$是传递集,如果从$x\in T$总可以推出$x\subset T$.这个条件等价于说$\cup S\subset S$或者$S\subset P(S)$.
+
+下面给出$\mathbb{N}$的一些性质:
+\begin{enumerate}
+	\item 首先,自然数集是传递集.我们断言$X=\{x\in\mathbb{N}\mid x\subset\mathbb{N}\}$是归纳集.因为如果$n\in X$,那么$n\subset\mathbb{N}$并且$n\in\mathbb{N}$,于是$n+1=n\cup\{n\}\in\mathbb{N}$,并且$n+1=n\cup\{n\}\subset\mathbb{N}$,于是$n+1\in X$.但是$\mathbb{N}$已经是所有归纳集的交,于是$X=\mathbb{N}$,也即$\forall n\in\mathbb{N}$有$n\subset\mathbb{N}$.即$\mathbb{N}$是传递集.
+	\item 接下来证明每个$n\in\mathbb{N}$都是传递集.为此只要证明$Y=\{x\in\mathbb{N}\mid x\text{是传递集}\}$是归纳集,同样按照$\mathbb{N}$已经是最小的归纳集就得证.
+	\item 对每个$n\in\mathbb{N}$,有$n\not=n+1$.否则有$n=n\cup\{n\}$,即集合$n$包含了自身为元素,按照正则公理知这不可能.
+	\item 除了0以外,每个自然数都是某个自然数的后继元.证明同样利用$\mathbb{N}$是最小的归纳集,去证明$\{x\in\mathbb{N}\mid x=\emptyset\vee (\exists y\in\mathbb{N},x=y\cup\{y\})\}$是归纳集.
+	\item 给定两个自然数$m,n$,那么$m=n$,$m\in n$,$n\in m$三者必有一个成立.考虑集合$A=\{n\in\mathbb{N}\mid\forall m\in\mathbb{N},(m=n)\vee(m\in n)\vee(n\in m)\}$,那么$0\in A$,并且若$n\in A$,任取自然数$m$,若$m\in n$则$m\in n+1$;若$n=m$则$m\in n+1$;若$n\in m$,我们来证明$n+1=m$或者$n+1\in m$.记$B=\{m\in\mathbb{N}\mid\forall n\in\mathbb{N},n\in m\text{则} n+1\in m\vee n+1=m\}$.那么$0\in B$,假设$m\in B$,即$n\in m$推出$n+1\in m$或$n+1=m$,现在设$n\in m+1$,即$n\in m\cup\{m\}$,那么$m=n$或$n\in m$,前者说明$n+1=m+1$,后者则有$n+1\in m$或$n+1=m$.而$n+1\in m$则$n+1\in m\cup\{m\}=m+1$,综上$m+1\in B$于是$B$是归纳集,于是$B=\mathbb{N}$.于是总能从$n\in m$推出$n+1=m$或$n+1\in m$.于是$n+1\in A$,于是$A$是归纳集,于是$A=\mathbb{N}$.
+	\item 给定传递集的子集$x$,称$x$中的元$t$是极小元,如果不存在$z\in x$使得$z\in t$.对$\mathbb{N}$的子集$S$,记$A=\{n\in\mathbb{N}\mid S\cap n=\emptyset\text{或它具有极小元}\}$.我们断言$A$是归纳集.首先空集在$A$中.如果$n\in A$,即$n\cap S$是空集或具有极小元:
+	\begin{enumerate}
+		\item 假设$n\cap S$是空集.若$(n+1)\cap S$也是空集,那么$n+1\in A$.若$(n+1)\cap S$非空,即$(n\cap S)\cup(\{n\}\cap S)$非空,这只能有$(n+1)\cap S=\{n\}$.于是此时$n$就是$(n+1)\cap S$的极小元.
+		\item 假设$n\cap S$具有极小元$a$.即不存在$n\cap A$中的$b$使得$b\in a$,我们断言$a$同样是$(n+1)\cap A$的极小元.首先$a\in n\cap A\subset (n+1)\cap A$,倘若存在$(n+1)\cap A$中的元$b$使得$b\in a$,那么如果$b=n$,得到$n\in a\in n\cap A\subset n$,这和正则公理矛盾.于是从$b\in n+1=n\cup\{n\}$和$b\not=n$,得到$b\in n$,也即$b\in A\cap n$并且$b\in a$,这就和$a$是$n\cap A$的极小元矛盾.
+	\end{enumerate}
+\end{enumerate}
+
+这里验证自然数的定义,即Peano公理.其中第1条是约定一个自然数0,这对应于我们的空集.接下来的2到5条约定的是自然数集上的相等是一个等价关系,而集合的相等关系同样是等价关系.相对麻烦的是最后的6到9条.这里先约定了自然数集上的后继函数$S$,在我们的构造中把后继函数取为了$+1:x\mapsto x+1=x\cup{x}$.现在验证公理:
+\begin{enumerate}
+	\item 对每个自然数$n$,$n+1$是自然数.这一条符合传递集的定义,即$x\in\mathbb{N}$则$x\cup\{x\}\in\mathbb{N}$.
+	\item 对自然数$m,n$,那么$m=n$当且仅当$m+1=n+1$.事实上如果$m\cup\{m\}=n\cup\{n\}$,并且假设$m\not=n$,那么有$m\in n$和$n\in m$,按照传递集的性质有$n\in m\subset n$,这说明集合$n$包含了自身,和正则公理矛盾.
+	\item 不存在一个自然数的后继元是0.若存在自然数$n$使得$n+1=0$,即$n\cup\{n\}=\emptyset$,但是左侧总不会是空集.
+	\item 归纳公理.归纳公理具有两个等价的描述:给定$\mathbb{N}$的任意非空子集,则它有极小元;若$S$是$\mathbb{N}$的子集,满足$0\in S$,并且$n\in S$推出$n+1\in S$,那么$S=\mathbb{N}$.
+	
+	先来证明二者的等价性.前推后,假设不成立,则$S$在$\mathbb{N}$中的补集$C$非空,于是可取$C$的极小元$a$,那么$a\not=0$,于是我们知道存在自然数$b$使得$b+1=a$,按照极小性说明$b\in S$,由条件得$a=b+1\in S$,这和$a\in C$矛盾.
+	
+	后推前,记$S=\{n\in\mathbb{N}\mid n\text{的每个子集都有极小元}\}$,那么$0\in S$,并且倘若$n\in S$,则对$n+1$的任意子集$A$,倘若$n\cap A$是空集,则$A=\{n\}$,此时$n$就是极小元.倘若$n\cap A$不是空集,则它是$n$的子集,于是它有极小元$a$,那么$a$也是$A$的极小元,倘若还存在$b\in A$使得$b\in a$,如果$b\in n\cap A$,则$a\in b\in a$,这矛盾;如果$b\not\in n\cap A$,于是只能有$b=n$,但是此时$a\in n=b$,这和极小性矛盾.综上$n+1\in S$.于是$S$是归纳集,或者按照条件得到$S=\mathbb{N}$.最后任取$\mathbb{N}$的非空子集$A$,则可取$n\in A$,那么$(n+1)\cap A$非空,按照刚刚所证它就有极小元$a$,我们断言$a$就是$A$的极小元.假设有$A$中的元$b$使得$b\in a$,那么$b\in a\in n\cap A$,这就和极小性矛盾.
+	
+	这里我们强调归纳公理和最小归纳集实际上是等价的,区别仅仅是形式不同.能用归纳证明的内容都可以利用最小归纳集的方式证明.归纳证明一个以自然数集为指标集的命题族总成立,需要证明0时成立,并且$n$时成立推出$n+1$时成立.利用最小归纳集则是先构造全部使得命题成立的自然数构成的子集为$S$,再证$0\in S$,$n\in S$则$n+1\in S$,于是$S$本身是归纳集,按照最小归纳集的定义,就得到$S=\mathbb{N}$,也即命题族对任意自然数成立.所以上述后推前的证明中,我们即证明了后者推出了前者,还从归纳集的定义证明了$\mathbb{N}$满足归纳公理.
+\end{enumerate}
+
+选择公理的等价描述.
+\begin{enumerate}
+	\item 一族以非空集作为指标集的非空集族的笛卡尔积是非空的.
+	\item 设集合$X$非空,并且每个元都不是空集,则存在映射$g:X\to\cup X$使得$\forall x\in X$有$g(x)\in x$.这样的映射称为$X$上的选择函数.
+\end{enumerate}
+\begin{proof}
+	
+给定非空指标集$J$上非空集族的笛卡尔积$\prod_{i\in J}A_i$.它的元实际上就是$J\to\cup A_i$的映射$g$,满足$g(i)\in A_i$.
+
+假设条件1成立,给定非空集合$X$,约定$X$不含空集,需要证明存在映射$g:X\to\cup X$满足$g(x)\in x$.取$X$为指标集,则笛卡尔积$\prod_{x\in X}x$是非空的,这样的映射就是选择函数.
+
+假设条件2成立,取非空的指标集$J$,取一族以$J$指标的非空集族$A_i$.那么$X=\{A_i\}$是集合,指标集$J$诱导了一个满射$f:J\to X$为$f(i)=A_i\in X$.按照集合$X$上的选择函数$g$存在.则$h=g\circ f:J\to\cup A_i$满足了$h(i)\in A_i$,这就说明笛卡尔积是非空的.
+\end{proof}
+
+在一些简单集合上,可以在ZF中证明选择函数是存在的.
+\begin{enumerate}
+	\item 若集合$S$中每个集合都是单点集,那么$S$上存在选择函数.
+	\item 若$S$是有限集,从数学归纳法可以得到$S$上存在选择函数.
+\end{enumerate}
+\newpage
+\section{序数与基数}
+
+偏序集是指一个集合$P$和$P$上的一个偏序$\le$.这里偏序是指集合$P$上的一个二元关系,满足:
+\begin{enumerate}
+	\item 反身性:对任意$x\in P$有$x\le x$.
+	\item 传递性:从$x\le y$和$y\le z$推出$x\le z$.
+	\item 反称性:从$x\le y$和$y\le x$推出$x=y$.
+\end{enumerate}
+
+如果偏序$\le$满足对任意$x,y\in P$,有$x\le y$和$y\le x$之间至少成立一个,就称$\le$是全序或者线性序或链.
+
+偏序集之间满足$x\le y$则$f(x)\le f(y)$的映射称为保序映射或者递增映射.一般用$x<y$表示$x\le y$并且$x\not=y$.符号$x<y$和$x\le y$也会记作$y>x$和$y\ge x$.如果偏序集之间的映射$f:P\to Q$满足$x<y$时有$f(x)<f(y)$,则称$f$是严格增映射.如果$f$是双射并且$f$和$f^{-1}$都是保序映射,则称$f$是$P,Q$之间的序同构,也称$P,Q$具有相同的序型.另外偏序集的子集自然的继承了偏序结构.
+
+设$P$是偏序集,任取子集$P'$.
+\begin{enumerate}
+	\item 称$x\in P$是$P$的极大元,如果不存在满足$x<y$的元素$y\in P$.
+	\item 称$x\in P$是$P$的最大元,如果对任意$y\in P$总有$y\le x$.
+	\item 称$x\in P$是$P'$的上界,如果对每个$x'\in P'$都有$x'\le x$.
+	\item 称$x\in P$是$P'$的上确界,如果$x$是$P'$的上界,并且对每个上界$y$都有$x\le y$.
+\end{enumerate}
+
+类似可以定义极小元,最小元,下界和下确界.按照反称性,子集$P'$的上下确界存在则分别唯一,分别记作$\sup P'$和$\inf P'$.在全序集上,最大元和极大元是相同的,最小元和极小元同样是相同的.如果全序集$P$满足每个非空子集都有极小元,则称它是良序集.
+
+自然数集是良序集,我们先来定义自然数集$\mathbb{N}$上的序结构.定义$a\le b$当且仅当$a\in b$或者$a=b$.这自然满足自反性和传递性,反称性是因为$a\in b$和$b\in a$推出矛盾.我们证明过对两个自然数总有$a=b,a\in b,b\in a$三者之一成立,于是这个偏序实际是全序.另外按照自然数都是传递集,$a\le b$也可以写作$a\subset b$.我们证明过自然数集满足的归纳公理等价于讲任意非空子集都有极小元,这实际就是说自然数集赋予上述全序是良序.
+
+设$P$是良序集,映射$f:P\to P$是严格增,则对每个$x\in P$均有$f(x)\ge x$.特别地,$P$没有非平凡的序同构,并且对任意$x\in P$,不存在从$P$到$P(x)=\{y\in P\mid y<x\}$的同构.这里的$P(x)$称为良序集$P$的$x$处的前端.最后,如果两个良序集同构,那么之间的同构映射是唯一的.
+\begin{proof}
+	
+	假设$P_0=\{x\in P\mid f(x)<x\}$非空,对任意$z\in P_0$,有$f(f(z))<f(z)$,则取$z$为$P_0$的极小元,就导致和良序性矛盾.
+\end{proof}
+
+给定两个良序集$W_1,W_2$,那么如下三种情况必然恰好存在一种情况成立:
+\begin{enumerate}
+	\item $W_1$同构于$W_2$.
+	\item $W_1$同构于$W_2$的某个前端.
+	\item $W_2$同构于$W_1$的某个前端.
+\end{enumerate}
+\begin{proof}
+	
+	记$f=\{(x,y)\in W_1\times W_2\mid W_1(x)\cong W_2(y)\}$.那么按照良序集不会和某个前端同构,说明对每个$x\in W_1$至多存在一个$y\in W_2$使得$(x,y)\in f$.这说明$f$是定义域是$W_1$某个子集的映射.假设存在$W_1(x)$到$W_2(y)$的同构$h$,那么对每个$x'<x$,有$W_1(x')$和$W_2(h(x'))$同构.于是$f$是一个严格保序映射.
+	
+	如果$f$的定义域是$W_1$,像集是$W_2$,那么此时$f$就是从$W_1$到$W_2$的同构.
+
+    如果$y_1<y_2$,并且$y_2$在$f$的像集中,则$y_1$也在$f$的像集.于是倘若$f$的像集不是$W_2$,可取$W_2$减去像集的极小元$y_0$.那么得到$f$的像集是$W_2(y_0)$.此时必有定义域为$W_1$,否则有$(x_0,y_0)\in f$,其中$x_0$是$W_1$减去定义域中的极小元,这和$y_0$不在像集矛盾.于是此时$W_1$同构于$W_2$的某个前端.
+    
+    如果$f$的定义域不是$W_1$,类似可以证明此时情况3成立.
+\end{proof}
+
+如果集合$S$的每个元素$s$都是$S$的子集,则称$S$是传递集.如果传递集$S$对于从属关系$\in$构成良序集,则称$S$是序数.那么自然数集$\mathbb{N}$和任意自然数都是序数.
+
+序数的性质.
+\begin{enumerate}
+	\item 空集是序数;倘若$\alpha$是序数,则$\alpha\cup\{\alpha\}$是序数.
+	\item 若$\alpha$是序数,$\beta\in\alpha$,则$\beta$也是序数.
+	\item 对任意两个序数$\alpha,\beta$,若$\alpha\subsetneqq\beta$,则$\alpha\in\beta$.
+	\item 对任意两个序数$\alpha,\beta$,必有$\alpha\subset\beta$,或者$\beta\subset\alpha$.
+\end{enumerate}
+\begin{proof}
+	
+1的证明是直接的,如果$\alpha$是序数,则$\alpha\cup\{\alpha\}$同样以从属关系构成良序集,并且是传递集.
+
+证明2,按照$\alpha$的传递性得到$\beta\subset\alpha$,那么$\beta$也是良序集,现在只需证明$\beta$是传递集,为此取$\gamma\in\beta\subset\alpha$,对任意$x\in\gamma$,按照从属关系是$\alpha$上的全序,得到$x\in\beta$,于是$\gamma\subset\beta$.
+
+证明3,考虑$\beta$的子集$\beta-\alpha$,取它的极小元为$\gamma$,我们断言$\alpha=\{x\in\beta\mid x\in\gamma\}=\gamma$.一方面按照$\gamma$的定义说明每个$x\in\gamma$都有$x\in\alpha$,这说明$\alpha\supset\gamma$.另一方面任取$y\in\alpha\subset\beta$,那么$y\not=\gamma$,按照传递性得到$y\subset\alpha$,于是$y\not\in\alpha$,由于从属关系是$\beta$上的全序,这只能有$y\in\gamma$,即$\alpha\subset\gamma$,即$\alpha=\gamma\in\beta$.
+
+证明4,不妨设$\alpha\not=\beta$,取$\gamma=\alpha\cap\beta$,按照3和2得到$\gamma$也是序数,倘若$\gamma$不是$\alpha,\beta$之一,则由3得到$\gamma\in\alpha\cap\beta=\gamma$,这矛盾.
+\end{proof}
+
+定义全体序数构成的类为$\textbf{On}$.
+\begin{enumerate}
+	\item 任意两个序数$\alpha,\beta$定义$\alpha>\beta$当且仅当$\beta\in\alpha$,则这定义了$\textbf{On}$上的一个全序,对任意序数$\alpha$有$\alpha=\{\beta\mid\beta<\alpha\}$.
+	\item 若$C$是由序数构成的类,$C\not=\emptyset$,则$\inf C=\cap C$也是序数,并且$\inf C\in C$,另外$\alpha\cup\{\alpha\}=\inf\{\beta\mid\beta>\alpha\}$.
+	\item 若$S$是由序数构成的集合,$S\not=\emptyset$,则$\sup S=\cup S$也是序数.
+\end{enumerate}
+
+给定序数$\alpha$,称序数$\alpha+1=\alpha\cup\{\alpha\}$为$\alpha$的后继,它就是大于$\alpha$的最小序数.如果序数$\alpha$是某个序数$\beta$的后继,则称$\alpha$是后继序数.如果序数$\alpha$不是后继序数,那么它可以表示为$\alpha=\sup\{\beta\mid\beta<\alpha\}$,称为极限序数.约定空$\sup$为$\emptyset$,于是零序数$\emptyset$为极限序数.
+
+非0极限序数的存在性可以由无穷公理说明.取归纳集$x$,取$\alpha=\{y\in x\mid y\subset x,y\in\textbf{On}\}$.那么$\emptyset\in\alpha$,并且$\alpha$是序数,并且$y\in\alpha$推出$y+1\in\alpha$,于是$\alpha$的确是一个极限序数.
+
+序数类是真类.事实上如果它是集合,那么$\sup\textbf{On}$有定义,此时序数$\sup\textbf{On}+1$严格大于所有序数,包括它自己,这矛盾.这个内容被称为Burali-Forti悖论,它面世实际上比Russell悖论更早,尽管后者的影响更大.
+
+每个良序集都同构于唯一的一个序数.
+\begin{proof}
+	
+	我们曾证明过良序集不能同构于自身的一个前端,这就说明了唯一性.现在给定良序集$W$,定义$W$上取值为序数的映射$F$为,对每个$x\in W$,$F(x)=\alpha$为同构于$W(x)$的序数.那么$F(x)$总存在,因为假设存在某些$x\in W$使得$F(x)$不存在,可取最小的$x$使得$F(x)$不存在,但是$\{W(y),y<x\}$是一个序数并且同构于$W(x)$.这和$F(x)$不存在矛盾.另外按照良序集不和自身的一个前端同构,说明$\alpha$存在则唯一.最后按照替换公理,$F(W)$是集合.设序数$\gamma$是最小的序数不在$F(W)$中,那么$F(W)=\gamma$,这就得到了$W$同构于一个序数.
+\end{proof}
+
+最小的非0极限序数$\omega$.记0为零序数$\emptyset$,定义1为它的后继,不断取后继得到序数$n=(n-1)+1$.最小的非0极限序数$\omega$如果存在,必然包含全部的$0,1,2,\cdots$.而我们证明过全体$0,1,2,\cdots$构成的自然数集是良序的传递集,于是最小的非0极限序数$\omega$就是自然数集.满足$n<\omega$的序数$n$称为有限序数,不是有限序数的序数称为无限序数.
+
+超限归纳.如果序数构成的一个类$C$满足如下三条,那么$C$就是$\textbf{On}$.
+\begin{enumerate}
+	\item 第0项.$0\in C$.
+	\item 后继项.若$\alpha\in C$则$\alpha+1\in C$.
+	\item 极限项.若$\alpha$是非0的极限序数,并且对每个$\beta\in C,\beta<\alpha$,有$\alpha\in C$.
+\end{enumerate}
+
+如果仅考虑小于某序数$\theta$的序数而非$\textbf{On}$整体,则断言依然成立.特别的,如果取为最小的非0极限序数$\omega$,则得到经典的数学归纳法,此时不涉及极限项的情况.
+
+称序数$\alpha$到某个类$X$的映射为$X$上的超限序列,或者$X$上的$\alpha$序列.如果$\alpha=\omega$,则称为$X$上的序列.如果$\alpha$是有限序列,则称为$X$上的有限序列.如果$s$是$X$上的$\alpha$序列,取$x\in X$,记$s^x=s\cup\{(\alpha,x)\}$为$X$上的$\alpha+1$序列,约定添加的映射的取值为$\alpha\mapsto x$.
+
+【超限递归.记全体集合构成的真类为$\textbf{V}$,取定$\textbf{V}$上的映射$G$.对任意序数$\theta$,存在唯一的$\theta$序列$a$,使得对任意$\alpha<\theta$有$a(\alpha)=G(a\mid_{\alpha})$.特别的,存在唯一的类映射$a:\textbf{On}\to\textbf{V}$使得对每个序数$\alpha$有$a(\alpha)=G(a\mid_{\alpha})$.】
+
+利用超限归纳可以定义序数上的运算.
+\begin{enumerate}
+	\item 加法:$\alpha+0=\alpha$,$\alpha+(\beta+1)=(\alpha+\beta)+1$,若$\beta$是极限序数,$\alpha+\beta=\sup\{\alpha+\eta\mid\eta<\beta\}$.
+	\item 乘法:$\alpha\cdot 0=1$,$\alpha\cdot(\beta+1)=\alpha\cdot\beta+\alpha$,若$\beta$是极限序数,$\alpha\cdot\beta=\sup\{\alpha\cdot\eta\mid\eta<\beta\}$.
+	\item 指数:$\alpha^0=1$,$\alpha^{\beta+1}=\alpha^{\beta}\cdot\alpha$,若$\beta$是极限序数,$\alpha^{\beta}=\{\alpha^{\eta}\mid\eta<\beta\}$.
+\end{enumerate}
+
+序数对加法和乘法都满足结合律,但是一般都不满足交换律.例如$1+\omega=\omega\not=\omega+1$,$2\cdot\omega=\omega\not=\omega\cdot2=\omega+\omega$.另外,利用超限归纳可以证明序数的加法和乘法满足如下的对一般全序集所定义的加法和乘法:
+
+给定两个无交的全序集$(A,\le_A)$和$(B,\le_B)$.它们的和定义为全序集$A\cup B$,其中全序定义为,$x<y$当且仅当如下三种情况之一成立:$x,y\in A$且$x<_A y$;$x,y\in B$且$x<_B y$;$x\in A$且$y\in B$.它们的积定义为笛卡尔积$A\times B$上赋予全序$<$:$(a_1,b_1)<(a_2,b_2)$当且仅当$b_1<b_2$或者$b_1=b_2$且$a_1<a_2$.
+
+序数的乘法和加法具有类似于自然数的关系:
+\begin{enumerate}
+	\item 若$\beta<\gamma$,则$\alpha+\beta<\alpha+\gamma$.
+	\item 若$\alpha<\beta$,则存在唯一的序数$\delta$使得$\alpha+\delta=\beta$.
+	\item 若$\beta<\gamma$,$\alpha>0$,则$\alpha\cdot\beta<\alpha\cdot\gamma$.
+	\item 若$\alpha>0$,取最大的序数$\beta$使得$\alpha\cdot\beta\le\gamma$,则这个$\beta$是唯一的满足$\gamma=\alpha\cdot\beta+\rho$,且$\rho<\alpha$唯一的序数.
+	\item 若$\beta<\gamma$且$\alpha>1$,则$\alpha^{\beta}<\alpha^{\gamma}$.
+\end{enumerate}
+
+每个无穷序数可以唯一的表示为一个极限序数与有限序数的和.
+\begin{proof}
+如果$\alpha$是极限序数,则$\alpha=\alpha+0$,即极限序数可以有定理中的表示.如果$\alpha$具有定理中的表示$\alpha=\beta+n$,那么$\alpha+1=\beta+(n+1)$也具有定理中的表示.按照超限归纳就得到所有序数都具有定理中的表示.
+
+为说明唯一性,假设$\beta$具有唯一的表示$\beta=\delta+n$,那么$\beta+1$具有表示$\delta+(n+1)$,倘若$\beta$还有表示$\delta'+k$,那么由于$\beta+1$是后继序数,说明$k>0$,于是有$\beta=\delta'+(k-1)$,导致$\delta=\delta'$以及$k-1=n$,这就说明$\beta+1$具有唯一表示.而对于极限序数的表示必然是唯一的.
+\end{proof}
+
+这里利用序数的运算给出一些具体的极限序数.我们曾给出过最小的非0极限序数$\omega$,它就是全体有限序数的上确界,于是它也就是自然数集的序型.接下来的极限序数是$\omega+\omega=\omega\cdot2$.会推广至$\omega\cdot n$,取它们的上确界,就得到序数$\omega^2$.它可以推广至$\omega^n$,取上确界得到$\omega^{\omega}$.再取上确界得到$\varepsilon_0=\omega^{\omega^{\omega^{\cdots}}}$.但是至此我们所描述的所有极限序数都还只是可数序数.存在不可数的序数,第一个不可数序数记作$\omega_1$,它就是全体至多可数的序数的上确界.
+
+康拓标准型公式.每个序数$\alpha>0$可唯一的表示为形式$\omega^{\beta_1}\cdot k_1+\cdots+\omega^{\beta_n}\cdot k_n$.其中$n\ge1$,$\alpha\ge\beta_1>\cdots>\beta_n$,并且$k_1,\cdots,k_n$是非0自然数.
+\begin{proof}
+	
+	运用超限归纳.首先$1=\omega^0\cdot1$.对任意的$\alpha>0$,记$\beta$是最大的序数使得$\omega^{\beta}\le\alpha$.于是存在唯一的$\delta$和唯一的$\rho<\omega^{\beta}$使得$\alpha=\omega^{\beta}\cdot\delta+\rho$.这里的$\delta$必然是有限序数.唯一性同样用超限归纳证明.
+\end{proof}
+
+在标准型中可能出现$\alpha=\omega^{\alpha}$的情况,这样的最小的序数记作$\varepsilon_0$.它就是序数的列$\alpha_0=\omega$,$\alpha_{n+1}=\omega^{\alpha_n}$的极限.
+
+选择公理的重要等价描述.
+\begin{enumerate}
+	\item 良序原理.任意集合都能赋予良序.
+	\item Zorn引理.设$P$是非空偏序集,$P$的每个链(即全序子集)都有上界,则$P$有极大元.
+\end{enumerate}
+\begin{proof}
+	\begin{enumerate}
+		\item\textbf{良序原理推Zorn引理}.
+		
+		设$(Z,\le)$是偏序集,满足每个链都有上界.按照良序原理,可以赋予$Z$上良序$\preceq$.定义从$Z$到幂集$P(Z)$的映射$f$为:
+		$$f(a)=\left\{\begin{array}{cc}
+		{a}& \text{若}{a}\cup\cup_{b\prec a}f(b)\text{关于}\le\text{是全序}\\
+		\emptyset&\text{若}{a}\cup\cup_{b\prec a}f(b)\text{关于}\le\text{不是全序}
+		\end{array}\right.$$
+		
+		我们断言$f$对每个$a\in Z$都有定义.事实上倘若存在没有定义的点,这些点构成了良序集$(Z,\preceq)$的子集,于是存在极小元$a$,于是对每个$b\prec a$的$b$都在$f$下有定义,这导致$f(a)$有定义,矛盾.
+		
+		记$S=\cup_{a\in Z}f(a)$,那么$S$是$(Z,\le)$的一个链.因为如果$a,b\in S$,设$b\prec a$,此时有$a,b\in{a}\cup\cup_{b\prec a}f(b)$,于是$a,b$关于$\le$有序关系.我们断言$S$是$(Z,\le)$的极大的全序子集,即如果还有$S\subset S'\subset Z$满足$S'$关于$\le$是全序子集,那么$S=S'$.
+		
+		事实上,设$T$为$S$在$S'$中的补集,倘若$T$非空,设$a\in T$,那么有${a}\cup\cup_{b\prec a}f(b)$是${a}\cup S\subset S'$的子集,于是它关于$\le$是全序集.于是$f(a)={a}$,于是$a\in S$,矛盾.
+		
+		最后按照$S$是$(Z,\le)$的链,得到它有上界$m$,我们断言$m$是$(Z,\le)$的极大元.倘若存在$m'\ge m$,那么$S\cup{m'}$关于$\le$是全序集,按照$S$的极大性得到$S\cup{m'}=S$,也即$m'\in S$,即$m'=m$.
+		\item\textbf{Zorn引理推良序原理}.
+		
+		设$Z$是非空集合,记$A$为全体$(S,\le)$构成的集合,其中$S$是$Z$的子集,而$\le$是$S$上的良序.由于集合上约定一个偏序关系相当于指定了集合的幂集的幂集的一个子集.(因为偏序关系$a\le b$可以等价于${{a},{a,b}}$),所以全体$(S,\le)$的确构成了一个集合$A$.注意$A$是非空的,因为单点集总可以赋予良序.
+		
+		现在给$A$上定义偏序$\preceq$,即$(S,\le)\preceq(T,\le')$当且仅当$S\subset T$,并且$\le$是$\le'$在$S$上的限制.验证$(A,\preceq)$上每个链都有上界,按照Zorn引理就得到极大元$(M,\le)$.倘若$M\not=Z$,总可以给$M$添加一个元大于$M$中每个元,和极大性矛盾.于是$M=Z$,也即$Z$上可以赋予良序.
+		\item\textbf{选择公理推Zorn引理}.
+		
+		设偏序集$(P,\le)$满足每个链都有上界.设$P$的全体非空子集构成的集合为$A$,记$A$上的选择函数为$f$.对每个$a\in P$,记$P_a=\{x\in P\mid a<x\}$,则$a$是$(P,\le)$中极大元当且仅当$P_a$是空集.
+		
+		任取$P$中的元$a_0$,设它不是极大元,则$P_{a_0}$非空,记$a_1=f(P_{a_0})>a_0$.假设对序数$\alpha$已经定义了$a_{\alpha}$,设它不是极大元,则$P_{a_{\alpha}}$非空,记$a_{\alpha+1}=f(P_{a_{\alpha}}>a_{\alpha}$.如果$\alpha$是极限序数,并且对每个序数$\beta<\alpha$已经定义了$a_{\beta}$.则$\{a_{\beta}\mid\beta<\alpha\}$是$P$中的一个链,按照条件它有上界,于是$\cap_{\beta<\alpha}P_{\beta}$非空,记$a_{\alpha}=f(\cap_{\beta<\alpha}P_{\beta})$.
+		
+		按照超限归纳原理,所构造的序列$a_{\alpha}$会终止.此时也就有某个$P_{a_{\alpha}}$是空集,于是$a_{\alpha}$是$(P,\le)$的极大元.
+		\item\textbf{Zorn引理推选择公理}.
+		
+		给定非空的元素都不是空集的集合$X$,记$A$为全体$(C,f)$,其中$C$是$X$的子集,$f$是$C$上的选择函数.赋予$A$上偏序$\le$为,$(C,f)\le(C',f')$当且仅当$C\subset C'$,并且$f'$在$C$上的限制为$f$.
+		
+		$A$是非空的,因为可取$x\in A$,$C={x}$,定义$f$把${x}$映射为$x$中的某个元.并且$A$中的链总可以取并得到一个上界.按照Zorn引理得到$A$有极大元$(M,f)$.最后我们断言$M$必然是整个$X$,否则可以给$M$添加一个新的$X$中的元,和极大性矛盾.
+		
+		\item\textbf{良序原理等价于选择公理}
+		
+		良序原理和选择公理的等价性可以从如下结论得到:$X$可良序化当且仅当$P(X)-\emptyset$上存在选择函数.
+		
+		一方面如果$X$上可以赋予良序,则可以定义$P(X)-\emptyset$上的选择函数为$g(x)=\min x$.另一方面如果$P(X)$上存在选择函数$f$(严格来讲选择函数应该是从$P(X)-\emptyset$到$X$的映射,但是这里我们可以约定$\emptyset$上的取值是$X$中的任意元),定义$F:P(X)\to X$为$F(A)=f(X-A)$,再运用如下引理,注意到这个情况下$W$只能是整个$X$:
+		
+		给定映射$F:P(X)\to X$,则存在唯一的良序集$(W,\le)$,满足$W\subset X$,对每个$x\in W$有$F({y\in W\mid y<x})=x$以及$F(W)\in W$.【】
+	\end{enumerate}
+\end{proof}
+
+若两集合之间存在双射,则称它们等势.按照双射的复合是双射,双射的逆是双射,说明等势是一个等价关系.我们期望引入一种标准集合用于度量等势关系.即对每个集合$X$,指定$|X|$为一种特殊的集合,称为$X$的基数,使得两个集合$X,Y$等势当且仅当$|X|=|Y|$.存在多种方式定义基数,这里我们定义为特殊的序数.称一个序数$\alpha$是基数,如果对任意的序数$\beta<\alpha$,有$\alpha$和$\beta$不等势.
+
+给定集合$X$,按照良序原理,其上可定义良序结构,于是存在序数$\alpha$满足$|X|=|\alpha|$,满足这个等式的最小的序数$\alpha$是基数,它就定义为集合$X$的基数.
+
+有限基数.称一个集合是有限集,如果它和某个自然数(作为集合)是等势的.此时就把有限集合$X$的基数定义为这个自然数$|X|=|n|=n$,并称$X$是$n$元集合.那么归纳可得$|n|=|m|$当且仅当$n=m$.
+
+这里我们证明无穷公理约定存在无穷集和存在归纳集是等价的.即ZFC体系中除去无穷公理,如果最小的非0序数存在,则记作$\omega$,否则记$\omega=\textbf{On}$.那么有如下结论等价:
+\begin{enumerate}
+	\item 存在归纳集.
+	\item 存在无穷集.
+	\item $\omega$是集合.
+\end{enumerate}
+\begin{proof}
+	
+	若存在归纳集,我们已经证明了最小的非0序数不是有限集.若$\omega$是集合,那么它本身是一个归纳集.最后来证明2推3,取无穷集$X$,按照幂集公理和分离公理模式,全体有限子集构成了集合$Y$,把有限集合映射为有限序数,按照替换公理得到$\omega$是集合.
+\end{proof}
+
+基数上定义全序.给定两个集合$X,Y$,若存在单射$f:X\to Y$,则记$|X|\le|Y|$.这个关系满足反身性和传递性是直接的,接下来会证明它满足反称性,于是$\le$成为一个偏序.另外由于两个良序集必然满足同构或者其中一个同构于另一个的前端,这说明$\le$实际是全序.反称性:若两个集合$X,Y$满足$|X|\le|Y|$和$|Y|\le|X|$,则有$|X|=|Y|$.
+\begin{proof}
+	
+	按照条件可取单射$f:X\to Y$和单射$g:Y\to X$.不妨约定$Y\subset X$,并且$g$是包含映射.那么有$f(X)\subset Y\subset X$.记$X_0=X,Y_0=Y$.归纳的定义$X_{n+1}=f(X_n)$,$Y_{n+1}=f(Y_n)$.这就得到一个子集链:$$X_0\supset Y_0\supset\cdots\supset X_n\supset Y_n\supset X_{n+1}\supset\cdots$$
+	
+	最后按照如下定义$\phi:X\to Y$,验证它是双射.
+	$$\phi(x)=\left\{\begin{array}{cc}
+	f(x)&\exists n\ge0,x\in X_n-Y_n\\
+	x& \mathrm{otherwise}.
+	\end{array}\right.$$
+\end{proof}
+
+无最大基数.对任意集合$X$,总有$|P(X)|>|X|$.
+\begin{proof}
+	
+	存在$X\to P(X)$的单射为$x\mapsto{x}$.接下来只要说明$f:X\to P(X)$总不是满射.考虑$X$的子集$Y=\{x\in X\mid x\not\in f(x)\}$.倘若$Y$在$f$的像集中,也即$Y=f(a)$,则若$a\in Y$,导致$a\not\in f(a)=Y$;若$a\not\in Y$,导致$a\in f(a)=Y$,矛盾.即总不存在$X\to P(X)$的满射.
+\end{proof}
+
+基数的运算.把两个基数的和$|X|+|Y|$定义为无交并$X\coprod Y$的基数;把两个基数的积$|X|\cdot|Y|$定义为笛卡尔积$X\times Y$的基数.把指数$|X|^{|Y|}$定义为集合$X^{Y}$的基数,这个集合是指全体从$Y$到$X$的映射构成的集合.特别的,集合$X$的幂集可以表示为$2^X$.
+
+对无穷集$A$和任意有限集$B$,有$A$到无交并$A\coprod B$的双射.这说明无穷基数必然是极限序数.
+
+如果$S$是一个由基数构成的集合,则$\sup S$也是基数.假定序数$\alpha=\sup S$不是基数,那么存在序数$\beta<\alpha$使得$|\beta|=|\alpha|$.按照上确界性质,存在$\gamma\in S$使得$\gamma>\beta$,这导致$|\beta|\le|\gamma|\le|\alpha|=|\beta|$,导致$|\beta|=|\gamma|$,和$\gamma$是基数矛盾.
+
+$\aleph$序列.第一个无穷序数$\omega$是基数,记作$\aleph_0$.$\aleph_{\alpha+1}$为大于$\aleph_{\alpha}$的最小基数;$\aleph_{\alpha}$是$\sup_{\beta<\alpha}\aleph_{\beta}$,其中$\alpha$是极限序数.如果基数$\alpha$是后继序数或者极限序数,则称$\aleph_{\alpha}$是后继基数或者极限基数.特别的,这说明基数全体构成一个真类.
+
+具有基数$\aleph_0$的集合称为可数集,具有有限基数或$\aleph_0$的集合统称为至多可数集,称无穷集合是不可数集,如果它不是可数集.另外在ZFC下每个无穷基数都是一个$\aleph$,这一事实的证明我们放后.
+
+$\alpha\cdot\alpha$上的标准良序.我们来定义$\textbf{On}\times\textbf{On}$上的良序结构,使得每个$\alpha\cdots\alpha$都是它的前端,此时$\alpha^2$上的序结构称为它的标准的良序结构.另外$\textbf{On}^2$上的良序结构实际上同构于$\textbf{On}$上的良序结构.于是存在双射$\textbf{On}^2\to\textbf{On}$.对很多序数$\alpha$在这个对应下都有$\alpha^2$和$\alpha$具有相同的序型,特别的所以无穷基数(即所有$\aleph$)都满足这个等式.
+
+定义$\textbf{On}^2$上的全序关系为$(\alpha,\beta)<(\gamma,\delta)$当且仅当,要么$\max\{\alpha,\beta\}<\max\{\gamma,\delta\}$,要么它们的最大值相等,并且要么$\alpha<\gamma$要么$\alpha=\gamma$且$\beta<\delta$.
+\begin{enumerate}
+	\item 这个全序实际上是良序,因为取$\textbf{On}^2$的非空子集$X$,记$\textbf{On}$的子集$A=\{\alpha\mid\exists\beta\in\textbf{On},(\alpha,\beta)\in X\}$,那么按照$\textbf{On}$是良序的,得到$A$有极小元$\alpha_0$,再取子集$B=\{\beta\mid(\alpha_0,\beta)\in X\}$,取$B$的极小元$\beta_0$,那么$(\alpha_0,\beta_0)$就是$X$的极小元.
+	\item 存在$\textbf{On}^2\to\textbf{On}$的保序双射$\Gamma$,为把$(\alpha,\beta)$映射为$(\alpha,\beta)$在$\textbf{On}^2$中的前端,也即集合$\{(\gamma,\delta)\mid(\gamma,\delta)<(\alpha,\beta)\}$.
+	\item 证明$\aleph_{\alpha}\times\aleph_{\alpha}=\aleph_{\alpha}$.于是对任意非0基数$\alpha,\beta$,其一是无穷基数,那么$\alpha+\beta=\alpha\cdot\beta=\max\{\alpha,\beta\}$.
+\end{enumerate}
+
+不可数集的重要例子.全体实数构成的集合称为实直线或者连续统,它是唯一的每个非空有界集都有上确界的有序域.实数集是不可数集,事实上任意非单点的闭区间都是不可数集:
+\begin{proof}
+	
+	闭区间$[a,b],a\not=b$是无穷集.假设它是可数集,那么存在自然数集到实数集的双射,记作$n\mapsto x_n$.现在构造一个$[a,b]$中的实数不在序列$\{x_n\}$中,就得出矛盾.将$[a,b]$三等分,那么必然存在一个小闭区间$[a_0,b_0]$不含点$x_0$,假设已经构造了$[a_i,b_i],0\le i\le k$使得它不含$x_i$,将$[a_i,b_i]$三等分,找到一个小闭区间$[a_{i+1},b_{i+1}]$不含点$x_{i+1}$.由此归纳构造闭区间套$[a_n,b_n]$,由闭区间套定理,可取$x\in\cap_{n\ge0}[a_n,b_n]$,我们断言$x$不会在序列$\{x_n\}$中.假设$x=x_t$,,则$x=x_t\in[a_t,b_t]$,这和构造矛盾.
+\end{proof}
+
+实数集的基数通常记作$c$,由于每个实数可以视为一个有理数集合的上确界,所以有关系式$c\le 2^{\aleph_0}$.在引入康拓集的概念后我们证明$c\ge 2^{\aleph_0}$,于是由Cantor-Bernstein定理得到$c=2^{\aleph_0}$.
+
+康拓集.给定闭区间$C_0=[0,1]$,先扣去三等分后中间的开区间,即$(\frac{1}{3},\frac{2}{3})$,剩下的点集记作$C_1=[0,\frac{1}{3}]\cup[\frac{2}{3},1]$.接下来再扣去这两个闭区间分别的三等分的中间开区间,剩下的点集记作$C_2=[0,\frac{1}{9}]\cup[\frac{2}{9},\frac{1}{3}]\cup[\frac{2}{3},\frac{7}{9}]\cup[\frac{8}{9},1]$.归纳构造$C_n=\frac{C_{n-1}}{3}\cup\left(\frac{2}{3}+\frac{C_{n-1}}{3}\right)$.康拓集的定义为这些$C_n$的交,即$C=\cap_{n\ge1}C_n$.康拓集中的点可以唯一的表示为无穷级数$\sum_{n\ge1}\frac{a_n}{3^n}$,其中$a_n$取0或2.这说明康拓集的基数是$2^{\aleph_0}$.于是实数集的基数大于等于$2^{\aleph_0}$.
+
+康拓曾猜想实数集的每个子集要么至多可数要么是基数$c$的.在ZFC下每个无穷基数都是一个$\aleph$,于是$c=2^{\aleph_0}\ge\aleph_1$,那么康拓的猜想就等价于说$2^{\aleph_0}=\aleph_1$.这就是连续统假设.

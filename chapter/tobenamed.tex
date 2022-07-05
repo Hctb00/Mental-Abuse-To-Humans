@@ -1,0 +1,500 @@
+\chapter{?}
+\section{?}
+\subsection{p-adic曲线上的特殊覆盖}
+
+本节中一个簇$X/k$指的是域$k$上的几何整的有限型可分概形,曲线是指一维簇.
+\begin{enumerate}
+	\item 范畴$\mathcal{S}_{\mathcal{X},D}$.设$R$是商域为$Q$的特征零的赋值环,设$X/Q$是光滑射影曲线,它的一个关于$R$的模型(model)指的是一个有限表示平坦紧合$R$概形$\mathcal{X}$,使得$\mathcal{X}$的一般纤维恰好是$X/Q$(关于模型:如果$X$是不可约的,只要这里$R$是整环,就有$\mathcal{X}$也是不可约的).设$D$是$X$上的除子,定义范畴$\mathcal{S}_{\mathcal{X},D}$是$\textbf{Sch}(\mathcal{X})$的完全子范畴:
+	\begin{enumerate}
+		\item 对象:有限表示紧合$R$态射$\pi:\mathcal{Y}\to\mathcal{X}$,使得它的一般纤维$\pi_Q:\mathcal{Y}_Q\to X$是有限态射,并且限制为$\pi_Q:\pi_Q^{-1}(X\backslash D)\to X\backslash D$是平展的,其中$X\backslash D$表示$X-\mathrm{Supp}D$.
+		\item 态射:从$\pi_1:\mathcal{Y}_1\to\mathcal{X}$到$\pi_2:\mathcal{Y}_2\to\mathcal{X}$的态射就是满足$\pi_1=\pi_2\circ\varphi$的态射$\varphi:\mathcal{Y}_1\to\mathcal{Y}_2$.特别的,$\varphi$一定是有限表示和紧合的,并且$\varphi_Q$是有限态射,并且$\varphi_Q$限制为$\pi_1^{-1}(X\backslash D)\to\pi_2^{-1}(X\backslash D)$是平展的.
+	\end{enumerate}
+
+    记$\mathcal{S}_{\mathcal{X}}=\mathcal{S}_{\mathcal{X},\emptyset}$,此时对象$\pi$的一般纤维$\pi_Q$就总是一个有限平展覆盖.
+    \item 控制和严格控制.如果$\mathrm{Hom}_{\mathcal{S}_{\mathcal{X},D}}(\pi_1,\pi_2)$非空,就称$\pi_1$控制了$\pi_2$;如果存在态射$\varphi:\pi_1\to\pi_2$使得$\varphi_Q$诱导了一般点的局部环之间的同构,就称$\pi_1$是严格控制了$\pi_2$.如果$\mathcal{Y}_{1,Q}$和$\mathcal{Y}_{2,Q}$都是光滑射影曲线,那么严格控制条件等价于讲存在$\varphi:\pi_1\to\pi_2$使得$\varphi_Q$是同构.
+    \item $\mathcal{S}_{\mathcal{X},D}$上的有限纤维积和$\textbf{Sch}(\mathcal{X})$中的有限纤维积吻合.
+    \item 如果$\mathcal{X}$和$\mathcal{X}'$分别是$X$和$X'$的关于$R$的模型,设$f:\mathcal{X}\to\mathcal{X}'$是态射,那么它在一般纤维上诱导了态射$X\to X'$.设$D'$是$X'$上的除子,那么关于$f$的基变换诱导了函子$f^{-1}:\mathcal{S}_{\mathcal{X}',D'}\to\mathcal{S}_{\mathcal{X},f^*D'}$.【$f^*D'$的支集?】
+    \item 完全子范畴$\mathcal{S}_{\mathcal{X},D}^{\mathrm{good}}\subseteq\mathcal{S}_{\mathcal{X},D}$.它的对象$\pi:\mathcal{Y}\to\mathcal{X}$要求满足结构态射$\lambda:\mathcal{Y}\to\mathrm{Spec}R$是平坦的,并且结构态射的基变换总满足$\lambda_*\mathscr{O}_{\mathcal{Y}}=\mathscr{O}_{\mathrm{Spec}R}$,并且一般纤维$\lambda_Q:\mathcal{Y}_Q\to\mathrm{Spec}Q$是光滑的.我们断言这些条件下$\mathcal{Y}_Q$是几何连通的,是光滑射影曲线,并且$\mathcal{Y}$是整概形.
+    \begin{proof}
+    	
+    	因为有如下事实:
+    	\begin{itemize}
+    		\item 设$X\to S$是紧合态射,其中$S$是局部诺特概形,满足$f_*\mathscr{O}_X=\mathscr{O}_S$,如果$S$是连通的,那么$X$也是连通的.
+    		\item 设态射$\mathcal{X}\to S=\mathrm{Spec}A$其中$A$是完备局部诺特环,那么如果它的一般纤维是紧合几何连通光滑曲线,那么它的任意纤维满足相同的事情.
+    		\item 设$X\to S=\mathrm{Spec}R$是有限表示平坦态射,其中$R$是DVR,那么如果这个态射的一般纤维是整概形,则$X$也是整概形.
+    	\end{itemize}
+    \end{proof}
+    \item 完全子范畴$\mathcal{S}_{\mathcal{X},D}^{\mathrm{ss}}\subseteq\mathcal{S}_{\mathcal{X},D}$.它的对象$\pi:\mathcal{Y}\to\mathcal{X}$要求满足结构态射$\lambda:\mathcal{Y}\to\mathrm{Spec}R$是半稳定曲线(这是指$\lambda$是平坦的,并且对任意$s\in\mathrm{Spec}R$,都有几何纤维$\mathcal{Y}_{\overline{s}}$是既约的并且仅有的奇点是一个noda),并且一般纤维$\mathcal{Y}_Q/Q$是光滑射影曲线.特别的,此时$\mathcal{Y}$是整概型,并且如果$R$是DVR,那么$\mathcal{Y}$是正规整概形.
+    \item 性质.设$R$是DVR.
+    \begin{enumerate}[(1)]
+    	\item $\mathcal{S}^{\mathrm{ss}}_{\mathcal{X},D}$是$\mathcal{S}^{\mathrm{good}}_{\mathcal{X},D}$的完全子范畴.
+    	\begin{proof}
+    		
+    		任取$\mathrm{S}_{\mathcal{X},D}^{\mathrm{ss}}$的对象$\pi:\mathcal{Y}\to\mathcal{X}$.那么$\lambda:\mathcal{Y}\to\mathrm{Spec}R$是平坦的并且几何纤维总是既约的,于是按照【EGAIII.7.8.6】知$\lambda$是零维上同调平坦的,也即$\lambda_*\mathscr{O}_{\mathcal{Y}}$关于任意基变换$T\to\mathrm{Spec}R$都可交换.按照$\lambda$是紧合态射,有$\lambda_*\mathscr{O}_{\mathcal{Y}}$是$\mathrm{Spec}R$上的凝聚层,于是它是一个有限$R$模$M$的伴随模层.按照$\mathcal{Y}$是整概形,这个模是无挠的,但是PID上有限无挠模是自由模,于是存在正整数$r$满足$\lambda_*\mathscr{O}_{\mathcal{Y}}=\mathscr{O}_{\mathrm{Spec}R}^r$.但是按照$\mathcal{Y}_Q$是一维的,就有$r=1$【?】.综上得到$\lambda_*\mathscr{O}_{\mathcal{Y}}=\mathscr{O}_{\mathrm{Spec}R}$是关于任意基变换成立的.
+    	\end{proof}
+        \item 如果$R'$控制了$R$,它们都是DVR(事实上这个结论对赋值环已经成立了),记$\mathcal{X}'=\mathcal{X}\otimes_RR'$,那么典范投影态射$\mathcal{X}'\to\mathcal{X}$诱导了一般纤维的态射$X'\to X$,设$D$是$X$上的除子,它关于上述态射的回拉记作$D'$,那么基变换函子$\mathcal{S}_{\mathcal{X},D}\to\mathcal{S}_{\mathcal{X}',D'}$,$\pi:\left(\mathcal{Y}\to\mathcal{X}\right)\mapsto\left(\pi'=\pi\otimes_RR'\right)$把$\mathcal{S}_{\mathcal{X},D}^{\mathrm{good}}$映入$\mathcal{S}_{\mathcal{X}',D'}^{\mathrm{good}}$;把$\mathcal{S}_{\mathcal{X},D}^{\mathrm{ss}}$映入$\mathcal{S}_{\mathcal{X}',D'}^{\mathrm{ss}}$.
+        \item 对$\mathcal{S}_{\mathcal{X},D}$中的任意对象$\pi:\mathcal{Y}\to\mathcal{X}$,都可以找到DVR的有限扩张$R'/R$(这是指,$Q=\mathrm{Frac}R$存在一个有限扩张$Q'/Q$,而$R'$是$Q'$的一个控制了$R$的DVR),使得$\pi\otimes_RR'$被$\mathcal{S}_{\mathcal{X}',D'}^{\mathrm{ss}}$中的一个对象严格控制.
+        \begin{proof}
+        	
+        	先证明命题对$\mathcal{S}_{\mathcal{X},D}^{\mathrm{good}}$成立.首先可以取有限扩张$Q'/Q$满足如下两件事:
+        	\begin{itemize}
+        		\item $\mathcal{Y}_Q$在$\pi_Q^{-1}(X\backslash D)$上有$Q'$值点.                                                                                                                                                                                          
+        		\item $\mathcal{Y}_{Q'}$的不可约分支都是几何不可约的:因为首先$\mathcal{Y}_Q$是诺特的,它只有有限个一般点,任取一个一般点$y$,按照$\mathcal{Y}_Q\to X$是平坦态射,它把一般点映为一般点,于是把$y$映为$X$的唯一一般点$x$.于是域扩张$Q\subseteq\kappa(x)\subseteq\kappa(y)$前者是纯不可分扩张,后者是有限扩张.于是$Q$在$\kappa(y)$中的可分闭包在$Q$上是有限的.【】
+        	\end{itemize}
+        	
+        	设$R'$是$Q'$的一个DVR,控制了$R$.记$\mathcal{Y}_{R'}=\mathcal{Y}\otimes_RR'$.选取$\mathcal{Y}_{Q'}$的一个不可约分支使得它包含了$X\backslash D$的一个$Q'$值点,把这个不可约分支在$\mathcal{Y}_{R'}$中的闭包赋予既约闭子概型结构,得到的概形记作$\mathcal{Y}^*$.那么这是一个整概形,它的正规化$\widetilde{\mathcal{Y}}\to\mathcal{Y}$是有限态射.那么$\widetilde{\mathcal{Y}}$是紧合平坦$R'$概形【?】.$\widetilde{Y}\otimes_{R'}Q'$是$\mathcal{Y}^*_Q$的正规化【?】,于是$\mathcal{Y}_{Q'}^*$具有$Q'$值点.按照Lipman奇点消解【?】,存在不可约正则$R'$概形$\mathcal{Y}^{\vee}$和一个$R'$紧合态射$\mathcal{Y}^{\vee}\to\widetilde{\mathcal{Y}}$使得它在一般纤维上是同构(这里$\mathcal{Y}^{\vee}$是通过做有限步爆破奇点得到的【Liu8.3.44】).于是$\mathcal{Y}^{\vee}$是紧合平坦$R'$概形,并且态射$\mathcal{Y}^{\vee}\to\mathcal{X}'$严格控制了$\pi\otimes_RR'$.$\mathcal{Y}^{\vee}$的一般纤维中的$Q'$值点诱导了紧合结构态射$\mathcal{Y}^{\vee}\to\mathrm{Spec}R'$的截面【?】,于是按照Raynuad的一个定理(
+        	
+        	设$S$是一个DVR的素谱,设$S'$是$S$的严格Hensel化,设$t'$是$S'$的一般点,设$f:X\to S$是紧合平坦态射,纤维的维数都是$i$,特殊纤维$X_g$没有嵌入分支,并且对$X_g$的及大点$x$都有$\mathscr{O}_{X,x}$是正规的,并且满足$f_*\mathscr{O}_X=\mathscr{O}_S$.记$X=X\times_SS'$,那么从一般纤维$X'_{t'}$在$\kappa(t')$上有次数$i$的除子能推出$X$在$S$上是上同调平坦的
+        	
+        	
+        	)得到$\mathcal{Y}^{\vee}$是零维上同调平坦的,于是它落在$\mathcal{S}_{\mathcal{X}',D'}^{\mathrm{good}}$中.
+        	
+        	\qquad
+        	
+        	下面证明命题对$\mathcal{S}_{\mathcal{X},D}^{\mathrm{ss}}$成立.在构造了$\mathcal{Y}^{\vee}$之后,它是不可约正则的,并且在$R'$上紧合平坦,按照Lichtenbaum的一个结论(【定理2.8】设$A$是戴德金整环,$X$是连通正则紧合平坦$A$概形,并且$X\to\mathrm{Spec}A$的纤维都是代数曲线,那么$X$在$A$上射影)有$\mathcal{Y}$在$R'$上射影.于是按照【Liu】的一个结论,可以找到有限扩张$Q^+/Q'$和$Q^+$的一个离散赋值环$R^+$控制了$R'$,以及$\mathcal{Y}^{\vee}\otimes_{R'}Q^+$的一个半稳定模型$\mathcal{Y}^+$和一个$R'$态射$\varphi:\mathcal{Y}^+\to\mathcal{Y}^{\vee}\otimes_{R'}R^+$.那么$\varphi$和态射$R^+\to\mathcal{X}^+=\mathcal{X}\otimes_RR^+$的复合就是$\mathcal{S}_{\mathcal{X},D}^{\mathrm{ss}}$中的一个对象并且严格控制了$\pi^+=\pi\otimes_RR^+$【】.
+        \end{proof}
+        \item 推论.对$\mathcal{S}_{\mathcal{X},D}$中的任意有限个对象$\pi_i:\mathcal{Y}_i\to\mathcal{X}$,都可以找到DVR的有限扩张$R'/R$,使得全部$\pi_i\otimes_RR'$都被$\mathcal{S}_{\mathcal{X}',D'}^{\mathrm{ss}}$中的一个固定对象控制.
+        \begin{proof}
+        	
+        	因为按照上一条可以找到有限扩张$R'_i/R$使得$\pi_i\otimes_RR'_i$被$\mathcal{S}_{\mathcal{X}'_i,D'_i}^{\mathrm{ss}}$中的$\pi_i'$控制.可以取足够大的有限扩张$R'/R$包含了所有$R'_i$,那么$\pi_i\otimes_RR'$被$\mathcal{S}_{\mathcal{X}',D'}$中的$\pi_i'\otimes_{R'_i}R$控制.再取这些$\{\pi_i'\otimes_{R_i'}R\}$的纤维积,它落在$\mathcal{S}_{\mathcal{X}',D'}$中并且控制了全部$\pi_i\otimes_RR'$.
+        \end{proof}
+    \end{enumerate}
+    \item 应用在$p$-adic曲线上.设$X/\overline{\mathbb{Q}_p}$是光滑射影曲线,设$D$是$X$上的除子,设$\mathcal{X}$是$X$的关于$\overline{\mathbb{Z}_p}$的模型.
+    \begin{enumerate}[(1)]
+    	\item 给定$\mathcal{S}_{\mathcal{X},D}$的对象$\pi:\mathcal{Y}\to\mathcal{X}$,那么存在$\mathbb{Q}_p$的有限扩张$K$和一条曲线$X_K/K$,以及模型$\mathcal{X}_{\mathscr{O}_K}/\mathscr{O}_K$,和$X_K$的除子$D_K$满足:$X=X_K\otimes_K\overline{K}$,$D=D_K\otimes_K\overline{K}$,$\mathcal{X}=\mathcal{X}_{\mathscr{O}_K}\otimes_{\mathscr{O}_K}\overline{\mathbb{Z}_p}$,并且存在$\mathcal{S}_{\mathcal{X}_{\mathscr{O}_K},D_K}^{\mathrm{ss}}$的对象$\pi_{\mathscr{O}_K}:\mathcal{Y}_{\mathscr{O}_K}\to\mathcal{X}_{\mathscr{O}_K}$,满足$\pi_{\mathscr{O}_K}\otimes_{\mathscr{O}_K}\overline{\mathbb{Z}}_p$严格控制了$\pi$.
+        \item 给定$\mathcal{S}_{\mathcal{X},D}$的有限个对象$\pi_i:\mathcal{Y}_i\to\mathcal{X}$,那么存在$\mathbb{Q}_p$的有限扩张$K$和一条曲线$X_K/K$,以及模型$\mathcal{X}_{\mathscr{O}_K}/\mathscr{O}_K$,和$X_K$的除子$D_K$满足:$X=X_K\otimes_K\overline{K}$,$D=D_K\otimes_K\overline{K}$,$\mathcal{X}=\mathcal{X}_{\mathscr{O}_K}\otimes_{\mathscr{O}_K}\overline{\mathbb{Z}_p}$,并且存在$\mathcal{S}_{\mathcal{X}_{\mathscr{O}_K},D_K}^{\mathrm{ss}}$的对象$\pi_{\mathscr{O}_K}:\mathcal{Y}_{\mathscr{O}_K}\to\mathcal{X}_{\mathscr{O}_K}$,满足$\pi_{\mathscr{O}_K}\otimes_{\mathscr{O}_K}\overline{\mathbb{Z}}_p$控制了全部$\pi_i$.
+        \item $\mathcal{S}_{\mathcal{X},D}^{\mathrm{ss}}$是$\mathcal{S}_{\mathcal{X},D}^{\mathrm{good}}$的完全子范畴.
+        \begin{proof}
+        	
+        	取$\mathcal{S}_{\mathcal{X},D}^{\mathrm{ss}}$中的对象$\pi:\mathcal{Y}\to\mathcal{X}$,按照逆向系统和概形性质的兼容性,存在有限扩张$K/\mathbb{Q}_p$使得$\pi$下降为$\mathcal{S}_{\mathcal{X}_{\mathscr{O}_K},D_K}$中的对象$\pi_{\mathscr{O}_K}:\mathcal{Y}_{\mathscr{O}_K}\to\mathcal{X}_{\mathscr{O}_K}$使得结构态射$\mathcal{Y}_{\mathscr{O}_K}\to\mathrm{Spec}\mathscr{O}_K$是平坦态射.按照$\mathcal{Y}_{\mathscr{O}_K}/\mathscr{O}_K$和$\mathcal{Y}/\overline{\mathbb{Z}_p}$的几何纤维是一致的【?】,从后者在$\mathcal{S}_{\mathcal{X},D}^{\mathrm{ss}}$中就得到前者在$\mathcal{S}_{\mathcal{X}_{\mathscr{O}_K},D_K}^{\mathrm{ss}}$中,进而它落在$\mathcal{S}_{\mathcal{X}_{\mathscr{O}_K},D_K}^{\mathrm{good}}$.再按照基变换保这个完全子范畴,就得到$\pi=\pi_{\mathscr{O}_K}\otimes_{\mathscr{O}_K}\overline{\mathbb{Z}_p}$落在$\mathcal{S}_{\mathcal{X},D}^{\mathrm{good}}$中.
+        \end{proof}
+    	\item 对$\mathcal{S}_{\mathcal{X},D}$的任意对象$\pi:\mathcal{Y}\to\mathcal{X}$,存在$\mathcal{S}_{\mathcal{X},D}^{\mathrm{ss}}$中的对象严格控制了$\pi$.
+    	\item 对$\mathcal{S}_{\mathcal{X},D}$的有限个对象$\pi_i:\mathcal{Y}_i\to\mathcal{X}$,存在$\mathcal{S}_{\mathcal{X},D}^{\mathrm{ss}}$中的对象控制了全部$\pi_i$.
+    \end{enumerate}
+    \item 范畴$\Sigma_{\mathcal{X},D}$.设$X/\overline{\mathbb{Q}_p}$是光滑射影曲线,设$D$是$X$上的除子,设$\mathcal{X}$是$X$的关于$\overline{\mathbb{Z}}_p$的模型.定义范畴$\Sigma_{\mathcal{X},D}$:
+    \begin{enumerate}
+    	\item 对象:有限表示紧合$G$不变的$\overline{\mathbb{Z}_p}$态射$\pi:\mathcal{Y}\to\mathcal{X}$,其中$G$是一个(相对于不同对象变动的)有限群,它在$\mathcal{Y}$上是左$\overline{\mathbb{Z}_p}$线性作用【?】,在$\mathcal{X}$上是平凡作用.另外还要求一般纤维$\pi_{\overline{\mathbb{Q}_p}}$是有限态射,并且它限制为$\mathcal{Y}_{\overline{\mathbb{Q}_p}}\backslash\pi^*D\to X\backslash D$是一个平展$G$挠【$G$在$\mathcal{Y}_{\overline{\mathbb{Q}_p}}$上的作用是什么?】.
+    	\item 态射:从$G_1$不变态射$\pi_1:\mathcal{Y}_1\to\mathcal{X}$到$G_2$不变态射$\pi_2:\mathcal{Y}_2\to\mathcal{X}$的不变态射之间的态射定义为一个态射$\varphi:\mathcal{Y}_1\to\mathcal{Y}_2$满足$\pi_1=\pi_2\circ\varphi$,以及一个群同态$\gamma:G_1\to G_2$满足如果$G_1$经$\gamma$作用在$\mathcal{Y}_2$上有$\varphi$是$G_1$不变的.
+    \end{enumerate}
+    
+    遗忘$G$作用结构是函子$\Sigma_{\mathcal{X},D}\to\mathcal{S}_{\mathcal{X},D}$.定义$\Sigma_{\mathcal{X},D}$的完全子范畴$\Sigma_{\mathcal{X},D}^{\mathrm{good}}$由那些在上述遗忘函子下映入$\mathcal{S}_{\mathcal{X},D}^{\mathrm{good}}$的对象构成.
+    \item $\mathcal{S}_{\mathcal{X},D}$中的对象总被$\Sigma_{\mathcal{X},D}^{\mathrm{good}}$中的一个对象在遗忘函子下的像控制.更具体地讲,对$\mathcal{S}_{\mathcal{X},D}$中的对象$\pi:\mathcal{Y}\to\mathcal{X}$,存在$\Sigma_{\mathcal{X},D}^{\mathrm{good}}$中的对象$(G,\pi':\mathcal{Y}'\to\mathcal{X})$,其中$G$是一个有限群,$\pi'$是一个$G$不变态射.它们满足存在一个态射$\varphi:\mathcal{Y}'\to\mathcal{Y}$使得$\pi\circ\varphi=\pi'$.
+    \begin{proof}
+    	
+    	我们断言$\Sigma_{\mathcal{X},D}$中的对象$\pi:\mathcal{Y}\to\mathcal{X}$总被$\Sigma_{\mathcal{X},D}^{\mathrm{good}}$中的某个对象控制.按照诺特下降,可以找到有限扩张$K/\mathbb{Q}_p$,使得$\pi$可以下降到$\Sigma_{\mathcal{X}_R,D_K}$中的对象$\pi_R:\mathcal{Y}_R\to\mathcal{X}_R$,其中$R$是$K/\mathbb{Q}_p$的整数环.按照定义记有限群$G$作用在$\mathcal{Y}_R$和$\mathcal{X}_R$上,使得限制为$\mathcal{Y}_K\backslash\pi_K^*D_K\to X_K\backslash D_K$是一个平展$G$挠.
+    	
+    	\qquad
+    	
+    	我们之前解释过可以找到有限扩张$K'/K$,使得$\mathcal{Y}_{K'}$存在一个不可约分支是几何不可约的,并且包含了$\mathcal{X}_{K'}\backslash D_{K'}$中的一个$K'$值点.记这个分支的稳定子为$H\le G$.那么$H$典范的作用在我们之前定义的$\mathcal{Y}^*$上,进而典范作用在$\widetilde{\mathcal{Y}}$和$\mathcal{Y}^{\vee}$上.我们之前解释过$\mathcal{Y}^{\vee}\to\mathcal{X}'=\mathcal{X}\otimes_RR'$是$\mathcal{S}_{\mathcal{X}',D'}^{\mathrm{good}}$中的对象,并且严格控制了$\pi\otimes_RR'$,其中$R'$是$K'$的整数环.于是$\mathcal{Y}^{\vee}\to\mathcal{X}'$是$\Sigma_{\mathcal{X}_{R'},D_{K'}}^{\mathrm{good}}$中的元并且支配了$\pi_{R'}$.于是把这个态射基变换到$\overline{\mathbb{Z}_p}$上就得到断言成立.
+    	
+    	\qquad
+    	
+    	按照我们的断言,只要证明$\mathcal{S}_{\mathcal{X},D}$中的任意对象$\pi:\mathcal{Y}\to\mathcal{X}$都能被$\Sigma_{\mathcal{X},D}$中的某个对象$\pi'$控制.我们之前解释过存在有限扩张$K/\mathbb{Q}_p$和$\mathcal{S}_{\mathcal{X}_{\mathscr{O}_K},D_K}^{\mathrm{good}}$中的对象$\pi_{\mathscr{O}_K}:\mathcal{Y}_{\mathscr{O}_K}\to\mathcal{X}_{\mathscr{O}_K}$使得$\pi=\pi_{\mathscr{O}_K}\otimes_{\mathscr{O}_K}\overline{\mathbb{Z}_p}$.
+    	
+    	\qquad
+    	
+    	设$Y'_K$是光滑射影曲线,使得它的函数域是$K(Y_K)/K(X_K)$的Galois闭包.那么Galois群$G$就作用在$Y_K'\to X_K$上.态射$Y_K'\to X_K$是有限的并且在$X_K\backslash D_K$上是一个对应的群为$G$的Galois覆盖.取$\mathcal{\mathscr{O}_K}$在$K(Y_K')$中的正规化为$\widetilde{\mathcal{Y}_{\mathscr{O}_K}}$,那么这个正规化是有限态射(整excellent概形在函数域的有限扩张中的正规化是有限的).于是$\widetilde{\mathcal{Y}_{\mathscr{O}_K}}\to\mathcal{Y}_{\mathscr{O}_K}\to\mathcal{X}_{\mathscr{O}_K}$是$\mathcal{S}_{\mathcal{X}_{\mathscr{O}_K},D_K}$中的对象,并且它的一般纤维是$Y'_K\to X_K$.
+    	
+    	\qquad
+    	
+    	【设$S$是戴德金概形,函数域记作$K$,设$X/K$是整射影概形,设有限群$G$作用在概形$X$上,设$\mathcal{X}$是$X$的关于$S$的模型,那么在那些兼容$G$作用并且控制了$\mathcal{X}$的$X$的模型中存在最小元$\mathcal{Z}$(也即对任意满足这个条件的模型$\mathcal{W}$,都存在模型的态射$\mathcal{W}\to\mathcal{Z}$),并且存在模型态射$\mathcal{Z}\to\mathcal{X}$诱导了一般纤维上的同构】
+    	
+    	\qquad
+    	
+    	于是可以找到$Y_K'$在$\mathscr{O}_K$上的模型$\mathcal{Y}'_{\mathscr{O}_K}$,延拓了$Y'_K$上的$G$作用,并且存在态射$\varphi_{\mathscr{O}_K}:\mathcal{Y}'_{\mathscr{O}_K}\to\mathcal{Y}_{\mathscr{O}_K}$使得它在一般纤维上是同构.
+    	
+    	\qquad
+    	
+    	记$\pi'_{\mathscr{O}_K}=\pi_{\mathscr{O}_K}\circ\varphi_{\mathscr{O}_K}:\mathcal{Y}'_{\mathscr{O}_K}\to\mathcal{Y}_{\mathscr{O}_K}\to\mathcal{X}_{\mathscr{O}_K}$.按照$\mathcal{Y}'_{\mathscr{O}_K}$是既约的,从$\pi'_{\mathscr{O}_K}$的一般纤维的$G$不变性得到$\pi'_{\mathscr{O}_K}$的$G$不变性【?】.最后取$\mathcal{Y}'=\mathcal{Y}'_{\mathscr{O}_K}\otimes_{\mathscr{O}_K}\overline{\mathbb{Z}_p}$和$\pi'=\pi'_{\mathscr{O}_K}\otimes_{\mathscr{O}_K}\overline{\mathbb{Z}_p}:\mathcal{Y}'\to\mathcal{X}$.那么$\pi'$就是$\Sigma_{\mathcal{X},D}$的对象,并且如果取$\varphi=\varphi_{\mathscr{O}_K}\otimes_{\mathscr{O}_K}\overline{\mathbb{Z}_p}:\mathcal{Y}'\to\mathcal{Y}$,就有$\pi\circ\varphi=\pi'$.
+    \end{proof}
+    \item Albanese簇.设$V/k$是一个代数簇,设$x\in V$,那么$V$的关于点$x$的Albanese簇是一个$k$阿贝尔簇$\mathrm{Alb}(V/k)$满足如下泛性质:存在态射$i_x:V\to\mathrm{Alb}(V)$把$x$映为幺元,并且如果$B$是任意的$k$阿贝尔簇,$f:V\to B$是任意的把$x$映为幺元的态射,那么存在唯一的态射$\widetilde{f}:\mathrm{Alb}(V/k)\to B$满足$\widetilde{f}\circ i_x=f$.
+    $$\xymatrix{\mathrm{Alb}(V/k)\ar[rr]&&B\\V\ar[u]^{i_x}\ar@/_1pc/[urr]_f&&}$$
+    \item 设$R$是DVR,商域记作$Q$,要求特征零.设$X/Q$是光滑射影曲线亏格$\ge1$,设$x\in X$是一个$Q$值点.固定一个正整数$N\ge1$,考虑$[N]$和$i_x$的纤维积(下图),那么$\alpha$是有限平展态射,并且$Y$是几何连通的,进而是光滑射影曲线【】.
+    $$\xymatrix{Y\ar[rr]^i\ar[d]_{\alpha}&&\mathrm{Alb}(X/Q)\ar[d]^{[N]}\\X\ar[rr]^{i_x}&&\mathrm{Alb}(X/Q)}$$
+    
+    设$\mathcal{X}$是$X$关于$R$的半稳定模型.我们断言存在:
+    \begin{itemize}
+    	\item 有限扩张$Q'/Q$和$Q'$的一个离散赋值环$R'$支配了$R$.
+    	\item $Y'=Y\otimes_QQ'$的关于$R'$的半稳定模型$\mathcal{Y}'$.
+    	\item 一个态射$\pi':\mathcal{Y}'\to\mathcal{X}'=\mathcal{X}\otimes_RR'$.
+    \end{itemize}
+    
+    满足:
+    \begin{enumerate}[(a)]
+    	\item $\pi'$的一般纤维$\pi'_{Q'}$就是$\alpha'=\alpha\otimes_QQ'$.
+    	\item 存在满足$g(0)=0$的态射$g$使得如下图表交换:
+    	$$\xymatrix{\mathrm{Pic}^0(\mathcal{X}'/R')\ar[dr]_N\ar[rr]^{{\pi'}^*}&&\mathrm{Pic}^0(\mathcal{Y}'/R')\\&\mathrm{Pic}^0(\mathcal{X}'/R')\ar[ur]_g&}$$
+    \end{enumerate}
+    \begin{proof}
+    	
+    	设$\mathcal{X}$在$\mathrm{Frac}(Y)$中的正规化为$\pi_1:\mathcal{Y}_1\to\mathcal{X}$,那么$\mathcal{Y}_1$是$Y$的模型【】.按照【EGAIV7.8.3(vi)】,整excellent概形在它函数域的有限扩张中的正规化总是有限的,于是这里$\pi_1$是有限态射.把$\pi_1$视为$\mathcal{S}_{\mathcal{X}}$中的对象,于是前面证明了可以找到DVR的有限扩张$R'/R$和$\mathcal{S}_{\mathcal{X}'}^{\mathrm{ss}}$中的对象$\pi':\mathcal{Y}'\to\mathcal{X}'$严格控制了$\pi_1\otimes_RR'$.可以不妨设$\pi'$的一般纤维就是$\alpha'=\alpha\otimes_QQ'$.
+    	
+    	\qquad
+    	
+    	$\mathrm{Alb}(X/Q)$的零元和$X$上的$Q$值点$x$诱导了$Y$上的一个$Q$值点$y$,满足$i(y)=0$.那么按照Albanese簇的泛性质,就存在唯一的态射$f:\mathrm{Alb}(Y/Q)\to\mathrm{Alb}(X/Q)$满足$f\circ i_y=i$.
+    	$$\xymatrix{\mathrm{Alb}(Y/Q)\ar[rr]^f&&\mathrm{Alb}(X/Q)\\Y\ar[u]^{i_y}\ar@/_1pc/[urr]_i&&}$$
+    	
+    	把函子$\mathrm{Pic}^0(-\otimes_QQ'/Q')$作用在如下交换图表上:
+    	$$\xymatrix{Y\ar[r]^{i_y}\ar[dd]_{\alpha}&\mathrm{Alb}(Y/Q)\ar[dr]^f&\\&&\mathrm{Alb}(X/Q)\ar[dl]^N\\X\ar[r]^{i_x}&\mathrm{Alb}(X/Q)&}$$
+    	
+    	得到【$\mathrm{Pic}^0(\mathrm{Alb}(X/Q)\otimes_QQ'/Q')=\mathrm{Pic}^0(X'/Q')$】如下交换图表,其中$f'=f\otimes_QQ'$,$\alpha'=\alpha\otimes_QQ'$.
+    	$$\xymatrix{\mathrm{Pic}^0(Y'/Q')&\\&\mathrm{Pic}^0(X'/Q')\ar[ul]_{\widetilde{f'}}\\\mathrm{Pic}^0(X'/Q')\ar[uu]^{{\alpha'}^*}\ar[ur]_{\widetilde{N}=N}&}$$
+    	
+    	【N\'eron Models:设$S$是戴德金概形,函数域记作$K$,设$X_K/K$是一个光滑可分有限型概形,它的在$S$上的N\'eron模型指的是一个光滑可分有限型$S$模型$X$,满足如下N\'eron映射性质:对任意光滑$S$概形$Y$和任意$K$态射$u_K:Y_K\to X_K$,存在唯一的$S$态射$u:Y\to X$延拓了$u_K$】
+    	
+    	【存在性?】
+    	
+    	记$\mathrm{Pic}^0(Y'/Q')$在$R'$上的N\'eron模型为$\mathscr{N}$,它的幺元连通分支记作$\mathscr{N}^0$.前面【Thm1.2】解释了$\mathrm{Pic}^0(\mathcal{X}'/R')$和$\mathrm{Pic}^0(\mathcal{Y}'/R')$是光滑可分概形,并且$\mathrm{Pic}^0(\mathcal{Y}'/R')$同构于$\mathscr{N}^0$.按照N\'eron模型的泛性质,有典范双射:
+    	$$\mathrm{Hom}_{R'}(\mathrm{Pic}^0(\mathcal{X}'/R'),\mathscr{N})\cong\mathrm{Hom}_{Q'}(\mathrm{Pic}^0(X'/Q'),\mathrm{Pic}^0(Y'/Q'))$$
+    	
+    	所以我们的$\widetilde{f'}$可以唯一的延拓为一个态射$g:\mathrm{Pic}^0(\mathcal{X}'/R')\to\mathscr{N}$.这里$g\circ N$的一般纤维是$\widetilde{f'}\circ N={\alpha'}^*$【】.前面解释了$\pi'$的一般纤维是$\alpha'$,于是${\pi'}^*:\mathrm{Pic}^0(\mathcal{X}'/R')\to\mathrm{Pic}^0(\mathcal{Y}'/R')$的一般纤维是${\alpha'}^*$.于是按照上述典范双射,有$g\circ N$等同于如下态射复合:
+    	$$\xymatrix{\mathrm{Pic}^0(\mathcal{X}'/R')\ar[r]^{{\pi'}^*}&\mathrm{Pic}^0(\mathcal{Y}'/R')=\mathscr{N}^0\ar@{^{(}->}[r]&\mathscr{N}}$$
+    	
+    	于是$g(0)=g(N(0))=0$.最后由于$\mathrm{Pic}^0(\mathcal{X}'/R')$的特殊纤维是连通的,所以$g$可以视为$\mathrm{Pic}^0(\mathcal{X}'/R')\to\mathscr{N}^0=\mathrm{Pic}^0(\mathcal{Y}'/R')$的态射【】,于是有$g\circ N={\pi'}^*$
+    \end{proof}
+\end{enumerate}
+
+\subsection{$p$-adic曲线上的特殊向量丛}
+
+设$\textbf{Vec}(S)$表示概形$S$上的向量丛范畴.对$S$上的向量丛$E$,它对应的局部自由模层记作$\mathscr{O}(E)$.记$\mathbb{C}_p$上的整数环为$\mathfrak{o}$,记$\mathfrak{o}_n=\mathfrak{o}/p^n\mathfrak{o}=\overline{\mathbb{Z}_p}/p^n\overline{\mathbb{Z}_p}$.对任意$\mathfrak{o}$概形$\mathcal{Y}$,记$\mathcal{Y}_n\otimes_{\mathfrak{o}}\mathfrak{o}_n$.设$X/\overline{\mathbb{Q}_p}$是光滑射影曲线,记$X_{\mathbb{C}_p}=X\otimes_{\overline{\mathbb{Q}_p}}\mathbb{C}_p$.
+\begin{enumerate}
+	\item 对任意$X_{\mathbb{C}_p}$上的向量丛$E$和$X$的任意关于$\overline{\mathbb{Z}_p}$的模型$\mathcal{X}$,都存在$X$的关于$\overline{\mathbb{Z}_p}$的模型$\mathcal{X}'$支配了$\mathcal{X}$,并且$E$可以延拓到$\mathcal{X}_{\mathfrak{o}}'$上.如果$\mathcal{X}$是光滑的,那么$E$就可以延拓到$\mathcal{X}_{\mathfrak{o}}$本身.
+	\begin{proof}
+		
+		一般的如果$X$是拟紧拟可分概形,$U\subseteq X$是拟紧开集,$\mathscr{F}$是$U$上的有限表示拟凝聚层,那么它可以延拓为$X$上的一个有限表示拟凝聚层.于是按照$X_{\mathbb{C}_p}$是$\mathcal{X}_{\mathfrak{o}}$的开子集,就有$E$可以延拓为$\mathcal{X}_{\mathfrak{o}}$上的有限表示拟凝聚层$\mathscr{F}$.
+		
+		\qquad
+		
+		
+		
+	\end{proof}
+    \item 定义.
+    \begin{enumerate}[(1)]
+        \item 对$X$关于$\overline{\mathbb{Z}_p}$的模型$\mathcal{X}$和$X$上的除子$D$,定义$\textbf{Vec}(\mathcal{X}_{\mathfrak{o}})$的完全子范畴$\mathfrak{B}_{\mathcal{X}_{\mathfrak{o}},D}$,它的对象是满足如下条件的向量丛$\mathcal{E}$:对任意正整数$n$,存在$\mathcal{S}_{\mathcal{X},D}$中的对象$\pi:\mathcal{Y}\to\mathcal{X}$使得在$\mathrm{mod}p^n$下有$\pi_n^*\mathcal{E}_n$是$\mathcal{Y}_n$上的平凡丛.
+        \item 定义$\textbf{Vec}(X_{\mathbb{C}_p})$的完全子范畴$\mathfrak{B}_{X_{\mathbb{C}_p},D}$,它的对象是那些同构于形如$j^*\mathcal{E}$的向量丛,其中$\mathcal{E}$是$\mathfrak{B}_{\mathcal{X}_{\mathfrak{o}},D}$中的对象,$\mathcal{X}$是$X$的关于$\overline{\mathbb{Z}_p}$的模型,$j$是开嵌入【?】$X_{\mathbb{C}_p}\to\mathcal{X}_{\mathfrak{o}}$.
+        \item 定义$\textbf{Vec}(X_{\mathbb{C}_p})$的完全子范畴$\mathfrak{B}^{\#}_{X_{\mathbb{C}_p},D}$,它的对象满足如下条件的向量丛$E$:存在有限覆盖$\alpha:Y\to X$,其中$Y/\overline{\mathbb{Q}_p}$是光滑射影曲线,并且$\alpha$在$X\backslash D$上平展,并且满足$\alpha^*_{\mathbb{C}_p}E\in\mathfrak{B}_{Y_{\mathbb{C}_p},\alpha^*D}$.
+    \end{enumerate}
+    \item $\mathfrak{B}_{X_{\mathbb{C}_p},D}$定义中的模型可以等价的额外要求它是半稳定的【】.
+    \item 设$f:X\to X'$是两个光滑射影$\overline{\mathbb{Q}_p}$曲线之间的态射,对$X'$的任意关于$\overline{\mathbb{Z}_p}$的模型$\mathcal{X}'$,总存在$X$的关于$\overline{\mathbb{Z}_p}$的模型$\mathcal{X}$和一个$\overline{\mathbb{Z}_p}$态射$\widetilde{f}$使得如下图表交换:
+    $$\xymatrix{X\ar[rr]^f\ar[d]&&X'\ar[d]\\\mathcal{X}\ar[rr]^{\widetilde{f}}&&\mathcal{X}'}$$
+    \begin{proof}
+    	
+    	归结为设$f$是满射:因为$f$是整射影曲线之间的态射,所以它要么是满射,要么是像集为$X'$一个闭点的常值态射.如果是后者,任取$X$的模型$\mathcal{X}$都存在这个交换图表【?】.于是可不妨设$f$是满射.
+    	
+    	\qquad
+    	
+    	此时$f$是有限态射:按照Zariski主定理的推论,一个紧合态射是有限态射当且仅当它是拟有限的.它是拟有限的等价于讲所有纤维都是有限集,这可归结为证明闭点的纤维是有限集:设$Y\subseteq X'$表示那些纤维是有限集的点构成的子集,它也就是满足$\dim f^{-1}(x')=0$的点$x'\in X'$构成的集合,按照纤维维数的半连续性,这是开集,所以如果它包含全部闭点,它是全集(否则补集非空,其中一定有闭点).最后验证闭点的纤维是有限集,这是因为$X$本身是不可约的,按照$f$非常值,闭点的纤维就是$X$的一个真闭子集,所以它的维数严格小于$\dim X=1$,于是它是零维诺特空间,于是是有限集.
+    	
+    	\qquad
+    	
+    	按照正向系统和概形性质的兼容性,可以取$\overline{\mathbb{Q}_p}/\mathbb{Q}_p$的有限扩张$K/\mathbb{Q}_p$,使得$f$下降为$K$上光滑射影曲线之间的有限态射$f_K:X_K\to X'_K$,并且$\mathcal{X}'$可以下降为$X_K'$关于$\mathfrak{o}_K$的模型$\mathcal{X}'_{\mathfrak{o}_K}$【?】.
+    	
+    	\qquad
+    	
+    	$\mathcal{X}'_{\mathfrak{o}_K}$是整概形,取它在函数域$K(X_K)$中的正规化为$\widetilde{f}_{\mathfrak{o}_K}:\mathcal{X}_{\mathfrak{o}_K}\to\mathcal{X}'_{\mathfrak{o}_K}$.由于$f_K$是$X_K'$在$K(X_K)$中的正规化【?】,于是相应图表交换,于是基变换到$\overline{\mathbb{Z}_p}$得到想要的交换图表.
+    \end{proof}
+    \item $\mathfrak{B}_{\mathcal{X}_{\mathfrak{o}},D}$,$\mathfrak{B}_{X_{\mathbb{C}_p},D}$,$\mathfrak{B}_{X_{\mathbb{C}_p},D}^{\#}$分别是$\textbf{Vec}(\mathcal{X}_{\mathfrak{o}})$和$\textbf{Vec}(X_{\mathbb{C}_p})$的加性完全子范畴,并且它们都在张量积,对偶,$\underline{Hom}$和外积下封闭.并且对任意$\overline{\mathbb{Z}_p}$的态射$f:\mathcal{X}\to\mathcal{X}'$或者$\overline{\mathbb{Q}_p}$的态射$f:X\to X'$,以及$X'$上的任意除子$D'$,都有回拉函子$f^*$是$\mathfrak{B}_{\mathcal{X}_{\mathfrak{o}}',D'}\to\mathfrak{B}_{\mathcal{X}_{\mathfrak{o}},f^*D'}$,$\mathfrak{B}_{X_{\mathbb{C}_p}',D'}\to\mathfrak{B}_{X_{\mathbb{C}_p},f^*D'}$,$\mathfrak{B}_{X_{\mathbb{C}_p}',D'}^{\#}\to\mathfrak{B}_{X_{\mathbb{C}_p},f^*D'}^{\#}$的加性正合函子.并且回拉函子和张量积,对偶,$\underline{Hom}$,外积可交换.
+    \item 
+    \begin{enumerate}[(1)]
+    	\item 设$\alpha:Y\to X$是光滑射影$\overline{\mathbb{Q}_p}$曲线之间的有限态射,在$X\backslash D$上平展,其中$D$是$X$上的除子.那么$E\in\textbf{Vec}(X_{\mathbb{C}_p})$落在$\mathfrak{B}_{X_{\mathbb{C}_p},D}^{\#}$中当且仅当$\alpha^*E$落在$\mathfrak{B}_{Y_{\mathbb{C}_p},\alpha^*D}^{\#}$.
+    	\item 如果$\alpha:Y\to X$是光滑射影$\overline{\mathbb{Q}_p}$曲线之间的有限平展态射.设$F\in\textbf{Vec}(Y_{\mathbb{C}_p})$,记$X_{\mathbb{C}_p}$上的局部自由模层$\alpha_*\mathscr{O}(F)$对应的向量丛为$\alpha_*F$.那么如果$F\in\mathfrak{B}_{Y_{\mathbb{C}_p}}^{\#}$,则$\alpha_*F\in\mathfrak{B}_{X_{\mathbb{C}_p}}^{\#}$.
+    \end{enumerate}
+    \item 引理.设$X/\overline{\mathbb{Q}_p}$是光滑射影曲线,设$\mathcal{X}_1,\mathcal{X}_2$是它在$\overline{\mathbb{Z}_p}$上的两个模型,那么存在第三个在$\overline{\mathbb{Z}_p}$上的模型$\mathcal{X}_3$,以及模型之间的两个态射$p_1,p_2$,使得它们限制在一般纤维上是$X$的恒等态射.
+    $$\xymatrix{\mathcal{X}_1&\mathcal{X}_3\ar[l]_{p_1}\ar[r]^{p_2}&\mathcal{X}_2}$$
+    \begin{proof}
+    	
+    	可选取有限扩张$K/\mathbb{Q}_p$,使得所有东西都下降到$K$上.考虑如下态射的复合:
+    	$$\xymatrix{X\ar[r]^{\Delta}&X\times_KX\ar[r]&\mathcal{X}_1\times_{\mathscr{o}_K}\mathcal{X}_2}$$
+    	
+    	由于$X$是既约的,这个复合态射的概形像就是它像集的闭包上赋予既约闭子概型结构.把这个概形像记作$\widetilde{\mathcal{X}_3}$,由于$K$是平坦$\mathscr{o}_K$模,平坦基变换是保概形像的,于是$\widetilde{\mathcal{X}_3}\times_{\mathscr{o}_K}K$是$X\to X\times_KX$的概形像,但是$X$是可分$K$概形,这个概形像同构于$X$本身,综上我们证明了$\widetilde{\mathcal{X}_3}$的一般纤维仍然同构于$X$.进而$\widetilde{\mathcal{X}_3}\to\mathcal{X}_1\times_{\mathscr{o}_K}\mathcal{X}_2\to\mathcal{X}_1$的一般纤维态射同构于$X$上的恒等态射.
+    	$$\xymatrix{X\ar[r]\ar[dr]&X\times_KX\ar@{=}[r]&X\times_KX\ar[r]&X\\&\widetilde{\mathcal{X}_3}\times_{\mathscr{o}_K}K\ar[ur]&&}$$
+    	
+    	
+    	
+    \end{proof}
+    \item $\mathfrak{B}_{\mathcal{X}_{\mathfrak{o}},D}$,$\mathfrak{B}_{X_{\mathbb{C}_p},D}$,$\mathfrak{B}_{X_{\mathbb{C}_p},D}^{\#}$都在延拓下封闭.换句话讲,考虑如下向量丛的短正合列,如果$E',E''$落在这三个范畴中的某一个,那么$E$也落在该范畴里.
+    $$\xymatrix{0\ar[r]&E'\ar[r]&E\ar[r]&E''\ar[r]&0}$$
+    \begin{proof}
+    	
+    	我们来证明$\mathfrak{B}_{X_{\mathbb{C}_p},D}$的情况.
+    	
+    	\qquad
+    	
+    	按照定义,可以找到$X$关于$\overline{\mathbb{Z}_p}$的模型$\mathcal{X}'$和$\mathcal{X}''$,以及向量丛$\mathcal{E}'_1\in\mathfrak{B}_{\mathcal{X}_{\mathfrak{o}}',D}$和$\mathcal{E}_1''\in\mathfrak{B}_{\mathcal{X}_{\mathfrak{o}}'',D}$使得$E'\cong j^*_{\mathcal{X}_{\mathfrak{o}}'}\mathcal{E}_1'$和$E''\cong j^*_{\mathcal{X}_{\mathfrak{o}}''}\mathcal{E}_1''$.其中$j^*$是相应的开嵌入.
+    	
+    	\qquad
+    	
+    	按照上述引理.存在第三个关于$\overline{\mathbb{Z}_p}$的模型$\mathcal{X}$,以及模型态射$\xymatrix{\mathcal{X}'&\mathcal{X}\ar[l]_{p_1}\ar[r]^{p_2}&\mathcal{X}''}$,使得它们限制在一般纤维上是$X$上的恒等态射.按照函子性,有$\mathcal{E}'=p_1^*\mathcal{E}_1'$和$\mathcal{E}''=p_2^*\mathcal{E}_1''$都落在$\mathfrak{B}_{\mathcal{X}_{\mathfrak{o}},D}$中.
+    	
+    	\qquad
+    	
+    	因为平坦基变换和上同调可交换,有$j^*_{\mathcal{X}_{\mathfrak{o}}}$诱导了同构$\mathrm{Ext}^1_{\mathcal{X}_{\mathfrak{o}}}\otimes_{\mathfrak{o}}\mathbb{C}_p\cong\mathrm{Ext}^1_{X_{\mathbb{C}_p}}(E'',E')$.由于左侧这个张量积中的元可以表示为$a\otimes1/p^k$的形式,于是存在$\mathrm{Ext}^1_{X_{\mathbb{C}_p}}(E'',E')$中的一个被$\mathrm{Ext}_{\mathcal{X}_{\mathfrak{o}}}^1(\mathcal{E}'',\mathcal{E}')$中延拓所诱导的延拓$0\to E'\to E_1\to E''\to0$,使得它数乘(这是指延拓群中的加法,也即Baer和)$p^k$得到我们预先给定的延拓.更具体地讲,存在$\mathcal{X}_{\mathscr{o}}$上向量丛的短正合列$0\to\mathcal{E}'\to\mathcal{E}\to\mathcal{E}''\to0$(这里$\mathcal{E}$是向量丛是因为局部自由模层的延拓是局部自由模层,而这是因为仿射概形上凝聚上同调平凡,于是延拓总是分裂的),使得$j^*_{\mathcal{X}_{\mathfrak{o}}}\mathcal{E}\cong E_1$.而这里$E_1$是经数乘$p^k$回拉得到的:
+    	$$\xymatrix{0\ar[r]&E'\ar[r]\ar@{=}[d]&E_1\ar[r]\ar[d]_{\cong}&E''\ar[r]\ar[d]_{\cong}^{p^k}&0\\0\ar[r]&E'\ar[r]&E\ar[r]&E''\ar[r]&0}$$
+    	
+    	这里$E''$是$\mathbb{C}_p$上的局部自由模层,所以数乘$p^k$是同构,于是短五引理得到中间的态射也是同构$E_1\cong E$.进而有$j^*\mathcal{E}\cong E$.
+    	
+    	\qquad
+    	
+    	固定$n\ge1$,按照$\mathcal{E}',\mathcal{E}''\in\mathfrak{B}_{\mathcal{X}_{\mathfrak{o}},D}$,存在$\mathcal{S}_{\mathcal{X},D}$中的对象$\pi':\mathcal{Y}'\to\mathcal{X}$和$\pi'':\mathcal{Y}''\to\mathcal{X}$使得${\pi_n'}^*\mathcal{E}_n'$在$\mathcal{Y}_n'=\mathcal{Y}'\otimes_{\overline{Z}_p}\mathfrak{o}_n$上是平凡丛;${\pi_n''}^*\mathcal{E}_n''$在$\mathcal{Y}_n''=\mathcal{Y}''\otimes_{\overline{Z}_p}\mathfrak{o}_n$上是平凡丛.于是按照前面解释的,可以找到$\mathbb{Q}_p$的一个有限扩张$K$满足:
+    	\begin{itemize}
+    		\item $X,D,\mathcal{X}$下降到$K$上,记号不变.
+    		\item 存在$\mathcal{S}^{\mathrm{ss}}_{\mathcal{X},D}$中的对象$\pi:\mathcal{Y}\to\mathcal{X}$,使得它基变换到$\overline{\mathbb{Z}_p}$上控制了$\pi'$和$\pi''$.
+    		\item $\mathcal{Y}$的一般纤维$Y$包含有理点.
+    	\end{itemize}
+    
+        综上,我们不妨设$\mathcal{E}'_n$和$\mathcal{E}''_n$本身是$\mathcal{X}_n$上的平凡丛.设它们的秩分别是$r'$和$r''$,那么$0\to\mathcal{E}_n'\to\mathcal{E}_n\to\mathcal{E}_n''\to0$对应了$\mathrm{Ext}^1_{\mathcal{Y}_n}(\mathscr{O}^{r''},\mathscr{O}^{r'})\cong\mathrm{H}^1(\mathcal{X}_n,\mathscr{O})^{r'r''}$中的一个等价类.
+        
+        \qquad
+        
+        断言:存在$\mathcal{S}_{\mathcal{X},D}$中的对象$\sigma:\mathcal{Z}\to\mathcal{X}$和其中的态射$\rho:\mathcal{Z}\to\mathcal{Y}$,使得诱导的$\rho_n^*:\mathrm{H}^1(\mathcal{Y}_n,\mathscr{O})\to\mathrm{H}^1(\mathcal{Z}_n,\mathscr{O})$是平凡的.
+        
+        \qquad
+        
+        一旦断言成立,上述等价类在$\rho_n^*$下的像是平凡的,于是$\sigma_n^*\mathcal{E}_n=\rho_n^*\pi_n^*\mathcal{E}_n$是$\mathcal{Z}_n$上的平凡向量丛.按照$n$的任意性就得到$E$落在$\mathfrak{B}_{X_{\mathbb{C}_p},D}$中.
+        
+        \qquad
+        
+        证明断言:记$\mathcal{Y}$的一般纤维为$\mathcal{Y}_K=Y$,如果他的亏格为零,此时曲线要么是射影线要么是圆锥曲线,但是由于我们假定了它包含有理点,于是有$Y\cong\mathbb{P}^1_K$.于是有$h^0(\mathcal{Y}_K,\mathscr{O})=1$,$h^1(\mathcal{Y}_K,\mathscr{O})=0$,$\chi(\mathcal{Y}_K,\mathscr{O})=1$,进而有特殊纤维满足$\chi(\mathcal{Y}_{\kappa},\mathscr{O})=1$(因为这个欧拉示性数就是$1-g$,算术亏格的定义用到希尔伯特多项式,这在域变换的情况下是不变的).按照$\lambda_*\mathscr{O}_{\mathcal{Y}}=\mathscr{O}_R$是泛成立的,于是得到$\mathrm{H}^0(\mathcal{Y}_{\kappa},\mathscr{O})=\kappa$,进而得到$\mathrm{H}^1(\mathcal{Y}_{\kappa},\mathscr{O})=0$.
+        
+        \qquad
+        
+        引理1.设$f:X\to Y=\mathrm{Spec}A$是紧合态射,设$\mathscr{F}$是$X$上的凝聚层,并且$\mathscr{F}$是$f$平坦的.假设存在自然数$p$使得$\mathrm{H}^p(X_y,\mathscr{F}_y)=0$对任意$y\in Y$成立,那么对任意$y\in Y$有如下典范映射是同构.这个结论可以推出我们这里有$\mathrm{H}^1(\mathcal{Y}_n,\mathscr{O})=0$【?】.此时我们的断言是平凡成立的.
+        $$\mathrm{R}^{p-1}f_*(\mathscr{F})\otimes_{\mathscr{O}_y}\kappa(y)\cong\mathrm{H}^{p-1}(X_y,\mathscr{F}_y)$$
+        
+        \qquad
+        
+        下面设$\mathcal{Y}_K$的亏格非零.我们先证明断言归结为找到$\mathscr{S}_{\mathcal{X},D}$中的态射$\rho:\mathcal{Z}\to\mathcal{Y}$,使得诱导的$\rho^*:\mathrm{H}^1(\mathcal{Y},\mathscr{O})\to\mathrm{H}^1(\mathcal{Z},\mathscr{O})$满足像集落在$p^n\mathrm{H}^1(\mathcal{Z},\mathscr{O})$中(这里所有记号都是在$\overline{\mathbb{Z}_p}$和$\overline{\mathbb{Q}_p}$上的).因为考虑如下交换图表:
+        $$\xymatrix{\mathrm{H}^1(\mathcal{Y},\mathscr{O})\otimes_{\overline{\mathbb{Z}_p}}\mathfrak{o}_n\ar[rr]^{\rho^*\otimes\mathfrak{o}_n}\ar[d]&&\mathrm{H}^1(\mathcal{Z},\mathscr{O})\otimes_{\overline{\mathbb{Z}_p}}\mathfrak{o}_n\ar[d]\\\mathrm{H}^1(\mathcal{O})\ar[rr]^{\rho_n^*}&&\mathrm{H}^1(\mathcal{Z}_n,\mathscr{O})}$$
+        
+        归结为的事情告诉我们$\rho^*\otimes\mathfrak{o}_n$是零映射.倘若我们可以证明左侧垂直映射是满射,就得到$\rho_n^*$是零映射完成断言的证明.下面证明这个满射:按照$\overline{\mathbb{Z}_p}$在$R$上平坦(PID上平坦等价于无挠),就有$\mathfrak{o}_n=\overline{\mathbb{Z}_p}/p^n\overline{\mathbb{Z}_p}$在$R/p^nR$上平坦,于是归结为证明$\mathrm{H}^1(\mathcal{Y}_R,\mathscr{O})\otimes_RR/p^nR\to\mathrm{H}^1(\mathcal{Y}_R\otimes_RR/p^R,\mathscr{O})$是满射【需要平坦性吗?】.又因为这里$R$是局部环,所以这个满射归结为基变换到剩余域$\kappa$上是满射.考虑如下交换图表,按照引理1,这里两个非水平的映射都是同构,迫使水平映射是满射.
+        $$\xymatrix{\mathrm{H}^1(\mathcal{Y}_R,\mathscr{O})\otimes_R\kappa\ar[rr]\ar[dr]&&\mathrm{H}^1(\mathcal{Y}_R\otimes_RR/p^nR,\mathscr{O})\otimes_{R/p^nR}\kappa\\&\mathrm{H}^1(\mathcal{Y}_{\kappa},\mathscr{O})&}$$
+        
+        最后只剩下证明可以找到(它们都是$\overline{\mathbb{Z}_p}$和$\overline{\mathbb{Q}_p}$上的)$\mathscr{S}_{\mathcal{X},D}$中的态射$\rho:\mathcal{Z}\to\mathcal{Y}$,使得诱导的$\rho^*:\mathrm{H}^1(\mathcal{Y},\mathscr{O})\to\mathrm{H}^1(\mathcal{Z},\mathscr{O})$满足像集落在$p^n\mathrm{H}^1(\mathcal{Z},\mathscr{O})$中.按照前面的定理(这里用到了亏格非零),我们可以把$R$替换为适当的有限扩张(仍然是DVR),使得可以找到$\mathcal{S}^{\mathrm{ss}}_{\mathcal{Y}_{R}}$中的态射$\rho:\mathcal{Z}\to\mathcal{Y}$,使得存在$g(0)=0$的$g$满足如下交换图表:
+        $$\xymatrix{\mathrm{Pic}^0(\mathcal{Y}/R)\ar[rr]^{\rho^*}\ar[dr]_{p^n}&&\mathrm{Pic}^0(\mathcal{Z}/R)\\&\mathrm{Pic}^0(\mathcal{Y}/R)\ar[ur]_g&}$$
+        
+        取群概形的李代数,得到如下交换图表:
+        $$\xymatrix{\mathrm{H}^1(\mathcal{Y},\mathscr{O})\ar[rr]^{\rho^*}\ar[dr]_{p^n}&&\mathrm{H}^1(\mathcal{Z},\mathscr{O})\\&\mathrm{H}^1(\mathcal{Y},\mathscr{O})\ar[ur]_{g^*}&}$$
+        
+        于是得到$\rho^*(\mathrm{H}^1(\mathcal{Y},\mathscr{O}))\subseteq p^n\mathrm{H}^1(\mathcal{Z},\mathscr{O})$.最后把它们基变换到$\overline{\mathbb{Z}_p}$和$\overline{\mathbb{Q}_p}$上即可.
+    \end{proof}
+    \item 设$\overline{X}/\overline{\mathbb{Q}_p}$是光滑射影曲线,设$X_{\mathbb{C}_p}=\overline{X}\otimes_{\overline{\mathbb{Q}_p}}\mathbb{C}_p$.
+    \begin{enumerate}[(1)]
+    	\item $\mathfrak{B}_{X_{\mathbb{C}_p}}^{\#}$包含了$X_{\mathbb{C}_p}$的全部零次线丛.
+    	\item 如果$\overline{X}$有关于$\overline{\mathbb{Z}_p}$的光滑模型,那么$\mathfrak{B}_{X_{\mathbb{C}_p}}$包含了$X_{\mathbb{C}_p}$的全部零次线丛.
+    \end{enumerate}
+    \begin{proof}
+    	
+    	曲线上向量丛$\mathscr{F}$的次数定义为线丛$\bigwedge^r\mathscr{F}$的次数,这里$r=\mathrm{rk}(\mathscr{F})$.
+    	
+    	\qquad
+    	
+    	亏格为零的时候代数闭域上的曲线就是射影线,其上的零次线丛只有平凡线丛,于是不妨设$\overline{X}$的亏格$\ge1$.
+    	
+    	\qquad
+    	
+    	按照半稳定约化定理,可以找到$\mathbb{Q}_p$的有限扩张$K$,使得$\overline{X}$下降为$K$上的光滑射影曲线$X$,并且$X$存在$K$有理点,并且$X$有在$\mathfrak{o}_K$上的半稳定模型$\mathcal{X}$.于是$\mathcal{X}/\mathfrak{o}_K$是零维上同调平坦的【】.于是$\mathrm{Pic}^0_{\mathcal{X}.\mathfrak{o}_K}$是$\mathfrak{o}_K$上的半阿贝尔概形(这件事对局部有限表示的半稳定曲线总成立【】 ).于是【】$\mathrm{Pic}^0_{\mathcal{X}/\mathfrak{o}_K}$是$\mathrm{Pic}^0_{X/K}(\mathbb{C}_p)=\mathrm{Pic}^0(X_{\mathbb{C}_p})$的开子群,后者恰好由零次线丛(的等价类)构成.
+    	
+    	\qquad
+    	
+    	断言:如果$L\in\mathrm{Pic}^0(X_{\mathbb{C}_p})$落在开子群$\mathrm{Pic}^0_{\mathcal{X}/\mathfrak{o}_K}$中,那么$L\in\mathfrak{B}_{X_{\mathbb{C}_p}}$.
+    	
+    	\qquad
+    	
+    	
+    	
+    	
+    	因为在$\mathcal{X}$光滑的时候【】
+    	
+    	
+    	
+    	
+    \end{proof}
+    \item 设$X/\overline{\mathbb{Q}_p}$是光滑射影曲线,设$D$是其上除子,那么$\mathfrak{B}_{X_{\mathbb{C}_p},D}^{\#}$和$\mathfrak{B}_{X_{\mathbb{C}_p},D}$中的向量丛都是零次半稳定的.
+    \begin{proof}
+    	
+    	首先如果$f:X\to Y$是曲线之间的有限态射,如果$\mathscr{L}$是$Y$上的线丛,那么有$\deg f^*\mathscr{L}=\deg f\deg\mathscr{L}$,于是如果$\mathcal{E}$是$Y$上的向量丛,那么$\deg f^*\mathcal{E}=\deg f\deg\mathcal{E}$.于是只要$X$上的向量丛$f^*\mathcal{E}$是零次半稳定的,就有$\mathcal{E}$是零次半稳定的.
+    	
+    	\qquad
+    	
+    	归结为证明$\mathfrak{B}_{X_{\mathbb{C}_p},D}$中的向量丛$E'$都是零次半稳定的.
+    	
+    	\qquad
+    	
+    	按照定义,存在$X$关于$\overline{\mathbb{Z}_p}$的模型$\mathcal{X}$,以及一个$\mathcal{E}'\in\mathfrak{B}_{\mathcal{X}_{\mathfrak{o}},D}$使得$E'=\mathcal{E}'\otimes_{\mathfrak{o}}\mathbb{C}_p$.再按照定义以及之前证明的半稳定控制,可以找到$\mathscr{S}^{\mathrm{ss}}_{\mathcal{X},D}$中的对象$\pi:\mathcal{Y}\to\mathcal{X}$,使得$\pi_1^*\mathcal{E}_1'$是$\mathcal{Y}_1=\mathcal{Y}\otimes\mathfrak{o}/p$上平凡丛,其中$\mathcal{E}_1'=\mathcal{E}'\otimes\mathfrak{o}/p$.如果记$E=\pi^*_{\overline{\mathbb{Q}_p}}E'$,由于$\pi_{\overline{\mathbb{Q}_p}}$是有限态射,所以$E$是零次半稳定的可以推出$E'$也是.
+    	
+    	\qquad
+    	
+    	综上我们约化到如下情况:设$\mathcal{X}\to\mathrm{Spec}\overline{\mathbb{Z}_p}$是半稳定曲线.$\mathcal{E}$是$\mathcal{X}_{\mathfrak{o}}$上的向量丛,$E=\mathcal{E}\otimes_{\mathfrak{o}}\mathbb{C}_p$是$X_{\mathbb{C}_p}$上的向量丛,满足$\mathcal{E}_1=\mathcal{E}\otimes\mathfrak{o}/p$是$\mathcal{X}_1$上的平凡丛.证明$E$是零次的,并且每个子丛$L\subseteq E$都满足$\deg L\le0$.
+    	
+    	\qquad
+    	
+    	选取合适的有限扩张$K/\mathbb{Q}_p$,把上面的$\mathcal{X},\mathcal{E}$都下降到$\mathfrak{o}_K$和$K$上.此时$\mathcal{X}_{\mathfrak{o}_K}/\mathfrak{o}_K$仍然是半稳定的.但是注意这里$\mathcal{E}$是$\mathfrak{o}$上的向量丛,所以它未必降到$\mathbb{Q}_p$的有限扩张上(因为这样的有限扩张都落在$\overline{\mathbb{Q}_p}$里,到不了$\mathbb{C}_p$).所以为了把$\mathcal{E}$降下来,我们要让$A$跑遍$\mathfrak{o}$的所有有限型正规$\mathfrak{o}_K$子代数.这样就可以把$\mathcal{X}$,$\mathcal{E}$,$L\subseteq E$,$\alpha:\mathcal{E}_1\cong\mathscr{O}_{\mathcal{X}_1}^r$降到某个足够大的$A$上.
+    	
+    	\qquad
+    	
+    	这里证明$A$存在高度1的素理想包含了$\mathfrak{o}_K$的极大理想:【】
+    	
+    	\qquad
+    	
+    	接下来取$A_{\mathfrak{p}}$在$\mathrm{Frac}(A)$在$\mathbb{C}_p$里的代数闭包的严格Hensel化,记作$R$,商域记作$Q\subseteq\mathbb{C}_p$,剩余域记作$\kappa$,于是$\mathfrak{o}_K/\pi_K\subseteq\kappa$是可分闭的扩张.我们把$\mathcal{X},\mathcal{E},L\subseteq E,\alpha$都基变换到$R$或者$Q$上.那么首先有$\mathcal{E}_R$限制在特殊纤维$\mathcal{X}_{\kappa}$上是平凡的:因为有$\mathcal{E}_{A_1}$是平凡的,考虑映射$A_1=A/pA\to R/p\to\kappa$,就有$\mathcal{E}_R\times_R\kappa=\mathcal{E}_A\times_A\kappa=\mathcal{E}_A\times_AA/pA\times_{A/pA}\kappa$是平凡的.
+    	
+    	\qquad
+    	
+    	按照Riemann-Roch定理,如果$\mathcal{E}$是曲线$C$上的向量丛,那么有:
+    	$$\chi(C,\mathcal{E})=h^0(C,\mathcal{E})-h^1(C,\mathcal{E})=(1-g)\mathrm{rank}\mathcal{E}+\deg\mathcal{E}$$
+    	
+    	其中$1-g$也可以写作$\chi(C,\mathscr{O}_C)$.于是如果记$r=\mathrm{rank}\mathcal{E}_Q$,就有:
+    	$$\deg\mathcal{E}_Q=\chi(\mathcal{E}_Q)-r\chi(\mathscr{O}_{\mathcal{X}_Q})$$
+    	
+    	【EGAIII7.9.4】告诉我们局部诺特概形之间的紧合态射下,源端上的凝聚层的欧拉示性数是局部常值的,这里$\mathrm{Spec}R$上闭点的开邻域只有全集,于是得到$\deg\mathcal{E}_Q=\chi(\mathcal{E}_{\kappa})-r\chi(\mathscr{O}_{\mathcal{X}_{\kappa}})$,这里$\mathcal{E}_{\kappa}$是平凡丛,于是$\chi(\mathcal{E}_{\kappa})=r\chi(\mathscr{O}_{Y_{\kappa}})$(因为上同调和有限直和可交换),于是得到$\deg\mathscr{E}_Q=0$,进而从$E=\mathcal{E}_Q\otimes_Q\mathbb{C}_p$得到$\deg E=0$.类似的按照【EGAIII7.9.4】得到$\deg L=\deg L_Q$.接下来还剩下证明$\deg L_Q\le0$,而这是下一个命题.
+    \end{proof}
+    \item 设$R$是DVR,商域记作$Q$,设它的剩余域$\kappa$是可分闭的.设$Z/Q$是光滑射影曲线,设$\mathcal{Z}$是它在$R$上的模型.如果$\mathcal{E}$是$\mathcal{Z}$的向量丛,使得它的特殊纤维$\mathcal{E}_{\kappa}$是$\mathcal{Z}_{\kappa}$上的平凡丛,那么它的一般纤维$E=\mathcal{E}_Q$是零次半稳定的.
+    \begin{proof}
+    	
+    	【这一段证明$\deg E=0$,其实上一条最后已经证明过了】由于$\mathcal{E}{\kappa}$是平凡丛,于是$\det\mathcal{E}_{\kappa}$是平凡线丛.于是有$\deg E=\deg\det E=\chi(Z,\det\mathcal{E}_Q)-\chi(Z,\mathscr{O})=\chi(\mathcal{Z}_{\kappa},\det\mathcal{E}_{\kappa})-\chi(\mathcal{Z}_{\kappa},\mathscr{O})=0$,其中倒数第二个等式是我们之前解释的欧拉示性数是纤维上的常值函数.
+    	
+    	\qquad
+    	
+    	我们要证明证明如果有$Z$上向量丛的短正合列$0\to E_1\to E\to E_2\to0$,那么$\deg E_2\ge0$(这件事等价于半稳定就是$\frac{a}{b}\le\frac{a+c}{b+d}$等价于$\frac{a+c}{b+d}\le\frac{c}{d}$).记$E_1$在$\mathcal{E}$中的典范延拓为$\mathscr{F}_1\subseteq\mathcal{E}$【EGAI9.4.1】,换句话讲,对$\mathcal{Z}$的开子集$U$定义$\Gamma(U,\mathscr{F}_1)=\{s\in\Gamma(U,\mathcal{E})\mid s\mid_{U\cap Z}\in\Gamma(U\cap Z,E_1)\}$,这是一个凝聚层.
+    	
+    	\qquad
+    	
+    	【】记$\mathcal{E}/\mathscr{F}_1$的$r=\mathrm{rank}(\mathscr{F}_2)$次的Fitting理想层为$\mathscr{I}$,记$\mathcal{Z}$沿这个凝聚理想层的爆破为$\varphi:\mathcal{Z}'\to\mathcal{Z}$.有$\mathscr{I}'=\varphi^{-1}(\mathcal{I})\mathscr{O}_{\mathcal{Z}'}$是$\varphi^*\mathscr{F}_2$的$r$次Fitting理想层.记$\mathcal{E}_2=\varphi^*\mathscr{F}_2/\mathrm{Ann}_{\varphi^*\mathscr{F}_2}(\mathscr{I}')$,它是$\mathcal{Z}'$上的局部自由层.因为$\varphi^*$是右正合的,有$\mathcal{E}'=\varphi^*\mathcal{E}\to\mathcal{E}_2$是满态射,它的核记作$\mathscr{F}$.那么$\mathcal{E}$和$\mathcal{E}_2$的一般纤维分别是$E$和$E_2$.
+    	
+    	\qquad
+    	
+    	设$\mathcal{Z}'_{\kappa}$的不可约分支为$C_1,\cdots,C_r$,正规化记作$\widetilde{C_i}\to C_i$.记复合态射$\widetilde{C_i}\to C_i\to\mathcal{Z}'$为$\alpha_i$.由于$\mathcal{E}_2$是局部自由的,于是有$\widetilde{C_i}$上模层的正合列$0\to\alpha_i^*\mathscr{F}\to\alpha_i^*\mathcal{E}'\to\alpha_i^*\mathcal{E}_2\to0$.按照$\mathcal{E}'_{\kappa}$是平凡丛,有$\alpha_i^*\mathcal{E}'$同构于某个$\mathscr{O}_{\widetilde{C_i}}^n$.于是它是光滑射影曲线$\widetilde{C_i}/\kappa$上的零次半稳定向量丛.进而有$\alpha_i^*\mathcal{E}_2$的次数$\ge0$对任意$i$成立.按照【neron model 9.1.5】次数公式,得到$\deg(\det(\mathcal{E}_2)_{\kappa})=\chi(\mathcal{Z}_{\kappa})-\chi(\mathcal{Z}_{\kappa},\mathscr{O}_{\mathcal{Z}_{\kappa}})\ge0$.于是按照欧拉示性数在$\mathcal{Z}$的纤维上是局部常值的,就得到$\deg(E_2)=\deg((\mathcal{E}_2)_Q)\ge0$,得证.【$\kappa$是可分闭用在哪里了?】
+    \end{proof}
+    \item 推论.设$A/\overline{\mathbb{Q}_p}$是椭圆曲线.
+    \begin{enumerate}[(1)]
+    	\item $\mathfrak{B}^{\#}_{A_{\mathbb{C}_p}}$恰好由$A_{\mathbb{C}_p}$上的零次半稳定向量丛构成,并且这样的向量丛恰好是零次线丛反复延拓得到的.
+    	\item 如果$A_K$有好约化,那么$\mathfrak{B}^{\#}_{A_{\mathbb{C}_p}}=\mathfrak{B}_{A_{\mathbb{C}_p}}$.
+    \end{enumerate}
+    \begin{proof}
+    	
+    	一个零次半稳定如果写成不可分解子丛的直和,这些分量同时是它的子丛和商丛,于是它们都是零次的.如果$A/\overline{\mathbb{Q}_p}$是椭圆曲线,那么$A_{\mathbb{C}_p}$上的向量丛$E$是零次半稳定的当且仅当它是若干零次不可分解丛的直和项.
+    	
+    	\qquad
+    	
+    	【】一般的$A_{\mathbb{C}_p}$上的零次不可分解向量丛具有形式$L\otimes F_r$,其中$L$是零次线丛,$F_r$是平凡线丛的反复延拓.于是按照我们之前证明的,这样的向量丛落在$\mathfrak{B}_{A_{\mathbb{C}_p}}^{\#}$.
+    	
+    \end{proof}
+    \item 设$X/\overline{\mathbb{Q}_p}$是光滑射影曲线,设$\mathcal{X}$是$X$在$\overline{\mathbb{Z}_p}$上的模型.记$\overline{\mathbb{Z}_p}$的剩余域为$k=\overline{\mathbb{F}_p}$.那么$\mathcal{E}\in\textbf{Vec}(\mathcal{X}_{\mathfrak{o}})$落在$\mathfrak{B}_{\mathcal{X}_{\mathfrak{o}},D}$当且仅当存在$\mathcal{S}_{\mathcal{X},D}$中的对象$\pi:\mathcal{Y}\to\mathcal{X}$使得$\pi_k^*\mathcal{E}_k$是$\mathcal{Y}_k$上的平凡丛.
+    \begin{proof}
+    	
+    	必要性是因为$p$包含在$\mathfrak{o}$的极大理想中,所以如果存在$\mathcal{S}_{\mathcal{X},D}$中的$\pi:\mathcal{Y}\to\mathcal{X}$使得$\pi_1^*\mathcal{E}_1$是$\mathcal{Y}_1$上的平凡丛,把它们在模到$\kappa$上即可.
+    	
+    	\qquad
+    	
+    	充分性,条件是存在$\mathcal{S}_{\mathcal{X},D}$中的对象$\pi:\mathcal{Y}\to\mathcal{X}$使得$\pi^*_k\mathcal{E}_k$是平凡丛.可不妨设$\pi$是落在$\mathcal{S}^{\mathrm{ss}}_{\mathcal{X},D}$中.把$\mathcal{X},D,\mathcal{E}_1,\pi:\mathcal{Y}\to\mathcal{X}$下降到一个有限扩张$K/\mathbb{Q}_p$上,记作$\mathcal{X}_0,D_0,\mathcal{F},\pi_0:\mathcal{Y}_0\to\mathcal{X}_0$.
+    	
+    	\qquad
+    	
+    	记$K/\mathbb{Q}_p$的分歧指数为$e$.记$\mathfrak{o}_{v/e}=\mathfrak{o}/\mathfrak{p}^v\mathfrak{o}=\overline{\mathbb{Z}_p}/\mathfrak{p}^v\overline{\mathbb{Z}_p}$,其中$\mathfrak{p}$是$\mathfrak{o}_K$的极大理想,那么这个记号吻合于$\mathfrak{o}_n=\overline{\mathbb{Z}_p}/p^n\overline{\mathbb{Z}_p}$.再记$\pi_0,\mathcal{E}_0$基变换到$\mathfrak{o}_{v/e}$上为$\pi_{v/e}$和$\mathcal{E}_{v/e}$.按照$\pi_{1/e}$是$\pi_0\otimes\mathfrak{o}_K/\mathfrak{p}$在$\mathfrak{o}_{1/e}$上的基变换,得到$\pi^*_{1/e}\mathcal{E}_{1/e}$是$\mathcal{Y}_{1/e}$上的平凡丛.问题归结为证明如下:
+    	
+    	\qquad
+    	
+    	设$v\ge2$,设$\mathcal{S}_{\mathcal{X},D}^{\mathrm{ss}}$中的对象$\pi:\mathcal{Y}\to\mathcal{X}$,使得$\pi^*_{(v-1)/e}\mathcal{E}_{(v-1)/e}$是$\mathcal{Y}_{(v-1)/e}$上的平凡丛,那么存在$\mathcal{S}^{\mathrm{ss}}_{\mathcal{X},D}$中的对象$\mu:\mathcal{Z}\to\mathcal{X}$使得$\mu^*_{v/e}\mathcal{E}_{v/e}$是$\mathcal{Z}_{v/e}$上的平凡丛.
+    	
+    	\qquad
+    	
+    	考虑如下$\mathcal{Y}_{v/e}$群层的短正合列,其中$i:\mathcal{Y}_{(v-1)/e}\to\mathcal{Y}_{v/e}$是闭嵌入,$\mathcal{J}=\mathrm{Im}(\omega^{v-1}:\mathscr{O}_{\mathcal{Y}_{v/e}}\to\mathscr{O}_{\mathcal{Y}_{v/e}})$,其中$\omega$是$\mathfrak{o}_K$中取定的素元.$\mathrm{adj}$是$i$的层态射诱导的态射.$f$是$M\mapsto1+M$.这里右正合是因为形式光滑性.
+    	$$\xymatrix{0\ar[r]&\mathrm{M}_r(\mathcal{J})\ar[r]^f&\mathrm{GL}_r(\mathscr{O}_{\mathcal{Y}_{v/e}})\ar[r]^{\mathrm{adj}}&i_*\mathrm{GL}_r(\mathscr{O}_{\mathcal{Y}_{(v-1)/e}})\ar[r]&1}$$
+    	
+    	\qquad
+    	
+    	这个短正合列就诱导了长正合列:
+    	$$\xymatrix{\mathrm{H}^1(\mathcal{Y}_{v/e},\mathrm{M}_r(\mathcal{J}))\ar[r]^f&\mathrm{H}^1(\mathcal{Y}_{v/e},\mathrm{GL}_r(\mathscr{O}))\ar[r]^{i^*}&\mathrm{H}^1(\mathcal{Y}_{(v-1)/e},\mathrm{GL}_r(\mathscr{O}))}$$
+    	
+    	记挠子$\pi^*_{v/e}\mathcal{E}_{v/e}$在$\mathrm{H}^1(\mathcal{Y}_{v/e},\mathrm{GL}_r(\mathscr{O}))$中对应的是$\Omega$.它经$i^*$映为$\mathrm{H}^1(\mathcal{Y}_{(v-1)/e},\mathrm{GL}_r(\mathscr{O}))$中的平凡挠子$\pi^*_{v/e}\mathcal{E}_{v/e}$.于是存在$\mathrm{H}^1(\mathcal{Y}_{v/e},\mathrm{M}_r(\mathcal{J}))=\mathrm{M}_r(\mathrm{H}^1(\mathcal{Y}_{v/e},\mathcal{J}))$中的$A=(A_{kl})$,使得$\Omega=f(A)$.
+    	
+    	\qquad
+    	
+    	考虑$\mathcal{Y}_{v/e}$上的短正合列$\xymatrix{0\ar[r]&\ker\omega^{v-1}\ar[r]&\mathscr{O}\ar[r]^g&\mathcal{J}\ar[r]&0}$.它诱导的$g:\mathrm{H}^1(\mathcal{Y}_{v/e},\mathscr{O})\to\mathrm{H}^1(\mathcal{Y}_{v/e},\mathcal{J})$是满射(因为$\mathcal{Y}_{v/e}$是一维的,二阶上同调都是0).于是存在$\mathrm{H}^1(\mathcal{Y}_{v/e},\mathscr{O})$上的$B=(B_{kl})$使得$\Omega=fg(B)$.
+    	
+    	\qquad
+    	
+    	如果$\mathcal{Y}_{\overline{\mathbb{Q}_p}}$的亏格为零,之前证明了$\mathrm{H}^1(\mathcal{Y}_{v/e},\mathscr{O})=0$,那么此时$\pi^*_{v/e}\mathcal{E}_{v/e}$本身就是平凡丛,得证.如果亏格非零,之前证明了存在$\mathcal{S}_{\mathcal{X},D}^{\mathrm{ss}}$中的态射$\rho:\mathcal{Z}\to\mathcal{Y}$使得$\rho^*:\mathrm{H}^1(\mathcal{Y},\mathscr{O})\to\mathrm{H}^1(\mathcal{Z},\mathscr{O})$满足像集落在$p^v\mathrm{H}^1(\mathcal{Z},\mathscr{O})$中.那么和之前一样依旧有$\rho^*_{v/e}:\mathrm{H}^1(\mathcal{Y}_{v/e},\mathscr{O})\to\mathrm{H}^1(\mathcal{Z}_{v/e},\mathscr{O})$是平凡映射.因为考虑如下图表,从上面水平映射是零,依旧归结为证明左侧垂直映射是满射,而这按照NAK引理归结为证明基变换到剩余域上是满射,而这是因为它们都是到$\mathrm{H}^1(\mathcal{Y}_{\kappa},\mathscr{O})$上的同构.
+    	$$\xymatrix{\mathrm{H}^1(\mathcal{Y},\mathscr{O})\otimes\mathfrak{o}_{v/e}\ar[rr]^{\rho^*\otimes\mathfrak{o}_{v/e}}\ar[d]&&\mathrm{H}^1(\mathcal{Z},\mathfrak{O})\otimes\mathfrak{o}_{v/e}\ar[d]\\\mathrm{H}^1(\mathcal{Y}_{v/e},\mathscr{O})\ar[rr]^{\rho_{v/e}^*}&&\mathrm{H}^1(\mathcal{Z}_{v/e},\mathscr{O})}$$
+    	
+    	考虑如下交换图表:
+    	$$\xymatrix{\mathrm{H}^1(\mathcal{Y}_{v/e},\mathrm{M}_r(\mathscr{O}))\ar[rr]^{fg}\ar[d]_{\rho^*_{v/e}=0}&&\mathrm{H}^1(\mathcal{Y}_{v/e},\mathrm{GL}_r(\mathscr{O}))\ar[d]^{\rho^*_{v/e}}\\\mathrm{H}^1(\mathcal{Z}_{v/e},\mathrm{M}_r(\mathscr{O}))\ar[rr]^{fg}&&\mathrm{H}^1(\mathcal{Z}_{v/e},\mathrm{GL}_v(\mathscr{O}))}$$
+    	
+    	就有$\rho^*_{v/e}\Omega=\rho^*_{v/e}\pi^*_{v/e}\mathcal{E}_{v/e}$是平凡挠子.
+    \end{proof}
+    \item 零次强半稳定约化.设$R$是赋值环,商域$Q$,剩余域$k$.设$X/Q$是光滑射影曲线,设$\mathcal{X}/R$是模型,设$\mathcal{E}$是$\mathcal{X}$上的向量丛.称$\mathcal{E}$有零次强半稳定约化,如果$\mathcal{E}_k$回拉到$\mathcal{X}_k$的任意不可约分支$C$的正规化$\widetilde{C}$上是零次强半稳定的(特征$p\not=0$的域上的光滑射影曲线上的向量丛称为强半稳定的如果它关于Frobenius态射的任意次复合的回拉都是半稳定向量丛).
+    \item 引理1.设$X/\mathbb{F}_q$是纯维数1的紧合曲线,设$E$是其上向量丛,那么如下命题互相等价:
+    \begin{enumerate}[(1)]
+    	\item $E$回拉到$X$的每个不可约分支的正规化上都是零次强半稳定向量丛.
+    	\item 存在纯维数1紧合概形$Y/\mathbb{F}_q$,以及有限满射态射$\varphi:Y\to X$使得$\varphi^*E$是平凡丛.
+    	\item 存在纯维数1紧合概形$Y/\mathbb{F}_q$,以及态射$\varphi:Y\to X$满足$\varphi$可以分解为$\xymatrix{Y\ar[r]^{F^s}&Y\ar[r]^{\pi}&X}$,其中$s\ge0$,$F$是$Y$上Frobenius态射,$\pi$是一个有限平展满射.并且有$\varphi^*E$是平凡丛.
+    \end{enumerate}
+    \begin{proof}
+    	
+    	(3)推(2)平凡.(2)推(1)是因为(2)导致$X$的每个不可约分支$C$都被$Y$的某个不可约分支支配,并且对应的态射是有限态射.我们知道一个向量丛经有限态射$f$的回拉的秩不变,次数差$\deg f$倍,并且$X$上的Frobenius态射经$Y\to X$的基变换就是$Y$上的Frobenius态射,所以只要$\varphi^*E$是平凡丛就有$E$是零次强半稳定向量丛.
+    	
+    	\qquad
+    	
+    	(1)推(3).我们断言在同构意义下$X$上只有有限个向量丛,回拉到$X$的每个不可约分支的正规化上是零次半稳定的.为此先设$X$是既约的.记$C_1,\cdots,C_r$是$X$的全部不可约分支,$C_i$的正规化记作$\widetilde{C_i}$,再记态射$\pi:\widetilde{X}=\coprod\widetilde{C_i}\to X$,这是有限态射.此时【Neron model P248-9,10】群层的典范单态射$\mathrm{GL}_r(\mathscr{O}_X)\to\pi_*\mathrm{GL}_r(\mathscr{O}_{\widetilde{X}})$的余核是$\prod_{x\in\mathrm{Sing}(X)}i_{x*}S_x$,其中$S_x=\pi^{-1}(x)$.于是取非阿贝尔上同调的长正合列,得到:
+    	$$\xymatrix{\prod_{x\in\mathrm{Sing}}S_x\ar[r]&\mathrm{H}^1(X,\mathrm{GL}_r(\mathscr{O}))\ar[r]^{\alpha}&\mathrm{H}^1(X,\pi_*\mathrm{GL}_r(\mathscr{O}_{\widetilde{X}}))\ar@{=}[r]&\prod_i\mathrm{H}^1(\widetilde{C_i},\mathrm{GL}_r(\mathscr{O}))}$$
+    	
+    	其中最后一个等式是因为,首先有如下正合列:
+    	$$\xymatrix{1\ar[r]&\mathrm{H}^1(X,\pi_*\mathrm{GL}_r(\mathscr{O}_{\widetilde{X}}))\ar[r]&\mathrm{H}^1(\widetilde{X},\mathrm{GL}_r(\mathscr{O}_{\widetilde{X}}))\ar[r]&\mathrm{H}^0(X,\mathrm{R}^1\pi_*\mathrm{GL}_r(\mathscr{O}_{\widetilde{X}}))}$$
+    	
+    	这里$\mathrm{R}^1(\widetilde{C_i},\mathrm{GL}_r(\mathscr{O}))=1$【?】,于是得到:
+    	$$\mathrm{H}^1(X,\pi_*\mathrm{GL}_r(\mathscr{O}_{\widetilde{X}}))\cong \mathrm{H}^1(\widetilde{X},\mathrm{GL}_r(\mathscr{O}_{\widetilde{X}}))\cong \prod_i\mathrm{H}^1(\widetilde{C_i},\mathrm{GL}_r(\mathscr{O}))$$
+    	
+    	有限域上的光滑射影曲线上的零次半稳定向量丛的同构类只有至多有限个.于是$\prod_i\mathrm{H}^1(\widetilde{C_i},\mathrm{GL}_r(\mathscr{O}))$的分量是零次半稳定向量丛的元素至多有限个.接下来按照正合性(实际比正合性更强),如果取$P\in\mathrm{H}^1(X,\mathrm{GL}_r(\mathscr{O}))$,那么全体满足$\alpha(P)=\alpha(P')$的$P'$会被$\prod_{x\in\mathrm{Sing}(X)}S_x$和$P$描述,并且这是一个有限集合【】.这就完成断言的证明.
+    	
+    	\qquad
+    	
+    	如果$X$不是既约的,问题归结为证明$\mathrm{H}^1(X,\mathrm{GL}_r(\mathscr{O}))\to\mathrm{H}^1(X^{\mathrm{red}},\mathrm{GL}_r(\mathscr{O}))$具有有限纤维.按照诺特条件$X$上的幂零层$\mathscr{J}$是幂零的,所以$X^{\mathrm{red}}\to X$可以分解为$X/\mathscr{J}\to X/\mathscr{J}^2\to\cdots\to X$.于是问题归结为设$\mathscr{J}\subseteq\mathscr{O}_X$是拟凝聚理想层,使得$\mathscr{J}^2=0$,对应的闭子概型记作$i:X'\to X$,那么$\varphi:\mathrm{H}^1(X,\mathrm{GL}_r(\mathscr{O}))\to\mathrm{H}^1(X,\mathrm{GL}_r(\mathscr{O}))$具有有限纤维.考虑如下短正合列:
+    	$$\xymatrix{0\ar[r]&\mathrm{M}_r(\mathscr{J})\ar[r]&\mathrm{GL}_r(\mathscr{O}_X)\ar[r]&i_*\mathrm{GL}_r(\mathscr{O}_{X'})\ar[r]&1}$$
+    	
+    	它诱导了如下长正合列,这得到$\varphi$具有有限纤维【?】.
+    	$$\xymatrix{\mathrm{H}^1(X,\mathrm{M}_r(\mathscr{J}))\ar[r]&\mathrm{H}^1(X,\mathrm{GL}_r(\mathscr{O}))\ar[r]^{\varphi}&\mathrm{H}^1(\mathrm{GL}_r(\mathscr{O}))}$$
+    	
+        至此我们证明了断言.接下来设$X$上的向量丛$E$满足对任意自然数$n$,有$X$上的向量丛$F^{*n}_XE$回拉到$X$的每个不可约分支的正规化$\widetilde{C_i}$上都是零次强稳定的,这里$F$是Frobenius态射.按照我们的断言,就存在自然数$t>s\ge0$使得$E'=F^{*s}_XE=F^{*t}_XE$.于是$r=t-s\ge1$就满足$F^{*r}_XE'=E'$.按照【】$\mathbb{F}_q$概形上的向量丛$E'$是有限平展平凡化的当且仅当存在Frobenius态射$F$的某个次幂使得$F^{*n}E'=E'$.于是这里存在有限平展态射$\pi:Y\to X$,使得$\pi^*E'=\pi^*F^{*s}_XE$是平凡丛.
+    \end{proof}
+    \item 引理2.设$T$是$\mathbb{F}_p$概形,设$\tau:S\to T$是$T$的一个既约闭子概型.对正整数$N$,记$F^N$是相应概形上绝对Frobenius态射的$N$次复合,考虑纤维积诱导的如下典范态射$i$,我们断言$i:S\to {S'}^{\mathrm{red}}$是同构.
+    $$\xymatrix{S\ar@/^1pc/[drr]^{F^N}\ar@/_1pc/[ddr]_{\tau}\ar[dr]^i&&\\&S'\ar[r]^{\rho}\ar[d]&S\ar[d]^{\tau}\\&T\ar[r]^{F^N}&T}$$
+    \begin{proof}
+    	
+    	归结为仿射情况.记$T=\mathrm{Spec}R$,记$S=\mathrm{Spec}R/\mathfrak{a}$,其中$\mathfrak{a}$是根理想.那么$S'$对应的环就是$R/\mathfrak{a}\otimes_{R,p^N}R\cong R/\mathfrak{b}$,其中$\mathfrak{b}$是由$\{r^{p^N}\mid r\in\mathfrak{a}\}$生成的理想.于是$i$对应的环同态就是$R/\mathfrak{b}\to R/\mathfrak{a}$.但是明显有$\sqrt{\mathfrak{b}}=\mathfrak{a}$,结合$\mathfrak{a}$是根理想得证.
+    \end{proof}
+    \item 设$X/\overline{\mathbb{Q}_p}$是光滑射影曲线,设$\mathcal{X}/\overline{\mathbb{Z}_p}$是一个模型.设$\mathcal{E}$是$\mathcal{X}_{\mathfrak{o}}$上的向量丛.那么$\mathcal{E}\in\mathfrak{B}_{\mathcal{X}_{\mathfrak{o}},D}$当且仅当$\mathcal{E}$具有零次强半稳定约化.
+    \begin{proof}
+    	
+    	必要性.设$\mathcal{E}\in\mathfrak{B}_{\mathcal{X}_{\mathfrak{o}},D}$,之前解释了存在$\mathcal{S}_{\mathcal{X},D}^{\mathrm{good}}$的对象$\pi:\mathcal{Y}\to\mathcal{X}$使得$\pi_k^*\mathcal{E}_k$是$\mathcal{Y}_k$上的平凡丛,这里$k=\overline{\mathbb{F}_p}$是$\overline{\mathbb{Z}_p}$的剩余域.取不可约分解$\mathcal{X}_k=\cup_iC_i$.因为$\mathcal{X}$是不可约的(我们定义的模型都是不可约的,这只要用到定义中的平坦性,更具体地讲,如果$f:X\to Y$是平坦态射,其中$Y$是不可约概形,并且$f$的一般纤维是不可约的,那么$X$是不可约的.这件事是因为终端不可约的平坦态射的一般纤维一定在源端中稠密,或者说这样的态射一定把非空开集映为稠密集),并且$\pi(\mathcal{Y})$是包含了$\mathcal{X}$一般点的闭子集,于是$\pi$是满射.于是此时$C_i$总被$\mathcal{Y}_k$的某个不可约分支有限的支配【?】,这就导致$\mathcal{E}_k$回拉到每个$\widetilde{C_i}$上是零次强半稳定的.
+    	
+    	\qquad
+    	
+    	充分性.设$\mathcal{E}\in\textbf{Vec}(\mathcal{X}_{\mathfrak{o}})$具有零次强半稳定约化.取有限扩张$K/\mathbb{Q}_p$,使得$\{X,\mathcal{X},C_i,\mathcal{E}_k\}$都下降到$K$上,记作$\{X_K,\mathcal{X}_{\mathscr{O}_K},C_{i0},\mathcal{E}_0\}$.于是这里$\mathcal{E}_0$是$\mathcal{X}_0=\mathcal{X}_{\mathscr{O}_K}\otimes\kappa$上的向量丛,使得回拉到每个$\widetilde{C_{i0}}$上是零次强半稳定向量丛.于是按照引理1,可以找到有限平展覆盖$\pi_0:\widetilde{\mathcal{Y}_0}\to\mathcal{X}_0$使得复合态射$\varphi_0:\xymatrix{\widetilde{\mathcal{Y}_0}\ar[r]^{F^s}&\widetilde{\mathcal{Y}_0}\ar[r]^{\widetilde{\pi_0}}&\mathcal{X}_0}$满足$\varphi^*_0\mathcal{E}_0$是平凡丛.这里的复合次数$s$总可以改为更大的正整数.另外一般的我们知道如果$S=\mathrm{Spec}A$是完备诺特局部环的素谱,如果$X/S$是紧合概形,记$X_0$是闭纤维,那么$X'\mapsto X'\times_XX_0$是范畴等价$\textbf{FEt}(X)\cong\textbf{FEt}(X_0)$.于是这里我们可以找到有限平展覆盖$\pi_{\mathscr{O}_K}:\mathcal{Y}_{\mathscr{O}_K}\to\mathcal{X}_{\mathscr{O}_K}$使得它的闭纤维就是$\pi_0$.并且我们可以在适当把$K$替换为更大的有限域扩张后约定$\pi_{\mathscr{O}_K}$是落在$\mathcal{S}^{\mathrm{ss}}_{\mathcal{X}_{\mathscr{O}_K}}$中(同时把Frobenius态射也替换为合适的次幂,使得依旧有$\varphi_0^*\mathcal{E}_0$是平凡丛).按照【Liuqing10.3.25】,再取极小奇点消解可以约定这里$\mathcal{Y}_{\mathscr{O}_K}$是正则的.
+    	
+    	\qquad
+    	
+    	按照【Lich】,如果$X/A$是连通正则紧合平坦概形,其中$A$是戴德金整环,并且它的全部纤维都是代数曲线,那么$X/A$是射影概形.于是存在闭嵌入$\mathcal{Y}_{\mathscr{O}_K}\to\mathbb{P}_{\mathscr{O}_K}^N$.记$H_i$是$\mathbb{P}_K^N$的被$x_i=0$确定的坐标超平面,记$\Delta=\cup_{i=0}^NH_i$,那么$\mathbb{P}_K^N-\Delta=\mathbb{G}_{m,K}^N$.因为$\mathbb{P}_K^N$上有限个点肯定能经一个线性变换使得它们不落在$\Delta$里,于是我们预先选取的闭嵌入$\tau:\mathcal{Y}_{\mathscr{O}_K}\to\mathbb{P}^N_{\mathscr{O}_K}$可以要求$\mathcal{Y}_K$不包含在$\Delta$中.
+    	
+    	\qquad
+    	
+    	考虑$[x_0:\cdots:x_N]\mapsto[x_0^q:\cdots:x_N^q]$(这里$q$是我们最后取定的$K$的剩余域作为有限域的元素个数)确定的有限态射$F_{\mathscr{O}_K}:\mathbb{P}_{\mathscr{O}_K}^N\to\mathbb{P}_{\mathscr{O}_K}^N$,这在$\mathbb{G}_{m,K}^N$上是平展的.取$\mathscr{O}_K$概形$\mathcal{Y}'_{\mathscr{O}_K}$为如下纤维积:
+    	$$\xymatrix{\mathcal{Y}'_{\mathscr{O}_K}\ar[rr]^{\rho_{\mathscr{O}_K}}\ar[d]&&\mathcal{Y}_{\mathscr{O}_K}\ar[d]^{\tau}\\\mathbb{P}_{\mathscr{O}_K}^N\ar[rr]^{F^s_{\mathscr{O}_K}}&&\mathbb{P}_{\mathscr{O}_K}^N}$$
+    	
+    	那么$\rho_{\mathscr{O}_K}$是有限态射,再记$\rho_K=\rho_{\mathscr{O}_K}\otimes_K:\mathcal{Y}_K'\to\mathcal{Y}_K$,它在$U_K=\mathcal{Y}_K\cap\mathbb{G}_{m,K}^N$上平展(这个$U_K$非空用到我们在射影空间上做线性变换的操作).于是可以取$\mathcal{Y}_K$上的除子$D_K'$使得它的支集恰好是闭子集$\mathcal{Y}$(诺特不可约一维概形上的闭子集是有限点集,总可以实现为某个除子的支集).考虑如下纤维积泛性质诱导的态射$i$,其中$\rho_0=\rho_{\mathscr{O}_K}\otimes\kappa:\mathcal{Y}_0'\to\mathcal{Y}_0$是一般纤维.其中$\mathcal{Y}_0$上的$F^s$实际表示的是$\mathbb{P}_{\kappa}^N$上的Frobenius态射的$rs$次复合,其中$r$是最后确定的$K$的剩余域作为有限域的元素个数.引理2解释了这个$i$诱导了同构$\mathcal{Y}_0\cong{\mathcal{Y}_0'}^{\mathrm{red}}$.
+    	$$\xymatrix{\mathcal{Y}_0\ar@/^1pc/[drr]^{F^s}\ar@/_1pc/[ddr]_{\tau_0}\ar[dr]^i&&\\&\mathcal{Y}_0'\ar[r]^{\rho_0}\ar[d]&\mathcal{Y}_0\ar[d]^{\tau_0}\\&\mathbb{P}_{\kappa}^N\ar[r]^{F^s}&\mathbb{P}_{\kappa}^N}$$
+    	
+    	记$D_K=\pi_K(D'_K)$,把所有东西都基变换到$\mathscr{O}_{\overline{K}}=\overline{\mathbb{Z}_p}$上,记$\pi':\xymatrix{\mathcal{Y}'\ar[r]^{\rho}&\mathcal{Y}\ar[r]^{\pi}&\mathcal{X}}$,那么$\pi'$在$\mathcal{S}_{\mathcal{X},D}$中.并且有$\xymatrix{\mathcal{Y}_k\ar[r]^{i_k}&\mathcal{Y}_k'\ar[r]^{\pi'_k}&\mathcal{X}_k}$就是$\pi_k\circ\rho_k\circ i_k=\pi_k\circ(F^s\otimes_{\kappa}k)$,那么$\mathcal{E}_k=\mathcal{E}_0\otimes_{\kappa}k$在这个复合态射的回拉是平凡丛.又因为$i_k$诱导了同构$\mathcal{Y}_k\cong{\mathcal{Y}_0'}^{\mathrm{red}}$(因为${\mathcal{Y}_0'}^{\mathrm{red}}\cong(\mathcal{Y}_0'\otimes_{\kappa}k)^{\mathrm{red}}\cong{\mathcal{Y}_0'}^{\mathrm{red}}\otimes_{\kappa}k\cong\mathcal{Y}_k$,倒数第二个同构因为$\mathcal{Y}_0$是几何既约的).
+    	
+    	\qquad
+    	
+    	按照之前证明的$\mathcal{S}_{\mathcal{X},D}$中的对象总可以被半稳定对象控制,也即可以找到$\mathcal{S}^{\mathrm{ss}}_{\mathcal{X},D}$中的对象$\mu:\mathcal{Z}\to\mathcal{X}$使得$\mu$可以经$\pi'$分解:$\mu:\xymatrix{\mathcal{Z}\ar[r]^{\psi}&\mathcal{Y}'\ar[r]^{\pi'}&\mathcal{X}}$.因为$\mathcal{Z}_k$是既约的,就有$\psi_k$经终端的既约闭子概型分解(下图).进而$\mu_k=\pi'_k\circ\psi_k$经$\pi'_k\circ i_k$分解,于是$\mu_k^*\mathcal{E}_k$是平凡丛.这得到$\mathcal{E}\in\mathfrak{B}_{\mathcal{X}_{\mathfrak{o}},D}$.
+    	$$\xymatrix{&&{\mathcal{Y}_K'}^{\mathrm{red}}\ar[d]^{i_k}\\\mathcal{Z}_k\ar[urr]\ar[rr]_{\psi_k}&&\mathcal{Y}_K'}$$
+    	
+    	记
+    	
+    	
+    	
+    \end{proof}
+\end{enumerate}
+
+ 

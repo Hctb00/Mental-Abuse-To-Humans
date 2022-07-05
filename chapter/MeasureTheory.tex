@@ -1,0 +1,498 @@
+\chapter{测度论}
+\section{正测度}
+
+【卡是条件的本质描述】
+
+从集合上的一个新结构讲起.给定集合$X$,称$X$的一个子集族$\mathscr{A}$是$X$上的一个代数,如果满足如下三条:
+\begin{enumerate}
+  \item $X\in\mathscr{A}$.
+  \item 若$A\subset X$满足$A\in\mathscr{A}$,那么它在$X$中的补集$A^c\in\mathscr{A}$.
+  \item $\mathscr{A}$中的元素满足有限交,即$\mathscr{A}$中有限个集合的交仍属于$\mathscr{A}$.
+\end{enumerate}
+
+这三条实际上告诉,$\mathscr{A}$这个子集族是保补集,保有限交和有限并的,并且保集合的差运算,即$A-B=A\cap B^c$,并且包含全集和空集.
+
+现在来定义集合上的$\sigma$-代数.对给定集合$X$,称一个子集族$\mathscr{A}$是一个$\sigma$-代数,如果满足如下三条:
+\begin{enumerate}
+  \item $X\in\mathscr{A}$.
+  \item 若$A\subset X$满足$A\in\mathscr{A}$,那么它在$X$中的补集$A^c\in\mathscr{A}$.
+  \item $\mathscr{A}$中的元素满足可数交,即$\mathscr{A}$中可数个集合的交仍属于$\mathscr{A}$.
+\end{enumerate}
+
+这里给出三个注解.第一,这三条实际上告诉,$\mathscr{A}$这个子集族是保补集,保可数交和可数并的,而且保集合的差运算,并且包含全集和空集.第二,需要区分集合上的代数和集合上的拓扑的区别,它们都是指集合上的一个子集族,但是拓扑一般不保补集(补集是闭集),并且$\sigma$-代数保的是可数并而不是任意并,即不可数个$\mathscr{A}$中的子集的并未必属于$\mathscr{A}$,最后,拓扑和$\sigma$-代数都包含全集和空集.最后,关于一个$X$上的代数$\mathscr{A}$何时成为一个$\sigma$代数,有如下几个准则:
+\begin{enumerate}
+  \item $\mathscr{A}$对其中任意递增的可数子集列的并是封闭的
+  \item $\mathscr{A}$对递减可数子集列的交是封闭的
+  \item $\mathscr{A}$对不交可数个子集的并封闭
+\end{enumerate}
+
+往往把一个集合和其上的一个$\sigma$代数称为一个可测空间,记作$(X,\mathscr{A})$,$\sigma$代数中的集合称为($\mathscr{A}$)可测集.
+
+现在给定集合$X$,如果在其上存在任意多个$\sigma$代数,那么这些$\sigma$代数的交仍然是一个$\sigma$代数,由此可以定义子集族生成的$\sigma$代数.即给定集合$X$上的一个子集族$\mathscr{A}$,定义它生成的$\sigma$代数是全部包含这个子集族的$\sigma$代数的交.生成这一概念对并不陌生,在群环模拓扑中都有看到,只要一个集合上的某种结构是保交的,那么就可以定义子集生成的结构.
+
+对于拓扑空间$X$,它的全部开集生成的$\sigma$代数称为Borel $\sigma$代数.其中的集合往往称为Borel集.作为最熟知的拓扑空间$\mathbb{R}^n$,它的Borel$\sigma$代数可由以下三个子集族任意一个生成:
+\begin{enumerate}
+  \item 全体闭集
+  \item 全体$\{(x_1,x_2,\cdots,x_n):x_i\le b\}$,其中$i$任取1到$n$, $b$任取实数.
+  \item 全体$(a_1,b_1]\times(a_2,b_2]\times\cdots\times(a_n,b_n]$
+\end{enumerate}
+
+按照定义,$F_{\sigma}$和$G_{\delta}$都是Borel集.
+
+现在可以给出测度的概念了.给定可测空间$(X,\mathscr{A})$,称$m:\mathscr{A}\to[0,+\infty]$是一个正测度,如果满足两点,第一空集的像是0,第二满足可数可加性,即对$\mathscr{A}$中可数个两两不交集合$A_n,n\ge1$,有:
+$$m\left(\cup_{n=1}^{+\infty}A_n\right)=\sum_{n=1}^{+\infty}m(A_n)$$
+
+把可测集在正测度下的像称为这个可测集的测度.在本节把正测度简称为测度.
+
+类似可数可加性可以定义有限可加性,即对有限个两两不交可测集,它们的并的测度等于它们各自测度的和.那么按照空集测度0,看到可数可加性必然推出有限可加性.
+
+注意到测度是依赖于$\sigma$代数结构定义出来的.在后文中将看到可测函数同样依赖于$\sigma$代数结构定义,但是测度和可测函数之间并没有联系,不过二者同时定义了测度的积分.
+
+把赋予了测度$m$的可测空间称为一个测度空间,记作$(X,\mathscr{A},m)$.如果$X$具有拓扑结构,并且$ \sigma$代数是Borel代数,就称这样的可测空间上定义的测度是Borel测度.
+
+这一段给出测度的基本性质.首先前文中看到测度是有限可加的,另外按照测度只映射为非负实数和正无穷,得到测度是满足单调性的,即如果$A\subset B$那么$m(A)\le m(B)$.最后测度是满足次可加性的,这是指对一列可数个可测集$A_n,n\ge1$,有:
+$$m\left(\cup_{n=1}^{+\infty}A_n\right)\le\sum_{n=1}^{+\infty}m(A_n)$$
+
+另外,对于一列单调的可测集,它们的极限集合的测度有如下结论:
+\begin{enumerate}
+  \item $\{A_n\}$是一列递增的可测集,那么$m(\cup A_n)=\lim_{n\to +\infty}m(A_n)$
+  \item $\{A_n\}$是一列递减的可测集,并且存在一个$N$似的$A_N$测度有限,那么有:
+  $m(\cap A_n)=\lim_{n\to+\infty}m(A_n)$
+\end{enumerate}
+
+如果一个从$\sigma$代数到$[0,+\infty]$的映射满足空集的像是0并且满足有限可加性,往往称这个映射是有限可加测度,那么验证一个有限可加测度是测度只需再验证如下任意一条:
+\begin{enumerate}
+  \item 对任意递增的可测集列$\{A_n\}$有:$\lim_ {n\to+\infty}m(A_n)=m(\cup A_n)$
+  \item 对任意递减的可测集列$\{A_n\}$,若交为空则有:$\lim_ {n\to+\infty}m(A_n)=0$
+\end{enumerate}
+
+给定可测空间$(X,\mathscr{A})$,称它的一个测度$\mu$是有限的,如果有$\mu(X)<+\infty$,称测度$\mu$是$\sigma$有限的,如果存在$X$的一列可测子集$A_n,n\ge1$,使得$X=\cup_{n\ge1}A_n$并且每个$\mu(A_n)<+\infty$.
+
+现在引出外测度概念.外测度是定义在整个幂集上的,并且外测度可以诱导出测度,反过来我们将会看到测度也可以延拓为外测度.
+
+给定集合$X$,定义它的外测度是从$X$的幂集到$[0,+\infty]$的函数$\mu^ {*}$,满足:
+\begin{enumerate}
+  \item $\mu(\varnothing)=0$.
+  \item 单调性,即$A\subset B\subset X$则$\mu^*(A)\le\mu^*(B)$.
+  \item 次可加性,即对可数个子集$A_n,n\ge1$有:$\mu^* (\cup_{n\ge1}A_n)\le\sum_{n\ge1}\mu^*(A_n)$.
+\end{enumerate}
+
+从外测度可以诱导出一个$\sigma$代数,即满足卡氏条件的子集构成一个$\sigma$代数,并且外测度在这个$\sigma$代数上的限制是一个测度.
+
+$\mu^*$为$X$上一个外测度,称$X$的一个子集$B$是$\mu^{*}-$可测的,或者满足卡氏条件的,如果它和它的补集总划分任一点集的外测度,即:
+$$\mu^*(A)=\mu^*(A\cap B)+\mu^*(A\cap B^c),\forall A\subset X$$
+
+那么首先注意到按照次可加性,这个等式左边小于等于右边是总成立的.另外对于外测度无限的集合$A$这个等式也是成立的,于是为了验证它,只需证明对外测度有限的$A$另一侧不等式成立.
+
+另外,看到对于外测度为0的集合$B$,或者补集外测度为0的集合$B$,必然满足要证的一侧不等式,于是外测度或者补集外测度为0的集合总是$\mu^*$-可测的.另外看到空集和全集都是$\mu^*$-可测的.
+
+现在来证明全体$\mu^*$-可测的集合构成一个$\sigma$代数.已经看到空集和全集是$\mu^*$-可测的,另外按照卡氏条件的等式,看到$B$是$\mu^*$-可测的就有$B^c$是$\mu^*$-可测的.现在来证明如果$B_1,B_2$是$\mu^*$-可测的有$B_1\cup B_2$是$\mu^*$-可测的,这只要注意到:
+\begin{align*}
+\mu^*(A)&=\mu^*(A\cap B_1)+\mu^*(A\cap B_1^c)\\
+&=\mu^*(A\cap B_1)+\mu^*(A\cap B_1^c\cap B_2)+\mu^*(A\cap B_1^c\cap B_2^c) \\
+&=\mu^*(A\cap(B_1\cup B_2)\cap B_1)+\mu^*(A\cap(B_1\cup B_2)\cap B_1^c)+\mu^*(A\cap B_1^c\cap B_2^c) \\
+&=\mu^*(A\cap(B_1\cup B_2))+\mu^*(A\cap(B_1\cup B_2)^c)
+\end{align*}
+
+于是看到全体$\mu^*$-可测集合构成一个代数.下面对于一族凉了不交的$\mu^*$-可测集$\{B_i\}_{i\ge1}$,归纳证明等式:
+$$\mu^*(A)=\sum_{i=1}^{n}\mu^*(A\cap B_i)+\mu^*(A\cap\left(\cap_{i=1}^nB_i^c\right))$$
+
+这得到$\mu^*(A)\ge\sum_{n=1}^{+\infty}\mu^*(A\cap B_n)+\mu^*(A\cap\left(\cup_{n=1}^{+\infty}B_n\right)^c)$,于是$\cup_ {n=1}^{+\infty}B_n$也满足卡氏条件,于是全体$\mu^*$-可测集构成一个$\sigma$代数.另外在上式中把$A$替换为$\cup_{n\ge1}B_n$得到可数可加性,这说明外测度$\mu^*$在这个$\sigma$代数上的限制是一个测度.
+
+这里定义完备性.称测度$\mu$是一个可测空间上的完备测度,如果每个$\mu$零集都是可测的,这里$\mu$零集是指测度为0的可测集的子集.那么看到一个外测度所诱导的测度是一个完备的测度.
+
+对于任意测度空间$(X,\mathscr{A},\mu)$,都可以稍微延拓一下$\sigma$代数$\mathscr{A}$,并且把$\mu$延拓到这个新的更大的$\sigma$代数上,使得测度空间是完备的.这称为测度空间的完备化.
+
+具体给出这个延拓.给定测度空间$(X,\mathscr{A},\mu)$,定义子集族:
+$$\overline{\mathscr{A}}=\{A\subset X:\exists E,F\in\mathscr{A},E\subset A\subset F;\mu(F-E)=0\}$$
+
+那么首先,看到$\mu(E)=\mu(F)$.并且$\mathscr{A}\subset\overline{\mathscr{A}}$.来证明$\overline{\mathscr{A}}$是一个$\sigma$代数.首先如果$A\in\overline{\mathscr{A}}$,也就是说存在两个可测集$E,F$使得$E\subset A\subset F$并且$\mu(F-E)=0$,但是这等价于说$F^c\subset A^c\subset E^c$并且$\mu(E^c-F^c)=0$,于是$A^c\in\overline{\mathscr{A}}$.下面对于可数个$A_n\in\overline{\mathscr{A}},n\ge1$,知道存在可测集列$E_n,F_n$使得$E_n\subset A_n\subset F_n$并且每个$\mu(F_n-E_n)=0$,那么得到$\cup_ {n\ge1}E_n\subset\cup_{n\ge1}A_n\subset\cup_{n\ge1}F_n$,另外有:
+$$\mu\left(\cup_{n\ge1}F_n-\cup_{n\ge1}E_n\right)\le\mu\left(\cup_{n\ge1}(F_n-E_n)\right)=0$$
+
+于是有$\cup_{n\ge1}A_n\in\overline{\mathscr{A}}$,于是我们$\overline{\mathscr{A}}$是一个$\sigma$代数.
+
+现在把测度$\mu$延拓定义到$\overline{\mathscr{A}}$上.对$A\in\overline{\mathscr{A}}$,存在$E,F\in\mathscr{A}$使得$E\subset A\subset F$并且$\mu(F-E)=0$,定义$\overline{\mu}(A)=\mu(E)=\mu(F)$.倘若还存在一对$B,C\in\mathscr{A}$使得$B\subset A\subset C$并且$\mu(C-B)=0$,那么有$B\subset F$和$E\subset C$,于是$\mu(B)=\mu(C)=\mu(E)=\mu(F)$,于是我们对$\overline{\mu}(A)$的定义是良好的,它是从$\overline{\mathscr{A}}$到$[0,+\infty]$的函数.另外$\overline{\mu}$在$\mathscr{A}$上的限制自然是$\mu$,于是$\overline{\mu}(\varnothing)=0$,于是最后只需要验证可数可加性.给定两两不交的$\overline{\mathscr{A}}$中的集合$A_n,n\ge1$,这意味着存在两列$\mathscr{A}$中的集合$E_n,F_n,n\ge1$使得$E_n\subset A_n\subset F_n$并且$\mu(F_n-E_n)=0,n\ge1$,那么$A_n$两两无交说明$E_n$两两无交,于是有$\overline{\mu}(\cup_ {n\ge1}A_n)=\mu(\cup_{n\ge1}E_n)=\sum_{n\ge1}\mu(E_n)=\sum_{n\ge1}\overline{\mu}(A_n)$.综上$\overline{\mu}$是一个测度.最后说明它是完备的测度.如果存在一个$A\in\overline{\mathscr{A}}$使得$\overline{\mu}(A)=0$,那么有$\mathscr{A}$中的$E,F$使得$E\subset A\subset F$并且$\mu(F-E)=\mu(F)=\mu(E)=0$,取$A$的任意子集$B$,那么有$\varnothing\subset B\subset F$并且$\mu(F-\varnothing)=0$,于是$B\in\overline{\mathscr{A}}$.
+
+测度可以反过来诱导出外测度.给定测度空间$(X,\mathscr{A},\mu)$,对任意$X$的子集$A$定义:
+$$\mu^*(A)=\inf\{\mu(B),B\in\mathscr{A},A\subset B\}$$
+
+那么首先有$\mu^*(\varnothing)=0$,并且$\mu^*$自然是单调的.现在需要证明次可加性.给定可数个子集$A_n,n\ge1$,不妨设$\sum_ {n\ge1}\mu^*(A_n)<+\infty$.对任意正数$\varepsilon>0$,对任意$n\ge1$,按照定义可以取到一个可测集$B_n$使得$A_n\subset B_n$并且$\mu(B_n)\le\mu^* (A_n)+\frac{\varepsilon}{2^n}$,于是取$B=\cup_{n\ge1}B_n$是可测集,并且有$\mu(B)\le\sum_{n\ge1}\mu^*(A_n)+\varepsilon$,这说明$\mu^* (\cup_{n\ge1}A_n)\le\sum_{n\ge1}\mu^*(A_n)$,得证.
+
+另外可以类似定义集合的内测度,即对测度空间$(X,\mathscr{A},\mu)$,子集$A\subset X$的内测度为:
+$$\mu_*(A)=\sup\{\mu(B),B\in\mathscr{A},B\subset A\}$$
+
+那么内外测度有限并相同的子集恰好就是测度空间完备化后的可测集.一方面如果子集$A$是完备化后的可测集,这意味着存在原始的可测集$E,F$使得:$\mu(E)\le\mu_* (A)\le\mu^*(A)\le\mu(F)$,那么既然两边相同,得到$A$的内外测度相同.
+
+现在开始介绍Lebesgue测度.期望Lebesgue测度能够推广在低维欧式空间中对规则图形的长度体积的定义.会先在欧式空间幂集上定义Lebesgue外测度,再按照卡氏条件得到一个完备的测度空间.
+
+给定欧式空间$R^n$中的一个子集$E$,定义它的Lebesgue外测度是:
+$$m^*(E)=\inf\{\sum_{j\ge1}\mid Q_j\mid:E\subset\cup_{j\ge1}Q_j;Q_j\in\mathscr{Q}\}$$
+
+其中$\mathscr{Q}$表示闭矩体,而$|Q|$表示闭矩体$Q$的体积,即各个边长的乘积.那么按照定义看到空集的外测度是0,并且满足单调性和次可加性.另外,看到单点集外测度0,并且这也说明可数点集外测度是0.
+
+指出,如果把定义里可数个矩体改为有限个距体,这样定义出来的外测度为Jordan外测度,它比Lebesgue外测度大,因为允许可数个矩体逼近一个集合会比仅仅允许有限个矩体逼近集合精细,所以数值会更加小.例如在$[0,1]$区间上的全部有理数$S$这个集合的Lebesgue外测度是0,但是有限个闭矩体的并是闭集,所以覆盖$S$的有限个闭矩体必然覆盖$S$的闭包$[0,1]$,这说明$S$的Jordan外测度是1.
+
+现在证明一个闭矩体的Lebesgue外测度就是它的体积,取闭矩体$Q$,那么有它自己覆盖自身,这立马得到$m^*(Q)\le |Q|$,另外,对于任意一列闭矩体$Q_j,j\ge1$,使得$Q\subset\cup_{j\ge1}Q_j$,现在对于任意$\varepsilon>0$,对每个$j\ge1$,可以取一个中心和$Q_j$一致,但是所有边长都稍微变大的开矩体$S_j$,并且满足$|S_j|\le(1+\varepsilon)|Q_j|$,那么$\{S_j,j\ge1\}$构成了紧集$Q$的开覆盖,于是存在有限子覆盖,不妨设$S_1,S_2,\cdots,S_N$覆盖了$Q$,那么有:
+$$|Q|\le\sum_{i=1}^{N}|S_i|\le(1+\varepsilon)\sum_{i=1}^N|Q_i|\le(1+\varepsilon)\sum_{j\ge1}|Q_j|$$
+
+结合$\varepsilon$是任意的正数,得到$|Q|\le\sum_{j\ge1}|Q_j|$,于是我们$|Q|\le m^*(Q)$,综上有$|Q|=m^*(Q)$.
+
+另外,容易看到$R^n$中的一个$m$维的闭矩体外测度必然是0,这里$m<n$.它结合外测度的次可加性,看到一个开矩体的外测度就是它的体积,即和它的闭包——闭矩体一样.
+
+事实上可以证明在外测度定义里把闭矩体改为开矩体所定义出来的外测度是相同的,也就说,对于每一个子集$E$,考虑两个集合$S=\{\sum_{j\ge1}\mid Q_j\mid:E\subset\cup_{j\ge1}Q_j;Q_j\text{是闭矩体}\}$和$T=\{\sum_ {j\ge1}\mid Q_j\mid:E\subset\cup_{j\ge1}Q_j;Q_j\text{是开矩体}\}$,有$\inf S=\inf T$,一方面对于$E$的每一个开矩体覆盖,这些开矩体的闭包都是闭矩体,并且这些闭矩体也覆盖了$E$,说明$\inf S\le \inf T$,另一方面对于任意正数$\varepsilon$,对$E$的每个闭矩体覆盖$\{Q_j,j\ge1\}$,可以把每个闭矩体$Q_j$中心不变边长延拓稍微小,使得得到对应开矩体$S_j$有$|S_j|\le|Q_j|+\frac{\varepsilon}{2^n}$,那么$S_j$覆盖了$Q_j$并且$\cup_{j\ge1}S_j$是$E$的一个开覆盖,于是$\inf T\le\inf S+\varepsilon$,再由$\varepsilon$的任意性,得到$\inf T\le\inf S$,于是$\inf S=\inf T$.
+
+球的外测度就是它的体积.
+
+存在不可数点集的外测度是0.例如$[0,1]$上的康托集$C$,按照它的构造知道$C=\cap_{n\ge1}F_n$,其中$F_n$是构造中第$n$步中剩下来的$2^n$个长度为$3^ {-n}$的闭区间的并,于是$m^*(C)\le m^*(F_n)\le\left(\frac{2}{3}\right)^n$,于是令$n\to+\infty$得到它的外测度是0.
+
+Lebesgue外测度满足距离可加性,即如果$d(E_1,E_2)=\inf\{d(x,y):x\in E_1,y\in E_2\}>0$,那么有$m^*(E_1\cup E_2)=m^*(E_1)+m^*(E_2)$.但是一般来讲,对于不交的两个集合,他们的并的外测度未必是他们分别外测度的和.
+
+按照外测度可以诱导完备的测度,给出如下定义,称$R^n$上子集$E$是可测集,如果它满足卡氏条件,即对任意$R^n$中的点集$T$,有:
+$$m^*(T)=m^*(T\cap E)+m^*(T\cap E^c)$$
+
+记全体可测集的集合是$\mathscr{A}$,把外测度$m^*$限制在$\mathscr{A}$上称为Lebesgue测度,那么$(R^n,\mathscr{A},m)$是一个完备的测度空间.即全体可测集包含全集和空集,保补运算,保可数交可数并运算;测度满足空集测度是0,满足可数可加性.最后零测集的子集都是可测的,并且也是零测集.最后,$m$是一个$\sigma$有限的测度,因为$R^n$可以表示为半径$m$球心在原点的球对$m$取并,每个球的外测度都有限.
+
+那么首先要说明的是Lebesgue可测集构成的代数的结构.将会看到它是$R^n$上Borel代数关于Lebesgue测度的完备化.为此,首先说明Borel集都是可测集,这只需要说明全体闭集是可测集.
+
+首先证明一个引理,考虑任意一个不为全集的开集$G$,取一个集合$E\subset G$,那么考虑集合$E_k=\{x\in E:d(x,G^c)\ge\frac{1}{k}\}$.看到$E_k$是递增的,并且$\cup_{k\ge1}E_k=\lim_{k\to+\infty}E_k\subset E$,另一方面,由于任意$x\in E$是$G$的内点,于是必然存在充分大的$k$使得$x\in E_k$,于是$E\subset\lim_ {k\to+\infty}E_k$.即$E=\lim_{k\to+\infty}E_k=\cup_{k\ge1}E_k$.现在我们断言$\lim_{k\to+\infty}m^*(E_k)=m^*(E)$,因为一方面必然有前者小于等于后者.另一方面,不妨设$\lim_ {k\to+\infty}m^*(E_k)<+\infty$,取$A_k=E_{k+1}-E_k$,那么有$d(A_ {k},A_{k+2})>0$,于是按照$E=E_{2k}\cup\left(\cup_{j\ge k}m^*(A_{2j})\right)\cup\left(\cup_{j\ge k}m^*(A_{2j+1})\right)$,那么从外测度的距离可加性得到:
+$$m^*(E)\le m^*(E_{2k})+\sum_{j\ge 2k}m^*(A_j)$$
+
+现在注意到$\sum_{j\ge 1}m^*(A_j)$收敛,于是按照Cauchy准则得到$\lim_ {k\to+\infty}\sum_ {j\ge 2k}m^*(A_j)=0$,那么在上式两边令$k\to+\infty$,即得证.
+
+现在任取非空闭集$F$,考虑$T-F\subset F^c=G$,其中$G$是开集,按照上述引理,得到$T-F$中的一列集合$\{F_k\}$,使得$d(F_k,F)\ge\frac{1}{k}$并且$\lim_ {k\to+\infty}m^*(F_k)=m^*(T-F)$,于是有:
+$$m^*(T)\ge m^*((T\cap F)\cup F_k)=m^*(T\cap F)+m^*(F_k)$$
+
+这里令$k\to+\infty$,得到$m^*(T)\ge m^*(T\cap F)+m^*(T\cap F^c)$,于是$F$可测!
+
+关于Lebesgue测度的另一个重要性质是正则性.正则性粗略的讲,是指对于一个拓扑空间上赋予一个包含Borel代数的$\sigma$代数构成的可测空间上的测度,对于一个可测集,可以分别用包含它的开集或者在它内的闭集的测度来逼近.严格的讲,考虑测度空间$(R^n,\mathscr{A},\mu)$,其中$\mathscr{A}$是一个包含$R^n$上Borel代数的$\sigma$代数,测度$\mu$称为正则的,如果它满足如下三条:
+\begin{enumerate}
+  \item 每一个紧集的测度有限.
+  \item 对任意可测集$A$,有:
+  $$\mu(A)=\inf\{\mu(U):A\subset U\text{并且U是开集}\}$$
+  \item 对任意可测集$A$,有:
+  $$\mu(A)=\sup\{\mu(F):F\subset A\text{并且F是闭集}\}$$
+\end{enumerate}
+
+现在给出Lebesgue测度的正则性的证明.按照紧集的有界性,他必然包含在某个闭矩体中,于是紧集的测度小于等于这个闭矩体的体积,于是测度有限.现在对于任意可测集$A$,先设$m(A)<+\infty$,现在断言对任意的正数$\varepsilon$存在包含$A$的开集$G$使得$m(G-A)<\varepsilon$,因为按照外测度定义存在$A$的一个开矩体覆盖$\{I_k\}_{k\ge1}$使得$A\subset\cup_{k\ge1}I_k$,并且$\sum_ {k\ge1}|I_k|\le m(A)+\varepsilon$.于是对于$G=\cup_ {k\ge1}I_k$有$m(F-A)<\varepsilon$.如果$m(E)=+\infty$,那么考虑圆心在原点半径为$m$的开圆$B_m$,有每个$A_m=A\cap B_m$可测并且测度有限,那么按照前述情况存在一个包含$A_m$的开集$G_m$使得$m(G_m-A_m)<\frac{\varepsilon} {2^m}$,于是$G=\cup_{m\ge1}G_k$覆盖了$A$,并且$m(G-A)\le\sum_ {k\ge1}m(G_k-A_k)<\varepsilon$.对于闭集的情况,只需考虑补集即可,对任意可测集$A$,按照上述情况,对任意$\varepsilon>0$,有开集$G$覆盖了可测集$A^c$使得$m(G-A^c)<\varepsilon$,于是对于闭集$F=G^c$有$A$包含闭集$F$并且$m(A-F)=m(G-A^c)<\varepsilon$.
+
+这一段指出,Lebesgue测度的正则性中第三条可以把闭集改为紧集.
+
+按照上述证明,可以看到对每个子集$A$,有$G_{\delta}$集$P$使得$A\subset P$并且$m^*(A)=m(Q)$,注意到这里未必有$m^*(P-A)=0$,也存在$F_{\sigma}$集合$Q$使得$Q\subset A$并且$m^*(A)=m(P)$,注意这时候同样未必有$m^* (A-Q)=0$.这里的$P,Q$是可测集,他们称为$A$的等测包和等测核.另外如果$A$取可测集,看到这时候$m(A-Q)=m(P-A)=0$,于是Lebesgue可测集就是Borel集并上一个零测集,也就是说,Lebesgue可测集构成的$\sigma$代数就是Borel代数在Lebesgue测度下的完备化.这是Littlewood三原理的第一条,即每个可测集几乎是一个Borel集.
+
+现在给出一个不可测集的构造,为此,先证明一个引理.首先对于正测集$E\subset R^n$,对任意的$0<\alpha<1$,断言存在一个闭矩体$I$使得$m(E\cap I)\ge\alpha m(I)$.按照测度的正则性,知道存在一个包含$E$的开集$U$使得$m(E)\ge\alpha m(U)$,$U$可以写作可数个两两几乎不交的闭矩体的并,这里几乎不交是指它们的交要么是闭矩体的边界点,要么是空集,那么按照测度的可数可加性,看到必然存在一个小闭矩体满足$m(E\cap I)\ge\alpha m(U)$.由此来证明如下结论:给定$R^n$中的一个点集$A$,定义$diff(A)=\{x-y,x,y\in A\}$,那么断言,如果$E$是一个正测集,则存在一个0的邻域$B_d\subset diff(E)$.首先取$1-1/2^{n+1}<\alpha<1$,取闭矩体$I$使得$\alpha m(I)\le m(I\cap E)$,现在取$I$的最短边长是$d$,断言中心在原点,边长为$d$的开方体$J$有$J\subset diff(E)$,由此就可以证明结论.而这等价于证明对任意$x_0\in J$,点集$E\cap I$和$E\cap I+\{x_0\}$有交.知道$I+\{x_0\}$仍然包含原点,于是$m(I\cap(I+\{x_0\}))>m(I)/2^n$,于是$m(I\cup(I+\{x_0\}))=m(I)+m(I+\{x_0\})-m(I\cap(I+\{x_0\}))<2\alpha m(I)$.但是$E\cap I$和$E\cap I+\{x_0\}$测度都大于$\alpha m(I)$,这说明二者必然有交,得证.
+
+事实上更一般的有,对于正测集$E,F$,有$E+F=\{a+b:a\in E,b\in F\}$包含一个开集.
+
+现在来构造一个不可测集,对于任意的正整数$n$,考虑$R^n$上这样一个等价关系,两个点的差如果位于$Q^n$则具有关系,那么在这个等价关系下,每一个等价类取一个元素,按照选择公理,知道这构造出了一个集合$A$,倘若$A$可测,那么分两种情况推出矛盾,一方面如果$A$是正测的,那么知道$diff(A)$中包含一个开集,于是说明存在$x\in diff(A)\cap Q^n$,但是这意味着$A$中存在两个点位于同一个等价类,这和$A$的构造矛盾.另一方面,如果$W$是零测集,那么把可数集$Q^n$中的点排列为$r_m$,于是每一个$m(A+\{r_m\})$都是零测集,但是按照可数可加性得到整个$R^n$都是零测集,这明显矛盾,综上$A$不说可测集.
+
+可测空间$(R,\mathscr{B})$上的有限测度可以被$R$上有界递增右连续函数完全描述.具体来说,对有界测度$\mu$,有$F_{\mu}(x)=\mu(-\infty,x]$是有界的递增右连续函数,另一方面,对任意的这样函数,可以确定一个有界测度.
+\section{可测函数}
+
+两个可测空间之间的映射,如果可测集的原像是原空间的可测集,那么称为可测映射.注意这个定义只依赖于$\sigma$代数,并不涉及测度.另外由于全体原像为可测集的集合是一个$\sigma-$代数,于是在验证一个函数是可测函数时只需对象空间上能够生成$\sigma-$代数的一个子集验证它原像都是可测集即可.
+
+当提及可测空间$(X,\mathscr{A})$上的可测函数的时候,专指它到可测空集$([-\infty,+\infty],\mathscr{B})$的可测映射,这里的$\mathscr{B}$是广义实数集合$[-\infty,+\infty]$上一个自然的$\sigma$代数,即全体$[-\infty,a],a\in R$生成的$\sigma-$代数,易知该$\sigma$ 代数还可以由如下任一个生成:
+\begin{enumerate}
+  \item 全体$[-\infty,a),a\in R$
+  \item 全体$[a,+\infty],a\in R$
+  \item 全体$(a,+\infty],a\in R$
+\end{enumerate}
+
+所以当考虑一个可测空间上的广义实值函数的时候,为证明它是可测函数,只需证明上述任一种情况中的所有点集的原像都是可测集即可.
+
+如果可测函数不取两个无穷,那么就成为有限值的可测函数.为证一个有限值函数是可测函数,只需证明全体$R$上开集的原像是可测集即可.
+
+把$(R^n,\mathscr{B}(R^n))$上的可测函数称为Borel可测函数,换句话说,它是全体这样的广义实值函数,对每个实数$a$有$[-\infty,a)$原像是Borel集.把Lebesgue可测空间$(R^n,\mathscr{A})$上的可测函数称为Lebesgue可测函数.Borel可测函数自然都是Lebesgue可测函数.
+
+如果$X,Y$都是拓扑空间,那么$(X,\mathscr{B}(X))\to(Y,\mathscr{B}(Y))$的连续映射自然都是可测函数,因为开集生成全部可测集,而连续映射开集的原像必然是开集,另外可测映射套入连续映射也必然是可测映射.这里指出广义实数集合上的拓扑.首先广义实数集合上存在全序,并且$\pm\infty$是最大元和最小元,那么可以赋予它序拓扑,于是在前面看到的$\sigma$代数$\mathscr{B}$实际上就是全体开集生成的代数,即Borel代数,于是看到,从$R^n$到广义实数集合上赋予序拓扑的连续函数总是一个可测函数.特别的,$R^n\to R$的连续函数总是可测函数.
+
+可测函数在加法和乘法下封闭,这里约定$0\times(\pm\infty)=0$给定一列可测函数$\{f_n\}$,有$\sup_nf_n,\inf_nf_n$都是可测函数,于是$\limsup_ {n\to+\infty}f_n$和$\liminf_{n\to+\infty}f_n$都是可测函数,这也说明了如果$f_n$收敛于$f$那么$f$可测.
+
+给定一个测度空间$(X,\mathscr{A},\mu)$,一个涉及$x\in X$的命题是几乎处处成立的,如果说不成立的$x$构成一个$\mu$-零集,即它是某个零测集的子集.通常把几乎处处记作a.e..注意这个定义依赖$\sigma$代数和测度.比方说,称两个在子集$E$上的函数$f,g$是几乎处处相等的,记作$f(x)=g(x),a.e.x\in E$,是指集合$\{x\in E:f(x)\not=g(x)\}$是一个$\mu$零集.或者比方说可以记$\lim_ {n\to\infty}f_n(x)=f(x),a.e.$,即$f_n$是几乎处处收敛到$f$的,也就是说可以存在一个顶多构成$\mu$零集的若干个点,其上函数列并不收敛.
+
+那么关于几乎处处给出最基本的命题:和一个可测函数几乎处处相同得到函数是可测函数.
+
+把取值有限的可测函数称为简单函数,它可以记作有限和$\sum a_n X_{E_n}$ 其中$E_n$是两两不交的可测集,而$a_n$是它全体不同的取值.
+
+
+以下可测函数均指广义实值可测函数
+\begin{enumerate}
+  \item 可测函数的加减乘均可测,最大最小函数可测,可测函数列的上下确界函数可测,可测函数列的上下极限
+  函数可测,可测函数保收敛.
+  \item 在验证实值函数是可测函数时只需验证全体开集原像可测,或全体闭集原像可测.
+  \item 简单函数逼近:
+  \begin{enumerate}
+  \item $f$是一个非负的广义实值可测函数,则存在一列$[0,+\infty)$值简单函数$\{f_n\}$递增趋于$f$
+  \item $f$是一个广义实值可测函数,则存在一列实值简单函数$\{f_n\}$趋于$f$ 并且$\{|f_n|\}$是递增的.
+  \end{enumerate}
+  \item $(X,\mathscr{A},\mu)$是完备的测度空间,那么如果$g$和一个可测函数几乎处处相同,则它也可测.
+  \item $(X,\mathscr{A},\mu)$是完备的测度空间,有可测函数列$\{f_n\}$几乎处处趋于$f$, 那么$f$可测.
+\end{enumerate}
+
+可测函数的收敛概念:在测度空间$(X,\mathscr{A},\mu)$上,$f_n,f$均为几乎处处有限的广义实值可测函数.依测度收敛,几乎处处收敛,近一致收敛
+
+注意谈及几种收敛由于要使得函数和几乎处处有意义,所以要函数均为几乎处处有限的.
+\begin{enumerate}
+  \item 几乎处处收敛但不依测度收敛:$f_n=X_{[n,+\infty)},f=0$;依测度收敛但不几乎处处收敛:$f=0,f_n$依次为$[0,1],[0,\frac{1} {2}],[\frac{1}{2},1],[0,\frac{1}{4}],\cdots$ 的特征函数.
+  \item 在有限测度下,几乎处处收敛蕴含依测度收敛
+  \item $f_n$依测度收敛于$f$那么$f_n$有子列几乎处处收敛于$f$
+  \item 近一致收敛蕴含几乎处处收敛
+  \item $Egoroff$定理:有限测度下,几乎处处收敛蕴含近一致收敛.
+\end{enumerate}
+
+\section{积分理论}
+积分是由测度和可测函数共同定义的.
+\begin{enumerate}
+\item 非负简单函数\\
+$f=\sum a_i X_{A_i}$,其中$A_i$两两不交,定义:
+$$\int f\mathrm{d}\mu=\sum a_i\mu(A_i)$$
+
+\begin{enumerate}
+  \item 积分的线性
+  \item 积分的单调性
+  \item 简单函数收敛到简单函数,积分和极限可交换
+\end{enumerate}
+
+\item 非负可测函数\\
+$f$是非负的可测函数,定义:
+$$\int f\mathrm{d}\mu=\sup\left\{\int g\mathrm{d}\mu:g\le f,g\text{是简单可测函数}\right\}$$
+
+
+\begin{enumerate}
+  \item 有非负递增简单函数列$\{f_n\}$趋于$f$,那么有$\int f\mathrm{d}\mu=\lim_{n\to+\infty}
+  \int f_n\mathrm{d}\mu$
+  \item 积分的线性
+  \item 积分的单调性
+\end{enumerate}
+
+\item 一般可测函数\\
+对任一可测函数$f$记$f^+=\max\{f,0\},f^-=-\min\{f,0\}$,于是$f^+$和$f^-$ 都是非负可测函数,
+若$\int f^+,\int f^-$都有限则称$f$可积,如果之多有一个为无穷则记积分为:
+$$\int f\mathrm{d}\mu=\int f^+\mathrm{d}\mu-\int f^-\mathrm{d}\mu$$
+\end{enumerate}
+
+\begin{enumerate}
+  \item 积分的线性
+  \item 积分的单调性
+  \item 可积性是保线性的
+  \item 当$f$可测时,$f$和$|f|$可积性等价,并且$\mid\int f\mathrm{d}\mu\mid\le\int|f|\mathrm{d}\mu$
+  \item $f,g$可测,几乎处处相同,那么他们的积分值如果一个存在则另一个存在并相同.
+  \item $$\mu\left(\left\{x\in X:|f(x)|\ge\frac{1}{\lambda}\right\}\right)\le\lambda\int|f|\mathrm{d}\mu$$
+  \item 单调收敛定理:
+  \begin{enumerate}
+  \item (函数列形式)$\{f_n\}$非负可测,并且递增,几乎处处收敛于$f$,那么:
+  $$\lim_{n\to+\infty}\int f_n\mathrm{d}\mu=\int f\mathrm{d}\mu$$
+  \item (级数和形式)$\{f_n\}$非负可测,那么:
+  $$\int\sum f_n\mathrm{d}\mu=\sum\int f_n\mathrm{d}\mu$$
+  \end{enumerate}
+  \item $Fatou$引理:$\{f_n\}$是一列非负可测函数,那么:
+  $$\int \underline{\lim}_{n\to+\infty}\mathrm{d}\mu\le\underline{\lim}_{n\to+\infty}\int f_n\mathrm{d}\mu$$
+  \item 控制收敛定理:$g$是非负可积函数,有可测的$\{f_n\}$几乎处处收敛于$f$, 并且$|f_n|\le g,|f|\le g$几乎处处成立,则$f_n$和$f$均可积并且满足:
+      $$\lim_{n\to+\infty}\int f_n\mathrm{d}\mu=\int f\mathrm{d}\mu$$
+\end{enumerate}
+
+对复值的可测函数$f$,定义可积当且仅当实虚部可积,积分为:
+$$\int f\mathrm{d}\mu=\int \Re f\mathrm{d}\mu+\i\int\Im f\mathrm{d}\mu$$
+
+$(X,\mathscr{A},\mu)$是测度空间,称$X$的子集$N$是局部$\mu-$零集,如果对任意测度有限的可测集$A$,有他们的交是$\mu-$零集.称局部$\mu-$几乎处处成立指不成立点集是一个局部$\mu-$零集.
+
+\begin{enumerate}
+  \item $\mu-$零集是局部$\mu-$零集.
+  \item 若测度空间是$\sigma-$有限的,那么局部$\mu-$ 零集和$\mu-$零集一致.
+  \item 局部$\mu-$零集的可数并是局部$\mu-$零集
+  \item 局部$\mu-$零集的任意子集是局部$\mu-$零集
+\end{enumerate}
+
+测度空间的$L^p$空间:当$1\le p<+\infty$时定义:
+$$\mathscr{L}^p(X,\mathscr{A},\mu,R)=\{f\text{实值可测},|f| ^p\text{可积}\}$$
+$$\mathscr{L}^p(X,\mathscr{A},\mu,C)=\{f\text{复值可测},|f| ^p\text{可积}\}$$
+称实值或复值可测函数是本性有界的如果存在非负实数$M$使得$\{x\in X:|f(x)|>M\}$ 是局部$\mu-$ 零集,全体本性有界的可测函数集定义做$\mathscr{L}^{\infty}(X,\mathscr{A},\mu,F),F=R,C$.
+
+\begin{enumerate}
+  \item $1\le p\le+\infty$,有$\mathscr{L}^p(X,\mathscr{A},\mu,F)$是线性空间,在其上可定义半范数:
+  $$\Vert f\Vert_p=\left(\int |f|^p\mathrm{d}\mu\right)^{1/p},1\le p<+\infty$$
+  $$\Vert f\Vert_{\infty}=\inf\left\{M:\{x\in X:|f(x)|>M\}\text{是局部}\mu-\text{零集}\right\}$$
+  \item $Minkowski$不等式:半范数的次可加性.
+  \item $Holder$不等式:$1\le p,q\le+\infty,\frac{1}{p}+\frac{1}{q}=1,f\in\mathscr{L}^p(X,\mathscr{A},\mu,F),
+  q\in\mathscr{L}^q(X,\mathscr{A},\mu,F)$,那么$fg\in\mathscr{L} ^1(X,\mathscr{A},\mu,F)$,并且:
+  $$\int |fg|\mathrm{d}\mu\le\Vert f\Vert_p\Vert g\Vert_q$$
+  \item $\{x\in X:|f(x)|>\Vert f\Vert_{\infty}\}$本身也是局部$\mu-$零集.
+  \item $f,f_n\in \mathscr{L}^1$并且$f_n$依$L^1$范数收敛于$f$,那么$f_n$依测度收敛于$f$
+  \item $f,f_n\in \mathscr{L}^1$,若$f_n$几乎处处收敛于$f$或依测度收敛于$f$,并且$f_n$和$f$均被同一个$\mathscr{L}^1$中函数几乎处处控制,那么$f_n$依$L^1$范数收敛于$f$
+\end{enumerate}
+
+$L^p(X,\mathscr{A},\mu)$
+
+\begin{enumerate}
+  \item $\Vert f\Vert_p$是$L^p(X,\mathscr{A},\mu)$ 的完备范数.
+  \begin{proof}
+  只需证明$L^p(1\le p<+\infty)$空间中任意绝对收敛的级数都依范数收敛.
+
+  取一函数列$\{f_n\}\subset L^p$,满足$\sum_{n=1}^{\infty}\Vert f_n\Vert<+\infty$,有:
+  $$\int\left(\sum_{k=1}^n\vert f_k\vert\right)^p d\mu
+  =\Vert\sum_{k=1}^n\vert f_k\vert\Vert^p\le\sum_{k=1}^n\Vert f_k\Vert\le\sum_{n=1}^{\infty}\Vert f_n\Vert<+\infty$$
+  定义函数$f(x)=\sum_{n=1}^{\infty}\vert f_n(x)\vert$,由单调收敛定理,它是可测函数,并且:
+  $$\lim_{n\to+\infty}\int\left(\sum_{k=1}^n\vert f_k\vert\right)^p d\mu=\int\vert f\vert^pd\mu$$
+  于是$f\in L^p$,最后证明$\sum_{n=1}^{\infty}f_n$依范数收敛于$f$,这是因为
+  $$\lim_{n\to+\infty}\vert\sum_{k=1}^nf_k-f\vert^p=0,\vert\sum_{k=1}^nf_k-f\vert^p\le f(x)^p$$
+  对$x\in X$几乎处处成立,从而由控制收敛定理得到:
+  $$\lim_{n\to+\infty}\Vert\sum_{k=1}^{n}f_k-f\Vert=\left(\lim_{n\to+\infty}\int\left|\sum_{k=1}^{n}f_k-f\right|^pd\mu\right)^{1/p}=
+  \left(\int 0d\mu\right)^{1/p}$$
+  \end{proof}
+  \item 全体简单函数是$\mathscr{L}^p(X,\mathscr{A},\mu)$的稠密子集
+  \item $p,q$共轭,那么有$L^p$到$L^q$的共轭空间的保范数线性算子(借助$Holder$不等式),当$1<p<+\infty$时
+  他们是保距同构,当$p=1$,$\mu$是$\sigma-$有限测度时他们是保距同构.
+\end{enumerate}
+
+\section{一般测度}
+
+$(X,\mathscr{A})$是一个可测空间,带号测度$\mu$是从$\mathscr{A}$到广义实值的函数,满足空集的值为0,并且满足次可加性,
+为了使得运算有意义,需要约定$\mu$只取正负无穷的之多一个,倘若均不取称为有限的带号测度.复测度是从$\mathscr{A}$到复数的函数,满足空集的值为0,并且满足次可加性,注意复测度没有取无穷的问题.
+
+\begin{enumerate}
+  \item 带号测度下,有限测度的可测集的任一可测子集必然测度有限
+  \item 若$\mu$是正测度,那么对任$f\in\mathscr{L}(X,\mathscr{A},\mu,R)$,定义:
+  $$v(A)=\int_A f\mathrm{d}\mu$$是一个有限带号测度
+  \item $\mu$为可测空间$(X,\mathscr{A})$上的一个带号测度,那么:
+  \begin{enumerate}
+  \item $\{A_n\}$是一列递增的可测集,那么$\mu(\cup A_n)=\lim_{n\to +\infty}\mu(A_n)$
+  \item $\{A_n\}$是一列递减的可测集,并且存在一个$N$似的$A_N$测度有限,那么有:
+  $\mu(\cap A_n)=\lim_{n\to+\infty}\mu(A_n)$
+  \end{enumerate}
+  \item $(X,\mathscr{A})$是可测空间,$\mu$是一个有限可加的带号测度,那么它是带号测度当且仅当它满足下列任一条:
+  \begin{enumerate}
+  \item 对任意递增的可测集列$\{A_n\}$有:$\lim_ {n\to+\infty}\mu(A_n)=\mu(\cup A_n)$
+  \item 对任意递减的可测集列$\{A_n\}$,若交为空则有:$\lim_ {n\to+\infty}\mu(A_n)=0$
+  \end{enumerate}
+\end{enumerate}
+
+正集和负集:是可测集并且任一可测子集测度非负/非正
+
+\begin{enumerate}
+  \item $\mu$为可测空间$(X,\mathscr{A})$上的带号测度,则对任一有限负测度的可测集$A$, 存在一个负集$B$包含$A$并且$\mu(B)\le\mu(A)$
+  \item $Hahn$分解定理:$\mu$为可测空间$(X,\mathscr{A})$上的带号测度,那么$X$可以分解为一个正集和一个负集的无交并
+  \item $Jordan$分解定理:带号测度可以唯一分解做两个正测度的差,其中至少有一个是有限的,事实上$\mu=\mu^+-\mu^-$:
+  $$\mu^+(A)=\sup\{\mu(B):B\in\mathscr{A},B\subset A\};\mu^-(A)=-\inf\{\mu(B):B\in\mathscr{A},B\subset A\}$$
+  \item 复测度的$Jordan$分解是把实虚部两个带号测度做$Jordan$分解,并且所得四个正测度均有限.
+\end{enumerate}
+
+带号测度$\mu=\mu^+-\mu^-$的变差定义做正测度$|\mu|=\mu^++\mu^-$.复测度$\mu$ 的变差定义做$|\mu|(A)=\sup\{\sum|\mu(A_i)|\}$其中求和取遍$A$的全部可测集划分.无论带号测度还是复测度,它的全变差定义做$\Vert\mu\Vert=|\mu|(X)$
+
+\begin{enumerate}
+  \item 复测度的变差是一个有限正测度
+  \item $(X,\mathscr{A})$是可测空间,记$M(X,\mathscr{A},R)$和$M(X,\mathscr{A},C)$是其上全体有限带号测度和全体复测度,那么他们均为线性空间,全变差是范数,并且它是完备范数.
+\end{enumerate}
+
+$(X,\mathscr{A})$上两个正测度$\mu,v$,称$v$对$\mu$绝对连续是指关于$v$的零测集包含关于$\mu$ 的零测集,记作$v\ll\mu$. 若$\mu$是正测度,称带号测度或复测度$v$ 关于$\mu$绝对连续,如果$v$的变差关于$\mu$绝对连续,这等价于说$v$的$Jordan$ 分解的两个或四个正测度关于$\mu$ 是绝对连续的,也等价于说$v$的零测集包含$\mu$ 的零测集.
+
+\begin{enumerate}
+  \item 对一正测度绝对连续的全体有限正测度的刻画:$(X,\mathscr{A})$上一个正测度$\mu$,有限正测度$v$关于$\mu$绝对连续当且仅当对任意$\varepsilon>0$,存在$\delta>0$ 使得只要$\mu(A)<\delta$就有$v(A)<\varepsilon$
+  \item 关于正测度的$Radon-Nikodym$定理:$(X,\mathscr{A})$上两个$\sigma-$ 有限正测度$\mu,v$,若$v$关于$\mu$绝对连续,那么存在$(X,\mathscr{A})$ 上的$[0,+\infty)$ 值可测函数$g$使得$v(A)=\int_A g\mathrm{d}\mu$,$g$ 在$\mu-$几乎处处相同意义下唯一.
+  \item 关于带号测度和复测度的$Radon-Nikodym$定理:$(X,\mathscr{A})$上一$\sigma-$有限正测度$\mu$,$v$是有限的带号测度或者复测度,那么$v$关于$\mu$绝对连续当且仅当存在$g\in\mathscr{L} ^1(X,\mathscr{A},\mu,F),F=R,C$, 使得
+      $v(A)=\int_A g\mathrm{d}\mu$,其中$g$在$\mu-$ 几乎处处相同的意义下唯一.
+\end{enumerate}
+
+$(X,\mathscr{A})$上一个$\sigma-$有限正测度$\mu$,一个有限带号测度或复测度或$\sigma-$有限的正测度$v$,则$Radon-Nikodym$定理中那个在$\mu-$几乎处处相同意义下唯一的$\mathscr{L}^1$中函数$g$称为$v$关于$\mu$的$Radon-Nikodym$导数,记作$\frac{\mathrm{d}v} {\mathrm{d}\mu}$利用$Radon-Nikodym$导数可以把关于测度的积分理论推广:对有限带号测度或复测度$v$,定义:
+$$\int f\mathrm{d}v=\int f\times\frac{\mathrm{d}v}{\mathrm{d}|v|}\mathrm{d}|v|$$
+
+\begin{enumerate}
+  \item $\frac{\mathrm{d}v}{\mathrm{d}\mu}=f$则$\frac{\mathrm{d}|v|}{\mathrm{d}\mu}=|f|$
+  \item $v$是$(X,\mathscr{A})$上有限带号测度或复测度,那么$Radon-Nikodym$ 导数$\frac{\mathrm{d}v}{\mathrm{d}|v|}$
+  $|v|-$几乎处处模长为1
+\end{enumerate}
+
+$(X,\mathscr{A})$上正测度$\mu$在可测集$E$上集中是指$\mu(E^c)=0$,称一个带号测度或复测度在可测集上集中是指它的变差在该可测集上集中.称两个一般测度$\mu,v$奇异是指存在一个可测集$E$使得两个测度依次在$E,E^c$上集中,记作$\mu\perp v$
+
+\begin{enumerate}
+  \item 由$Hahn$分解,带号测度$\mu=\mu^+-\mu^-$那么$\mu^+$和$\mu^-$是奇异的
+  \item $Lebesgue$分解定理:$(X,\mathscr{A})$上一个正测度$\mu$,那么对任一$\sigma-$有限正测度或有限带号测度或复测度$v$,唯一存在两个相同类型的一般测度$v_a,v_s$使得$v=v_a+v_s$,其中$v_a$关于$\mu$绝对连续,$v_s$和$\mu$奇异,称为$v$关于$\mu$的$Lebesgue$分解,其中$v_a$为绝对连续部分,$v_s$为奇异部分
+\end{enumerate}
+
+两个可测空间$(X,\mathscr{A}),(Y,\mathscr{B})$的积是一个可测空间,他的集合是$X$和$Y$的笛卡尔积,他的$\sigma-$ 代数是全体$\{A\times B:A\in\mathscr{A},B\in\mathscr{B}\}$生成的$\sigma-$代数,记作$\mathscr{A}\times\mathscr{B}$.
+
+子集和函数的截片:$E$是$X\times Y$的子集,那么定义截片:$$E^y=\{x\in X:(x,y)\in E\};E_x=\{y\in Y:(x,y)\in E\}$$
+$f$是$X\times Y$上的函数,那么定义截片:$$f_x(y)=f(x,y);f^y(x)=f(x,y)$$
+
+测度均为正测度.
+\begin{enumerate}
+  \item 积空间上可测集的截片总是原空间中的可测集;积空间上可测函数的截片总是原空间上的可测函数.
+  \item $(X,\mathscr{A},\mu),(Y,\mathscr{B},v)$是$\sigma-$有限的测度空间.$E$是积空间上的可测集,那么$x\to v(E_x);y\to\mu(E^y)$分别是$X,Y$ 上可测函数.
+  \item $(X,\mathscr{A},\mu),(Y,\mathscr{B},v)$是$\sigma-$有限的测度空间.则有积空间上唯一的测度$\tau$使得$$\tau(A\times B)=\mu(A) v(B),\forall A\in\mathscr{A};B\in\mathscr{B}$$称为$\mu$和$v$的积测度,记作$\mu\times v$,事实上有:
+      $$(\mu\times v)(E)=\int_X v(E_x)\mathrm{d}\mu=\int_Y \mu(E^y)\mathrm{d}v$$
+  \item $(X,\mathscr{A},\mu),(Y,\mathscr{B},v)$是$\sigma-$有限的测度空间.$f$是积空间上非负可测函数:
+  \begin{enumerate}
+  \item $x\to\int_Y f_x\mathrm{d}v;y\to\int_X f^y\mathrm{d}\mu$都是可测函数
+  \item $$\int_{X\times Y}f\mathrm{d}(\mu\times v)=\int_Y\left(\int_X f^y\mathrm{d}\mu\right)\mathrm{d}v=\int_X\left(\int_Y f_x\mathrm{d}v\right)\mathrm{d}\mu$$
+  \end{enumerate}
+  \item $(X,\mathscr{A},\mu),(Y,\mathscr{B},v)$是$\sigma-$有限的测度空间.$f$是积空间上广义实值的可积函数:
+  \begin{enumerate}
+  \item 对$\mu-$几乎处处的$x\in X$有$f_x$是$v-$可积的;对$v-$几乎处处的$y\in Y$有$f^y$ 是$\mu-$可积的
+  \item $f_x$不可积时取值改为0,得到的函数记作$F_x$;$f^y$不可积时取值改为0,得到的函数记作$F^y$;那么两个函数都是可积的
+  \item $$\int_{X\times Y}f\mathrm{d}(\mu\times v)=\int_X f^y\mathrm{d}\mu=\int_Yf_x\mathrm{d}v$$
+  \end{enumerate}
+\end{enumerate}
+
+\section{Lebesgue测度}
+
+$Lebesgue$外测度,诱导出$Lebesgue$测度
+
+\begin{enumerate}
+  \item $Lebesgue$外测度定义中,可限制矩体变长最大值小于一个预先设定值
+  \item $Lebesgue$外测度是距离外测度
+  \item 开闭矩体的外测度就是他们的体积
+  \item 全体$Borel$集都是$Lebesgue$可测的.(证全体闭集可测,有引理:$G$开集,$G^c$非空,$R\subset G$, 记
+  $E_k=\{x\in E:d(x,G^c)\ge\frac{1}{k}\}$那么$\lim_ {k\to+\infty}m^*(E_k)=m^*(E)$)
+  \item $Lebesgue$测度是一个正则的$Borel$测度
+  \item 对任意可测集$E$有一个$G_{\delta}$集$H$使得$E\subset H$并且$H-E$是零测集;有一个$F_{\sigma}$集$K$ 使得$K\subset E$并且$E-K$零测集
+  \item 对任意$R^n$子集$E$存在一个$G_{\delta}$集$H$ 使得他们外测度相同,称$H$为$E$的等测包.
+  \item $E_k\subset R^n$,有:
+   \begin{enumerate}
+   \item $m^*(\underline{\lim}_{n\to+\infty}E_n)\le\underline{\lim}_{n\to+\infty}m^*(E_n)$
+   \item 当$E_k$递增点集列时:$\lim_ {n\to+\infty}m^*(E_n)=m^*(\lim_{n\to+\infty}E_n)$
+   \end{enumerate}
+  \item 可测集的可测性和测度都是平移不变的
+  \item $A$为$R^1$上一个可测集,具有正测度,那么$diff(A)=\{x-y:x,y\in A\}$ 包含一个含有0的开区间
+  \item 不可测集的一个构造
+  \item 连续变换保可测集,对$R^n$上一个点集$A$和一个线性映射$T$,有:
+  $$m^*(T(A))=|\det T|m^*(A)$$
+  \item $U,V$是$R^n$上的开集,存在$U$到$V$的双射$T$ 使得$T$和$T^ {-1}$都是连续可导的,那么对$U$中任意
+  一个$Borel$集$B$有等式:
+  $$m(T(B))=\int_B|J_T(x)|\mathrm{d}m$$
+\end{enumerate}
+
+若$F:R\to R$是连续函数,证明$Dini$导数可测,即证明下式可测:
+$$D^+(F)(x)=\limsup_{h\to 0^+}\frac{F(x+h)-F(x)}{h}$$
+\begin{proof}
+
+按照$F$的连续性,得到:
+$$\limsup_{h\to 0^+}\frac{F(x+h)-F(x)}{h}=\limsup_{h\to 0^+,h\in\mathbb{Q}}\frac{F(x+h)-F(x)}{h}$$
+
+注意到:
+$$\limsup_{h\to 0^+,h\in\mathbb{Q}}\frac{F(x+h)-F(x)}{h}
+=\lim_{n\to +\infty}\left(\sup_{h\in\mathbb{Q}\cap (0,\frac{1}{n})}\frac{F(x+h)-F(x)}{h}\right)$$
+
+只需证明$\sup_{h\in\mathbb{Q}\cap (0,\frac{1}{n})}\frac{F(x+h)-F(x)}{h}$是可测函数,这样按照可测函数列的极限函数可测就得到$D^+(F)$的可测性.固定$n$,注意到$\mathbb{Q}\cap(0,\frac{1}{n})$是可数集,于是可以设$h$只有可数个取值$a_m,m\ge1$,那么上式是可测函数列$\frac{F(x+a_m)-F(x)}{a_m},m\ge1$的上确界函数,于是它可测,证毕.
+
+\end{proof}
+\section{勒贝格积分与微分}
+
+知道黎曼积分中积分和微分间的联系扮演着微积分"基本"定理这一角色.本节来探究勒贝格积分和微分的关系.
+
+$F$是$[a,b]$上单调增函数,定义$F$的跳跃函数是$J(x)=\sum_ {n=1}^{+\infty}\alpha_nj_n(x)$,证明下式可测:
+$$\limsup_{h\to 0}\frac{J(x+h)-J(x)}{h}$$
+\begin{proof}
+
+设$H(x,h)=\frac{J(x+h)-J(x)} {h},H_n(x,h)=\frac{J_n(x+h)-J_n(x)}{h}$.那么按照定义有$\limsup_ {h\to0}H(x,h)>\varepsilon>0$等价于对任意正整数$m$和存在不取0的$h\in[-\frac{1}{m},\frac{1}{m}]$使得$H(x,h)>\varepsilon$.
+这又等价于对任意正整数$m$,存在一个比$m$大的正整数$k$,使得存在$h$满足$\frac{1}{k}\le |h|\le\frac{1}{m}$满足$H(x,h)>\varepsilon$.
+这又等价于对任意正整数$m$,存在比$m$大的正整数$k$使得:
+$$\sup_{\frac{1}{k}\le |h|\le\frac{1}{m}}H(x,h)>\varepsilon$$
+
+于是:
+$$\{x:\limsup_{h\to0}H(x,h)>\varepsilon\}=\cap_{m\ge1,m\in\mathbb{N}}
+\cup_{k\ge m,k\in\mathbb{N}}\{x:\sup_{\frac{1}{k}\le |h|\le\frac{1}{m}}H(x,h)>\varepsilon\}$$
+
+
+
+\end{proof}
+
+
+

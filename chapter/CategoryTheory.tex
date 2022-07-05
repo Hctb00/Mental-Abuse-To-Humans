@@ -1,0 +1,2071 @@
+\chapter{范畴论}
+
+1945年Eilenberg和Mac Lane的论文《General theory of natural equivalences》初次提出范畴论.二十世纪四十年代晚期,范畴论主要应用在代数拓扑中,尤其是同调论.二十世纪五十年代,Grothendieck在代数几何中引入范畴论,获得了巨大成功.
+\section{范畴,函子,自然变换}
+
+我们先解释一点集合论麻烦.在范畴论里我们经常要遇到全体集合,全体群这样的描述.集合论告诉我们它们不构成集合.对此有两种解决办法.其一是引入真类的概念,用类来定义全体对象,类似集合上映射的定义,类之间也可以定义映射.第二种方法稍微复杂,但是完全不涉及到真类概念,仅在ZFC体系下操作.粗略的讲一个宇宙是指这样的集合,我们对其中的集合做的数学上可能的任何具体操作(取子集,取笛卡尔积,取并等)都落在这个集合中.倘若有每个集合都落在某个宇宙中,我们就可以对每个宇宙定义范畴,这样不涉及真类概念却又可以处理任意集合.在集合论中可以证明一个宇宙恰好就是形如$V_{\kappa}$的集合,其中$\kappa$是强不可达基数.但是在ZFC体系下无法证明强不可达基数的存在性,因而在这种处理方法我们就约定这样一个公理:任意集合都被某个宇宙所包含.本文我们采取第一种处理方法.
+
+范畴$\mathscr{C}$由指定的一些对象和一些态射构成.每个态射$f$赋予了两个对象,称为态射的源端和终端,分别记作$\mathrm{dom}f$和$\mathrm{cod}f$.全体对象构成的类记作$\mathrm{obj}(\mathscr{C})$,态射记作箭头$f:\mathrm{dom}f\to\mathrm{cod}f$,全体$A\to B$的态射构成的类记作$\mathrm{Hom}_{\mathscr{C}}(A,B)$.它们满足:
+\begin{itemize}
+	\item 任取态射$f:A\to B$和态射$g:B\to C$,那么指定一个态射$h:A\to C$称为态射$f,g$的复合,记作$h=g\circ f$.
+	\item 态射的复合满足结合律,即对任意$f:A\to B$,$g:B\to C$,$h:C\to D$有:
+	$$h\circ(g\circ f)=(h\circ g)\circ f$$
+	\item 对每个对象$A$,指定一个态射$1_A:A\to A$,称为$A$上的恒等态射.它满足对任意态射$f:A\to B$有:
+	$$f\circ 1_A=f=1_B\circ f$$
+\end{itemize}
+\begin{enumerate}
+	\item 态射复合的结合律允许在合适的条件下约定态射的多重复合$f\circ g\circ h$而不引起歧义.
+	\item 每个对象$A$上的恒等态射是唯一的.因为倘若存在两个恒等态射$f,g$,那么$f=f\circ g=g$.
+	\item 如果范畴$\mathscr{C}$上总有$\mathrm{Hom}_{\mathscr{C}}(A,B)$是集合,就称它是局部小范畴.如果局部小范畴还满足对象类是集合,那么所有态射也构成集合,此时称它是小范畴.如果范畴的态射构成有限集合,此时对象必然也构成有限集合,因为每个对象提供一个独特的恒等态射,这样的范畴称为有限范畴.今后我们只考虑局部小范畴.
+\end{enumerate}
+
+范畴的一些例子.
+\begin{enumerate}
+	\item 集合作为对象,映射作为态射构成一个范畴,称为集合范畴,记作\textbf{Sets}.带基点的集合范畴$\textbf{Sets}_*$是指全体$(X,x)$作为对象,其中$X$是集合,$x\in X$,两个对象的态射$(X,x)\to(Y,y)$定义为映射$f:X\to Y$,满足$f(x)=y$.
+	\item 称一个范畴是离散范畴,如果它的全体态射都是恒等态射,这也就是说只要对象$A\not=B$,那么$\mathrm{Hom}(A,B)$是空集,并且每个$\mathrm{Hom}(A,A)=\{1_A\}$.
+	\item 给定一个偏序集合$S$,偏序关系记作$\le$,定义一个新范畴,对象是全体$S$的元素,对两个元素$a,b$,现在定义态射集$\mathrm{Hom}(a,b)$,如果$a\le b$则取为单元集合,如果不满足$a\le b$则取为空集.在这个范畴中任意两个元素存在积和余积等价于偏序语言中的任意二元子集存在公共极大/小元.满足这一条的偏序集称为\textbf{格}.如果任意有限个元素存在积和余积则称为\textbf{完备格}.
+\end{enumerate}
+
+范畴之间的映射是函子.给定两个范畴$\mathscr{C},\mathscr{D}$.
+\begin{enumerate}
+	\item 一个共变函子(简称函子)$F:\mathscr{C}\to\mathscr{D}$,是指:
+	\begin{itemize}
+		\item 对象类之间的一个映射.$\mathscr{Obj}\mathscr{C}\to\mathscr{Obj}\mathscr{D}$.把$\mathscr{C}$上的对象$A$的像记作$FA$或者$F(A)$.
+		\item $\mathrm{Hom}$之间的映射.对任意$A,B\in\mathrm{Obj}\mathscr{C}$,有映射$\mathrm{Hom}_{\mathscr{C}}(A,B)\to\mathrm{Hom}_{\mathscr{D}}(FA,FB)$.态射$f$的像记作$Ff$或者$F(f)$.
+	\end{itemize}
+
+    这些映射满足如下条件:
+    \begin{itemize}
+    	\item 对每对态射$f:A\to B$和$g:B\to C$,有$F(g\circ f)=Fg\circ Ff$.
+    	\item 对每个对象$A$有$F(1_A)=1_{FA}$.
+    \end{itemize}
+    \item 一个逆变函子$F:\mathscr{C}\to\mathscr{D}$,是指:
+    \begin{itemize}
+    	\item 对象类之间的一个映射.$\mathscr{Obj}\mathscr{C}\to\mathscr{Obj}\mathscr{D}$.把$\mathscr{C}$上的对象$A$的像记作$FA$或者$F(A)$.
+    	\item $\mathrm{Hom}$之间的逆变的映射.对任意$A,B\in\mathrm{Obj}\mathscr{C}$,有映射$\mathrm{Hom}_{\mathscr{C}}(A,B)\to\mathrm{Hom}_{\mathscr{D}}(FB,FA)$.态射$f$的像记作$Ff$或者$F(f)$.
+    \end{itemize}
+    
+    这些映射满足如下条件:
+    \begin{itemize}
+    	\item 对每对态射$f:A\to B$和$g:B\to C$,有$F(g\circ f)=Ff\circ Fg$.
+    	\item 对每个对象$A$有$F(1_A)=1_{FA}$.
+    \end{itemize}
+    \item 逆变函子$F:\mathscr{C}\to\mathscr{D}$可视为$\mathscr{C}\to\mathscr{D}^{\mathrm{op}}$的共变函子,也可以视为$\mathscr{C}^{\mathrm{op}}\to\mathscr{D}$的共变函子.
+\end{enumerate}
+
+函子的一些例子.
+\begin{enumerate}
+	\item 对任意范畴$\mathscr{C}$,定义它的恒等函子为把对象和态射分别映射为自身的函子.
+	\item 对任意两个范畴$\mathscr{C}$和$\mathscr{D}$,取定$\mathscr{D}$中的一个对象$B$,定义常值函子$F_B:\mathscr{C}\to\mathscr{D}$为把所有对象映射为$B$,所有态射映射为$1_B$的函子.
+	\item 对任意两个范畴$\mathscr{C}$和$\mathscr{D}$,定义投射函子$p_{\mathscr{C}}:\mathscr{C}\times\mathscr{D}\to\mathscr{C}$为$(A,A')\mapsto A$,$(f,f')\mapsto f$的函子.
+	\item 对任意范畴$\mathscr{C}$,定义对角函子$\Delta:\mathscr{C}\to\mathscr{C}\times\mathscr{C}$为$C\mapsto(C,C)$,$f\mapsto(f,f)$.
+	\item 给定范畴$\mathscr{C}$,取一个逗号范畴$A-\mathscr{C}$,可定义函子$F:A\downarrow\mathscr{C}\to\mathscr{C}$为把对象$f:A\to B$映射为$B$,把态射映射为自身.
+	\item 如果$\cong$是$\mathscr{C}$中的一个同余关系,那么存在商函子$\mathscr{C}\to\mathscr{C}/\cong$,把每个对象映射为自身,把态射映射为所在的等价类.
+	\item Hom函子.给定范畴$\mathscr{C}$,取定一个对象$A$,那么存在函子$\mathrm{Hom}_{\mathscr{C}}(A,-):\mathscr{C}\to\textbf{Set}$为,把对象$B$映射为集合$\mathrm{Hom}_{\mathscr{C}}(A,B)$,把态射$f:B\to B'$映射为$f_*:\mathrm{Hom}_{\mathscr{C}}(A,B)\to\mathrm{Hom}_{\mathscr{C}}(A,B')$,即$f_*:h\mapsto f\circ h$.
+	\item 上一条可以说得更多一点.对任意范畴$\mathscr{C}$,存在函子$\mathscr{C}^{op}\times\mathscr{C}\to\textbf{Set}$,把对象$(A,B)$映射为集合$\mathrm{Hom}_{\mathscr{C}}(A,B)$,把态射$(\varphi,\psi):(A,B)\to(A',B')$映射为$\mathrm{Hom}_{\mathscr{C}}(\varphi,\psi):\mathrm{Hom}_{\mathscr{C}}(A,B)\to\mathrm{Hom}_{\mathscr{C}}(A',B')$,即把$h$映射到$\psi\circ h\circ\varphi$.关于Hom函子的记号.固定$A$的时候,Hom函子是共变的,此时记作$h^A$,固定$B$的时候,Hom函子是逆变的,此时记作$h_B$.
+	\item 如果范畴$\mathscr{C}$满足所有态射都是同构,就称为是一个群胚.如果对象只有一个,就称为是群.那么两个群$G_1,G_2$之间的群同态就是这种只有一个对象并且态射全是同构的范畴之间的函子.
+	\item 给定函子$F:\mathscr{C}\to\mathscr{D}$,取定$\mathscr{D}$中的一个对象$A$,定义范畴$A\downarrow F$,它的对象构成集合$\{(B,f)\mid B\in\mathrm{obj}(\mathscr{C}),f\in\mathrm{Hom}_{\mathscr{D}}(A,FB)\}$,从$(B,f)$到$(B',f')$的态射定义为$\mathscr{C}$态射$\varphi:B\to B'$满足如下交换图.那么我们之前定义的逗号范畴可以写作$A\downarrow 1_{\mathscr{C}}$,这里$1_{\mathscr{C}}$是$\mathscr{C}$上的恒等范畴.
+	$$\xymatrix{&A\ar[dl]_f\ar[dr]^{f'}&\\B\ar[rr]_{F(\varphi)}&&B'}$$
+\end{enumerate}
+
+完全函子,忠实函子.
+\begin{enumerate}
+	\item 给定函子$F:\mathscr{C}\to\mathscr{D}$,称$F$是忠实的,如果对任意对象$A,B\in\mathrm{obj}(\mathscr{C})$,总有$F:\mathrm{Hom}_{\mathscr{C}}(A,B)\to\mathrm{Hom}_{\mathscr{D}}(FA,FB)$都是集合上的单射.称$F$是完全的,如果对任意对象$A,B\in\mathrm{obj}(\mathscr{C})$,总有$F:\mathrm{Hom}_{\mathscr{C}}(A,B)\to\mathrm{Hom}_{\mathscr{D}}(FA,FB)$都是集合上的满射.
+	\item 忠实和完全这两个概念只是说当函子限制在单个Hom集上是单射或者满射,并没有说任取两个不同态射在函子下的像一定不同,例如函子把某些不同对象映射为相同的对象,那么此时必然会把不同的恒等态射映射为相同的恒等态射;也没有说任取$\mathscr{D}$中的态射总有$\mathscr{C}$中的态射是它的原像,例如约定存在$\mathscr{D}$中的对象$B$在$\mathscr{C}$中没有原像,那么此时恒等态射$1_B$就不存在原像.但是完全本质满这个概念可以保证每个$\mathscr{D}$中的态射都存在原像.
+	\item 子范畴.如果$\mathscr{A}$是$\mathscr{C}$的子范畴,可定义一个自然的忠实函子$i:\mathscr{A}\to\mathscr{C}$.子范畴称为完全的,如果这个包含函子是完全函子,也即两个范畴上Hom集总是一致的.
+	\item 范畴$\mathscr{C}$称为具体范畴,如果存在忠实函子$F:\mathscr{C}\to\textbf{Sets}$,此时$F$称为遗忘函子.具体范畴允许我们把它的对象视为具备某些特殊结构的集合,态射视为保结构的集合之间的映射.数学上我们关注的大多数范畴都是具体范畴.一个反例:同伦关系下拓扑空间范畴的商范畴不是具体范畴.
+	\item 范畴的同构.给定两个范畴$\mathscr{C}$和$\mathscr{D}$,称它们同构,如果存在函子$F:\mathscr{C}\to\mathscr{D}$和函子$F':\mathscr{D}\to\mathscr{C}$满足$F'\circ F=1_{\mathscr{C}}$和$F\circ F'=1_{\mathscr{D}}$.这等价于讲$F$在对象类上是双射,并且是完全忠实函子.
+\end{enumerate}
+
+自然变换.自然变换是函子之间的映射.
+\begin{itemize}
+	\item 给定两个范畴$\mathscr{C}$和$\mathscr{D}$,给定两个函子$F,F':\mathscr{C}\to\mathscr{D}$,称一个从$F$到$F'$的自然变换是一族$\mathscr{D}$中的态射$\eta_A:FA\to F'A,\forall A\in\mathrm{Obj}(\mathscr{C})$.满足,对任意的$\mathscr{C}$中的态射$f:A\to B$,有如下图表交换.
+	$$\xymatrix{FA\ar[r]^{\eta_A}\ar[d]_{F(f)}&F'A\ar[d]^{F'(f)}\\FB\ar[r]_{\eta_B}&F'B}$$
+	\item 如果$F,F':\mathscr{C}\to\mathscr{D}$是逆变函子,从$F\to F'$的自然变换是一族$\mathscr{D}$中的态射$\eta_A:FA\to F'A,\forall A\in\mathrm{Obj}(\mathscr{C})$,使得对$\mathscr{C}$中任意的态射$f:A\to B$,都有如下图表交换:
+	$$\xymatrix{FB\ar[r]^{\eta_B}\ar[d]_{F(f)}&F'B\ar[d]^{F'(f)}\\FA\ar[r]_{\eta_A}&F'A}$$
+\end{itemize}
+\begin{enumerate}
+	\item 函子范畴.给定范畴$\mathscr{A}$和$\mathscr{B}$,定义函子范畴$\mathscr{B}^{\mathscr{A}}$为,对象为全体从$\mathscr{A}$到$\mathscr{B}$的函子,两个函子$F,F'$之间的态射定义为自然变换.
+	\item 如果约定$\mathscr{A}$是小范畴,也即约定$\mathrm{obj}(\mathscr{A})$和$\cup_{A\in\mathrm{obj}(\mathscr{A})}\mathrm{Hom}_{\mathscr{D}}(FA,F'A)$都是集合,于是全体从$F\to F'$的自然变换构成了一个集合.换句话讲此时函子范畴$\mathscr{B}^{\mathscr{A}}$是局部小范畴.
+	\item 恒等自然变换.给定函子$F$,定义一个自然变换为把全部态射都取成恒等态射,这称为$F$上的恒等自然变换,它是函子范畴中的恒等态射.
+	\item 函子范畴中的同构态射称为自然同构.给定两个函子$F,F':\mathscr{C}\to\mathscr{D}$,自然变换$\eta:F\to F'$是自然同构,也等价于要求构成自然变换的全体态射$\eta_A$都是$\mathscr{D}$中的同构.
+\end{enumerate}
+
+如果$\mathscr{A}$,$\mathscr{B}$,$\mathscr{C}$是范畴,那么函子范畴$\mathscr{C}^{\mathscr{A}\times\mathscr{B}}$和$(\mathscr{C}^{\mathscr{A}})^{\mathscr{B}}$是范畴同构的.
+\begin{enumerate}
+	\item 我们称源端为一个二元积范畴的函子为双函子.给定双函子$F:\mathscr{A}\times\mathscr{B}\to\mathscr{C}$.我们来定义一个$\mathscr{B}\to\mathscr{C}^{\mathscr{A}}$的函子如下:
+	\begin{itemize}
+		\item 对每个对象$B\in\mathrm{Obj}(\mathscr{B})$,它对应的函子为$F(-,B):\mathscr{A}\to\mathscr{C}$,即把$\mathscr{A}$中的对象$A$映为$F(A,B)$,把$\mathscr{A}$中态射$f:A\to A'$映为$F(f,1_B)$.
+		\item 对$\mathscr{B}$中的每个态射$g:B\to B'$,它对应的自然变换为$F(1,g):F(-,B)\to F(-,B')$:
+		$$\xymatrix{F(A,B)\ar[rr]^{F(1_A,g)}\ar[d]_{F(f,1_B)}&&F(A,B')\ar[d]^{F(f,1_{B'})}\\F(A',B)\ar[rr]^{F(1_{A'},g)}&&F(A',B')}$$
+	\end{itemize}
+	\item 给定两个双函子$F,G:\mathscr{A}\times\mathscr{B}\to\mathscr{C}$.给定一族$\mathscr{C}$中的态射$\{\eta(A,B):F(A,B)\to G(A,B)\}$.
+	\begin{itemize}
+		\item 称这族态射$\eta(-,-)$在第一个位置自然,如果对任意对象$B\in\mathrm{Obj}(\mathscr{B})$,都有$\alpha(-,B)$是自然变换,换句话讲对任意$\mathscr{A}$中的态射$f:A\to A'$都有如下图表交换:
+		$$\xymatrix{F(A,B)\ar[rr]^{\alpha(A,B)}\ar[d]_{F(f,B)}&&G(A,B)\ar[d]^{G(f,B)}\\F(A',B)\ar[rr]_{\alpha(A',B)}&&G(A',B)}$$
+		\item 称这族态射$\eta(-,-)$在第二个位置自然,如果对任意对象$A\in\mathrm{Obj}(\mathscr{A})$,都有$\alpha(A,-)$是自然变换,换句话讲对任意$\mathscr{B}$中的态射$g:B\to B'$都有如下图表交换:
+		$$\xymatrix{F(A,B)\ar[rr]^{\alpha(A,B)}\ar[d]_{F(A,g)}&&G(A,B)\ar[d]^{G(A,g)}\\F(A,B')\ar[rr]_{\alpha(A,B')}&&G(A,B')}$$
+		\item 这族态射$\{\eta(A,B):F(A,B)\to G(A,B)\}$是这两个双函子之间的自然变换当且仅当它在第一个位置和第二个位置都是自然的.
+	\end{itemize}
+	\item 给定两个双函子$F,G:\mathscr{A}\times\mathscr{B}\to\mathscr{C}$.给定它们之间的一个自然变换$\{\eta(A,B):F(A,B)\to G(A,B)\}$.如果把这两个双函子视为$\mathscr{B}\to\mathscr{C}^{\mathscr{A}}$的函子.那么$\{\eta(A,B):F(A,B)\to G(A,B)\}$也是自然变换:任取$\mathscr{B}$中的态射$g:B\to B'$,那么有如下图表交换,这里图表交换性是$\eta(-,-)$在第二个位置的自然性,而两行态射都是自然变换是第一个位置的自然性.
+	$$\xymatrix{F(-,B)\ar[rr]^{\eta(-,B)}\ar[d]_{F(1,g)}&&G(-,B)\ar[d]^{G(1,g)}\\F(-,B')\ar[rr]_{\eta(-,B')}&&G(-,B')}$$
+\end{enumerate}
+
+自然变换的Godement积.
+\begin{enumerate}
+	\item 我们之前给出过自然变换的复合的概念,如果$F,G,H$都是$\mathscr{A}\to\mathscr{B}$的函子,如果$\alpha:F\to G$和$\beta:G\to H$都是自然变换,它们的复合是$F\to H$的自然变换,记作$G\circ F$.这可以理解为自然变换在垂直方向的复合:
+	$$\xymatrix{\mathscr{A}\ar[rrrr]^{F\qquad\qquad}&&\ar@{=>}[d]^{\alpha}&&\mathscr{B}\\\mathscr{A}\ar[rrrr]^{G\qquad\qquad}&&\ar@{=>}[d]^{\beta}&&\mathscr{B}\\\mathscr{A}\ar[rrrr]^{H\qquad\qquad}&&&&\mathscr{B}}$$
+	\item 现在如果$F,G:\mathscr{A}\to\mathscr{B}$和$F',G':\mathscr{B}\to\mathscr{C}$都是函子,如果$\alpha:F\to G$和$\alpha':F'\to G'$都是自然变换,它们的Godement积定义为$F'F\to G'G$的自然变换,它在$\mathscr{A}$的对象$A$上的态射取为如下交换图表的任一方向的复合态射:
+	$$\xymatrix{F'FA\ar[rr]^{\alpha'FA}\ar[d]_{F'\alpha(A)}&&G'FA\ar[d]^{F'\alpha(A)}\\F'GA\ar[rr]^{\alpha' GA}&&G'GA}$$
+	
+	把Godement积记作$\alpha'\ast\alpha$.这个二元运算满足结合律,它可以理解为自然变换在水平方向的复合:
+	$$\xymatrix{\mathscr{A}\ar[rrrr]^{F\qquad\qquad}&&\ar@{=>}[d]^{\alpha}&&\mathscr{B}\ar[rrrr]^{F'\qquad\qquad}&&\ar@{=>}[d]^{\alpha'}&&\mathscr{C}\\\mathscr{A}\ar[rrrr]^{G\qquad\qquad}&&&&\mathscr{B}\ar[rrrr]^{G'\qquad\qquad}&&&&\mathscr{C}}$$
+	\item 考虑如下四个自然变换:
+	$$\xymatrix{\mathscr{A}\ar[rr]&\ar@{=>}[d]^{\alpha}&\mathscr{B}\ar[rr]&\ar@{=>}[d]^{\alpha'}&\mathscr{C}\\\mathscr{A}\ar[rr]&\ar@{=>}[d]^{\beta}&\mathscr{B}\ar[rr]&\ar@{=>}[d]^{\beta'}&\mathscr{C}\\\mathscr{A}\ar[rr]&&\mathscr{B}\ar[rr]&&\mathscr{C}}$$
+	
+	我们定义的两种水平复合于垂直复合满足如下等式:
+	$$\left(\beta'\circ\alpha'\right)\ast\left(\beta\circ\alpha\right)=\left(\beta'\ast\beta\right)\circ\left(\alpha'\ast\alpha\right)$$
+	\item 如果一个范畴中的态射上定义了两种复合法则,满足上一条的等式,就称为2-范畴.那么所有函子和所有自然变换就构成一个2-范畴.
+\end{enumerate}
+
+单态射和满态射.设$f:A\to B$是范畴$\mathscr{C}$中的一个态射.称$f$是单态射,如果对任意$g_1,g_2:C\to A$,只要满足$f\circ g_1=f\circ g_2$就得到$g_1=g_2$.称$f$是满态射,如果对任意的$h_1,h_2:B\to D$,只要满足$h_1\circ f=h_2\circ f$就得到$h_1=h_2$.
+\begin{enumerate}
+	\item $f$存在左逆态射称为分离单态射(split mono),存在右逆态射称为分离满态射.分离单/满态射可推出单/满态射.但是反过来一般是不成立的,例如含幺环范畴.
+	\item 两个单态射的复合是单态射;两个满态射的复合是满态射.
+	\item 如果$f\circ g$是一个单态射,那么$g$是一个单态射;如果$f\circ g$是一个满态射,那么$f$是一个满态射.
+	\item 态射$f:A\to B$是单态射当且仅当对任意对象$C$,$f$所诱导的$\mathrm{Hom}(C,f)$是单射;态射$f:A\to B$是满态射当且仅当对任意对象$C$,$f$所诱导的$\mathrm{Hom}(f,C)$是满射.
+	\item 如果$F$是忠实函子,那么从$Ff$是单态射得到$f$是单态射;如果$Ff$是满态射得到$f$是满态射.
+\end{enumerate}
+
+同构.态射$f:A\to B$称为同构,如果存在态射$g:B\to A$使得$f\circ g=1_B$和$g\circ f=1_A$.
+\begin{enumerate}
+	\item 我们可以分别定义态射的左逆和右逆,那么只要态射同时存在左逆和右逆,可得所有左逆和右逆和双侧逆都是相同且唯一的.
+	\item 态射存在左逆推出它是单态射;态射存在右逆推出它是满态射.于是同构总是单满态射.但是反过来,一般范畴上一个单满态射未必是同构.
+	\item 恒等态射是同构,同构的复合是同构.
+	\item 如果满态射$f:A\to B$有左逆,那么它是一个同构.对偶的单态射有右逆则是同构.事实上,如果设$g\circ f=1_A$,那么$f\circ g\circ f=f$,按照$f$是满态射得到$f\circ g=1_B$.
+	\item 设$F$是一个完全忠实函子,如果$Ff$是同构,那么$f$是同构.
+\end{enumerate}
+
+范畴的一些构造.
+\begin{enumerate}
+	\item 逗号范畴.给定两个函子$F:\mathscr{A}\to\mathscr{C}$和$G:\mathscr{B}\to\mathscr{C}$.定义逗号范畴$F\downarrow G$如下:
+	\begin{itemize}
+		\item 对象定义为三元对$(A,f,B)$,其中$A\in\mathrm{Obj}(\mathscr{A})$,$B\in\mathrm{Obj}(\mathscr{B})$,而$f\in\mathrm{Hom}_{\mathscr{C}}(FA,GB)$.
+		\item 对象$(A,f,B)$到对象$(A',f',B')$的态射定义为对$(a,b)$,其中$a:A\to A'$,$b:B\to B'$都是态射,并且满足如下图表交换:
+		$$\xymatrix{FA\ar[rr]^f\ar[d]_{Fa}&&GB\ar[d]^{Gb}\\FA'\ar[rr]_{f'}&&GB'}$$
+		\item 两个态射$(a',b'),(a,b)$的复合就约定为$(a'\circ a,b'\circ b)$.其中$(A,f,B)$上的恒等态射就是$(1_A,1_B)$.
+		$$\xymatrix{FA\ar[rr]^f\ar[d]_{Fa}&&GB\ar[d]^{Gb}\\FA'\ar[rr]_{f'}\ar[d]_{Fa'}&&GB'\ar[d]^{Gb'}\\FA''\ar[rr]_{f''}&&GB''}$$
+	\end{itemize}
+	
+	如果$A$是范畴$\mathscr{A}$的对象,我们用记号$A$本身来表示仅由$A$和$1_A$构成的$\mathscr{A}$的子范畴到$\mathscr{A}$的包含函子.用$\mathscr{A}$表示恒等函子.那么范畴$A\downarrow\mathscr{A}$的信息如下:
+	\begin{itemize}
+		\item 对象为源端为$A$的态射$f:A\to B$.
+		\item 从$A\downarrow\mathscr{A}$的对象$f:A\to B$到对象$f':A\to B'$的态射是$\mathscr{A}$中的态射$h:B\to B'$使得如下图表交换:
+		$$\xymatrix{&A\ar[dl]_f\ar[dr]^{f'}&\\B\ar[rr]_h&&B'}$$
+	\end{itemize}
+	
+	范畴$\mathscr{A}\downarrow A$的信息如下:
+	\begin{itemize}
+		\item 对象为终端为$A$的态射$f:B\to A$.
+		\item 从$\mathscr{A}\downarrow A$的对象$f:B\to A$到对象$f':B'\to A$的态射是$\mathscr{A}$中的态射$h:B\to B'$使得如下图表交换:
+		$$\xymatrix{B\ar[rr]_h\ar[dr]_f&&B'\ar[dl]^{f'}\\&A&}$$
+	\end{itemize}
+	\item 对偶范畴和对偶准则.给定范畴$\mathscr{C}$,它的对偶范畴$\mathscr{C}^{\mathrm{op}}$定义为:
+	\begin{itemize}
+		\item 对象类和$\mathscr{C}$的对象类相同.
+		\item 对任意对象$A,B$,约定$\mathrm{Hom}_{\mathscr{C}^{\mathrm{op}}}(A,B)=\mathrm{Hom}_{\mathscr{C}}(B,A)$.换句话讲$\mathscr{C}^{\mathrm{op}}$中的态射相对于$\mathscr{C}$中的态射就是把源端终端交换位置.用记号$f^*$表示$\mathscr{C}$中的态射在$\mathscr{C}^{\mathrm{op}}$中的对应.
+		\item 约定态射的复合为$f^*\circ g^*=(g\circ f)^*$.
+	\end{itemize}
+	
+	对偶准则:如果一个命题可以表述为某些对象或者态射的存在性,或者某些图表的交换性,如果这个命题对任意范畴都成立,那么把这个命题中的所有态射改变方向,所有态射的复合改变复合顺序,得到的反命题在任意范畴中也成立.
+	\item 积范畴.给定两个范畴$\mathscr{A}$和$\mathscr{B}$,定义它们的积范畴$\mathscr{A}\times\mathscr{B}$如下.类似的可以定义有限个范畴的积范畴.
+	\begin{itemize}
+		\item 对象定义为二元对$(A,B)$,其中$A\in\mathrm{Obj}(\mathscr{A})$,$B\in\mathrm{Obj}(\mathscr{B})$.
+		\item 从对象$(A,B)$到对象$(A',B')$的态射定义为二元对$(f,f')$,其中$f\in\mathrm{Hom}_{\mathscr{A}}(A,A')$,$f'\in\mathrm{Hom}_{\mathscr{B}}(B,B')$.
+		\item 态射的复合就约定为$(f,f')\circ(g,g')=(f\circ g,f'\circ g')$.那么对象$(A,B)$上的恒等态射就是$(1_A,1_B)$.
+	\end{itemize}
+	
+	存在投影函子$P:\mathscr{A}\times\mathscr{B}\to\mathscr{A}$为把对象$(A,B)\mapsto A$,把态射$(f,f')\mapsto f$.类似的有第二个投影函子$Q:\mathscr{A}\times\mathscr{B}\to\mathscr{B}$.
+	
+	\qquad
+	
+	积范畴满足如下泛性质:如果$F:\mathscr{D}\to\mathscr{A}$和$G:\mathscr{D}\to\mathscr{B}$是两个函子,那么存在唯一的函子$H:\mathscr{D}\to\mathscr{A}\times\mathscr{B}$使得如下图表交换:
+	$$\xymatrix{&\mathscr{D}\ar[dl]_F\ar[d]^H\ar[dr]^G&\\\mathscr{A}&\mathscr{A}\times\mathscr{B}\ar[l]_P\ar[r]^Q&\mathscr{B}}$$
+	\item 子范畴.给定两个范畴$\mathscr{C}$和$\mathscr{C}'$,称$\mathscr{C}'$为$\mathscr{C}$的子范畴,如果$\mathscr{C}'$的每个对象都是$\mathscr{C}$的对象,并且对任意的$\mathscr{C}'$中的对象$A,B$,有$\mathrm{Hom}_{\mathscr{C'}}(A,B)$是$\mathrm{Hom}_{\mathscr{C}}(A,B)$的子集,而且它们的恒等态射是相同的.并且$\mathscr{C}'$中态射的复合与$\mathscr{C}$中态射的复合一致.
+	
+	\qquad
+	
+	倘若$\mathscr{C}'$是$\mathscr{C}$的子范畴并且对任意$\mathscr{C}'$中的对象$A,B$有$\mathrm{Hom}_{\mathscr{C}}(A,B)=\mathrm{Hom}_{\mathscr{C}'}(A,B)$,那么就称$\mathscr{C}'$是$\mathscr{C}$的完全子范畴.例如有限集范畴\textbf{FinSet}是集合范畴的完全子范畴.
+	\item 商范畴.给定范畴$\mathscr{C}$,在每个态射集$\mathrm{Hom}(A,B)$中约定一个等价关系,把这族等价关系记作$\sim$.满足如果$f,f'\in\mathrm{Hom}(A,B)$和$g,g'\in\mathrm{Hom}(B,C)$满足$f\sim f'$和$g\sim g'$,那么就有$g\circ f\sim g'\circ f'$.这个等价关系一般称为范畴$\mathscr{C}$上的同余关系.那么定义商范畴$\mathscr{C}/\sim$的对象类和$\mathscr{C}$的对象类相同,而态射集是商去这个等价关系所得到的商集$\mathrm{Hom}_{\mathscr{C}}(A,B)/\sim$.同余关系保证了态射的复合律,而$\mathscr{C}/\sim$的恒等态射就是$\mathscr{C}$的恒等态射在等价关系下对应的等价类.
+\end{enumerate}
+
+可表函子.
+\begin{enumerate}
+	\item 设$\mathscr{A}$是局部小范畴,我们有双函子$\mathrm{Hom}_{\mathscr{A}}(-,-):\mathscr{A}^{\mathrm{op}}\times\mathscr{A}\to\textbf{Sets}$.设$A$是$\mathscr{A}$的对象,记$h_A$表示逆变函子$\mathrm{Hom}_{\mathscr{A}}(-,A)$;记$h^A$表示共变函子$\mathrm{Hom}_{\mathscr{A}}(A,-)$.如果函子$F:\mathscr{A}\to\textbf{Sets}$满足存在对象$A$使得$F$自然同构于$h_A$或者$h^A$,就称$F$是逆变的或者共变的可表函子,并且称它被对象$A$表示.
+	\item 米田引理(Yoneda lemma).设$F:\mathscr{A}\to\textbf{Sets}$是源端为局部小范畴的函子,设$A\in\mathrm{Obj}(\mathscr{A})$.
+	\begin{itemize}
+		\item 如果$F$是共变的,存在自然的双射$\mathrm{Nat}(h^A,F)\cong F(A)$.特别的,如果$F$本身被某个对象$B$表示,那么有$\mathrm{Nat}(h^A,h^B)\cong\mathrm{Hom}_{\mathscr{A}}(B,A)$.
+		\item 如果$F$是逆变的,存在自然的双射$\mathrm{Nat}(h_A,F)\cong F(A)$.特别的,如果$F$本身被某个对象$B$表示,那么有$\mathrm{Nat}(h_A,h_B)\cong\mathrm{Hom}_{\mathscr{A}}(A,B)$.
+		\item 换句话讲把$\mathrm{Nat}(h_{A},F)$和$F(A)$视为$\textbf{Sets}^{\mathscr{A}}\times\mathscr{A}\to\textbf{Sets}$的函子时是自然同构的.
+	\end{itemize}
+	\begin{proof} 
+		
+		任取$a\in FA$,定义自然变换$\eta(a):h^A\to F$为,对任意$B\in\mathrm{obj}(\mathscr{C})$,定义$\eta(a)_B:\mathrm{Hom}_{\mathscr{C}}(A,B)\to FB$为$f\mapsto F(f)(a)$.为验证$\eta(a)$的自然性,只要验证对任意$\mathscr{C}$中的态射$\varphi:B\to B'$有图表交换:
+		$$\xymatrix{\mathrm{Hom}_{\mathscr{C}}(A,B)\ar[rrrr]^{\eta(a)_B}\ar[d]_{\mathrm{Hom}_{\mathscr{C}}(A,\varphi)}&&&&FB\ar[d]^{F(\varphi)}\\\mathrm{hom}_{\mathscr{C}}(A,B')\ar[rrrr]_{\eta(a)_{B'}}&&&&FB'}$$
+		
+		于是我们定义了一个从$FA\to\mathrm{Nat}(h^A,F)$映射.现在定义逆映射$\kappa$,它把$h^A\to F$的自然变换$\alpha$映射为$\alpha_A(1_A)\in FA$.那么一方面,对任意的$a\in FA$有$\eta(a)_A(1_A)=F(1_A)(a)=1_{FA}(a)=a$.另一方面对任意的$h^A\to F$的自然变换$\alpha$有$\eta(\alpha_A(1_A))=\alpha$,为此,只要利用如下交换图,有$\eta(\alpha_A(1_A))_B(f)=F(f)(\alpha_A(1_A))=(F(f)\circ\eta_A)(1_A)=(\eta_B\circ\mathrm{Hom}_{\mathscr{C}}(A,f))(1_A)=\alpha_B(f)$,完成证明.
+		$$\xymatrix{\mathrm{Hom}_{\mathscr{C}}(A,A)\ar[rrrr]^{\eta(a)_A}\ar[d]_{\mathrm{Hom}_{\mathscr{C}}(A,f)}&&&&FA\ar[d]^{F(f)}\\\mathrm{hom}_{\mathscr{C}}(A,B)\ar[rrrr]_{\eta(a)_{B}}&&&&FB}$$
+	\end{proof}
+	\item 米田引理和群论的Cayley定理.如果把范畴$\mathscr{C}$取为单个对象$\ast$的范畴,并且态射全部是同构,即单元对象的群胚,那么$G=\mathrm{Hom}_{\mathscr{C}}(\ast,\ast)$是一个群,二元运算是态射的复合.在这个情况下,一个共变函子$F:\mathscr{C}\to\textbf{Set}$就是一个群同态$G\to S(X)$,其中$S(X)$表示集合$X$上的置换群.等价于说$X$是一个$G$-set.那么两个这样的函子之间的自然变换,就相当于是$G$-set之间的同态,即$\alpha:X\to Y$满足$\alpha(gx)=g\alpha(x),\forall g\in G,x\in X$.而Hom函子$\mathrm{Hom}_{\mathscr{C}}(\ast,-)$在态射集$G$上的作用等价于左平移作用.于是在米田引理中取$F=\mathrm{Hom}_{\mathscr{C}}(\ast,-)$得到了同构$\mathrm{Hom}_{\mathscr{C}^{\textbf{Set}}}(\mathrm{Hom}_{\mathscr{C}}(\ast,-),\mathrm{Hom}_{\mathscr{C}}(\ast,-))$.也就是说,$G$-set上的同态是和$G$存在双射的.但是上述同构实际上是群同构,并且左侧的每个自然变换都可以看作$S(G)$中的元,并且左侧的两个自然变换看作$S(X)$中的元如果相同,那么这两个自然变换实际上是同一个$G$-set同态,综上就得到$G$可以作为$S(X)$的子群,于是每个群都是置换群的子群.
+	\item 若$A,A'\in\mathrm{obj}(\mathscr{C})$,那么函子$h^A$和$h^{A'}$是自然同构的当且仅当,$A$和$A'$是同构的对象.
+	\begin{proof} 
+		
+		在米田引理中取$F=h^{A'}$.取$\varphi\in FA=\mathrm{Hom}_{\mathscr{C}}(A',A)$是一个同构,那么按照米田引理,$\eta(\varphi)$是一个自然变换,满足$\eta(\varphi)_B:\mathrm{Hom}_{\mathscr{C}}(A,B)\to\mathrm{Hom}_{\mathscr{C}}(A',B)$为$f\mapsto f\circ\varphi$.于是两个函子是自然同构的.现在设$\eta:h^A\to h^{A'}$是自然同构,取$\varphi=\eta_A(1_A):A'\to A$,有如下交换图:
+		$$\xymatrix{\mathrm{Hom}_{\mathscr{C}}(A,A')\ar[d]_{\varphi_*}\ar[rrr]^{\eta_{A'}}&&&\mathrm{Hom}_{\mathscr{C}}(A',A)\ar[d]^{\varphi_*}\\\mathrm{Hom}_{\mathscr{C}}(A,A)\ar[rrr]_{\eta_A}&&&\mathrm{Hom}_{\mathscr{C}}(A',A)}$$
+		
+		于是从$\eta_{A'}$是双射得到存在$f:A\to A'$满足$\eta_{A'}(f)=1_{A'}$,于是按照图表交换性得到$\eta_{A}(\varphi\circ f)=\varphi=\eta_A(1_A)$,于是按照$\eta_A$是同构就得到$\varphi\circ f=1_A$.
+		
+		最后只要证明$f\circ\varphi=1_{A'}$,为此,考虑态射$f:A\to A'$诱导的如下交换图,根据$f_*\circ\eta_A(1_A)=\eta_{A'}\circ f_*$就得到$f\circ\varphi=1_{A'}$.
+		$$\xymatrix{\mathrm{Hom}_{\mathscr{C}}(A,A)\ar[d]_{f_*}\ar[rrr]^{\eta_{A}}&&&\mathrm{Hom}_{\mathscr{C}}(A',A)\ar[d]^{f_*}\\\mathrm{Hom}_{\mathscr{C}}(A,A')\ar[rrr]_{\eta_{A'}}&&&\mathrm{Hom}_{\mathscr{C}}(A',A')}$$
+	\end{proof}
+	\item 米田嵌入.米田引理提供了一个自然同构$\mathrm{Nat}(h^A,F)\cong F(A)$,其中$F$是$\mathscr{C}\to\textbf{Set}$的函子,倘若把$F$取做Hom函子$F=h^B$,也就得到了自然同构$\mathrm{Nat}(h^A,h^B)\cong\mathrm{Hom}(B,A)$.把态射$f:B\to A$对应的自然变换记作$\mathrm{Hom}(f,-)$,记$\mathscr{C}$中的对象$A$对应的Hom函子为$h^A$.这就得到了一个从$\mathscr{C}$到$\textbf{Set}^{\mathscr{C}}$的逆变函子.而Yoneda引理的作用在于,这个函子是完全忠实的.于是范畴$\mathscr{C}^{op}$可以嵌入到函子范畴$\textbf{Set}^{\mathscr{C}}$中.
+	\item 如果$F$是可表函子,求它的表示对象可以这样操作(至少对代数对象的范畴上的可表函子):考虑构造$F(A)$中一个元素需要哪些参数,考虑这些参数生成的自由对象,再模去这些参数需要满足的等式.例如:
+	\begin{enumerate}
+		\item 在$\textbf{A-Mod}$范畴中,取定$A$模$M,N$,考虑可表函子$F=\mathrm{Hom}_A(M,\mathrm{Hom}_A(N,-))$,任取$A$模$P$,构造$F(P)$中的元素,需要知道$(x,y)$对应$P$中的哪个元,取全体$\{(x,y)\mid x\in M,y\in N\}$生成的自由模,模去满足的关系$(ax_1+bx_2,y)-a(x_1,y)-b(x_2,y)$和$(x,ay_1+by_2)-a(x,y_1)-b(x,y_2)$,于是可表对象就是张量积$M\otimes_AN$,这得到典范同构:
+		$$\mathrm{Hom}_A(M\otimes_AN,P)\cong\mathrm{Hom}_A(M,\mathrm{Hom}_A(N,P))$$
+		\item 再比如设$B$是$A$代数,考虑可表函子$\mathrm{Der}_A(B,-):\textbf{B-Mod}\to\textbf{Sets}$,这是把$B$模$M$取为全体$B\to M$的$A$导数构成的集合$\mathrm{Der}_A(B,M)$.构造$B\to M$的一个$A$导数$D$需要设的参数是$D(b),b\in B$,把它记作参数$\mathrm{d}b$,全体这些参数生成的自由$B$模,模去满足的关系$\mathrm{d}(ab)-a\mathrm{d}b-b\mathrm{d}a$和$\mathrm{d}(a+b)-\mathrm{d}a-\mathrm{d}b$和$\mathrm{d}x,x\in A$,就得到表示对象$\Omega_{B/A}$,于是有典范同构:
+		$$\mathrm{Hom}_B(\Omega_{B/A},M)\cong\mathrm{Der}_A(B,M)$$
+	\end{enumerate}
+\end{enumerate}
+\newpage
+\section{极限和余极限}
+
+定义.
+\begin{enumerate}
+	\item 锥体.给定函子$F:\mathscr{I}\to\mathscr{C}$,这里$\mathscr{I}$是一个小范畴,称为指标范畴,定义$F$的一个锥体为$\mathscr{C}$中的一个对象$Y$以及一族$\mathscr{C}$态射$\{\delta_i:Y\to F_i,i\in \mathrm{obj}(\mathscr{I})\}$,满足对任意$i,j\in\mathrm{obj}(\mathscr{I})$和任意态射$m:i\to j$有如下图表交换:
+	$$\xymatrix{&Y\ar[dl]_{\delta_i}\ar[dr]^{\delta_j}&\\F_i\ar[rr]_{F(m)}&&F_j}$$
+	\item 锥体之间的态射.给定函子$F:\mathscr{I}\to\mathscr{C}$,这里$\mathscr{I}$是一个小范畴,给定$F$的两个锥体$(Y,\delta_i)$和$(Y',\delta_i')$,一个$(Y',\delta_i')\to(Y,\delta_i)$的态射是指一个$\mathscr{C}$中的态射$\varphi:Y'\to Y$,使得对任意的$i,j\in\mathrm{Obj}(\mathscr{I}),m\in\mathrm{Hom}_{\mathscr{I}}(i,j)$,有如下图表交换:
+	$$\xymatrix{&Y'\ar@/_1pc/[ddl]_{\delta_i'}\ar@/^1pc/[ddr]^{\delta_j'}\ar[d]^{\varphi}&\\&Y\ar[dl]^{\delta_i}\ar[dr]_{\delta_j}&\\F_i\ar[rr]_{F(m)}&&F_j}$$
+	\item 范畴极限.给定函子$F:\mathscr{I}\to\mathscr{C}$,其中$\mathscr{I}$是一个小范畴,如果存在一个锥体$(Y,\delta_i)$,满足对任意另一个$Y$的锥体$(Y',\delta_i')$,存在唯一的态射$(Y',\delta_i')\to(Y,\delta_i)$,就称锥体$(Y,\delta_i)$是$F$的范畴极限.范畴极限也称为逆向(inverse)极限,也称为投射(projective)极限.
+	\item 余锥体.对偶的,给定函子$F:\mathscr{I}\to\mathscr{C}$,其中$\mathscr{I}$是一个小范畴,它的余锥体是指一个对象$Y$和一族态射$\delta^i:F_i\to Y$,满足对任意$i,j\in\mathrm{obj}(\mathscr{I})$和任意态射$m:i\to j$有如下图表交换:
+    $$\xymatrix{&Y&\\F_i\ar[ur]^{\delta^i}\ar[rr]_{F(m)}&&F_j\ar[ul]_{\delta^j}}$$
+    \item 余锥体之间的态射.对偶的,给定函子$F:\mathscr{I}\to\mathscr{C}$,这里$\mathscr{I}$是一个小范畴,给定$F$的两个余锥体$(Y,\delta^i)$和$(Y',(\delta^i)')$,一个$(Y,\delta^i)\to(Y',(\delta^i)')$的态射是指一个$\mathscr{C}$中的态射$\varphi:Y\to Y'$,使得对任意的$i,j\in\mathrm{Obj}(\mathscr{I}),m\in\mathrm{Hom}_{\mathscr{I}}(i,j)$,有如下图表交换:
+	$$\xymatrix{&Y'&\\&Y\ar[u]_{\varphi}&\\F_i\ar[ur]_{\delta_i}\ar@/^1pc/[uur]^{\delta_i'}\ar[rr]_{F(m)}&&F_j\ar[ul]^{\delta_j}\ar@/_1pc/[uul]_{\delta_j'}}$$
+	\item 范畴余极限.对偶的,给定函子$F:\mathscr{I}\to\mathscr{C}$,这里$\mathscr{I}$是一个小范畴,它的余极限是一个余锥体$(Y,\delta^i)$,满足对任意一个$F$上的余锥体$(Y',(\delta^i)')$,存在唯一的余锥体之间的态射$(Y,\delta^i)\to(Y',(\delta^i)')$.范畴余极限也称为正向(direct)极限,也称为归纳(inductive)极限.
+	\item 极限和余极限存在的时候,在同构意义下是唯一的.如果$Y$和$Y'$都是函子$F$的极限,那么按照定义存在锥之间的态射$f:Y'\to Y$和$g:Y\to Y'$.于是复合$g\circ f:Y'\to Y'$也是锥体之间的态射,按照这种态射的唯一性,说明必然有$g\circ f=1_{Y'}$.同理得到$f\circ g=1_Y$,于是$Y$和$Y'$是同构的.
+\end{enumerate}
+
+初对象和终对象.
+\begin{enumerate}
+	\item 给定范畴$\mathscr{C}$,称$A\in\mathrm{obj}(\mathscr{C})$是初对象,如果对任意对象$C\in\mathrm{obj}(\mathscr{C})$,有集合$\mathrm{Hom}(A,C)$是单元集合.对偶的,称$B\in\mathrm{obj}(\mathscr{C})$是终对象,如果总有$\mathrm{Hom}(C,B)$是单元集合.如果一个对象同时是初对象和终对象,就称它是一个零对象.
+	\item 等价定义.设空集作为对象集的指标范畴为$\mathscr{I}$,此时空函子$F:\mathscr{I}\to\mathscr{C}$的极限是终对象,余极限是初对象.
+\end{enumerate}
+
+积和余积.
+\begin{enumerate}
+	\item 取$\mathscr{C}$的一个由对象构成的集合$\{A_i,i\in I\}$,取这个集合作为对象集的离散范畴$\mathscr{I}$,嵌入函子$F:\mathscr{I}\to\mathscr{C}$的极限称为这族对象$\{A_i,i\in I\}$的积,余极限称为这族对象的余积.
+	\item 等价定义.
+	\begin{enumerate}
+		\item 一族对象$\{A_i,i\in I\}$的积是一个对象$\prod_iA_i$以及一族态射$\pi_j:\prod_iA_i\to A_j$,使得对任意对象$B$和一族态射$f_i:B\to A_i$,存在唯一的态射$f:B\to\prod_iA_i$使得如下图表交换.
+		$$\xymatrix{\prod A_i\ar[d]_{\pi_i}&B\ar[l]_{h}\ar[dl]^{f_i}\\A_i&}$$
+		\item 一族对象$\{A_i,i\in I\}$的余积是一个对象$\coprod_iA_i$和一族态射$l_j:A_j\to\coprod_iA_i$,使得对任意对象$B$和一族态射$f_i:A_i\to B$,存在唯一的态射$h:\coprod_iA_i\to B$使得如下图表交换.
+		$$\xymatrix{\coprod A_i\ar[r]^{h}&B\\A_i\ar[u]^{l_i}\ar[ur]_{f_i}&}$$
+	\end{enumerate}
+	\item 另一个等价定义.
+	\begin{enumerate}
+		\item $(X,\pi_i:X\to A_i)$是一族对象$\{A_i,i\in I\}$的积,如果对任意对象$B$,有$h\mapsto(\pi_i\circ h)$是如下集合之间的双射:
+		$$\mathrm{Hom}_{\mathscr{C}}(B,X)\cong\prod_i\mathrm{Hom}_{\mathscr{C}}(B,A_i)$$
+		\item $(Y,l_i:A_i\to Y)$是一族对象$\{A_i,i\in I\}$的余积,如果对任意对象$B$,有$h\mapsto(h\circ l_i)$是如下集合之间的双射:
+		$$\mathrm{Hom}_{\mathscr{C}}(Y,B)\cong\prod_i\mathrm{Hom}_{\mathscr{C}}(A_i,B)$$
+	\end{enumerate}
+	\item 终对象就是空对象集上的积对象,初对象就是空对象集上的余积对象.我们称一个范畴上总存在有限积,如果对任意有限的对象集合(包含空集的情况)总存在积对象.于是范畴总存在有限积当且仅当范畴存在终对象和任意二元积.对偶的范畴总存在有限余积是指范畴存在初对象和任意二元余积.
+	\item 通过验证泛性质,我们可以证明积和余积(如果存在则)满足交换律和结合律,即$A\times B\cong B\times A$(事实上积和余积的定义就和指标上的序无关)和$A\times(B\times C)\cong(A\times B)\times C$.以及一般情况的结合律:设指标集有无交并$I=\cup_jI_j$,则如果涉及到的积都存在,那么有$\prod_{i\in I}A_i\cong\prod_j\left(\prod_{i\in I_j}A_i\right)$.把积都改为余积依旧成立.
+\end{enumerate}
+
+等化子(equalizer)和余等化子(coequalizer).
+\begin{enumerate}
+	\item 取$\mathscr{C}$中两个态射$f,g:A\to B$,取指标范畴$\mathscr{I}$为$\xymatrix@1{\ast\ar@<0.5ex>[r]_ {\cdot}\ar@<-0.5ex>[r]&\ast}$,取函子$F:\mathscr{I}\to\mathscr{C}$把指标范畴中仅有的两个非恒等态射映射为$f$和$g$,这个函子的极限称为$f,g$的等化子,记作$\ker(f,g)$;这个函子的余极限称为$f,g$的余等化子,记作$\mathrm{coker}(f,g)$.
+	\item 等价定义.
+	\begin{enumerate}
+		\item 两个态射$f,g:A\to B$的等化子是一个态射$h_0:K_0\to A$,满足$f\circ h_0=g\circ h_0$,并且对任意另一个满足$f\circ h=g\circ h$的态射$h:K\to A$,有$h$唯一的经$h_0$分解,也即唯一存在$\overline{h}$使得如下图表交换.
+		$$\xymatrix@1{K\ar[r]^h\ar[d]_{\overline{h}}&A\ar@<0.5ex>[r]_{\cdot}^f\ar@<-0.5ex>[r]_g&B\\K_0\ar[ur]_{h_0}&&}$$
+		\item 两个态射$f,g:A\to B$的余等化子是一个态射$h_0:B\to K_0$,满足$h_0\circ f=h_0\circ g$,并且对任意另一个满足$h\circ f=h\circ g$的态射$h:B\to K$,有$h$唯一的经$h_0$分解,也即唯一存在$\overline{h}:K_0\to K$使得如下图表交换.
+		$$\xymatrix@1{A\ar@<0.5ex>[r]_{\cdot}^f\ar@<-0.5ex>[r]_g&B\ar[r]^h\ar[dr]_{h_0}&K\\&&K_0\ar[u]_{\overline{h}}}$$
+	\end{enumerate}
+    \item 如果$f,g:A\to B$存在等化子$k:K\to A$,那么等化子是一个单态射;对偶的,余等化子(如果存在)总是一个满态射.事实上,假设有态射$u,v$使得$t=k\circ u=k\circ v$,那么有$f\circ t=g\circ t$,于是按照等化子的泛性质,$t$唯一的经$k$分解,于是$u=v$.
+    \item 任取态射$f:A\to B$,那么$\ker(f,f)$总存在,它就是$1_A$;$\mathrm{coker}(f,f)$总存在,它就是$1_B$.特别的,这说明同时是等化子和满态射的态射是同构:设$f$是$u,v$的等化子,那么$u\circ f=v\circ f$,按照$f$是满态射得到$u=v$,导致$\ker(u,v)$同构与一个恒等态射,于是$f$是同构.
+\end{enumerate}
+
+纤维积(拉回)与纤维和(推出).
+\begin{enumerate}
+	\item 极限定义.
+	\begin{enumerate}
+		\item 取范畴$\mathscr{C}$中的态射$f:A\to C$和$g:B\to C$,取指标范畴$\mathscr{I}$为下图,取函子$F:\mathscr{I}\to\mathscr{C}$为把仅有的两个非恒等态射映射为$f$和$g$,此时$F$的极限$(P,f':P\to B,g':P\to A)$称为$f$和$g$的纤维积.称$f'$为$f$的提升,$g'$为$g$的提升.
+		$$\xymatrix{&\ast\ar[d]\\ \ast\ar[r]&\ast}$$
+		\item 取范畴$\mathscr{C}$中的态射$f:C\to A$和$g:C\to B$,取指标范畴$\mathscr{I}$为下图,取函子$F:\mathscr{I}\to\mathscr{C}$为把仅有的两个非恒等态射映射为$f$和$g$,此时$F$的余极限$(Q,f':B\to Q,g':A\to Q)$称为$f$和$g$的纤维和.同样的称$f'$为$f$的提升,$g'$为$g$的提升.
+		$$\xymatrix{\ast\ar[d]\ar[r]&\ast\\\ast&}$$
+	\end{enumerate}
+	\item 等价定义.
+	\begin{enumerate}
+		\item 两个态射$f:A\to C$和$g:B\to C$的纤维积是$(P,f',g')$,满足$g\circ f'=f\circ g'$,使得对任意满足$g\circ z_2=f\circ z_1$的$(Z,z_1,z_2)$,存在唯一的态射$u:Z\to P$使得如下图表交换.
+		$$\xymatrix{Z\ar@/^1pc/[drr]^{z_2}\ar[dr]^u\ar@/_1pc/[ddr]_{z_1}&&\\&P\ar[r]_{f'}\ar[d]^{g'}&B\ar[d]^g\\&A\ar[r]_f&C}$$
+		\item 两个态射$f:Z\to X$和$g:Z\to Y$的纤维和是$(Q,f',g')$,满足$f\circ g'=g\circ f'$,使得对任意满足$f\circ z_1=g\circ z_2$的$(Z,z_1,z_2)$,存在唯一的态射$u:Q\to Z$使得如下图表交换:
+		$$\xymatrix{Z\ar[r]^f\ar[d]_g&X\ar[d]^{g'}\ar@/^1pc/[ddr]^{z_1}&\\Y\ar@/_1pc/[drr]_{z_2}\ar[r]_{f'}&Q\ar[dr]^u&\\&&Z}$$
+	\end{enumerate}
+	\item 纤维积把单态射提升为单态射,把同构提升为同构.对偶的,纤维和把满态射提升为满态射,把同构提升为同构.
+	\begin{proof}
+		
+		设$g$是单态射,设$f$和$g$的纤维积为$(P,f',g')$.假设态射$u,v$满足$g'\circ u=g'\circ v$,那么有$f\circ(g'\circ u)=g\circ(f'\circ u)$.按照纤维积的泛性质,存在唯一的态射$h$使得$f'\circ h=f'\circ u$和$g'\circ h=g'\circ v$,但是$u$满足这两个等式,下面验证$v$也满足这两个等式,这是因为$g\circ f'\circ v=f\circ g'\circ v=f\circ g'\circ u=g\circ f'\circ u$,按照$g$是单态射得到$f'\circ v=f'\circ u$,这就得到$u=v$,也即$g'$是单态射.
+		
+		如果$g:B\to C$是一个同构,取$f,g$上的锥$(A,1_A,g^{-1}\circ f)$,按照纤维积定义存在唯一的态射$u:A\to P$满足$g'\circ u=1_A$和$f'\circ u=g^{-1}\circ f$.现在$g'\circ u\circ g'=g'=g'\circ 1_P$和$f'\circ u\circ g'=g^{-1}\circ f\circ g'=g^{-1}\circ g\circ f'=f'\circ 1_P$.于是按照纤维积的泛性质,得到$u\circ g'=1_P$,于是$u$是$g'$的逆态射,于是$g'$是同构.
+	\end{proof}
+	\item 给定范畴$\mathscr{C}$中的如下交换图表:
+	$$\xymatrix{\ast\ar[rr]\ar[d]&&\ast\ar[rr]\ar[d]&&\ast\ar[d]\\\ast\ar[rr]&&\ast\ar[rr]&&\ast}$$
+	\begin{enumerate}
+		\item 如果左右两个小方格都是纤维积图表,那么大矩形也是纤维积图表.
+		\item 如果$\mathscr{C}$上任意两个终端相同的态射的纤维积总存在,那么从右侧小方格和大矩形是纤维积图表,可推出左侧小方格是纤维积图表.
+	\end{enumerate}
+    \item 一个存在二元积和等化子的范畴中,两个态射$f:A\to C,g:B\to C$必然存在纤维积.
+    \begin{proof}
+    	
+    	考虑积对象$A\times B$,和投影态射$\pi_1:A\times B\to A,\pi_2:A\times B\to B$,注意按照下图这里的方形未必是交换图.再考虑$f\circ\pi_1$和$g\circ\pi_2$的等化子为$e:E\to A\times B$,取$p_i=\pi_i\circ e$,于是按照等化子的定义,有$f\circ p_1=g\circ p_2$.我们断言$(E,p_1,p_2)$是$f,g$的纤维积.为此,任取一个锥体$(Z,z_1,z_2)$,其中$z_1:Z\to A,z_2:Z\to B$,满足$f\circ z_1=g\circ z_2$.于是$(z_1,z_2):Z\to A\times B$满足$f\circ\pi_1\circ(z_1,z_2)=g\circ\pi_2\circ(z_1,z_2)$.于是按照等化子的定义,存在$u:Z\to E$满足$e\circ u=(z_1,z_2)$.于是得到$p_i\circ u=z_i,i=1,2$.如果还存在$u':Z\to E$满足$p_i\circ u'=z_i,i=1,2$,那么有$\pi_i\circ e\circ u'=z_i,i=1,2$,于是$eu'=eu$,但是按照等化子是monic,这导致$u'=u$.
+    	
+    	反过来,如果$(E,p_1,p_2)$是一个纤维积,那么$e=(p_1,p_2):E\to A\times B$是$f\circ\pi_1$和$g\circ\pi_2$的等化子,证明同上.
+    	$$\xymatrix{E\ar@/^1pc/[drr]^{p_2}\ar[dr]^e\ar@/_1pc/[ddr]_{p_1}&&\\&A\times B\ar[r]_{\pi_2}\ar[d]^{\pi_1}&B\ar[d]^g\\&A\ar[r]_f&C}$$
+    \end{proof}
+\end{enumerate}
+
+核对与余核对.一个态射和它自身的纤维积$(P,\alpha,\beta)$称为它的核对,它和自身的纤维和称为它的余核对.态射的核对与余核对未必一定存在.
+\begin{enumerate}
+	\item 如果$(P,\alpha,\beta)$是态射$f:A\to B$的核对,那么$\alpha$和$\beta$是满态射.对偶的,如果$(Q,\alpha,\beta)$是$f$的余核对,那么$\alpha,\beta$是单态射.事实上,考虑锥$(A,1_A,1_A)$,泛性质说明存在态射$u:A\to P$使得$\beta\circ u=\alpha\circ u=1_A$,于是$\alpha$和$\beta$都是满态射.
+	\item 给定态射$f:A\to B$,那么如下条件互相等价,对偶的有满态射的等价描述.
+	\begin{enumerate}
+		\item $f$是单态射.
+		\item $f$的核对存在,可表示为$(A,1_A,1_A)$.
+		\item $f$的核对存在,如果记作$(P,\alpha,\beta)$,那么$\alpha=\beta$.
+	\end{enumerate}
+    \item 两个态射余等化子的核对如果存在,那么这两个态射余等化子的核对的余等化子是这两个态射的核对.
+    \begin{proof}
+    	
+    	设$f$是两个态射$x,y:X\to A$的余等化子,设$f$的核对是$(P,\alpha,\beta)$.那么从$f\circ x=f\circ y$,按照核对的泛性质(纤维积的泛性质),说明存在唯一的态射$z:X\to P$使得$\alpha\circ z=x$和$\beta\circ z=y$.
+    	
+    	现在要证的是$f$是$\alpha$和$\beta$的余等化子,为此假设$g$满足$g\circ\alpha=g\circ\beta$,那么$g\circ x=g\circ y$,于是$f$作为$x$和$y$的余等化子的泛性质说明$g$唯一的经$f$分解,此即$f$是$\alpha$与$\beta$的余等化子.
+    	$$\xymatrix{&&X\ar@<0.5ex>[d]^y\ar@<-0.5ex>[d]_x\ar[dll]_z&&\\P\ar@<0.5ex>[rr]^{\alpha}\ar@<-0.5ex>[rr]_{\beta}&&A\ar[rr]^f\ar[d]_g&&B\ar[dll]^h\\&&C&&}$$
+    \end{proof}
+    \item 一个态射核对的余等化子如果存在,那么这个态射的核对的余等化子的核对是这个态射的核对.
+\end{enumerate}
+
+范畴的完备性和有限完备性.如果范畴$\mathscr{C}$满足对任意的小范畴$\mathscr{I}$和函子$F:\mathscr{I}\to\mathscr{C}$都有极限存在,就称范畴$\mathscr{C}$是完备(complete)范畴,如果对全部从有限范畴$\mathscr{I}$到$\mathscr{C}$的函子$F$的极限都存在,就称$\mathscr{C}$是有限完备范畴.对偶的可定义余完备范畴和有限余完备范畴.
+\begin{enumerate}
+	\item 范畴是有限完备范畴当且仅当它存在全部有限积和全部等化子.
+	\begin{proof}
+		
+		按照定义,必要性是成立的.现在只要证明充分性.取定一个函子$F:\mathscr{I}\to\mathscr{C}$,其中指标范畴是有限范畴.记$\mathscr{I}$的全体态射为$\Sigma$,记全体$\mathscr{I}$中对象为$\Lambda$,如果$\alpha\in\Sigma$是$i\to j$的态射,就记$F_{\alpha}$为$F_j$.现在构造两个积对象之间的态射:
+		$$\xymatrix{\prod_{i\in \Lambda}F_i\ar@<0.5ex>[r]^{\varphi}\ar@<-0.5ex>[r]_{\psi}&\prod_{\alpha\in\Sigma}F_{\alpha}}$$
+		
+		其中$\varphi$在$\alpha$分量上取$\pi_{\mathrm{cod}(\alpha)}$,而$\psi$在$\alpha$分量上取为$F(\alpha)\circ\pi_{\mathrm{dom}(\alpha)}$.现在取这两个态射$\varphi$和$\psi$的等化子:
+		$$\xymatrix{E\ar[r]^e&\prod_{i\in J_0}F_i\ar@<0.5ex>[r]^{\varphi}\ar@<-0.5ex>[r]_{\psi}&\prod_{\alpha\in\Lambda}F_{\alpha}}$$
+		
+		我们断言$(E,e_i)$是$F$的极限,其中$e_i=\pi_i\circ e$.为此,任取$c:C\to\prod_{i\in \Lambda}F_i$,记$c=(c_i),c_i=\pi_i\circ c$.我们断言$(c_i)$是$F$的一个锥体当且仅当$\varphi\circ c=\psi\circ c$,事实上这个条件等价于对所有$\alpha\in\Sigma$有$\pi_{\alpha}\circ\varphi\circ(c_i)=\pi_{\alpha}\circ\psi\circ(c_i)$.又有:
+		$$\pi_{\alpha}\circ\varphi\circ(c_i)=\varphi_{\alpha}\circ(c_i)=\pi_{\mathrm{cod}(\alpha)}\circ(c_i)=c_j,\alpha:i\to j$$
+		$$\pi_{\alpha}\circ\psi\circ(c_i)=\psi_{\alpha}\circ(c_i)=F(\alpha)\circ\pi_{\mathrm{dom}(\alpha)}\circ(c_i)=F(\alpha)\circ c_i,\alpha:i\to j$$
+		
+		于是$\varphi\circ(c_i)=\psi\circ(c_i)$当且仅当对所有$\alpha:i\to j$为指标范畴中的态射,有$c_j=F(\alpha)\circ c_i$,于是这等价于$(c_i)$是一个锥体.于是$(E,e_i)$也是一个锥体,并且按照等化子定义存在唯一的$u:C\to E$使得图表交换,这也就是说$(E,e_i)$是极限.
+	\end{proof}	
+    \item 一个范畴具有全部有限积和全部等化子当且仅当这个范畴具有全部纤维积和终对象.于是特别的,一个范畴是有限完备范畴当且仅当它具有全部纤维积和终对象.
+    \begin{proof}
+    	
+    	必要性我们之前证明过.现在证明充分性.设范畴的终对象为1.那么积对象$(A\times B,\pi_A,\pi_B)$就是$B\to1$和$A\to1$的纤维积,即有交换图:
+    	$$\xymatrix{A\times B\ar[d]\ar[r]&B\ar[d]\\ A\ar[r]&1}$$
+    	
+    	再考虑等化子.对任意的态射$f,g:A\to B$,它们的等化子定义为如下纤维积:
+    	$$\xymatrix{E\ar[d]_e\ar[r]^h&B\ar[d]^{\Delta=(1_B,1_B)}\\
+    		A\ar[r]_{(f,g)}&B\times B}$$
+    \end{proof}
+	\item 套用这个证明可以说明完备性的如下等价描述:
+	\begin{enumerate}
+		\item 一个范畴是有限完备范畴当且仅当它存在全部有限积和全部等化子.
+		\item 一个范畴是有限完备范畴当且仅当它存在全部纤维积并且存在终对象.
+		\item 一个范畴是完备范畴当且仅当全部等化子存在,并且全部积存在.
+		\item 一个范畴是有限余完备范畴当且仅当它存在全部有限余积和全部余等化子.
+		\item 一个范畴是有限余完备范畴当且仅当它存在全部纤维和并且存在初对象.
+		\item 一个范畴是余完备范畴当且仅当它存在全部余等化子和全部余积.
+	\end{enumerate}
+    \item 推论.我们称一个范畴$\mathscr{I}$是有限生成的,如果它只有有限个对象,并且存在有限个态射$f_1,\cdots,f_n$,使得$\mathscr{I}$的每个态射都是这些态射的若干复合.那么如果$F:\mathscr{I}\to\mathscr{C}$是从有限生成范畴到有限完备范畴的函子,那么它的极限就总存在.这件事是因为此时$F$的锥就是对象$A$和一族态射$p_D:A\to FD$,使得对$f_i:D\to D'$有$Ff_i\circ p_D=p_{D'}$.
+\end{enumerate}
+
+极限和余极限看作函子.给定范畴$\mathscr{C}$和小范畴$\mathscr{I}$,那么函子范畴$\mathscr{C}^{\mathscr{I}}$就是所有$\mathscr{I}$型图表构成的范畴.定义对角函子$\Delta:\mathscr{C}\to\mathscr{C}^{\mathscr{I}}$为,把对象$N$映射为常值函子$\Delta(N)$,即这个函子把全部对象映射为$N$,把全部态射映射为$1_N$.现在任给函子$F:\mathscr{I}\to\mathscr{C}$,那么从$\Delta(N)$到$F$的自然变换也就是一个从$N$到$F$的锥体.现在如果$\mathscr{C}$是一个完备范畴,那么可以定义一个函子$\lim:\mathscr{C}^{\mathscr{I}}\to\mathscr{C}$为把每个函子映射为它的极限.
+
+保极限函子.给定函子$F:\mathscr{I}\to\mathscr{C}$,和函子$T:\mathscr{C}\to\mathscr{D}$.如果$\{\delta_i:Y\to F_i\}$是$F$的一个锥体,那么$\{T(\delta_i):T(Y)\to T(F_i)\}$是$T\circ F$的锥体.于是存在唯一的态射$T(\lim F)\to\lim(T\circ F)$.称函子$T:\mathscr{C}\to\mathscr{D}$保极限,如果对任意函子$F:\mathscr{I}\to\mathscr{C}$,都有上述典范态射实际上是一个同构$T(\lim F)\cong\lim T\circ F$.对偶的可以定义保余极限函子.
+\begin{enumerate}
+	\item 如果$\mathscr{A}$是完备范畴,$\mathscr{B}$是任意范畴,那么函子$F:\mathscr{A}\to\mathscr{B}$是保极限的当且仅当它保全部积和全部等化子.对偶的,如果$\mathscr{A}$是余完备范畴,这个函子保余极限当且仅当它保全部余积和全部余等化子.
+	\item 如果$\mathscr{A}$是有限完备范畴,那么函子$F:\mathscr{A}\to\mathscr{B}$是保极限的当且仅当它保全部有限积和全部等化子.也等价于它保全部纤维积和终对象.对偶的,如果$\mathscr{A}$是余完备范畴,那么它保余极限当且仅当它保全部有限余积和全部余等化子,也等价于保全部纤维和与全部初对象.
+	\item 如果函子保全部纤维积,那么它把单态射映射为单态射.对偶的如果函子保全部纤维和,那么它把满态射映射为满态射.事实上,我们证明过一个态射$f:A\to B$是单态射当且仅当$f$和$f$的纤维积是$(A,1_A,1_A)$,于是$(FA,1_{FA},1_{FA})$是$Ff$和$Ff$的纤维积,于是$Ff$是单态射.
+	\item 尽管一般范畴$\mathscr{A}$上未必总存在极限,但是可表函子总是保所有存在的极限的.对偶的,逆变的可表函子$\mathrm{Hom}(-,A)$把存在的余极限映射为极限.
+	\begin{proof}
+		
+		假设$\mathscr{I}$是一个小范畴,假设函子$F:\mathscr{I}\to\mathscr{A}$的极限存在,记作$(L,p_i:L\to F_i)$.我们需要说明$\mathrm{Hom}(A,F(-)):\mathscr{I}\to\textbf{Sets}$的极限是$\left(\mathrm{Hom}(A,L),\mathrm{Hom}(A,p_i)\right)$.任取$\mathrm{Hom}(A,F(-))$上的一个锥$(M,q_i:M\to\mathrm{Hom}(A,F_i))$.对每个元素$m\in M$,有$(q_i(m):A\to F_i)$是$F$上的一个锥,于是存在唯一的态射$q(m):A\to L$使得$p_i\circ q(m)=q_i(m)$.这族态射定义了映射$q:M\to\mathrm{Hom}(A,L)$.并且满足$\mathrm{Hom}(A,p_i)\circ q=q_i$,唯一性从$q(m)$的唯一性可得到,于是$\mathrm{Hom}(A,-)$是保这个极限的.
+	\end{proof}
+\end{enumerate}
+
+函子的反映极限性.如果$F:\mathscr{A}\to\mathscr{B}$是函子,称它反映极限,如果对任意源端为小范畴的函子$G:\mathscr{D}\to\mathscr{A}$,和任意$G$上的锥$\{\delta_i:Y\to G_i\}$,如果$(F\circ\delta_i:Y\to F_i)$是$F\circ G$的极限,那么就有$\{\delta_i:Y\to G_i\}$是$G$的极限.
+\begin{enumerate}
+	\item 设$F:\mathscr{A}\to\mathscr{B}$是保极限的函子,如果$F$反映同构(即$Ff$是同构推出$f$是同构),并且$\mathscr{A}$是完备范畴,那么$F$是反映极限的函子.
+	\begin{proof}
+		
+		设$G:\mathscr{I}\to\mathscr{A}$的函子,其中$\mathscr{I}$是小范畴.记$G$的极限是$(L,(p_i)_{i\in\mathscr{I}})$,那么$(FL,(fp_i)_{i\in\mathscr{I}})$就是$F\circ G$的极限.现在设$(M,(q_i)_{i\in\mathscr{I}})$是$G$的一个锥,使得$(FM,(Fq_i)_{i\in\mathscr{I}})$也是$F\circ G$的极限.那么在$\mathscr{A}$中按照极限定义存在唯一的锥之间的同构$f:M\to L$,因为$Ff$是同构,条件导致$f$是同构,这就说明$(M,(q_i)_{i\in\mathscr{I}})$是$G$的极限.
+	\end{proof}
+	\item 如果$F:\mathscr{A}\to\mathscr{B}$是完全忠实函子,那么它是反映极限的函子.
+	\begin{proof}
+		
+		设$G:\mathscr{D}\to\mathscr{A}$是源端为小范畴的函子,设$\{\delta_i:Y\to G_i\}$是$G$上的锥,使得$\{F\circ\delta_i:Y\to F_i\}$是$F\circ G$的极限.如果任取$G$的另外一个锥$\{\tau_i:M\to G_i\}$,那么存在唯一的锥之间的态射$FM\to FY$,按照$F$是完全忠实的,就存在唯一的锥之间的态射$M\to Y$,这说明$\{\delta_i:Y\to G_i\}$已经是极限.
+	\end{proof}
+\end{enumerate}
+
+极限余极限的可交换性.给定双函子$F:\mathscr{C}\times\mathscr{D}\to\mathscr{A}$,我们关心什么时候有如下极限余极限的交换性:
+$$\lim\limits_{\substack{\leftarrow\\C\in\mathscr{C}}}\left(\lim\limits_{\substack{\leftarrow\\D\in\mathscr{D}}}F(C,D)\right)\cong\lim\limits_{\substack{\leftarrow\\D\in\mathscr{D}}}\left(\lim\limits_{\substack{\leftarrow\\C\in\mathscr{C}}}F(C,D)\right)$$
+$$\lim\limits_{\substack{\rightarrow\\C\in\mathscr{C}}}\left(\lim\limits_{\substack{\rightarrow\\D\in\mathscr{D}}}F(C,D)\right)\cong\lim\limits_{\substack{\rightarrow\\D\in\mathscr{D}}}\left(\lim\limits_{\substack{\rightarrow\\C\in\mathscr{C}}}F(C,D)\right)$$
+$$\lim\limits_{\substack{\rightarrow\\C\in\mathscr{C}}}\left(\lim\limits_{\substack{\leftarrow\\D\in\mathscr{D}}}F(C,D)\right)\cong\lim\limits_{\substack{\leftarrow\\D\in\mathscr{D}}}\left(\lim\limits_{\substack{\rightarrow\\C\in\mathscr{C}}}F(C,D)\right)$$
+\begin{enumerate}
+	\item 设$\mathscr{A}$是完备(有限完备)范畴,设$F:\mathscr{C}\times\mathscr{D}\to\mathscr{A}$是以两个小范畴(有限范畴)的积为源端的双函子,那么有如下极限可交换:
+	$$\lim\limits_{\substack{\leftarrow\\C\in\mathscr{C}}}\left(\lim\limits_{\substack{\leftarrow\\D\in\mathscr{D}}}F(C,D)\right)\cong\lim\limits_{\substack{\leftarrow\\D\in\mathscr{D}}}\left(\lim\limits_{\substack{\leftarrow\\C\in\mathscr{C}}}F(C,D)\right)$$
+	\begin{proof}
+		
+		按照范畴是完备的,任取$\mathscr{C}$中的态射$c:C\to C'$,存在极限$\lim\limits_{\substack{\leftarrow\\D\in\mathscr{D}}}F(C,D)$和$\lim\limits_{\substack{\leftarrow\\D\in\mathscr{D}}}F(C',D)$.把前一个极限上的典范态射记作$p_D:\lim\limits_{\substack{\leftarrow\\D\in\mathscr{D}}}F(C,D)\to F(C,D)$,把后一个极限上的典范态射记作$p'_D:\lim\limits_{\substack{\leftarrow\\D\in\mathscr{D}}}F(C',D)\to F(C',D)$.对$\mathscr{D}$的每个对象$D$考虑如下复合态射:
+		$$\xymatrix{\lim\limits_{\substack{\leftarrow\\D\in\mathscr{D}}}F(C,D)\ar[r]^{\quad p_D}&F(C,D)\ar[r]^{F(c,1_D)}&F(C',D)}$$
+		
+		这些态射映射构成了函子$F(C',-):\mathscr{D}\to\mathscr{A}$的锥,于是得到态射$\alpha(c):\lim\limits_{\substack{\leftarrow\\D\in\mathscr{D}}}F(C,D)\to\lim\limits_{\substack{\leftarrow\\D\in\mathscr{D}}}F(C',D)$,并且满足$p'_D\circ\alpha(c)=F(c,1_D)\circ p_D$.
+		$$\xymatrix{\lim\limits_{\substack{\leftarrow\\D\in\mathscr{D}}}F(C,D)\ar[rr]^{\alpha(c)}\ar[d]_{p_D}&&\lim\limits_{\substack{\leftarrow\\D\in\mathscr{D}}}F(C',D)\ar[d]^{p'_D}\\F(C,D)\ar[rr]_{F(c,1_D)}&&F(C',D)}$$
+		
+		按照$\mathscr{A}$是完备的,就可以定义函子$L:\mathscr{C}\to\mathscr{A}$把对象$C$映射为$\lim\limits_{\substack{\leftarrow\\D\in\mathscr{D}}}F(C,D)$,把态射$c:C\to C'$映射为$\alpha(c,1_D)$.现在考虑函子$L$的极限,它就是我们要证的同构式的左侧,它的典范态射就是态射的复合:
+		$$\xymatrix{\lim\limits_{\leftarrow}L\ar[r]^{p_C}&L(C)\ar[r]^{p_D}&F(C,D)}$$
+		
+		如下图表的交换性说明固定对象$D$的时候$p_D\circ p_C$构成了函子$F(-,D)$上的锥:
+		$$\xymatrix{\lim\limits_{\leftarrow}L\ar[rr]^{p_C}\ar@/_1pc/[drr]_{p_{C'}}&&L(C)\ar[rr]^{p_D}\ar[d]^{\alpha(c)}&&F(C,D)\ar[d]^{F(c,1_D)}\\&&L(C')\ar[rr]^{p'_D}&&F(C',D)}$$
+		
+		于是我们得到了一个态射$\lambda_D:\lim\limits_{\leftarrow}L\to\lim\limits_{\substack{\leftarrow\\C\in\mathscr{C}}}F(C,D)$.它使得如下图表交换:
+		$$\xymatrix{\lim\limits_{\leftarrow}L\ar[d]_{p_C}\ar[rr]^{\lambda_D}&&\lim\limits_{\substack{\leftarrow\\C\in\mathscr{C}}}F(C,D)\ar[d]^{\overline{p}_C}\\\lim\limits_{\substack{\leftarrow\\D\in\mathscr{D}}}F(C,D)\ar[rr]^{p_D}&&F(C,D)}$$
+		
+		给定$\mathscr{D}$中的态射$d:D\to D'$,记诱导的典范态射$\lim\limits_{\substack{\leftarrow\\C\in\mathscr{C}}}F(C,D)\to\lim\limits_{\substack{\leftarrow\\C\in\mathscr{C}}}F(C,D')$为$\beta(d)$.我们断言有如下图表交换:
+		$$\xymatrix{\lim\limits_{\leftarrow}L\ar[rr]^{\lambda_D}\ar@/_1pc/[drr]_{\lambda_{D'}}&&\lim\limits_{\substack{\leftarrow\\C\in\mathscr{C}}}F(C,D)\ar[d]^{\beta(d)}\\&&\lim\limits_{\substack{\leftarrow\\C\in\mathscr{C}}}F(C,D')}$$
+		
+		按照$\lim\limits_{\substack{\leftarrow\\C\in\mathscr{C}}}F(C,D')$的泛性质,这只要证明对任意对象$D$都有$\overline{p}'_C\circ\beta(d)\circ\lambda_D=\overline{p}'_C\circ\lambda_{D'}$.这俩$\overline{p}'_C$是典范态射$\lim\limits_{\substack{\leftarrow\\C\in\mathscr{C}}}F(C,D')\to F(C,D')$:
+		\begin{align*}
+		\overline{p}'_C\circ\beta(d)\circ\lambda_D&=F(1_C,d)\circ\overline{p}_C\circ\lambda_D\\&=F(1_C,d)\circ p_D\circ p_C\\&=p_{D'}\circ p_C\\&=\overline{p}'_C\circ\lambda_{D'}
+		\end{align*}
+
+        于是我们证明了前一个图表是交换的.这说明$\{\lambda_D\}$构成了一个锥,所以存在唯一的态射$\lambda:\lim\limits_{\leftarrow}L\to\lim\limits_{\substack{\leftarrow\\C\in\mathscr{C}}}\left(\lim\limits_{\substack{\leftarrow\\D\in\mathscr{D}}}F(C,D)\right)$.对偶的构造另一侧的自然变换$\mu$.最后我们只需验证$\mu\circ\lambda=1$和$\lambda\circ\mu=1$.以$\mu\circ\lambda=1$为例,按照极限的泛性质归结为证明对任意$D,C$有$p_D\circ p_C\circ\mu\circ\lambda=p_D\circ p_C$.而这按照构造知是成立的.
+	\end{proof}
+    \item 按照对偶原则,极限全部改为余极限也是成立的.即如果$\mathscr{A}$是余完备(有限余完备)范畴,设$F:\mathscr{C}\times\mathscr{D}\to\mathscr{A}$是以两个小范畴(有限范畴)的积为源端的双函子,那么有如下余极限可交换:
+    $$\lim\limits_{\substack{\rightarrow\\C\in\mathscr{C}}}\left(\lim\limits_{\substack{\rightarrow\\D\in\mathscr{D}}}F(C,D)\right)\cong\lim\limits_{\substack{\rightarrow\\D\in\mathscr{D}}}\left(\lim\limits_{\substack{\rightarrow\\C\in\mathscr{C}}}F(C,D)\right)$$
+    \item 另外上两条命题中实际上不需要$\mathscr{A}$是完备或者有限完备的,只需要出现的所有极限都存在即可,即全体$\lim\limits_{\substack{\leftarrow\\C\in\mathscr{C}}}F(C,D)$和全体$\lim\limits_{\substack{\leftarrow\\D\in\mathscr{D}}}F(C,D)$存在.
+    \item 依旧设$F:\mathscr{C}\times\mathscr{D}\to\mathscr{A}$是双函子.我们来构造典范态射:
+    $$\lambda:\lim\limits_{\substack{\rightarrow\\C\in\mathscr{C}}}\left(\lim\limits_{\substack{\leftarrow\\D\in\mathscr{D}}}F(C,D)\right)\to\lim\limits_{\substack{\leftarrow\\D\in\mathscr{D}}}\left(\lim\limits_{\substack{\rightarrow\\C\in\mathscr{C}}}F(C,D)\right)$$
+    
+    这归结为构造锥:
+    $$\lambda_D:\lim\limits_{\substack{\rightarrow\\C\in\mathscr{C}}}\left(\lim\limits_{\substack{\leftarrow\\D\in\mathscr{D}}}F(C,D)\right)\to\lim\limits_{\substack{\rightarrow\\C\in\mathscr{C}}}F(C,D)$$
+    
+    而这又归结为构造余锥:
+    $$\lambda_{D,C}:\lim\limits_{\substack{\leftarrow\\D\in\mathscr{D}}}F(C,D)\to\lim\limits_{\substack{\rightarrow\\C\in\mathscr{C}}}F(C,D)$$
+    
+    我们取$\lambda_{D,C}$是如下典范态射的复合:
+    $$\xymatrix{\lim\limits_{\substack{\leftarrow\\D\in\mathscr{D}}}F(C,D)\ar[r]^{p_D}&F(C,D)\ar[r]^{s_C}&\lim\limits_{\substack{\rightarrow\\C\in\mathscr{C}}}F(C,D)}$$
+    
+    验证$\lambda_{D,C},C\in\mathscr{C}$的确构成一个余锥,即对$i:C\to C'$有$\lambda_{D,C'}\circ i^*=\lambda_{D,C}$,而这是因为如下图表.
+    $$\xymatrix{\lim\limits_{\substack{\leftarrow\\D\in\mathscr{D}}}F(C,D)\ar[r]^{p_D}\ar[d]_{i^*}&F(C,D)\ar[r]^{s_C}\ar[d]_i&\lim\limits_{\substack{\rightarrow\\C\in\mathscr{C}}}F(C,D)\ar@{=}[d]\\\lim\limits_{\substack{\leftarrow\\D\in\mathscr{D}}}F(C',D)\ar[r]^{p_D}&F(C',D)\ar[r]^{s_{C'}}&\lim\limits_{\substack{\rightarrow\\C\in\mathscr{C}}}F(C,D)}$$
+    
+    再验证$\lambda_D$的确构成一个锥,即对$j:D\to D'$有$\lambda_{D'}=j^*\circ\lambda_D$,而这是因为有如下交换图表:
+    $$\xymatrix{\lim\limits_{\substack{\leftarrow\\D\in\mathscr{D}}}F(C,D)\ar[r]^{p_D}\ar@{=}[d]&F(C,D)\ar[r]^{s_C}\ar[d]_j&\lim\limits_{\substack{\rightarrow\\C\in\mathscr{C}}}F(C,D)\ar[d]_{j^*}\\\lim\limits_{\substack{\leftarrow\\D\in\mathscr{D}}}F(C,D)\ar[r]^{p_{D'}}&F(C,D')\ar[r]^{s_C}&\lim\limits_{\substack{\rightarrow\\C\in\mathscr{C}}}F(C,D')}$$
+    
+    但是遗憾的是$\lambda$未必总是同构.例如在集合范畴上,设$A,B,C,D$是四个有限集合,元素个数分别是$a,b,c,d$,集合范畴的积是笛卡尔积,余积是无交并,那么$(A\times B)\coprod(C\times D)\cong(A\coprod C)\times(B\coprod D)$就导致$ab+cd=(a+c)(b+d)$矛盾.
+    \item 滤过范畴.一个小范畴$\mathscr{C}$称为滤过范畴,如果它非空,并且满足如下条件.一个滤过极限或者滤过余极限是指源端为滤过范畴的函子的极限或者余极限.
+    \begin{itemize}
+    	\item 对任意对象$C_1,C_2$,存在对象$C_3$,使得存在态射$C_1\to C_3$和$C_2\to C_3$.进而归纳可得,对任意有限个对象$C_1,\cdots,C_n$,总存在对象$C$使得存在态射$C_i\to C,\forall 1\le i\le n$.
+    	\item 对态射$f,g:C_1\to C_2$,存在对象$C_3$和态射$h:C_2\to C_3$,使得$h\circ f=h\circ g$.进而归纳可得,对任意有限个态射$f_1,\cdots,f_n:C_1\to C_2$,存在对象$C_3$和态射$f:C_2\to C_3$,使得$f\circ f_i=f\circ f_j$对任意$1\le i,j\le n$成立.
+    \end{itemize}
+    \item 引理.设$\mathscr{C}$是滤过范畴,设$\mathscr{D}$是任意有限范畴(对象和态射都是有限集),那么任意函子$F:\mathscr{D}\to\mathscr{C}$总存在余锥.
+    \begin{proof}
+    	
+    	考虑有限个对象$(FD)_{D\in\mathscr{D}}$,可以找到对象$C\in\mathscr{C}$,使得存在态射$f_D:FD\to C$.对任意$\mathscr{D}$中的态射$d:D\to D'$,我们有$FD\to C$的态射对$(f_D,f_{D'}\circ Fd)$,于是存在对象$C_d\in\mathscr{C}$和态射$g_d:C\to C_d$使得$g_d\circ f_D=g_d\circ f_{D'}\circ Fd$.再考虑有限个对象$C_d,d\in\mathrm{Mor}(\mathscr{D})$,可取对象$C'\in\mathscr{C}$,使得存在态射$h_d:C_d\to C'$.至此我们得到有限个态射$h_d\circ g_d:C\to C'$,于是滤过范畴的定义说明存在对象$C''\in\mathscr{C}$和态射$k:C'\to C''$使得$k\circ h_d\circ g_d=k\circ h_{d'}\circ g_{d'}=l$对任意态射$d,d'\in\mathrm{Mor}(\mathscr{D})$成立.那么$(C'',(l\circ f_D)_{D\in\mathscr{D}})$就是$F$的一个余锥.
+    \end{proof}
+    \item 集合范畴上的滤过余极限总存在.设$\mathscr{I}$是小滤过范畴,设$F:\mathscr{I}\to\textbf{Sets}$是函子.那么$F$的余极限可以表示为$(L,(s_i)_{i\in\mathscr{I}})$,其中$L=\left(\coprod_{i\in\mathscr{I}}F_i\right)/\sim$,这里等价关系定义为,$x\in F_i$和$x'\in F_{i'}$等价当且仅当存在$i''\in\mathscr{I}$和态射$f:i\to i''$和$g:i'\to i''$,满足$Ff(x)=Fg(x')$.而$s_i:F_i\to L$是把$x$映射为它所在的等价类$[x]$.
+    \begin{proof}
+    	
+    	我们先来验证这里$\sim$的确是一个等价关系.首先自反性和对称性是容易的,下面解释传递性.设$(x_1\in F_1)\sim(x_2\in F_2)$和$(x_2\in F_2)\sim(x_3\in F_3)$.那么存在$\mathscr{I}$中的对象4和5,以及态射$f:1\to4$,$g:2t\to4$,$h:2\to5$,$k:3\to5$,使得有$Ff(x_1)=Fg(x_2)$和$Fh(x_2)=Fk(x_3)$.那么按照上述引理,存在余锥$\{\alpha_i:i\to6\mid 1\le i\le 5\}$,于是我们有如下交换图表:
+    	$$\xymatrix{&&6&&\\&4\ar[ur]^{\alpha_4}&&5\ar[ul]_{\alpha_5}&\\1\ar[ur]^f&&2\ar[ul]^g\ar[ur]_h\ar[uu]_{\alpha_2}&&3\ar[ul]_k}$$
+    	
+    	于是有:
+    	\begin{align*}
+    		F\alpha_4\circ Ff(x_1)&=F\alpha_4\circ Fg(x_2)\\&=F\alpha_2(x_2)\\&=F\alpha_5\circ Fh(x_2)\\&=F\alpha_5\circ Fk(x_3)
+    	\end{align*}
+    
+        这得到传递性.我们再验证$s_i$的确构成一个余锥.如果$f:i\to j$是$\mathscr{I}$中的态射,任取$x\in F_i$,那么有$Ff(x)=F(1_j)(Ff(x))$,这说明$[x]=[Ff(x)]$,也即$s_i$构成余锥.最后验证泛性质.设$\{t_i:F_i\to M\mid i\in\mathscr{I}\}$也是$F$的余锥.定义$t:L\to M$为$t([x])=t_i(x)$,这不依赖于$[x]$的代表元$x$的选取是因为,如果$[x_1]=[x_2]$,其中$x_1\in F_1$和$x_2\in F_2$,那么存在$\mathscr{I}$的对象3以及态射$f:1\to3$和$g:2\to3$使得$Ff(x_1)=Fg(x_2)$.进而有$t_1(x_1)=t_3\circ Ff(x_1)=t_3\circ Fg(x_2)=t_2(x_2)$.
+    \end{proof}
+    \item 设$\mathscr{C}$是小滤过范畴,设$\mathscr{D}$是有限范畴,设设$\mathscr{A}$表示集合范畴,阿贝尔群范畴,环范畴,模范畴之一,设$F:\mathscr{C}\times\mathscr{D}\to\mathscr{A}$是双函子.那么有如下典范同构.换句话讲这些范畴上的滤过余极限和有限极限总是可交换的.
+    $$\lambda:\lim\limits_{\substack{\rightarrow\\C\in\mathscr{C}}}\left(\lim\limits_{\substack{\leftarrow\\D\in\mathscr{D}}}F(C,D)\right)\to\lim\limits_{\substack{\leftarrow\\D\in\mathscr{D}}}\left(\lim\limits_{\substack{\rightarrow\\C\in\mathscr{C}}}F(C,D)\right)$$
+    \begin{proof}
+    	
+    	【我们之前给出过$\lambda$的构造,这个证明就是在这些具体的范畴上验证$\lambda$是单射和满射.】
+    \end{proof}
+    \item 考虑这些遗忘函子:$\textbf{Ab}\to\textbf{Sets}$,$\textbf{Rings}\to\textbf{Sets}$,$\textbf{R-mod}\to\textbf{Sets}$,$\textbf{Rings}\to\textbf{Ab}$,$\textbf{R-mod}\to\textbf{Ab}$.它们都保滤过余极限,也都反映滤过余极限.换句话讲,比方说$\textbf{Ab}$上的滤过余极限,对应的滤过正向系统,用遗忘函子作用得到的$\textbf{Sets}$上的滤过正向极限的极限,也就是该滤过余极限的集合.【】
+\end{enumerate}
+\newpage
+\section{伴随函子}
+
+泛态射和余泛态射.
+\begin{itemize}
+	\item 设$F:\mathscr{A}\to\mathscr{B}$是函子,设$B$是$\mathscr{B}$的对象,从$B$到$F$的泛态射是指一个态射$u:B\to FA$,其中$A$是$\mathscr{A}$的对象.满足对任意一个态射$u':B\to FA'$,其中$A'$是$\mathscr{A}$的对象,都存在唯一的$\mathscr{A}$中的态射$f:A\to A'$使得如下图表交换:
+	$$\xymatrix{&B\ar[dl]_{u}\ar[dr]^{u'}&\\FA\ar[rr]^{Ff}&&FA'}$$
+	\item 设$F:\mathscr{A}\to\mathscr{B}$是函子,设$B$是$\mathscr{B}$的对象,从$B$到$F$的余泛态射是指一个态射$u:FA\to B$,其中$A$是$\mathscr{A}$的对象.满足对任意一个态射$u':FA'\to B$,其中$A'$是$\mathscr{A}$的对象,都存在唯一的$\mathscr{A}$中的态射$f:A'\to A$,使得如下图表交换:
+	$$\xymatrix{FA'\ar[rr]^{Ff}\ar[dr]_{u'}&&FA\ar[dl]^{u}\\&B&}$$
+\end{itemize}
+\begin{enumerate}
+	\item 从$B$到$F$的泛态射如果存在,那么在同构意义下唯一.即如果$u:B\to FA$和$u':B\to FA'$都是$B$到$F$的泛态射,那么定义中唯一的态射$f:A\to A'$是同构.
+	\item 设$F:\mathscr{A}\to\mathscr{B}$是函子,如果对$\mathscr{B}$的任意对象$B$都存在并选取一个$B$到$F$的泛态射$\eta_B:B\to FA$(这里的$A$依赖于$B$的选取),那么我们可以构造一个$R:\mathscr{B}\to\mathscr{A}$的函子如下:对$\mathscr{B}$的对象$B$取$RB=A$,对$\mathscr{B}$态射$b:B\to B'$,存在唯一的态射$a:RB\to RB'$使得如下图表交换,就定义$Rb=a$.
+	$$\xymatrix{B\ar[rr]^{\eta_B}\ar[d]_b&&FRB\ar[d]^{F(a)}\\B'\ar[rr]_{\eta_{B'}}&&FRB'}$$
+	
+	另外$\{\eta_B:B\to FRB\}$就是$B$上恒等函子到$FR$的自然变换.
+	\item 对偶的设$F:\mathscr{A}\to\mathscr{B}$是函子,如果对$\mathscr{B}$的任意对象$B$都存在$B$到$F$的余泛态射,那么可构造函子$R:\mathscr{B}\to\mathscr{A}$使得存在自然变换$FR\to 1_{\mathscr{B}}$.
+	\item 元素范畴.设$F:\mathscr{A}\to\textbf{Sets}$是函子,它的元素范畴记作$\mathrm{Elts}(F)$,定义为:
+	\begin{itemize}
+		\item 它的对象是全体二元对$(A,a)$,其中$A$是$\mathscr{A}$的对象,$a\in FA$.
+		\item $(A,a)\to(B,b)$的态射定义为$\mathscr{A}$中的态射$f:A\to B$,使得$Ff(a)=b$.
+	\end{itemize}
+	\item 设$F:\mathscr{A}\to\mathscr{B}$是函子,设$B$是$\mathscr{B}$的对象,记$F'=\mathrm{Hom}_{\mathscr{B}}(B,F-):\mathscr{A}\to\textbf{Sets}$,记$\varphi_B:\mathrm{Elts}(F')\to\mathscr{A}$是遗忘函子,那么$B$到$F$的泛态射存在当且仅当遗忘函子$\varphi_B$具有极限并且与$F$可交换.
+\end{enumerate}
+
+伴随函子的定义.
+\begin{itemize}
+	\item 称函子$G:\mathscr{B}\to\mathscr{A}$左伴随于函子$F:\mathscr{A}\to\mathscr{B}$,如果存在自然变换$\alpha:1_{\mathscr{B}}\to FG$,使得每个$\alpha_B:B\to FGB$都是$B$到$F$的泛态射.我们解释过这等价于讲$\mathscr{B}$的每个对象$B$,都存在$B$到$F$的泛态射.
+	\item 称函子$F:\mathscr{A}\to\mathscr{B}$右伴随于函子$G:\mathscr{B}\to\mathscr{A}$,如果存在自然变换$\beta:GF\to 1_{\mathscr{A}}$,使得每个$\beta_A:GFA\to A$都是$A$到$F$的余泛态射.这等价于讲$\mathscr{B}$的每个对象$B$,都存在$B$到$F$的余泛态射.
+\end{itemize}
+\begin{enumerate}
+	\item 伴随函子的等价定义.给定两个函子$F:\mathscr{A}\to\mathscr{B}$和$G:\mathscr{B}\to\mathscr{A}$,如下命题互相等价.如果$G$左伴随于某个函子$F$,我们称$G$是左伴随函子,$F$是右伴随函子.
+	\begin{itemize}
+		\item $G$左伴随于$F$.
+		\item 存在自然变换$\alpha:1_{\mathscr{B}}\to FG$和自然变换$\beta:GF\to 1_{\mathscr{A}}$满足如下等式,这里$\ast$是Godement积.
+		$$\left(F\ast\beta\right)\circ\left(\alpha\ast F\right)=1_F,\left(\beta\ast G\right)\circ\left(G\ast\alpha\right)=1_G$$
+		
+		具体写出来就是$\beta_{GB}\circ G\alpha_B=1_{GB}$和$F\beta_A\circ\alpha_{FA}=1_{FA}$对任意对象$A$和$B$成立.
+		\item 存在关于位置$B$和位置$A$自然的双射:
+		$$\theta(B,A):\mathrm{Hom}_{\mathscr{A}}(GB,A)\cong\mathrm{Hom}_{\mathscr{B}}(B,FA)$$
+		\item $F$右伴随于$G$.
+	\end{itemize}
+    \begin{proof}
+    	
+    	1推2.取$\alpha$就是$G$左伴随$F$定义中的自然变换$\alpha:1_{\mathscr{B}}\to FG$.取$\mathscr{B}$中对象$FA$,按照左伴随定义就有$A$中的态射$\beta_A:GFA\to A$使得如下图表交换:
+    	$$\xymatrix{&FA\ar@{=}[dr]\ar[dl]_{\eta_{FA}}&\\FGFA\ar[rr]^{F\beta_A}&&FA}$$
+    	
+    	验证$\beta:GF\to 1_{\mathscr{A}}$是自然变换.任取$\mathscr{A}$中的态射$a:A\to A'$,考虑如下交换图表,就得到$F(\beta_{A'}\circ GFa)\circ\alpha_{FA}=Fa=F(a\circ\beta_A)\circ\alpha_{FA}$.按照泛态射定义得到$\beta_{A'}\circ GFa=a\circ\beta_A$.
+    	$$\xymatrix{&&&&FA\ar[drr]^{Fa}&&\\FA\ar@{=}@/^1pc/[urrrr]\ar[rr]^{\alpha(FA)}\ar[drr]_{Fa}&&FGFA\ar[rr]^{FGFa}\ar[urr]^{F\beta(A)}&&FGFA'\ar[rr]^{F\beta(A')}&&FA'\\&&FA'\ar[urr]_{\alpha(FA')}\ar@{=}@/_1pc/[urrrr]&&&&}$$
+    	
+    	现在证明条件2中的等式,以第二个等式为例,按照$\beta$的定义有$F\beta_{GB}\circ\alpha_{FGB}=1_{FGB}$.这里$\alpha(FGB)=FG\alpha_B$,于是就有$\beta_{GB}\circ G\alpha_B=1_{GB}$.此即第二个等式.
+    	
+    	\qquad
+    	
+    	2推3.给定态射$a:GB\to A$,定义$\theta(B,A)(a)$为复合态射$Fa\circ\alpha_B$:
+    	$$\xymatrix{B\ar[rr]^{\alpha_B}&&FGB\ar[rr]^{Fa}&&FA}$$
+    	
+    	反过来给定态射$b:B\to FA$,定义$\tau(B,A)(b)$为复合态射$\beta_A\circ Gb$:
+    	$$\xymatrix{GB\ar[rr]^{Gb}&&GFA\ar[rr]^{\beta_A}&&A}$$
+    	
+    	直接验证这两个映射互逆,比如如下交换图表说明$\tau\circ\theta(a)=a$:
+    	$$\xymatrix{&&&&GB\ar[drr]^a&&\\GB\ar@{=}@/^1pc/[urrrr]\ar[rr]^{G\alpha_B}&&GFGB\ar[rr]^{GFa}\ar[urr]^{\beta_{GB}}&&GFA\ar[rr]^{\beta_A}&&A}$$
+    	
+    	验证自然性也是直接的,比如验证位置$A$的自然性,任取态射$f:A\to A'$,任取态射$a:GB\to A$,按照$F(f\circ a)=Ff\circ Fa$就得到如下交换图表:
+    	$$\xymatrix{\mathrm{Hom}_{\mathscr{A}}(GB,A)\ar[rr]^{\theta(B,A)}\ar[d]&&\mathrm{Hom}_{\mathscr{B}}(B,FA)\ar[d]\\\mathrm{Hom}_{\mathscr{A}}(GB,A')\ar[rr]&&\mathrm{Hom}_{\mathscr{B}}(B,FA')}$$
+    	
+    	3推1.任取$\mathscr{B}$的对象$B$,我们断言$(GB,\theta(GB,B)(1_{GB}))$是$B$到$F$的泛态射.任取$\mathscr{A}$的对象$A$和态射$b:B\to FA$.那么存在唯一的态射$a:GB\to A$满足$b=\theta(a)$.按照$\theta$是自然同构,有$(Fa\circ\theta(GB,B)(1_{GB}))=\theta(A,B)(a)=b$.另外如果还有态射$a':GB\to A$满足$Fa'\circ\theta(GB,B)(1_{GB})=b$,也即$\theta(A,B)(a)=\theta(A,B)(a')$.按照$\theta$是自然同构就得到$a=a'$.
+    	
+    	4等价于3.我们已经证明了1等价于3,取对偶范畴,左伴随就变成了右伴随,自然同构仍然是自然同构,这说明3还等价于1的对偶命题,也即4.
+    \end{proof}
+    \item 如果函子$G:\mathscr{A}\to\mathscr{B}$左伴随于函子$F$,函子$G':\mathscr{B}\to\mathscr{C}$左伴随于函子$F'$,那么它右伴随于$F\circ F'$.
+    $$\mathrm{Hom}_{\mathscr{C}}(G'GA,C)\cong\mathrm{Hom}_{\mathscr{B}}(GA,F'C)\cong\mathrm{Hom}_{\mathscr{A}}(A,FF'C)$$
+    \item 如果函子$F:\mathscr{A}\to\mathscr{B}$是右伴随函子,换句话讲它有左伴随函子$G:\mathscr{B}\to\mathscr{A}$,那么$F$和$\mathscr{A}$上所有存在的极限(小极限)可交换.对偶的$G$和$\mathscr{B}$上所有存在的余极限可交换.
+    \begin{proof}
+    	
+    	考虑以一个小范畴为源端的函子$H:\mathscr{I}\to\mathscr{A}$,设它的极限是锥$\{p_i:L\to H_i\}$.我们要证明的是$\{Fp_i:FL\to FH_i\}$是$FH$的极限.但是它已经是$FH$的锥,于是只需验证泛性质.假设$\{q_i:B\to FH_i\}$是$FH$的锥,伴随性保证$q_i:B\to FH_i$唯一的对应于态射$r_i:GB\to H_i$,我们断言这些态射$\{r_i:GB\to H_i\}$构成了$H$上的锥,事实上,取$u:i\to j$是$\mathscr{I}$中的态射,那么有:
+    	\begin{align*}
+    	r_j&=\theta^{-1}(q_j)\\&=\theta^{-1}(FH_u\circ q_i)\\&=\theta^{-1}\circ\mathrm{Hom}(1_B,FHu)(q_i)\\&=\mathrm{Hom}(1_{GB},Hd)\circ\theta^{-1}(q_i)\\&=Hu\circ r_i
+    	\end{align*}
+    	
+    	于是存在唯一的态射$r:GB\to L$满足$p_i\circ r=r_i$对任意$i$成立.这个$r$按照伴随性唯一的对应了一个态射$s:B\to FL$,并且有$Fp_i\circ s=q_i$,唯一性说明$s$是唯一满足这个性质的态射,这说明$\{Fp_i:FL\to FH_i\}$是$FH$的极限.
+    \end{proof}
+    \item 设$\mathscr{I}$是小范畴,我们之前定义过对角函子$\Delta:\mathscr{C}\to\mathscr{C}^{\mathscr{I}}$.一个范畴$\mathscr{C}$是余完备的当且仅当,对任意小范畴$\mathscr{I}$,对角函子$\Delta:\mathscr{C}\to\mathscr{C}^{\mathscr{I}}$具有左伴随.
+    \begin{proof}
+    	
+    	这个证明就是概念的翻译.按照具有左伴随的定义,对任意函子$F:\mathscr{I}\to\mathscr{C}$,存在态射$F\to\Delta(C)$,这个态射也即一个自然变换,而这就是函子$F$的一个余锥,所以$F$沿$\Delta$的泛态射就是一个泛余锥,也即$F$的余极限.
+    \end{proof}
+\end{enumerate}
+
+伴随函子定理.
+\begin{enumerate}
+	\item 解集合条件(solution set condition).设$F:\mathscr{A}\to\mathscr{B}$是函子,它关于$\mathscr{B}$的对象$B$满足解集合条件是指,存在$\mathscr{A}$上对象构成的集合$S_B$,满足对任意$\mathscr{A}$的对象$A$,对任意态射$b:B\to FA$,都存在$A'\in S_B$,存在态射$a:A'\to A$和$b':B\to FA'$,使得$Fa\circ b'=b$.
+	\item 如果对象$B$到$F$存在泛态射,取$S_B=\{GB\}$就使得$B$满足解集合条件.另外如果$\mathscr{A}$是小范畴,那么此时每个对象$B$都自动满足解集合条件.
+	\item 伴随函子定理.设$\mathscr{A}$是完备范畴,一个函子$F:\mathscr{A}\to\mathscr{B}$是右伴随函子当且仅当如下两个条件同时满足:
+	\begin{itemize}
+		\item $F$和所有极限(小极限)可交换.
+		\item 对$\mathscr{B}$的任意对象$B$,都有$F$关于$B$满足解集合条件.
+	\end{itemize}
+\end{enumerate}
+
+完全忠实伴随函子和范畴等价.
+\begin{enumerate}
+	\item 设$G:\mathscr{B}\to\mathscr{A}$左伴随于函子$F$.我们有定义中的两个自然变换$\alpha:1_{\mathscr{B}}\to FG$和$\beta:GF\to 1_{\mathscr{A}}$.那么$F$是完全忠实的当且仅当$\beta$是自然同构.并且在这个条件成立时有$\beta\ast F$和$G\ast\beta$都是自然同构.
+	\begin{proof}
+		
+		先设$F$是完全忠实函子,那么态射$\alpha_{FA}:FA\to FGFA$就可以表示为$F\eta_A$,其中$\eta_A$是$A\to GFA$的态射.按照$F\beta_A\circ F\eta_A=F\beta_A\circ\alpha_{FA}=1_{FA}$,完全忠实就导致$\alpha_A\circ\eta_A=1_A$.再按照$\alpha_{FA}:FA\to FGFA$是泛态射,以及如下等式,就得到$\eta_A\circ\beta_A=1_{GFA}$.
+		$$F(\eta_A\circ\beta_A)\circ\eta_{FA}=\eta_{FA}\circ F\beta_A\circ\eta_{FA}=\eta_{FA}=F(1_{GFA})\circ\eta_{FA}$$
+		
+		反过来设$\beta$是自然同构.考虑如下映射的复合:
+		$$\xymatrix{\mathrm{Hom}_{\mathscr{A}}(A,A')\ar[rr]^{\mathrm{Hom}(\beta_A,1_{A'})}&&\mathrm{Hom}_{\mathscr{A}}(GFA,A')\ar[rr]^{\theta(A',FA)}&&\mathrm{Hom}_{\mathscr{B}}(FA,FA')}$$
+		
+		这个复合映射把态射$a:A\to A'$映射为:
+		$$\theta(A',FA)(a\circ\beta_A)=F(a\circ\beta_A)\circ\alpha_{FA}=Fa\circ F\beta_A\circ\alpha_{FA}=Fa$$
+		
+		于是$F$是完全忠实的.最后如果这两个等价条件同时成立,任取对象$A$和$B$,按照伴随定义有$F\beta_A\circ\alpha_{FA}=1_{FA}$和$\beta_{GB}\circ G\alpha_B=1_{GB}$.这里$\beta_A$和$\beta_{GB}$都是同构,就导致$\alpha_{FA}$和$G\alpha_B$都是同构.
+	\end{proof}
+    \item 如果函子$F:\mathscr{A}\to\mathscr{B}$同时具有左伴随函子$G$和右伴随函子$H$,如果$G$和$H$中有一个函子是完全忠实的,那么另外一个也是完全忠实的.
+    \begin{proof}
+    	
+    	记$\alpha:1_{\mathscr{B}}\to FG$和$\beta:GF\to1_{\mathscr{A}}$是互相伴随的函子$F$和$G$定义中的自然变换,记$\eta:1_{\mathscr{A}}\to HF$和$\tau:FH\to1_{\mathscr{B}}$是互相伴随的函子$H$和$F$定义中的自然变换.设$H$是完全忠实函子.我们要证明$G$是完全忠实的函子.按照上一条的结论,就是证明当$\tau$是自然同构的时候$\alpha$是自然同构.考虑如下态射的复合:
+    	$$\xymatrix{FG\ar[rr]^{FG\tau^{-1}}&&FGFH\ar[rr]^{F\beta H}&&FH\ar[rr]^{\tau}&&1_{\mathscr{B}}}$$
+    	
+    	我们断言这就是$\alpha$的逆,一方面有:
+    	$$\tau\circ F\beta H\circ FG\tau^{-1}\circ\alpha=\tau\circ F\beta H\circ\alpha FG\circ\tau^{-1}=\alpha\circ\alpha^{-1}=1$$
+    	
+    	另一方面从$\alpha F\circ F\beta=1_F$得到$F\beta=\alpha^{-1}_F$,就有:
+    	\begin{align*}
+    	\alpha\circ\tau\circ F\beta H\circ FG\tau^{-1}&=FG\tau\circ FH\alpha\circ F\beta H\circ FG\tau^{-1}\\&=FG\tau\circ F\beta HGF\circ FGFH\alpha\circ FG\tau^{-1}\\&=FG\tau\circ F\beta HFG\circ FG\tau^{-1}FG\circ FG\alpha\\&=FG\tau\circ F\beta HFG\circ FGF\eta G\circ FG\alpha\\&=F1_{C}\circ F1_G=1_{FG}
+    	\end{align*}
+    \end{proof}
+    \item 一个函子$F:\mathscr{A}\to\mathscr{B}$称为范畴等价函子,如果它满足如下两两等价命题中的任意一个.如果两个范畴之间存在范畴等价函子,就称它们是范畴等价的.那么这的确是范畴上的一个等价关系.
+    \begin{itemize}
+    	\item $F$是完全忠实函子,并且具有完全忠实的左伴随函子$G$.
+    	\item 上一条的对偶命题:$F$是完全忠实函子,并且具有完全忠实的右伴随函子$G$.
+    	\item $F$具有左伴随函子,并且伴随定义中的两个自然变换$\alpha:1_{\mathscr{B}}\to FG$和$\beta:GF\to1_{\mathscr{A}}$都是自然同构.
+    	\item 上一条的对偶命题:$F$具有右伴随函子,并且伴随定义中的两个自然变换$\alpha:1_{\mathscr{A}}\to GF$和$\beta:FG\to1_{\mathscr{B}}$都是自然同构.
+    	\item 存在函子$G:\mathscr{B}\to\mathscr{A}$使得存在自然同构$1_{\mathscr{B}}\cong FG$和$GF\cong1_{\mathscr{A}}$.但是注意这里的两个自然同构未必是伴随性定义中的两个典范自然变换.仅仅是说这里的条件能推出存在真正的典范的自然同构.
+    	\item $F$是完全忠实函子,并且是本质满函子,本质满是指对$\mathscr{B}$的任意对象$B$,都存在$\mathscr{A}$的对象$A$使得$FA\cong B$.
+    \end{itemize}
+    \begin{proof}
+    	
+    	这里第五条和第六条是自对偶的命题.我们已经证明过1推3,并且3推5平凡.我们只要证明5推6和6推1,按照对偶原理就得到它们都是互相等价的.先证明5推6:任取$\mathscr{B}$的对象$B$,有$B$同构于$FGB$,这里$GB$是$\mathscr{A}$的对象,这说明$F$是本质满的.再按照$FG$和$GF$都自然同构于恒等态射,说明$FG$和$GF$都是完全忠实函子,于是有$F,G$都是完全忠实函子.
+    	
+    	最后证明6推1.先证明$F$有左伴随函子$G$.任取$\mathscr{B}$的对象$B$,取$GB$使得有同构$\alpha_B:B\cong FGB$.任取$\mathscr{A}$的对象$A$和态射$b:B\to FA$,那么$b\circ\alpha_B^{-1}:FGB\to FA$可以表示为$Fa$,其中$a:GB\to A$是态射.于是$\alpha_B:B\to FGB$是泛态射.于是$G$就是$F$的左伴随函子,另外我们构造的$\alpha:1_{\mathrm{B}}\to FG$是自然同构,而$F$又是完全忠实的,就导致$G$也是完全忠实的.
+    \end{proof}
+    \item 如果$\mathscr{A}$和$\mathscr{B}$是范畴等价的,如果$\mathscr{A}$是完备或者有限完备或者余完备或者有限余完备范畴,那么$\mathscr{B}$也是具有相应性质的范畴.
+    \begin{proof}
+    	
+    	按照定义有范畴等价函子$F:\mathscr{A}\to\mathscr{B}$,它有左伴随函子$G$.设$H:\mathscr{I}\to\mathscr{B}$是源端为小范畴(有限范畴)的函子,按照$\mathscr{A}$是完备(有限完备)的,那么函子$GH$的极限存在,按照$F$是右伴随函子,它和极限可交换,于是$FGH$有极限,但是这里$FG$自然同构于$1_{\mathscr{B}}$,所以$FGH\cong H$存在极限,这说明$\mathscr{B}$是完备(有限完备)的.
+    \end{proof}
+\end{enumerate}
+
+反射子范畴.
+\begin{itemize}
+	\item 范畴$\mathscr{B}$的完全子范畴$\mathscr{A}$称为充足(replete)的,如果对$\mathscr{B}$中的对象$B$,只要存在$\mathscr{A}$中对象同构于$B$,就有$B\in\mathrm{Obj}(\mathscr{A})$.
+	\item 范畴$\mathscr{B}$的反射(reflective)子范畴是指一个完全充足子范畴$\mathscr{A}$,使得包含函子$l:\mathscr{A}\to\mathscr{B}$是右伴随函子.它的左伴随函子$r:\mathscr{B}\to\mathscr{A}$就称为反射.
+\end{itemize}
+\begin{enumerate}
+	\item 定义中的充足条件不是本质的,我们只是在所有互相等价的子范畴中选取了一个典范的,或者说最大的.另外范畴语言里我们几乎不区分同构的对象,所以充足约定是很合理的.
+	\item 如果$\mathscr{B}$是完备(有限完备)范畴,那么它的反射子范畴$\mathscr{A}$总是完备(有限完备)范畴.并且$\mathscr{A}$上函子$H$的极限就是它在$\mathscr{B}$上对应函子的极限.
+	\begin{proof}
+		
+		这个证明里我们取$\mathscr{B}$是完备范畴,对有限完备范畴证明是一样的.取源端为小范畴的函子$H:\mathscr{I}\to\mathscr{A}$,设$\{p_i:L\to lH_i\}$是$lH$的极限,其中$l:\mathscr{A}\to\mathscr{B}$是包含函子.设$r:\mathscr{B}\to\mathscr{A}$是反射.伴随性导致每个态射$p_i:L\to lH_i$对应于唯一的态射$q_i:rL\to H_i$,并且满足$lq_i\circ\alpha_L=p_i$.任取态射$u:i\to j$,就有$l(Hu\circ q_i)\circ\alpha_L=lHd\circ p_i=p_j=lq_j\circ\alpha_L$.这导致$Hu\circ q_i=q_j$.这说明$\{q_i:rL\to H_i\}$是函子$H$的锥,于是$\{lq_i:lrL\to lH_i\}$是$lH$的锥.于是按照$lF$极限的定义就有态射$u:lrL\to L$满足$p_i\circ u=lq_i$.我们断言有$u\circ\alpha_L=1_L$和$\alpha_L\circ u=1_{lrL}$.一旦这得证就有$\alpha_L$是同构,按照$\mathscr{A}$是充足的就有$L$在$\mathscr{A}$中.这就得到$\mathscr{A}$是完备的.
+		
+		\qquad
+		
+		证明$u\circ\alpha_L=1_L$:我们有$p_i\circ u\circ\alpha_L=lq_i\circ\alpha_L=p_i$.按照$L$是极限的泛性质,就得到这里$u\circ\alpha_L=1_L$.
+		
+		\qquad
+		
+		证明$\alpha_L\circ u=1_{lrL}$:按照$i$是完全忠实的,存在唯一的态射$v_L:rL\to rL$使得$i(v_L)=\alpha_L\circ u:lrL\to lrL$.那么有$i(v_L)\circ\alpha_L=\alpha_L\circ u\circ\alpha_L=\alpha_L=l(1_{rL})\circ\alpha_L$.这得到$v_L=1_{rL}$.所以$\alpha_L\circ u=i(v_L)=1_{lrL}$.
+	\end{proof}
+    \item 如果$\mathscr{B}$是余完备(有限余完备)范畴,那么它的反射子范畴$\mathscr{A}$总是余完备(有限余完备)范畴.并且$\mathscr{A}$上函子$F$的余极限就是它在$\mathscr{B}$上对应函子的极限在反射函子$r$下的像.
+    \begin{proof}
+    	
+    	我们取$\mathscr{B}$是余完备范畴,对于有限余完备的证明是相同的.取源端为小范畴的函子$H:\mathscr{I}\to\mathscr{A}$,设$lH$的余极限为$\{s_i:L\to lH_i\}$,这里$l:\mathscr{A}\subset\mathscr{B}$是包含函子.记反射函子为$r:\mathscr{B}\to\mathscr{A}$,它是左伴随函子,和余极限可交换,于是有$\{rs_i:rL\to rlH_i\}$是$riH$的余极限.但是按照$l$是完全忠实函子,就有伴随性定义中的自然变换$\beta:ri\to 1_{\mathscr{A}}$实际是自然同构.于是$\{rs_i:rL\to riH_i\}$就是$H$的余极限.
+    \end{proof}
+\end{enumerate}
+\newpage
+\section{生成子和投射对象}
+
+对象的交和并.
+\begin{enumerate}
+	\item 子对象.设$A$是$\mathscr{A}$的对象.考虑全体二元对$(R,f)$,其中$R$是对象,$f:R\to A$是单态射,它们构成的类记作$\mathrm{Sub}(A)$.在其上赋予一个关系$\le$为,$(R,f)\le(S,g)$当且仅当存在态射(则必然是单态射)$h:R\to S$使得如下图表交换:
+	$$\xymatrix{R\ar[dr]_{f}\ar[rr]^{h}&&S\ar[dl]^{g}\\&A&}$$
+	
+	这个关系未必是等价关系.如果$(R,f)\le(S,g)$且$(S,g)\le(R,f)$,就称它们等价,这个条件等价于讲$R,S$之间使得上述图表交换的态射必须是同构.这是一个等价关系,我们称等价类为$A$的子对象.$A$的全体子对象构成的类记作$\mathrm{sub}(A)$,我们之前定义的关系仍然可以定义在这个类上,并且此时它的确是一个偏序关系.
+	\item 商对象.对偶的,把单态射改成满态射,箭头全部改变方向,得到商对象的定义.
+	\item 一个范畴称为well-powered的,如果它每个固定对象的全体子对象都构成集合.这个约定可以回避很多集合论问题.
+	\item 我们解释了对象$A$的全体子对象构成一个偏序类$\mathrm{sub}(A)$.一个由子对象构成的类的并和交分别定义为这个类在偏序类$\mathrm{sub}(A)$中的上确界和下确界.
+	\item 设$A$是对象,设$\mathrm{sub}(A)$是集合,那么如下两个条件互相等价:
+	\begin{itemize}
+		\item 每个由$A$的子对象构成的集合的交存在.
+		\item 每个由$A$的子对象构成的集合的并存在.
+	\end{itemize}
+	\item 如果$\mathscr{A}$上有回拉,那么对象$A$的两个子对象的交就是对应单态射的纤维积.
+	\begin{proof}
+		
+		两个单态射$r:B\to A$和$s:C\to A$的纤维积$(D,r',s')$满足$r',s'$都是单态射,所以复合态射$D\to A$也是单态射.另外纤维积的泛性质就保证$D\to A$是$r$和$s$的下确界.
+	\end{proof}
+	\item 设$\mathscr{A}$是完备范畴,那么它任意固定对象$A$的任意一族子对象$\{s_i:S_i\to A\}$的交总是存在的.它就是这族态射构成的图表的极限到$A$的态射.另外如果我们考虑空集的交,每个子对象都是空集的下界,所以空集的下确界就是子对象类上的上确界,也就是$1_A:A\to A$本身.
+	\begin{proof}
+		
+		按照完备性,设这族态射构成的图表的极限为$\{p_i:L\to S_i\}$,它是锥说明要满足所有复合态射$s_i\circ p_i:L\to A$都要相同,记作$s$.我们断言$s$是单态射.设态射$x,y$使得$s\circ x=s\circ y$,那么有$s_i\circ p_i\circ x=s_i\circ p_i\circ y$.按照$s_i$是单态射得到$p_i\circ x=p_i\circ y$.按照极限的泛性质就有$x=y$.另外按照泛性质有它是这族子对象的下确界.
+	\end{proof}
+    \item 即便对于有限完备的well-powered范畴,一个对象的两个子对象的并未必是存在的.因为无穷交未必存在,而两个子对象的并可以描述为所有包含这两个子对象的子对象的交.但是如果范畴是完备的well-powered范畴,无限交也是存在的,所以此时任一族子对象的交和并总是存在的.
+\end{enumerate}
+
+几种特殊的满态射.
+\begin{itemize}
+	\item 一个满态射称为正则满态射(regular epimorphism),如果它是某两个态射的余等化子.
+	\item 一个满态射$f$称为强满态射(strong epimorphism),如果对任意的如下形式的交换图表,其中$z$是单态射,都存在虚线态射使得图表交换.
+	$$\xymatrix{A\ar[rr]^f\ar[d]_u&&B\ar[d]^v\ar@{-->}[dll]_h\\X\ar[rr]_z&&Y}$$
+	\item 一个满态射$f$称为极满态射(extremal epimorphism),如果当它分解为如下图表,使得$i$是单态射时,$i$总必须是同构.
+	$$\xymatrix{A\ar[rr]^f\ar[dr]&&B\\&C\ar[ur]_i&}$$
+\end{itemize}
+\begin{enumerate}
+	\item 首先在强满态射定义中,使得图表交换的虚线态射必然是唯一的,这可以从$f$是满态射或者$z$是单态射得到.另外虚线态射$B\to X$使得强满态射定义中的图表的左上角的三角交换当且仅当右下角的三角交换:
+	\begin{align*}
+	h\circ f=u&\Leftrightarrow z\circ h\circ f=z\circ u\\&\Leftrightarrow z\circ h\circ f=v\circ f\\&\Leftrightarrow z\circ h=v
+	\end{align*}
+	\item 极满态射的一些性质.
+	\begin{itemize}
+		\item 如果$\xymatrix{\ast\ar[r]^g&\ast\ar[r]^f&\ast}$是极满态射,那么$f$也是极满态射.
+		\item 一个态射如果同时是单态射和极满态射,那么它是同构.这是因为$f=f\circ 1_A$,按照极满态射定义就有$f$是同构.
+		\item 在平衡范畴(balanced category,即同时为单满态射的总是同构)上每个满态射都是极满态射.事实上如果满态射$f=i\circ p$,其中$i$是单态射,但是从$f$满态射得到$i$还是满态射,就说明$i$是同构.
+	\end{itemize}
+    \item 强满态射的一些性质.
+    \begin{itemize}
+    	\item 强满态射的复合仍然是强满态射.
+    	\begin{proof}
+    		
+    		考虑如下交换图表,其中$f,g$是强满态射,$z$是单态射.按照$f$是强满态射,存在虚线态射$B\to X$使得图表交换.同理按照$g$是强满态射得到虚线态射$C\to X$使得图表中所有三角形交换,于是$C\to X$是我们要找的态射(我们解释过强满态射定义中的虚线态射只要对一个小三角形交换,就满足另一个小三角形交换).
+    		$$\xymatrix{A\ar[rr]^f\ar[d]_u&&B\ar[rr]^g\ar@{-->}[dll]&&C\ar[d]^v\ar@{-->}[dllll]\\X\ar[rrrr]_z&&&&Y}$$
+    	\end{proof}
+        \item 如果$\xymatrix{\ast\ar[r]^g&\ast\ar[r]^f&\ast}$是强满态射,那么$f$也是强满态射.
+        \begin{proof}
+        	
+        	考虑如下交换图表,其中$z$是单态射,按照$f\circ g$是强满态射,就得到虚线态射$k:C\to X$满足$k\circ f\circ g=u\circ g$,但是$g$是满态射得到$k\circ f=u$,这说明$f$是强满态射.
+        	$$\xymatrix{A\ar[rr]^g\ar[drr]_{u\circ g}&&B\ar[d]^u\ar[rr]^f&&C\ar[d]^v\ar@{-->}[dll]_k\\&&X\ar[rr]_z&&Y}$$
+        \end{proof}
+        \item 如果一个态射同时是单态射和强满态射,那么它是同构.
+        \begin{proof}
+        	
+        	设$f$同时是单态射和强满态射,那么按照强满态射定义就有虚线态射$g$使得如下图表交换,也即$g\circ f=1_A$和$f\circ g=1_B$,这说明$f$是同构.
+        	$$\xymatrix{A\ar[rr]^f\ar@{=}[d]&&B\ar@{=}[d]\ar@{-->}[dll]_g\\A\ar[rr]_f&&B}$$
+        \end{proof}
+    \end{itemize}
+    \item 三种满态射有如下关系:
+    $$\textbf{正则满态射}\subseteq\textbf{强满态射}\subseteq\textbf{极满态射}$$
+    \begin{proof}
+    	
+    	先设$f:B\to C$是正则满态射,所以它是某两个态射$u,v$的余核对(余等化子),考虑如下交换图表,其中$z$是单态射.那么有$q\circ f\circ u=q\circ f\circ v$,于是有$z\circ p\circ u=z\circ p\circ v$,按照$z$是单态射就得到$p\circ u=p\circ v$,所以按照余核对的泛性质,$p$要经$f$分解,所以存在虚线态射使得左上角小三角交换,但是我们解释过此时虚线也使得右下角小三角交换,这就得证.
+    	$$\xymatrix{A\ar@<0.5ex>[rr]^u\ar@<-0.5ex>[rr]_v&&B\ar[rr]^f\ar[d]_p&&C\ar[d]^q\ar@{-->}[dll]\\&&X\ar[rr]^z&&Y}$$
+    	
+    	再设$f:A\to B$是强满态射,如果有$f=i\circ p$,其中$i$是单态射,那么得到如下实线交换图表,按照强满态射定义就存在虚线态射使得图表交换,于是$i\circ k=1_B$,这结合$i$是单态射得到它是同构.
+    	$$\xymatrix{A\ar[rr]^f\ar[d]_p&&B\ar@{=}[d]\ar@{-->}[dll]_k\\C\ar[rr]^i&&B}$$
+    \end{proof}
+    \item 设$\mathscr{A}$是有限完备范畴.那么如果态射$f$满足强满态射或者极满态射定义中交换图表的部分,那么$f$自动是满态射.
+    \begin{proof}
+    	
+    	先设$f:A\to B$满足强满态射定义中的交换图表部分,如果有$u\circ f=v\circ f$,记$i=\ker(u,v):K\to B$,那么$f$就要经$K\to B$分解,于是有如下实线交换图表.于是存在虚线态射$h$使得图表交换,于是有$i\circ h=1_B$,但是$i$还是单态射,这使得$i$是同构,于是从$u\circ i=v\circ i$就得到$u=v$,也即$f$是满态射.
+    	$$\xymatrix{A\ar[rr]^f\ar[d]_g&&B\ar@<0.5ex>[rr]^u\ar@<-0.5ex>[rr]_v\ar@{=}[d]\ar@{-->}[dll]_h&&C\\K\ar[rr]^i&&B&&}$$
+    	
+    	再设$f:A\to B$满足极满态射定义中的交换图表部分,如果有$u\circ f=v\circ f$,记$i=\ker(u,v):K\to B$,那么按照核对的泛性质$f$要经$i$分解,于是有如下交换图表,但是这导致$i$是同构,于是从$u\circ i=v\circ i$得到$u=v$.
+    	$$\xymatrix{A\ar[rr]^f\ar[dr]_p&&B\ar@<0.5ex>[rr]^u\ar@<-0.5ex>[rr]_v&&C\\&K\ar[ur]_i&&&}$$
+    \end{proof}
+    \item 在有限完备范畴中,极满态射等价于强满态射.
+    \begin{proof}
+    	
+    	我们解释过一般范畴中强满态射总是极满态射.现在任取极满态射$f$,我们来验证它是强满态射.任取如下交换图表,其中$z$是单态射:
+    	$$\xymatrix{A\ar[rr]^f\ar[d]_u&&B\ar[d]^v\\X\ar[rr]_z&&Y}$$
+    	
+    	记$(W,p,q)$是$v,z$的纤维积,我们解释过单态射在纤维积中的提升总是单态射,所以这里$q$是单态射.另外按照纤维积的泛性质有态射$A\to W$使得如下图表交换:
+    	$$\xymatrix{A\ar@/_1pc/[ddrr]_u\ar@/^1pc/[drrrr]^f\ar[drr]^h&&&&\\&&W\ar[rr]^q\ar[d]_p&&B\ar[d]^v\\&&X\ar[rr]_z&&Y}$$
+    	
+    	但是按照$f$是极满态射,从$f=q\circ h$和$q$是单态射就得到$q$是同构,取$k:B\to X$为$p\circ q^{-1}$,那么有$k\circ f=p\circ q^{-1}\circ f=p\circ h=u$,也即如下图表交换,这说明$f$是强满态射.
+    	$$\xymatrix{A\ar[rr]^f\ar[d]_u&&B\ar[d]^v\ar@{-->}[dll]_k\\X\ar[rr]_z&&Y}$$
+    \end{proof}
+    \item 我们之前解释过满态射在纤维和中的提升是满态射,这里我们证明强满态射在纤维和中的提升是强满态射;正则满态射在纤维和中的提升是正则满态射.
+    \begin{proof}
+    	
+    	先设$f$是强满态射,设下面图表上方小方格是纤维和,我们要证明$g$是强满态射.于是考虑如下交换图表,其中$z:X\to Y$是单态射.那么按照$f$是强满态射说明有态射$h:B\to X$使得两个大直角三角形交换.那么$(h,u)$是$(A,p,f)$的余锥,所以纤维和的泛性质保证存在态射$k:D\to X$使得图表交换,于是$g$是强满态射.
+    	$$\xymatrix{A\ar[rr]^f\ar[d]_p&&B\ar[d]^q\ar@{-->}[ddll]\\C\ar[rr]^g\ar[d]_u&&D\ar@{-->}[dll]\ar[d]^v\\X\ar[rr]^z&&Y}$$
+    	
+    	再设$f$是正则满态射,也即它是两个态射$u,v$的核对,任取包含态射$f$的纤维和图表如下图,我们断言$g$是$h\circ u$和$h\circ v$的核对,从而$g$也是正则满态射.任取态射$w:C\to Y$使得$w\circ h\circ u=w\circ h\circ v$,那么$w\circ h$就要经$\ker(u,v)=f$分解,所以存在$\alpha:B\to Y$使得如下图表交换.于是按照纤维和的泛性质,有$\beta:D\to Y$使得如下图表交换.换句话讲$w$要经$g$分解,这就说明$g=\ker(h\circ u,h\circ v)$.
+    	$$\xymatrix{X\ar@<0.5ex>[rr]^u\ar@<-0.5ex>[rr]_v&&A\ar[rr]^f\ar[d]_h&&B\ar[d]^k\ar@/^1pc/[ddrr]^{\alpha}&&\\&&C\ar[rr]^g\ar@/_1pc/[drrrr]_w&&D\ar[drr]^{\beta}&&\\&&&&&&Y}$$
+    \end{proof}
+    \item 左伴随函子把强满态射映射为强满态射,把正则满态射映射为正则满态射.对偶的右伴随函子把强单态射映射为强单态射,把正则单态射映射为正则单态射.
+    \begin{proof}
+    	
+    	左伴随函子保所有存在的余极限,所以它把余核对映射为余核对,所以它把正则满态射映射为正则满态射.下面我们证明左伴随函子$G$把强满态射映射为强满态射.设$G$的右伴随为$F:\mathscr{A}\to\mathscr{B}$,于是有定义中的自然变换$\eta:1_{\mathscr{B}}\to FG$和$\varepsilon:GF\to 1_{\mathscr{A}}$.我们要证明的是$Gf$是强满态射,首先左伴随函子肯定把满态射映射为满态射(因为$f:A\to B$是满态射等价于$(B,1_B,1_B)$是$(f,f)$的纤维和,但是左伴随函子保纤维和,所以$Gf$也是满态射).任取如下交换图表,其中$z$是单态射,我们要证明存在$GB\to X$使得图表交换.
+    	$$\xymatrix{GA\ar[rr]^{Gf}\ar[d]_u&&GB\ar[d]^v\\X\ar[rr]_z&&Y}$$
+    	
+    	把函子$F$作用其上,结合$\eta$的自然性得到如下交换图表.这里$F$是右伴随函子,所以它把单态射映射为单态射,所以$Fz$仍然是单态射,按照$f$是强满态射就得到虚线$w:B\to FX$使得如下图表交换.
+    	$$\xymatrix{A\ar[rr]^f\ar[d]_{\eta_A}&&B\ar[d]^{\eta_B}\ar@{-->}[ddll]\\FGA\ar[rr]^{FGf}\ar[d]_{Fu}&&FGB\ar[d]^{Fv}\\FX\ar[rr]_{Fz}&&FY}$$
+    	
+    	我们断言虚线$\varepsilon_X\circ Gw:GB\to X$使得如下图表交换:
+    	$$\xymatrix{GA\ar[rr]^{Gf}\ar[d]_u&&GB\ar[d]^v\ar@{-->}[dll]\\X\ar[rr]_z&&Y}$$
+    	
+    	这是因为:
+    	$$\varepsilon_X\circ Gw\circ Gf=\varepsilon_X\circ GFu\circ G\eta_A=u\circ\varepsilon_{GA}\circ G\eta_A=u$$
+    \end{proof}
+\end{enumerate}
+
+强满-单分解.一个态射$f$的强满-单分解是指$f=i\circ p$,其中$i$是单态射,$p$是强满态射.如果范畴上每个态射都有这样的分解,就称该范畴上具有强满-单分解.
+\begin{enumerate}
+	\item 一个完备的well-powered范畴上具有强满-单分解.
+	\begin{proof}
+		
+		取完备的well-powered范畴中的一个态射$f$,考虑所有分解$f=i\circ p$,其中$i$是单态射,当$i$取遍所有子对象的一个代表元时,构成一个集合$\{i_k:I_k\to B\mid k\in K\}$.按照完备性,这些子对象的交存在,记作$i:I\to B$.那么$\{p_k:A\to I_k\mid k\in K\}$是这个图表的锥,所以存在分解$p:A\to I$,满足$f=i\circ p$.
+		
+		\qquad
+		
+		现在假设$p=j\circ q$,其中$j$是单态射,那么$f=i\circ j\circ q$,所以$i$要经$i\circ j$分解,导致$j$是同构,这说明$p$是极满态射.但是我们证明过有限完备的前提下极满态射就等价于强满态射.这得证.
+	\end{proof}
+    \item 一个态射$f:A\to B$的强满-单分解如果存在,那么在同构意义下唯一.换句话讲,如果$f=i\circ p=j\circ q$是两个强满-单分解,那么有同构$k:I\to J$使得如下图表交换.我们就称这个在同构意义下唯一的单态射$i$是$f$的像,记作$i=\mathrm{im}f$.
+    $$\xymatrix{A\ar[rr]^p\ar[d]_q&&I\ar[d]^i\ar@{-->}[dll]_k\\J\ar[rr]_j&&B}$$
+    \begin{proof}
+    	
+        按照$p$是强满态射,$j$是单态射,说明存在唯一这样的态射$k:I\to J$使得图表交换.但是按照$j\circ k=i$得到$k$是单态射.按照$k\circ p=q$是强满态射得到$k$是强满态射.我们解释过同时为单态射和强满态射则必须是同构,这就得证.
+    \end{proof}
+    \item 如果$(p,i)$和$(q,j)$是强满-单分解.如果$f,g$使得如下图表交换,那么存在唯一的态射$h:I\to J$使得图表交换.
+    $$\xymatrix{A\ar[rr]^p\ar[d]_f&&I\ar[rr]^i\ar@{-->}[d]_h&&B\ar[d]_g\\C\ar[rr]^q&&J\ar[rr]^j&&D}$$
+    \begin{proof}
+    	
+    	把图表写成如下形式,按照$j$是单态射,$p$是强满态射,就存在唯一的$h$使得结论成立.
+    	$$\xymatrix{A\ar[rr]^p\ar[d]_f&&I\ar[d]^i\ar@{-->}[ddll]_h\\C\ar[d]_q&&B\ar[d]^g\\J\ar[rr]^j&&D}$$
+    \end{proof}
+\end{enumerate}
+
+生成子和生成元.
+\begin{itemize}
+	\item 设$\mathscr{A}$是范畴,一族对象(当我们提及一族的时候总是指它们构成一个集合,而不是真类)$\{G_i\mid i\in I\}$称为$\mathscr{A}$上的生成子(generators),如果对两个态射$u,v:A\to B$,只要对任意的$i\in I$和任意的$g:G_i\to A$都有$u\circ g=v\circ g$,就有$u=v$.
+	\item 如果生成子由单个对象$G$构成,就称它是生成元.换句话讲它满足,对任意态射$u,v:A\to B$,只要对任意$g:G\to A$有$u\circ g=v\circ g$,就得到$u=v$.
+\end{itemize}
+\begin{enumerate}
+	\item 等价描述.设$\mathscr{A}$是具有余积的范畴.那么一族对象$\{G_i\mid i\in I\}$是生成子当且仅当对任意对象$A$,都有如下典范映射是满态射,这里$s(f)$表示态射$f$的源端.
+	$$\gamma_A:\coprod_{f\in\cup_i\mathscr{A}(G_i,A)}s(f)\to A$$
+	\begin{proof}
+		
+		我们把这个余积记作$\coprod G_{i,f}$,这里$i\in I$,$f$是$G_i\to A$的态射,$G_{i,f}=G_i$.一方面,如果$\{G_i\mid i\in I\}$是生成子,任取$u,v:A\to B$满足$u\circ\gamma_A=v\circ\gamma_A$,那么$u\circ f=v\circ f$对任意$f\in\cup_i\mathscr{A}(G_i,A)$成立,于是$u=v$,于是$\gamma_A$是满态射.
+		
+		\qquad
+		
+		反过来如果$\gamma_A$是满态射对任意对象$A$成立.现在任取态射$u,v:A\to B$,如果$u\circ f=v\circ f$对任意$f\in\cup_i\mathscr{A}(G_i,A)$成立,那么余积的泛性质有$u\circ\gamma_A=v\circ\gamma_A$,按照$\gamma_A$是满态射就得到$u=v$.
+	\end{proof}
+    \item 等价描述.给定一族函子$\{F_i:\mathscr{A}\to\mathscr{B}_i\mid i\in I\}$.称它们是集体忠实的,如果对任意$\mathscr{A}$中的态射$f,g:A\to A'$,只要对任意$i\in I$有$F_i(f)=F_i(g)$,就得到$f=g$.那么明显的有:
+    \begin{itemize}
+    	\item $\{G_i\}$是$\mathscr{A}$的生成子当且仅当可表函子族$\{\mathscr{A}(G_i,-):\mathscr{A}\to\textbf{Sets}\}$是集体忠实的.
+    	\item $G$是$\mathscr{A}$的生成元当且仅当可表函子$\mathscr{A}(G,-):\mathscr{A}\to\textbf{Sets}$是忠实函子.
+    \end{itemize}
+\end{enumerate}
+
+几种特殊的生成子.
+\begin{itemize}
+	\item 设$\mathscr{A}$具有余积,生成子$\{G_i\}$称为正则的,如果在等价描述中的对每个对象$A$的满态射$\gamma_A$总是正则满态射.
+	\item 设$\mathscr{A}$具有余积,生成子$\{G_i\}$称为强的,如果在等价描述中的对每个对象$A$的满态射$\gamma_A$总是强满态射.
+	\item 记$\{G_i\}$为范畴$\mathscr{A}$上一个生成子,给定任意对象$A$,记范畴$\mathscr{C}$的对象集为$\cup_i\mathscr{A}(G_i,A)$,从$f:G_i\to A$到$g:G_j\to A$的态射为所有使得图表交换的$G_i\to G_j$.考虑函子$\Gamma^A:\mathscr{C}\to\mathscr{A}$为$(f:G_i\to A)\mapsto G_i$,如果对任意对象$A$,这个函子$\Gamma^A$的极限总是$(A,f\in\cup_i\mathscr{A}(G_i,A))$,就称$\{G_i\}$是稠密的生成子.换句话讲,稠密生成子满足的条件为,给定对象$T$对每个$G_{i,f}$,选取一个态射$Ff:G_i\to T$,它们满足只要有$h:G_i\to G_j$使得$g\circ h=f$,其中$g:G_j\to A$,就有$Fg\circ h=Ff$,那么存在唯一的态射$A\to T$使得图表交换.
+	$$\xymatrix{G_i\ar[dr]_f\ar@/_1pc/[ddr]_{Ff}\ar[rr]^h&&G_j\ar[dl]^g\ar@/^1pc/[ddl]^{Fg}\\&A\ar[d]&\\&T&}$$
+\end{itemize}
+\begin{enumerate}
+	\item 如果范畴上具有余积,那么稠密生成子总是正则生成子,这是因为稠密生成子在等价描述中的那个满态射$\gamma_A$作为余极限要描述为余积之间的余等化子.
+	\item 设$\mathscr{A}$是有限完备范畴,并且总存在余积.那么一族对象$\{G_i\}$是强生成子当且仅当可表函子列$\{\mathscr{A}(G_i,-)\}$是集体反映同构的.特别的,在相同条件下,对象$G$是强生成元当且仅当可表函子$\mathscr{A}(G,-)$是反映同构的.
+	\begin{proof}
+		
+		先设$\{G_i\}$是一个强生成子.假设$f:A\to B$是态射,满足对任意$i\in I$都有$\mathscr{A}(G_i,f)$是$\mathscr{A}(G_i,A)\to\mathscr{A}(G_i,B)$的同构.考虑如下图表,按照$\mathscr{A}(G_i,f)$是双射得到存在唯一的$g'$使得$\gamma_B\circ s_g=g=f\circ g'$.当$f$跑遍$\cup_i\mathscr{A}(G_i,B)$中的元时就得到态射$f':A\to\coprod G_{i,g}$使得$f'\circ s_g=g'$.于是有$f\circ f'\circ s_g=f\circ g'=\gamma_B\circ s_g$,按照$s_g$是满态射得到$f\circ f'=\gamma_B$,按照$\gamma_B$是强满态射,得到$f$也是强满态射.
+		$$\xymatrix{G_i\ar[rr]^{s_g}\ar[d]_{g'}\ar[drr]_{g}&&\coprod G_{i,g}\ar[d]^{\gamma_B}\ar[dll]_{f'}\\A\ar[rr]_f&&B}$$
+		
+		再证明$f$是单态射:如果$f\circ u=f\circ v$,其中$u,v:X\to A$,那么对任意的态射$h:G_j\to X$,就有$f\circ u\circ h=f\circ v\circ h$,于是按照$\mathscr{A}(G_j,f)$是双射得到$u\circ h=v\circ h$,再按照生成子的定义得到$u=v$,于是$f$是单态射.同时是单态射和强满态射就必然是同构.这得证.
+		
+		\qquad
+		
+		反过来设可表函子族$\{\mathscr{A}(G_i,-)\}$是集体反射同构的.我们来证明$\gamma_A$必然满足极满态射定义中的交换图表条件,我们解释过在有限完备条件下能说明$\gamma_A$是满态射,也是强满态射.事实上如果$\gamma_A=j\circ p$,其中$j$是单态射,我们知道可表函子必然保单态射,所以$\mathscr{A}(G_i,j)$总是单态射,也即集合范畴上的单射.另一方面任取$g:G_i\to A$,那么$g=\gamma_A\circ s_g=j\circ p\circ s_g=\mathscr{A}(G_i,j)(p\circ s_g)$.这说明$\mathscr{A}(G_i,j)$是满态射,也即集合范畴上的满射.于是$\mathscr{A}(G_i,j),\forall i$都是集合范畴上的双射,所以$j$是同构,完成证明.
+	\end{proof}
+    \item 设$\mathscr{A}$上总存在等化子,设$\{G_i\}$是一族对象,满足$\{\mathscr{A}(G_i,-)\mid i\in I\}$是集体反映同构的,那么它是生成子.
+    \begin{proof}
+    	
+    	如果$u,v:A\to B$满足对任意$i\in I$和任意$g:G_i\to A$都有$u\circ g=v\circ g$,记$k=\ker(u,v):K\to A$是等化子,那么$g$要经$k$唯一分解,换句话讲$\mathscr{A}(G_i,k)$对任意$i\in I$都是同构,这导致$k$本身是同构,所以$u=v$.
+    \end{proof}
+    \item 设$\{G_i\}$是$\mathscr{A}$的一族对象,它们生成的完全子范畴记作$\mathscr{B}$.那么$\{G_i\}$是稠密生成子当且仅当函子$\Gamma:\mathscr{A}\to\textbf{Sets}^{\mathscr{B}^{\mathrm{op}}}$为$\Gamma(A)(G_i)=\mathscr{A}(G_i,A)$是完全忠实的.
+    \item 如果$\mathscr{A}$有限完备,并且存在强生成子$\{G_i\}$,那么它是well-powered的.
+    \begin{proof}
+    	
+    	给定对象$A$,对任意单态射$s:B\to A$,定义$\alpha(s)$是$\coprod_i\mathscr{A}(G_i,A)$的子集:
+    	$$\alpha(s)=\{(i,g)\mid i\in I,g\in\mathscr{A}(G_i,A),\exists h\in\mathscr{A}(G_i,B),s\circ h=g\}$$
+    	
+    	我们来证明两个单态射$r:C\to A$和$s:B\to A$等价当且仅当$\alpha(r)=\alpha(s)$.这导致得到$A$的子对象类到$\coprod_i\mathscr{A}(G_i,A)$幂集的单射,于是导致子对象类构成集合.如果$r,s$是等价的,明显的有$\alpha(r)=\alpha(s)$:
+    	$$\xymatrix{&C\ar@/^1pc/[ddr]^{r}\ar[d]\ar@/_1pc/[ddl]_h'&\\&B\ar[u]\ar[dr]^s\ar[dl]_h&\\G_i\ar[rr]_g&&A}$$
+    	
+    	反过来如果$\alpha(r)=\alpha(s)$,考虑$r,s$的纤维积记作$(B\cap C,u,v)$.任取态射$x:G_i\to B$,那么$r\circ x$有经$r$分解,所以$(i,r\circ x)\in\alpha(r)=\alpha(s)$,所以$r\circ x$要经$s$分解,也即有$y:G_i\to C$使得图表交换,那么按照纤维积的泛性质就有$z:G_i\to B\cap C$使得图表交换.于是我们证明了$\mathscr{A}(G_i,u)$是满射,但是$u$本身是单态射,所以$\mathscr{A}(G_i,u)$也是单射,所以$\mathscr{A}(G_i,u),\forall i$是集合上的双射.但是我们证明过有限完备条件下强生成子等价于对应的这族可表函子是集体反映同构的,所以$u$本身是同构.同理$v$本身也是同构,于是有$r,s$是等价的单态射.
+    	$$\xymatrix{G_i\ar@/^1pc/[drrrr]^y\ar[drr]^z\ar@/_1pc/[ddrr]_x&&&&\\&&B\cap C\ar[rr]^v\ar[d]_u&&B\ar[d]^s\\&&C\ar[rr]_r&&A}$$
+    \end{proof}
+    \item 如果$\mathscr{A}$具有余积和零对象,那么它有生成子当且仅当它有生成元.
+    \begin{proof}
+    	
+    	如果$\{G_i\}$是一个生成子,我们断言余积$(\coprod_iG_i,s_i)$是一个生成子.不妨设指标集$I$是非空的,如果态射$f,g:A\to B$不相同,那么存在一个指标$i\in I$和一个态射$h:G_i\to A$使得$f\circ h\not=g\circ h$.构造$k_j:G_j\to A$为$k_i=h$,当$j\not=i$时$k_j=0$.于是泛性质得到唯一的态射$k:\coprod_jG_j\to A$满足$k\circ s_j=k_j$.特别的有如下不等式,于是$f\circ k\not=g\circ k$,于是$\coprod_iG_i$是生成元.
+    	$$f\circ k\circ s_i=f\circ k_i=f\circ h\not=g\circ h=g\circ k_i=g\circ k\circ s_i$$
+    \end{proof}
+\end{enumerate}
+
+投射对象.
+\begin{itemize}
+	\item 一个对象$P$称为投射对象,如果对任意满态射$X\to Y$,任意态射$P\to Y$可以提升为$P\to X$,不要求提升是唯一的.
+	\item 一个对象$P$称为强投射对象,如果对任意强满态射$X\to Y$,任意态射$P\to Y$可以提升为$P\to X$,同样不要求提升是唯一的.
+	\item 称一个范畴具有足够多的投射对象,如果每个对象都同构于某个投射对象的商对象.称具有足够多的强投射对象,如果每个对象都同构于某个投射对象的强商对象(也即对应的满态射是强满态射).
+	\item 类似的定义内射对象,强内射对象,范畴具有足够多的内射对象和强内射对象.
+\end{itemize}
+\begin{enumerate}
+	\item 对象$P$是投射对象当且仅当可表函子$\mathscr{A}(P,-)$保满态射.
+	\item 投射对象的余积总是投射对象,强投射对象的余积总是强投射对象.
+	\item 一个对象$A$的收缩是指一个对象$B$,使得存在态射$i:B\to A$和$r:A\to B$,满足$1_B=r\circ i$.投射对象的收缩总是投射对象,强投射对象的收缩总是强投射对象.
+	\begin{proof}
+		
+		设$A$是投射对象,设$r:A\to B$是收缩.任取满态射$p:X\to Y$,任取态射$f:B\to Y$,按照$A$是投射的,就有$h:A\to X$使得$p\circ h=f\circ r$.右侧复合$i$就得到$p\circ h\circ i=f$,也即$B$是投射对象.
+	\end{proof}
+    \item 设$\mathscr{A}$总存在余积,并且存在生成子$\{G_i\}$,使得每个$G_i$都是投射对象,那么$\mathscr{A}$上具有足够多的投射对象.这是因为我们之前对任意对象$A$构造过满态射$\gamma_A:\coprod G_{i,f}\to A$,并且证明过投射对象的直和总是投射的.
+    \item 如果$\mathscr{A}$上总存在余积,并且存在零对象,给定一族对象$\{P_i\}$,那么$\coprod_iP_i$是投射的当且仅当每个$P_i$都是投射的.
+    \begin{proof}
+    	
+    	有一侧方向我们已经解释过了,投射对象的余积如果存在就必然是投射对象.现在假设$\coprod_iP_i$是投射对象.构造$f_j:P_i\to P_j$为当$i=j$时$f_j=1_{p_j}$,当$i\not=j$时$f_j=0$.于是得到了态射$p_j:\coprod_iP_i\to P_j$满足$p_j\circ s_j=1_{p_j}$和$p_j\circ s_i=0,i\not=j$.于是$P_j$是$\coprod_iP_i$的收缩,所以是投射对象.
+    \end{proof}
+\end{enumerate}
+\newpage
+\section{阿贝尔范畴}
+
+零态射.范畴$\mathscr{C}$上的一个态射$f:X\to Y$称为零态射,如果对任意对象$W$和任意$g,h:W\to X$,有$f\circ g=f\circ h$,对任意对象$Z$和任意$g,h:Y\to Z$,有$g\circ f=h\circ f$.称$\mathscr{C}$是具有零态射的范畴,如果每个$\mathrm{Hom}(X,Y)$中都存在零态射$0_{X,Y}$,使得对任意态射$f:Y\to Z$和任意态射$g:X\to Y$,如下图表交换:
+$$\xymatrix{X\ar[r]^{0_{X,Y}}\ar[dr]^{0_{X,Z}}\ar[d]_g&Y\ar[d]^f\\Y\ar[r]_{0_{Y,Z}}&Z}$$
+
+下面给出一些基本性质:
+\begin{enumerate}
+	\item 设$f:X\to Y$是零态射,对任意态射$g:Y\to Z$和$h:W\to X$,有$g\circ f$和$f\circ h$都是零态射.
+	\item 设$\mathscr{C}$是具有零态射的范畴,那么每个$\mathrm{Hom}(X,Y)$上的零态射是唯一的.任取$f_{X,Y},g_{X,Y}:X\to Y$为两个零态射族,满足定义中的图表交换.那么从$f_{Y,Z}\circ g_{X,Y}=f_{X,Z}=g_{X,Z}$说明两族零态射是相同的.
+	\item 如果范畴具有零对象0,任取对象$X,Y$,确定了唯一一个态射$0_{X,Y}:X\to0\to Y\in\mathrm{Hom}(X,Y)$.这个态射不依赖于零对象的选取.并且它是一个零态射.另外全体$\{0_{X,Y}\}$构成了满足之前定义的交换图的零态射族,于是存在零对象的范畴上具有零态射.
+	\begin{proof}
+		
+		任取$h_1,h_2:Y\to Z$,需要验证$h_1\circ g\circ f=h_2\circ g\circ f$.按照$h_1\circ g,h_2\circ g$都是$Y\to0$的态射,它们是相同的,这就说明$g\circ f$是零态射.
+	\end{proof}
+\end{enumerate}
+
+预加性范畴.一个范畴$\mathrm{C}$称为预加性范畴,如果每个$\mathrm{A,B}$赋予了一个交换群结构,使得态射复合与加法满足分配律,或者说复合满足双线性$f\circ(g+h)=f\circ g+f\circ h$和$(f+g)\circ h=f\circ h+g\circ h$.下面给出一些基本性质:
+\begin{enumerate}
+	\item $\mathrm{Hom}(X,Y)$作为交换群的零元是一个零态射.于是尽管预加性范畴上零对象未必存在,但是它总具有零态射.另外对于存在零对象的预加性范畴上,零态射等价于能作为所在Hom集上零元的态射,也等价于能经零对象分解的态射.
+	\begin{proof}
+		
+		此即需要验证当复合有意义时,$0\circ f$和$g\circ0$是相应Hom集中的零元.为此只需注意到$0\circ f=(0+0)\circ f=0\circ f+0\circ f$,得到$0\circ f=0$.
+	\end{proof}
+	\item 固定一个对象$A$,那么$\mathrm{End}(A)=\mathrm{Hom}(A,A)$是一个环(可能是零环),幺元是$1_A$,乘法是态射的复合.
+	\item 在预加性范畴中给定对象$A$,那么如下条件互相等价.
+	\begin{enumerate}
+		\item $A$是初对象.
+		\item $A$是终对象.
+		\item $A$是零对象.
+		\item $\mathrm{End}(A)=\mathrm{Hom}(A,A)$是零环,或者等价的讲这个集合上$0_A=1_A$.
+	\end{enumerate}
+	\begin{proof}
+		
+		按照对偶性,只需验证a推d和d推b.这里a推d是直接的,反过来如果$1_A=0_A$,于是对任意对象$B$,任取$f,g:B\to A$,零态射定义保证了$f=f\circ1_A=0_{B,A}=g\circ1_A=g$,于是$A$是终对象.
+	\end{proof}
+	\item 设$A,B$是某个预加性范畴上的两个对象,设$C$是一个对象,那么如下条件互相等价.换句话讲,在预加性范畴里任取两个对象,如果它们的积或者余积中某个存在,那么另一个也存在并且它们同构.另外在等价条件都成立时,有$i_A=\ker p_B$,$i_B=\ker p_A$,$p_A=\mathrm{coker}i_B$,$p_B=\mathrm{coker}i_A$.
+	\begin{enumerate}
+		\item 有态射$p_A:C\to A$和$p_B:C\to B$使得$(C,p_A,p_B)$是$A$和$B$的积.
+		\item 有态射$i_A:A\to C$和$i_B:B\to C$使得$(C,q_A,q_B)$是$A$和$B$的余积.
+		\item 有态射$p_A:C\to A,p_B:C\to B,i_A:A\to C,i_B:B\to C$满足$p_A\circ i_A=1_A$,$p_B\circ i_B=i_B$,$p_A\circ i_B=p_B\circ i_A=0$,$i_A\circ p_A+i_B\circ p_B=1_C$.
+	\end{enumerate}
+	\begin{proof}
+		
+		按照对偶性,我们仅需验证1和3的等价性.1推3,按照积的泛性质,存在唯一的态射$i_A$满足$p_A\circ i_A=1_A$和$p_B\circ i_A=0$,也存在唯一的态射$i_B$满足$p_A\circ i_B=0$和$p_B\circ i_B=1_B$.于是得到如下等式,泛性质就说明$i_A\circ p_A+i_B\circ p_B=1_C$.
+		$$p_A\circ\left(i_A\circ p_A+i_B\circ p_B=1_C\right)=p_A=p_A\circ 1_C$$
+		$$p_B\circ\left(i_A\circ p_A+i_B\circ p_B=1_C\right)=p_B=p_B\circ 1_C$$
+		
+		3推1,假设有态射$f:D\to A$和$g:D\to C$,需要验证积对象的泛性质.构造$h=i_A\circ f+i_B\circ g$,那么有$p_A\circ h=f$和$p_B\circ h=g$.假设$h':D\to C$是满足这两个等式的态射,那么$h'=(i_A\circ p_A+i_B\circ p_B)\circ h'=i_A\circ f+i_B\circ g=h$,这说明唯一性,于是$(C,p_A,p_B)$是积对象.
+		
+		现在假设这些等价的条件都成立,我们来证明$i_A=\ker p_B$,其余的证明都是对偶的.首先$p_B\circ i_A=0$,倘若$x:D\to C$满足$p_B\circ x=0$,从$p_B\circ i_B=1_B$得到$p_B$是满态射,于是从$p_B\circ i_A\circ p_A\circ x=0=p_B\circ x$得到$i_A\circ p_A\circ x=x$,于是$x$经$i_A$分解.这个分解的唯一性是因为从$p_A\circ i_A=1_A$得到$i_A$是单态射.完成证明.
+	\end{proof}
+    \item 设$\{A_i,1\le i\le n\}$和$\{B_j,1\le j\le m\}$是预加性范畴两组对象,设它们的积$A=\oplus_{1\le i\le n}A_i$和$B=\oplus_{1\le j\le m}B_j$存在.那么按照泛性质,任意态射$f:A\to B$可以被$mn$个态射$f_{ij}:A_i\to B_j,1\le i\le n,1\le j\le m$描述,所以和线性代数一样$f:A\to B$可以被一个$m\times n$的矩阵$\left(f_{ij}\right)$表示,并且态射的符合吻合于矩阵的乘法.
+\end{enumerate}
+
+我们通常把初对象视为空对象集的积,终对象视为空对象集的余积.当我们提及有限积的时候是指对象集是空集或者有限集合时做积,于是前面的性质证明了尽管预加性范畴上初对象或者二元积未必存在,但是倘若一个有限对象集的积对象存在,那么这个对象集的余积对象存在,并且它们是互相同构的.倘若预加性范畴上任意有限个对象(包含了空集的情况)都存在积对象,就称它为加性范畴.
+
+加性函子.给定两个预加性范畴$\mathscr{C},\mathscr{D}$,称一个函子$F:\mathscr{C}\to\mathscr{D}$是加性函子,如果它诱导的Hom集之间的映射$\mathrm{Hom}_{\mathscr{C}}(X,Y)\to\mathrm{Hom}_{\mathscr{D}}(FX,FY)$总是交换群同态.设$F:\mathscr{A}\to\mathscr{B}$是加性范畴之间的函子,那么如下条件互相等价:
+\begin{enumerate}
+	\item $F$是加性函子.
+	\item $F$和二元积可交换,换句话讲如果$(C,p_A,p_B,i_A,i_B)$是$\mathscr{A}$中两个对象$A,B$的二元积,那么$(FC,Fp_A,Fp_B,Fi_A,Fi_B)$是$\mathscr{B}$中两个对象$FA$和$FB$的二元积.
+	\item $F$和所有有限积可交换.
+	\item $F$和所有有限余积可交换.
+\end{enumerate}
+\begin{proof}
+	
+	按照对偶性,3和4是等价的.3和4推出2平凡.证明2推3也即证明$F$和二元积可交换的条件下得到$F$和零对象可交换,按照对偶性只需证明和终对象可交换.设0是一个终对象,任取$\mathscr{B}$的对象$B$,于是至少存在零态射$B\to F(0)$,于是$\mathrm{Hom}_{\mathscr{B}}(B,F(0))$不是空集.设两个0的积对象是$(0\oplus0,p_1,p_2)$,按照0是终对象说明$p_1=p_2$记作$p$,按照条件$(F(0)\oplus F(0),F(p),F(p))$是两个$F(0)$的积对象.任取态射$f:B\to F(0)$,考虑零态射$g:B\to F(0)$,它们诱导了态射$h:B\to F(0)\oplus F(0)$,也即满足$F(p)\circ h=f$和$F(p)\circ h=0$,导致$f=0$.也即$F(0)$是终对象.这证明了2推3.
+	
+	1推2,我们解释过预加性范畴上的二元积等价于可构造四个态射满足一组等式.倘若$F$是加性函子,这四个态射的像也满足相应的一组等式,于是$F$保二元积.最后说明3推1,给定两个态射$f,g:A\to B$,需要验证$F(f-g)=F(f)-F(g)$.设$(B\oplus B,p_1,p_2,i_1,i_2)$是两个$B$的二元积,那么$f$和$g$诱导了态射$h:A\to B\oplus B$使得$p_1\circ h=f$和$p_2\circ h=g$,于是$F(f-g)=F((p_1-p_2))\circ F(h)$以及$F(f)-F(g)=(F(p_1)-F(p_2))\circ F(h)$,于是仅需验证$F(p_1-p_2)=F(p_1)-F(p_2)$.但是$F(p_1-p_2)\circ F(i_1)=F(p_1\circ s_1)=1_{F(B)}=(F(p_1)-F(p_2))\circ F(i_1)$,按照$F$保有限积,导致$F(i_1)$是单态射,导致$F(p_1-p_2)=F(p_1)-F(p_2)$,完成证明.
+\end{proof}
+
+核与余核.在具有零对象的范畴上,我们定义一个态射$f:A\to B$的核是它和零态射$0_{A,B}$的等化子;定义它的余核是它和零态射$0_{A,B}$的余等化子.
+\begin{enumerate}
+	\item 泛性质.按照定义,对态射$f:A\to B$,它的核是一个态射$\ker f:K\to A$,满足对任意一个满足$f\circ g=0$的态射$g:C\to A$,都有$g$唯一的经$\ker f$分解.
+	$$\xymatrix{C\ar[dr]_{\exists_!\overline{h}}\ar[r]_g\ar@/^1pc/[rr]^0&A\ar[r]_f&B\\&K\ar[u]_{\ker f}&}$$
+	
+	对偶的,态射$f:A\to B$的余核是一个态射$\mathrm{coker}f:B\to H$,满足对任意满足$g\circ f=0$的态射$g:B\to C$,都有$g$唯一的经$\mathrm{coker}f$分解.
+	$$\xymatrix{A\ar[r]_f\ar@/^1pc/[rr]^0&B\ar[d]_{\mathrm{coker}f}\ar[r]_g&H\\&H\ar[ur]_{\exists_!\overline{h}}&}$$
+	\item 在具有零对象的范畴上,零态射$f:A\to B$总具有核与余核,它的核就是$A$上的恒等态射,它的余核就是$B$上的恒等态射.
+    \item 在加性范畴中,一个态射$f$是单态射当且仅当对任意$f\circ g=0$推出$g=0$.同样态射$f$是满态射当且仅当任意$g\circ f=0$推出$g=0$.
+    \item 核如果存在则总是单态射,余核如果存在则总是满态射.事实上对每个态射$f:A\to B$,设它的核为$g:K\to A$,需要验证的是$g$是单态射,也即对任意$h:P\to K$,从$g\circ h=0$推出$h=0$.按照$g\circ h=0$说明$f\circ g\circ h=0$,于是按照$g$是核的泛映射性质,得到这里的$h:P\to K$是唯一的,但是这里$h$替换为零态射同样保证图表交换,于是$h=0$.
+    $$\xymatrix{P\ar[dr]_{\exists_!h}\ar[r]_{g\circ h}\ar@/^/[rr]^0&A\ar[r]_f&B\\&K\ar[u]_{h}&}$$
+    \item 一个态射$f:A\to B$如果存在核,那么它是单态射当且仅当核是零态射$0\to A$;一个态射$f:A\to B$如果存在余核,那么它是满态射当且仅当余核是零态射$B\to0$.
+    \begin{proof}
+    	
+    	如果$f:A\to B$是单态射,取一个核是$i:K\to A$,那么$f\circ i=0$,单态射说明$i=0$.于是$i$唯一的经零对象分解,于是$K$只能是零对象.反过来如果$k:0\to A$是核,任取$j:P\to A$使得$f\circ j=0$,那么存在唯一的$i:P\to0$使得$k\circ i=j$,于是$j$是零态射,于是$f$是单态射.
+    \end{proof}
+    \item 给定加性范畴上两个态射$f.g:A\to B$,那么如下结论等价,并且成立时等化子与核是同构的,另外总有$\ker f\cong\ker -f$和$\mathrm{coker}f\cong\mathrm{coker}-f$.
+    \begin{enumerate}
+    	\item 等化子$\ker(f,g)$存在.
+    	\item $\ker(f-g)$存在.
+    	\item $\ker(g-f)$存在.
+    \end{enumerate}
+\end{enumerate}
+
+加性可表函子与加性Yoneda引理.
+\begin{enumerate}
+	\item 设$\mathscr{A}$是一个加性范畴,给定对象$A$,那么可表函子$\mathrm{Hom}_{\mathscr{A}}(A,-)$是加性函子.
+	\begin{proof}
+		
+		给定两个态射$f,g:X\to Y$,那么$\mathrm{Hom}(A,f-g)(h)=(f-g)\circ h=f\circ h-g\circ h=\mathrm{Hom}(A,f)(h)-\mathrm{Hom}(A,g)(h)$.
+	\end{proof}
+    \item 加性Yoneda引理.设$\mathscr{A}$是加性范畴,任取对象$A$,任取加性函子$F:\mathscr{A}\to\textbf{Ab}$,那么存在自然的同构$\mathrm{Nat}(\mathrm{Hom}(A,-),F)\cong F(A)$.
+\end{enumerate}
+
+一个范畴称为阿贝尔范畴(Abelian category),如果它满足如下公理.
+\begin{itemize}
+	\item 存在零对象.
+	\item 存在二元积和二元余积.
+	\item 每个态射都有核与余核.
+	\item 每个单态射都是某个态射的核,每个满态射都是某个态射的余核.(换句话讲,在一般加性范畴里核是单态射也即子对象,余核是满态射也即商对象,这一条是要求反过来子对象或者说单态射也是核,商对象或者说满态射也是余核).
+\end{itemize}
+\begin{enumerate}
+	\item 加性范畴中态射的核与余核未必总是存在的.例如环上的有限生成模范畴是加性范畴,但是有限生成模的子模未必有限生成,取这样的一个有限生成模$M$和非有限生成的子模$N$,那么$M/N$是有限生成模,而典范同态$M\to M/N$的核不是有限生成的,于是不存在核.另外加性范畴上核与余核只能分别推出是单满态射,反过来单满态射未必是某个态射的核与余核.这些不足都在阿贝尔范畴上得以弥补,我们还会证明阿贝尔范畴实际是加性范畴.
+	\item 在阿贝尔范畴上,态射是同构当且仅当它是单满态射.
+	\begin{proof}
+		
+	如果$f:A\to B$同时是单态射和满态射,按照阿贝尔范畴的定义$f$是某个态射$g$的核,于是$g\circ f=0$,但是按照$f$是满态射得到$g=0$,而我们解释过零态射的核是同构.
+	\end{proof}
+    \item 在阿贝尔范畴中,对于态射$f:A\to B$,如下条件互相等价,对偶的有满态射的等价描述.
+    \begin{enumerate}
+    	\item $f:A\to B$是一个单态射.
+    	\item $\ker f$即$0\to A$.
+    	\item 对每个对象$C$,对每个态射$g:C\to A$,从$f\circ g=0$总推出$g=0$.
+    \end{enumerate}
+    \item 阿贝尔范畴是有限完备的和余有限完备的.我们之前解释过有限完备等价于有限积和等化子总存在,这里有限积的存在性是定义提供的,而我们解释过加性范畴上$f,g:A\to B$的等化子如果存在,则就是$\ker(f-g)$,这里态射的核的存在性也是定义提供的.
+    \item 如果$g\circ f$是单态射,那么$f$是单态射;如果$g\circ f$是满态射,那么$g$是满态射.
+    \item 如果$f:A\to B,g:B\to C$是两个态射,倘若$g$是单态射,那么$\ker g\circ f=\ker f$;倘若$f$是满态射,那么$\mathrm{coker}g\circ f=\mathrm{coker}g$.
+    \item 在阿贝尔范畴中总有$\mathrm{coker}\circ\ker\circ\mathrm{coker}f=\mathrm{coker}f$和$\ker\circ\mathrm{coker}\circ\ker f=\ker f$.特别的,这说明单态射的像是自身,满态射的余像是自身.另外如果引入子对象核商对象的概念,即$A$的子对象是以$A$为终端的单态射的等价类,$A$的商对象是以$A$为源端的满态射的等价类,那么$\ker$可视为从$A$的全体商对象到全体子对象的映射,$\mathrm{coker}$是从$A$的全体子对象到全体商对象的映射,这一条的两个公式就是在说这两个映射互逆.
+    \begin{proof}
+    	
+    	这里证明后半段命题,前半段是对偶的.如果$\varphi:A\to B$是某个态射$Z\to A$的余核,那么记$\varphi$的核是$l:K\to A$,那么既然$Z\to A\to B$是0态射,按照核的定义得到了唯一的态射$Z\to K$.现在为了证明$\varphi$是$K\to A$的余核,任意给出一个$A\to C$使得$K\to A\to C$是零态射,那么复合态射$Z\to A\to C$同样是零态射,这样按照$A\to B$是$Z\to A$的余核得到唯一的$B\to C$.这就完成证明.
+    	$$\xymatrix{&C&\\Z\ar[dr]_{\exists !}\ar[r]&A\ar[u]\ar[r]^{\varphi}&B\ar[ul]_{\exists !}\\&K\ar[u]^{l}&}$$
+    \end{proof}
+    \item 阿贝尔范畴是一个加性范畴.
+    \begin{proof}
+    	
+    	给定两个态射$f,g:A\to B$,定义$f+g$为态射的复合$\xymatrix{A\ar[r]^{(1_A,1_A)}&A\oplus A\ar[r]^{\left(\substack{f\\g}\right)}&B}$.按照如下交换图表及二元对称积的泛性质,这个复合态射也是复合态射$\xymatrix{A\ar[r]^{(f,g)}&B\times B\ar[r]^{\left(\substack{1_B\\1_B}\right)}&B}$
+    	$$\xymatrix{&&A\ar[r]^f&B\ar@/^1pc/[dr]&\\A\ar[r]\ar@/^1pc/[urr]^{1_A}\ar@/_1pc/[drr]&A\oplus A\ar[r]\ar[ur]^{p_1}\ar[dr]_{p_2}&B\oplus B\ar[ur]^{p_1}\ar[dr]_{p_2}\ar[rr]^{(1_B,1_B)}&&B\\&&A\ar[r]_g&B\ar@/_1pc/[ur]_{1_B}&}$$
+    	
+    	容易验证交换律和结合律.下面验证逆元存在,设态射$x:A\to B$,考虑态射$\varphi=\left(\begin{array}{cc}1&x\\0&1\end{array}\right):A\otimes B\to A\otimes B$.它的核设为$(a,b):K\to A\oplus B$,那么有$(a,xa+b)=0$,于是$a=b=0$.这说明$\varphi$是单射,对偶的有$\varphi$是满射,于是它是同构.它的逆映射具有形式$\left(\begin{array}{cc}1&y\\0&1\end{array}\right):A\oplus B\to A\oplus B$.于是按照态射复合(矩阵乘法)得到$x+y=0$.
+    \end{proof}
+\end{enumerate}
+
+阿贝尔范畴上的像与余像.对态射$f:A\to B$,它的像定义为$\mathrm{im}f=\ker\mathrm{coker}f$,它的余像定义为$\mathrm{coim}f=\mathrm{coker}\ker f$.特别的,像总是一个单态射,余像总是一个满态射.
+\begin{enumerate}
+	\item 态射的像分解.对态射$f:A\to B$,在同构意义下存在唯一的分解$f=i\circ p$,使得其中$i$是单态射,$p$是满态射.并且实际上这里$i$就是$f$的像,$p$就是$f$的余像.这个同构意义下唯一的分解称为态射的像分解.
+	\begin{proof}
+		
+		我们先来说明$f$可分解为$p\circ i$,其中$p$是$f$的余像,$i$是一个单态射.取$f$的核为$k$,按照$k\circ f=0$,说明$f$唯一的经$p=\mathrm{coker}k=\mathrm{coim}f$分解.记$f=p\circ i$.我们来证明$i$是单态射.假设$i\circ x=0$,需要证明$x=0$.
+		
+		按照$i\circ x=0$,说明$i$唯一的经$\mathrm{coker}x$分解,记作$i=r\circ\mathrm{coker}x$.现在$\mathrm{coker}x\circ p$是满态射,于是存在态射$h$满足$\mathrm{coker}h=\mathrm{coker}x\circ p$.按照$f\circ h=r\circ\mathrm{coker}x\circ p\circ h=0$,说明$h$唯一的经$k$分解,于是有态射$l$满足$h=k\circ l$.再按照$p\circ h=p\circ k\circ l=0$,说明$p$唯一的经$\mathrm{coker}h$分解,也即有$p=s\circ(\mathrm{coker}x\circ p)$,按照$p$是满态射,得到$s\circ\mathrm{coker}x=1$,于是$\mathrm{coker}x$是单态射,于是从$q\circ x=0$得到$x=0$.
+		
+		最后我们断言假设$f$可分解为$f=i\circ p$,其中$i$是单态射,$p$是满态射,那么$i=\mathrm{im}f$和$p=\mathrm{coim}f$.事实上$\mathrm{im}f=\ker\mathrm{coker}i\circ p=\ker\mathrm{coker}i=i$,因为单态射的像是自身.同理$p=\mathrm{coim}f$.
+		$$\xymatrix{&&\cdot\ar[d]^h\ar[dll]_l&&\\\cdot\ar[rr]_k&&\cdot\ar[rr]^f\ar[d]_p&&\cdot\\\cdot\ar[rr]_x&&\cdot\ar@<-0.5ex>[rr]_q\ar[urr]^i&&\cdot\ar@<-0.5ex>[ll]_s\ar[u]_r}$$
+	\end{proof}
+	\item 像的泛性质.态射$f:X\to Y$的像$\mathrm{im}f$定义为单态射$m:I\to Y$,满足存在态射$e:X\to I$使得$f=m\circ e$.满足对任意的满足$f=m'\circ e'$的态射$e':X\to I'$和单态射$m':I'\to Y$,存在唯一的态射$v:I\to I'$使得$m=m'\circ v$.换句话讲,态射$f:X\to Y$的像就是$Y$的分解了$f$的子对象中最小的.
+	$$\xymatrix{X\ar[rr]^f\ar[dr]_e\ar@/_1pc/[ddr]_{e'}&&Y\\&I\ar@{^{(}->}[ur]_m\ar[d]^{\exists! v}&\\&I'\ar@{^{(}->}@/_1pc/[uur]_{m'}&}$$
+	\item 在阿贝尔范畴中考虑如下图表,其中$f,g$是任意态射,$p,q$是满态射,$i,j$是单态射,那么存在唯一的态射$h$使得图表交换.
+	$$\xymatrix{\cdot\ar[rr]^p\ar[d]_f&&\cdot\ar[rr]^i\ar[d]_h&&\cdot\ar[d]_g\\\cdot\ar[rr]_q&&\cdot\ar[rr]_j&&\cdot}$$
+	\begin{proof}
+		
+		先说明唯一性,按照$p$是满态射和$j$是单态射,从$j\circ h_1\circ p=j\circ h_2\circ p$就推出$h_1=h_2$.再说明存在性,取$q\circ f$的像分解$s_2\circ s_1$,取$g\circ i$的像分解$t_2\circ t_1$.那么$t_2\circ(t_1\circ p)$和$(j\circ s_2)\circ s_1$是同一个态射的两个像分解,于是存在同构$w$使得如下图表交换,于是取$h=s_2\circ w^{-1}\circ t_1$就使得图表交换.
+		$$\xymatrix{\cdot\ar[rr]^p\ar[dd]_f\ar[dr]_{s_1}&&\cdot\ar[rr]^i\ar[dr]^{t_1}&&\cdot\ar[dd]_g\\&\cdot\ar[dr]_{s_2}\ar[rr]^w&&\cdot\ar[dr]^{t_2}&\\\cdot\ar[rr]_q&&\cdot\ar[rr]_j&&\cdot}$$
+	\end{proof}
+\end{enumerate}
+
+两种构造新阿贝尔范畴的手段.
+\begin{enumerate}
+	\item 取阿贝尔范畴$\mathscr{A}$,取$A$的完全子范畴$\mathscr{C}$,满足:$\mathscr{A}$的零对象落在$\mathscr{C}$中;$\mathscr{C}$中对象的在$\mathscr{A}$中的有限积落在$\mathscr{C}$中,$\mathscr{C}$中每个态射在$\mathscr{A}$中的余核与核都落在$\mathscr{C}$中.那么$\mathscr{C}$是一个阿贝尔范畴,并且$\mathscr{C}$中的序列是正合列当且仅当它在$\mathscr{A}$中是正合列.
+	\item 如果$\mathscr{A}$是阿贝尔范畴,$\mathscr{C}$是一个小范畴,考虑加性函子构成的函子范畴$\mathscr{A}^{\mathscr{C}}$是一个阿贝尔范畴.如果额外的$\mathscr{A}$是完备或者余完备的阿贝尔范畴,那么$\mathscr{A}^{\mathscr{C}}$也是完备或者余完备的阿贝尔范畴.
+\end{enumerate}
+
+阿贝尔范畴中的一个如下序列称为正合列,如果对每个$n$都有$\ker f_{n+1}=\mathrm{im}f_n$.
+$$\xymatrix{\cdots\ar[r]&A_n\ar[r]^{f_n}&A_{n+1}\ar[r]^{f_{n+1}}&A_{n+2}\ar[r]&\cdots}$$
+\begin{enumerate}
+	\item 态射序列$A\to B\to C$是正合的等价于如下任一条件成立.
+	\begin{enumerate}
+		\item $\mathrm{im}(A\to B)=\ker(B\to C)$.
+		\item $\mathrm{coker}(A\to B)=\mathrm{coim}(B\to C)$.
+		\item 记$K\to B=\ker(B\to C)$和$B\to F=\mathrm{coker}(A\to B)$.那么$A\to B\to C=0$和$K\to B\to F=0$.
+		$$\xymatrix{A\ar[rr]\ar[dr]&&B\ar[rr]\ar[dr]&&C\\&K\ar[ur]&&F\ar[ur]&}$$
+	\end{enumerate}
+    \begin{proof}
+    	
+    	我们来证明第一条和第三条等价,第二条和第三条等价是对偶的.如果第一条成立,那么$A\to B\to C=A\to K\to B\to C=0$.按照$K\to B=\ker(B\to C)=\mathrm{im}(A\to B)=\ker\mathrm{coker}(A\to B)=\ker(B\to F)$,所以$K\to B\to F=0$.
+    	
+    	\qquad
+    	
+    	如果第三条成立.按照$A\to B\to C=0$,得到$A\to B$要经$K\to B$分解,于是按照像的泛性质,$\mathrm{im}(A\to B)$要经$K\to B$分解.另一方面从$K\to B\to F=0$说明$K\to B$要经$\ker(B\to F)=\mathrm{im}(A\to B)$分解.于是$K\to B=\ker(B\to C)=\mathrm{im}(A\to B)$.
+    \end{proof}
+	\item 正合性是阿贝尔范畴上的一个自对偶概念,即如果$\xymatrix{A\ar[r]^f&B\ar[r]^g&C}$是阿贝尔范畴$\mathscr{C}$上的正合列,那么它在反范畴中的对应$\xymatrix{C\ar[r]^{g^*}&B\ar[r]^{f^*}&A}$是反范畴中的正合列.
+	\begin{proof}
+		
+		从$\ker g=\mathrm{im}f=\ker\mathrm{coker}f$得到$\mathrm{coim}g=\mathrm{coker}\ker g=\mathrm{coker}\ker\mathrm{coker}f=\mathrm{coker}f$,取对偶,得到$\mathrm{im}g^*=\ker f^*$.
+	\end{proof}
+    \item 在阿贝尔范畴中,如下结论成立:
+    \begin{enumerate}
+    	\item $\xymatrix{0\ar[r]&A\ar[r]^f&B}$是正合列当且仅当$f$是单态射.这是因为态射$0\to A$总是单态射,于是它的像集就是自身,而我们证明过$f:A\to B$是单态射当且仅当核就是$0\to A$.
+    	\item $\xymatrix{A\ar[r]^f&B\ar[r]&0}$是正合列当且仅当$f$是满态射.上一条的对偶命题.
+    	\item $\xymatrix{0\ar[r]&A\ar[r]^f&B\ar[r]^g&C}$是正合列当且仅当$f=\ker g$.因为它是正合列等价于$f$是单态射,并且$\mathrm{im}f=\ker g$,但是$f$是单态射的时候$f=\mathrm{im}f$.
+    	\item $\xymatrix{C\ar[r]^g&B\ar[r]^f&A\ar[r]&0}$是正合列当且仅当$f=\mathrm{coker}g$.上一条的对偶.
+    	\item $\xymatrix{0\ar[r]&A\ar[r]^f&B\ar[r]&0}$是正合列当且仅当$f$是同构.这是因为阿贝尔范畴中同时是单满态射推出同构.
+    \end{enumerate}
+    \item 分裂短正合列.在阿贝尔范畴中形如如下的正合列称为短正合列,它是短正合列时如下三个条件互相等价,这些条件成立时我们称它为分裂短正合列.
+    $$\xymatrix{0\ar[r]&A\ar[r]^f&B\ar[r]^g&C\ar[r]&0}$$
+    \begin{enumerate}
+    	\item 存在态射$s:C\to B$使得$g\circ s=1_C$.
+    	\item 存在态射$r:B\to A$使得$r\circ f=1_A$.
+    	\item 存在态射$s:C\to B$和$r:B\to A$使得$(B,r,g,f,s)$是$A$和$C$的二元积.
+    \end{enumerate}
+    \begin{proof}
+    	
+    	按照对偶性,只需验证1和3的等价性,并且3推1是直接的,于是我们仅需验证1推3.考虑$B$上的态射$1_B-s\circ g$,我们有$g\circ(1_B-s\circ g)=0$.于是按照$f=\ker g$与核的泛性质,得到$1_B-s\circ g$经$f$分解,也即存在态射$r:B\to A$使得$f\circ r=1_B-s\circ g$.最后仅需验证$r\circ f=1_A$.但是按照$f\circ r\circ f=(1_B-s\circ g)\circ f=f=f\circ 1_A$,结合$f$是单态射,就得到$r\circ f=1_A$.
+    \end{proof}
+    \item 正合列的拼接.给定如下两个正合列:
+    $$\xymatrix{\ar[r]&A_1\ar[r]^{f_1}&A_0\ar[r]^{f_0}&K\ar[r]&0}$$
+    $$\xymatrix{0\ar[r]&K\ar[r]^{g_0}&B_0\ar[r]^{g_1}&B_1\ar[r]&}$$
+    
+    那么它可拼接为正合列:
+    $$\xymatrix{\ar[r]&A_1\ar[r]^{f_1}&A_0\ar[r]^{g_0\circ f_0}&B_0\ar[r]^{g_1}&B_1\ar[r]&}$$
+    \begin{proof}
+    	
+    	因为$g_0$是单态射得到$\ker f_0=\ker g_0\circ f_0$,$f_0$是满态射得到$\mathrm{im}g_0=\mathrm{im}g_0\circ f_0$.
+    \end{proof}
+\end{enumerate}
+
+为了证明阿贝尔范畴上的短五引理和蛇形引理,我们引入伪元素的概念.
+\begin{enumerate}
+	\item 给定对象$A$,它的一个伪元素是指一个以$A$为终端的态射$a:X\to A$.称$A$的两个伪元素$a:X\to A$和$b:Y\to A$等价,如果存在满态射$Z\to X$和$Z\to Y$使得如下图表交换,这是一个等价关系,记作$a\cong b$.
+	$$\xymatrix{Z\ar[rr]\ar[d]&&X\ar[d]^a\\Y\ar[rr]^b&&A}$$
+	\begin{proof}
+		
+		自反性和对称性都是直接的,我们只证明传递性.假设$a:X\to A$和$a':X'\to A$是等价的,$a':X'\to A$和$a'':X''\to A$是等价的,考虑如下图表,取$p'$和$p''$的回拉,我们解释过两个满态射的回拉也是满态射,这说明$a$和$a''$是等价的.
+		$$\xymatrix{&&W\ar[dll]_q\ar[drr]^{q'}&&\\Y\ar[d]_p\ar[drr]^{p'}&&&&Z\ar[d]^{p'''}\ar[dll]_{p''}\\X\ar[drr]_a&&X'\ar[d]_{a'}&&X''\ar[dll]^{a''}\\&&A&&}$$
+	\end{proof}
+	\item 设$f:A\to B$是一个态射,设$a:X\to A$是$A$的一个伪元素,那么$f\circ a$是$B$的一个伪元素,记作$f(a)$.如果$a:X\to A$和$a':X'\to A$是$A$的两个等价的伪元素,那么$f(a)$和$f(a')$是两个等价的$B$的伪元素,于是$f$诱导了$A$上伪元素的等价类到$B$上伪元素的等价类之间的一个(类的)映射.
+	\item 设$a$是$A$的伪元素,设$f:A\to B$和$g:B\to C$是态射,那么$g(f(a))=(g\circ f)(a)$.
+	\item 设$A$是对象,全体以$A$为终端的零态射构成了$A$上伪元素的一个等价类,记作0.
+	\begin{proof}
+		
+		假设$a:X\to A$和$b:Y\to A$是零态射,取二元积$(X\oplus Y,p_X,p_Y,r_X,r_Y)$,于是$p_X:X\oplus Y\to X$和$p_Y:X\oplus Y\to Y$都是满态射,并且$a\circ p_X=b\circ p_Y$.
+		
+		假设$a:X\to A$等价于零态射$0:Y\to A$,于是存在满态射$p,q$使得$a\circ p=0\circ q=0$,于是从$p$是满态射得到$a=0$.
+	\end{proof}
+    \item 伪元素的意义在于本条结论.在阿贝尔范畴中如下结论成立.
+    \begin{enumerate}
+    	\item $f:A\to B$是零态射当且仅当对$A$的每个伪元素有$f(a)=0$.
+    	\begin{proof}
+    		
+    		一方面如果$f=0$,自然有$f(a)=f\circ a=0$.反过来取$a=1_A$,那么$f(1_A)=f\circ 1_A=f=0$.
+    	\end{proof}
+        \item $f:A\to B$是单态射当且仅当如果$A$的伪元素$a$满足$f(a)=0$,那么有$a=0$.也等价于如果$A$的两个伪元素$a,a'$满足$f(a)\cong f(a')$,那么$a\cong a'$.
+        \begin{proof}
+        	
+        	一方面如果$f$是单态射,自然从$f\circ a=0=f\circ 0$得到$a=0$.反过来如果$f\circ g=0$,此即$f(g)=0$,于是$g=0$.最后假设$f$是单态射,从$f\circ a\circ p=f\circ a'\circ q$得到$a\circ p=a'\circ q$,于是$a\cong a'$.
+        \end{proof}
+        \item $f:A\to B$是满态射当且仅当对$B$的每个伪元素$b$,存在$a$的伪元素$a$使得$f(a)\cong b$.
+        \begin{proof}
+        	
+        	如果$f:A\to B$是满态射,设$b:C\to B$,考虑$f$和$b$的回拉为$(Z,p,a)$如下图,那么$p$也是满态射,并且从$f\circ a=b\circ p$得到$f(a)$和$b$等价.反过来对$B$的伪元素$1_B$,可取$A$的伪元素$a$使得$f(a)$和$1_B$等价,也即存在满态射$p,q$使得$f\circ a\circ p=q$,于是从$q$是满态射得到$f$是满态射.
+        	$$\xymatrix{Z\ar[rr]^p\ar[d]_a&&C\ar[d]^b\\A\ar[rr]_f&&B}$$
+        \end{proof}
+        \item 序列$\xymatrix{A\ar[r]^f&B\ar[r]^g&C}$是正合列当且仅当对$A$的每个伪元素$a$有$g(f(a))\cong0$(记作条件1),并且如果$B$的伪元素$b$使得$g(b)\cong0$,那么存在$A$的伪元素$a$使得$f(a)\cong b$(记作条件2).
+        \begin{proof}
+        	
+        	一方面如果这是正合列,那么$g\circ f=0$,于是得到对$A$的每个伪元素$a$有$g(f(a))\cong0$.现在假设$b$是$B$的伪元素,使得$g(b)\cong0$,取$f$的像分解$f=i\circ p$.按照$g\circ b=0$,说明$b$可经$\ker g=\mathrm{im}f=i$分解,再取$(p,c)$的回拉,得到如下交换图.这里$q$是满态射,因为$p$是满态射.于是从$f\circ a=b\circ q$,于是$f(a)\cong b$.
+        	$$\xymatrix{&Y\ar[dl]_a\ar[r]^q&X\ar[d]^b\ar[dl]_c&\\A\ar[r]^p&I\ar[r]^i&B\ar[r]^g&C}$$
+        	
+        	反过来假设这两个条件成立.设$f$的像分解为$f=i\circ p$,只需验证$i=\ker g$.我们已经证明过第一个条件等价于$g\circ f=0$,于是从$p$是满态射得到$g\circ i=0$.现在假设$b$满足$g\circ b=0$,需要验证$b$经$i$分解.第二个条件说明从$g(b)=0$得到存在$a:Y\to A$使得$f(a)\cong b$,于是存在满态射$q$和$r$使得$i\circ p\circ a\circ r=b\circ q$.取$(i,b)$的纤维积$(P,c,j)$,于是按照这个纤维积的泛性质,存在$z:Z\to P$使得如下图表交换.这里$i$是单态射说明$j$是单态射.但是$q$是满态射说明$j$是满态射,于是$j$是一个同构,于是$b$可经$i$分解:$b=i\circ c\circ j^{-1}$,经$i$分解的唯一性由$i$是单态射保证,这就完成证明.
+        	$$\xymatrix{&Z\ar[dl]_r\ar[d]_z\ar[dr]^q&&\\Y\ar[d]_a&P\ar[r]_j\ar[d]_c&X\ar[d]^b&\\A\ar[r]^p&I\ar[r]^i&B\ar[r]^g&C}$$
+        \end{proof}
+    \end{enumerate}
+\end{enumerate}
+
+回拉和推出.
+\begin{enumerate}
+	\item 考虑如下交换图,记$f_A:C\to A$和$f_B:C\to B$诱导的$C\to A\oplus B$为$f_A\oplus f_B$.记$g_A:A\to D$和$-g_B:B\to D$诱导的$A\oplus B\to D$为$g_A-g_B$.那么如下结论成立.
+	$$\xymatrix{C\ar[rr]^{f_A}\ar[d]_{f_B}&&A\ar[d]^{g_A}\\B\ar[rr]_{g_B}&&D}$$
+	\begin{enumerate}
+		\item 该图表是一个回拉(纤维积)当且仅当如下序列是一个正合列:
+		$$\xymatrix{0\ar[rr]&&C\ar[rr]^{f_A\oplus f_B}&&A\oplus B\ar[rr]^{g_A-g_B}&&D}$$
+		\item 该图表是一个推出当且仅当如下序列是一个正合列:
+		$$\xymatrix{C\ar[rr]^{f_A\oplus f_B}&&A\oplus B\ar[rr]^{g_A-g_B}&&D\ar[rr]&&0}$$
+		\item 该图表同时是一个回拉和推出当且仅当如下序列是一个短正合列:
+		$$\xymatrix{0\ar[rr]&&C\ar[rr]^{f_A\oplus f_B}&&A\oplus B\ar[rr]^{g_A-g_B}&&D\ar[rr]&&0}$$
+	\end{enumerate}
+    \begin{proof}
+    	
+    	假设图表是一个回拉,假设有态射$T\to A\oplus B$可表示为$h_A\oplus h_B$,使得$(g_A-g_B)\circ h_A\oplus h_B=0$,那么$(T,h_A,h_B)$是$g_A,g_B$上的一个锥,于是$h_A\oplus h_B$唯一的经$f_A\oplus f_B$分解,此即说明$f_A\oplus f_B$是$g_A-g_B$的核,于是a中是正合列.
+    	
+    	反过来假设a中是正合列,也即$\ker(g_A-g_B)=f_A\oplus f_B$.任取$g_A,g_B$上的锥$(T,h_A,h_B)$,它诱导了一个态射$h_A\oplus h_B:T\to A\oplus B$,那么有$(g_A-g_B)\circ h_A\oplus h_B=0$,于是核的泛性质说明$h_A\oplus h_B$唯一的经$f_A\oplus f_B$分解,此即存在唯一的从锥$(T,h_A,h_B)$到$(C,f_A,f_B)$的态射,于是图表是回拉.
+    \end{proof}
+    \item 在一般范畴上,纤维积把单态射提升为单态射,一般不把满态射提升为满态射.但是在阿贝尔范畴上满态射的提升仍然是满态射.
+    \begin{proof}
+    	
+    	如果$g_A$和$g_B$中某个是满态射,那么从$(g_A-g_B)\circ i_A=g_A$得到$g_A-g_B$是满态射,于是上一条中的c中是一个短正合列,于是它也是一个推出,于是满态射的提升是满态射.
+    \end{proof}
+\end{enumerate}
+
+我们来继续证明正合性引理.
+\begin{enumerate}
+	\item 短五引理.给定如下交换图,两行都是短正合列,那么$f$和$h$是单态射推出$g$是单态射;$f$和$h$是满态射推出$g$是满态射;$f$和$h$是同构推出$g$是同构.
+	$$\xymatrix{0\ar[r]&A\ar[r]^{\alpha}\ar[d]_f&B\ar[r]^{\beta}\ar[d]_g&C\ar[r]\ar[d]_h&0\\0\ar[r]&A'\ar[r]^{\alpha'}&B'\ar[r]^{\beta'}&C\ar[r]&0}$$
+	\begin{proof}
+		
+		按照对偶性,只需验证$f,h$是单态射的时候$g$是单态射.为此我们任取$B$的伪元素$b$,假设$g(b)=0$,需验验证$b=0$.我们有$0=\beta'(g(b))=h(\beta(b))$,于是按照正合性的伪元素描述,存在$A$的伪元素$a$使得$\alpha(a)\cong b$.于是$g(\alpha(a))=0$,于是$\alpha'(f(a))=0$.按照$f$和$\alpha'$是单态射得到$a=0$,于是$b=\alpha(a)=0$.也即$g$是单态射.
+	\end{proof}
+    \item 给定如下交换图,如果第一行是正合列,并且$f,g,h$都是同构,那么第二行是正合列.
+    $$\xymatrix{A\ar[r]^{\alpha}\ar[d]_f&B\ar[r]^{\beta}\ar[d]_g&C\ar[d]_h\\A'\ar[r]^{\alpha'}&B'\ar[r]^{\beta'}&C'}$$
+    \begin{proof}
+    	
+    	按照正合列的伪元素等价描述,需要验证两件事:第一有$\beta'\circ\alpha'=0$,第二有如果$B'$的伪元素$b'$满足$\beta'(b')=0$,那么存在$A'$的伪元素$a'$使得$\alpha'(a')\cong b'$.这里第一件事是因为$\beta'\circ\alpha'=h\circ\beta\circ\alpha\circ f^{-1}=0$.最后证明第二件事,按照$g$是同构,可取$B$的伪元素$b$使得$g(b)\cong b'$,于是$\beta(b)=h^{-1}\circ \beta'\circ g(b)=0$.于是按照第一行的正合性,说明存在$A$的伪元素$a$使得$\alpha(a)\cong b$.也即存在满态射$p,q$使得$\alpha\circ a\circ p=b\circ q$,于是有$g\circ b\circ q=g\circ\alpha\circ a\circ p=\alpha'\circ f\circ a\circ p$,记$a'=f(a)$,就有$f(a)\cong b'$.
+    \end{proof}
+    \item 在阿贝尔范畴中考虑如下交换图,其中最下面两行都是正合列,那么存在唯一的态射$\alpha$和$\beta$使得图表交换,并且此时$\xymatrix{D\ar[r]^{\alpha}&E\ar[r]^{\beta}&F}$是正合的.另外如果$\lambda:A\to B$是单态射,那么$\alpha$是单态射.对偶命题自然也是成立的.
+    $$\xymatrix{&0\ar[d]&0\ar[d]&0\ar[d]\\&D\ar[r]^{\alpha}\ar[d]_{\ker f}&E\ar[r]^{\beta}\ar[d]_{\ker g}&F\ar[d]_{\ker h}\\&A\ar[r]^{\lambda}\ar[d]_f&B\ar[r]^{\mu}\ar[d]_g&C\ar[d]_h\\0\ar[r]&A'\ar[r]^{\lambda'}&B'\ar[r]^{\mu'}&C'}$$
+    \begin{proof}
+    	
+    	首先按照图表交换性,得到$g\circ\lambda\circ\ker f=0$,于是按照$\ker g$的泛性质,$\lambda\circ\ker f$唯一的经$\ker g$分解,据此定义了唯一的态射$\alpha$使得图表交换.同理我们构造唯一的态射$\beta$使得图表交换.
+    	
+    	现在我们证明$\xymatrix{D\ar[r]^{\alpha}&E\ar[r]^{\beta}&F}$是正合的.我们解释过这需要验证两件事,其一是$\beta\circ\alpha=0$,但是按照图表交换性得到$\ker h\circ\beta\circ\alpha=\mu\circ\lambda\circ\ker f=0$,按照$\ker h$是单态射得到$\beta\circ\alpha=0$.第二件事是如果$E$的伪元素$e$满足$\beta(e)=0$,那么存在$D$的伪元素$d$使得$\alpha(d)\cong e$.图表交换性得到$\mu(\ker g(e))=0$,于是按照$A\to B\to C$是正合的说明存在$A$的伪元素$a$使得$\lambda(a)\cong\ker g(e)$,于是$\lambda'\circ f(a)=g\circ\lambda(a)\cong g\circ \ker g(e)=0$,按照$\lambda'$是单态射,得到$f(a)=0$,于是$a$经$\ker f$分解,也即存在$D$的伪元素$d$使得$a=\ker f\circ d$.那么$\ker g\circ\alpha(d)=\lambda\circ\ker f(d)=\lambda(a)\cong\ker g(e)$,按照$\ker g$是单态射,得到$\alpha(d)\cong e$.
+    	
+    	最后假设$\lambda$是单态射,需验验证$\alpha$是单态射.任取$D$的伪元素$d$使得$\alpha(d)=0$,那么$\lambda\circ\ker f(d)=0$,按照$\lambda$和$\ker f$都是单态射得到$d=0$,也即$\alpha$是单态射.
+    \end{proof}
+    \item 蛇形引理1.给定如下交换图,最中间两行是短正合列,那么上一条与上一条的对偶命题得到这里$\alpha,\beta,\alpha',\beta'$的存在性和唯一性,并且这里$D\to E\to F$和$D'\to E'\to F'$是正合列.我们断言存在态射$\omega:F\to D'$使得$\xymatrix{E\ar[r]^{\beta}&F\ar[r]^{\omega}&D'\ar[r]^{\alpha'}&E'}$是正合的.
+   $$\xymatrix{&0\ar[d]&0\ar[d]&0\ar[d]&\\0\ar[r]&D\ar[r]^{\alpha}\ar[d]_{\ker f}&E\ar[r]^{\beta}\ar[d]_{\ker g}&F\ar[d]_{\ker h}\ar[dddll]&\\0\ar[r]&A\ar[r]^{\lambda}\ar[d]_f&B\ar[r]^{\mu}\ar[d]_g&C\ar[r]\ar[d]_h&0\\0\ar[r]&A'\ar[r]^{\lambda'}\ar[d]_{\mathrm{coker}f}&B'\ar[r]^{\mu'}\ar[d]_{\mathrm{coker}g}&C'\ar[d]_{\mathrm{coker}h}\ar[r]&0\\&D'\ar[r]^{\alpha'}\ar[d]&E'\ar[r]^{\beta'}\ar[d]&F'\ar[d]\ar[r]&0\\&0&0&0&}$$
+    \begin{proof}
+    	
+    	我们先来构造连接态射$\omega:F\to D'$.取$\ker h$和$\mu$的回拉为$(Z,s,t)$,取$\lambda'$和$\mathrm{coker}f$的推出为$(Z',s',t')$.取$\ker s$和$\mathrm{coker}s'$,那么我们证明过存在态射$p,q$使得如下图表交换.注意这里$\mu$和$\mathrm{coker}f$是满态射得到$s$和$t'$是满态射,$\ker h$和$\lambda'$是单态射得到$t$和$s'$是单态射.于是$s=\mathrm{coim}s=\mathrm{coker}\ker s$.于是第一行和最后一行也是正合的.
+    	
+    	$$\xymatrix{X\ar[r]^{\ker s}\ar[d]_p&Z\ar[r]^s\ar[d]_t&F\ar[d]_{\ker h}\ar[dddl]\ar[dddll]\\A\ar[r]^{\lambda}\ar[d]_f&B\ar[r]^{\mu}\ar[d]_g&C\ar[d]_h\\A'\ar[r]^{\lambda'}\ar[d]_{\mathrm{coker}f}&B'\ar[r]^{\mu'}\ar[d]_{t'}&C'\ar[d]_q\\D'\ar[r]^{s'}&Z'\ar[r]^{\mathrm{coker}s'}&X'}$$
+    	
+    	按照$X\to A\to A'\to D'\to Z'$是零态射,得到$X\to Z\to B\to B'\to Z'$是零态射,于是按照$s$是$\ker s$的余核,泛性质说明存在唯一的态射$\omega':F\to Z'$满足$\omega'\circ s=Z\to B\to B'\to Z'$.现在$\mathrm{coker}s'\circ\omega'=F\to C\to C'\to X'=0$,于是按照$s'$是$\mathrm{coker}s'$的核,泛性质说明存在唯一的态射$\omega:F\to D'$使得$s'\circ\omega=\omega'$.这就构造了$\omega$.
+    	
+    	现在我们探究$\omega$在伪元素上的作用.任取$F$的一个伪元素$x$,按照$\mu$是满态射,存在$B$的伪元素$b$使得$\ker h(x)\cong\mu(b)$.现在$\mu'(g(b))=h(\mu(b))\cong h(\ker h(x))=0$,于是正合性说明存在$A'$中的伪元素$a'$使得$\lambda'(a')\cong g(b)$.我们断言$\mathrm{coker}f(a')\cong\omega(x)$:按照$\ker h(x)\cong\mu(b)$,说明存在满态射$i$和$j$使得$\ker h\circ x\circ i=\mu\circ b\circ j$,于是回拉图表的定义说明存在态射$z$使得$s\circ z=i$和$t\circ z=j$,于是$z$满足$t(z)=b$和$s(z)=x$.接下来$s'(\omega(x))=\omega'(x)\cong\omega'(s(z))\cong t'\circ g\circ t(z)=t'\circ g(b)\cong t'(\lambda'(a'))=s'(\mathrm{coker}f(a'))$,于是结合$\mathrm{coker}f$是满态射得到$\omega(x)\cong \mathrm{coker}f(a')$.
+    	
+    	现在我们来证明$\xymatrix{E\ar[r]^{\beta}&F\ar[r]^{\omega}&D'\ar[r]^{\alpha'}&E'}$是正合的.为此先证明$\omega\circ\beta=0$,为此任取$E$的伪元素$e$,那么$\alpha\omega(\beta(e))=\mathrm{coker}f(a')$,但是$\lambda'(a')=g(b)=g(\ker g(e))=0$,结合$\lambda'$是单态射得到$a'=0$,于是$\omega\circ\beta=0$.现在假设$F$的伪元素$x$满足$\omega(x)=\mathrm{coker}f(a')=0$,需要构造$E$的伪元素$e$使得$\beta(e)=x$.按照第一列的正合性,存在$A$的伪元素$a$使得$f(a)\cong a'$,于是$g(\lambda(a))=\lambda'(f(a))\cong g(b)$,于是$g(b-\lambda(a))=0$.于是存在$E$的伪元素$e$使得$\ker g(e)\cong b-\lambda(a)$.于是$\ker h(\beta(e))=\mu(\ker g(e))=\cong\mu(b-\lambda(a))\cong\mu(b)\cong\ker h(x)$,于是$\ker h$是单态射得到$\beta(e)=x$.对偶的可证明$F\to D'\to E'$也是正合的.
+    \end{proof}
+    \item 蛇形引理2.给定如下交换图,最中间两行是正合列,我们解释过这里$\alpha,\beta,\alpha',\beta'$的存在性和唯一性,并且这里$0\to D\to E\to F$和$D'\to E'\to F'\to0$是正合列.那么存在连接态射$\omega:F\to D'$使得$0\to D\to E\to F\to D'\to E'\to F'\to0$是正合的.
+    $$\xymatrix{&0\ar[d]&0\ar[d]&0\ar[d]&\\&D\ar[r]^{\alpha}\ar[d]_{\ker f}&E\ar[r]^{\beta}\ar[d]_{\ker g}&F\ar[d]_{\ker h}\ar[dddll]&\\&A\ar[r]^{\lambda}\ar[d]_f&B\ar[r]^{\mu}\ar[d]_g&C\ar[r]\ar[d]_h&0\\0\ar[r]&A'\ar[r]^{\lambda'}\ar[d]_{\mathrm{coker}f}&B'\ar[r]^{\mu'}\ar[d]_{\mathrm{coker}g}&C'\ar[d]_{\mathrm{coker}h}&\\&D'\ar[r]^{\alpha'}\ar[d]&E'\ar[r]^{\beta'}\ar[d]&F'\ar[d]&\\&0&0&0&}$$
+    \begin{proof}
+    	
+    	记$\alpha$的像分解为$\alpha_1,\alpha_2$,类似记$\beta,\lambda,\mu',\alpha',\beta'$的像分解.我们解释过存在唯一的态射$i,j$使得如下图表交换.
+    	$$\xymatrix{D\ar[rr]^{\alpha_1}\ar[d]_{\ker f}&&X_1\ar[rr]^{\alpha_2}\ar[d]_{\ker i}&&E\ar[rr]^{\beta_1}\ar[d]_{\ker g}&&X_2\ar[dddllll]\ar[rr]^{\beta_2}\ar[d]_{\ker j}&&F\ar[d]_{\ker h}\\A\ar[rr]^{\lambda_1}\ar[d]_f&&X_3\ar[rr]^{\lambda_2}\ar[d]_i&&B\ar[rr]^{\mu}\ar[d]_g&&C\ar[rr]^{\mathrm{id}}\ar[d]_j&&C\ar[d]_h\\A'\ar[rr]^{\mathrm{id}}\ar[d]_{\mathrm{coker}f}&&A'\ar[rr]^{\lambda'}\ar[d]_{\mathrm{coker}i}&&B'\ar[rr]^{\mu'_1}\ar[d]_{\mathrm{coker}g}&&X_4\ar[rr]^{\mu'_2}\ar[d]_{\mathrm{coker}j}&&C'\ar[d]_{\mathrm{coker}j}\\D'\ar[rr]^{\alpha'_1}&&X_5\ar[rr]^{\alpha_2'}&&E'\ar[rr]^{\beta_1'}&&X_6\ar[rr]^{\beta'_2}&&F'}$$
+    	
+    	我们来证明$\beta_2$也是一个满态射,于是它是一个同构.任取$F$的伪元素$x$,那么$0=h\circ\ker h(x)=\mu_2'\circ j\circ\ker h(x)$,按照$\mu_2'$是单态射,得到$j\circ\ker h(x)=0$.于是存在$X_2$的伪元素$y$使得$\ker j(y)\cong\ker h(x)$,那么$\ker h\circ\beta_2(y)=\ker j(y)\cong\ker h(x)$,按照$\ker h$是单态射得到$\beta_2(y)\cong x$,也即$\beta_2$是满态射.按照对偶性,$\alpha_1'$也是一个同构.
+    	
+    	现在$X_3\to B\to C$和$A'\to B'\to X_4$都是正合列,于是按照上一条中的证明,存在态射$\chi:X_2\to X_5$使得$E\to X_2\to X_5\to E'$是正合列.再取$\omega=(\alpha_1')^{-1}\circ\chi\circ\beta_2^{-1}$,就得到$E\to F\to D'\to E'$是正合列.
+    \end{proof}
+\end{enumerate}
+
+正合函子的定义.设$F:\mathscr{A}\to\mathscr{B}$是阿贝尔范畴之间的加性函子,称$F$保一个正合列,如果它作用其上得到了一个$\mathscr{B}$上的正合列.
+\begin{enumerate}
+	\item $F:\mathscr{A}\to\mathscr{B}$是阿贝尔范畴之间的加性函子,称它是左正合函子,如果它满足如下等价条件中的任意一个.
+	\begin{enumerate}
+		\item $F$保全部形如$0\to A\to B\to C$的正合列.
+		\item $F$与全部核可交换.
+		\item $F$与全部有限极限可交换.
+	\end{enumerate}
+    \begin{proof}
+    	
+    	1和2的等价性.任取核$g=\ker f$,等价于一个正合列$\xymatrix{0\ar[r]&A\ar[r]^f&B\ar[r]^g&C}$,于是$F$与$\ker f$可交换当且仅当$F$保这个正合列.2推3,我们证明过如果$\mathscr{A}$是阿贝尔范畴,那么函子$F:\mathscr{A}\to\mathscr{B}$保全部极限当且仅当它保全部有限积并且保全部等化子.但是我们解释过加性函子保全部有限积,而在阿贝尔范畴上等化子与核是一致的($\ker(f,g)=\ker(f-g)$),这说明3成立.最后3推2是平凡的.
+    \end{proof}
+    \item $F:\mathscr{A}\to\mathscr{B}$是阿贝尔范畴之间的加性函子,称它是右正合函子,如果它满足如下等价条件中的任意一个.
+    \begin{enumerate}
+    	\item $F$保全部形如$A\to B\to C\to0$的正合列.
+    	\item $F$与全部余核可交换.
+    	\item $F$与全部有限余极限可交换.
+    \end{enumerate}
+    \item $F:\mathscr{A}\to\mathscr{B}$是阿贝尔范畴之间的加性函子,称它是正合函子,如果它满足如下等价条件中的任意一个.
+    \begin{enumerate}
+    	\item $F$保全部形如$0\to A\to B\to C\to0$的正合列.
+    	\item $F$与全部核,余核可交换.
+    	\item $F$与全部有限极限,有限余极限可交换.
+    	\item $F$保全部正合列.
+    \end{enumerate}
+    \begin{proof}
+    	
+    	上两条已经证明了2和3是等价的,4可推出2和3,2和3可推出1.于是我们仅需验证1推4.倘若$\ker g=\mathrm{im}f$,取$f$的像是$i$,取$g$的余像是$q$,那么$\ker q=\mathrm{im}i=i$.于是$(i,q)$是短正合列,于是$(Fi,Fq)$是短正合列,此即$(Ff,Fg)$是正合的.
+    \end{proof}
+    \item 如果$F:\mathscr{A}\to\mathscr{B}$是阿贝尔范畴之间的左正合函子,那么它是正合函子当且仅当它保满态射.对偶的如果$F$是右正合函子,那么它是正合函子当且仅当它保单态射.
+    \item 设$F:\mathscr{A}\to\mathscr{B}$是阿贝尔范畴之间的加性函子,那么如下命题互相等价:
+    \begin{enumerate}
+    	\item $F$是忠实函子.
+    	\item $F$把非交换图表映射为非交换图表.
+    	\item $F$把非正合列映射为非正合列.
+    \end{enumerate}
+    \begin{proof}
+    	
+    	1和2的等价性是平凡的.3推1,如果$f:A\to B\not=0$,那么$\xymatrix{A\ar[r]^{1_A}&A\ar[r]^f&B}$不是正合列,所以$\xymatrix{FA\ar[r]^{1_{FA}}&FA\ar[r]^{Ff}&FB}$不是正合列,所以$Ff\not=0$,于是$f$是忠实的.
+    	
+    	\qquad
+    	
+    	1推3,设$A\to B\to C$是非正合列,记$B\to C$的核是$K\to B$,记$A\to B$的余核是$B\to G$.于是要么$A\to B\to C\not=0$,要么$K\to B\to G\not=0$.倘若前者成立,按照$F$是忠实的就有$FA\to FB\to FC\not=0$.于是它不是正合列.倘若后者成立,那么$FK\to FB\to FG\not=0$.记$FB\to FC$的核是$L\to FB$,记$FA\to FB$的余核是$FB\to H$.按照$FA\to FB\to FG=0$,得到$FB\to FG$要经$FB\to H$分解.但是如果$FA\to FB\to FC$是正合的,就有$L\to FB\to H=0$,导致$FK\to FB\to FG=FK\to L\to FB\to H\to FG=0$.和假设矛盾.
+    \end{proof}
+    \item 如果$F:\mathscr{A}\to\mathscr{B}$是阿贝尔范畴之间的忠实正合函子,那么$\mathscr{A}$中一个序列的正合性等价于它在$F$下的像在$\mathscr{B}$中的正合性.一个$\mathscr{A}$中图表的交换性等价于它在$F$下的像在$\mathscr{B}$中的交换性.
+\end{enumerate}
+\newpage
+\section{Freyd-Mitchell定理}
+
+遗忘函子$F:\textbf{R-Mod}\to\textbf{Ab}$是正合函子.事实上我们会证明它存在左和右伴随函子.
+\begin{proof}
+	
+	$F$右伴随于函子$\textbf{Ab}\to\textbf{R-Mod}$为$G\mapsto R\otimes_{\mathbb{Z}}G$:
+	$$\mathrm{Hom}_{\textbf{R-Mod}}(R\otimes_{\mathbb{Z}G}M)\cong\mathrm{Hom}_{\textbf{Ab}}(G,FM)$$
+	
+	$F$左伴随于函子$\textbf{Ab}\to\textbf{R-Mod}$为$G\mapsto\mathrm{Hom}_{\mathbb{Z}}(R,G)$:
+	$$\mathrm{Hom}_{\textbf{Ab}}(FM,G)\cong\mathrm{Hom}_{\textbf{R-Mod}}(M,\mathrm{Hom}_{\mathbb{Z}}(R,G))$$
+\end{proof}
+
+阿贝尔范畴的一个阿贝尔子范畴称为正合的,如果包含函子是正合函子.一个阿贝尔范畴$\mathscr{A}$称为fully abelian的,如果它的每个完全正合小阿贝尔子范畴$\mathscr{A}'$,都存在环$R$以及一个完全正合嵌入函子$\mathscr{A}'\to\textbf{R-Mod}$.我们先来证明Freyd-Mitchell定理的一个特殊版本:一个具有投射生成元的余完备阿贝尔范畴是fully abelian的.另外按照遗忘函子$\textbf{R-Mod}\to\textbf{Ab}$是正合函子,所以一个阿贝尔范畴$\mathscr{A}$是fully abelian的也等价于它的每个完全正合小阿贝尔子范畴都能完全正合的嵌入到$\textbf{Ab}$中.
+\begin{proof}
+	
+	设$\mathscr{A}$是余完备阿贝尔范畴,设$\mathscr{A}'$是它的完全正合小阿贝尔子范畴,设$P'$是$\mathscr{A}$的一个投射生成元.我们要找到一个环$R$使得$\mathscr{A}'$能完全正合的嵌入到$\textbf{R-Mod}$中.
+	
+	\qquad
+	
+	首先我们改进下$P'$.对每个$A\in|\mathscr{A}|$,按照生成元的性质有满态射$\sum_{\mathrm{Hom}(P',A)}P'\to A$.按照$\mathscr{A}'$是小范畴,有$I=\cup_{A\in|\mathscr{A}'|}\mathrm{Hom}(P',A)$是一个集合,取$P=\sum_IP'$.那么$P$仍然是$\mathscr{A}$的投射生成元,并且它具有这样一个额外性质:对每个$A\in|\mathscr{A}'|$,都存在满态射$P\to A$,即指标在$\mathrm{Hom}(P',A)$中的分量就取该态射,其余指标都取零态射.
+	
+	\qquad
+	
+	取$R=\mathrm{End}_{\mathscr{A}}(P)$是一个环,考虑函子$F=\mathrm{Hom}_{\mathscr{A}}(P,-)$,这是$\mathscr{A}\to\textbf{Ab}$的函子,我们来说明它还可以视为$\mathscr{A}\to\textbf{Mod-R}$的函子,并且它是正合忠实的,并且限制在$\mathscr{A}'$上是完全的:
+	\begin{itemize}
+		\item 任取对象$A\in|\mathscr{A}|$,那么$\mathrm{Hom}(P,A)$已经是一个阿贝尔群,它的右$R$模结构定义为对$r\in\mathrm{End}_{\mathscr{A}}(P)$和$f\in\mathrm{Hom}_{\mathscr{A}}(P,A)$,有$rf=f\circ r$.
+		\item 任取态射$\varphi:A\to B$,映射$\varphi^*:\mathrm{Hom}(P,A)\to\mathrm{Hom}(P,B)$,$f\mapsto \varphi\circ f$实际上是一个右$R$模同态:
+		$$\varphi^*(rf)=\varphi\circ f\circ r=(\varphi^*(f))\circ r=r\varphi^*(f)$$
+		\item $F$是忠实的是因为$P$是生成元,$F$是正合的是因为$P$是投射的.严格讲,$P$是投射生成元导致可表函子$\mathrm{Hom}_{\mathscr{A}}(P,-)$是$\mathscr{A}\to\textbf{Ab}$的正合忠实函子,但是按照遗忘函子$\textbf{Mod-R}\to\textbf{Ab}$也是正合忠实函子,所以这个可表函子实际是$\mathscr{A}\to\textbf{Mod-R}$的正合忠实函子.
+		\item 证明$F$限制在$\mathscr{A}'$上是完全函子.任取$A,B\in\mathscr{A}'$,设$\widetilde{\varphi}:FA\to FB$是模同态,需要证明存在$\mathscr{A}'$中的态射$\varphi:A\to B$使得$F\varphi=\widetilde{\varphi}$.取满态射$P\to A$,取核为$K\to P$,取满态射$P\to B$.按照$P$是投射对象,有$FP=R$是投射模,于是存在$f:R\to R$使得如下图表交换:
+		$$\xymatrix{0\ar[r]&FK\ar[r]&R\ar[d]_f\ar[r]&FA\ar[d]_{\widetilde{\varphi}}\ar[r]&0\\&&R\ar[r]&FB\ar[r]&0}$$
+		
+		这里$R$作为右$R$模的自同态就是$R$中元素的右乘,所以存在$r\in R$使得$f$就是$R\to R$的右乘$r$的模同态.回到$\mathscr{A}$上有如下实线图表,按照$\xymatrix{FK\ar[r]&R\ar[r]^f&R\ar[r]&FB}=0$,从$F$是忠实正合函子得到$\xymatrix{K\ar[r]&P\ar[r]^r&P\ar[r]&B}=0$,于是$\xymatrix{P\ar[r]^r&P\ar[r]&B}$要经余核$P\to A$分解,于是存在虚线使得如下图表交换:
+		$$\xymatrix{0\ar[r]&K\ar[r]&P\ar[r]\ar[d]_r&A\ar[r]\ar@{-->}[d]_{\varphi}&0\\&&R\ar[r]&B\ar[r]&0}$$
+		
+		于是$F\varphi$和$\widetilde{\varphi}$都要使得如下图表交换,但是这里$R\to FA$是满态射,所以$F\varphi=\widetilde{\varphi}$.
+		$$\xymatrix{R\ar[rr]\ar[d]_f&&FA\ar@<0.5ex>[d]^{\widetilde{\varphi}}\ar@<-0.5ex>[d]_{F\varphi}\\R\ar[rr]&&FB}$$
+	\end{itemize}
+\end{proof}
+
+内射包(injective envelope).我们的目标是证明一个具有生成元的Grothendieck范畴上每个对象都有内射包.
+\begin{enumerate}
+	\item 一个阿贝尔范畴$\mathscr{C}$称为Grothendieck范畴,如果它是well-powered的阿贝尔范畴,并且对任意对象$S$和它的任意一个子对象链$\{S_i,i\in I\}$和任意一个子对象$T$,都有$T\cap\left(\cup_iS_i\right)=\cup_{i\in I}(I\cap S_i)$.
+	\item 对象$A$的一个延拓指的是一个单态射$A\to B$.它的平凡延拓指的是分裂单态射$A\to B$,也即存在$B\to A$使得$A\to B\to A=1_A$.这等价于讲$B\cong A\oplus C$,而$A\to B$等价于包含态射$A\to A\oplus C$.
+	\item 一个对象是内射的当且仅当它只有平凡延拓.
+	\begin{proof}
+		
+		一方面如果$A$是内射对象,考虑单态射$A\to B$,那么恒等态射$A\to A$就要延拓为$B\to A$,使得$A\to B\to A=1_A$,也即$A\to B$是平凡延拓.另一方面如果$A$只有平凡延拓,任取单态射$B\to C$,任取态射$B\to A$,记$B\to A$和$B\to C$的pushout为如下图表:
+		$$\xymatrix{B\ar[rr]^x\ar[d]_a&&C\ar[d]^b\\A\ar[rr]_y&&P}$$
+		
+		按照$x$是单态射,得到$y$也是单态射.由于$A$只有平凡延拓,存在$z:P\to A$使得$zy=1_A$,那么取$zb:C\to A$,就有$zbx=zya=a$.于是$A$是内射对象.
+	\end{proof}
+    \item 称一个单态射$A\to B$是本性延拓(essential extension),如果对任意非零单态射$B'\to B$,有这两个单态射的交(也即回拉)是非平凡的.我们断言$A\to B$是本性延拓当且仅当对任意态射$B\to F$,从$A\to B\to F$是单态射推出$B\to F$是单态射.
+    \begin{proof}
+    	
+    	一方面如果$A\to B$是本性延拓.如果态射$B\to F$使得$A\to B\to F$是单态射.假设$B\to F$不是单态射,那么它的核$B'\to B$非零,所以按照条件有$A\to B$和$B'\to B$的交非零.但是这个交实际上是零:如果单态射$C\to B$落在这个交中,那么它要分解为$C\to A\to B$,也要经$B\to F$的核分解,所以$C\to A\to B\to F=0$.但是$A\to B\to F$是单态射,所以$C\to A=0$,所以$C\to B=0$,于是$A\to B$和$B'\to B$的交是零.
+    	
+    	\qquad
+    	
+    	另一方面如果$A\to B$满足命题中的条件.假设有单态射$B'\to B$使得$A\to B$和它的交是零.取$B\to F$是$B'\to B$的余核,那么$B\to F$就不是单态射.我们来证明$A\to B\to F$是单态射.假设有$A'\to A$使得$A'\to A\to B\to F=0$,把$A'\to A\to B$的像记作$I\to B$,按照像的泛性质就有$I\to B$要经$A\to B$分解.于是有$A'\to I\to B\to F=A'\to A\to B\to F=0$.这里$A'\to I$是满态射,所以$I\to B\to F=0$,所以$I\to B$要经$B'\to B$分解.于是$I\to B$落在$A\to B$和$B'\to B$的交中,于是$I\to B=0$,于是$A'\to A\to B=0$,但是$A\to B$是单态射,就得到$A'\to A=0$.这说明$A\to B\to F$是单态射,于是$B\to F$是单态射,这就矛盾了.
+    \end{proof}
+    \item 本性延拓的本性延拓仍然是本性延拓.另外在Grothendieck范畴中,一个本性延拓升链的并仍然是本性延拓.换句话讲设$J$是一个全序集,对$j<k$,有单态射$E_j\to E_k$.满足对$j<k<l$有$E_j\to E_k\to E_l=E_j\to E_l$.我们断言存在对象$E$和一族单态射$E_j\to E$,使得对任意$j<k$有$E_j\to E_k\to E=E_j\to E$.
+    \begin{proof}
+    	
+    	取$S=\sum_JE_j$,记$l_j:E_j\to S$是余核泛性质中的态射,对每个$j\in J$,定义$h_j:S\to S$是如下态射诱导的:
+    	$$\xymatrix{E_k\ar[r]^{l_k}&S\ar[r]^{h_j}&S}=\left\{\begin{array}{cc}\xymatrix{E_k\ar[r]&E_j\ar[r]^{l_j}&S}&k\le j\\\xymatrix{E_k\ar[r]^{l_k}&S}&j\ge k\end{array}\right.$$
+    	
+    	对$k\le k'$有$h_{k'}=\xymatrix{S\ar[r]^{h_k}&S\ar[r]^{h_{k'}}&S}$,于是$\{\ker(h_k)\}$是子对象的一个升链,于是$\cup_j\ker(h_k)$存在,它的余核记作$h:S\to E$.我们断言每个$\xymatrix{E_j\ar[r]^{l_j}&S\ar[r]^h&S}$是单态射.为此只需验证$\mathrm{im}(E_j\to S)\cap\left(\cup_j\ker(h_k)\right)=0$,这按照Grothendieck公理是成立的.
+    \end{proof}
+    \item 在Grothendieck范畴中,一个对象是内射对象当且仅当它没有非真的本性延拓(真延拓指的是不是同构的单态射).
+    \begin{proof}
+    	
+    	如果$E$是内射对象,它的延拓只能是平凡延拓,于是真延拓具有形式$\xymatrix{E\ar[r]^{i_1}&E\oplus B}$,其中$B\not=0$.那么$\xymatrix{E\oplus B\ar[r]^{\pi_1}&E}$不是单态射(核非平凡),但是$\pi_1i_1=1_E$是单态射,这说明$E$只能有非真的本性延拓.
+    	
+    	\qquad
+    	
+    	反过来设$E$没有非真的本性延拓.任取延拓$E\to B$,我们来证明它是平凡的.设$B$的所有和$E\to B$的交为零的子对象构成的偏序集是$S$.我们断言如果$\{B_i\}$是$S$中的一个升链,那么$\cup_iB_i\in S$.事实上如果记$E\to B$的像为$I\to B$,那么Grothendieck公理就保证$\cup_iB_i$满足:
+    	$$I\cap\left(\cup_iB_i\right)=\cup_i(I\cap B_i)=\cup 0=0$$
+    	
+    	于是Zorn引理保证我们可以在$S$中取一个极大元$B'\to B$.子对象和商对象是反序一一对应的,当我们提及$B$的一个和$E\to B$交为零的子对象$B_i\to B$时,取余核就等价于$B$的一个商对象$B\to F_i$,使得$E\to B\to F_i$是单态射.所以Zorn引理还告诉我们如果考虑$S$的全体这样的商对象$B\to F$构成的偏序集$S'$,使得$E\to B\to F$是单态射,那么$S'$中存在一个极小元,记作$B\to B''$,它就是$B'\to B$的余核.下面我们断言$E\to B\to B''$是本性延拓.一旦这成立,按照$E$只有非真本性延拓,得到$E\to B\to B''$是同构,这就导致$E\to B$是平凡延拓.
+    	
+    	\qquad
+    	
+    	如果有$B''\to F$使得$E\to B\to B''\to F$是单态射,那么$B\to B''\to F$是比$B\to B''$更小的$S'$中的元,按照$B\to B''$的极小性说明$B''\to F$是单态射.
+    \end{proof}
+    \item 对象$A$的内射包指的是它的内射本性延拓.我们证明具有生成元的Grothendieck范畴$\mathscr{A}$中每个对象都存在内射包.
+    \begin{proof}
+    	
+    	对任意对象$A$,如果它不是内射对象,选取一个非真本性延拓记作$E(A)=A\to B$,如果它是内射对象就选取恒等态射$E(A)=A\to A$.用超限归纳定义$E^r(A)$:首先$E^0(A)=A$,对于前继序数定义$E^{r+1}(A)=E(E^r(A))$,对于极限序数$\alpha$,定义$E^{\alpha}(A)$是控制$\{E^r(A),r<\alpha\}$的最小的本性延拓.为证明每个对象$A$都有内射包,归结为证明序列$\{E^r(A)\}$在$r$足够大时是稳定的.
+    	
+    	\qquad
+    	
+    	设$G$是$\mathscr{A}$的生成元,设$R=\mathrm{End}(G)$,可表函子$F=\mathrm{Hom}(G,-)$是$\mathscr{A}\to\textbf{Mod-R}$的左正合忠实加性函子.我们先证明如果$A\to E$是本性延拓,那么$FA\to FE$是$\textbf{Mod-R}$中的本性延拓:首先左正合性导致$FA\to FE$仍然是单态射.取非零子模$M\subseteq FE$,于是可取非零元$x\in M$,它实际是$G\to E$的一个态射,我们要构造$M\cap\mathrm{im}(FA\to FE)$中的非零元.为此考虑如下回拉图表:
+    	$$\xymatrix{P\ar[rr]\ar[d]&&G\ar@/^1pc/[dd]^x\ar[d]\\P'\ar[d]\ar[rr]&&\mathrm{im}x\ar[d]\\A\ar[rr]&&E}$$
+    	
+    	这里$A\to E$是本性延拓,$x\not=0$,所以本性延拓定义得到$P'\not=0$.另外这里$G\to\mathrm{im}x$是满态射,所以提升$P\to P'$也是满的,这迫使$P\not=0$.接下来我们断言$P\to G\to E$是非零的,假设它是零,导致$\left(P\to P'\to A\to E\right)=0$,但是$P\to P'$满,$A\to E$单,就导致$\left(P'\to A\right)=0$,但是提升映射$P'\to A$是单,这导致$P'=0$核本性延拓定义矛盾,完成断言的证明.接下来按照$F$是忠实函子,所以非零态射$P\to G\to E$诱导的$FP\to FE$的同态也是非零的,也即存在$G\to P$使得$G\to P\to G\to E$是非零的,这个元可视为$x$左乘$R=\mathrm{End}(G)$中的元$G\to P\to G$,于是我们找到了$M\cap\mathrm{im}(FA\to FE)$的非零元.
+    	
+    	\qquad
+    	
+    	按照$R$模范畴上对象总存在内射包,所以存在内射模$Q$和嵌入$FA\to Q$.按照内射模的定义,$FA\to Q$就可以经$FA\to FE$分解为$FA\to FE\to Q$.于是对任意本性扩张$A\to E$,都有$FE$同构于$Q$的子对象.所以一旦我们取$A$的本性延拓链$\{E^r(A)\}$,这个链的长度或者说序数不能超过$Q$的子对象链的长度,这导致$\{E^r(A)\}$在序数$r$足够大时终止,于是$A$存在内射包.
+    \end{proof}
+\end{enumerate}
+
+加性函子构成的函子范畴$\textbf{Ab}^{\mathscr{A}}$,这里$\mathscr{A}$总约定为一个小阿贝尔范畴.
+\begin{enumerate}
+	\item $\textbf{Ab}^{\mathscr{A}}$是一个完备和余完备的阿贝尔范畴.另外函子范畴中的一个序列$F_1\to F_2\to F_3$是正合的当且仅当对每个对象$A$都有$F_1A\to F_2A\to F_3A$是正合的.
+	\item 我们有逆变的米田嵌入$H:\mathscr{A}^{\mathrm{op}}\to\textbf{Ab}^{\mathscr{A}}$为$H^A=\mathrm{Hom}(A,-)$.这是一个左正合函子.
+	\begin{proof}
+		
+		给定$\mathscr{A}$中的左正合列$0\to A\to B\to C$,对每个对象$D$,按照$\mathrm{Hom}(-,D)$是左正合的,有左正合列:$$\xymatrix{0\ar[r]&\mathrm{Hom}(A,D)\ar[r]&\mathrm{Hom}(B,D)\ar[r]&\mathrm{Hom}(C,D)}$$
+		
+		但是这等价于讲有正合列$H^C\to H^B\to H^A\to0$,也即该米田嵌入是左正合的.
+	\end{proof}
+	\item 按照米田引理,对加性函子$F:\mathscr{A}\to\textbf{Ab}$,总有自然同构$\mathrm{Hom}(H^A,F)\cong F(A)$.
+	\item $\sum_AH^A$是$\textbf{Ab}^{\mathscr{A}}$上的投射生成元.
+	\begin{proof}
+		
+		考虑$\mathscr{A}^{\mathrm{op}}\times\textbf{Ab}^{\mathscr{A}}\to\textbf{Ab}$的两个函子$D,E$,其中$D$是如下函子的复合,于是有$D(A,F)=\mathrm{Hom}(H^A,F)$.
+		$$\xymatrix{\mathscr{A}^{\mathrm{op}}\times\textbf{Ab}^{\mathscr{A}}\ar[rr]^{H\times1}&&\textbf{Ab}^{\mathscr{A}}\times\textbf{Ab}^{\mathscr{A}}\ar[rr]^{\mathrm{Hom}(-,-)}&&\textbf{Ab}}$$
+		
+		函子$E:\mathscr{A}^{\mathrm{op}}\times\textbf{Ab}^{\mathscr{A}}\to\textbf{Ab}$定义为$E(A,F)=F(A)$,$E(A,\xymatrix{F_1\ar[r]^{\eta}&F_2})=\xymatrix{F_1(A)\ar[r]^{\eta_A}&F_2(A)}$和$E(\xymatrix{A\ar[r]^f&B},F)=\xymatrix{FA\ar[r]^{Ff}&FB}$.于是米田引理说明$D$自然同构于$E$.那么有:
+		$$\mathrm{Hom}(\sum_AH^A,-)\cong\prod_A\mathrm{Hom}(H^A,-)\cong\prod_AD(A,-)\cong\prod_AE(A,-)$$
+		
+		但是这里$E(A,-)$是正合嵌入,所以$\prod_AE(A,-)$也是正合嵌入.于是$\sum_AH^A$是投射生成元.
+	\end{proof}
+	\item $\textbf{Ab}^{\mathscr{A}}$是Grothendieck范畴.
+	\begin{proof}
+		
+		我们解释过具有生成元的阿贝尔范畴是well-powered的,于是这里$\textbf{Ab}^{\mathscr{A}}$是well-powered的.因为$\textbf{Ab}$是具体范畴,容易验证条件$T\cap\left(\cup_iS_i\right)=\cup_{i\in I}(I\cap S_i)$.
+	\end{proof}
+    \item $\textbf{Ab}^{\mathscr{A}}$中的内射对象总是一个右正合函子.
+    \begin{proof}
+    	
+    	给定$\mathscr{A}$上的右正合列$A'\to A'\to A''\to0$,按照米田嵌入,得到$\textbf{Ab}^{\mathscr{A}}$中的左正合列$0\to H^{A''}\to H^A\to H^{A'}$.设$E$是$\textbf{Ab}^{\mathscr{A}}$中的内射对象,那么有$\textbf{Ab}$中的有正合列:
+    	$$\xymatrix{\mathrm{Hom}(H^{A'},E)\ar[r]&\mathrm{Hom}(H^A,E)\ar[r]&\mathrm{Hom}(H^{A''},E)\ar[r]&0}$$
+    	
+    	按照米田引理,这个有正合列也就是$E(A')\to E(A)\to E(A'')\to0$,于是$E$是右正合函子.
+    \end{proof}
+\end{enumerate}
+
+设$\mathscr{B}$是Grothendieck范畴,设$\mathscr{M}$是它的完全子范畴,并且在取子对象,取积,取本性扩张下封闭,称$\mathscr{M}$中的对象为单对象.
+\begin{enumerate}
+	\item 定义$\mathscr{M}(\mathscr{A})$是$\textbf{Ab}^{\mathscr{A}}$的由保单函子构成的完全子范畴.保单函子是指总把单态射映射为单同态的函子.那么子范畴$\mathscr{M}(\mathscr{A})$在取子对象,取积,取本性扩张下封闭.
+	\begin{proof}
+		
+		如果$F$是保单函子,$E$是$F$的子函子,如果$A\to A'$是$\mathscr{A}$中的单态射,那么$FA\to FA'$是$\textbf{Ab}$的单同态,于是限制映射$FA\to FA'$也是单同态.保积也是平凡的,因为如果$F_i(A)\to F_i(A')$是单同态,那么$\prod_iF_i(A)\to\prod_iF_i(A')$也是单同态.下面设$M\to E$是$\textbf{Ab}^{\mathscr{A}}$中的本性延拓,设$M$是保单函子,如果$E$不是保单函子,存在单态射$A'\to A$,使得$EA'\to EA$不是$\textbf{Ab}$中的单态射.那么存在$0\not=x\in EA'$,使得$(EA'\to EA)(x)=0$.我们定义被$x$生成的加性子函子$F\subseteq E$如下:
+		\begin{itemize}
+			\item 对于对象$B\in\mathrm{Obj}(\mathscr{A})$,定义$FB=\{y\in EB\mid\exists A'\to B,s.t. (EA'\to EB)(x)=y\}$.
+			\item 对态射$B'\to B$,按照定义就有$(EB'\to EB)(FB')\subseteq FB$.如果$y\in FB'$,也即存在态射$A'\to B'$使得$(EA'\to EB')(x)=y$,那么$(EB'\to EB)(y)\in FB$,就定义$F(B'\to B)$是$E(B'\to B)$在$FB'$上的限制.
+			\item $0\in FB$,因为零态射把$x$映成零.
+			\item 如果$y,z\in FB$,也即存在态射$f,g:A'\to B$满足$(Ef)(x)=y$和$(Eg)(x)=z$.那么$(E(f-g))(x)=y-z$,于是$y-z\in FB$,这说明$F$是加性函子.
+		\end{itemize}
+		
+		因为$x\in FA'\subseteq EA'$,所以$F\not=0$,又因为$M\to E$是本性扩张,所以$F\cap M\not=0$,也即存在对象$B$使得$FB\cap MB\not=0$,可以取非零元$y\in FB\cap MB$.那么存在态射$A'\to B$使得$y=(EA'\to EB)(x)$.考虑$A'\to A$和$A'\to B$的前推:
+		$$\xymatrix{A'\ar[rr]\ar[d]&&A\ar[d]\\B\ar[rr]&&P}$$
+		
+		因为$A'\to A$是单态射,得到提升$B\to P$也是单态射.按照$M$是保单的,有$MB\to MP$也是单态射,特别的$\left(MB\to MP\right)\not=0$.于是$0\not=(EB\to EP)(y)=(EA'\to EP)(x)=(EA\to EP)(EA'\to EA)(x)=0$,这个矛盾迫使$E$是保单函子.
+	\end{proof}
+    \item $\mathscr{B}$的每个对象$B$都存在$\mathscr{M}$中的极大商对象$\mathscr{N}(B)$.
+    \begin{proof}
+    	
+    	设$\mathscr{F}$表示$B$的所有单的商对象,定义$\mathscr{N}(B)$为态射$h:B\to\prod_{B'\in\mathscr{F}}B'$的余像.按照$\mathscr{M}$保子对象和积对象,就得到$\mathscr{B}$也是单对象.我们断言它在$\mathscr{M}$中是极大的商对象.假设有满态射$B\to B''$,其中$B''$是单对象,那么这个态射要经$B\to\mathscr{N}(B)$分解:按照$B''$出现在$\prod B'$的分量中,就取$\mathscr{N}(B)\to B''$为$\mathscr{N}(B)\to\prod B'\to B''$,那么有$B\to\mathscr{N}(B)\to B''=B\to\mathscr{N}(B)\to\prod B'\to B''=B\to\prod B'\to B''=B\to B''$.完成证明.
+    \end{proof}
+    \item 设$B\to M$是态射,其中$B\in\mathrm{Obj}(\mathscr{B})$,$M\in\mathrm{Obj}(\mathscr{M})$,那么存在唯一的态射$\mathscr{N}(B)\to M$,使得$B\to M$可分解为$B\to\mathscr{N}(B)\to M$.换句话讲$B\to\mathscr{N}(B)$是$B$在$\mathscr{M}$中的反射(reflection).
+    \begin{proof}
+    	
+    	设$b:B\to M$的余像为$c:B\to B''$,那么$b$可分解为$\xymatrix{B\ar[r]^c&B''\ar[r]^d&M}$.按照$B''$是$M$的子对象,得到$B''$也是单对象.按照$\mathscr{M}(B)$的极大性,$c:B\to B''$就可以分解为$\xymatrix{B\ar[r]^q&\mathscr{N}(B)\ar[r]^u&B''}$,我们就取$\mathscr{M}(B)\to M$是$x=du$,那么有$b=dc=duq=xq$,这说明存在性,按照$q$是满态射得到$x$如果存在则唯一.
+    \end{proof}
+    \item 按照上一条,对$\mathscr{B}$中的每个态射$B'\to B$,存在唯一的态射$\mathscr{N}(B')\to\mathscr{N}(B)$使得如下图表交换.
+    $$\xymatrix{B'\ar[rr]\ar[d]&&\mathscr{N}(B')\ar[d]\\B\ar[rr]&&\mathscr{N}(B)}$$
+    
+    那么$\mathscr{N}$是$\mathscr{B}\to\mathscr{M}$的加性函子.换句话讲$\mathscr{M}$是$\mathscr{B}$的反射子范畴,并且$\mathscr{N}$就是反射函子.
+    \begin{itemize}
+    	\item $\mathscr{N}(1_B)=1_{\mathscr{N}(B)}$.因为$1_{\mathscr{N}(B)}$已经满足上述图表交换,并且它是唯一的.
+    	\item $\mathscr{N}(B'\to B\to B'')=\mathscr{N}(B\to B'')\circ\mathscr{N}(B'\to B)$.
+    	\item $\mathscr{N}$是加性的,因为有如下图表交换:
+    	$$\xymatrix{B'\ar[rr]\ar[d]_{\left(\begin{array}{c}1\\1\end{array}\right)}&&\mathscr{N}(B')\ar[d]^{\left(\begin{array}{c}1\\1\end{array}\right)}\\B'\oplus B'\ar[rr]\ar[d]_{\left(f,g\right)}&&\mathscr{N}(B')\oplus\mathscr{N}(B')\ar[d]^{\left(\mathscr{N}f,\mathscr{N}g\right)}\\B\ar[rr]&&\mathscr{N}(B)}$$
+    \end{itemize}
+    \item 称$T\in\mathrm{Obj}(\mathscr{B})$是挠对象(torsion object),如果对每个单对象$N$都有$\mathrm{Hom}(T,N)=0$.我们断言$T$是挠对象当且仅当$\mathscr{N}(T)=0$.
+    \begin{proof}
+    	
+    	一方面如果$\mathscr{N}(T)=0$,任取态射$k:T\to N$,其中$N$是单对象,那么$k$要经$T\to0$分解,此即$k=0$.另一方面从$\mathrm{Hom}(T,M(T))=0$,说明满态射$T\to\mathscr{N}(T)$是零,导致$\mathscr{N}(T)=0$.
+    \end{proof}
+    \item $\ker(B\to\mathscr{N}(B))$是$B$的挠子对象中的最大元.
+    \begin{proof}
+    	
+    	任取挠对象$T$和态射$T\to B$,从$\left(T\to B\to\mathscr{N}(B)\right)=0$,得到$\mathrm{im}(T\to B)$落在$\ker(B\to\mathscr{N}(B))$中.所以归结为证明$K=\ker(B\to\mathscr{N}(B))$是挠对象.任取单对象$B''$,我们来证明任意态射$K\to B''$都是零.考虑短正合列$0\to K\to B\to\mathscr{N}(B)\to0$,对内射包$B''\to E$,有$E$也是单对象,按照$K\to B$是单态射,并且$E$是内射对象,所以态射$K\to B''\to E$可以延拓为$B\to E$,我们解释过存在唯一的态射$\mathscr{N}(B)\to E$使得有如下交换图表:
+    	$$\xymatrix{0\ar[r]&K\ar[r]\ar[d]&B\ar[r]\ar[d]&\mathscr{N}(B)\ar[r]\ar[dl]&0\\&B''\ar[r]&E&&}$$
+    	
+    	于是$\left(K\to B''\to E\right)=\left(K\to B\to\mathscr{N}(B)\to E\right)=0$.但是$B''\to E$是单态射,这就得到$K\to B''$是零态射.
+    \end{proof}
+    \item 一般来讲,虽然$\mathscr{B}$是阿贝尔范畴,但是$\mathscr{M}$未必也是阿贝尔的.因为$\mathscr{M}$中的单态射未必是$\mathscr{M}$中某个态射的核.例如取$\mathscr{B}=\textbf{Ab}$,取$\mathscr{M}$是无挠阿贝尔群构成的完全子范畴,那么$\xymatrix{\mathbb{Z}\ar[r]^2&\mathbb{Z}}$不是核.因为假设它是态射$f:\mathbb{Z}\to B$的核,那么$2f(1)=0$,按照$B$是无挠的,迫使$f(1)=0$,也即$f=0$,那么$\mathbb{Z}$上的恒等映射也要经核分解,但这不可能.
+\end{enumerate}
+
+依旧设$\mathscr{B}$是Grothendieck范畴,设$\mathscr{M}$是在子对象,积和本性扩张下封闭的完全子范畴,它的对称称为单对象.称单对象$M$的子对象$M'$是纯的(pure),如果对应的商对象$M/M'$(此即$M'\to M$的余核)也是单对象.称一个单对象$M$是绝对纯的(absolutely pure),如果它是某个单对象$N$的子对象,那么它是$N$的纯子对象.
+\begin{enumerate}
+	\item 内射(在$\mathscr{B}$中内射)单对象都是绝对纯的.
+	\begin{proof}
+		
+		设$E\in\mathscr{M}$是内射对象,设$E\to F$是单对象之间的单态射,那么$E\to F$必须分裂,于是$F$是$E$和$F/E$的直和,于是$F/E$也是$F$的子对象,所以它是单对象.
+	\end{proof}
+	\item 如果$0\to M_1\to B\to M_2\to0$是$\mathscr{B}$中的正合列,并且$M_1,M_2$是单对象,那么$B$也是单对象.
+	\begin{proof}
+		
+		取内射包$M_1\to E$,那么$E$是单对象,并且$E\oplus M_2$也是单对象.按照$E$是内射的,就有$M_1\to E$延拓为$B\to E$,考虑它和$B\to M_2$诱导的态射$m:B\to E\oplus M_2$,如果我们证明$m$是单态射,就得到$B$是单对象.为此设$d$是$A\to B$的态射,满足$md=0$,那么$A\to B\to E\oplus M_2\to M_2$是零,于是$A\to B$要经$\ker(B\to M_2)=M_1\to B$分解,记作$\left(A\to B\right)=\left(A\to M_1\to B\right)$.进而有$\left(A\to M_1\to B\to E\right)=\left(A\to B\to E\right)=0$,于是$A\to M_1\to E$是零,但是$M_1\to E$是单态射,导致$A\to M_1$是零,于是$A\to B$是零.
+	\end{proof}
+	\item 一个绝对纯对象的纯子对象是绝对存对象.
+	\begin{proof}
+		
+		设$A$是绝对纯对象,设$P\to A$是纯子对象,设$P\to M$是单态射,并且$M$是单对象,我们需要证明$M/P$是单对象.为此考虑$P\to A$和$P\to M$的前推为:
+		$$\xymatrix{P\ar[rr]\ar[d]&&A\ar[d]\\M\ar[rr]&&R}$$
+		
+		这里所有态射都是单态射,取余核得到如下交换图表:
+		$$\xymatrix{&0\ar[d]&0\ar[d]&0\ar[d]&\\0\ar[r]&P\ar[r]\ar[d]&A\ar[r]\ar[d]&A/P\ar[r]\ar[d]&0\\0\ar[r]&M\ar[r]\ar[d]&R\ar[r]\ar[d]&R/M\ar[d]\ar[r]&0\\0\ar[r]&M/P\ar[d]\ar[r]&R/A\ar[d]\ar[r]&0&\\&0&0&&}$$
+		
+		这里$M/P\to R/A$和$A/P\to R/M$都是同构,并且这里$R$是单对象,于是$R/A$和$M/P$是单对象.
+	\end{proof}
+	\item 考虑具体例子$\textbf{Ab}^{\mathscr{A}}$的由保单函子构成的完全子范畴$\mathscr{M}$.一个左正合函子的子函子是纯的当且仅当它是左正合的.
+	\begin{proof}
+		
+		设$0\to M\to E\to F\to0$是$\textbf{Ab}^{\mathscr{A}}$的短正合列,其中$E$是左正合的.再取左正合列$0\to A'\to A\to A''$,那么有如下交换图表:
+		$$\xymatrix{&0\ar[d]&0\ar[d]&0\ar[d]\\0\ar[r]&MA'\ar[r]\ar[d]&MA\ar[r]\ar[d]&MA''\ar[d]\\0\ar[r]&EA'\ar[r]\ar[d]&EA\ar[r]\ar[d]&EA''\\0\ar[r]&FA'\ar[r]\ar[d]&FA\ar[d]&\\&0&0&}$$
+		
+		这里列都是正合列,因为$M,E,F$构成正合列,第二行是正合列因为$E$是左正合的.在这个条件下第一行是正合的当且仅当第三行是正合的.于是$M$是左正合的当且仅当$FA'\to FA$是单态射,当且仅当$F$是保单函子,也即$M$是纯的.
+	\end{proof}
+	\item 考虑具体例子$\textbf{Ab}^{\mathscr{A}}$的由保单函子构成的完全子范畴$\mathscr{M}$.一个保单函子$M$是完全纯的当且仅当它是左正合的.
+	\begin{proof}
+		
+		取内射包$M\to E$,我们解释过内射函子$E$总是右正合的,又因为$E$是保单函子,所以$E$是正合函子.另外我们还证明过内射单对象总是绝对纯对象,所以$E$是绝对纯的.如果$M$是绝对纯的,那么$M\to E$是纯的,所以上一条得到$M$是左正合的.反过来如果$M$是左正合的,上一条得到$M$是$E$的纯子对象,但是绝对纯对象的纯子对象是绝对纯的,所以$M$是绝对纯的.
+	\end{proof}
+\end{enumerate}
+
+依旧设$\mathscr{B}$是Grothendieck范畴,设$\mathscr{M}$是在子对象,积和本性扩张下封闭的完全子范畴,它的对称称为单对象.考虑$\mathscr{M}$的由绝对纯对象构成的完全子范畴$\mathscr{L}$.
+\begin{enumerate}
+	\item 设$0\to M\to R\to T\to0$是$\mathscr{B}$中的短正合列,设$M$是单对象,$R$是绝对纯对象,$T$是挠对象(回顾定义中纯对象要求是单对象,但是挠对象不要求是单对象),那么$M\to R$就是$M$在$\mathscr{L}$中的反射(reflection).换句话讲,对任意态射$M\to L$,其中$L\in\mathscr{L}$,存在唯一的态射$R\to L$使得$M\to L$分解为$M\to R\to L$.
+	\begin{proof}
+		
+		任取绝对纯对象$L$和态射$m:M\to L$,设$l:L\to E$是内射包,设$l$的余核为$c:E\to F$,因为$M\to R$是单态射,并且$E$是内射对象,所以$M\to L\to E$可以延拓为$R\to E$.另外$R\to E\to F$要经$M\to R$的余核$R\to T$分解,于是我们得到如下短正合列的交换图表:
+		$$\xymatrix{0\ar[r]&M\ar[r]^i\ar[d]_m&R\ar[r]\ar@{-->}[dl]_u\ar[d]^r&T\ar[r]\ar[d]&0\\0\ar[r]&L\ar[r]^l&E\ar[r]^c&F\ar[r]&0}$$
+		
+		这里$E$也是单对象,按照$L$是绝对纯的,得到$F$也是单对象,于是按照挠对象的定义,这里$T\to F$是零态射.于是$R\to E\to F$是零态射,于是$r$要经$c:E\to F$的核$l:L\to E$分解,也即存在$u:R\to L$使得图表交换.那么$lui=ri=lm$,按照$l$是单态射得到$ui=m$.最后证明$u$的唯一性,假设还存在$u':R\to L$使得$ui=u'i=m$,取$d=u-u'$,那么$di=0$,导致$d$要经$i$的余核,也就是$R\to T$分解.于是$d=\left(R\to T\to L\right)$,但是$T$是挠对象,导致$T\to L$是零,于是$d=0$,这证明了$u$的唯一性.
+	\end{proof}
+    \item 设$M$是单对象,那么总存在单态射$M\to R$是$M$在$\mathscr{L}$中的反射(这要求了$R$是绝对纯对象).
+    \begin{proof}
+    	
+    	设$M\to E$是内射包,我们证明过$E$是绝对纯对象.取$M\to E$的余核是$F$,取$F\to\mathscr{N}(F)$的核是$T$,取$E\to\mathscr{N}(F)$是两个满态射的复合$E\to F\to\mathscr{N}(F)$,取$E\to\mathscr{N}(F)$的核是$R\to E$.再按照$M\to E\to\mathscr{N}(F)$是零,就有$M\to E$要经$E\to\mathscr{N}(F)$的核$R\to E$分解,于是得到态射$M\to R$使得如下图表交换.这里所有行所有列除了第一行以外按照构造都是正合的,但是按照9引理,从第三行正合也得到第一行正合.
+    	$$\xymatrix{&0\ar[d]&0\ar[d]&0\ar[d]&\\0\ar[r]&M\ar[r]\ar[d]&R\ar[r]\ar[d]&T\ar[r]\ar[d]&0\\0\ar[r]&M\ar[r]\ar[d]&E\ar[r]\ar[d]&F\ar[r]\ar[d]&0\\&0\ar[r]&\mathscr{N}(F)\ar[r]\ar[d]&\mathscr{N}(F)\ar[r]\ar[d]&0\\&&0&0&}$$
+    	
+    	我们解释过$F\to\mathscr{N}(F)$的核是挠对象,所以这里$T$是挠对象.另外按照$\mathscr{N}(F)$是单对象,得到$R$是$E$的纯子对象,但是$E$是绝对纯的,所以$R$也是绝对纯的.把上一条用在第一行上得到结论.
+    \end{proof}
+    \item 上一段说明$\mathscr{L}$是$\mathscr{M}$的反射子范畴,构造的$R(M)$是加性反射函子.我们断言$\mathscr{L}$是阿贝尔范畴,并且每个对象存在内射包.
+    \begin{proof}
+    	\begin{itemize}
+    		\item 零对象,二元积,核与余核.因为$\mathscr{B}$是有限完备和有限余完备的,于是反射子范畴也是有限完备和有限余完备的.
+    		\item 单态射是核.设$L\to L'$是绝对纯对象之间的单态射,它在$\mathscr{B}$中的余核记作$M=L'/L$,因为$L$是绝对纯对象,并且$L'$是单对象,于是$M$是单对象,于是可取$M$在$\mathscr{L}$中的反射$M\to R(M)$.由于$\mathscr{B}$是阿贝尔范畴,所以$L\to L'$是$\mathscr{B}$中态射$L'\to M$的核,又因为$M\to R(M)$是单态射,所以$L\to L'$是$L'\to M\to R(M)$的$\mathscr{B}$核,从而也是$L'\to R(M)$的$\mathscr{L}$核.
+    		\item 满态射是余核.设$L\to L'$是$\mathscr{L}$满态射,取它的$\mathscr{B}$像是$M\to L'$,那么有$\mathscr{B}$中的短正合列$0\to M\to L'\to T\to0$,这里$T$就是$L\to L'$在$\mathscr{B}$中的余核,而按照反射子范畴的性质,$L\to L'$在$\mathscr{L}$中的余核就是$L'\to T\to R(T)$,所以按照$L\to L'$是$\mathscr{L}$中的满态射,得到$T\to R(T)$是零态射,也即$T$是挠对象.另外因为$L'$是单对象得到$M$是单对象,于是$M\to L'$也就是$M$在$\mathscr{L}$中的反射,按照唯一性得到$L'$和$R(M)$同构.记$L\to M$的核是$K\to L$,那么$K\to L$的$\mathscr{B}$余核是$L\to M$.于是$K\to L$的$\mathscr{L}$余核就是$\left(L\to M\to R(M)\right)=\left(L\to L'\right)$.
+    		\item $\mathscr{L}$中的对象总存在内射包:取绝对纯对象$L$,设它在$\mathscr{B}$中的内射包是$L\to E$,那么$E$是内射对象并且是单对象,所以它是绝对纯对象,所以$L\to E$也是$\mathscr{L}$中的内射包.
+    	\end{itemize}
+    \end{proof}
+\end{enumerate}
+
+证明Freyd-Mitchell定理.
+\begin{enumerate}
+	\item 考虑Grothendieck范畴$\textbf{Ab}^{\mathscr{A}}$,取保单函子构成的完全子范畴$\mathscr{M}$,取绝对纯对象构成的完全子范畴$\mathscr{L}$,此即左正合函子构成的完全子范畴.那么$\mathscr{L}$是总存在内射包的阿贝尔范畴.因为每个加性函子$H^A=\mathrm{Hom}(A,-)$是左正合函子,所以米田嵌入$H:\mathscr{A}\to\textbf{Ab}^{\mathscr{A}}$实际上是经$\mathscr{L}$分解的.
+	\item $\mathscr{L}$是完备和余完备的,并且具有内射余生成元.
+	\begin{proof}
+		
+		$\mathscr{L}$中的积就是它在$\textbf{Ab}^{\mathscr{A}}$中的积(因为反射子范畴是保范畴极限的,或者直接证明左正合函子的积还是左正合的),$\mathscr{L}$中的余积是它在$\textbf{Ab}^{\mathscr{A}}$中的余积再复合反射函子.另外左正合函子的直和本身也是左正合的,所以它已经落在$\mathscr{L}$中.特别的,所有可表函子$\{H^A\mid A\in\mathrm{Obj}(\mathscr{A})\}$的直和是左正合的($\mathscr{A}$是小范畴,对象构成集合),它是$\textbf{Ab}^{\mathscr{A}}$的投射生成元,所以也是$\mathscr{L}$的投射生成元.另外我们解释过具有生成元的完备阿贝尔范畴上具有足够多内射对象等价于它具有内射余生成元.但是我们解释过$\mathscr{B}$中内射对象都在$\mathscr{L}$中,这就证明了$\mathscr{L}$具有内射余生成元.
+	\end{proof}
+    \item 米田嵌入$\mathrm{H}:\mathscr{A}^{\mathrm{op}}\to\mathscr{L}$是完全忠实的正合函子.
+    \begin{proof}
+    	
+    	我们之前解释过这个米田嵌入是完全忠实的,只需证明它是正合的.设$0\to A'\to A\to A''\to0$是短正合列,我们要证明$0\to H^{A''}\to H^A\to H^{A'}\to0$是$\mathscr{L}$中的短正合列.设$E$是内射余生成元,那么$H_E=\mathrm{Hom}(-,E)$是正合忠实函子,此时上述短正合列等价于$0\to\mathrm{Hom}(H^{A'},E)\to\mathrm{Hom}(H^{A},E)\to\mathrm{Hom}(H^{A''},E)\to0$是短正合列.按照米田引理这等价于$0\to EA'\to EA\to EA''\to0$是短正合列.但是$E$在$\mathscr{L}$中导致它是左正合的,它是$\textbf{Ab}^{\mathscr{A}}$中的内射对象导致它是右正合函子,于是$E$是正合函子.
+    \end{proof}
+    \item Freyd-Mitchell定理.每个阿贝尔范畴都是完全阿贝尔的,即对每个完全正合小阿贝尔子范畴$\mathscr{A}'$,都存在环$R$和一个完全忠实正合函子$\mathscr{A}'\to\textbf{R-Mod}$.
+    \begin{proof}
+    	
+    	上一条说明米田嵌入$\mathrm{H}:\mathscr{A}^{\mathrm{op}}\to\mathscr{L}$是完全忠实正合函子,这里$\mathscr{L}$是具有内射余生成元的完备阿贝尔范畴.取对偶范畴得到完全忠实正合函子$\mathscr{A}\to\mathscr{L}^{\mathrm{op}}$,这里$\mathscr{L}^{\mathrm{op}}$是具有投射生成元的余完备阿贝尔范畴.按照我们之前证明的特殊版本,这里$\mathscr{L}^{\mathrm{op}}$可以完全忠实的正合嵌入到$\textbf{Ab}$中,这就完成证明.
+    \end{proof}
+    \item 推论.对每个小阿贝尔范畴$\mathscr{A}$,总存在一个环$R$以及一个完全忠实正合函子$\mathscr{A}\to\textbf{R-Mod}$.
+\end{enumerate}
+\newpage
+\section{三角范畴}
+
+预三角范畴定义.
+\begin{enumerate}
+	\item 设$\mathscr{C}$是加性范畴,设$T$是$\mathscr{C}$上的加性自同构函子,此即有函子$T^{-1}$满足$TT^{-1}=T^{-1}T=1_{\mathscr{C}}$.这个自同构函子通常称为平移函子.通常把恒等函子在对象和态射上的作用记作$X[0]$和$f[0]$,把平移函子在对象和态射上的作用记作$X[1]$和$f[1]$.
+	\item $(\mathscr{C},T)$中的一个三角是指如下态射序列:
+	$$\xymatrix{X\ar[r]^u&Y\ar[r]^v&Z\ar[r]^w&T(X)}$$
+	
+	也会把这个三角记作六元对$(X,Y,Z,u,v,w)$,也会记作如下图表:
+	$$\xymatrix{&Z\ar[dl]_w&\\X\ar[rr]_u&&Y\ar[ul]_v}$$
+	\item 两个三角之间的态射称为三角态射,是指$(f,g,h)$使得如下图表交换,类似定义三角同构.
+	$$\xymatrix{X\ar[r]^u\ar[d]_f&Y\ar[r]^v\ar[d]_g&Z\ar[r]^w\ar[d]_h&T(X)\ar[d]_{Tf}\\X'\ar[r]^{u'}&Y'\ar[r]^{v'}&Z'\ar[r]^{w'}&T(X')}$$
+	\item 带平移函子的加性范畴$(\mathscr{C},T)$称为预三角范畴,如果指定一族三角构成的类称为好三角(distinguished triangle),使得好三角满足如下公理:
+	\begin{itemize}
+		\item ($\mathrm{TR}1$).
+		\begin{enumerate}
+			\item 和好三角同构的三角也是好三角.
+			\item $\mathscr{C}$中的每个态射$u:X\to Y$都可以补充为一个好三角:
+			$$\xymatrix{X\ar[r]^u&Y\ar[r]^v&Z\ar[r]^w&T(X)}$$
+			\item 对任意对象$X$,如下三角是好三角:
+			$$\xymatrix{X\ar[r]^{1_X}&X\ar[r]&0\ar[r]&T(X)}$$
+		\end{enumerate}
+	    \item ($\mathrm{TR}2$).(顺时针旋转)如果$\xymatrix{X\ar[r]^u&Y\ar[r]^v&Z\ar[r]^w&T(X)}$是好三角,那么如下三角也是好三角:
+	    $$\xymatrix{Y\ar[r]^v&Z\ar[r]^w&T(X)\ar[r]^{-T(u)}&T(Y)}$$
+	    \item ($\mathrm{TR}3$).如果$(X,Y,Z,u,v,w)$和$(X',Y',Z',u',v',w')$均为好三角,如果有态射$(f,g)$使得如下图表交换:
+	    $$\xymatrix{X\ar[d]_f\ar[rr]^u&&Y\ar[d]_g\\X'\ar[rr]^{u'}&&Y'}$$
+	    
+	    那么存在(不唯一)$h:Z\to Z'$使得$(f,g,h)$是一个三角态射:
+	    $$\xymatrix{X\ar[r]^u\ar[d]_f&Y\ar[r]^v\ar[d]_g&Z\ar[r]^w\ar[d]_h&T(X)\ar[d]_{Tf}\\X'\ar[r]^{u'}&Y'\ar[r]^{v'}&Z'\ar[r]^{w'}&T(X')}$$
+	\end{itemize}
+    \item 设$(\mathscr{C},T)$是预三角范畴,设$\mathscr{A}$是阿贝尔范畴,一个加性函子$H:\mathscr{C}\to\mathscr{A}$称为上同调函子,如果对任意好三角$(X,Y,Z,u,v,w)$,都有如下长正合列:
+    $$\xymatrix{\cdots\ar[r]&H(T^iX)\ar[r]^{H(T^iu)}&H(T^iY)\ar[r]^{H(T^iv)}&H(T^iZ)\ar[r]^{H(T^iw)}&H(T^{i+1}X)\ar[r]&\cdots}$$
+    
+    如果这个函子是逆变的,称它是上同调函子如果对任意好三角$(X,Y,Z,u,v,w)$都有如下长正合列:
+    $$\xymatrix{\cdots\ar[r]&H(T^{i+1}X)\ar[r]^{H(T^{i+1}w)}&H(T^iZ)\ar[r]^{H(T^iv)}&H(T^iY)\ar[r]^{H(T^iu)}&H(T^iX)\ar[r]&\cdots}$$
+\end{enumerate}
+\begin{enumerate}
+	\item 设$(\mathscr{C},T)$是预三角范畴,对任意态射$u:X\to Y$,它嵌入到好三角的位置是任意预设的.
+	\begin{proof}
+		
+		考虑态射$-T^{-1}(u)$,它可以补充为如下好三角:
+		$$\xymatrix{T^{-1}(X)\ar[r]^{-T^{-1}(u)}&T^{-1}Y\ar[r]&Z\ar[r]&X}$$
+		
+		按照$\mathrm{TR}2$,就有如下好三角,这说明$u$补充为好三角的位置是可以任意预设的:
+		$$\xymatrix{T^{-1}Y\ar[r]&Z\ar[r]&X\ar[r]^u&Y}$$
+		$$\xymatrix{Z\ar[r]&X\ar[r]^u&Y\ar[r]&T(Z)}$$
+	\end{proof}
+    \item 设$(\mathscr{C},T)$是预三角范畴,对好三角$(X,Y,Z,u,v,w)$,类似复形一样总有:
+    $$vu=0,wv=0,T(u)w=0$$
+    \begin{proof}
+    	
+    	按照$\mathrm{TR}2$,只需证明$vu=0$.考虑如下交换图表:
+    	$$\xymatrix{Y\ar[rr]^v\ar[d]_v&&Z\ar@{=}[d]\\Z\ar[rr]^{1_Z}&&Z}$$
+    	
+    	按照$\mathrm{TR}3$,它就可以延拓为好三角之间的三角态射:
+    	$$\xymatrix{Y\ar[r]^v\ar[d]_v&Z\ar[r]^w\ar@{=}[d]&T(X)\ar[r]^{-T(u)}\ar[d]&T(Y)\ar[d]_{T(v)}\\Z\ar[r]^{1_Z}&Z\ar[r]&0\ar[r]&T(Z)}$$
+    	
+    	这个图表交换说明$T(vu)=0$,但是$T$是同构函子,所以$vu=0$.
+    \end{proof}
+    \item $\mathrm{TR}3$中态射延拓可以约定为任一位置的延拓,即如果如下交换图表中两行都是好三角,实线构成的小图标交换,那么存在虚线态射使得所有图表交换:
+    $$\xymatrix{X\ar[r]^u\ar@{-->}[d]_f&Y\ar[r]^v\ar[d]_g&Z\ar[r]^w\ar[d]_h&T(X)\ar@{-->}[d]_{Tf}\\X'\ar[r]^{u'}&Y'\ar[r]^{v'}&Z'\ar[r]^{w'}&T(X')}$$
+    $$\xymatrix{X\ar[r]^u\ar[d]_f&Y\ar[r]^v\ar@{-->}[d]_g&Z\ar[r]^w\ar[d]_h&T(X)\ar[d]_{Tf}\\X'\ar[r]^{u'}&Y'\ar[r]^{v'}&Z'\ar[r]^{w'}&T(X')}$$
+    \begin{proof}
+    	
+    	以第一个图表为例.首先按照$\mathrm{TR}3$,存在态射$Tf:TX\to TX'$使得如下图表交换.这里两行都是好三角是因为$\mathrm{TR}2$.
+    	$$\xymatrix{Y\ar[r]^v\ar[d]_g&Z\ar[r]^w\ar[d]_h&TX\ar[r]^{-Tu}\ar[d]_{Tf}&TY\ar[d]_{Tg}\\Y'\ar[r]^{v'}&Z'\ar[r]^{w'}&TX'\ar[r]^{-Tu'}&TY'}$$
+    	
+    	最右侧图表作用$T^{-1}$,就得到有如下交换图表:
+    	$$\xymatrix{X\ar[r]^u\ar[d]_f&Y\ar[r]^v\ar[d]_g&Z\ar[r]^w\ar[d]_h&T(X)\ar[d]_{Tf}\\X'\ar[r]^{u'}&Y'\ar[r]^{v'}&Z'\ar[r]^{w'}&T(X')}$$
+    \end{proof}
+    \item 设$M$是预三角范畴$\mathscr{C}$中的对象,那么$\mathrm{Hom}_{\mathscr{C}}(M,-)$和$\mathrm{Hom}_{\mathscr{C}}(-,M)$分别是共变和逆变的上同调函子.
+    \begin{proof}
+    	
+    	我们验证$\mathrm{Hom}_{\mathscr{C}}(M,-)$是上同调函子,另一个命题是对偶的.取好三角$(X,Y,Z,u,v,ww)$,按照$\mathrm{TR}2$公理,只需验证有如下正合列:
+    	$$\xymatrix{\mathrm{Hom}_{\mathscr{C}}(M,T^iX)\ar[r]^{(T^iu)_*}&\mathrm{Hom}_{\mathscr{C}}(M,T^iY)\ar[r]^{(T^iv)_*}&\mathrm{Hom}_{\mathscr{C}}(M,T^iZ)}$$
+    	
+    	因为$vu=0$,所以这已经是一个复形,任取$g\in\mathrm{Hom}_{\mathscr{C}}(M,T^iY)$,设$(T^iv)g=0$,那么作用$T^{-i}$得到$v(T^{-i}g)=0$,所以有如下交换图表:
+    	$$\xymatrix{T^{-i}M\ar[rr]\ar[d]_{T^{-i}g}&&0\ar[d]\\Y\ar[rr]^v&&Z}$$
+    	
+    	所以有$f:T^{-i}M\to X$构成如下三角态射:
+    	$$\xymatrix{T^{-i}M\ar@{=}[r]\ar[d]_{f}&T^{-i}M\ar[r]\ar[d]_{T^{-i}g}&0\ar[d]\ar[r]&T^{1-i}M\ar[d]_{Tf}\\X\ar[r]^u&Y\ar[r]^v&Z\ar[r]^{w}&TX}$$
+    	
+    	于是有$uf=T^{-i}g$,两边作用$T^i$得到$(T^iu)(T^if)=g$,也即$g\in\mathrm{im}(T^iu)_*$.这证明了正合性.
+    \end{proof}
+    \item 设$(f,g,h)$是好三角之间的三角态射,如果$f,g,h$中有两个是同构,那么第三个也是同构,此时$(f,g,h)$是三角同构.
+    $$\xymatrix{X\ar[r]^u\ar[d]_f&Y\ar[r]^v\ar[d]_g&Z\ar[r]^w\ar[d]_h&T(X)\ar[d]_{Tf}\\X'\ar[r]^{u'}&Y'\ar[r]^{v'}&Z'\ar[r]^{w'}&T(X')}$$
+    \begin{proof}
+    	
+    	按照$\mathrm{TR}2$,以及$f$是同构当且仅当某个$T^if$是同构.说明只需证明当$f,g$是同构时$h$是同构,因为其余两种情况按照$\mathrm{TR}2$是可以顺时针旋转得到的.将上同调函子$\mathrm{Hom}_{\mathscr{C}}(Z',-)$作用在图表上,得到两个阿贝尔群的正合列之间的链映射:
+    	$$\xymatrix{\mathrm{Hom}(Z',X)\ar[r]\ar[d]_{f_*}&\mathrm{Hom}(Z',Y)\ar[r]\ar[d]_{g_*}&\mathrm{Hom}(Z',Z)\ar[r]\ar[d]_{h_*}&\mathrm{Hom}(Z',TX)\ar[r]\ar[d]_{(Tf)_*}&\mathrm{Hom}(Z',TY)\ar[d]_{(Tg)_*}\\\mathrm{Hom}(Z',X')\ar[r]&\mathrm{Hom}(Z',Y')\ar[r]&\mathrm{Hom}(Z',Z')\ar[r]&\mathrm{Hom}(Z',TX')\ar[r]&\mathrm{Hom}(Z',TY')}$$
+    	
+    	按照五引理,这里的$h_*$也是同构,于是存在态射$h_1:Z'\to Z$使得$hh_1=1_{Z'}$.同理对原本的好三角之间的态射作用上同调函子$\mathrm{Hom}_{\mathscr{C}}(Z,-)$,得到存在态射$h_2:Z'\to Z$使得$h_2h=1_Z$.于是得到$h:Z\to Z'$是同构.
+    \end{proof}
+    \item 推论.在同构意义下$\mathscr{C}$中任一态射$u:X\to Y$只能嵌入到唯一的好三角中.
+    \begin{proof}
+    	
+    	如果存在好三角$(X,Y,Z,u,v,w)$和$(X,Y,Z',u,v',w')$,按照$\mathrm{TR}3$,如下实线图表交换得到存在虚线使得图表交换.但是上一条说明这导致$h$也是同构,所以这两个好三角是同构的.
+    	$$\xymatrix{X\ar[r]^u\ar@{=}[d]&Y\ar[r]^v\ar@{=}[d]&Z\ar[r]^w\ar@{-->}[d]_h&TX\ar@{=}[d]\\X\ar[r]^u&Y\ar[r]^{v'}&Z'\ar[r]^{w'}&TX}$$
+    \end{proof}
+    \item (逆时针旋转).设$\xymatrix{X\ar[r]^u&Y\ar[r]^v&Z\ar[r]^w&TX}$是好三角,那么如下三角也是好三角:
+    $$\xymatrix{T^{-1}Z\ar[r]^{-T^{-1}w}&X\ar[r]^u&Y\ar[r]^v&Z}$$
+    
+    另外这说明一个三角是好三角当且仅当它的某个顺时针或者某个逆时针是好三角.
+    \begin{proof}
+    	
+    	先把$-T^{-1}w$嵌入到好三角中:
+    	$$\xymatrix{T^{-1}Z\ar[r]^{-T^{-1}w}&X\ar[r]^{u'}&Y'\ar[r]^{v'}&Z}$$
+    	
+    	按照$\mathrm{TR}2$就有如下好三角:
+    	$$\xymatrix{X\ar[r]^{u'}&Y'\ar[r]^{v'}&Z\ar[r]^w&TX}$$
+    	
+    	按照$\mathrm{TR}3$(我们解释过延拓为三角态射可以在任意位置实现),存在虚线态射使得如下图表交换:
+    	$$\xymatrix{X\ar[r]^u\ar@{=}[d]&Y\ar[r]^v\ar@{-->}[d]_g&Z\ar[r]^w\ar@{=}[d]&TX\ar@{=}[d]\\X\ar[r]^{u'}&Y'\ar[r]^{v'}&Z\ar[r]^w&TX}$$
+    	
+    	并且我们解释过这里的$g$是同构.于是得到如下三角同构.但是第二行是好三角,按照$\mathrm{TR}1$就得到第一行也是好三角.
+    	$$\xymatrix{T^{-1}Z\ar[r]^{-T^{-1}w}\ar@{=}[d]&X\ar[r]^u\ar@{=}[d]&Y\ar[r]^v\ar[d]_g&Z\ar@{=}[d]\\T^{-1}Z\ar[r]^{-T^{-1}w}&X\ar[r]^{u'}&Y\ar[r]^{v'}&Z}$$
+    \end{proof}
+    \item 两个好三角的直和是好三角.
+    \begin{proof}
+    	
+    	设$(X,Y,Z,u,v,w)$和$(X',Y',Z',u',v',w')$是好三角,先把$u\oplus u'$嵌入到好三角中:
+    	$$\xymatrix{X\oplus X'\ar[r]^{u\oplus u'}&Y\oplus Y'\ar[r]^g&W\ar[r]^h&TX\oplus TX'}$$
+    	
+    	于是实线的交换图表得到三角态射:
+    	$$\xymatrix{X\ar[r]^u\ar[d]_{i_X}&Y\ar[r]^v\ar[d]_{i_Y}&Z\ar[r]^w\ar@{-->}[d]_i&TX\ar[d]_{i_{TX}}\\X\oplus X'\ar[r]^{u\oplus u'}&Y\oplus Y'\ar[r]^g&W\ar[r]^h&TX\oplus TX'}$$
+    	
+    	类似的有如下交换图表:
+    	$$\xymatrix{X'\ar[r]^{u'}\ar[d]_{i_{X'}}&Y'\ar[r]^{v'}\ar[d]_{i_{Y'}}&Z'\ar[r]^{w'}\ar@{-->}[d]_j&TX'\ar[d]_{i_{TX'}}\\X\oplus X'\ar[r]^{u\oplus u'}&Y\oplus Y'\ar[r]^g&W\ar[r]^h&TX\oplus TX'}$$
+    	
+    	按照加性范畴上二元直和与直积同构,它们的泛性质得到如下交换图表:
+    	$$\xymatrix{X\oplus X'\ar[r]^{u\oplus u'}\ar@{=}[d]&Y\oplus Y'\ar[r]^{v\oplus v'}\ar@{=}[d]&Z\oplus Z'\ar[r]^{w\oplus w'}\ar[d]_{i+j}&TX\oplus TX'\ar@{=}[d]\\X\oplus X'\ar[r]^{u\oplus u'}&Y\oplus Y'\ar[r]^g&W\ar[r]^h&TX\oplus TX'}$$
+    	
+    	现在分别将上同调函子$\mathrm{Hom}_{\mathscr{C}(W,-)}$和$\mathrm{Hom}_{\mathscr{C}}(-,Z\oplus Z')$作用在这个图表上.尽管上一行我们暂且不知道是好三角,但是由于它是好三角的直和,作用上同调函子同样得到长正合列,那么按照五引理可得$i+j$是同构,于是这是三角同构,于是按照$\mathrm{TR}1$得到第一行也是好三角.
+    \end{proof}
+    \item 设$\xymatrix{X\ar[r]^u&Y\ar[r]^v&Z\ar[r]^w&TX}$是好三角,那么如下命题互相等价:
+    \begin{itemize}
+    	\item $w=0$.
+    	\item $u$是分裂单态射,即存在态射$u':Y\to X$使得$u'u=1_X$.
+    	\item $v$是分裂满态射,即存在态射$v':Z\to Y$使得$vv'=1_Z$.
+    	\item 存在$s:Y\to X$和$t:Z\to Y$使得$su=1_X$和$vt=1_Z$和$st=0$和$us+tv=1_Y$.换句话讲$Y$是$X,Z$的biproduct.此时给定的好三角同构于:$$\xymatrix{X\ar[r]^{i_X}&X\oplus Z\ar[r]^{p_Z}&Z\ar[r]^0&TX}$$
+    \end{itemize}
+
+    另外要强调的是不是所有使得$su=1_X$和$vt=1_Z$的$s,t$都满足$st=0$和$us+tv=1_Y$.
+    \begin{proof}
+    	
+    	首先$\xymatrix{X\ar[r]^{i_X}&X\oplus Z\ar[r]^{p_Z}&Z\ar[r]^0&TX}$是好三角因为它是如下两个好三角的直和:$$\xymatrix{X\ar[r]^{1_X}&X\ar[r]&0\ar[r]&TX}$$
+    	$$\xymatrix{0\ar[r]&Z\ar[r]^{1_Z}&Z\ar[r]&0}$$
+    	
+    	1推2,如果$w=0$,那么存在虚线使得如下图表交换,这说明存在$u'u=1_X$.类似得到1推3.
+    	$$\xymatrix{X\ar@{=}[d]\ar[r]^u&Y\ar[r]^v\ar@{-->}[d]_{u'}&Z\ar[r]^0\ar[d]&TX\ar@{=}[d]\\X\ar[r]^{1_X}&X\ar[r]&0\ar[r]&TX}$$
+    	
+    	2推1,如果存在$u'$使得$u'u=1_X$,那么有如下三角态射.所以有$w=0$.类似得到3推1.
+    	$$\xymatrix{X\ar[r]^u\ar@{=}[d]&Y\ar[r]^v\ar[d]_{u'}&Z\ar[r]^w\ar[d]&TX\ar@{=}[d]\\X\ar@{=}[r]&X\ar[r]&0\ar[r]&0}$$
+    	
+    	4推1是直接的,因为有4推2推1成立.最后证明1推4.先按照1推2得到一个$s:Y\to X$使得$su=1_X$,于是得到如下好三角的态射.我们解释过此时有$(s,v)$是同构,把逆映射记作$(a,t):X\oplus Z\to Y$.那么$s,t$满足条件.
+    	$$\xymatrix{X\ar@{=}[d]\ar[r]^u&Y\ar[r]^v\ar[d]_{(s,v)}&Z\ar@{=}[d]\ar[r]^0&TX\ar@{=}[d]\\X\ar[r]^{(1,0)}&X\oplus Z\ar[r]^{p_Z}&Z\ar[r]^0&TX}$$
+    \end{proof}
+    \item 态射$u:X\to Y$是同构当且仅当它嵌入的好三角$(X,Y,Z,u,v,w)$满足$Z\cong0$.
+    \begin{proof}
+    	
+    	如果$u$是同构,考虑如下三角态射,于是$Z\to0$是同构.
+    	$$\xymatrix{X\ar[r]^u\ar[d]_u&Y\ar[r]\ar@{=}[d]&Z\ar[r]\ar[d]&TX\ar[d]_{Tu}\\Y\ar@{=}[r]&Y\ar[r]&0\ar[r]&TY}$$
+    	
+    	反过来如果$\xymatrix{X\ar[r]^u&Y\ar[r]&0\ar[r]&TX}$是好三角,考虑如下三角态射,得到$u$是同构.
+    	$$\xymatrix{X\ar[r]^u\ar[d]_u&Y\ar[r]\ar@{=}[d]&0\ar[r]\ar@{=}[d]&TX\ar[d]_{Tu}\\Y\ar@{=}[r]&Y\ar[r]&0\ar[r]&TY}$$
+    \end{proof}
+    \item (符号法则)如果$(X,Y,Z,u,v,w)$是好三角,那么如下三个三角都是好三角:
+    $$(X,Y,Z,-u,-v,w),(X,Y,Z,u,-v,-w),(X,Y,Z,-u,v-w)$$
+    
+    但是有例子说明$(X,Y,Z,u,v,-w)$未必是好三角.
+    \begin{proof}
+    	
+    	因为有如下三角同构,得到$(X,Y,Z,-u,-v,w)$是好三角.另外两种情况类似.
+    	$$\xymatrix{X\ar[r]^u\ar@{=}[d]&Y\ar[r]^v\ar[d]_{-1}&Z\ar[r]^w\ar@{=}[d]&TX\ar@{=}[d]\\X\ar[r]^{-u}&Y\ar[r]^{-v}&Z\ar[r]^w&TX}$$
+    \end{proof}
+\end{enumerate}
+
+三角范畴和三角函子.
+\begin{enumerate}
+	\item 预三角范畴$(\mathscr{C},T)$称为三角范畴,如果它还满足如下八面体公理$\mathrm{TR}4$.
+	\begin{itemize}
+		\item ($\mathrm{TR}4$).(八面体公理)在如下图表中第一行第二行和第二列都是好三角,那么存在虚线的$f,g$使得所在的第三列也是好三角.
+		$$\xymatrix{X\ar[r]^u\ar@{=}[d]&Y\ar[r]^i\ar[d]^v&Z'\ar[r]^{i'}\ar@{-->}[d]^f&TX\ar@{=}[d]\\X\ar[r]^{vu}&Z\ar[r]^k\ar[d]^j&Y'\ar[r]^{k'}\ar@{-->}[d]^g&TX\ar[d]^{Tu}\\&X'\ar@{=}[r]\ar[d]^{j'}&X'\ar[r]^{j'}\ar[d]^{(Ti)j'}&TY\\&TY\ar[r]^{Ti}&TZ'&}$$
+		\item 八面体公理可以理解为如下八面体图表,其中有四个面是好三角,其余四个面不是三角,两个斜平行四边形导出两个三角态射.
+		$$\xymatrix@!{&&Y'\ar[drr]^g\ar[ddll]&&\\Z'\ar[d]\ar[urr]^f&&&&X'\ar@{-->}[ddll]\ar@{-->}[llll]\\X\ar[rrrr]\ar[drr]_u&&&&Z\ar[u]\ar[uull]\\&&Y\ar[urr]_v\ar@{-->}[uull]&&}$$
+	\end{itemize}
+    \item 三角范畴$(\mathscr{C},T)$的一个完全加性子范畴$\mathscr{D}$称为三角子范畴,如果它满足如下三个条件:
+    \begin{itemize}
+    	\item $\mathscr{D}$是充足子范畴,即$\mathscr{C}$中某个与$\mathscr{D}$中对象同构的对象仍在$\mathscr{D}$中.
+    	\item $T$限制在$\mathscr{D}$上仍是自同构.
+    	\item $\mathscr{D}$对好三角扩张封闭.即如果$X\to Y\to Z\to TX$是好三角,那么$X,Z$在$\mathscr{D}$中能推出$Y$在$\mathscr{D}$中.另外按照顺时针逆时针旋转公理,这条等价于讲$X,Y,Z$中任意两个在$\mathscr{D}$中都能推出第三个也在$\mathscr{D}$中.
+    \end{itemize}
+    \item 设$(\mathscr{C},T)$和$(\mathscr{C}',T')$是两个三角范畴.设$F:\mathscr{C}\to\mathscr{C}'$是加性函子,设$\varphi:FT\cong T'F$是自然同构.我们称$(F,\varphi)$是从$(\mathscr{C},T)$到$(\mathscr{C}',T')$的三角函子,如果对$\mathscr{C}$中任意的好三角$(X,Y,Z,u,v,w)$,都有如下三角是$\mathscr{C}'$中的好三角:
+    $$\xymatrix{FX\ar[r]^{Fu}&FY\ar[r]^{Fv}&FZ\ar[r]^{\varphi(X)Fw}&T'FX}$$
+    
+    如果三角函子是范畴同构函子或者范畴等价函子,就称它是三角同构或者三角等价.如果两个三角范畴之间存在三角同构或者三角等价,就称它们是三角同构的或者三角等价的.
+\end{enumerate}
+\begin{enumerate}
+	\item 设$(F,\varphi):\mathscr{C}\to\mathscr{C}'$是三角函子,如果它是完全的,并且把非零对象映射为非零对象,那么$F$是忠实的.所以如果三角函子还是本质满的,那么它就是三角等价函子.
+	\begin{proof}
+		
+		取态射$f:X\to Y$使得$Ff=0$.把$f$嵌入到好三角中:
+		$$\xymatrix{X\ar[r]^f&Y\ar[r]^g&Z\ar[r]&TX}$$
+		
+		按照三角函子定义,就有$\mathscr{C}'$中的如下好三角:
+		$$\xymatrix{FX\ar[r]^0&FY\ar[r]^{Fg}&FZ\ar[r]&T'FX}$$
+		
+		我们解释过这个好三角说明$Fg$是分裂单态射,那么存在函子$Fg':FZ\to FY$使得$Fg'Fg=1_{FY}$,其中$g'$是$Z\to Y$的态射.把$g'g:Y\to Y$嵌入到好三角中:
+		$$\xymatrix{Y\ar[r]^{g'g}&Y\ar[r]&W\ar[r]&TY}$$
+		
+		那么有$\mathscr{C}'$中的如下好三角:
+		$$\xymatrix{FY\ar[r]^{1_{FY}}&FY\ar[r]&FW\ar[r]&T'FY}$$
+		
+		我们解释过这里$1_{FY}$是同构得到$FW=0$,导致$W=0$,导致$g'g$是同构,于是$g'$是分裂但态射.于是$f=0$.
+	\end{proof}
+    \item 设$(\mathscr{C},[1])$是预三角范畴,八面体公理等价于如下公理$(\mathrm{TR}4')$:给定$\mathscr{C}$中的态射序列$\xymatrix{A\ar[r]^{f_1}&B\ar[r]^{f_2}&C}$,那么存在如下交换图表使得前两行和中间两列都是好三角.
+    $$\xymatrix{A\ar[r]^{f_1}\ar@{=}[d]&B\ar[r]^{g_1}\ar[d]^{f_2}&X\ar[r]^{h_1}\ar[d]^{\alpha}&A[1]\ar@{=}[d]\\A\ar[r]^{f_2f_1}&C\ar[r]^{g_3}\ar[d]^{g_2}&Y\ar[r]^{h_3}\ar[d]^{\beta}&A[1]\ar[d]^{f_1[1]}\\&Z\ar@{=}[r]\ar[d]^{h_2}&Z\ar[r]^{h_2}\ar[d]^{\gamma}&B[1]\\&B[1]\ar[r]^{g_1[1]}&A[1]&}$$
+    \begin{proof}
+    	
+    	$(\mathrm{TR}4)\Rightarrow(\mathrm{TR}4')$:首先$f_1$可以延拓为第一行的好三角,$f_2$可以延拓为第二列的好三角,$f_2f_1$延拓为第二行的好三角.按照$(\mathrm{TR}4)$就得到存在$\alpha,\beta$使得第三列是好三角,并且所有图表交换.
+    	
+    	\qquad
+    	
+    	$(\mathrm{TR}4)\Rightarrow(\mathrm{TR}4')$:考虑如下图表.
+    	$$\xymatrix{A\ar[r]^{f_1}\ar@{=}[d]&B\ar[r]^{g_1'}\ar[d]^{f_2}&X'\ar[r]^{h_1'}\ar@{-->}[d]^{\alpha'}&A[1]\ar@{=}[d]\\A\ar[r]^{f_2f_1}&C\ar[r]^{g_3'}\ar[d]^{g_2'}&Y'\ar[r]^{h_3'}\ar@{-->}[d]^{\beta'}&A[1]\ar[d]^{f_1'[1]}\\&Z'\ar@{=}[r]\ar[d]^{h_2'}&Z'\ar[r]^{h_2'}\ar[d]^{\gamma'}&B[1]\\&B[1]\ar[r]^{g_1'[1]}&A[1]&}$$
+    	
+    	我们需要证明存在$\alpha',\beta'$使得图表交换,并且第三列是好三角.按照$\mathrm{TR}4'$,有如下交换图表,其中前两行和中间两列都是好三角.
+    	$$\xymatrix{A\ar[r]^{f_1}\ar@{=}[d]&B\ar[r]^{g_1}\ar[d]^{f_2}&X\ar[r]^{h_1}\ar[d]^{\alpha}&A[1]\ar@{=}[d]\\A\ar[r]^{f_2f_1}&C\ar[r]^{g_3}\ar[d]^{g_2}&Y\ar[r]^{h_3}\ar[d]^{\beta}&A[1]\ar[d]^{f_1[1]}\\&Z\ar@{=}[r]\ar[d]^{h_2}&Z\ar[r]^{h_2}\ar[d]^{\gamma}&B[1]\\&B[1]\ar[r]^{g_1[1]}&A[1]&}$$
+    	
+    	但是这个图表的第一行,第二列,第二行分别是$f_1,f_2,f_2f_1$嵌入到好三角.我们解释过统一态射嵌入到的好三角是同构的,所以存在三个同构$p:X\to X'$,$q:Y\to Y'$和$r:Z\to Z'$使得$(1_A,1_B,p)$是$(A,B,X,f_1,g_1,h_1)$到$(A,B,X',f_1,g_1',h_1')$的同构.类似有另外两个好三角同构.取$\alpha=r^{-1}\alpha'p:X\to Y$和$\beta=r^{-1}\beta'q:Y\to Z$就使得图表交换.
+    \end{proof}
+    \item 设$(\mathscr{C},T)$是预三角范畴,八面体公理等价于如下基变换条件:给定好三角
+    $$\xymatrix{A\ar[r]^f&B\ar[r]^g&C\ar[r]^h&A[1]}$$
+    
+    给定态射$\varepsilon:C'\to C$,那么有如下交换图表,使得中间两行和中间两列都是好三角:
+    $$\xymatrix{&E\ar@{=}[r]\ar[d]_{\alpha}&E\ar[d]_{\delta}&\\A\ar@{=}[d]\ar[r]^{f'}&B'\ar[r]^{g'}\ar[d]_{\beta}&C'\ar[r]^{h'}\ar[d]_{\varepsilon}&A[1]\ar@{=}[d]\\A\ar[r]^f&B\ar[r]^g\ar[d]_{\gamma}&C\ar[r]^h\ar[d]_{\eta}&A[1]\ar[d]_{f'[1]}\\&E[1]\ar@{=}[r]&E[1]\ar[r]^{-\alpha[1]}&B'[1]}$$
+    \begin{proof}
+    	
+    	基变换$\Rightarrow(\mathrm{TR}4')$:给定态射链$\xymatrix{A\ar[r]^{f_1}&B\ar[r]^{f_2}&C}$.将$f_2$嵌入到好三角中:
+    	$$\xymatrix{C[-1]\ar[r]^{-g_2[-1]}&Z[-1]\ar[r]^{-h_2[-1]}&B\ar[r]^{f_2}&C}$$
+    	
+    	这个好三角和态射$f_1:A\to B$,按照基变换就得到如下交换图表,并且中间两行和中间两列都是好三角,这得到$\mathrm{TR}4'$那个图表是交换的,并且其中四个三角是好三角:
+    	$$\xymatrix{&X[-1]\ar@{=}[r]\ar[d]_{\alpha[-1]}&X[-1]\ar[d]_{-h_1[-1]}&\\C[-1]\ar[r]^{-g_3[-1]}\ar@{=}[d]&Y[-1]\ar[r]^{-h_3[-1]}\ar[d]_{\beta[-1]}&A\ar[r]^{f_2f_1}\ar[d]_{f_1}&C\ar@{=}[d]\\C[-1]\ar[r]^{-g_2[-1]}&Z[-1]\ar[r]^{-h_2[-1]}\ar[d]_{-\gamma[-1]}&B\ar[r]^{f_2}\ar[d]_{g_1}&C\ar[d]_{-g_3}\\&X\ar@{=}[r]&X\ar[r]^{-\alpha}&Y}$$
+    	
+    	$(\mathrm{TR}4')\Rightarrow$基变换:给定好三角$\xymatrix{A\ar[r]^f&B\ar[r]^g&C\ar[r]^h&A[1]}$和态射$\varepsilon:C'\to C$.考虑态射链$\xymatrix{C'\ar[r]^{\varepsilon}&C\ar[r]^h&A[1]}$,按照$\mathrm{TR}4'$得到如下交换图表,零七前两行和中间两列都是好三角,这得到基变换图表是交换的,并且基变换图表中中间两行和中间两列都是好三角.
+    	$$\xymatrix{C'\ar[r]^{\varepsilon}\ar@{=}[d]&C\ar[r]^{\eta}\ar[d]_h&E[1]\ar[r]^{-\delta[1]}\ar[d]_{\alpha[1]}&C'[1]\ar@{=}[d]\\C'\ar[r]^{h'}&A[1]\ar[r]^{-f'[1]}\ar[d]_{f[1]}&B'\ar[r]^{-g'[1]}\ar[d]_{-\beta[1]}&C'[1]\ar[d]_{\varepsilon[1]}\\&B[1]\ar@{=}[r]\ar[d]_{g[1]}&B[1]\ar[r]^{g[1]}\ar[d]_{\gamma[1]}&C[1]\\&C[1]\ar[r]^{\eta[1]}&E[2]&}$$
+    \end{proof}
+    \item 设$(\mathscr{C},T)$是预三角范畴,八面体公理还等价于如下余基变换条件:给定好三角
+    $$\xymatrix{A\ar[r]^f&B\ar[r]^g&C\ar[r]^h&A[1]}$$
+    
+    给定态射$\alpha:A\to A'$,那么有如下交换图表,使得中间两行和中间两列都是好三角:
+    $$\xymatrix{&F\ar@{=}[r]\ar[d]_{\eta}&F\ar[d]_{\varepsilon}&\\C[-1]\ar@{=}[d]\ar[r]^{-h[-1]}&A\ar[r]^{f}\ar[d]_{\alpha}&B\ar[r]^{g}\ar[d]_{\beta}&C\ar@{=}[d]\\C[-1]\ar[r]^{-h'[-1]}&A'\ar[r]^{f'}\ar[d]_{\gamma}&B'\ar[r]^{g'}\ar[d]_{\delta}&C\ar[d]_{-h}\\&F[1]\ar@{=}[r]&F[1]\ar[r]^{-\eta[1]}&A[1]}$$
+    \item ($4\times4$引理)设$(\mathscr{C},T)$是三角范畴,并且有如下交换图表:
+    $$\xymatrix{A_1\ar[rr]^{x_1}\ar[d]^{a_1}&&B_1\ar[d]^{b_1}\\A_2\ar[rr]^{x_2}&&B_2}$$
+    
+    那么存在如下图表,其中四行与四列都是好三角,并且图表除了右下角方块反交换外都是交换的.
+    \begin{proof}
+    	
+    	按照$\mathrm{TR}4$得到如下三个图表,它们凑成了命题结论的图表.
+    	$$\xymatrix{A_1\ar@{=}[r]\ar[d]_{x_1}&A_1\ar[d]^{b_1x_1}&&\\B_1\ar[r]^{b_1}\ar[d]_{y_1}&B_2\ar[r]^{b_2}\ar[d]^f&B_3\ar[r]^{b_3}\ar@{=}[d]&B_1[1]\ar[d]^{y_1[1]}\\C_1\ar[r]^k\ar[d]_{z_1}&D\ar[r]^j\ar[d]^g&B_3\ar[r]\ar[d]^{b_3}&C_1[1]\\A_1[1]\ar@{=}[r]&A_1[1]\ar[r]^{x_1[1]}&B_1[1]&}$$
+    	$$\xymatrix{A_1\ar@{=}[r]\ar[d]_{a_1}&A_1\ar[d]^{x_2a_1}&&\\A_2\ar[r]^{x_2}\ar[d]_{a_2}&B_2\ar[r]^{y_2}\ar[d]^f&C_2\ar[r]^{x_2}\ar@{=}[d]&A_2[1]\ar[d]^{a_2[1]}\\A_3\ar[r]^h\ar[d]_{a_3}&D\ar[r]^i\ar[d]^g&C_2\ar[r]\ar[d]^{z_2}&A_3[1]\\A_1[1]\ar@{=}[r]&A_1[1]\ar[r]^{a_1[1]}&A_2[1]&}$$
+    	$$\xymatrix{A_3\ar@{=}[r]\ar[d]_{h}&A_3\ar[d]^{jh}&&\\D\ar[r]^{j}\ar[d]_{i}&B_3\ar[r]^{y_1[1]b_3}\ar[d]^{y_3}&C_1[1]\ar[r]^{-k[1]}\ar@{=}[d]&D[1]\ar[d]^{i[1]}\\C_2\ar[r]^{c_2}\ar[d]_{a_2[1]z_2}&C_3\ar[r]^{c_3}\ar[d]^{z_3}&C_1[1]\ar[r]^{-c_1[1]}\ar[d]^{-k[1]}&C_2[1]\\A_3[1]\ar@{=}[r]&A_3[1]\ar[r]^{h[1]}&D[1]&}$$
+    \end{proof}
+\end{enumerate}
+
+
+
+\newpage
+\section{范畴分式化}
+
+图(graph)的定义.
+\begin{itemize}
+	\item 一个图$\mathscr{G}$由一个类$|\mathscr{G}|$,及对每个$(A,B)\in|\mathscr{G}|\times|\mathscr{G}|$,赋予一个集合$\mathscr{G}(A,B)$,其中元素称为箭头,构成.如果$|\mathscr{G}|$是集合就称图$\mathscr{G}$是小的(small).两个图之间的态射$F:\mathscr{F}\to\mathscr{G}$是一个映射$F:|\mathscr{F}|\to|\mathscr{G}|$,以及对每对$(A,B)\in\mathscr{F}\times\mathscr{F}$,赋予一个映射$\mathscr{F}(A,B)\to\mathscr{G}(FA,FB)$.所有小图构成的范畴记作$\textbf{Graph}$.
+	\item 图$\mathscr{G}$中的一条道路定义为一个箭头序列$(f_1,f_2,\cdots,f_n)$,使得$f_i$的终端是$f_{i+1}$的源端.如果记$f_i:A_i\to A_{i+1}$,也会把道路记作$(A_1,f_1,A_2,\cdots,f_n,A_{n+1})$.于是长度1的$(A,f,B)$就是一个箭头.图$\mathscr{G}$中的一个交换条件(commutativity condition)是指两个具有相同源端和终端的道路.记范畴$\textbf{CondGraph}$为,对象是小图赋予了一个交换条件构成的集合,态射定义为把交换条件映射为交换条件的图之间的态射.
+\end{itemize}
+\begin{enumerate}
+	\item 图就相当于没有结合律的范畴,记$\textbf{Cat}$是小范畴构成的范畴,有遗忘函子$F:\textbf{Cat}\to\textbf{Graph}$就让范畴忘记结合律.我们构造它的左伴随函子,就是构造图的道路范畴.
+	\begin{proof}
+		
+		设$\mathscr{G}$是一个小图,定义它的道路范畴$\mathscr{P}$为,对象集$|\mathscr{P}|=|\mathscr{G}|$,$\mathscr{P}(A,B)$定义为所有从$A$到$B$的道路.态射的复合就定义为:
+		$$(A_n,f_n,\cdots,A_m)\circ(A_1,f_1,\cdots,A_n)=(A_1,f_1,\cdots,A_n,f_n,\cdots,A_m)$$
+		
+		小图之间的态射自然诱导了它们对应的道路范畴之间的函子,于是我们构造了函子$G:\textbf{Graph}\to\textbf{Cat}$.把$\mathscr{P}$视为小图,定义态射$\Gamma:\mathscr{G}\to\mathscr{P}$为$\Gamma(A)=A$,$\Gamma(f:A\to B)=(A,f,B)$.这个态射是$\mathscr{G}$到$F$的泛态射:对任意范畴$\mathscr{A}$和任意一个态射$\Gamma':\mathscr{B}\to F\mathscr{A}$,存在唯一的态射$f:\mathscr{P}\to F\mathscr{A}$使得如下图表交换,即$f(A)=\Gamma'(A)$和$f(A_1,f_1,\cdots,A_n)=\Gamma'(1_{A_n})\circ\cdots\circ\Gamma'(f_1)\circ\Gamma'(1_{A_1})$.于是$G$是$F$的左伴随函子.
+		$$\xymatrix{&\mathscr{G}\ar[dl]_{\Gamma}\ar[dr]^{\Gamma'}&\\F\mathscr{P}\ar[rr]_{Ff}&&F\mathscr{A}}$$
+	\end{proof}
+    \item 小范畴相当于带一族交换条件的小图,于是我们有遗忘函子$F:\textbf{Cat}\to\textbf{CondGraph}$.我们构造它的左伴随函子.
+    \begin{proof}
+    	
+    	给定带交换条件的小图$(\mathscr{G},\Sigma)$,它的道路范畴记作$\mathscr{P}$.考虑$\mathscr{P}\times\mathscr{P}$的最小的满足如下三个条件的子范畴$\mathscr{R}$,也即所有满足如下三个条件的子范畴的交.
+    	\begin{itemize}
+    		\item $|\mathscr{L}|=\{(A,A)\mid A\in\mathscr{G}\}$.
+    		\item $\mathrm{Ar}(\mathscr{R})$(这个记号表示小范畴$\mathscr{R}$的全体态射构成的集合)是$\mathrm{Ar}(\mathscr{P})$的等价关系.
+    		\item $\Sigma\subseteq\mathrm{Ar}(\mathscr{R})$.
+    	\end{itemize}
+    	
+    	特别的,$\mathscr{R}((A,A),(B,B))$中的态射是$\mathscr{P}(A,B)$上的等价关系.我们定义范畴$\mathscr{L}$的对象集就是$|\mathscr{P}|=|\mathscr{G}|$,态射集$\mathscr{L}(A,B)$定义为$\mathscr{P}(A,B)$在上述等价关系下的全体等价类.我们把道路$\varphi$所在的等价类记作$[\varphi]$.构造态射$\theta:(\mathscr{G},\Sigma)\to F\mathscr{L}$.为在对象上恒等,在箭头上$\theta(f)=[f]$,这把交换条件映射为交换条件.任取范畴$\mathscr{A}$,任取态射$\theta':(\mathscr{G},\Sigma)\to F\mathscr{A}$,那么存在唯一的函子$f:\mathscr{L}\to\mathscr{A}$使得如下图表交换,即$f(A)=\theta'(A)$和$f([\varphi])=\theta'(\varphi)$.于是$\theta:(\mathscr{G},\Sigma)\to\mathscr{L}$是泛态射,于是$G$是$F$的左伴随函子.
+    \end{proof}
+    \item 小范畴构成的范畴$\textbf{Cat}$是余完备范畴.
+    \begin{proof}
+    	
+    	$\textbf{Cat}$上的余积就是无交并,我们只需构造任意两个函子$F,G:\mathscr{A}\to\mathscr{B}$的余等化子.考虑$\mathscr{B}\times\mathscr{B}$的最小的满足如下四个条件的子范畴$\mathscr{R}$,也即所有满足如下条件的子范畴的交:
+    	\begin{itemize}
+    		\item $|\mathscr{R}|$是$|\mathscr{B}|$上的等价关系.
+    		\item 对任意$A\in\mathscr{A}$有$(FA,GA)\in|\mathscr{R}|$.
+    		\item $\mathrm{Ar}(\mathscr{R})$是$\mathrm{Ar}(\mathscr{B})$上的等价关系.
+    		\item 对任意$f\in\mathrm{Ar}(\mathscr{A})$,有$(Ff,Gf)\in\mathrm{Ar}(\mathscr{R})$.
+    	\end{itemize}
+    
+        定义小图$\mathscr{G}$为,对象集是$|\mathscr{B}|$上等价关系$|\mathscr{R}|$的等价类集合,定义$\mathrm{Ar}(\mathscr{G})$是$\mathrm{Ar}(\mathscr{B})$上等价关系$\mathrm{Ar}(\mathscr{R})$的等价类集合.对象$B$和箭头$g$所在等价类分别记作$[B]$和$[g]$.这个小图一般不是范畴,比方说如果两个不能复合的箭头$g:A\to B$和$h:C\to D$等价,如果$[B]=[C]$就会出问题.
+        
+        \qquad
+        
+        下面取$\mathscr{G}$的如下交换条件集合$\Sigma$:
+        \begin{itemize}
+        	\item $\forall B\in\mathscr{B}$,$(([B],[1_B],[B]),([B]))\in\Sigma$.
+        	\item 对任意$\mathscr{B}$中的态射$g:A\to B$和$h:B\to C$,有:
+        	$$\left(([A],[g],[B],[h],[C]),([A],[h\circ g],[C])\right)\in\Sigma$$
+        	\item 对任意$\mathscr{A}$中的态射$f:X\to Y$,有(因为定义要求了$[FX]=[GX]$):
+        	$$\left(([FX],[Ff],[FY]),([GX],[Gf],[GY])\right)\in\Sigma$$
+        \end{itemize}
+        
+        考虑$(\mathscr{G},\Sigma)$在上一条中对应的范畴$\mathscr{L}$.考虑态射的复合$\xymatrix{\mathscr{B}\ar[r]^{P}&\mathscr{G}\ar[r]^{\theta}&\mathscr{L}}$,其中$P$是典范的投影态射,这个复合态射是函子是因为$\Sigma$定义中的前两条.我们断言$(\mathscr{L},P\circ\theta)$是$F,G:\mathscr{A}\to\mathscr{B}$的余等化子.
+        
+        \qquad
+        
+        首先$\theta PF=\theta PG$是因为$\Sigma$定义中的第三条.任取小范畴$\mathscr{D}$和函子$H:\mathscr{B}\to\mathscr{D}$,使得$HF=HG$,考虑子范畴$\mathscr{K}\subseteq\mathscr{B}\times\mathscr{B}$为,$|\mathscr{K}|=\{(B_1,B_2)\in\mathscr{B}\times\mathscr{B}\mid HB_1=HB_2\}$和$\mathscr{K}((B_1,B_2),(B_1',B_2'))=\{(f,g)\in\mathscr{B}(B_1,B_1')\times\mathscr{B}(B_2,B_2')\mid Hf=Hg\}$.这个子范畴满足定义$\mathscr{R}$的四个条件,所以有$\mathscr{R}\subseteq\mathscr{K}$.于是$H$要经$\mathscr{D}$分解,记唯一的态射$K:\mathscr{G}\to\mathscr{D}$使得$K\circ P=H$.从$H$是函子得到$K$把$\Sigma$定义中前两个条件映射为交换条件,把第三个条件也映射为交换条件是因为$HF=HG$.于是按照泛态射的定义的图表(也是$\textbf{Graph}$上的图表),$H$要唯一的经$\theta$分解,也即有函子$L:\mathscr{L}\to\mathscr{D}$使得$L\theta=K$.于是有$L\theta P=KP=H$.结合$K$的唯一性说明$L$是唯一的.
+    \end{proof}
+\end{enumerate}
+
+范畴的分式化.设$\mathscr{C}$是范畴,设$\Sigma$是一些态射构成的类,分式化(如果存在)$\varphi:\mathscr{C}\to\mathscr{C}[\Sigma^{-1}]$是如下泛映射性质的解:
+\begin{itemize}
+	\item 对任意$f\in\Sigma$,有$\varphi(f)$是同构.
+	\item 如果函子$F:\mathscr{C}\to\mathscr{D}$同样满足对任意$f\in\Sigma$有$F(f)$是$\mathscr{D}$中的同构,那么$F$唯一的经$\varphi:\mathscr{C}\to\mathscr{C}[\Sigma^{-1}]$分解:
+	$$\xymatrix{\mathscr{C}[\Sigma^{-1}]\ar[rr]^{F'}&&\mathscr{D}\\\mathscr{C}\ar[u]_{\varphi}\ar@/_1pc/[urr]_F&&}$$
+\end{itemize}
+
+如果范畴$\mathscr{C}$的一个态射类$\Sigma$是集合,那么分式化范畴$\mathscr{C}[\Sigma^{-1}]$总存在.如果额外的$\mathscr{C}$是小范畴,那么$\mathscr{C}[\Sigma^{-1}]$也是小范畴.
+\begin{proof}
+	
+	我们只证$\mathscr{C}$是小范畴的情况,一般情况要做些集合论操作.构造小图$\mathscr{G}$为,顶点集$|\mathscr{G}|=|\mathscr{C}|$,箭头集定义为$\mathscr{G}(A,B)=\mathscr{C}(A,B)\coprod\{f\in\mathscr{C}(B,A)\mid f\in\Sigma\}$.这里无交并的$\{f\in\mathscr{C}(B,A)\mid f\in\Sigma\}$要充当态射的逆,所以我们用记号$f^{-1}:A\to B$代表添加的箭头.有典范的图态射$I:\mathscr{C}\to\mathscr{G}$.考虑这个图表的如下交换条件类$\Theta$:
+	\begin{itemize}
+		\item 对任意$\mathscr{C}$中对象$C$,有$\left((C,1_C,C),(C)\right)\in\Theta$.
+		\item 对任意$\mathscr{C}$中态射$f:C\to D$,$g:D\to E$,有:
+		$$\left((C,f,D,g,E),(C,g\circ f,E)\right)\in\Theta$$
+		\item 对任意$\Sigma$中态射$f:C\to D$,有:
+		$$\left((C,f,D,f^{-1},C),(C,1_C,C)\right)\in\Theta$$
+		$$\left((D,f^{-1},C,f,D),(D,1_D,D)\right)\in\Theta$$
+	\end{itemize}
+ 
+    考虑带交换条件的小图$(\mathscr{G},\Theta)$对应的范畴记作$\mathscr{C}[\Sigma^{-1}]$,典范映射记作$\varphi:\mathscr{C}\to\mathscr{C}[\Sigma^{-1}]$.它把$\Sigma$中的态射$f$映射为等价类$[f]$,按照$\Theta$定义中第二条和第三条说明$[f]$是同构.下面仅需验证它满足泛性质.
+    
+    \qquad
+    
+    设有函子$F:\mathscr{C}\to\mathscr{D}$满足对任意$f\in\Sigma$有$F(f)$是$\mathscr{D}$中的同构.构造态射$H:\mathscr{G}\to F\mathscr{D}$为,对$\mathscr{C}$中对象$A$有$H(A)=F(A)$,对$\mathscr{C}(A,B)$中态射$f$有$H(f)=F(f)$,对$\mathscr{C}(B,A)\cap\Sigma$中的态射$f$有$H(f^{-1})=(Ff)^{-1}$.那么有$H\circ I=F$.这个态射$H$把$\mathscr{G}$中的交换条件映射为$\mathscr{D}$中的交换条件,于是有唯一的态射$G:\mathscr{C}[\Sigma^{-1}]\to\mathscr{D}$使得$G\circ\tau=H$,于是$G\circ\tau\circ I=F$.
+\end{proof}
+
+范畴$\mathscr{C}$的一个态射构成的类$\Sigma$称为(右)乘法系,如果它满足如下条件.其中第三条和第四条的命题如果改为对偶命题,则称$\Sigma$是左乘法系.
+\begin{itemize}
+	\item 包含全部恒等态射$1_C$.
+	\item 保复合,即如果$s:A\to B$和$t:B\to C$都在$\Sigma$中,那么$t\circ s\in\Sigma$.
+	\item 如果存在下图中的两个实线态射,其中$s\in\Sigma$,那么存在虚线态射使得图表交换,并且其中$t\in\Sigma$.
+	$$\xymatrix{D\ar@{-->}[rr]^g\ar@{-->}[d]_t&&C\ar[d]^s\\A\ar[rr]_f&&B}$$
+	\item 设$f,g:A\to B$是任意两个态射,如果存在$\Sigma$中的态射$s:B\to C$使得$s\circ f=s\circ g$,那么存在$\Sigma$中的态射$t:D\to A$使得$f\circ t=g\circ t$.
+	$$\xymatrix{D\ar@{-->}[r]^t&A\ar@<0.5ex>[r]^f\ar@<-0.5ex>[r]_g&B\ar[r]^s&C}$$
+\end{itemize}
+\begin{enumerate}
+	\item 设$\mathscr{C}$是范畴,$\Sigma$是乘法系,如果分式化范畴$\mathscr{C}[\Sigma^{-1}]$存在,那么它可以被这样描述:
+	\begin{enumerate}
+		\item $|\mathscr{C}[\Sigma^{-1}]|=|\mathscr{C}|$.
+		\item $\mathscr{C}[\Sigma^{-1}]$中的态射$A\to B$是三元对$(s,I,f)$上的等价类,其中$I$是对象,$s:I\to A$是$\Sigma$中的态射,$f:I\to B$是一个态射.两个三元对$(s,I,f)$和$(t,J,q)$等价定义为存在态射$x:X\to I$和$y:X\to J$使得$s\circ x=t\circ y\in\Sigma$和$f\circ x=g\circ y$.
+		$$\xymatrix{&X\ar[dr]^y\ar[dl]_x&\\I\ar[d]_s\ar[drr]^(0.2){f}&&J\ar[d]^g\ar[dll]_(0.2){t}\\A&&B}$$
+		\item $\mathscr{C}[\Sigma^{-1}]$中两个态射$[s,I,f]:A\to B$和$[t,J,g]:B\to C$的复合是$[s\circ r,K,g\circ h]:A\to C$,其中$r\in\Sigma$和$h$是乘法系定义中的使得如下图表交换的两个态射:
+		$$\xymatrix{I\ar[d]_s\ar[dr]_f&K\ar[r]^h\ar[l]_r&J\ar[d]^g\ar[dl]^t\\A&B&C}$$
+	\end{enumerate}
+    \begin{proof}
+    	
+    	先设$\mathscr{C}$是小范畴,此时$\Sigma$是集合,我们证明过$\mathscr{C}[\Sigma^{-1}]$存在,并且有$|\mathscr{C}|=|\mathscr{C}[\Sigma^{-1}]|$.下面证明(b)中的二元关系的确是等价关系.自反性和对称性是平凡的,至于传递性,如果$(s,I,f)\simeq(t,J,g)$和$(t,J,g)\simeq(u,K,h)$,那么存在态射$x,v\in\Sigma$和态射$y,w$使得如下实线图表交换.按照乘法系的定义,存在态射$m\in\Sigma$和态射$n$使得虚线图表交换.于是有$t\circ y\circ m=t\circ v\circ n$,按照乘法系定义就有$r\in\Sigma$使得$y\circ m\circ r=v\circ n\circ r$.于是有:
+    	$$f\circ x\circ m\circ r=g\circ y\circ m\circ r=g\circ v\circ n\circ r=h\circ w\circ n\circ r$$
+    	$$s\circ x\circ m\circ r=t\circ y\circ m\circ r=t\circ v\circ n\circ r=u\circ w\circ n\circ r$$
+    	
+    	这里$s\circ x\circ m\circ r\in\Sigma$,于是$(s,I,f)\simeq(u,K,h)$,说明传递性成立.
+    	$$\xymatrix{&W\ar@{-->}[d]^r&\\X\ar[d]_x\ar[dr]^y&Z\ar@{-->}[l]_m\ar@{-->}[r]^n&Y\ar[d]^w\ar[dl]_v\\I\ar[d]_s\ar[drr]_(0.2)f&J\ar[dl]_(0.2)t\ar[dr]^(0.2)g&K\ar[d]^h\ar[dll]^(0.2)u\\A&&B}$$
+    	
+    	把命题中刻画的范畴记作$\mathscr{F}$,构造函子$\varphi:\mathscr{C}\to\mathscr{F}$为$\varphi(A)=A$和$\varphi(f)=[1_A,A,f]$.这是函子因为$\varphi(1_A)=[1_A,A,1_A]$是恒等态射,并且如下图表交换说明$\varphi(g\circ f)=\varphi(g)\circ\varphi(f)$:
+    	$$\xymatrix{A\ar[d]_{1_A}\ar[dr]_f&A\ar[l]_{1_A}\ar[r]^f&B\ar[d]^g\ar[dl]^{1_B}\\A&B&C}$$
+    	
+    	设$s\in\Sigma$,考虑如下图表:
+    	$$\xymatrix{A\ar[d]_{1_A}\ar[dr]_s&A\ar[l]_{1_A}\ar[r]^{1_A}&A\ar[d]^{1_A}\ar[dl]^s\\A&B&A}\qquad\xymatrix{A\ar[d]_s\ar[dr]_{1_A}&A\ar[l]_{1_A}\ar[r]^{1_A}&A\ar[d]^s\ar[dl]^{1_A}\\B&A&B}$$
+    	
+    	得到:
+    	$$[s,A,1_A]\circ[1_A,A,s]=[1_A,A,1_A]$$
+    	$$[1_A,A,s]\circ[s,A,1_A]=[s,A,s]=[1_B,B,1_B]$$
+    	
+    	于是我们证明了如果$s\in\Sigma$就有$\varphi(s)$是$\mathscr{F}$中的同构.最后验证泛映射性质.如果有函子$F:\mathscr{C}\to\mathscr{D}$使得对任意$f\in\Sigma$有$Ff$是$\mathscr{D}$中的同构.我们需要证明存在唯一的函子$G:\mathscr{F}\to\mathscr{D}$使得$G\circ\varphi=F$.这样的函子$G$必须要满足:
+    	\begin{itemize}
+    		\item $G(A)=G\varphi(A)=FA,\forall A\in|\mathscr{C}|$.
+    		\item $G[1_A,A,f]=G\varphi(f)=Ff,\forall (f:A\to B)\in\mathscr{C}$.
+    		\item $G[s,A,1_A]=G(\varphi(s))^{-1}=(Fs)^{-1},\forall (s:A\to B)\in\Sigma$.
+    		\item $\mathscr{F}$中任何一个态射可分解为$[s,I,f]=[1_I,I,f]\circ[s,I,1_I]$,所以上两条等价于:
+    		$$G[s,I,f]=G[1_I,I,f]\circ G[s,I,1_I]=(Ff)\circ(Fs)^{-1}$$
+    	\end{itemize}
+    
+        这些条件必然导致唯一性.至于存在性,只需验证最后一条不依赖于代表元的选取.如果有$[s,I,f]=[t,J,g]$,设$x,y$是等价定义中的态射,也即有如下交换图表:
+        $$\xymatrix{&X\ar[dr]^y\ar[dl]_x&\\I\ar[d]_s\ar[drr]^(0.2){f}&&J\ar[d]^g\ar[dll]_(0.2){t}\\A&&B}$$
+        
+        那么就有:
+        \begin{align*}
+        	Ff\circ(Fs)^{-1}&=Ff\circ(Fs)^{-1}\circ F(s\circ x)\circ(F(s\circ x))^{-1}\\&=Ff\circ(Fs)^{-1}\circ Fs\circ Fx\circ(F(s\circ x))^{-1}\\&=Ff\circ Fx\circ(F(s\circ x))^{-1}\\&=Fg\circ Fy\circ(F(t\circ y))^{-1}\\&=Fg\circ(Ft)^{-1}
+        \end{align*}    
+    \end{proof}
+    \item 考虑范畴$\mathscr{C}$和一个乘法系$\Sigma$,设分式化范畴存在.那么如果$\mathscr{C}$是有限完备的,有$\mathscr{C}[\Sigma^{-1}]$也是有限完备的,并且典范映射$\varphi:\mathscr{C}\to\mathscr{C}[\Sigma^{-1}]$保有限极限.
+    \begin{proof}
+    	
+    	终对象.记$\mathscr{C}$的终对象为1,对任意对象$C$,存在唯一的态射$f:C\to1$,考虑如下交换图表,说明每个态射$[s,I,g]:C\to I$都是$\varphi(f)=[1_C,C,f]$,于是1同样是$\mathscr{C}[\Sigma^{-1}]$的终对象.
+    	$$\xymatrix{C\ar[d]_{1_C}\ar[drr]_(0.2)f&I\ar[l]_s\ar[r]^{1_I}&I\ar[d]^g\ar[dll]^(0.2)s\\C&&1}$$
+    	
+    	二元积.给定对象$A,B$,它在$\mathscr{C}$中的积记作$(A\times B,p_A,p_B)$.我们断言$A\times B$和如下两个态射是$\mathscr{C}[\Sigma^{-1}]$中的二元积:$[1_{A\times B},A\times B,p_A]$和$[1_{A\times B},A\times B,p_B]$.任取对象$C$和态射$[s,I,f]:C\to A$,$[t,J,g]:C\to B$.首先按照乘法系定义,有态射$r\in\Sigma$和态射$u$使得如下图表交换,于是有$t\circ u=s\circ r\in\Sigma$.
+    	$$\xymatrix{&K\ar[dl]_u\ar[dr]^r&\\J\ar[dr]_t&&I\ar[dl]^s\\&C&}$$
+    	
+    	再考虑如下交换图表,得到$[s,I,f]=[sr,K,fr]$.同理按照$tu\in\Sigma$得到$[t,J,g]=[tu,K,gu]$.于是我们不妨设初始的两个态射为$[s,K,f]:C\to A$和$[s,K,g]:C\to B$.
+    	$$\xymatrix{&K\ar[dl]_r\ar[dr]^{1_K}&\\I\ar[d]_s\ar[drr]^(0.2)f&&K\ar[d]^{fr}\ar[dll]_(0.2){sr}\\C&&A}$$
+    	
+    	按照$A\times B$在$\mathscr{C}$中的的泛性质,存在态射$h:K\to A\times B$使得如下图表交换:
+    	$$\xymatrix{&K\ar[dl]_{f}\ar[dr]^{g}\ar[dd]^h&\\A&&B\\&A\times B\ar[ur]_{p_B}\ar[ul]^{p_A}&}$$
+    	
+    	按照$p_A\circ h=f$,结合如下交换图表得到$[1_{A\times B},A\times B,p_A]\circ[s,K,h]=[s,K,f]$.同理有$[1_{A\times B},A\times B,p_B]\circ[s,K,h]=[s,K,g]$.
+    	$$\xymatrix{&K\ar[dr]^h\ar[dl]_{1_K}&\\K\ar[d]_{s}\ar[dr]_h&&A\times B\ar[d]^{p_A}\ar[dl]^{1_{A\times B}}\\C&A\times B&A}$$
+    	
+    	下证$[s,K,h]$的唯一性.如果还有$C\to A\times B$的态射使得上述两个等式成立,可设这个态射为$[s,K,k]$.我们来证明$[s,K,h]=[s,K,k]$,为此只需证明存在态射$c$使得$sc\in\Sigma$和$kc=hc$(这实际上是等价的,即$[s,I,f]=[s,I,g]$等价于存在态射$t$使得$st\in\Sigma$且$ft=gt$).有$[s,K,f]=[1_{A\times B},A\times B,p_A]=[s,K,p_Ak]$.这个等式说明存在态射$a,b$使得$sa=sb\in\Sigma$和$p_Aka=fb$.同理存在态射$c,d$使得$sc=sd\in\Sigma$和$p_Bkc=gd$.按照乘法系定义,存在态射$t_1,t_2\in\Sigma$使得$at_1=bt_1$和$ct_2=dt_2$.再按照乘法系定义就有态射$x\in\sigma$和态射$y$,使得如下图表:
+    	$$\xymatrix{&\ast\ar[dl]_x\ar[dr]^y&\\\ast\ar[dr]_{sat_1=sbt_1}&&\ast\ar[dl]^{sct_2=sdt_2}\\&\ast&}$$
+    	
+    	也即有$sat_1x=sbt_1x=sct_2y=sdt_2y$.乘法系定义中有一条说对任意态射$f,g:A\to B$,如果有$s\in\Sigma$使得$sx=sy$,那么存在$t\in\Sigma$使得$xt=yt$.这一条可以等价的改为对任意有限个$A\to B$的态射均成立.以三个为例:如果$f,g,h:A\to B$使得$sf=sg=sh$,那么存在$t_1,t_2\in\Sigma$使得$xt_1=yt_1$和$yt_2=zt_2$,但是按照乘法系定义前面一条,存在$t_3\in\Sigma$和态射$t_4$使得$t_1t_3=t_2t_4\in\Sigma$.那么有$xt_1t_3=yt_1t_3=yt_2t_4=zt_2t_4$,所以取$t=t_1t_3=t_2t_4$就保证$xt=yt=zt$.回到原命题的证明,也就存在$t\in\Sigma$使得$at_1xt=bt_1xt=ct_2yt=dt_2yt$记作$c$,那么$sc=(sat_1)xt\in\Sigma$.那么从$p_Aka=fb$得到$p_Akc=fc=p_Ahc$和$p_Bkc=gc=p_Bhc$,但是按照$h$的泛性质,满足这两个等式的$hc$是唯一的,所以$hc=kc$.
+    	
+    	\qquad
+    	
+    	等化子.考虑两个态射$[s,I,f],[t,J,g]:A\to B$.存在态射$x\in\Sigma$和态射$y$使得$t\circ y=s\circ x\in\Sigma$.我们有$[s,I,f]=[sx,X,fx]$和$[t,J,g]=[tu,X,gy]$.于是我们不妨设这两个态射为$[s,X,f],[s,X,g]:A\to B$.记$\mathscr{C}$中的等化子$k=\ker(f,g):K\to X$.我们断言$[1_K,K,sk]$是这两个态射的等化子.
+    	$$\xymatrix{&&X\ar[dr]^x\ar[dl]_y&&\\&J\ar[dr]_t\ar[dl]_g&&I\ar[dr]^f\ar[dl]^s&\\B&&A&&B}$$
+    	
+    	首先考虑如下图表,按照$fk=gk$就说明$[s,X,f]\circ[1_K,K,sk]=[s,X,g]\circ[1_K,K,sk]$.
+    	$$\xymatrix{&&K\ar[dr]^k\ar[dl]_{1_K}&&\\&K\ar[dr]_{sk}\ar[dl]_{1_K}&&X\ar[dr]^f\ar[dl]^s&\\K&&A&&B}$$
+    	
+    	假设态射$[t,Y,h]:Z\to A$使得$[t,Y,h]\circ[s,X,f]=[t,Y,h]\circ[s,X,g]$.设$x,y$使得如下图表交换,那么这个等式变为$[tx,W,fy]=[tx,W,gy]$.于是存在态射$u:W_1\to W$,使得$txu\in\Sigma$和$fyu=gyu$.按照$k=\ker(f,g)$的泛性质,就有$yu$经$k$分解,也即有态射$v$使得$yu=kv$.于是有$[t,Y,h]=[txu,W_1,hxu]=[txu,W_1,syu]=[txu,W_1,skv]=[1_K,K,sk]\circ[txu,W_1,v]$.还要说明这个分解的唯一性,假设有$[t,Y,a]:Z\to K$使得$[1_K,K,sk]\circ[t,Y,a]=[t,Y,h]$.此即$[t,Y,ska]=[t,Y,h]$,也即$[txu,W_1,skaxu]=[txu,W_1,hxu]$.那么存在态射$b$使得$txub\in\Sigma$和$skaxub=hxub=syub=skvb$.于是存在$t_0\in\Sigma$使得$kaxubt_0=kvbt_0$.但是按照$k=\ker(f,g)$的泛性质,得到$axubt_0=vbt_0$.于是有$[t,Y,a]=[txubt_0,W_2,axubt_0]=[txubt_0,W_2,vbt_0]=[txu,W_1,v]$.这得到唯一性.
+    	$$\xymatrix{&&W\ar[dr]^y\ar[dl]_x&&\\&Y\ar[dr]_h\ar[dl]_t&&X\ar[dr]^f\ar[dl]^s&\\B&&A&&B}$$
+    	
+    	特别的,这说明如果$k=\ker(f,g)$,那么$[1_K,K,k]$是$[1_A,A,f]$和$[1_A,A,g]$的等化子.于是典范函子$\varphi:\mathscr{C}\to\mathscr{C}[\Sigma^{-1}]$是保等化子的.之前也证明过它保有限积,于是它保有限极限.
+    \end{proof}
+    \item 设$\mathscr{A}$是$\mathscr{B}$的反射子范畴,记反射函子为$r:\mathscr{B}\to\mathscr{A}$,记$\Sigma$表示$\mathscr{B}$的使得$r(f)$是同构的态射$f$构成的类,那么分式化$\varphi:\mathscr{B}\to\mathscr{B}[\Sigma^{-1}]$存在,并且就等价于反射函子$r:\mathscr{B}\to\mathscr{A}$.
+    \begin{proof}
+    	
+    	
+    \end{proof}
+\end{enumerate}
+
+
+
+
+

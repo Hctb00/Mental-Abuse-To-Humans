@@ -1,0 +1,319 @@
+\newpage
+\chapter{黎曼几何}
+\section{黎曼度量}
+
+黎曼度量.设$M$是光滑流形,其上的一个黎曼度量指的是一个正定对称$(0,2)$型张量场$g$.于是对每个点$p\in M$,都指定了$\mathrm{T}_pM$上的一个内积(即正定对称双线性型)$g_p$,对$v,w\in\mathrm{T}_pM$记$g_p(v,w)=\langle v,w\rangle$.黎曼流形$(M,g)$指的是光滑流形$M$上赋予一个黎曼度量$g$.
+\begin{enumerate}
+	\item 如果$a,b>0$,$g_1,g_2$是$M$上两个黎曼度量,那么明显有$ag_1+bg_2$也是$M$上的黎曼度量.
+	\item 在每个局部坐标$(x^i)$中,记$g_{ij}(p)=\langle\frac{\partial}{\partial x^i},\frac{\partial}{\partial x^j}\rangle\mid_p$.那么$(g_{ij}(p))$总是一个正定对称矩阵.在这个局部坐标卡上可以表示$g=g_{ij}\mathrm{d}x^i\mathrm{d}x^j$(此为爱因斯坦求和约定,是指对$i$和$j$求和).
+	\item $\mathbb{R}^n$上的标准黎曼度量是取$g=\sum_{i,j}\delta_{ij}\mathrm{d}x^i\mathrm{d}x^j$.这时每个$g_p$在标准基下是标准内积.
+	\item 黎曼流形的笛卡尔积.设$(M,g)$和$(M',g')$是两个黎曼流形,定义$g\times g'$是$M\times M'$上这样的黎曼度量,满足$(g\times g')((v,v'),(w,w'))=g(v,w)+g'(v',w')$.如果取$p\in M$的局部坐标为$(x^i)$,取$q\in M'$的局部坐标为$(y^j)$,那么$(x^i,y^j)$是$(p,q)\in M\times M'$的局部坐标,此时$g\times g'$的坐标表示就满足:
+	$$\left(g\times g'_{ij}\right)=\left(\begin{array}{cc}(g_{ij})&0\\0&(g'_{ij})\end{array}\right)$$
+	\item 存在性.每个光滑流形上都存在黎曼度量.
+	\begin{proof}
+		
+		设$M$是光滑流形,选取单位分解$\{U_{\alpha},\psi_{\alpha}\}$.约定这里每个$U_{\alpha}$都是坐标邻域,坐标变换记作$\varphi_{\alpha}$.在每个$U_{\alpha}$上有黎曼度量$g_{\alpha}=\varphi_{\alpha}^*\overline{g}$,其中$\overline{g}$是$\mathbb{R}^n$上的标准度量,换句话讲如果记$(U_{\alpha},\varphi_{\alpha})$的坐标是$(x^i)$,那么$g_{\alpha}=\sum_{i,j}\mathrm{d}x^i\mathrm{d}x^j$.下面定义$g=\sum_{\alpha}\psi_{\alpha}g_{\alpha}$.这有意义因为单位分解要求了每个点的附近这个求和只有至多有限项非零,于是这的确是一个光滑张量场,对称和正定是因为每个$g_{\alpha}$是对称正定的.
+	\end{proof}
+    \item 黎曼度量$g$可以定义切向量的长度角度正交的概念:
+    \begin{itemize}
+    	\item 对$v\in\mathrm{T}_pM$,定义它的范数或者长度为$|v|_g=\sqrt{\langle v,v\rangle_g}$.
+    	\item 两个向量$v,w\in\mathrm{T}_pM$的角度定义为$\theta\in[0,\pi]$使得:
+    	$$\cos\theta=\frac{\langle v,w\rangle_g}{|v|_g|w|_g}$$
+    	\item 两个向量$v,w\in\mathrm{T}_pM$称为垂直的或者正交的,如果它们的夹角是$\pi/2$,或者等价于讲$\langle v,w\rangle_g=0$.
+    	\item 黎曼流形上的一个局部标架称为正交的,如果在这个局部上每个点处的基是正交基.那么按照Schmidt正交化过程,黎曼流形每个点附近都存在局部正交标架(附近指的是存在一个开邻域满足这个结论,不是指任意开邻域都满足).
+    \end{itemize}
+    \item 回拉度量.设$F:M\to N$是光滑流形之间的光滑映射,设$g$是$N$上的黎曼度量,那么回拉$F^*g$是如下等式定义的,它是$M$上的对称$(0,2)$型光滑张量.但是这个回拉可能不是正定的,它是正定的(即$F^*g$是$M$上的黎曼度量)等价于$F$是光滑浸入.
+    $$(F^*g)(u,v)=g(F_*(u),F_*(v)),u,v\in\mathrm{T}_pM$$
+    \item 给定两个黎曼流形$(M,g)$和$(M',g')$,它们之间的映射理应考虑保黎曼度量的光滑映射,也即光滑映射$F:M\to M'$满足$F^*g'=g$.我们解释过使得这个等式成立$F$需要是浸入,所以这样的光滑映射我们称为等距浸入(isometric immersion);如果$F$是满足$F^*g'=g$的微分同胚,就称$F$是等距(isometry);如果$F$是满足$F^*g'=g$的局部微分同胚,则称$F$是局部等距.
+    \item 黎曼流形$M$上的全体等距构成一个群,称为等距群$\mathrm{Isom}(M,g)$,它是$\mathrm{Diff}(M)$的子群,另外前者比后者小很多:$\mathrm{Diff}(M)$是一个无限维李群,但是$\mathrm{Isom}(M,g)$在$M$紧致的情况下是一个有限维李群.所以对大多数$M$上的微分同胚$\varphi$,有$\varphi^*g$是和$g$不同的黎曼度量.这也说明了$M$上黎曼度量有很多.
+    \item 纳什嵌入定理.每个$m$维黎曼流形$(M,g)$都可以等距嵌入到带标准度量的欧氏空间$(\mathbb{R}^N,g_0)$中.事实上如果$M$是紧致的,可取$N=\frac{m(3m+11)}{2}$;如果$M$非紧致,可取$N=\frac{m(m+1)(3m+11)}{12}$.
+    \item 黎曼子流形.设$(M,g)$是黎曼度量,设$S\subseteq M$是浸入或者嵌入子流形,那么$l^*g$是$S$上的黎曼度量,其中$l:S\to M$是包含映射.称$(S,l^*g)$是$M$的黎曼子流形.
+\end{enumerate}
+
+曲线长度和两点距离.设$(M,g)$是黎曼度量,
+\begin{itemize}
+	\item 设$\gamma:[a,b]\to M$是分段光滑曲线,它的长度定义为:
+	$$\mathrm{L}_g(\gamma)=\int_a^b|\gamma'(t)|_g\mathrm{d}t=\int_a^b\sqrt{\langle\gamma'(t),\gamma'(t)\rangle_g}\mathrm{d}t$$
+	\item 设$M$是连通的,任取两个点$p,q$,记$\mathscr{C}_{p,q}$表示全体光滑曲线$\gamma:[a,b]\to M$,使得$\gamma(a)=p$和$\gamma(b)=q$.定义$d_g(p,q)=\inf\{\mathrm{L}_g(\gamma)\mid\gamma\in\mathscr{C}_{p,q}\}$.
+\end{itemize}
+\begin{enumerate}
+	\item 明显的曲线长度有加法:对$a<c<b$,对$\gamma:[a,b]\to M$有
+	$$\mathrm{L}_g(\gamma)=\mathrm{L}_g(\gamma\mid_{[a,c]})+\mathrm{L}_g(\gamma\mid_{[c,b]})$$
+	\item 改变曲线的参数表示不改变曲线长度,就是换元积分公式.
+	\item 如果曲线是正则的,即速度$\gamma'(t)$总不为零,那么$s(t)=\int_0^t|\gamma'(u)|\mathrm{d}u$可以反解出$t=t(s)$.换句话讲存在参数表示$\gamma:[0,s]\to M$,使得对$0\le u\le s$,总有$\gamma([0,u])$的长度就是$u$(也即参数表示的速度总是1).
+	\item 曲线长度在局部等距下不变.具体地讲,如果$(M,g)$和$(M',g')$是两个黎曼流形,设$F:M\to M'$是局部等距,对$M$上的任意分段光滑曲线,就有:
+	$$\mathrm{L}_{g'}(F\circ\gamma)=\mathrm{L}_g(\gamma)$$
+	\item 设$(M,g)$是连通黎曼流形,设$d_g$是由度量$g$诱导的两点距离,那么$d_g$使得$M$是度量空间,并且这个度量拓扑和$M$作为流形的拓扑是一致的.另外这件事也说明了光滑流形都是度量空间.
+	\begin{proof}
+		
+		先证明$d_g$是度量.$d_g(p,q)\ge0$,$d_g(p,q)=d_g(q,p)$和$d_g(p,p)=0$都是平凡的.三角不等式是因为对点$p,q,r$,连接$p$和$q$的分段光滑曲线与连接$q$和$r$的分段光滑曲线合在一起得到连接$p$和$r$的分段光滑曲线.所以取下确界得到$d_g(p,r)\le d_g(p,q)+d_g(q,r)$.最后我们要证明当$p\not=q$时有$d_g(p,q)\not=0$.为此先证明如下引理:设$g$是开集$U\subseteq\mathbb{R}^n$上的黎曼度量,设标准度量是$g'$,设$K\subseteq U$是紧集,那么存在正数$c,C$,使得对每个$x\in K$和每个$v\in\mathrm{T}_x\mathbb{R}^n$有$c|v|_{g'}\le|v|_g\le C|v|_{g'}$.
+		
+		\qquad
+		
+		引理的证明.记$L=\{(x,v)\in\mathrm{T}\mathbb{R}^n\mid x\in K,|v|_{g'}=1\in\}$.如果把$\mathrm{T}\mathbb{R}^n$等同于$\mathbb{R}^n\times\mathbb{R}^n$,那么$L=K\times\mathbb{S}^{n-1}$,这是紧集,所以连续映射$|v|_g$在$L$上恒正,所以有最大最小值$c\le|v|_g\le C$.如果$x\in K$和$0\not=v\in\mathrm{T}_x\mathbb{R}^n$,记$\lambda=|v|_{g'}$,那么$(x,\lambda^{-1}v)\in L$,所以有$|v|_g=\lambda|\lambda^{-1}v|_g\le\lambda C=C|v|_{g'}$.类似的有$|v|_g\ge c|v|_{g'}$.
+		
+		\qquad
+		
+		下面设$p\not=q\in M$,取$p$的一个不包含$q$的光滑坐标卡$U$,可取$p$的半径$\varepsilon$的正则坐标球$V$使得$\overline{V}\subseteq U$.那么按照上述引理,存在正数$c,C$满足对任意$x\in\overline{V}$和任意$v\in\mathrm{T}_x\mathbb{R}^n$,有$c|v|_{g'}\le|v|_g\le C|v|_{g'}$,其中$g'$是局部同胚到欧氏空间中的标准度量.那么按照积分的不等式,对$\overline{V}$中的分段光滑曲线$\gamma$,就有$c\mathrm{L}_{g'}(\gamma)\le\mathrm{L}_g(\gamma)\le C\mathrm{L}_{g'}(\gamma)$.下面任取从$p$到$q$的分段光滑曲线$\gamma:[a,b]\to M$,设$t_0$是所有满足$\gamma(t)\not\in\overline{V}$的$t\in[a,b]$的下确界,那么有$\gamma(t_0)\in\partial V$,并且$\gamma([a,t_0])\subseteq\overline{V}$.于是有:
+		$$\mathrm{L}_g(\gamma)\ge\mathrm{L}_g(\gamma\mid_{[a,t_0]})\ge c\mathrm{L}_{g'}(\gamma\mid_{[a,t_0]})\ge cd_{g'}(p,\gamma(t_0))=c\varepsilon>0$$
+		
+		取左侧的下确界,得到$d_g(p,q)\ge c\varepsilon>0$.综上得到$(M,d_g)$是度量空间.下面要证明被$d_g$诱导的度量拓扑和$M$本身的流形拓扑是一致的.一方面先取$U\subseteq M$是流形拓扑的开集,取$p\in U$,取$p$的正则坐标球$V$使得$\overline{V}\subseteq U$,设它半径是$\varepsilon$,那么按照上述引理(的证明)我们得到$d_g(p,q)\ge c\varepsilon$对任意$q\not\in\overline{V}$成立.于是如果$d_g(p,q)<c\varepsilon$就推出$q\in\overline{V}\subseteq U$.换句话讲,$p$为中心的半径$c\varepsilon$的度量$d_g$下的球落在$U$中,这说明$U$是度量拓扑下的开集.
+		
+		\qquad
+		
+		反过来,设$W$是度量拓扑下的开集,任取$p\in W$,任取$p$的坐标开邻域$U$,设$V$是$p$为中心的半径$r$的正则坐标球,使得$\overline{V}\subseteq U$,设$g'$是同胚到欧氏空间中的标准度量,设$c,C>0$是引理中满足$q\in\overline{V}$和$v\in\mathrm{T}_qM$和$c|v|_{g'}\le|v|_g\le C|v|_{g'}$.设$\varepsilon<r$是足够小的正数,使得$p$为中心半径$C\varepsilon$的$d_g$下的度量开球落在$W$中.记$V_{\varepsilon}$是$p$为中心的半径$\varepsilon$的正则坐标球,这是流形拓扑的开集,现在任取$q\in\overline{V}$,那么有$d_g(p,q)\le\mathrm{L}_g(\gamma)\le C\mathrm{L}_{g'}(\gamma)<C\varepsilon$.于是有$V_{\varepsilon}\subseteq W$,这就说明$W$是流形拓扑的开集.
+	\end{proof}
+\end{enumerate}
+\newpage
+\section{联络}
+
+联络和仿射联络(线性联络).
+\begin{enumerate}
+	\item 设$M$是光滑流形,$\pi:E\to M$是向量丛,记$\mathrm{T}M$是$M$上的切丛,用$\Gamma(E)$和$\Gamma(\mathrm{T}M)$表示丛的光滑截面集.$E$上的一个联络(connection)指的是一个映射$\nabla:\Gamma(\mathrm{T}M)\times\Gamma(E)\to\Gamma(E)$,$(X,Y)\mapsto\nabla_XY$,满足:
+	\begin{itemize}
+		\item 关于第一个位置在$\mathrm{C}^{\infty}(M)$上是线性的,换句话讲对任意$X_1,X_2\in\Gamma(\mathrm{T}M)$和任意$f,g\in\mathrm{C}^{\infty}(M)$有:
+		$$\nabla_{fX_1+gX_2}Y=f\nabla_{X_1}Y+g\nabla_{X_2}Y$$
+		\item 关于第二个位置在$\mathbb{R}$上是线性的,换句话讲对任意$Y_1,Y_2\in\Gamma(E)$和任意$a,b\in\mathbb{R}$有:
+		$$\nabla_X(aY_1+bY_2)=a\nabla_XY_1+b\nabla_XY_2$$
+		\item 有莱布尼兹法则,即对$f\in\mathrm{C}^{\infty}(M)$有:
+		$$\nabla_X(fY)=f\nabla_XY+(Xf)Y=f\nabla_XY+\mathrm{d}f(X)$$
+	\end{itemize}
+    \item 如果把$\pi:E\to M$取为切丛,定义出来的联络称为仿射联络或者线性联络.如果记$\chi(M)$表示$M$上所有切向量场的集合,那么仿射联络是$\nabla:\chi(M)\times\chi(M)\to\chi(M)$的映射.称$\nabla_XY$是$Y$沿着$X$的协变导数(covariant derivative).
+\end{enumerate}
+\begin{enumerate}
+	\item 莱布尼兹法则很苛刻,联络的和或者倍数都不再是联络.但是联络构成一个凸集,具体地讲如果$f_1,\cdots,f_k$是$M$上的光滑函数使得$f_1+\cdots+f_k=1$,如果$\nabla^{(i)}$都是联络,那么$f_i\nabla^{(i)}$也是联络.
+	\item 协变导数的几何意义是充当方向导数.我们要引入联络而不是用李导数是因为李导数并不太能充当方向导数,它不满足莱布尼兹法则.
+	\item 联络是局部性质.
+	\begin{enumerate}
+		\item 如果两个向量场$Y,Y'$在$p\in M$附近相同(指在$p$的某个足够小的开邻域中有$Y=Y'$),那么总有$\nabla_XY(p)=\nabla_XY'(p)$.
+		\begin{proof}
+			
+			按照$\nabla_XY-\nabla_XY'=\nabla_X(Y-Y')$.问题归结为如果$Y$在$p$附近为零,那么$\nabla_XY=0$.设$p$的开邻域$U$上有$Y\equiv0$,取$\{p\}\subseteq U$的碰撞函数$\varphi$,换句话讲$\varphi$是取值在$[0,1]$的光滑函数,使得$\varphi(p)=1$和$\overline{\mathrm{Supp}\varphi}\subseteq U$.那么有$\varphi Y$在整个$M$上为零.按照莱布尼兹法则,有$0=\nabla_X(\varphi Y)=(X\varphi)Y+\varphi(\nabla_XY)$.这里$(X\varphi)Y=0$,把等式在$p$处取值,就有$\nabla_XY\mid_p=0$.
+		\end{proof}
+	    \item 如果两个切向量场在点$p$相同,即$X(p)=X'(p)$,那么总有$\nabla_XY(p)=\nabla_{X'}Y(p)$.
+	    \begin{proof}
+	    	
+	    	按照联络关于位置$X$是线性的,归结为证明如果$X(p)=0$,那么$\nabla_XY(p)=0$.可取$p$为中心的坐标卡,设$X=X^i\partial_i$,有$X^i(0)=0,\forall i$.取泰勒展开$X^i=x^kX_k^i$,那么有$\nabla_XY(p)=\nabla_{x^kX_k^i\partial_i}Y(p)=x^k(p)\nabla_{X_k^i\partial_i}Y(p)=0$.
+	    \end{proof}
+	\end{enumerate}
+    \item 克里斯托菲尔(Christoffel)符号.设$\{E_i\}$是开集$U\subset M$上切丛$\mathrm{T}M$的局部标架.我们可以做展开$\nabla_{E_i}E_j=\sum_k\Gamma_{ij}^kE_k$.称这$n^3$个在$U$上的光滑函数为$\nabla$关于这组局部标架的克里斯托菲尔符号.它完全决定了$\nabla$:
+    \begin{enumerate}
+    	\item 设$U$上的切向量场$X,Y$关于$U$上的局部标架$\{E_i\}$的展开为$X=\sum_iX^iE_i$和$Y=\sum_jY^jE_j$.那么有:
+    	$$\nabla_XY=\left(XY^k+X^iY^j\Gamma_{ij}^k\right)E_k$$
+    	\begin{proof}
+    		\begin{align*}
+    			\nabla_XY&=\nabla_X(\sum_jY^jE_j)\\&=\sum_j(XY^j)E_j+\sum_jY^j\nabla_XE_j\\&=\sum_j(XY^j)E_j+\sum_{i,j}X^iY^j\nabla_{E_i}E_j\\&=\sum_jXY^jE_j+\sum_{i,j,k}X^iY^j\Gamma_{ij}^kE_k
+    		\end{align*}
+    	\end{proof}
+        \item 在取定$U$上一组局部标架$\{E_i\}$时,有从$U$上的全部仿射联络到全体$n^3$个$U$上的光滑函数$\{\Gamma_{ij}^k\}$的一一对应为:
+        $$\nabla_XY=\sum_k(XY^k)E_k+\sum_{i,j,k}\left(X^iY^j\Gamma_{ij}^k\right)E_k$$
+    \end{enumerate}
+    \item 欧氏空间上的标准仿射联络取为$\overline{\nabla}_XY=\overline{\nabla}_X(\sum_jY^j\partial_j)=\sum_j(XY^j)\partial_j$.换句话讲,$\overline{\nabla}_X$在向量场$Y$上的作用,相当于在每个分量上沿着方向$X$做方向导数.这也等价于讲它的克里斯托菲尔符号都是零.
+    \item 每个光滑流形上都有线性联络.
+    \begin{proof}
+    	
+    	取光滑流形$M$上的一族坐标邻域覆盖$\{U_{\alpha}\}$,这里每个$U_{\alpha}$都微分同胚于欧氏空间的开子集,所以在每个$U_{\alpha}$上至少有经欧氏空间上标准仿射联络诱导过来的仿射联络$\nabla^{\alpha}$.取关于$\{U_{\alpha}\}$的单位分解$\{\varphi_{\alpha}\}$.定义$\nabla_XY=\sum_{\alpha}\varphi_{\alpha}\nabla_X^{\alpha}Y$.这是光滑的,关于位置$Y$是$\mathbb{R}$线性的,关于位置$X$是$\mathrm{C}^{\infty}(M)$线性的.最后验证莱布尼兹法则:
+    	\begin{align*}
+    		\nabla_X(fY)&=\sum_{\alpha}\varphi_{\alpha}\nabla_X^{\alpha}(fY)\\&=\sum_{\alpha}\varphi_{\alpha}\left((Xf)Y+f\nabla_X^{\alpha}Y\right)\\&=(Xf)Y+f\sum_{\alpha}\varphi_{\alpha}\nabla_X^{\alpha}Y\\&=(Xf)Y+f\nabla_XY
+    	\end{align*}
+    \end{proof}
+\end{enumerate}
+
+线性联络延拓到任意张量场上.
+\begin{enumerate}
+	\item 设$\nabla$是$M$上的线性联络,在每个张量丛$\mathrm{T}^{(k,l)}M$上存在唯一的联络,依旧记作$\nabla$,满足如下四个条件.这里第三条是带联络的丛的张量积上联络的定义方式.
+	\begin{enumerate}
+		\item 在$\mathrm{T}M$上吻合于预先给的线性联络.
+		\item 在$\mathrm{T}^0M=\mathrm{C}^{\infty}(M)$上就是函数关于向量场的导数$\nabla_Xf=Xf$.
+		\item $\nabla$满足如下关于张量积的公式:
+		$$\nabla_X(F\otimes G)=(\nabla_XF)\otimes G+F\otimes(\nabla_XG)$$
+		\item $\nabla$和迹(我们之前定义的张量场上的迹,它是$\mathrm{T}^{(k+1,l+1)}M\to\mathrm{T}^{(k,l)}M$的映射)是可交换的:
+		$$\nabla_X(\mathrm{Tr}(Y))=\mathrm{Tr}(\nabla_XY)$$
+	\end{enumerate}
+
+    另外这个唯一的延拓联络满足,对任意$(k,l)$张量场$F$,对任意切向量场$Y_i$和任意余切向量场$\omega^j$就有:
+    \begin{align*}
+    	(\nabla_XF)(\omega^1,\cdots,\omega^l,Y_1,\cdots,Y_k)&=X(F(\omega^1,\cdots,\omega^l,Y_1,\cdots,Y_k))\\&-\sum_{j=1}^lF(\omega^1,\cdots,\nabla_X\omega^j,\cdots,\omega^l,Y_1,\cdots,Y_k)\\&-\sum_{i=1}^kF(\omega^1,\cdots,\omega^l,Y_1,\cdots,\nabla_XY_i,\cdots,Y_k)
+    \end{align*}
+    \begin{proof}
+    	
+    	我们只要证明在$\mathrm{T}^{(0,1)}M$上延拓的联络是唯一的,按照$(c)$就唯一的延拓到每个张量丛上.为此任取切向量场$Y$和余切向量场$\omega$,按照$(c)$有$\nabla_X(\omega\otimes Y)=(\nabla_X\omega)\otimes Y+\omega\otimes(\nabla_XY)$.按照(d)有$\nabla_X(\omega(Y))=\nabla(\mathrm{Tr}(\omega\otimes Y))=\mathrm{Tr}(\nabla(\omega\otimes Y))=\mathrm{Tr}((\nabla_X\omega)\otimes Y+\omega\otimes(\nabla_XY))=\nabla_X\omega(Y)+\omega(\nabla_XY)$.另外取局部坐标可以得到表示:
+    	$$\nabla_X\omega=\left(X^i\partial_i\omega_k-X^i\omega_j\Gamma_{ik}^j\right)\mathrm{d}x^k$$
+    \end{proof}
+    \item 引理.设$F\in\Gamma(\mathrm{T}^{(l,k)}M)$,那么$F$诱导了$\mathrm{C}^{\infty}(M)$上的多重线性映射$\mathrm{T}^{(0,1)}(M)^{\times l}\times\mathrm{T}^{(1,0)}(M)^{\times k}\to\mathrm{C}^{\infty}(M)$.反过来对于这样一个$\mathbb{C}^{\infty}(M)$系数的多重线性映射,它总是被某个$(l,k)$型张量场诱导的.
+    \item 全协变导数(total covariant derivative).设$\nabla$是$M$上的仿射联络,设$F$是$M$上的$(l,k)$型张量场,按照联络的定义,如下映射关于每个分量都是$\mathrm{C}^{\infty}(M)$线性的,所以按照上述引理它被一个光滑$(l,k+1)$张量场诱导,同样记作$\nabla F$,称为$F$的全协变导数.
+    $$\nabla F:\Gamma(\mathrm{T}^*(M))^{\times l}\times\Gamma(\mathrm{T}(M))^{\times(k+1)}\to\mathrm{C}^{\infty}(M)$$
+    $$(\omega^1,\cdots,\omega^l,Y_1,\cdots,Y_k,X)\mapsto(\nabla_XF)(\omega^1,\cdots,\omega^l,Y_1,\cdots,Y_k)$$
+    \item 例如对$M$上的光滑函数$u$,那么$\nabla u:\chi(M)\to\mathrm{C}^{\infty}(M)$为$X\mapsto\nabla_Xu=Xu=\mathrm{d}u(X)$,所以光滑函数$u$的全协变导数就是微分1形式$\mathrm{d}u$.另外光滑函数的二阶全协变导数$\nabla^2u=\nabla(\nabla u)$是一个$(0,2)$型张量,称为$u$的协变Hessian.
+    \item 再例如对切向量场$Y=Y^i\partial_i$,那么(1,1)型张量场$\nabla Y$局部表示为$Y^i_{\ \ ;j}\partial_i\otimes\mathrm{d}x^j$,其中$Y^i_{\ \ ;j}=\partial_jY^i+Y^k\Gamma_{jk}^i$.更一般的,如果$\nabla$是线性联络,如果$F$是$(k,l)$型张量场,那么$(k,l+1)$型张量场$\nabla F$的局部表示的系数为:
+    $$F_{i_1\cdots i_k;m}^{j_1\cdots j_l}=\partial_mF_{i_1\cdots i_k}^{j_1\cdots j_l}+\sum_{s=1}^lF_{i_1\cdots i_k}^{j_1\cdots p\cdots j_l}\Gamma_{mp}^{j_s}-\sum_{s=1}^kF_{i_1\cdots p\cdots i_k}^{j_1\cdots j_l}\Gamma_{mi_s}^p$$
+\end{enumerate}
+
+沿曲线的协变导数.
+\begin{enumerate}
+	\item 设$\gamma:I=[a,b]\to M$是一条光滑曲线,沿这条曲线的向量场定义为一个光滑映射$V:I\to\mathrm{T}M$,使得$\forall t\in I$有$V(t)\in\mathrm{T}_{\gamma(t)}M$.全体沿$\gamma$的向量场集合记作$\mathcal{J}(\gamma)$.例如速度向量场$\dot{\gamma}(t)\in\mathrm{T}_{\gamma(t)}M$.称$V\in\mathcal{J}(\gamma)$是可延拓的(extendible),如果对曲线上的每个点$\gamma(t)$,都存在它在$M$中的开邻域及其上的一个切向量场$\widetilde{V}$,使得$\forall\gamma(t)\in U$,有$V(t)=\widetilde{V}_{\gamma(t)}$.例如如果$\gamma(t_1)=\gamma(t_2)$但是$\dot{\gamma}(t_1)\not=\dot{\gamma}(t_2)$,那么$\dot{\gamma}$就不可延拓.
+	\item 设$\nabla$是$M$上的仿射联络,对每条光滑曲线$\gamma:I=[a,b]\to M$,有$\nabla$诱导了唯一的映射$D_t:\mathcal{J}(\gamma)\to\mathcal{J}(\gamma)$满足如下三个条件.对每个$V\in\mathcal{J}(V)$,称$D_tV$为$V$沿$\gamma$的协变导数.
+	\begin{enumerate}
+		\item 在$\mathbb{R}$上线性:
+		$$D_t(aV+bW)=aD_tV+bD_tW,\forall a,b\in\mathbb{R},V,W\in\mathcal{J}(\gamma)$$
+		\item 乘积法则:
+		$$D_t(fV)=\dot{f}V+fD_tV,\forall f\in\mathrm{C}^{\infty}(I)$$
+		\item 如果$V$是可延拓的,对每个局部延拓$\widetilde{V}$,局部上总有:
+		$$D_tV(t)=\nabla_{\dot{\gamma}(t)}\widetilde{V}$$
+	\end{enumerate}
+    \begin{proof}
+    	
+    	先证唯一性.按照$(b)$,结合光滑碰撞函数的存在性,说明$D_tV$在$t_0$处的取值只依赖于$V$在$t_0$的附近$(t_0-\varepsilon,t_0+\varepsilon)$的取值.取$\gamma(t_0)$的局部坐标,记局部上有$V(t)=V^j(t)\partial_j$,那么有:
+    	\begin{align*}
+    		D_tV(t_0)&=\dot{V}^j(t_0)\partial_j+V^j(t_0)\nabla_{\dot{\gamma}(t_0)}\partial_j\\&=\left(\dot{V}^k(t_0)+V^j(t_0)\dot{\gamma}^i(t_0)\Gamma_{ij}^k(\gamma(t_0))\right)\partial_k
+    	\end{align*}
+    
+        这说明局部上唯一性.至于存在性,用坐标卡覆盖$\gamma(I)$,在每个坐标卡上按照上述等式定义$D_tV$,由于唯一性,不同坐标卡上定义的$D_tV$在相交的部分是相同的,这就得到存在性.
+    \end{proof}
+\end{enumerate}
+
+平行变换.
+\begin{enumerate}
+	\item 设$\nabla$是$M$上的线性联络,设$\gamma$是$M$上的光滑曲线,设$V$是沿$\gamma$的切向量场,称$V$是沿$\gamma$平行的(parallel),如果$D_tV\equiv0$.等价于局部上恒有$\dot{V}^k(t)+V^j(t)\dot{\gamma}^i(t)\Gamma_{ij}^k(\gamma(t))\equiv0$.这是一个常微分方程组,按照ODE解的存在和唯一性定理有:给定曲线$\gamma:I\to M$和$t_0\in I$,给定初始切向量$V_0\in\mathrm{T}_{\gamma(t_0)}M$,那么存在唯一的沿$\gamma$的平行切向量场$V$满足$V(t_0)=V_0$.
+	\item 定义映射$P^{\gamma}_{t_0,t}:\mathrm{T}_{\gamma(t_0)}M\to\mathrm{T}_{\gamma(t)}M$为$X_0=X(\gamma(t_0))\mapsto X(\gamma(t))$,其中$X$是唯一的沿$\gamma$平行的切向量场,称为从$\gamma(t_0)$到$\gamma(t)$的沿$\gamma$的平移变换.我们断言每个平移变换$P_{t_0,t}^{\gamma}$都是线性同构.
+	\begin{proof}
+		
+		因为如果记$\gamma$是$[a,b]\to M$的光滑曲线,记$-\gamma:[a,b]\to M$为$s\mapsto a+b-s$,那么有$P_{t_0,t}^{\gamma}\circ P_{a+b-t,a+b-t_0}^{-\gamma}=\mathrm{id}$.
+	\end{proof}
+	\item 例如对于欧氏空间上的标准联络,有克里斯托菲尔符号都是零,切向量场$V\in\mathscr{J}(\gamma)$是沿$\gamma$平行的当且仅当$\dot{V}^k(t)\equiv0$,所以等价于$V$的每个分量都是常值的.
+	\item 称$M$上的切向量场$V$是平行的,如果$V$沿每条光滑曲线都是平行的.那么按照局部表示,一个切向量场$V$是平行的当且仅当有$\nabla V\equiv0$.
+	\item 平移变换是用线性联络定义的,反过来平移变换的信息还可以还原成线性联络:设$\gamma:[a,b]\to M$是光滑曲线,记$\gamma(t_0)=p$和$\dot{\gamma}(t_0)=X_0\in\mathrm{T}_pM$.那么对任意切向量场$Y$,都有:
+	$$\nabla_{X_0}Y(p)=\lim\limits_{t\to t_0}\frac{(P^{\gamma}_{t_0,t})^{-1}(Y(\gamma(t)))-Y(\gamma(t_0))}{t-t_0}$$
+\end{enumerate}
+
+黎曼度量诱导的黎曼联络(也称为Levi-Civita联络).
+\begin{enumerate}
+	\item 设$(M,g)$是黎曼流形,一个仿射联络$\nabla$称为和$g$兼容的(compatible with $g$),如果对任意向量场$X,Y,Z$都有如下等式(这里$\langle A,B\rangle$是$M$上的光滑函数,为$\langle A,B\rangle(p)=\langle A_p,B_p\rangle$):
+	$$X\langle Y,Z\rangle=\langle\nabla_XY,Z\rangle+\langle Y,\nabla_XZ\rangle$$
+	
+	有如下互相等价的命题:
+	\begin{enumerate}
+		\item $\nabla$是和$g$兼容的仿射联络.
+		\item $\nabla g=0$.
+		\item 如果$V,W$是沿曲线$\gamma$的两个切向量场,那么:
+		$$\frac{\mathrm{d}}{\mathrm{d}t}\langle V,W\rangle=\langle D_tV,W\rangle+\langle V,D_tW\rangle$$
+		\item 如果$V,W$是沿$\gamma$平行的切向量场,那么$\langle V,W\rangle$是常值的.
+		\item 对任意曲线$\gamma$,对曲线上任意两个点$\gamma(t_0)$和$\gamma(t_1)$,平行变换$P_{t_0t_1}:\mathrm{T}_{\gamma(t_0)}M\to\mathrm{T}_{\gamma(t_1)}M$是等距同构(即保内积的线性同构).
+	\end{enumerate}
+    \begin{proof}
+    	
+    	(a)和(b)的等价性.黎曼度量$g$是一个$(0,2)$型张量场,于是$\nabla g$是一个$(0,3)$型张量场,它的表达式如下,所以$\nabla$和$g$兼容等价于$\nabla g=0$.
+    	\begin{align*}
+    		(\nabla g)(X,Y,Z)&=(\nabla_Zg)(X,Y)\\&=\nabla_Z(g(X,Y))-g(\nabla_ZX,Y)-g(X,\nabla_ZY)\\&=Z\langle X,Y\rangle-\langle\nabla_ZX,Y\rangle-\langle X,\nabla_ZY\rangle
+    	\end{align*}
+    
+        (b)$\Rightarrow$(c)$\Rightarrow$(d)是平凡的.(d)$\Rightarrow$(e)是因为,任取$\mathrm{T}_{\gamma(t_0)}M$的基$\{e_k\}$,任取两个切向量$e_i,e_j$,那么有沿$\gamma$平行的切向量$X$和$Y$,使得$X(\gamma(t_0))=e_i$和$Y(\gamma(t_0))=e_j$.由于$\langle X,Y\rangle$是常值的,所以有$\langle e_i,e_j\rangle=\langle X(\gamma(t_0)),Y(\gamma(t_0))\rangle=\langle X(\gamma(t_1)),Y(\gamma(t_1))\rangle=\langle P_{t_0t_1}^{\gamma}e_i,P_{t_0t_1}^{\gamma}e_j\rangle$,这说明等距同构.
+        
+        \qquad
+        
+        最后证明(e)$\Rightarrow$(a).任取切向量$X,Y,Z$,任取点$p\in M$,任取$X_p\in\mathrm{T}_pM$,可取曲线$\gamma$使得$\gamma(t_0)=p$和$\dot{\gamma}(t_0)=X_p$.取$\mathrm{T}_pM$的单位正交基$\{e_i\}$,那么沿曲线$\gamma$可记$Y=Y^i(t)e_i(t)$和$Z=Z^i(t)e_i(t)$.按照平移变换是等距的,就有$\langle Y,Z\rangle=\sum Y^i(t)Z^i(t)$.于是有$X\langle Y,Z\rangle(p)=X_p\sum Y^i(t)Z^i(t)=\sum X_pY^i(t)Z^i(0)+\sum_i Y^i(0)X_pZ^i(p)=\langle\nabla_{X_p}Y,Z_p\rangle+\langle Y_p,\nabla_{X_p}Z\rangle$.
+    \end{proof}
+    \item 设$\nabla$是$M$上的仿射联络.定义映射$\gamma:\chi(M)\times\chi(M)\to\chi(M)$为:
+    $$\gamma(X,Y)=\nabla_XY-\nabla_YX-[X,Y]$$
+    
+    这是一个$(1,2)$型张量场(双线性映射$V\times V\to V$理解为$(1,2)$型张量场因为可以视为$V^*\times V\times V\to\mathbb{R}$的多重线性映射),称为$\nabla$的挠张量(torsion tensor).如果仿射联络$\nabla$的挠张量处处为零,就称$\nabla$是对称的或者无挠的(torsion-free).有如下互相等价的命题:
+    \begin{enumerate}
+    	\item $\nabla$是对称的.
+    	\item $\nabla$关于坐标标架的克里斯托菲尔符号是对称的,即$\Gamma_{ij}^k=\Gamma_{ji}^k$(但是对非坐标标架可能不是对称的).
+    	\item 对任意$M$上的光滑函数$u$,有$\nabla^2u$(共变Hessian)是对称$(0,2)$张量场.
+    \end{enumerate}
+    \begin{proof}
+    	
+    	(a)和(b)等价性.局部坐标下$\nabla$的挠张量可以写作$T_{ij}^k\partial_k\otimes\mathrm{d}x^i\otimes\mathrm{d}x^j$.这里$T_{ij}^k=\mathrm{d}x^k\left(\nabla_{\partial_i}\partial_j-\nabla_{\partial_j}\partial_i-[\partial_i,\partial_j]\right)=\Gamma_{ij}^k-\Gamma_{ji}^k$.
+    \end{proof}
+    \item 设$(M,g)$是黎曼流形,存在唯一的对称线性联络,满足和$g$兼容.它称为$g$的黎曼联络或者Levi-Civita联络.
+    \begin{proof}
+    	
+    	对$M$上的三个切向量场$X,Y,Z$,有:
+    	$$X\langle Y,Z\rangle=\langle\nabla_XY,Z\rangle+\langle Y,\nabla_ZX\rangle+\langle Y,[X,Z]\rangle$$
+    	$$Y\langle Z,X\rangle=\langle\nabla_YZ,X\rangle+\langle Z,\nabla_XY\rangle+\langle Z,[Y,X]\rangle$$
+    	$$Z\langle X,Y\rangle=\langle\nabla_ZX,Y\rangle+\langle X,\nabla_YZ\rangle+\langle X,[Z,Y]\rangle$$
+    	
+    	前两个等式的和减去第三个等式,得到:
+    	$$X\langle Y,Z\rangle+Y\langle Z,X\rangle-Z\langle X,Y\rangle=2\langle\nabla_XY,Z\rangle+\langle Y,[X,Z]\rangle+\langle Z,[Y,X]\rangle-\langle X,[Z,Y]\rangle$$
+    	
+    	解出$\langle\nabla_XY,Z\rangle$后它的表达式只依赖$g$,所以如果$\nabla^1$和$\nabla^2$都满足条件,那么对任意向量场$X,Y,Z$就有$\langle\nabla_X^1Y-\nabla_X^2Y,Z\rangle=0$.这只能有$\nabla^1=\nabla^2$.这得到存在性.
+    	$$\langle\nabla_XY,Z\rangle=\frac{1}{2}\left(X\langle Y,Z\rangle+Y\langle Z,X\rangle-Z\langle X,Y\rangle-Y\langle Y,[X,Z]\rangle-\langle Z,[Y,X]\rangle+\langle X,[Z,Y]\rangle\right)$$
+    	
+    	下面就按照这个等式定义$\nabla$.我们首先给出局部坐标表示,然后验证这的确是和$g$兼容的对称仿射联络.任取光滑坐标卡$(U,(x^i))$,取坐标的局部标架$(\partial_i)$.那么它们之间的李括号是零,所以有$\langle\nabla_{\partial_i}\partial_j,\partial_l\rangle=\frac{1}{2}\left(\partial_i\langle\partial_j,\partial_l\rangle+\partial_j\langle\partial_l,\partial_i\rangle-\partial_l\langle\partial_i,\partial_j\rangle\right)$.我们记$g_{ij}=\langle\partial_i,\partial_j\rangle$和关于这组标架的克里斯托菲尔符号$\nabla_{\partial_i}\partial_j=\Gamma_{ij}^m\partial$.带入上述等式得到$\Gamma_{ij}^mg_{ml}=\frac{1}{2}(\partial_ig_{jl}+\partial_jg_{il}-\partial_lg_{ij})$.按照内积$\langle-,-\rangle$是正定的,有$(g_{ml})$是可逆矩阵,逆矩阵记作$(g^{lk})$,得到$\Gamma_{ij}^m=\frac{1}{2}g^{lk}(\partial_ig_{jl}+\partial_jg_{il}-\partial_lg_{ij})$.这$n^3$个光滑函数定义了一个仿射联络$\nabla$.最后它是对称的因为$\Gamma_{ij}^k=\Gamma_{ji}^k$;它和$g$兼容等价于验证$\nabla g=0$.但是$\nabla g$关于取定的坐标的第$k$分量为$g_{ij;k}=\partial_kg_{ij}-\Gamma_{ki}^lg_{lj}-\Gamma_{kj}^lg_{li}$.它是零是因为如下等式,这就证明了$\nabla$和$g$兼容.
+    	\begin{align*}
+    		\Gamma_{ki}^lg_{lj}+\Gamma_{kj}^lg_{li}&=\frac{1}{2}(\partial_kg_{ij}+\partial_ig_{kj}-\partial_jg_{ki})+\frac{1}{2}(\partial_kg_{ji}+\partial_jg_{ki}-\partial_ig_{kj})\\&=\partial_kg_{ij}
+    	\end{align*}
+    \end{proof}
+\end{enumerate}
+
+梯度和散度.
+\begin{enumerate}
+	\item $\flat$(读作flat)和$\sharp$(读作sharp).我们知道对于线性空间$V$,它和对偶空间$V^*$尽管是同构的,但是不存在自然同构,即描述这样的同构必须依赖于预先取定一组基.但是对于带内积的线性空间$V$,可以借助内积构造自然的同构:定义$\flat:V\to V^*$为把每个向量$v$映射为线性函数$\flat(v)(w)=\langle v,w\rangle$.定义$\sharp:V^*\to V$为把线性函数$\omega$映射为向量$\sharp(\omega)$,满足$\omega(v)=\langle\sharp(\omega),v\rangle$.这两个线性映射互为逆映射.
+	\item 梯度(gradient).给定$M$上的光滑函数$f$,它的梯度记作$\nabla f$(区分于全协变导数),定义为$\sharp(\mathrm{d}f)$.换句话讲换句话讲,切向量场$\nabla f$要满足对任意切向量场$X$有$\langle\nabla f,X\rangle=X(f)$.它的局部表示为$\nabla f=g^{ij}(\partial_if)\partial_j$.例如带标准度量的欧氏空间上,光滑函数$f$的梯度就是我们熟知的$\left(\frac{\partial f}{\partial x^1},\cdots,\frac{\partial f}{\partial x^n}\right)^t$.
+	\begin{proof}
+		
+		取局部坐标,记$\nabla f=\sum_{i=1}^n(\nabla f)^i\partial_i$.那么有$\langle\nabla f,\partial_j=\partial_j(f)$.以及$\langle\nabla f,\partial_j\rangle=\sum_i(\nabla f)^ig_{ij}$.于是有$\partial_j(f)=(\nabla f)^ig_{ij}$,记$(g_{ij})$的逆矩阵是$(g^{ij})$,那么有$(\nabla f)^i=g^{ij}\partial_j(f)$.于是有$\nabla f=g^{ij}(\partial_if)\partial_j$.
+	\end{proof}
+	\item 散度(divergence).给定$M$上的切向量场$X$,它的散度记作$\mathrm{div}(X)$,定义为$\mathrm{Tr}(Y\mapsto\nabla_YX)$.它的局部表示为:
+	$$\mathrm{div}(X)=\sum_i\frac{\partial X^i}{\partial x^i}+\sum_s\frac{\partial_sG}{2G}X^s$$
+	\begin{proof}
+		
+		取局部坐标,记$X=X^i\partial_i$,那么$\nabla_{\partial_i}(X^s\partial_s)=\frac{\partial X^s}{\partial x^i}\partial_s+\Gamma_{is}^kX^s\partial_k=\sum_l\left(\frac{\partial X^l}{\partial x^i}+\sum_s\Gamma_{is}^lX^s\right)\partial_l$.于是迹就是$\sum_i\left(\frac{\partial X^i}{\partial x^i}+\sum_s\Gamma_{is}^iX^s\right)$.但是我们有$\sum_i\Gamma_{is}^i=\frac{1}{2}\sum_{t,i}g^{it}(\partial_sg_{it})=\frac{\partial_sG}{2G}$,其中$G=\det((g_{ij}))$.于是这个迹可以整理为:
+		$$\sum_i\frac{\partial X^i}{\partial x^i}+\sum_s\frac{\partial_sG}{2G}X^s$$
+	\end{proof}
+	\item Laplace.对$(M,g)$上的光滑函数$f$,它的Laplace记作$\Delta f$,定义为$\mathrm{div}(\nabla f)$.局部上它可以表示为$\Delta f=\frac{1}{\sqrt{G}}\partial_i\left(\sqrt{G}g^{ij}\partial_jf\right)$.
+\end{enumerate}
+\newpage
+\section{测地线}
+
+$(M,g)$上的一条光滑曲线$\gamma$称为测地线(geodesic),如果它的切向量场$\dot{\gamma}$沿自身的协变导数是零,即$D_t\dot{\gamma}\equiv0$.用黎曼联络定义的测地线称为黎曼测地线,不引起歧义的情况下简称测地线.
+\begin{enumerate}
+	\item 在局部坐标$(x^k)$下,$\gamma(t)=(x^1(t),\cdots,x^n(t))$是测地线等价于满足如下测地线方程:
+	$$\frac{\mathrm{d}^2x^k}{\mathrm{d}t^2}+\Gamma_{ij}^k\frac{\mathrm{d}x^i}{\mathrm{d}t}\frac{\mathrm{d}x^j}{\mathrm{d}t}=0$$
+	
+	这是一个二阶非线性ODE,它一般不能求出具体解.但是按照ODE存在和唯一性定理可得:对任意点$p\in M$和任意切向量$V\in\mathrm{T}_pM$,局部上存在唯一的过点$p$的极大的测地线,使得它在$p$处的切向量恰好是$V$.这个局部测地线称为以$p$为起始点,以$V$为初始切向量的测地线,记作$\gamma_V$.
+	\item 曲线$\gamma$在点$t$的速度定义为$|\dot{\gamma}(t)|$,如果曲线速度是常值就称曲线是匀速的.对于黎曼测地线$\gamma$,我们解释过$\langle\dot{\gamma},\dot{\gamma}\rangle$是常值,于是黎曼测地线总是匀速的.另外点$p$的沿切向量$V$的测地线和沿切向量$aV,a>0$的测地线是相同的,区别只是速度不同,即如果$\gamma_V$在0附近定义的,那么$\gamma_{aV}(t)=\gamma_V(at)$.
+	\item 设$\varphi:(M,g)\to(M',g')$是等距映射.
+	\begin{enumerate}
+		\item $\varphi$把$g$的黎曼联络$\nabla$映射为$g'$的黎曼联络$\nabla'$,满足:
+		$$\nabla'_{\varphi_*X}(\varphi_*Y)=\varphi_*(\nabla_XY)$$
+		\item 如果$\gamma$是$M$上的曲线,并且$V$是沿$\gamma$的切向量场,那么有:
+		$$\varphi_*D_tV=D'_t(\varphi_*V)$$
+		\item $\varphi$把黎曼测地线映射为黎曼测地线:如果$\gamma$是$M$上的起始点$p$起始切向量是$V$的黎曼测地线,那么$\varphi\circ\gamma$是$M'$上的起始点$\varphi(p)$起始切向量是$\varphi_*V$的黎曼测地线.
+	\end{enumerate}
+\end{enumerate}
+
+指数映射.设$(M,g)$是黎曼流形,设$p\in M$,有$U_p(M)=\{v\in\mathrm{T}_pM\mid |v|=1\}\cong\mathbb{S}^{n-1}$是紧集,按照ODE理论,存在一个一致的参数$\delta=\delta(p)>0$,使得对每个$\xi\in U_p(M)$都有起始点$p$起始切向量$v$的黎曼测地线$\gamma_{\xi}(t)$在$-\delta<t<\delta$存在.于是适当伸缩向量$\xi$的长度(记$u=\delta\xi$),就有当$u\in\mathrm{T}_pM$满足$|u|<\delta$时有$\gamma_u$在$[-1,1]$上存在.我们定义点$p$处的指数映射为$\exp_p:B(0_p,\delta)\to M$,$u\mapsto\gamma_u(1)$,其中$B(0_p,\delta)$表示$\mathrm{T}_pM$的原点为圆心半径$\delta$的开球.也可以把指数映射的定义域理解为切丛的一个子集.
+\begin{enumerate}
+	\item $\exp_p(t\xi)=\gamma_{\xi}(t)$,其中$|t|\le1$且$\xi\in B(0_p,\delta)$.这是因为$\exp_p(t\xi)=\gamma_{t\xi}(1)=\gamma_{\xi}(t)$.
+	\item $\exp_p(0_p)=p$. 
+    \item $\exp$是光滑映射.
+    \item 正规邻域(normal neighborhoods)和正规坐标(normal coordinates).考虑$(\exp_p)_*\mid_{0_p}:\mathrm{T}_{0_p}(\mathrm{T}_pM)=\mathrm{T}_pM\to\mathrm{T}_pM$.按照定义有:
+    $$(\exp_p)_*\mid_{0_p}(u)=\frac{\mathrm{d}}{\mathrm{d}t}(\exp_p(tu))\mid_{t=0}=\gamma'_u(0)=u$$
+    
+    于是这里$(\exp_p)_*\mid_{0_p}$是恒等映射.于是按照反函数定理,存在$\varepsilon>0$($\varepsilon<\delta$),使得$\exp_p$在$B(0_p,\varepsilon)$上的限制是一个微分同胚,它的像集是$M$中的一个开集$B$(后面会证明实际上有$B=B(p,\varepsilon)$).逆映射记作$\varphi:B\to B(0_p,\varepsilon)$,也可以模仿数学分析把逆映射记作$\log_p$.于是$(B,\varphi)$构成一个光滑坐标卡,称为正规邻域.记$B(0_p,\varepsilon)$的一组标准正交基$\{e_1,\cdots,e_n\}$,那么每个$q\in B$,有$\varphi(q)=x^i(q)e_i$,称$(B,\varphi,(x^i))$是$p$的正规坐标.
+\end{enumerate}
+
+曲率张量.我们定义曲率张量$R$是一个$(1,3)$型张量场,换句话讲它吃进三个切向量场得到一个切向量场,它满足:
+$$R:\chi(M)\times\chi(M)\times\chi(M)\to\chi(M)$$
+$$R(X,Y)Z=\nabla_X\nabla_YZ-\nabla_Y\nabla_XZ-\nabla_{[X,Y]}Z$$
+\begin{enumerate}
+	\item 
+	\begin{itemize}
+		\item $R(X,Y)Z=-R(Y,X)Z$.
+		\item $R(X,Y)Z+R(Y,Z)X+R(Z,X)Y=0$.
+		\item $\langle R(X,Y)Z,W\rangle=\langle R(Z,W)X,Y\rangle$.
+		\item $\langle R(X,Y)Z,W\rangle=-\langle R(X,Y)W,Z\rangle$.
+		\item $(\nabla_XR)(Y,Z)W+(\nabla_YR)(Z,X)W+(\nabla_ZR)(X,Y)W=0$.
+	\end{itemize}
+
+    我们也会把曲率张量视为$(0,4)$型张量,即$R(X,Y,Z,W)=\langle R(X,Y)Z,W\rangle$.
+    \item 记$R(\partial_i,\partial_j)\partial_k=R_{ijk}^l\partial_l$.用$(0,4)$型张量的形式就记$R(\partial_i,\partial_j,\partial_k,\partial_l)=R_{ijkl}$.那么有$R_{ijkl}=R_{ijk}^mg_{ml}$.
+    \item 现在设$u\in\mathrm{T}_pM$使得$|u|<\varepsilon$,那么$(\exp_p)_*\mid_u$是$\mathrm{T}_u(\mathrm{T}_pM)\cong\mathbb{R}^n\to\mathrm{T}_{\gamma_u(1)}M$的映射,固定$\xi\in\mathrm{T}_u(\mathrm{T}_pM)$,那么它对应的$\mathrm{T}_pM$中的曲线可简单的取为直线$\{u+s\xi\mid s\in\mathbb{R}\}$.定义$\alpha:[0,1]\times(-\varepsilon,\varepsilon)\to M$为$(t,s)\mapsto\exp_pt(u+s\xi)$
+\end{enumerate}
+
+
+
+\newpage
+\section{曲率}

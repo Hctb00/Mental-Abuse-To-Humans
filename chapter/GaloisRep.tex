@@ -1,0 +1,604 @@
+\chapter{Galois表示}
+\section{交换$\ell$-进制表示}
+\subsection{定义}
+\begin{enumerate}
+	\item 一个Galois表示是指一个绝对Galois群在另一个拓扑域上的表示.即固定域$K,F$,其中$F$是拓扑域,记$G_K=\mathrm{Gal}(K^{\mathrm{sep}}/K)$是绝对Galois群(在不引起歧义的前提下也会记为$G$),它的拓扑是作为射影有限群的拓扑(于是拟紧,全不连通等).一个$G_K$表示就是指一个有限维$F$线性空间$V$,及一个连续映射$\rho:G_K\to\mathrm{GL}(V)$,我们会把$\rho(g)v$简记作$gv$.这里$\mathrm{GL}(V)$上的拓扑定义为当取定一组基的时候,视为$\mathrm{M}(F,n)\cong F^{n^2}$的(开)子空间$\mathrm{GL}_n(F)$,这个拓扑不依赖于基的选取.我们称$(V,\rho)$是$G_K$的一个$F$表示.
+	\item 如果$(V,\rho)$和$(V',\rho')$是$G_K$的两个$F$表示,它们之间的态射定义为一个$F$线性映射$f:V\to V'$使得如下图表交换,也即总有$f(gv)=gf(v)$:
+	$$\xymatrix{G_K\times V\ar[rr]^{1_{G_k}\times f}\ar[d]_{(g,v)\mapsto gv}&&G_k\times V'\ar[d]^{(g,v')\mapsto gv'}\\V\ar[rr]^f&&V'}$$
+	态射集合$\mathrm{Hom}_{G_K}(V,V')$自然具备一个$F$线性空间结构.把$G_K$的连续表示范畴记作$\textbf{Rep}_F(G_k)$.这是一个阿贝尔范畴.当系数域$F=\mathbb{Q}_{\ell}$时,我们就称$(V,\rho)$是$G_K$或者$K$的一个$\ell$-adic表示.
+	\item 任取$g\in G_K$,那么$\rho(g)$是$V$上的连续的自同构,这诱导了映射$\varphi:G_K\times V\to V$.那么$\rho$的连续性和$\varphi$的连续性等价.
+	\item 例子.
+	\begin{enumerate}[(1)]
+		\item 设$\ell\not=\mathrm{char}(K)$.那么$G=G_K$作用在$K^{\mathrm{sep}}$的$\ell^m$次单位根群$\mu_m=\mathbb{Z}/\ell^n\mathbb{Z}$上,进而作用在极限$\mathrm{T}_{\ell}(\mu)=\varprojlim\mu_m=\mathbb{Z}_{\ell}$上.进而诱导了$\mathrm{T}_{\ell}(\mu)\otimes_{\mathbb{Z}_{\ell}}\mathbb{Q}_{\ell}=\mathbb{Q}_{\ell}$上的$G$作用.于是我们得到了一维表示$G\to\mathrm{Aut}(\mathbb{Q}_{\ell})=\mathbb{Q}_{\ell}^*$.它的像集实际上落在$\mathbb{Z}_{\ell}^*$中.
+		\item 设$\ell\not=\mathrm{char}(K)$,设$(E,O)$是$K$上椭圆曲线,设$E(K^{\mathrm{sep}})$上数乘$\ell^m$这个同源的核为$E[m]$,那么绝对Galois群$G$就作用在$E[m]$上,并且群作用和数乘$\ell$的同态$E[m+1]\to E[m]$兼容,于是$G$作用在$\mathrm{T}_{\ell}(E)\cong\mathbb{Z}_{\ell}\times\mathbb{Z}_{\ell}$上.于是我们得到了$G$的二维表示.
+		\item 上一条中的构造可以推广到$d$维阿贝尔簇$A/K$上,其中$\ell\not=\mathrm{char}(K)$.由此得到绝对Galois群$G$的$2d$维表示.
+		\item 设$X/K$是紧合光滑代数簇,设$Y=X_{K^{\mathrm{sep}}}$是到可分代数闭包的基变换.考虑平展上同调$\mathrm{H}^m(Y_{\mathrm{et}},\mathbb{Z}/\ell^n\mathbb{Z})$,那么绝对Galois群$G$在其上有典范作用,进而作用在:
+		$$\mathrm{H}^m_{\mathrm{et}}(Y,\mathbb{Q}_{\ell})=\mathbb{Q}_{\ell}\otimes_{\mathbb{Z}_{\ell}}\varprojlim\mathrm{H}^m_{\mathrm{et}}(Y_{\mathrm{et}},\mathbb{Z}/\ell^n\mathbb{Z})$$
+	\end{enumerate}
+\end{enumerate}
+\subsection{数域的$\ell$-进制表示}
+\begin{enumerate}
+	\item 回顾代数数论.
+	\begin{enumerate}[(1)]
+		\item 设$K$是数域,设$\Sigma_K$是数域$K$上的全部有限素位.对$v\in\Sigma_K$,记$\mathscr{O}_v$表示赋值环,$\kappa_v$表示剩余域,记$v$对应的有理素数为$p_v$,记$v$的分歧指数$e_v$,惯性次数$f_v=[\kappa_v:\mathbb{F}_{p_v}]$,记$(K,v)$的完备化为$K_v$.
+		\item 设$L/K$是有限Galois扩张,Galois群记作$G$,对$w\in\Sigma_L$,它的分解群定义为$G$的子群$D_w=\{\sigma\in G\mid\sigma(w)=w\}$.如果$w$延拓了$v\in\Sigma_K$,那么$D_w$就是$L_w/K_v$的Galois群.此时有典范满同态$D_w\to\mathrm{Gal}(\kappa_w/\kappa_v)$,它的核$I_w$称为$w$的惯性群.于是有典范同构$D_w/I_w\cong\mathrm{Gal}(\kappa_w/\kappa_v)$.这里剩余域扩张是有限域之间的扩张,它的Galois群被Fronebius同态生成,这个同态对应的$D_w/I_w$中的元称为$w$的Frobenius元,记作$F_w$.
+		\item 如果$I_w=\{e\}$,就称$w$是非分歧的.由于那些延拓了$v$的$\Sigma_L$中的赋值的惯性群/分解群是互相共轭的,所以$w$是非分歧的等价于所有那些延拓了$v$的$\Sigma_L$中的赋值都是非分歧的,所以也可以称$v$是非分歧的.另外如果$v$是非分歧的,那么对那些延拓了$v$的赋值$w\in\Sigma_L$,就有$F_w$是互相共轭的,所以$w$的Frobenius元所在的$G$中的共轭类只依赖于$v$,记作$F_v$.
+		\item 上述构造对任意特征零的域$K$和无穷Galois扩张$\overline{K}/K$都可行:对任意特征零的域$K$,把$\Sigma_K$定义为$\Sigma_E$的逆向极限,其中$E$跑遍$K/\mathbb{Q}$的有限中间域;对维数无穷的Galois扩张$L/K$,如果$w\in\Sigma_L$延拓了$v\in\Sigma_K$,那么$D_w,I_w$的定义是一样的.如果$L=\overline{K}$,此时剩余域扩张是$\widehat{\mathbb{Z}}=\overline{\mathbb{F}_{p^n}}/\mathbb{F}_{p^n}$,那些Frobenius映射在逆向极限$\widehat{\mathbb{Z}}$中对应的元是$\widehat{\mathbb{Z}}$的拓扑生成元,它在同构到$D_w/I_w$中的元定义为$F_w$.
+		
+		
+		$F_w$就定义为
+	\end{enumerate}
+	\item 非分歧表示.设$\rho:G_K\to\mathrm{Aut}(V)$是一个$\ell$-进制表示,设$v\in\Sigma_K$,称$\rho$在$v$处非分歧,如果$\rho(I_w)=0$对任意
+\end{enumerate}
+
+
+
+
+
+\subsection{\v{C}ebotarev密度定理}
+
+
+\begin{enumerate}
+	\item 设$\rho:G_K\to\mathrm{Aut}(V)$是数域$K$的$\ell$-进制表示,设$v\in\Sigma_K$是一个有限素位,如果$v$在$\overline{K}$中的任意延拓赋值$w$都满足$\rho(I_w)=\{e\}$,其中$I_w$为惯性群,就称$\rho$在$v$处是非分歧的.记闭子群$H=\ker\rho$对应的Galois域扩张是$L/K$,那么$\rho$在$v$处非分歧当且仅当$L/K$在$v$处非分歧.如果$\rho$在$v$处非分歧,任取延拓赋值$w$,那么$\rho$限制在分解群$D_w$上就要经$D_w/I_w$分解,我们知道$D_w/I_w$是有限循环群,生成元是Frobenius同态$F_w$,记$F_{w,\rho}=\rho(F_w)\in\mathrm{Aut}(V)$,称为$w$处的Frobenius元.这个元在$\mathrm{Aut}(V)$中的共轭类只依赖于$v$,记作$F_{v,\rho}$.
+	\item 密度.设$P\subseteq\Sigma_K$是子集,对任意整数$n$,记$a_n(P)$表示满足$\mathrm{N}(v)\le n$的$v\in P$的个数,其中$\mathrm{N}(v)$表示$v$的剩余域(是有限域)的元素个数,也即$v$对应的$\mathscr{O}_K$的素理想的绝对范数.如果如下极限收敛到实数$a$(在$[0,1]$中),我们就称$P$具有密度$a$:
+	$$\lim\limits_{n\to\infty}\frac{a_n(P)}{a_n(\Sigma_K)}$$
+	
+	按照素数定理有$a_n(\Sigma_K)\sim n/\ln(n)$,于是$P$的密度为$a$等价于讲有:
+	$$a_n(P)=an/\ln(n)+o(n/\ln(n))$$
+	\item 例子.
+	\begin{itemize}
+		\item 最直观的例子是考虑$\mathbb{Z}[i]$中的素理想,选取的素理想越来越多时,那些分裂的素理想出现的概率恰好是$1/2$.
+		\item 有限子集$P\subseteq\Sigma_K$的密度为0.
+		\item 惯性次数为1的有限素位构成的子集的密度为1.
+		\item $\mathbb{Q}$上第一个数码为1的素数构成的子集没有密度.
+	\end{itemize}
+	\item \v{C}ebotarev密度定理.设$L/K$是数域的有限扩张,Galois群记作$G$,设$X\subseteq G$是一个在共轭下不变的子集.设$P_X$由那些在$L$上非分歧,并且Frobenius所在共轭类(因为非分歧导致此时$D_w\cong\mathrm{Gal}(\kappa(L)/\kappa(K))$,后者是循环群,生成元对应的$D_w$中的元称为$w$对应的Frobenius,记作$F_w$,它所在的共轭类不依赖于$v$的延拓$w$的选取,把共轭类记作$F_v$)$F_v\subseteq X$的$v\in\Sigma_K$构成.那么$P_X$的密度为$|X|/|G|$.
+	\item 推论.设$L/K$是有限Galois扩张,Galois群记作$G$.对任意$g\in G$,存在无穷个非分歧素位$w\in\Sigma_L$使得$F_w=g$.
+	\item 推论.设$L/K$是Galois扩张,Galois群记作$G$,它在一个有限集合$S$以外是非分歧的.
+	\begin{enumerate}[(1)]
+		\item $L$的那些非分歧素位的Frobenius元在$G$中稠密.
+		\item 设$X\subseteq G$是被共轭固定的子集.设$X$的边界点集具有Haar测度0,设这里Haar测度$\mu$是规范的,也即$\mu(G)=1$.那么$Y=\{v\in\Sigma_K\mid v\not\in S,F_v\subseteq X\}$的密度就是$\mu(X)$.
+	\end{enumerate}
+\end{enumerate}
+\subsection{有理$\ell$-进制表示}
+
+设$\rho$是数域$K$的$\ell$-进制表示.设$v\in\Sigma_K$关于表示是非分歧赋值,记多项式$P_{v,\rho}(T)=\det(1-F_{v,\rho}T)$(这里$F_{v,\rho}$是共轭类,其中元素的特征多项式是相同的).
+\begin{itemize}
+	\item 称$\rho$是有理表示(rational),如果存在有限子集$S\subseteq\Sigma_K$,使得任意不在其中的有限素位$v$都关于$\rho$是非分歧的,并且$P_{v,\rho}(T)$是$\mathbb{Q}$系数多项式.
+	\item 称$\rho$是整表示(integral),如果存在有限子集$S\subseteq\Sigma_K$,使得任意不在其中的有限素位$v$都关于$\rho$是非分歧的,并且$P_{v,\rho}(T)$是$\mathbb{Z}$系数多项式.
+\end{itemize}
+\begin{enumerate}
+	\item 设$L/K$是有限扩张,设$\rho_K$是$K$的$\ell$-进制表示,那么把它限制在$G_L$上得到$L$的$\ell$-进制表示$\rho_L$.按照有限域扩张下Frobenius元是次幂关系,就有$\rho_K$是有理/整表示得到$\rho_L$是有理/整表示.
+	\item 我们之前给出过四个表示的例子,其中单位根表示是整表示,可以取$S$是$\ell$对应的素位;设$A/K$是$d$维阿贝尔簇,可以取$S$是坏约化的点集合,此时诱导的$2d$维表示也是整表示;平展上同调的表示是否有理还是公开问题.
+	\item 设$\rho$是$G=G_K$的$\ell$-进制有理表示,设$\rho'$是$G$的$\ell'$-进制有理表示.称它们是兼容的,如果存在有限子集$S\subseteq\Sigma_K$,使得对任意$v\not\in S$都有$\rho$和$\rho'$在$v$处非分歧,并且$P_{v,\rho}(T)=P_{v,\rho'}(T)$.进而$G$的一族$\ell$-进制有理表示(其中$\ell$可以变动)称为兼容的,如果其中任意两个表示都是兼容的.
+	\item 一个有理表示$\rho:G\to\mathrm{Aut}(V)$有如下$\rho$不变子空间分解,其中每个$V_i/V_{i+1}$都是不可约表示.那么$V'=\oplus_{i=0}^{q-1}V_i/V_{i+1}$是半单有理表示,并且和$\rho$,它称为$(V,\rho)$的半单化.结合下一条说明证明它是唯一的$\ell$-半单化.
+	$$V=V_0\supseteq V_1\supseteq\cdots\supseteq V_q=0$$
+	\item 设$\rho$是$K$的$\ell$-进制有理表示,对任意素数$\ell'$,在同构意义下存在唯一的$\ell'$-进制半单有理表示$\rho'$,满足和$\rho$兼容.
+	\begin{proof}
+		
+		设$\rho_1'$和$\rho_2'$是$K$的两个$\ell'$-进制半单有理表示,并且都和$\rho$兼容.取$H=G/(\ker\rho_1'\cap\ker\rho_2')$.我们知道特征零的域上的代数$A$,两个有限维半单$A$表示如果迹函数相同(此即对任意$a\in A$有$\mathrm{Tr}\circ\rho_1(a)=\mathrm{Tr}\circ\rho_2(a)$),那么它们是同构的表示【bourbaki】.取群代数$A=\mathbb{Q}_{\ell}[H]$,问题就归结为对任意$h\in H$有$\mathrm{Tr}(\rho_1'(h))=\mathrm{Tr}(\rho_2'(h))$.
+		
+		\qquad
+		
+		设$H$的固定域是$M\subseteq\overline{K}$(也即$M/K$的Galois群是$H$).设有限子集$S\subseteq\Sigma_K$满足对任意$v\not\in S$有$\mathrm{Tr}(\rho_1'(F_v))=\mathrm{Tr}(\rho_2'(F_v))$.于是对$v$的任意在$M$上的延拓$w$,就有$\mathrm{Tr}(\rho_1'(F_w))=\mathrm{Tr}(\rho_2'(F_w))$.但是按照\v{C}ebotarev密度定理(的推论),这些$F_w$构成$H$的稠密子集,于是两个迹函数相同.
+	\end{proof}
+    \item 对任意素数$\ell$取一个$\ell$-进制有理表示$\rho_{\ell}$,称$\{\rho_{\ell}\}$是严格兼容的,如果它是兼容的(也即其中任意两个表示都是兼容的),并且存在有限子集$S\subseteq\Sigma_K$满足:
+    \begin{enumerate}[(1)]
+    	\item 记$S_{\ell}$表示$K$的那些剩余域的特征为$\ell$的素位构成的集合.那么对任意$v\not\in S\cup S_{\ell}$,都有$\rho_{\ell}$在$v$非分歧,并且$P_{v,\rho_{\ell}}(T)$是$\mathbb{Q}$系数的.
+    	\item 对$v\not\in S\cup S_{\ell}\cup S_{\ell'}$,总有$P_{v,\rho_{\ell}}(T)=P_{v,\rho_{\ell'}}(T)$.
+    \end{enumerate}
+
+    当集合$\{\rho_{\ell}\}$严格兼容时,存在最小的有限子集$S\subseteq\Sigma_K$满足上述条件,它称为这个集合的异常集(exceptional set).
+    \item 例如我们之前给出的四个表示的例子,前三个都是严格兼容的,第一个异常集是空集,第二个和第三个异常集是阿贝尔簇的坏约化点构成的集合.
+\end{enumerate}
+\subsection{取值在线性代数群的表示}
+\begin{enumerate}
+	\item 设$H$是域$k$上的线性代数群(此即$\mathrm{GL}(n,k)$的闭子群概形并且是仿射的),设$R$是$k$(交换)代数,记$H(R)$表示$H$的$R$值点.设$A$是$H$的坐标环,一个正则函数$f\in A$称为中心的(central),如果对任意$x,y\in R$有$f(xy)=f(yx)$.设$x\in H(R)$,如果对任意中心元$f\in A$有$f(x)\in k$,则称$x$在$H$上是有理的(rational),这个性质实际上是$x$共轭类的性质,所以我们也称$x$所在的共轭类在$H$上是有理的.
+	\item 设$H$是$\mathbb{Q}$上的线性代数群,那么$\mathbb{Q}_{\ell}$值点$H(\mathbb{Q}_{\ell})$是$\ell$-进制李群,设$K$是域,称连续同态$\rho: G=G_K\to H(\mathbb{Q}_{\ell})$为$K$或者$G_K$的取值在$H$中的$\ell$-进制表示.
+	\item 对于数域$K$的取值在$H$中的表示,类似的可以定义表示在一个素位处非分歧的概念,类似定义$F_{w,\rho}$和共轭类$F_{v,\rho}$.类似定义$\rho$是有理表示如果满足:
+	\begin{enumerate}[(1)]
+		\item 存在有限子集$S\subseteq\Sigma_K$使得$\rho$在每个$v\not\in S$处非分歧.
+		\item 如果$v\not\in S$,那么共轭类$F_{v,\rho}$在$\mathbb{Q}$上有理.
+	\end{enumerate}
+
+    类似定义取值在$H$的$\ell$-进制表示$\rho$和$\ell'$-进制表示$\rho'$是兼容的,如果存在有限子集$S\subseteq\Sigma_K$,满足对任意$v\not\in S$,有$\rho$和$\rho'$都在$v$上非分歧,并且对任意中心元$f\in A$,有$f(F_{v,\rho})=f(F_{v,\rho'})$.类似定义兼容族和严格兼容族的概念.
+\end{enumerate}
+\subsection{有理表示的L函数}
+
+
+\newpage
+\section{Hodge-Tate表示}
+\subsection{分圆特征标}
+\begin{enumerate}
+	\item 设$K$是域,设$K^{\mathrm{sep}}$是固定的可分闭包,设素数$p\not=\mathrm{char}(K)$,设$\mu_{p^n}$是$K^{\mathrm{sep}}$上的$p^n$次单位根群,记$\mu_{p^{\infty}}$是这些子群的并(逆向极限),绝对Galois群$G_K$典范作用在$\mu_{p^{\infty}}$上,进而定义了一个连续同态$\chi:G_K\to\mathbb{Z}_p^*$满足$g(\zeta)=\zeta^{\chi(g)}$.这是一个一维$p$进表示,它称为$G_K$的$p$进分圆特征标(p-adic cyclotomic character).
+	\item 对域$K$,记$\mathbb{Z}_p(1)=\varprojlim\mu_{p^n}(\overline{K})$,这是一个秩1的$\mathbb{Z}_p$自由模,附带一个典范的$G_K$作用.对$r\ge0$,记$\mathbb{Z}_p(r)=\mathbb{Z}_p(1)^{\otimes r}$和$\mathbb{Z}_p(-r)=\mathbb{Z}_p(r)^{\vee}=\mathrm{Hom}_{\mathbb{Z}_p}(\mathbb{Z}_p(r),\mathbb{Z}_p)$.它们都具备典范的$G_K$作用.更一般的,对任意$\mathbb{Z}_p[G_K]$模$M$(也即带$G_K$作用的$\mathbb{Z}_p$模),记$M(r)=\mathbb{Z}_p(r)\otimes_{\mathbb{Z}_p}M$,对偶模记作$M(r)^{\vee}$.它们也都具备典范的$G_K$作用(比方说$M(r)$可以典范等同于$M$,其上的$G_K$作用是$gm=\chi(g)^rg(m)$).明显有$(M(r))(r')=M(r+r')$和$M(r)^{\vee}=M^{\vee}(-r)$.
+\end{enumerate}
+\subsection{$\textbf{C}_K$表示}
+
+设$K$是$p$进域,此即一个特征零的完备离散赋值域,满足剩余域是特征为$p>0$的完全域.记$G_K$是绝对Galois群,记$\textbf{C}_K=\widehat{\overline{K}}$是$p$进复数域.$G_K$的一个$\textbf{C}_K$表示指的是一个有限维$\textbf{C}_K$线性空间$W$,附带一个连续的$G_K$半线性作用$G_K\times W\to W$,这里作用是半线性的指的是对任意固定的$g\in G_K$和任意$w_1,w_2\in W$仍然有$g(w_1+w_2)=gw_1+gw_2$,但是数乘的部分对任意$c\in\textbf{C}_K$和任意$w\in W$有$g(cw)=g(c)g(w)$(数乘也要作用).两个$\textbf{C}_K$表示之间的同态是指保作用结构的$\textbf{C}_K$线性映射.这构成的范畴记作$\textbf{Rep}_{\textbf{C}_K}(G_K)$.
+\begin{enumerate}
+	\item 矩阵表示.选取$W$的一组$\textbf{C}_K$基为$\{w_1,\cdots,w_n\}$.可记$g(w_j)=\sum_ia_{ij}(g)w_i$.定义$\mu:G_K\to\mathrm{M}_n(\textbf{C}_K)$为$g\mapsto(a_{ij}(g))_{1\le i,j\le n}$.这是一个连续映射,但是它未必是同态,它满足$\mu(1)=\mathrm{id}$和$\mu(gh)=\mu(g)g(\mu(h))$(因为半线性).特别的,这说明$\mu$的取值总是可逆矩阵.
+	\item 例子.设$V\in\textbf{Rep}_{\mathbb{Q}_p}(G_K)$,那么$W=\textbf{C}_K\otimes_{\mathbb{Q}_p}V\in\textbf{Rep}_{\textbf{C}_K}(G_K)$.
+	\item $\textbf{Rep}_{\textbf{C}_K}(G_K)$是阿贝尔范畴,带张量积,下面定义对偶:设$W$是$G_K$的$\textbf{C}_K$表示,它的对偶表示定义为对偶$\textbf{C}_K$空间$W^{\vee}$,其上的$G_K$作用定义为$(gf)(w)=g(f(g^{-1}(w)))$,$\forall w\in W,f\in W^{\vee},g\in G_K$.这样定义的目的是为了$gf$仍然是线性函数.类似于线性空间理论,在范畴$\textbf{Rep}_{\textbf{C}_K}(G_K)$中仍然有典范同构$W\cong W^{\vee\vee}$和$W^{\vee}\otimes V^{\vee}\cong(W\otimes V)^{\vee}$,以及典范同态$W\otimes W^{\vee}\to\textbf{C}_K$.
+	\item (Faltings).设$K$是$p$进域,设$X/K$是光滑紧合概形,那么有$\textbf{Rep}_{\textbf{C}_K}(G_K)$中的典范同构:
+	$$\textbf{C}_K\otimes_{\mathbb{Q}_p}\mathrm{H}_{\mathrm{\'et}}^n(X_{\overline{K}},\mathbb{Q}_p)\cong\bigoplus_q\left(\textbf{C}_K(-q)\otimes_K\mathrm{H}^{n-q}(X,\Omega_{X/K}^q)\right)$$
+	其中$G_K$在右侧的作用定义为只作用在$\textbf{C}_K(-q)=\textbf{C}_K\otimes_{\mathbb{Q}_p}\mathbb{Q}_p(-q)$上.
+	\begin{enumerate}[(1)]
+		\item 
+	\end{enumerate}
+	
+\end{enumerate}
+
+
+
+
+
+
+
+设$K$是$p$进域,此即一个特征零的完备离散赋值域,满足剩余域是特征为$p>0$的完全域,固定代数闭包$\overline{K}$,它的绝对Galois群记作$G_K$,它的$p$进复数域记作$\textbf{C}_K=\widehat{\overline{K}}$,它的一致化参数记作$\pi$.
+
+
+
+
+\subsection{Serre群}
+\begin{enumerate}
+	\item 关于Weil限制函子.给定域扩张$L/K$,纤维积函子$-\times_KL:\textbf{Sch}(K)\to\textbf{Sch}(L)$的右伴随函子存在,记作$\mathrm{R}_{L/K}(-):\textbf{Sch}(L)\to\textbf{Sch}(K)$,称为Weil限制函子.
+	\begin{enumerate}[(1)]
+		\item 按照定义,对任意$K$概形$S$就有$\mathrm{R}_{L/K}(X)(S)=X(S\times_KL)$.特别的$\mathrm{R}_{L/K}(X)$的$K$值点恰好是$X$的$L$值点.
+		\item 例如对域扩张$L/K$总有$\mathrm{R}_{L/K}(\mathrm{Spec}L)=\mathrm{Spec}K$;对$m$维域扩张$L/K$有$\mathrm{R}_{L/K}(\mathbb{A}^1_L)=\mathbb{A}_K^m$;再比如对$m$维域扩张$L/K$,设
+		$$X=\mathrm{Spec}L[x_1,\cdots,x_n]/(f_1,\cdots,f_r)$$
+		是仿射的,取$L/K$一组基$\{e_1,\cdots,e_s\}$,取$x_i=\sum_{1\le j\le m}y_{ij}e_j$和$f_k=\sum_{1\le j\le s}g_{kj}e_j$.那么$\mathrm{R}_{L/K}(X)=\mathrm{Spec}K[y_{ij}]/(g_{pq})$.
+		\item 如果$X/L$是群概形,那么$\mathrm{R}_{L/K}(X)/K$也是群概形.
+	\end{enumerate}
+	\item 取数域$K$上的乘法群簇$\mathbb{G}_{m,K}$,取它的Weil限制$T=\mathrm{R}_{K/\mathbb{Q}}(\mathbb{G}_{m,K})$,这是$\mathbb{Q}$上的代数群.
+	\begin{enumerate}[(1)]
+		\item 按照定义,如果$A$是$\mathbb{Q}$代数,那么$T(A)=(K\otimes_{\mathbb{Q}}A)^*$.特别的有$T(\mathbb{Q})=K^*$.
+		\item 记$[K:\mathbb{Q}]=d$,那么$T$是$d$维环面(torus),此即基变换到代数闭包上有:$T_{\overline{\mathbb{Q}}}=\mathbb{G}_{m,\mathbb{Q}}^{\times d}$.换句话讲,设$S=\mathrm{Hom}_{\mathbb{Q}}(K,\overline{\mathbb{Q}})$,每个$\sigma\in S$延拓为同态$K\otimes_{\mathbb{Q}}\overline{\mathbb{Q}}$,进而延拓为$\sigma^*:T_{\overline{\mathbb{Q}}}\to\mathbb{G}_{m,\overline{\mathbb{Q}}}$【?】,那么当$\sigma$跑遍$S$时态射$T_{\overline{\mathbb{Q}}}\to\mathbb{G}_{m,\overline{\mathbb{Q}}}^{\times d}$是同构.并且这里$\{\sigma^*\}$构成了特征群$X=X(T)=\mathrm{Hom}_{\overline{\mathbb{Q}}}(T_{\overline{\mathbb{Q}}},\mathbb{G}_{m,\overline{\mathbb{Q}}})$的一组基.
+	\end{enumerate}
+	\item 设$E$是$K^*=T(\mathbb{Q})$的子群,设$E$在$T$中的Zariski闭包为$\overline{E}$,从$\overline{E}\times\overline{E}=\overline{E\times E}$说明$\overline{E}$是$T$的代数子群.记$T_E=T/\overline{E}$,这也是$\mathbb{Q}$上的环面,它的特征群$X_E=X(T_E)$是$X$的子群,由那些在$E$上取值为1的特征构成.换句话讲如果$\lambda=\prod_{\sigma\in S}{\sigma^*}^{n_{\sigma}}$是$T$的一个特征,那么$X_E$由满足$\prod\sigma(x)^{n_{\sigma}}=1,\forall x\in E$的$\lambda$构成.
+	\item 扩充群.设$k$是域,设$A/k$是交换的代数群,设有交换群的短正合列$0\to Y_1\to Y_2\to Y_3\to0$,其中$Y_3$是有限群,取定一个群同态$\varepsilon:Y_1\to A(k)$.我们断言存在代数群$B/k$,存在代数群同态$A\to B$和群同态$Y_2\to B(k)$,万有的满足如下图表交换:
+	$$\xymatrix{Y_1\ar[rr]\ar[d]&&Y_2\ar[d]\\A(k)\ar[rr]&&B(k)}$$
+	这里万有的含义是,如果代数群$B'/k$和代数群同态$A\to B'$和交换群同态$Y_2\to B'(k)$满足相同的交换图表,那么存在唯一的代数群同态$f:B\to B'$满足$Y_2\to B'(k)$和$A(k)\to B'(k)$复合上$f(k):B'(k)\to B(k)$就是预先的$Y_2\to B(k)$和$A(k)\to B(k)$.此时我们有$B$是$Y_3$上的常值代数群经$A$的延拓.这个代数群$B$称为$A$的扩充群(enlarged group).
+	$$\xymatrix{Y_1\ar[rr]\ar[d]&&Y_2\ar[d]\\A(k)\ar[rr]\ar[drr]&&B'(k)\ar[d]^{f(k)}\\&&B(k)}$$
+	\begin{proof}
+		
+		对$y\in Y_3$,取一个提升$\overline{y}\in Y_2$.如果$y,y'\in Y_3$,那么有$c(y,y')=\overline{y}+\overline{y'}-\overline{y+y'}\in Y_1$是延拓的一个2-余圈.取一个以$Y_3$为指标集的集合族$\{A_y\mid y\in Y_3\}$,使得每个$A_y=A$,记它们的无交并为$B$.定义$B$上的群结构$\pi_{y,y'}:A_y\times A_{y'}\to A_{y+y'},y,y'\in Y_3$是$A$上的群结构再复合上关于$\varepsilon(c(y,y'))\in A$的平移变换.于是$B$上的零元是$-\varepsilon(\overline{0})$,元$x\in A_y$的逆元是$-x+\varepsilon(\overline{y}+\overline{-y})$.取:
+		\begin{itemize}
+			\item $A\to B$是典范嵌入$A\to A_0\subseteq B$复合上经$-c(0,0)$的平移变换.
+			\item $Y_2\to B(k)$把$\overline{y}+z$,其中$y\in Y_3$和$z\in Y_1$,映为$z-\varepsilon\overline{0}\in A_y$.
+		\end{itemize}
+		验证$B$和这些态射满足泛性质.最后对$k$的任意域扩张$L$有如下短正合列之间的交换图表:
+		$$\xymatrix{0\ar[r]&Y_1\ar[d]\ar[r]&Y_2\ar[d]\ar[r]&Y_3\ar@{=}[d]\ar[r]&0\\0\ar[r]&A(L)\ar[r]&B(L)\ar[r]&Y_3\ar[r]&0}$$
+		于是$B$就是关于$Y_3$的常值代数群经$A$的延拓.
+	\end{proof}
+	\begin{enumerate}[(1)]
+		\item 我们构造的扩充群和域扩张的基变换可交换.设$L/k$是域扩张,设$A/k$是代数群,设$A_L=A\times_kL$.那么代数群$A_L/L$关于上述交换群的短正合列以及群同态$\varepsilon:Y_1\to A(k)\to A_L(L)$的扩充群$B'$恰好典范同构于$B\times_kL$.
+		\item 【?】我们在下文只考虑$\mathrm{char}(k)=0$和$A$是环面的情况,此时经基域的有限扩张后,$B$总是同构于一个环面和一个有限阿贝尔群的直积.这样的代数群一定被它的特征群$X(B)=\mathrm{Hom}_{\overline{k}}(B_{\overline{k}},\mathbb{G}_{m,\overline{k}})$所决定,这个特征群是一个$G$模,其中$G$是Galois群,并且它是有限型$\mathbb{Z}$代数.
+	\end{enumerate}
+    \item 群$C_m$.设$K$是数域,设$\Sigma_K$是有限素位构成的集合,取一个有限子集$S$,取$m=(m_v)_{v\in S}$,其中$m_v\ge1$是整数,我们也称$m$是一个模量(modulus),也称$S$是$m$的支集.对任意素位$v$,取$U_v$为$K_v$的单位群(对复素位取$U_v=\mathbb{C}^*$,对实素位取$U_v=\mathbb{R}^{>0}$),定义$U_{v,m}$如下:
+    \begin{itemize}
+    	\item 如果$v\in\Sigma^{\infty}_K$是无穷素位,取为$K_v^*$单位元的连通分支.
+    	\item 如果$v\in S$,取为$m_v$阶单位群$\{u\in U_v\mid v(1-u)\ge m_v\}$.
+    	\item 如果$v\in\Sigma_K-S$,取为$U_v$.
+    \end{itemize}
+    那么$U_m=\prod_vU_{v,m}$是依代尔群$I_K$的开子群.记$E=\mu(K)$是单位根群,那么$E_m=E\cap U_m$是$E$的有限指数子群.记$I_m=I_K/U_m$和$C_m=I_K/K^*U_m$,后者也即$C$模去$U_m$在$C=I_K/K^*$中的像.于是我们得到如下短正合列:
+    $$\xymatrix{1\ar[r]&K^*/E_m\ar[r]&I_m\ar[r]&C_m&}$$
+    \begin{enumerate}[(1)]
+    	\item 这里群$C_m$是有限的:按照$U_m\subseteq C$是开子群,它包含了单位元的连通分支$D$,熟知的$C/D$是紧群,于是它的开子群是有限指数的.
+    	\item 另外按照$I_K$的幺元的每个开邻域都包含了某个$U_m$,就得到$\varprojlim C_m=C/D=\mathrm{Gal}(K^{\mathrm{ab}}/K)$.
+    	\item 我们给出$C_m$的更古典的定义(借助理想类群的定义).设$J_S$是那些和$S$互素的分式理想构成的群.设$P_{S,m}$由满足$a\in U_{v,m},\forall v\in S\cup\Sigma^{\infty}_K$的主理想$(a)$构成的子群(这个条件可以简单的理解为$a\equiv1(\mathrm{mod}m)$).记它们的商为$\mathrm{Cl}_m$,那么有下图表中上一行的短正合列.取$\mathfrak{a}=\prod_{v\not\in S}v^{d_v}\in J_S$,取映射$g$把它映到$I_m$中为:对那些分量$v\in S\cup\Sigma_K^{\infty}$则取零;对分量$v\in\Sigma_K-S$则取为任意赋值为$d_v$的元(这在模掉$U_m$的意义下没有歧义).这个同态$g$诱导了如下短正合列之间的同态,并且其中$f$是同构.进而从类数有限也可以得到$C_m$是有限群.
+    	$$\xymatrix{1\ar[r]&P_{S,m}\ar[d]\ar[r]&J_S\ar[r]\ar[d]^g&\mathrm{Cl}_m\ar[r]\ar[d]^f&1\\1\ar[r]&K^*/E_m\ar[r]&I_m\ar[r]&C_m\ar[r]&1}$$
+    \end{enumerate}
+    \item 构造$T_m$和$S_m$.取$T=\mathrm{R}_{K/\mathbb{Q}}(\mathbb{G}_{m,K})$是$\mathbb{Q}$代数群,取$E_m=E\cap U_m$是$K^*=T(\mathbb{Q})$的子群,取$T_m=T/\overline{E_m}$.取典范群同态$K^*/E_m\to T_m(\mathbb{Q})$,那么就存在$T_m$的扩充代数群$S_m$以及代数群同态$T_m\to S_m$,使得有如下短正合列:
+    $$\xymatrix{1\ar[r]&T_m\ar[r]&S_m\ar[r]&C_m\ar[r]&1}$$
+    以及如下交换图表:
+    $$\xymatrix{1\ar[r]&K^*/E_m\ar[r]\ar[d]&I_m\ar[r]\ar[d]^{\varepsilon}&C_m\ar[r]\ar@{=}[d]&1\\1\ar[r]&T_m(\mathbb{Q})\ar[r]&S_m(\mathbb{Q})\ar[r]&C_m\ar[r]&1}$$
+    另外如果$m'\ge m$(这个记号是指$m$的支集包含在$m'$的支集中,并且对$m$支集中的任意赋值$v$有$m_v'\ge m_v$),那么有典范同态$T_{m'}\to T_m$和$I_{m'}\to I_m$,进而诱导了$S_{m'}\to S_m$.那么$\{S_m\}$构成了逆向系统,他的极限是$\mathbb{Q}$上的代数群,它是射影有限群$C/D=\varprojlim C_m$经一个环面的延拓.
+\end{enumerate}
+\subsection{$S_m$和$\ell$-adic表示}
+\begin{enumerate}
+	\item 取一个模量$m$,取素数$\ell$,取态射复合$\pi:T\to T_m\to S_m$,它诱导了$\mathbb{Q}_{\ell}$值点的同态$\pi_{\ell}:T(\mathbb{Q}_{\ell})\to S_m(\mathbb{Q}_{\ell})$.这里$T(\mathbb{Q}_{\ell})=K_{\ell}^*=(K\otimes_{\mathbb{Q}}\mathbb{Q}_{\ell})^*=\prod_{v\mid\ell}K_v^*$,于是这是$I_K$的直和项.取典范投影$\mathrm{pr}_{\ell}:I_K\to T(\mathbb{Q}_{\ell})$.我们取$\alpha_{\ell}$是$\pi_{\ell}$和$\mathrm{pr}_{\ell}$的复合:$I_K\to T(\mathbb{Q}_{\ell})\to S_m(\mathbb{Q}_{\ell})$.另外我们取$\varepsilon:I_K\to I_m\to S_m(\mathbb{Q})$.那么按照之前的交换图表就得到$\alpha_{\ell}$和$\varepsilon$限制在$K^*$上是相同的.
+	\item 取$\varepsilon_{\ell}:I\to S_m(\mathbb{Q}_{\ell})$为$\varepsilon\cdot\alpha_{\ell}^{-1}$,也即对任意$a\in I_K$有$\varepsilon_{\ell}(a)=\varepsilon(a)\alpha_{\ell}(a^{-1})$.于是上一条说明$\varepsilon_{\ell}$在$K^*$上是平凡的.进而诱导了同态$C_K\to S_m(\mathbb{Q}_{\ell})$.后者是一个$\ell$-adic李群,从而是全不连通的.进而$C$的幺元的连通分支$D$落在它的核中,进而$\varepsilon_{\ell}$经$C/D=G^{\mathrm{ab}}$分解:$\varepsilon_{\ell}:G^{\mathrm{ab}}\to S_m(\mathbb{Q}_{\ell})$.这是$K$的取值在$S_m$的阿贝尔$\ell$-adic表示.
+	\item 对$v\not\in S$,其中$S$是模量$m$的支集,取$f_v\in I_K$满足在$v$处取$K_v$的一致化参数,在其余的$v$处取1.记$F_v=\varepsilon(f_v)\in S_m(\mathbb{Q})$.那么有:
+	\begin{enumerate}[(1)]
+		\item 我们构造的表示$\varepsilon_{\ell}:G^{\mathrm{ab}}\to S_m(\mathbb{Q}_{\ell})$是取值在$S_m$中的有理表示.
+		\item $\varepsilon_{\ell}$在$S\cup S_{\ell}$以外非分歧,其中$S_{\ell}$由那些整除$\ell$的赋值构成.
+		\item 如果$v\not\in S\cup S_{\ell}$,任取$v$在$\overline{K}$上的延拓赋值$w$,那么$\varepsilon_{\ell}$限制在$D_w$上就经有限循环群$D_w/I_w$分解,它的生成元在$\varepsilon_{\ell}$下的像记作$F_{w,\varepsilon_{\ell}}$,这个元在$S_m(\mathbb{Q}_{\ell})$中的共轭类不依赖于延拓赋值$w$的选取,把这个共轭类记作$F_{v,\varepsilon_{\ell}}$.我们断言这个共轭类等用于上面构造的$F_v\in S_m(\mathbb{Q})$.
+		\item $\{\varepsilon_{\ell}\mid\ell\}$是取值在$S_m$的$\ell$-进制表示的严格兼容系统,并且异常集包含在$S$中.
+	\end{enumerate}
+\end{enumerate}
+
+
+
+
+\section{平展$\varphi$模}
+\subsection{$B$表示与正则$(F,G)$环}
+
+半线性表示.
+\begin{itemize}
+	\item 设$B$是拓扑环,设$G$是拓扑群,$G$的一个$B$半线性表示$X$是指一个有限$B$模$X$,使得$G$在$B$上约定了连续表示,还在$X$上约定了半线性的连续表示,这里半线性是指对任意$g\in G,\lambda\in B,x_1,x_2,x\in X$有:
+	$$g(x_1+x_2)=g(x_1)+g(x_2),g(\lambda x)=g(\lambda)g(x)$$
+	\item 如果$B$模$X$是自由的,就称$G$的$B$半线性表示$X$是自由的.
+	\item 称$G$的自由$B$半线性表示$X$是平凡的,如果如下等价命题的任一成立:
+	\begin{enumerate}
+		\item 存在由$X^G$中的元构成的$X$的基.
+		\item 有$G$表示同构$X\cong B^d$.
+	\end{enumerate}
+\end{itemize}
+\begin{enumerate}
+	\item 如果$G$在拓扑环$B$上的作用是平凡的,那么$G$的$B$半线性表示就是线性表示.
+	\item 如果$B=\mathbb{F}_p$赋予离散拓扑,称$G$的$B$半线性表示为$G$的模$p$表示;如果$B=\mathbb{Q}_p$赋予$p-$adic拓扑,称$G$的$B$半线性表示为$p-$adic表示.
+	\item 存在从$G$的自由秩$d$的$B$半线性表示的等价类到$\mathrm{H}_{\mathrm{cont}}^1(G,\mathrm{GL}_d(B))$的双射.并且这个等价类是平凡表示的等价类当且仅当它对应到连续同调群中的零元.
+	\begin{proof}
+		
+		设$X$是秩$d$的自由$B$表示.取一组基为$\{e_1,\cdots,e_d\}$,那么可记$g(e_j)=\sum_{i=1}^da_{ij}(g)e_i$.记$\alpha:G\to\mathrm{GL}_d(B)$为$g\mapsto\left(a_{ij}(g)\right)$.那么它满足$\alpha(g_1g_2)=\alpha(g_1)g_1\alpha(g_2)$.于是$\alpha\in\mathrm{Z}_{\mathrm{cont}}^1(G,\mathrm{GL}_d(B))$.再取一组基$\{e_1',\cdots,e_d'\}$,记$g(e_1',\cdots,e_d')=(e_1',\cdots,e_d')\left(a_{ij}'(g)\right)$,把右边这个矩阵记作$\alpha'(g)$,记可逆矩阵$P$使得$(e_1,\cdots,e_d)P=(e_1',\cdots,e_d')$,那么:
+		$$(e_1,\cdots,e_d)P\alpha'(g)=g(e_1',\cdots,e_d')=g((e_1,\cdots,e_d)P)=(e_1,\cdots,e_d)\alpha(g)g(P)$$
+		
+		于是有$P\alpha'(g)=\alpha(g)g(P)$.即$\alpha$和$\alpha'$落在同一个同调类中,于是不依赖基选取的定义了自由秩$d$的$B$表示到一阶连续同调群的映射$X\mapsto[X]$.反过来给定一个1余圈$\alpha\in\mathrm{Z}_{\mathrm{cont}}^1(G,\mathrm{GL}_d(B))$,那么$g(e_j)=\sum_{i=1}^da_{ij}(g)e_i$定义了$X=B^d$上的一个半线性$G$表示.
+	\end{proof}
+\end{enumerate}
+
+正则$(F,G)$环.设$B$是拓扑环,设$G$是拓扑群,在$B$上有连续作用,记$E=B^G$约定是一个域,设$F\subset E$是闭子域.如果$B$是整环,那么$G$在$B$上的连续作用就可以延拓到$C=\mathrm{Frac}(B)$上,即$g(b_1/b_2)=g(b_1)/g(b_2)$.
+\begin{itemize}
+	\item 称$B$是$(F,G)$正则环,如果如下条件成立:
+	\begin{enumerate}
+		\item $B$是整环.
+		\item $B^G=C^G$.
+		\item 如果非零元$0\not=b\in B$,满足对任意$g\in G$,都有$\lambda\in F$使得$g(b)=\lambda b$,那么$b$在$B$中可逆.
+	\end{enumerate}
+	\item 设$\textbf{Rep}_F(G)$是$G$的连续$F$线性表示构成的范畴.这是一个阿贝尔范畴,并且它具备如下额外结构:
+	\begin{enumerate}
+		\item 单位表示.此为$F$赋予平凡表示.
+		\item 张量积.如果$V_1,V_2$是$G$的两个连续$F$线性表示,那么$V_1\otimes V_2$作为线性空间是线性空间的张量积,$G$作用定义为$g(v_1\otimes v_2)=g(v_1)\otimes g(v_2)$.这个表示是连续的因为它是如下连续映射的复合:
+		$$\xymatrix{G\ar[r]&G\times G\ar[r]&\mathrm{GL}(V_1)\otimes\mathrm{GL}(V_2)\ar[r]&\mathrm{GL}(V_1\otimes V_2)}$$
+		\item 对偶表示.如果$V$是$G$的$F$表示,对偶表示$V^*$作为线性空间是$V$的对偶空间,它的$G$作用定义为$(gf)(v)=f(g^{-1}(v))$.
+	\end{enumerate}
+	\item 记号同上,一个$G$的$F$表示$V$称为$B-$容许的,如果$B\otimes_FV$作为$G$的$B$表示是平凡表示.
+\end{itemize}
+
+设$B$是$(F,G)$正则环.设$V$是$G$的$F$表示,那么$B\otimes_FV$按照$g(\lambda\otimes x)=g(\lambda)\otimes g(x)$是$G$的一个自由$B$半线性表示.记$\textbf{D}_B(V)=(B\otimes_FV)^G$,那么有$G$表示的如下同态映射:
+$$\alpha_V:B\otimes_E\textbf{D}_B(V)\to B\otimes_FV$$
+$$\lambda\otimes x\mapsto\lambda x$$
+\begin{enumerate}
+	\item $\alpha_V$总是单射,并且有$\dim_E\textbf{D}_B(V)\le\dim_FV$.并且如下命题互相等价:
+	\begin{itemize}
+		\item $\dim_E\textbf{D}_B(V)=\dim_FV$.
+		\item $\alpha_V$是同构.
+		\item $V$是$B$容许的.
+	\end{itemize}
+	\begin{proof}
+		
+		设$C=\mathrm{Frac}B$,按照$B$是$(F,G)$正则环,有$C^G=B^G=E$.所以有如下交换图表,其中垂直的三个映射都是单射,说明问题归结为设$B=C$,也即$B$本身是域的情况.$\alpha_V$是单射等价于讲对任意$h\ge1$,任意$E$上线性无关的$\{x_1,x_2,\cdots,x_h\}\subseteq\textbf{D}_B(V)$也在$B$上线性无关(因为$B\otimes_E\textbf{D}_B(V)$中的元可以表示为$\sum_i\lambda_i\otimes x_i$,使得$\{x_i\}$线性无关).
+		$$\xymatrix{B\otimes_E\textbf{D}_B(V)\ar[rr]\ar@{^{(}->}[d]&&B\otimes_FV\ar@{^{(}->}[dd]\\B\otimes_E\textbf{D}_C(V)\ar@{^{(}->}[d]&&\\C\otimes_E\textbf{D}_C(V)\ar[rr]&&C\otimes_FV}$$
+		
+		我们对$h$归纳证明这件事.首先$h=1$没有什么需要证的,设$h\ge2$.假设$\{x_1,\cdots,x_h\}\subseteq\textbf{D}_B(V)$在$E$上线性无关,但是不在$B$上线性无关,那么存在不全为零的系数$\lambda_1,\cdots,\lambda_h\in B$,使得$\sum_{i=1}^h\lambda_ix_i=0$.按照归纳假设,我们可以设$\lambda_i$是全不为零的.所以我们不妨设$\lambda_h=-1$,否则可以给等式乘以$-\lambda_h^{-1}$.于是有$x_h=\sum_{i=1}^{h-1}\lambda_ix_i$,对每个$g\in G$,就有$x_h=g(x_h)=\sum_{i=1}^{h-1}g(\lambda_i)x_i$.导致$\sum_{i=1}^{h-1}(g(\lambda_i)-\lambda_i)x_i=0$,归纳假设说明对每个$1\le i\le h-1$都有$g(\lambda_i)=\lambda_i$,导致$\lambda_i\in B^G=E$,这得到这组元素在$E$上也线性相关,矛盾.于是我们证明了$\alpha_V$是单射,于是有:
+		$$\dim_E\textbf{D}_B(V)=\dim_BB\otimes_E\textbf{D}_B(V)\le\dim_BB\otimes_FV=\dim_FV$$
+		
+		按照如上维数不等式,$\alpha_V$是同构等价于中间的两个维数相同,于是等价于$\dim_E\textbf{D}_B(V)=\dim_FV$.【？】
+		
+		另一个等价是因为,$V$是$B$容许的是指存在由$\textbf{D}_B(V)$中元素构成的$B\otimes_FV$的一族基,记作$\{x_1,\cdots,x_d\}$,按照$\alpha_V(1\otimes x_i)=x_i$,结合$\alpha_V$是单射,就说明$\alpha_V$是同构等价于$V$是$B$容许的.
+	\end{proof}
+	\item 设$B$是$(F,G)$正则的,记$\textbf{Rep}_F^B(G)$表示$\textbf{Rep}_F(G)$的由$B$容许表示构成的完全子范畴.
+	\begin{itemize}
+		\item $F$上的单位表示显然是$B$容许的.
+		\item $B$容许表示的子表示和商表示都是$B$容许的.
+		\item $B$容许表示的对偶,张量积,直和都是$B$容许的.
+	\end{itemize}
+	
+	另外考虑函子$\textbf{D}_B(-):\textbf{Rep}_F(G)\to\textbf{Rep}_F^B(G)$为$V\mapsto\textbf{D}_B(V)=(B\otimes_FV)^G$限制在$\textbf{Rep}_F^B(G)$上是一个忠实正合函子.并且如果$V,V_1,V_2$是$B$容许的,那么有自然同构:
+	\begin{itemize}
+		\item $\textbf{D}_B(V_1)\otimes_E\textbf{D}_B(V_2)\cong\textbf{D}_B(V_1\otimes V_2)$.
+		\item $\textbf{D}_B(V^*)\cong(\textbf{D}_B(V))^*$.
+		\item $\textbf{D}_B(F)\cong E$.
+	\end{itemize}
+	\begin{proof}
+		
+		考虑$G$的$F$表示的如下短正合列,这里$V'$可同构的视为$V$的子表示,$V''$可视为$V$的商表示.设$V$是$B$容许的.
+		$$\xymatrix{0\ar[r]&V'\ar[r]&V\ar[r]&V''\ar[r]&0}$$
+		
+		按照$F$是域,张量函子是正合的,有如下短正合列:
+		$$\xymatrix{0\ar[r]&B\otimes_FV'\ar[r]&B\otimes_FV\ar[r]&B\otimes_FV''\ar[r]&0}$$
+		
+		按照$V\mapsto V^G$是左正合的,有如下左正合列:
+		$$\xymatrix{0\ar[r]&\textbf{D}_B(V')\ar[r]&\textbf{D}_B(V)\ar[r]&\textbf{D}_B(V'')}$$
+		
+		现在设$\dim_FV=d,\dim_FV'=d',\dim_FV''=d''$,按照我们之前证明的维数不等式,就有:
+		$$d=\dim_E\textbf{D}_B(V)\le\dim_E\textbf{D}_B(V')+\dim_E\textbf{D}_B(V'')\le d'+d''=d$$
+		
+		这说明上述所有不等式都是等式,于是$V',V''$都是$B$容许的,这说明$B$容许表示的子表示和商表示都是$B$容许的,另外从$\dim_E\textbf{D}_B(V)=\dim_E\textbf{D}_B(V')+\dim_E\textbf{D}_B(V'')$还说明之前的左正合列实际是正合列,于是$\textbf{D}_B(-)$定义在$\textbf{Rep}_F^B(G)$上是正合函子.
+		
+		\qquad
+		
+		再说明$\textbf{D}_B$限制在$\textbf{Rep}_F^B(G)$上是忠实函子.首先如果$V$是$B$容许的,我们有$\dim_E\textbf{D}_B(V)=\dim_FV$,这说明只要$B$容许的$V\not=0$就有$\textbf{D}_B(V)\not=0$.但是如果$\textbf{D}_B$不是忠实的,那么存在$B$容许的表示之间的非零态射$f$,作用正合函子$\textbf{D}_B$后变成零.但是$f\not=0$意味着它的核与余核不全为零(这里核与余核都是$B$容许的因为我们解释过$B$容许表示的子表示和商表示都是$B$容许的),作用$\textbf{D}_B$后的核与余核反而都是零,这就矛盾.
+		
+		\qquad
+		
+		我们来证明$B$容许表示的张量积还是$B$容许的,并且有自然同构$\textbf{D}_B(V_1)\otimes_E\textbf{D}_B(V_2)\cong\textbf{D}_B(V_1\otimes V_2)$.考虑如下图表,其中$\Sigma$是典范同构,存在唯一的同态$\sigma$使得图表交换,但是按照$V_1,V_2$都是$B$容许的,有左侧的垂直映射是同构,导致$\sigma$和右侧垂直同态都是同构,这就既得到我们的典范同构,又说明了$V_1\otimes_FV_2$也是$B$容许的.
+		$$\xymatrix{(B\otimes_FV_1)\otimes_B(B\otimes_FV_2)\ar[rrr]^{\Sigma}&&&B\otimes_F(V_1\otimes_FV_2)\\\textbf{D}_B(V_1)\otimes_E\textbf{D}_B(V_2)\ar@{-->}[rrr]^{\sigma}\ar@{^{(}->}[u]&&&\textbf{D}_B(V_1\otimes_FV_2)\ar@{^{(}->}[u]}$$
+		
+		【？】
+	\end{proof}
+\end{enumerate}
+
+$\varphi$模和平展$\varphi$模.
+\begin{itemize}
+	\item 设$E$是特征$p>0$的域,它的一个$\varphi$模是指一个对$(M,\varphi)$,其中$M$是有限维$E$线性空间,$\varphi:M\to M$是关于Frobenius映射的半线性自同态,换句话讲满足:
+	$$\varphi(x+y)=\varphi(x)+\varphi(y),\forall x,y\in M$$
+	$$\varphi(\lambda x)=\lambda^p\varphi(x),\forall\lambda\in E,x\in M$$
+	\item 如果$(M,\varphi)$是$E$的$\varphi$模,我们考虑$M$的Frobenius回拉$\varphi_E^*(M)=E\otimes_{\varphi_E}M$,它是满足如下等式的$E$线性空间:
+	$$a(b\otimes x)=ab\otimes x,\forall a,b\in E,x\in M$$
+	$$a\otimes bx=b^pa\otimes x,\forall a,b\in E,x\in M$$
+	
+	我们有$E$线性映射$\Phi:\varphi_E^*(M)\to M$为$c\otimes x\mapsto c\varphi(x)$.如果这是一个线性同构,就称$(M,\varphi)$是平展$\varphi$模.
+	\item $E$上全体平展$\varphi$模和它们之间的与$\varphi$可交换的$E$线性映射作为态射构成了一个范畴,记作$\mathscr{M}_{\varphi}^{\mathrm{et}}(E)$.
+\end{itemize}
+\begin{enumerate}
+	\item 如果$\{e_1,\cdots,e_d\}$是$M$在$E$上的一组基,那么$\{1\otimes e_1,\cdots,1\otimes e_d\}$是$\varphi_E^*(M)$在$E$上的一组基.【？】
+	\item 如果设$M$在$E$上的一组基为$\{e_1,\cdots,e_d\}$,记$\varphi(e_j)=\sum_{i=1}^da_{ij}e_i$,记$A=(a_{ij})$,明显的有如下命题互相等价:
+	\begin{itemize}
+		\item $M$是平展$\varphi$模.
+		\item $\Phi$是线性同构.按照有限维也等价于$\Phi$是单射,也等价于$\Phi$是满射.
+		\item $\varphi(M)$在$E$上生成整个$M$.
+		\item $A$是$E$上的可逆矩阵.
+	\end{itemize}
+	\item 回顾一个特征$p>0$的域$k$上的局部有限型概形$X$是平展的当且仅当相对Frobenius映射$F_{X/k}:X\to X^{(p)}=k\otimes_{\varphi_k,k}X$是同构.这是这里用平展一词的原因.
+	\item 
+\end{enumerate}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+\subsection{特征$p$域的模$p$\;Galois表示}
+
+$\textbf{Rep}_{\mathbb{F}_p}(G_E)$,其中$\mathrm{char}E=p$
+
+\subsection{特征$p$域的$p-$adic\,Galois表示}
+
+$\textbf{Rep}_{\mathbb{F}_p}(G_E)$,其中$\mathrm{char}E=p$
+
+
+
+\newpage
+\subsection{目标}
+\begin{itemize}
+	\item 设$G$是拓扑群,设$M$是未必交换的拓扑群,它称为拓扑$G$模如果赋予连续作用$G\times M\to M$,满足$g(xy)=g(x)g(y)$.定义连续1阶上同调为带基点的如下集合,其中基点是$f(g)\equiv 1_M,\forall g\in G$所在的等价类.
+	$$\mathrm{H}^1_{\mathrm{cont}}(G,M)=\frac{\{f:G\to M\text{\quad continuous}\mid f(g_1g_2)=f(g_1)\cdot g_1f(g_2)\}}{f_1\simeq f_2:\exists a\in M,f_2(g)=a^{-1}f_1(g)g(a),\forall g\in G}$$
+	\item 设$H\subset G$是闭正规子群,记$M^H=\{m\in M\mid hm=m,\forall h\in H\}$就是$M$的子群,我们有如下inflation映射(保基点):
+	$$\mathrm{H}^1_{\mathrm{cont}}(G/H,M^H)\to\mathrm{H}^1_{\mathrm{cont}}(G,M)$$
+	$$f\mapsto(\xymatrix{G\ar[r]&G/H\ar[r]^f&M^H})$$
+	\item 局部域指的是剩余类域是特征$p>0$的完美域(不要求有限)的完备离散赋值域.$p-$adic域指的是特征0的局部域.设$K$是$p-$adic域,记$G=\mathrm{Gal}(\overline{K}/K)$,记$C=\widehat{\overline{K}}$,设$K_{\infty}$是$K$的$\mathbb{Z}_p$扩张,这是指Galois群为$\Gamma\cong\mathbb{Z}_p$的Galois扩张.
+	$$\xymatrix{\overline{K}\ar@{-}[d]&{1}\ar@{-}[d]\\K_{\infty}\ar@{-}[d]&H\ar@{-}[d]\\K&G}$$
+	
+	$\forall n\ge1$,$M=\mathrm{GL}_n(C)$是拓扑$G$模,Galois理论说明$H$是$G$的闭正规子群,上一节的3.8说明$C^H=\widehat{K_{\infty}}$,我们有如下inflation映射,我们的目标就是证明这是一个双射.
+	$$\mathrm{H}^1_{\mathrm{cont}}(\Gamma,\mathrm{GL}_n(\widehat{K_{\infty}}))\cong\mathrm{H}^1_{\mathrm{cont}}(G,\mathrm{GL}_n(C))$$
+	
+	第二章中证明过$\mathrm{H}^1_{\mathrm{cont}}(G,\mathrm{GL}_n(B))$和$G$的自由秩$n$的$B$半线性表示等价类集合是双射.所以这个同构给出了两个半线性表示范畴对象等价类之间的双射.
+\end{itemize}
+
+\subsection{回顾分歧群和下分歧群}
+\begin{enumerate}
+	\item 设$(K,v_K)$是局部域,其中$v_K$是规范离散赋值(指$v_K(K^*)=\mathbb{Z}$),设$L/K$是有限Galois扩张,记Galois群为$G$.那么赋值$v_K$唯一延拓到$L$上,记作$w$,那么$v_L=e(L/K)w$是规范离散赋值,其中$e(L/K)$是分歧指数.对每个实数$s\ge -1$,定义$G$的正规子群$G_s=\{\sigma\in G\mid v_L(\sigma(x)-x)\ge s+1,\forall x\in\mathscr{O}_L\}$,称为$s$阶分歧群.
+	\begin{itemize}
+		\item 按照$v_L$是规范离散的,如果$n<s\le n+1$,那么有$G_s=G_{n+1}$.
+		\item $G_{-1}=G$,$G_0$就是惯性群,$G_1$就是分歧群.
+	\end{itemize}
+	\item 定义$\Phi(s)=\int_0^s[G_0:G_s]^{-1}\mathrm{d}t$.其中$-1<s\le0$的时候约定$[G_0:G_s]=[G_s:G_0]^{-1}$也即1.这是一个严格递增的$[-1,+\infty)\to[-1,+\infty)$的连续映射,它有逆映射$\Psi$,对实数$t\ge-1$,定义下分歧群$G^t=G_{\Psi(t)}$.
+	\item Herbrand定理.设$K'/K$是$L/K$的Galois子扩张,设$H=\mathrm{Gal}(L/K')$,那么有如下等式,其中$v=\Phi_{L/K'}(u)$.
+	$$G_u(L/K)H/H=G_v(K'/K)$$
+	
+	如果写成下分歧群的形式就是如下等式.换句话讲下分歧群和商是相容的$(G/H)^v=G^vH/H$就是$G^v$在$G/H$中的像.
+	$$G^t(L/K)H/H=G^t(K'/K)$$
+	
+	因为记$s=\Psi_{K'/K}(t)$,就有:
+	$$G^t(L/K)H/H=G_{\Psi_{L/K}(t)}(L/K)H/H=G_{\Phi_{L/K'}(\Psi_{L/K}(t))}(K'/K)=G_s(K'/K)=G^t(K'/K)$$
+\end{enumerate}
+
+\subsection{回顾共轭差积(different)和判别式}
+\begin{itemize}
+	\item 设$L/K$是局部域的有限可分扩张,那么赋值环$\mathscr{O}_L$是自由$\mathscr{O}_K$模,并且有$x\in\mathscr{O}_L$使得$\mathscr{O}_L=\mathscr{O}_K[x]$.即便是数域之间的扩张也未必总有$\mathscr{O}_L$是自由$\mathscr{O}_K$模.
+	\begin{proof}
+		
+		
+	\end{proof}
+	\item 这个扩张的共轭差积定义为$\mathscr{O}_L$的分式理想$\mathfrak{C}_{L/K}=\{x\in L\mid\mathrm{Tr}(x\mathscr{O}_L)\subset\mathscr{O}_K\}$的逆,但是这里$\mathscr{O}_L$是DVR,它的分式理想都是主理想(其实就是$m^k,k\in\mathbb{Z}$),导致它的共轭差积就是$\mathfrak{D}_{L/K}=\{x\in L\mid\mathrm{Tr}(x^{-1}\mathscr{O}_L)\subset\mathscr{O}_K\}$.这里可分扩张还保证了双线性映射$(x,y)\mapsto\mathrm{Tr}(xy):L\times L\to K$是非退化的.
+	\item 判别式.在数域的情况中,一个代数整数环$\mathscr{O}_K$总存在整基$\{e_1,\cdots,e_n\}$,取所有$K\to\overline{\mathbb{Q}}$的固定$\mathbb{Q}$的嵌入$\{\sigma_1,\cdots,\sigma_n\}$,可定义如下判别式,选取不同的整基相差$(\mathbb{Z}^*)^2=\{1\}$的一个乘积,所以是固定的.
+	$$d_{L/K}(e_1,e_2,\cdots,e_n)=\det((\sigma_i(e_j))^2)=\det(\mathrm{Tr}_{L/K}(e_ie_j))$$
+	
+	在我们这个情况中,$\mathscr{O}_L$的确仍然自由$\mathscr{O}_K$模,选取一组整基$\{e_1,\cdots,e_n\}$,取所有$L\to K^s$的固定$K$的嵌入$\{\sigma_1,\cdots,\sigma_n\}$,如下元素
+	$$d_{L/K}(e_1,e_2,\cdots,e_n)=\det((\sigma_i(e_j))^2)=\det(\mathrm{Tr}_{L/K}(e_ie_j))$$
+	
+	在$\mathscr{O}_K$中生成的主理想是固定的.这是因为非退化的迹二次型$\mathrm{Tr}(xy):L\times L\to K$诱导的如下同态也是非退化的:
+	$$T:\bigwedge^n(\mathscr{O}_L)\otimes_{\mathscr{O}_K}\bigwedge^n(\mathscr{O}_L)\to\mathscr{O}_K$$
+	$$(s_1\wedge\cdots\wedge s_n)\otimes(t_1\wedge\cdots\wedge t_n)\mapsto\det(\mathrm{Tr}(s_it_j))$$
+	
+	但是如果$\mathscr{O}_L$是$\mathscr{O}_K$的秩$n$自由模,就有$\bigwedge^n(\mathscr{O}_L)$是$\mathscr{O}_K$的秩1自由模,任取$\mathscr{O}_L$在$\mathscr{O}_K$中的一组基$\{e_1,\cdots,e_n\}$,那么$e=e_1\wedge\cdots\wedge e_n$是外积的基,于是$\det(\mathrm{Tr}(e_ie_j))$在$\mathscr{O}_K$中生成的主理想不依赖于基的选取.这称为$L/K$的判别式,记作$\delta_{L/K}$.
+\end{itemize}
+\begin{enumerate}
+	\item $\delta_{L/K}=\mathrm{N}_{L/K}(\mathfrak{D}_{L/K})$.
+	\begin{proof}
+		
+		设$\mathscr{O}_L$作为$\mathscr{O}_K$的一组基是$\{a_1,\cdots,a_n\}$,那么它也是$L$作为$K$线性空间的一组基,于是按照$\mathrm{Tr}$非退化,可取关于迹二次型的对偶基$\{b_1,\cdots,b_n\}\subset L$,那么它也是$\mathscr{O}_K$模$\mathfrak{C}$的一组基(因为它是$K$线性空间$L$的基,所以在$\mathscr{O}_K$上线性无关,另外按照二次型非退化,即从$\mathrm{Tr}:L\times L\to K$非退化可得到$\mathscr{O}_L\times\mathscr{O}_L\to\mathscr{O}_K$非退化,说明如果$x\in C$满足$\mathrm{Tr}(xa_i)=\lambda_i$,那么$x=\sum_i\lambda_ib_i$).
+		
+		\qquad
+		
+		因为$\mathscr{O}_L$是DVR,可设$\mathfrak{C}$作为$\mathscr{O}_L$分式理想为$(\beta)$,那么有$\mathfrak{C}=\mathscr{O}_L\beta=\mathscr{O}_K\beta a_1+\cdots+\mathscr{O}_K\beta a_n$,所以$\{\beta a_1,\cdots,\beta a_n\}$也是$\mathfrak{C}$的一组$\mathscr{O}_K$基.所以有:
+		$$d(\beta a_1,\cdots,\beta a_n)=\mathrm{N}_{L/K}(\beta)^2d(a_1,\cdots,a_n)$$
+		
+		所以有:
+		$$\delta_{L/K}^{-1}=(d(a_1,\cdots,a_n)^{-1})=(d(b_1,\cdots,b_n))=(d(\beta a_1,\cdots,\beta a_n))=\mathrm{N}_{L/K}(\mathfrak{D}_{L/K})^{-2}\delta_{L/K}$$
+	\end{proof}
+	\item (不证)设$\alpha$和$\beta$分别是$K$和$L$的分式理想,那么有:
+	$$\mathrm{Tr}(\beta)\subseteq\alpha\Leftrightarrow\beta\subseteq\alpha\mathfrak{C}_{L/K}$$
+	\begin{proof}
+		
+		如果$\alpha=0$按照$\mathrm{Tr}$非退化得到$\beta=0$.下面设$\alpha\not=0$:
+		\begin{align*}
+			\mathrm{Tr}(\beta)\subseteq\alpha&\Leftrightarrow\alpha^{-1}\mathrm{Tr}(\beta)\subseteq\mathscr{O}_K\\&\Leftrightarrow\mathrm{Tr}(\alpha^{-1}\beta)\subseteq\mathscr{O}_K\\&\Leftrightarrow\alpha^{-1}\beta\subseteq\mathfrak{C}_{L/K}\\&\Leftrightarrow\beta\subseteq\alpha\mathfrak{C}_{L/K}
+		\end{align*}
+	\end{proof}
+	\item 设有局部域的有限可分扩张链$K\subset L\subset M$,那么有:
+	$$\mathfrak{D}_{M/K}=\mathfrak{D}_{M/L}\mathfrak{D}_{L/K},\delta_{M/K}=(\delta_{L/K})^{[M:L]}\mathrm{N}_{L/K}(\delta_{M/L})$$
+	\item 设$L/K$是$p-$adic域的有限扩张,分歧指数$e$,记$\mathfrak{D}_{L/K}=m_L^s$,那么对任意整数$n\ge0$,有$\mathrm{Tr}(m_L^n)=m_K^r$,其中$r=[(s+n)/e]$是最大的不超过$(s+n)/e$的整数.
+	\item 它叫共轭差积是因为,设$x\in\mathscr{O}_L$使得$\mathscr{O}_L=\mathscr{O}_K[x]$,设$x$的极小多项式$f(X)$,那么$\mathfrak{D}_{L/K}=(f'(x))$.特别的有$\delta_{L/K}=(\mathrm{N}_{L/K}(f'(x)))$.
+	\begin{proof}
+		
+		设$f(X)=a_0+a_1X+\cdots+a_nX^n$,在$\mathscr{O}_L$中做分解$f(X)=(X-x)g(X)$,记$g(X)=b_0+\cdots+b_{n-1}X^{n-1}$.这里$\{1,x,\cdots,x^{n-1}\}$是$\mathscr{O}_L$在$\mathscr{O}_K$上的一组基.我们断言它关于迹二次型$\mathrm{Tr}(xy)$的对偶基是$\{\frac{b_0}{f'(x)},\cdots,\frac{b_{n-1}}{f'(x)}\}$:事实上按照插值公式有$\sum_{1\le i\le n}\frac{f(X)}{X-x_i}\frac{x_i^r}{f'(x_i)}=X^r$,其中$\{x_1,\cdots,x_n\}$是$f(X)$在某个分裂域中的全部$n$个根,这个等式可以写作$\mathrm{Tr}(\frac{f(X)}{X-x}\frac{x^r}{f'(x)})=X^r$.比较系数得到$\mathrm{Tr}(x^i\frac{b_j}{f'(x)})=\delta_{ij}$.
+		
+		\qquad
+		
+		于是按照对偶基有$\mathfrak{C}_{L/K}=\frac{1}{f'(x)}(Ab_0+Ab_1+\cdots Ab_{n-1})$.考虑$b_i$和$a_j$的关系式$b_{n-1}=1,b_{n-2}-xb_{n-1}=a_{n-1}$,递推得到$Ab_0+\cdots+Ab_{n-1}=A[x]=B$.所以有$\mathfrak{C}_{L/K}$是$1/f'(x)$生成的$\mathscr{O}_L$的主分式理想,导致$\mathfrak{D}_{L/K}=(f'(x))$.
+	\end{proof}
+	\item 设$L/K$是局部域之间的有限Galois扩张,Galois群记作G,那么有:
+	\begin{align*}
+		v_L(\mathfrak{D}_{L/K})&=\sum_{s\not=1}v_L(x-s(x))=\sum_{i=0}^{\infty}(|G_i|-1)\\&=\int_{-1}^{+\infty}(|G_u|-1)\mathrm{d}u=|G_0|\int_{-1}^{+\infty}(1-|G^v|^{-1})\mathrm{d}v
+	\end{align*}
+	
+	进而有:$$v_K(\mathfrak{D}_{L/K})=\int_{-1}^{+\infty}(1-|G^v|^{-1})\mathrm{d}v$$
+	\begin{proof}
+		
+		取$x\in\mathscr{O}_L$使得$\mathscr{O}_L=\mathscr{O}_K[x]$,记$x$的极小多项式为$f$,那么$\mathfrak{D}_{L/K}$是$f'(x)$生成的主理想,于是有:
+		$$v_L(\mathfrak{D}_{L/K})=v_L(f'(x))=\sum_{s\not=1}v_L(x-s(x))$$
+		
+		如果记$r_i=|G_i|-1$,那么$G$中使得$v_L(x-s(x))=i$的$s\not=1$的元素个数为$r_{i-1}-r_i$,所以有:
+		$$\sum_{s\not=1}v_L(x-s(x))=\sum_{i=0}^{+\infty}i(r_{i-1}-r_i)=\sum_{i=0}^{\infty}r_i=\sum_{i=0}^{\infty}(|G_i|-1)=\int_{-1}^{+\infty}(|G_u|-1)\mathrm{d}u$$
+		
+		做换元$u=\Psi(v)$,从$\Psi'(v)=|G_0|/|G^v|$,所以有:
+		$$\int_{-1}^{+\infty}(|G_u|-1)\mathrm{d}u=\int_{-1}^{+\infty}(|G^v|-1)\Psi'(v)\mathrm{d}v=|G_0|\int_{-1}^{+\infty}(1-|G^v|^{-1})\mathrm{d}v$$
+		
+		最后一个等式是因为惯性群的阶数$|G_0|=e$,并且有$v_K=\frac{1}{|G_0|}v_L$.
+	\end{proof}
+	\item 设有局部域之间的有限Galois扩张链$K\subset M\subset L$,那么有:
+	$$v_K(\mathfrak{D}_{L/M})=\int_{-1}^{+\infty}\left(\frac{1}{|\mathrm{Gal}(M/K)^v|}-\frac{1}{|\mathrm{Gal}(L/K)^v|}\right)\mathrm{d}v$$
+	
+	这直接从$\mathfrak{D}_{L/K}=\mathfrak{D}_{L/M}\mathfrak{D}_{M/K}$得到.
+\end{enumerate}
+
+\subsection{几乎平展(almost \'etale)步骤}
+\begin{enumerate}
+	\item 设Galois扩张$K_{\infty}/K$的Galois群为$\Gamma\cong\mathbb{Z}_p$,它的下分歧群的跳跃点是这样描述的:存在一列单调递增的实数(实际上Hasse-Arf定理告诉你它们是整数)$\{v_i\}$,使得$v\in (v_{i-1},v_i]$时有$\Gamma^v=p^i\Gamma$记作$\Gamma(i)$.并且$n$足够大时$v_n$是等差的,即$v_{n+1}=v_n+e$,这里$e=v_K(p)$是$K$的absolute ramification index.
+	\item 考虑Galois扩张$K_{\infty}/K$的被闭子群$\Gamma(n)=p^n\mathbb{Z}_p$固定的中间域$K_n$,按照Herbrand定理有:
+	$$\mathrm{Gal}(K_n/K)^v=\Gamma^v\Gamma(n)/\Gamma(n)=\left\{\begin{array}{cc}\Gamma(i)/\Gamma(n)&v_i<v\le v_{i+1},i\le n\\1&v>v_{n+1}\end{array}\right.$$
+	\item 设$L$是$K_{\infty}$的有限扩张,这里$K$是$p-$adic域,那么有:
+	$$m_{K_{\infty}}\subseteq\mathrm{Tr}_{L/K_{\infty}}(\mathscr{O}_L)$$
+	\begin{proof}
+		
+		首先我们不妨设$K_{\infty}\subseteq L$是有限Galois扩张,因为否则的话按照$K$特征0,可取$L$的正规闭包$M$,一旦证明了Galois扩张的情况,就有:
+		$$m_{K_{\infty}}\subseteq\mathrm{Tr}_{M/K_{\infty}}(\mathscr{O}_M)=\mathrm{Tr}_{L/K_{\infty}}(\mathrm{Tr}_{M/L}(\mathscr{O}_M))\subseteq\mathrm{Tr}_{L/K_{\infty}}(\mathscr{O}_L)$$
+		
+		回顾linearly disjoint:考虑如下域的扩张(或者视为包含),称$K,L$在$F$上linearly disjoint,如果典范映射$K\otimes_FL\to KL$是单射,也即是同构,也即$K\otimes_FL$是域.
+		$$\xymatrix{&C&\\K\ar[ur]&&L\ar[ul]\\&F\ar[ul]\ar[ur]&}$$
+		
+		如果$K/F$和$L/F$都是Galois扩张,那么$K,L$在$F$上linearly disjoint当且仅当$F=K\cap L$,当且仅当如下典范的限制映射是同构:
+		$$\mathrm{Gal}(KL/K)\cong\mathrm{Gal}(L/F)$$
+		
+		特别的对$x\in L$就有:
+		$$\mathrm{Tr}_{L/F}(x)=\mathrm{Tr}_{KL/K}(x)$$
+		
+		\qquad
+		
+		回到原命题.设$L=K_{\infty}(\alpha)$,记$L_0=K(\alpha)$,记$L_m=L_0K_m=K_m(\alpha)$.我们断言存在$i$,使得$L_i$和$K_m,m\ge i$在$K_i$上linearly disjoint.设$\alpha$在$K_{\infty}$上的极小多项式为$f(x)=x^n+a_1x^{n-1}+\cdots+a_n$,设$i$使得$K_i$包含了这些系数$a_i$,那么当$m\ge i$时$f(x)$总是$K_m$的不可约多项式,我们有$L_i\otimes_{K_i}K_m=k_i[x]/(f(x))\otimes_{K_i}K_m=K_m[x]/(f(x))$是域,所以$L_i$和$K_m$在$K_i$上linearly disjoint.此时$K_{\infty}/K_i$依旧是Galois群同构于$\mathbb{Z}_p$的完全分歧Galois扩张.所以我们不妨用$K_i$和$L_i$分别代替$K$和$L_0$,于是可以不妨设$L_0$和每个$K_m$在$K$上linearly disjoint,$L_0$也和$K_{\infty}$在$K$上linearly disjoint.
+		
+		\qquad
+		
+		任取$\alpha\in m_{k_{\infty}}$,可设$n$使得$\alpha\in m_{K_n}$,对每个$m\ge n$,记$\alpha\mathscr{O}_{K_m}=m_{k_m}^{i_m}$(因为DVR),按照扩张是完全分歧的,$K_{n+1}/K_n$剩余类域不扩张,导致$i_{m+1}=pi_m$,所以$m\ge n$时有$i_m=p^{m-n}i_n$.于是特别的$i_m$是趋于正无穷大的.
+		
+		\qquad
+		
+		记$\mathfrak{D}_{L_n/K_n}=m_{L_n}^{r_n}$,我们之前证明过$\mathrm{Tr}_{L_n/K_n}(m_{L_n})=m_{K_n}^{[(r_n+1)/e]}$.倘若我们可以说明这里$\{r_n\}$是有界的,那么$[(r_n+1)/e]$就也是有界的,所以取足够大的$m$使得$i_m>[(r_m+1)/e]$,就有:
+		$$\alpha\in m_{K_m}^{i_m}\subseteq m_{K_m}^{[(r_m+1)/e]}=\mathrm{Tr}_{L_m/K_m}(m_{L_m})$$
+		
+		但是linearly disjoint保证$\mathrm{Tr}_{L_m/K_m}(x)=\mathrm{Tr}_{L/K_{\infty}}(x)$,于是$\alpha\in\mathrm{Tr}_{L/K_{\infty}}(m_L)$.
+		
+		\qquad
+		
+		按照$\mathrm{Gal}(L_0/K)$是有限的,存在$h$使得$v\ge h$时有$\mathrm{Gal}(L_0/K)^y=\{1\}$.按照$K_n$和$L_0$在$K$上linearly disjoint,得到$\mathrm{Gal}(L_n/K)\cong\mathrm{Gal}(K_n/K)\times\mathrm{Gal}(L/K)$.那么$\mathrm{Gal}(L_n/K)^v$在这个直积表示的投影到$\mathrm{Gal}(L/K)$是平凡的,所以$\mathrm{Gal}(L_n/K)^v$嵌入到$\mathrm{Gal}(K_n/K)$中.但是我们解释过下分歧群和商是相容的,这个像就是$\mathrm{Gal}(K_n/K)^y=\mathrm{Gal}(L_n/K)^yH/H$,其中$H=\mathrm{Gal}(K_n/K)$.所以有$v\ge h$时$|\mathrm{Gal}(K_n/K)^v|=|\mathrm{Gal}(L_n/K)^v|$.我们之前解释过对于扩张链$K\subseteq K_n\subseteq L_n$有如下估计,其中$n_0$足够大使得$v_{n_0}>h$:
+		\begin{align*}
+			v_K(\mathfrak{D}_{L_n/K_n})&=\int_{-1}^{\infty}\left(\frac{1}{|\mathrm{Gal}(K_n/K)^v|}-\frac{1}{|\mathrm{Gal}(L_n/K)^v|}\right)\mathrm{d}v\\&=\int_{-1}^h\left(\frac{1}{|\mathrm{Gal}(K_n/K)^v|}-\frac{1}{|\mathrm{Gal}(L_n/K)^v|}\right)\mathrm{d}v\\&\le\int_{-1}^h\frac{\mathrm{d}v}{|\mathrm{Gal}(K_n/K)^v|}=\sum_{i=0}^{n_0}(v_i-v_{i-1})p^{i-n}
+		\end{align*}
+		
+		于是$\{p^nv_K(\mathfrak{D}_{L_n/K_n})\}$有界的.最后$\mathfrak{D}_{L_n/K_n}=m_{L_n}^{r_n}$得到$v_K(\mathfrak{D}_{L_n/K_n})=r_np^{-n}e_{L_n/K_n}$,于是得到$\{r_n\}$有界的.
+	\end{proof}
+	\item 对实数$a>0$,存在$x\in L$使得$v_K(x)>-a$,并且$\mathrm{Tr}_{L/K_{\infty}}(x)=1$.
+	\begin{proof}
+		
+		按照$m_{K_{\infty}}$中有赋值任意从正面接近0的元,结合上一条结论,存在$\alpha\in\mathscr{O}_L$使得$v_K(\mathrm{Tr}_{L/K_{\infty}}(x))<a$,取$x=\frac{\alpha}{\mathrm{Tr}_{L/K_{\infty}}(\alpha)}$就满足条件:
+		$$v_K(x)>-a\Leftrightarrow v_K(\alpha)+a>v_K(\mathrm{Tr}_{L/K_{\infty}}(\alpha))$$
+	\end{proof}
+\end{enumerate}
+
+\subsection{证明目标}
+\begin{enumerate}
+	\item 设$(K,v)$是$p-$adic域,设$G=G_K=\mathrm{Gal}(\overline{K}/K)$,设$C=\widehat{\overline{K}}$.设$K_{\infty}$是$K$的包含在$\overline{K}$中的$\mathbb{Z}_p$分歧Galois扩张.记$\Gamma=\mathrm{Gal}(K_{\infty}/K)\cong\mathbb{Z}_p$.记$H=G_{K_{\infty}}=\mathrm{Gal}(\overline{K}/K_{\infty})$.对矩阵$M=(m_{ij})\in\mathrm{GL}_n(C)$,定义$v(M)=\min\{v(m_{ij})\}$,因为可逆矩阵肯定有非零元,所以这定义出来的是有限数.
+	\item 设$H_0$是$H$的开子群,设$U:H_0\to\mathrm{GL}_n(C)$是cocycle,存在$a>0$,使得$v(U_{\sigma}-1)\ge a$对任意$\sigma\in H_0$成立.那么存在$M\in\mathrm{GL}_n(C)$,满足$v(M-1)\ge a/2$,并且对任意$\sigma\in H_0$都有:$$v(M^{-1}U_{\sigma}\sigma(M)-1)\ge a+1$$
+	\begin{proof}
+		
+		按照$U$的连续性,以及它把幺元映射为幺元(在$U(ab)=U(a)a(U(b))$中取$a=1$),并且射影有限群的开子群构成了幺元的邻域基,可取开子群$H_1\subsetneq H_0$,使得$v(U_{\sigma}-1)\ge a+1+a/2$对任意$\sigma\in H_1$成立.
+		
+		\qquad
+		
+		射影有限群的开子群肯定是有限指数的,所以$[H_0:H_1]$有限,所以$C^{H_1}$是$K_{\infty}$的有限扩张,按照我们almost \'etale引理,存在$\alpha\in C^{H_1}$使得$v(\alpha)\ge-a/2$和$\sum_{\tau\in H_0/H_1}\tau(\alpha)=1$.
+		
+		\qquad
+		
+		构造$M$:记$S\subset H_0$是$H_0/H_1$的一组代表元,记$M_S=\sum_{\sigma\in S}\sigma(\alpha)U_{\sigma}$,那么有$M_S-1=\sum_{\sigma\in S}\sigma(\alpha)(U_{\sigma}-1)$.于是有$v(M_S-1)\ge\min\{v(\sigma(\alpha))+v(U_{\sigma}-1)\}\ge-a/2+a=a/2$.那么$\sum_{n\ge0}(1-M_S)^n$收敛到$M_S$的逆,于是$M_S$是可逆矩阵.
+		
+		\qquad
+		
+		最后还要证明$v(M_S^{-1}U_{\tau}\tau(M_S)-1)\ge a+1,\forall\tau\in H_0$.任取$\tau\in H_0$,有$U_{\tau}\tau(M_S)=\sum_{\sigma\in S}U_{\tau}\tau\sigma(\alpha)\tau(U_{\sigma})=\sum_{\sigma\in S}\tau\sigma(\alpha)U_{\tau\sigma}=M_{\tau S}$,这里$\tau S$也是$H_0/H_1$的一组代表元.
+		
+		\qquad
+		
+		于是我们有$M_S^{-1}U_{\tau}\tau(M_S)=M_S^{-1}M_{\tau S}=1+M_S^{-1}(M_{\tau S}-M_S)$.最后任取$\sigma\in S$,就有$\lambda(\sigma)\in H_1$使得$\tau\sigma=\sigma\lambda(\sigma)$,但是$\alpha$是被$H_1$固定的,所以有:
+		\begin{align*}
+			M_S-M_{\tau S}&=\sum_{\sigma\in S}\sigma(\alpha)U_{\sigma}-\sum_{\sigma\in S}\tau\sigma(\alpha)U_{\tau\sigma}\\&=\sum_{\sigma\in S}\sigma(\alpha)U_{\sigma}-\sum_{\sigma\in S}\sigma(\alpha)U_{\sigma\lambda(\sigma)}\\&=\sum_{\sigma\in S}\sigma(\alpha)U_{\sigma}(1-\sigma(U_{\lambda(\sigma)}))
+		\end{align*}
+		
+		估计赋值,有$v(M_S-M_{\tau S})\ge-a/2+a+1+a/2=a+1$.至此得到:
+		$$v(M_S^{-1}M_{\tau S}-1)=v(M_S^{-1}(M_{\tau S}-M_S))\ge a+1$$
+	\end{proof}
+	\item 在上述条件和记号下,存在$M\in\mathrm{GL}_n(C)$,满足$v(M-1)\ge a/2$,并且对任意$\sigma\in H_0$都有:$$M^{-1}U_{\sigma}\sigma(M)=1$$
+	\begin{proof}
+		
+		首先按照上一条结论,可取$M_0\in\mathrm{GL}_n(C)$,满足$v(M_0-1)\ge a/2$,并且对任意$\sigma\in H_0$有$v(M_0^{-1}U_{\sigma}\sigma(M_0)-1)\ge a+1$.
+		
+		\qquad
+		
+		记$U^1:H_0\to\mathrm{GL}_n(C)$满足$U^1_{\sigma}=M_0^{-1}U_{\sigma}\sigma(M_0)$,那么$U^1$满足上一条命题中$a$替换为$a+1$的条件.所以可取$M_1\in\mathrm{GL}_n(C)$满足$v(M_1-1)\ge a/2$,并且对任意$\sigma\in H_0$就有$v((M_0M_1)^{-1}U_{\sigma}\sigma(M_0M_1)-1)\ge a+2$.
+		
+		\qquad
+		
+		归纳构造下去,得到一列$\{M_n\}\subseteq\mathrm{GL}_n(C)$,使得$v(M_n-1)\ge a/2$,并且有:
+		$$v((M_0M_1\cdots M_n)^{-1}U_{\sigma}\sigma(M_0\cdots M_n)-1)\ge a+n+1$$
+		
+		有$v(M_0M_1\cdots M_n-1)\ge a/2$是因为如果$v(M_0-1),v(M_1-1)\ge a/2$,那么$v(M_0M_1-1)=v((M_0-1)(M_1-1)+(M_0-1)+(M_1-1))\ge\min\{v(M_0-1),v(M_1-1)\}\ge a/2$.
+		
+		\qquad
+		
+		最后因为$C$是完备的,矩阵列$\{M_0M_1\cdots M_n,n\ge0\}$就收敛到某个矩阵$M$,它就满足$v(M-1)\ge a/2$,并且有$M^{-1}U_{\sigma}\sigma(M)=1$.
+	\end{proof}
+	\item 引理.inflation-restriction正合列.设$G$是拓扑群,$H\subseteq G$是闭正规子群,对未必交换的拓扑$G$模$M$,$M^H$是拓扑$G/H$模,把一阶上同调看作带基点的集合,依旧可以考虑正合性,断言有如下正合列:
+	$$\xymatrix{1\ar[r]&\mathrm{H}^1_{\mathrm{cont}}(G/H,M^H)\ar[r]^{\mathrm{inf}}&\mathrm{H}^1_{\mathrm{cont}}(G,M)\ar[r]^{\mathrm{res}}&\mathrm{H}^1_{\mathrm{cont}}(H,M)}$$
+	\item 断言有$\mathrm{H}^1_{\mathrm{cont}}(H,\mathrm{GL}_n(C))=1$.结合如下inflation-restriction正合列:$$\xymatrix{1\ar[r]&\mathrm{H}^1_{\mathrm{cont}}(\Gamma,\mathrm{GL}_n(C^H))\ar[r]&\mathrm{H}^1_{\mathrm{cont}}(G,\mathrm{GL}_n(C))\ar[r]&\mathrm{H}^1_{\mathrm{cont}}(H,\mathrm{GL}_n(C))}$$
+	
+	就得到如下同构:$$\mathrm{H}^1_{\mathrm{cont}}(\Gamma,\mathrm{GL}_n(\widehat{K_{\infty}}))\cong\mathrm{H}^1_{\mathrm{cont}}(G,\mathrm{GL}_n(C))$$
+	\begin{proof}
+		
+		设$U:H\to\mathrm{GL}_n(C)$是cocycle,我们要证明它和平凡映射(恒取幺元)是等价的.任取实数$a>0$,cocycle肯定把幺元映射为幺元($f(ab)=f(a)a(f(b))$,取$a=1$就行了),那么$U$的连续性保证存在$H$的开正规子群$H_0$使得$v(U_{\sigma}-1)>a,\forall\sigma\in H_0$(射影有限群的幺元存在由开正规子群构成的拓扑基).前面命题就说明$U$在$H_0$上的限制是1阶上同调中的基点.而$H/H_0$是有限群(射影有限群的开子群肯定是有限指数的,事实上等价于有限指数的闭子群),Hilbert90定理说明$\mathrm{H}^1_{\mathrm{cont}}(H/H_0,\mathrm{GL}_n(C^{H_0}))$平凡,所以下面正合列导致$U$是平凡的.
+		$$\xymatrix{1\ar[r]&\mathrm{H}^1_{\mathrm{cont}}(H/H_0,\mathrm{GL}_n(C^{H_0}))\ar[r]&\mathrm{H}^1_{\mathrm{cont}}(H,\mathrm{GL}_n(C))\ar[r]&\mathrm{H}^1_{\mathrm{cont}}(H_0,\mathrm{GL}_n(C))}$$
+	\end{proof}
+\end{enumerate}
+
+
+
+

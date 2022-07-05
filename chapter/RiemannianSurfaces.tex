@@ -1,0 +1,281 @@
+\chapter{黎曼曲面}
+\section{存在性定理}
+
+复流形的定义.
+\begin{enumerate}
+	\item 复坐标卡.拓扑空间$X$上的一个复坐标卡是指一个同胚$\phi:U\to V$,其中$U$是$X$的一个开集,$V\subset\mathbb{C}^n$是复空间中的一个开集.如果$p\in U$满足$\phi(p)=0$,就称$\phi$以$p$为中心.
+	\item 给定空间$X$上的两个复坐标卡$\phi_i:U_i\to V_i,i=1,2$,称它们是相容的,如果要么$U_1\cap U_2$是空集,要么$\phi_2\circ\phi_1^{-1}:\phi_1(U_1\cap U_2)\to\phi_2(U_1\cap U_2)$是全纯函数.它称为这两个坐标卡之间的坐标变换.
+	\item 坐标卡集.空间$X$上的一个坐标卡集是指一族两两相容的坐标卡$\{\phi_i:U_i\to V_i\}$,使得$X=\cup_iU_i$.
+	\item 两个坐标卡集称为等价的,如果分别任意取一个坐标卡都是相容的.容易验证这是一个等价关系.并且两个坐标卡集是等价的当且仅当它们的并构成一个坐标卡集.于是每个坐标卡集的等价类中存在唯一的极大坐标卡集.称空间$X$上的一个复结构是指一个复坐标卡集的等价类,或者等价的讲,是指一个极大复坐标卡集.
+	\item 我们的定义没有约定不同复坐标卡映入的复空间的维数相同,如果约定空间是连通的,那么这个维数必然是相同的.
+	\item 一个复流形是指赋予了复结构的Hausdorff,第二可数的(连通)拓扑空间.如果这个复结构中每个复坐标卡映入的是同一个维数$n$的复空间,就称这个复流形是$n$维的.称一维复流形为黎曼曲面,这里称为曲面是因为复一维就是实二维的.
+\end{enumerate}
+
+一些基本注解.
+\begin{enumerate}
+	\item 复结构使得黎曼曲面是局部道路连通的,此时连通性等价于道路连通性.于是黎曼曲面都是道路连通的.
+	\item 全纯函数可视为$\mathbb{R}^2\to\mathbb{R}^2$的映射,此时该映射是光滑的.于是复结构一定是关于$\mathbb{R}^2$的实光滑结构.于是黎曼曲面总是一个2维的实光滑流形.
+	\item 我们知道导函数处处不为零的解析函数是共形的,特别的它保定向.这里复结构中的坐标变换存在全纯的逆映射,于是特别的它的导函数处处不为零.这说明了复结构自动是可定向的.
+	\item 紧定向2-实流形在同胚意义下被亏格完全分类:给定紧定向2-实流形,恰好存在一个自然数$g$,使得它同胚于$g$亏格-torus.当$g=0$时即同胚于2-球面,当$g=1$时即同胚于$S^1\times S^1$.于是黎曼曲面在拓扑层面上也被亏格完全分类,它称为黎曼曲面的拓扑亏格.
+	\item 如果我们有一族$\mathbb{C}^n$的开子集$\{U_i\}$,每个$U_i$有开子集$U_{ij},j\not=i$(可能是空集),每对不同的指标$i,j$存在全纯映射$\phi_{ij}:U_{ij}\to U_{ji}$,使得$\phi_{ij}$和$\phi_{ji}$互为逆映射,并且对互不相同的指标$i,j,k$,有$\phi_{jk}\circ\phi_{ij}=\phi_{ik}$.原本复流形定义中这些信息是从先给出的拓扑空间中找到的,但是倘若我们没有预先给定的拓扑空间,而是先有这些信息,那么我们可以逆向的粘合构造复流形.在这个观点下如何验证粘合空间的Hausdorff条件?等价于验证每个$\phi_{ij}$的图像都是对应积空间的闭子集.
+\end{enumerate}
+
+全纯映射.设$X,Y$是两个黎曼曲面,称映射$F:X\to Y$在点$p\in X$处是全纯的,如果存在(这个存在可以等价的改为任意)$p$的坐标卡$\phi:U\to V$和$F(p)$的坐标卡$\psi:U'\to V'$,使得映射$\psi\circ F\circ\phi^{-1}$在点$\phi(p)$处是全纯的.如果$F$在开子集$W\subset X$上每个点都全纯,就称$F$是$W$上的全纯映射.下面是一些基本性质:
+\begin{enumerate}
+	\item 等价的讲,一个集合间的映射$F:X\to Y$是全纯映射,当且仅当存在$X$的坐标卡覆盖$\{\phi_i:U_i\to V_i\}$和$Y$的坐标卡覆盖$\{\psi_j:U_j'\to V_j'\}$使得每个$\psi_j\circ F\phi_i^{-1}$在定义域非空的时候都是全纯函数.
+	\item 全纯映射还有这样一个等价描述.一个黎曼曲面$X$可视为一个环空间,它在开集$U$上的截面环$\mathscr{O}_X(U)$是全体$U$上全纯函数.两个黎曼曲面之间的全纯映射等价的定义为一个连续映射$F:X\to Y$,使得对每个开集$W\subset Y$,都有$\mathscr{O}_Y(W)\to\mathscr{O}_X(F^{-1}(W))$,$f\mapsto f\circ F$是一个环同态.
+	\item 开映射定理.黎曼曲面之间的全纯映射是开映射,也即把开集映射为开集.
+	\item 如果黎曼曲面之间的全纯映射是双射,那么它的逆映射自动是全纯的.特别的,全纯映射是源空间到像空间的全纯同构.
+	\item 唯一性定理.设$F,G:X\to Y$是黎曼曲面之间的两个全纯映射,如果存在$X$的一个子集$S$,它在$X$中存在极限点,并且$F(x)=G(x),\forall x\in S$,那么在整个$X$上恒有$F=G$.
+	\item 设$X$是紧黎曼曲面,设$F:X\to Y$是非常值的全纯映射,那么$Y$是紧的并且$F$是满射.
+	\begin{proof}
+		
+		只需说明$F(X)\subset Y$是既开又闭的子集.这样按照$Y$的连通性就得到$F(X)=Y$,另外紧集的连续像紧说明$Y$是紧的.$F(X)$是开集因为$F$是开映射;按照$F(X)$是$Y$的紧子集,Hausdorff空间的紧子集是闭的,得到$F(X)$是闭集.	
+	\end{proof}
+	\item 纤维的离散性.设$F:X\to Y$是非常值的全纯映射,那么对任意$y\in Y$,有$F^{-1}(\{y\})$是$X$的离散子集.特别的,如果$X$是紧集,按照紧集的闭子集也紧,说明每个纤维$F^{-1}(\{y\})$都是非空的有限点集.
+	\begin{proof}
+		
+		任取$x\in F^{-1}(\{y\})$.取$x$附近的一个坐标卡$(\phi,U,V)$,使得$\phi(x)=0$.按照$F$不是常值映射以及唯一性定理,说明$\phi$不会是常值函数.按照复平面的开子集之间的全纯函数的零点是离散的,说明适当缩小$U$和$V$能使得$U$不含$\phi$除$x$以为的零点.于是在$U$上除$x$以外没有点取值为$y$,这说明$x$在$F^{-1}\{y\}$中离散.
+	\end{proof}
+\end{enumerate}
+
+黎曼曲面上的全纯函数.设$X$是一个黎曼曲面,设$p\in X$,设$f$是在$p$的某个开邻域$W$上定义的复值函数.称$f$在点$p$是全纯的,如果存在$p$的坐标卡$\phi:U\to V$,使得$f\circ\phi^{-1}$在$\phi(p)$处是全纯的.如果$f$在$W$中每个点都是全纯的,就称$f$是$W$上的全纯函数.开集$W$上的全体全纯函数构成了一个$\mathbb{C}$代数,记作$\mathscr{O}_X(W)$.
+\begin{enumerate}
+	\item 设$f$是$p\in X$某个开邻域$W$上的复值函数,那么如果$f$在$p$处全纯,说明对任意的$p$附近的坐标卡$\psi:U'\to V'$都有$f\circ\psi^{-1}$在$\psi(p)$处全纯.于是如果$f$在$p\in W$处全纯,那么$f$在$p$的某个开邻域上全纯.
+	\item $f$是开子集$W\subset X$上的全纯函数当且仅当存在(或对任意)一组坐标卡$\{\phi_i:U_i\to V_i\}$,使得$W\subset\cup_iU_i$,并且每个$f\circ\phi_i^{-1}$都是$\phi_i(W\cap U_i)$上的全纯函数.
+	\item 特别的,每个坐标变换都是全纯函数;另外如果把$\mathbb{C}$视为黎曼曲面,这里定义的开集$U$上的全纯函数恰好是$U\to\mathbb{C}$的全纯映射.
+\end{enumerate}
+
+一些例子.
+\begin{enumerate}
+	
+	
+	
+	
+	\item 黎曼球面.设$S^2$表示$\mathbb{R}^3$中的单位球面,也即$\{(x,y,w)\in\mathbb{R}^3\mid x^2+y^2+w^2=1\}$.这是一个紧连通第二可数Hausdorff空间.我们来定义它上面的复结构.把$w=0$平面视为复平面,也即把$(x,y,0)$等同于复数$z=x+iy$.构造$\phi_1:S^2-\{(0,0,1)\}\to\mathbb{C}$为$(x,y,w)\mapsto\frac{x}{1-w}+i\frac{y}{1-w}$.这是一个同胚,它的逆映射为$z=x+iy\mapsto(\frac{2x}{|z|^2+1},\frac{2y}{|z|^2+1},\frac{|z|^2-1}{|z|^2+1})$.再定义$\phi_2:S^2-\{(0,0,-1)\}\to\mathbb{C}$为$(x,y,w)\mapsto\frac{x}{1+w}-i\frac{y}{1+w}$,这也是一个同胚,它的逆映射为$z=x+iy\mapsto(\frac{2x}{|z|^2+1},\frac{-2y}{|z|^2+1},\frac{1-|z|^2}{|z|^2+1})$.再验证这两个坐标卡的相容性:它们的交是$S^2-\{(0,0,\pm1)\}$,经$\phi_1$和$\phi_2$的像都是$\mathbb{C}^*=\mathbb{C}-\{0\}$.这里$\phi_2\circ\phi_1^{-1}(z)=1/z$是全纯函数.黎曼球面可以视为复平面添加无穷远点,因此通常记作$\mathbb{C}_{\infty}$.
+	\item 黎曼球面$\mathbb{C}_{\infty}$和复射影线$\mathbb{CP}^1$是全纯同构的.同构可以取为$[z,w]\mapsto(2\mathrm{Re}(z\overline{w}),2\mathrm{Im}(z\overline{w}),|z|^2-|w|^2)/(|z|^2+|w|^2)\in S^2$.
+	\item 解析函数的图像.设$V\subset\mathbb{C}$是连通开子集,设$g$为定义在$V$上的解析函数.记$g$的图像$X_g=\{(z,g(z))\mid z\in V\}$,它是$\mathbb{C}^2$的子集,赋予子空间拓扑.那么投影映射$\pi:X\to V$是同胚.此时$\pi$是一个整体复坐标卡.
+	\item 复仿射平面曲线.一个二元复多项式$f(z,w)$在$\mathbb{C}^2$上的全部零点构成的集合$X$称为复仿射平面曲线.$f(z.w)$称为在零点$p$处是非奇异的,如果$\partial f/\partial z$和$\partial f/\partial w$在点$p$处不全为零.称曲线是非奇异的或者光滑的,如果$f$在每个零点处都是非奇异的.
+	\begin{itemize}
+		\item 隐函数定理.设$f(z,w)\in\mathbb{C}[z,w]$,对每个零点$p=(z_0,w_0)$,如果$\partial f/\partial w(p)\not=0$,那么存在定义在$z_0$的一个开邻域上的解析函数$g$,使得在这个开邻域上有$f(z,g(z))=0$.
+		\item 复结构.任取一个零点$p=(z_0,w_0)$,两个偏导数至少有一个不为零,不妨设$z$的偏导数不为零,那么按照隐函数定理,存在一个复坐标卡$\pi_z:U\to\mathbb{C}$,其中$U$是$p$的一个开邻域.现在我们验证坐标卡的相容性,如果零点$x$在两个坐标卡的定义域中,假设这两个坐标卡对应的投影映射来自于同一个坐标轴,那么此时坐标变换是恒等映射;现在设两个坐标卡分别是$\pi_z$和$\pi_w$,那么$\pi_w\circ\pi_z^{-1}$把$z$映射为$g(z)$,多项式函数是解析函数,这就说明了相容性.
+		\item 现在空间$X$是第二可数和Hausdorff的,因为它是$\mathbb{C}^2$的子空间.但是它未必是连通的.如果$f$是$\mathbb{C}[z,w]$上的不可约多项式,那么$f$的零点集$X$总是不可约的,此时$X$称为不可约仿射平面曲线.于是我们得到:光滑不可约复仿射平面曲线总是黎曼曲面.
+		\item 两个注解.尽管$f$是不可约的情况下它未必是非奇异的,不过我们可以证明奇异点的个数有限.删掉这些点后这有限个分支每个都是黎曼曲面;复仿射平面曲线总不是紧的,因为对每个复数$z_0$,那么$f(z_0,w)$总有解,于是它不是有界的.
+	\end{itemize}
+    \item 复射影平面曲线.设$F(x,y,z)$是一个$d$次齐次多项式,讨论它在$\mathbb{CP}^2$上的零点集是有意义的.复射影平面上能表示为一个齐次多项式的零点集的子集称为复射影平面曲线.称$F$定义的曲面是非奇异的,如果$F=\frac{\partial F}{\partial x}=\frac{\partial F}{\partial y}=\frac{\partial F}{\partial z}=0$在射影平面上没有零点(或者等价于它在$\mathbb{C}^3$上没有非零解).
+    \begin{itemize}
+    	\item 设$X$是由齐次多项式$F$定义的射影曲线,记$X_1=X\cap U_1=\{(a,b)\in\mathbb{C}^2\mid F(1,a,b)=0\}$,同理定义$X_2$和$X_3$.于是每个$X_i=X\cap U_i$都是仿射曲线.这说明复射影平面曲线是黎曼曲面.
+    	\item 在上述记号下,$F$是非奇异的当且仅当每个$X_i$都是仿射非奇异曲线.
+    	\begin{proof}
+    		
+    		必要性,假设某个$X_i$不是非奇异的,不妨设为$X_1$,记$f(u,v)=F(1,y,z)$.按照它是非奇异的,可设有$(u_0,v_0)\in\mathbb{C}^2$使得在这个点处$f=\frac{\partial f}{\partial u}=\frac{\partial f}{\partial v}=0$.这说明$[1,u_0,v_0]$是射影曲线非奇异定义中方程组的非零解:$F[1,u_0,v_0]=f(u_0,v_0)=0$,$\frac{\partial F}{\partial y}[1,u_0,v_0]=\frac{\partial f}{\partial u}(u_0,v_0)=0$,$\frac{\partial F}{\partial z}[1,u_0,v_0]=\frac{\partial f}{\partial v}(u_0,v_0)=0$.最后如果设$F$的齐次次数为$d$,有欧拉公式$F=\frac{1}{d}\left(x\frac{\partial F}{\partial x}+y\frac{\partial F}{\partial y}+z\frac{\partial F}{\partial z}\right)$.据此得到$\frac{\partial F}{\partial x}[1,u_0,v_0]=0$.
+    		
+    		充分性,假设$[x_0,y_0,z_0]$是非奇异定义中方程组的非零解,不妨设$x_0\not=0$,可设齐次坐标的一个代表元为$(1,u_0,v_0)$,一样可证$(u_0,v_0)$是$U_1$的奇异点.
+    	\end{proof}
+    	\item 一个有意思的结论是,如果$F$是非奇异射影曲线,那么$F$是不可约多项式.于是非奇异的齐次多项式在复射影平面上的零点集是一个紧黎曼曲面.这里紧性是因为紧空间($\mathbb{CP}^2$是紧空间)的闭子集是紧的.
+    \end{itemize}
+\end{enumerate}
+
+奇点,亚纯函数和洛朗(Laurent)级数.
+\begin{enumerate}
+	\item 设$X$是黎曼曲面,设$p\in X$,设$f$是$p$的某个去心邻域$U-\{p\}$上的全纯函数.称$f$在点$p$处是可去奇点/极点/本性奇点,如果对每个(等价于存在一个)包含$p$的坐标卡$\phi:U\to V$,有$f\circ\phi^{-1}$以点$\phi(p)$为可去奇点/极点/本性奇点.称函数$f$在点$p\in X$处亚纯,如果$f$在$p$处全纯或$p$是$f$的可去奇点或极点.称$W$上的函数$f$是亚纯的,如果$f$在每个$p\in W$处是亚纯的.开集$W\subset X$上的全体亚纯函数记作$\mathscr{M}_X(W)$.
+	\begin{itemize}
+		\item 如果$p\in X$是$f$的奇点,如果$|f(x)|$在$p\in X$附近是有界的,那么$p$是$f$的可取奇点.在这个情况下$\lim_{x\to p}f(x)$是存在的,补充这个定义会使得$f$在$p$附近是全纯的.
+		\item 如果$p\in X$是$f$的奇点,如果$\lim_{x\to p}|f(x)|=\infty$,那么$p$是$f$的极点.
+		\item 如果$p\in X$是$f$的奇点,如果$\lim_{x\to p}|f(x)|$不存在,那么$p$是$f$的本性奇点.
+	\end{itemize}
+    \item 洛朗(Laurent)级数和奇点的阶.设$f$定义在$p\in X$的去心邻域上全纯,取$p$附近的坐标卡$\phi:U\to V$,记$f\circ\phi^{-1}$在$z_0=\phi(p)$附近的洛朗级数为$\sum_nc_n(z-z_0)^n$.这称为$f$在点$p$处关于坐标卡$\phi$的洛朗级数.序列$\{c_n\}$称为洛朗系数.现在设$f$在点$p\in X$处亚纯,称$\mathrm{ord}_p(f)=\min\{n\mid c_n\not=0\}$,它称为$f$在奇点$p$处的阶.可验证奇点的阶不依赖于坐标卡的选取.
+	\item 洛朗级数和阶可以刻画奇点类型:
+	\begin{itemize}
+		\item 点$p$是$f$的可去奇点当且仅当$f$在点$p$处的洛朗级数没有非零的负指数次项,当且仅当$\mathrm{ord}_p(f)\ge0$.其中$f(p)=0$等价于$\mathrm{ord}_p(f)>0$;$f(p)\not=0$等价于$\mathrm{ord}_p(f)=0$.
+		\item 点$p$是$f$的极点当且仅当$f$在点$p$处的洛朗级数存在有限并且不为零个非零的负指数次项,当且仅当$\mathrm{ord}_p(f)$是负有限数.
+		\item 点$p$是$f$的本性奇点当且仅当$f$在点$p$处的洛朗级数有无穷个负指数次项,当且仅当$\mathrm{ord}_p(f)=-\infty$.
+	\end{itemize}
+	\item 记$n=\mathrm{ord}_p(f)$,如果$p$是$f$的零点,我们称$p$是$f$的$n$阶零点;如果$p$是$f$的极点,我们称$p$是$f$的$-n$阶极点.
+	\item 阶的一些性质.设$f,g$是非零的点$p\in X$附近的亚纯函数.
+	\begin{itemize}
+		\item $\mathrm{ord}_p(fg)=\mathrm{ord}_p(f)+\mathrm{ord}_p(g)$.
+		\item $\mathrm{ord}_p(f/g)=\mathrm{ord}_p(f)-\mathrm{ord}_p(g)$.
+		\item $\mathrm{ord}_p(1/f)=-\mathrm{ord}_p(f)$.
+		\item $\mathrm{ord}_p(f\pm g)\ge\min\{\mathrm{ord}_p(f),\mathrm{ord}_p(g)\}$.
+	\end{itemize}
+    \item 黎曼曲面$X$上的全纯函数可视为$X\to\mathbb{C}$的全纯映射,$X$上的亚纯函数可视为不恒取$\infty$的$X\to\mathbb{C}_{\infty}$的全纯映射.按照黎曼球面和复射影线是同构的,于是$X$上每个亚纯函数$g/h$唯一的对应于$X\to\mathbb{CP}^1$的全纯映射$x\mapsto[g(x),h(x)]$.
+\end{enumerate}
+
+除子(divisor).黎曼曲面$X$上的除子是指一个形式和$\sum_{p\in X}m_pp$,其中$m_p\in\mathbb{Z}$,并且满足所谓的局部有限性:即对每个点$p_0\in X$,存在开邻域$U$,使得$U$中只有至多有限个点$p$满足$m_p\not=0$.给定黎曼曲面$X$上的亚纯函数$f$,它的除子定义为$\mathrm{div}(f)=\sum_{p\in X}\mathrm{ord}_p(f)p$.按照极点和零点的孤立性,这个形式和的确满足局部有限性.对于紧黎曼曲面,除子$D=\sum_pm_pp$的局部有限性推出至多有限个$p$满足$m_p\not=0$,此时称整数$\sum_{p\in M}m_p$为除子的次数,记作$\deg D$.
+
+复平面的开集上的全纯/亚纯函数的主要性质可以经复结构传递给黎曼曲面的开集上的全纯/亚纯函数.
+\begin{enumerate}
+	\item 零点和极点的离散性.设$X$是黎曼曲面,设$f$是连通开集$U\subset X$上的亚纯函数,如果$f$不是恒为零的函数,那么$f$在$U$上的零点和极点集是离散的点集.
+	\item 特别的,上一条说明紧黎曼曲面上的亚纯函数的零点集和极点集都是有限点集.
+	\item 唯一性定理.设$f,g$是连通开子集$U\subset X$上的全纯函数,如果$S\subset W$是一个在$W$中有极限点的子集,并且$f(x)=g(x),\forall x\in S$,那么在整个$W$上有$f=g$.
+	\item 极大模原理.设$f$是连通开子集$W$上的全纯函数,如果实值函数$|f(x)|$在$W$上能取到最大值,那么$f$在$W$上是一个常值函数.
+	\item 特别的,上一条说明紧黎曼曲面上的全纯函数是常值函数.
+\end{enumerate}
+
+一些具体黎曼曲面上的亚纯函数.
+\begin{enumerate}
+	\item 黎曼球面$\mathbb{C}_{\infty}$上的亚纯函数.
+	\begin{itemize}
+		\item 黎曼球面上的亚纯函数恰好就是有理函数.
+		\begin{proof}
+			
+			先说明有理函数总是亚纯函数.设函数$f(z)$在无穷远点附近有定义,那么$f$在无穷远点亚纯当且仅当$f(1/z)$在$z=0$是亚纯的.这说明有理函数在无穷远点总是亚纯的.
+			
+			现在设$f$是$\mathbb{C}_{\infty}$上的亚纯函数.按照$\mathbb{C}_{\infty}$是紧黎曼曲面,说明它只有有限个零点和极点.设$\{\lambda_i\}$是$f$在复平面上的全部极点和零点,记$\mathrm{ord}_{\lambda_i}(f)=e_i$.记$r(z)=\prod_i(z-\lambda_i)^{e_i}$,那么$g(z)=f(z)/r(z)$是$\mathbb{C}$上的没有零点的整函数,这导致$g$是常值函数,于是$f$是有理函数.
+		\end{proof}
+		\item 现在设有理函数$f(z)=p(z)/q(z)$,其中$p,q$是互素的复多项式,设$\{\lambda_i\}$是复平面中的全部零点和极点,记$e_i=\mathrm{ord}_{\lambda_i}(f)$,那么有$\deg q-\deg p=-\sum_ie_i$,左侧即有理函数在无穷远点的阶.于是我们证明了,设$\{\lambda_i\}$是有理函数在整个黎曼球面上的零点和极点,设$\lambda_i$的阶是$e_i$,那么有$\sum_ie_i=0$.
+		\item 复射影线上的亚纯函数就是全体零次齐次有理多项式,也即$f(u,v)/g(u,v)$,其中$f,g$是次数相同的齐次多项式.我们证明过黎曼球面和复射影线是全纯等价的.
+	\end{itemize}
+    \item 仿射曲线和射影曲线上的亚纯函数.
+    \begin{itemize}
+    	\item 设$X\subset\mathbb{C}^2$是由多项式$f(x,y)=0$定义的仿射曲线.投影映射$(x,y)\mapsto x$和$(x,y)\mapsto y$都是$X$上的全纯函数.这说明每个多项式映射$g(x,y)$都是$X$上的全纯函数.于是只要多项式$h(x,y)$不是$X$上的零映射,那么$g(x,y)/h(x,y)$都是$X$上的亚纯函数.按照希尔伯特零点定理,$h$在$X$上是零映射当且仅当$f\mid h$.
+    	\item 设$X\subset\mathbb{CP}^2$是由齐次多项式$F(x,y,z)=0$定义的射影曲线.如果$G,H$是两个三元同次数的齐次多项式,并且$H$在$X$上不是零映射,那么$G/H$是$X$上的亚纯函数.按照射影版本的零点定理,$H$在$X$上是零映射当且仅当$F\mid H$.
+    \end{itemize}
+    \item 一维复环面上的亚纯函数.取复平面$\mathbb{C}$上的一个实完备格$X=\mathbb{Z}\omega_1+\mathbb{Z}\omega_2$,我们解释过商空间$\mathbb{C}/X$定义为一维复环面.任取它的亚纯函数,这个函数可以直接提升为$\mathbb{C}$上的一个亚纯函数.反过来$\mathbb{C}$上的亚纯函数$f$能限制在格的基本网孔上当且仅当它以$\omega_1$和$\omega_2$为双周期的亚纯函数,换句话讲此即$\mathbb{C}$上的椭圆函数.下面给出椭圆函数的一些基本性质.设椭圆函数$F$的双周期是$\omega_1,\omega_2$,定义要求了它们是实线性无关的.我们称$\Pi=\{a\omega_1+b\omega_2\mid a,b\in[0,1]\}$为它的基本网孔.再记$\Pi$平移复数$z_0$为$\Pi_{z_0}$.
+    \begin{itemize}
+    	\item 椭圆整函数必然是常值函数.因为双周期$\omega_1,\omega_2$是实线性无关的保证了它的周期是一个连通的有界闭子集,而我们知道紧连通黎曼曲面整函数必然是常值的.
+    	\item 设$F$是椭圆函数,它的零点和极点都不落在某个基本网孔$\Pi_{z_0}$的边界上,那么$\sum_{p\in\Pi_{z_0}}\mathrm{Res}_pF=0$.因为左边这个和就是$F(z)/2\pi i$在$\Pi_{z_0}$边界的积分.
+    	\item 条件同上一条,此时$F'(z)/F(z)$也是一个相同双周期的椭圆函数,于是它在$\Pi_{z_0}$边界的积分仍然是零,按照俯角原理,这说明椭圆函数在$\Pi_{z_0}$内的零点个数恰好等于极点个数,这里零点和极点都是计算重数的.
+    	\item 条件同上一条,设椭圆函数$F$的全部零点为$z_1,z_2,\cdots,z_r$,全部极点为$p_1,p_2,\cdots,p_r$,这里都是计重数表示的,那么$\sum_{1\le i\le r}z_i\equiv\sum_{1\le i\le r}p_i\mathrm{mod}X$.
+    	\begin{proof}
+    		
+    		首先我们有如下一般的公式,取$\phi(z)=z$,于是问题归结为证明$\frac{1}{2\pi i}\int_{\partial\Pi_{z_0}}z\frac{F'(z)}{F(z)}\mathrm{d}z$落在完备格$X$中.
+    		$$\sum_{1\le i\le r}\phi(z_i)-\sum_{1\le i\le r}\phi(p_i)=\frac{1}{2\pi i}\int_{\partial\Pi_{z_0}}z\frac{F'(z)}{F(z)}\mathrm{d}z$$
+    		
+    		但是我们有如下等式,按照俯角原理,最后式子的两个括号都是整数.
+    		\begin{align*}
+    		\frac{1}{2\pi i}\int_{\partial\Pi_{z_0}}z\frac{F'(z)}{F(z)}\mathrm{d}z&=\frac{1}{2\pi i}\left(\int_{[z_0,z_0+\omega_1]}-\int_{[z_0+\omega_2,z_0+\omega_1+\omega_2]}-\int_{[z_0,z_0+\omega_2]}+\int_{[z_0+\omega_2,z_0+\omega_1+\omega_2]}\right)\\&=\omega_2\left(\frac{1}{2\pi i}\int_{[z_0,z_0+\omega_1]}\frac{F'(z)}{F(z)}\mathrm{d}z\right)+\omega_1\left(\frac{1}{2\pi i}\int_{[z_0,z_0+\omega_2]}\frac{F'(z)}{F(z)}\mathrm{d}z\right)
+    		\end{align*}
+    	\end{proof}
+    \end{itemize}
+    \item 上述讨论给出了如下定理的必要性:一维复环面上的除子$D=P_1+P_2+\cdots+P_r-Q_1-Q_2-\cdots-Q_s$(这里$P_i$可能重复,$Q_i$也可能重复,前面的数字$m_p$取为1)是某个亚纯函数的除子当且仅当$r=s$,并且$\sum_{1\le i\le r}P_i\equiv\sum_{1\le i\le r}Q_i(\mathrm{mod}X)$.我们接下来主要证明它的充分性.
+    \item 首先给定$\omega_1,\omega_2\in\mathbb{C}$,满足$\mathrm{Im}\frac{\omega_1}{\omega_2}\not=0$,那么存在全纯同构$\mathbb{C}/(\omega_1,\omega_2)\mathbb{Z}\cong\mathbb{C}/(1,\tau)\mathbb{Z}$,其中$\tau=\omega_2/\omega_1$.于是我们总可以假定椭圆函数的双周期是$\{1,\tau\}$,其中$\tau$非实数.
+\end{enumerate}
+
+为了证明上述定理的充分性,先引入Theta函数,它是构造椭圆函数的基本单位.定义$\theta_{\tau}(z)=\sum_{n\in\mathbb{Z}}\exp\left(\pi i(n^2\tau+2nz)\right)$.这个函数通常不够用,引入它的旋转函数为,对任意$a,b\in\mathbb{R}$,记:
+$$\theta_{\tau}\genfrac{[}{]}{0pt}{}{a}{b}(z)=\sum_{n\in\mathbb{Z}}\exp\left(\pi i((n+a)^2\tau+2(n+a)(z+b))\right)$$
+\begin{enumerate}
+	\item 这些级数都是在复平面收敛的.
+	\item 一些基本公式.
+	\begin{itemize}
+		\item $$\theta_{\tau}\genfrac{[}{]}{0pt}{}{a}{b}(z+m)=e^{2\pi iam}\theta_{\tau}\genfrac{[}{]}{0pt}{}{a}{b}(z),m\in\mathbb{Z}$$
+		\item $$\theta_{\tau}\genfrac{[}{]}{0pt}{}{a}{b}(z+m\tau)=e^{-\pi i(m^2\tau+wm(z+b))}\theta_{\tau}\genfrac{[}{]}{0pt}{}{a}{b}(z)$$
+		\item $$\theta_{\tau}\genfrac{[}{]}{0pt}{}{a}{b}(z)=e^{\pi i(a^2\tau+2az+2ab)}\theta_{\tau}(z+b+a\tau)$$
+		\item $$\theta_{\tau}\genfrac{[}{]}{0pt}{}{a+k}{b+l}(z)=e^{2\pi ila}\theta_{\tau}\genfrac{[}{]}{0pt}{}{a}{b}(z),k,l\in\mathbb{Z}$$
+		\item 下面第二个等式成立需要约定$2a,2b\in\mathbb{Z}$,此时该函数是奇函数或者偶函数. $$\theta_{\tau}\genfrac{[}{]}{0pt}{}{a}{b}(-z)=\theta_{\tau}\genfrac{[}{]}{0pt}{}{-a}{-b}(z)=e^{-\pi i(2a)(2b)}\theta_{\tau}\genfrac{[}{]}{0pt}{}{a}{b}(z)$$
+	\end{itemize}
+    \item $\theta_{\tau}\genfrac{[}{]}{0pt}{}{a}{b}(z)$在$\Pi_{z_0}$中恰有一个零点.
+    \begin{proof}
+    	
+    	按照第三条公式,不妨约定$a=b=0$,按照基本公式得到$\theta_{\tau+1}=\theta_{\tau}(z)$和$\theta_{\tau}(z+\tau)=e^{-\pi i(\tau+2z)}\theta_{\tau}(z)$,于是得到:
+    	$$\left(\frac{\theta_{\tau}'}{\theta_{\tau}}\right)(z+1)=\left(\frac{\theta_{\tau}'}{\theta_{\tau}}\right)(z),\left(\frac{\theta_{\tau}'}{\theta_{\tau}}\right)(z+\tau)=\left(\frac{\theta_{\tau}'}{\theta_{\tau}}\right)(z)-2\pi i$$
+    	
+    	记$\gamma$为$z_0$到$z_0+1$的直线段,那么$\theta_{\tau}(z)$在$\Pi_{z_0}$的零点个数为:
+    	\begin{align*}
+    	&=\frac{1}{2\pi i}\int_{\partial Pi_{z_0}}\left(\frac{\theta_{\tau}'}{\theta_{\tau}}\right)(z)\mathrm{d}z=\frac{1}{2\pi i}\left(\int_{\gamma}-\int_{\gamma+\tau}\right)\\&=\frac{1}{2\pi i}\int_{\gamma}\left(\left(\frac{\theta_{\tau}'}{\theta_{\tau}}\right)(z)-\left(\left(\frac{\theta_{\tau}'}{\theta_{\tau}}\right)(z)-2\pi i\right)\right)\mathrm{d}z=1
+    	\end{align*}
+    \end{proof}
+    \item 按照基本公式,$\theta_{\tau}\genfrac{[}{]}{0pt}{}{1/2}{1/2}(z)$是奇函数,于是$z=0$是它的零点,于是$\theta_{\tau}(z)$的零点集为$\frac{1+\tau}{2}+(1,\tau)\mathbb{Z}$,于是$\theta_{\tau}\genfrac{[}{]}{0pt}{}{a}{b}(z)$的零点集为$\{(\frac{1}{2}-b)+(\frac{1}{2}-a)+(1,\tau)\mathbb{Z}\}$.
+    \item 证明充分性.给定除子$D=Q_1+Q_2+\cdots+Q_r-P_1-\cdots-P_r$,满足$\sum_{1\le i\le r}Q_i=\sum_{1\le i\le r}P_i(\mathrm{mod}X)$.设典范的投影映射$p:\mathbb{C}\to\mathbb{C}/(1,\tau)\mathbb{Z}$.我们期望选取$z_i,w_i\in\mathbb{C}$,使得$p(z_i)=Q_i$,$p(w_i)=P_i$,并且$\sum_{1\le i\le r}z_i=\sum_{1\le i\le r}w_i$.并且期望$z_i$就是全部零点,$w_i$就是全部极点.为此我们选取$a_k,b_k,\widetilde{a_k},\widetilde{b_k}\in\mathbb{C},1\le k\le r$,使得$\theta_{\tau}\genfrac{[}{]}{0pt}{}{a_k}{b_k}$以$z_k$为零点,$\theta_{\tau}\genfrac{[}{]}{0pt}{}{\widetilde{a_k}}{\widetilde{b_k}}$以$w_k$为零点.再构造$F=\prod_{1\le k\le r}\theta_{\tau}\genfrac{[}{]}{0pt}{}{a_k}{b_k}(z)/\theta_{\tau}\genfrac{[}{]}{0pt}{}{\widetilde{a_k}}{\widetilde{b_k}}(z)$.改进这些参数可以使得$F$以$1,\tau$为双周期的椭圆函数.
+\end{enumerate}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+重数.设$F:X\to Y$是黎曼曲面之间的非常值全纯映射,对每个点$p\in X$,存在唯一的正整数$m\ge1$,使得对任意的以$F(p)$为中心的$Y$中的坐标卡$(\psi,U',V')$,都存在$X$中的以$p$为中心的坐标卡$(\phi,U,V)$,使得$\psi\circ f\phi^{-1}(z)=z^m$.这个唯一的正整数$m$称为$F$在点$p$处的重数,记作$\mathrm{mult}_p(F)$.如果$F$在点$p\in X$处的重数$\ge2$,就称$p$是分歧点.如果$y\in Y$是分歧点的像,就称它是分支点.
+\begin{enumerate}
+	\item $F$在点$p\in X$的重数就是唯一的正整数$m$,满足存在$p$和$F(p)$的局部坐标使得它有坐标表示$z\mapsto z^m$.
+	\item 设$h$是任意一个$F$在$p\in X$处的局部表示,那么有$\mathrm{mult}_p(F)=1+\mathrm{ord}_p(\mathrm{d}h/\mathrm{d}z)$.换句话讲,重数$m$就是最小的正整数,使得有$h(z)=h(z_0)+\sum_{i\ge m}c_i(z-z_0)^i$,其中$c_m\not=0$.
+	\item 重数和阶数的关系.重数是对全纯映射定义的,而阶数是对亚纯函数定义的.但是亚纯函数$f$可视为终端$\mathbb{C}_{\infty}$的全纯映射$F$,在这个对应下有如下关系式:
+	\begin{itemize}
+		\item 设$p\in X$是亚纯函数$f$的零点,那么$\mathrm{mult}_p(F)=\mathrm{ord}_p(f)$.
+		\item 设$p\in X$是亚纯函数$f$的极点,那么$\mathrm{mult}_p(F)=-\mathrm{ord}_p(f)$.
+		\item 设$p\in X$既不是零点也不是极点,那么$\mathrm{mult}_p(F)=\mathrm{ord}_p(f-f(p))$.
+	\end{itemize}
+\end{enumerate}
+
+紧黎曼曲面上全纯映射的次数.设$F:X\to Y$是紧黎曼曲面之间的非常值全纯映射,任取$y\in Y$,我们解释过$F^{-1}(y)$是一个有限集,记$d_y(F)=\sum_{p\in F^{-1}(y)}\mathrm{mult}_p(F)$.这个数字不依赖于$y$的选取,它称为$F$的次数,记作$\deg(F)$.
+\begin{proof}
+	
+	
+	
+	
+\end{proof}
+
+
+
+
+
+
+
+
+
+
+
+设$X$是拓扑空间,设群$G$连续作用在$X$上,此即存在一个映射$G\times X\to X$为$(g,x)\mapsto gx$,满足如下三个条件:对任意$g\in G$有$g:X\to X$是连续映射;群的幺元$e$的作用是恒等映射;任取$g,h\in G$,任取$x\in X$,那么$g(hx)=(gh)x$.那么按照群元素存在逆元,这里每个$g\in G$诱导的$X$上的连续映射实际都是同胚.我们定义$X/G$是这样一个商空间,它是$X$上定义等价关系为$x_1\sim x_2$当且仅当存在$g\in G$使得
+
+
+\newpage
+\section{黎曼曲面上的积分}
+
+黎曼曲面上的全纯/亚纯1形式(或者实光滑1形式).给定黎曼曲面$X$,其上的一个全纯/亚纯1形式是指对每个坐标卡$\phi:U\to V$定义一个全纯1形式$f(z)\mathrm{d}z$,满足如果两个坐标卡$\phi_i:U_i\to V_i,i=1,2$有非空的交,记分别的全纯/亚纯1形式为$f(z)\mathrm{d}z$和$g(w)\mathrm{d}w$,记$T=\phi_1\circ\phi_2^{-1}$,那么$g(w)=f(T(w))T'(w)$.
+\begin{enumerate}
+	\item 定义黎曼曲面$X$上的一个全纯/亚纯1形式不需要对每个坐标卡定义微分形式,只需要对一个图册定义即可:设$\mathscr{A}$是$X$上的一个图册,如果对每个$\mathscr{A}$中的坐标卡$\phi:U\to V$定义全纯/亚纯1形式$f(z)\mathrm{d}z$,使得只要$\mathscr{A}$中两个坐标卡$\phi_i:U_i\to V_i,i=1,2$有交,设它们对应的全纯/亚纯1形式分别为$f(z)\mathrm{d}z$和$g(w)\mathrm{d}w$,那么$T=\phi_1\circ\phi^{-1}_2$满足$g(w)=f(T(w))T'(w)$.那么$\mathscr{A}$上的这个全纯/亚纯1形式可以唯一的延拓为极大图册上的全纯1形式.
+	\begin{proof}
+		
+		任取$X$的坐标卡$\psi:U\to V$.任取$p\in U$,选取$\mathscr{A}$中的坐标卡$\phi$覆盖了点$p$,设它对应的全纯/亚纯1形式为$f(z)\mathrm{d}z$.我们定义$\psi$上的全纯/亚纯1形式为$f(T(w))T'(w)\mathrm{d}w$,其中$T=\phi\circ\psi^{-1}$.验证这不依赖于$\phi$的选取,并且这样延拓到极大图册后是一个互相兼容的全纯1形式.
+	\end{proof}
+    \item 亚纯1形式在一个点处的阶.设$\omega$是黎曼曲面$X$上的亚纯1形式,任取$p\in X$,任取覆盖$p$的坐标卡$\phi$,设它对应的1形式为$f(z)\mathrm{d}z$,那么$\mathrm{ord}_p(f(z))$不依赖于覆盖$p$的坐标卡的选取,这个阶称为亚纯1形式$\omega$在$p$处的阶,记作$\mathrm{ord}_p(\omega)$.
+    \item 于是亚纯1形式$\omega$在$p\in X$处全纯当且仅当$\mathrm{ord}_p(\omega)\ge0$.如果$\mathrm{ord}_p(\omega)=n>0$,就称$p$是$\omega$的$n$阶零点;如果$\mathrm{ord}_p(\omega)=-n<0$,就称$p$是$\omega$的$n$阶极点.亚纯1形式的零点集和极点集是黎曼曲面上的离散点集.
+    \item 按照亚纯函数的唯一性定理,亚纯1形式被它在单个坐标卡上的表示唯一决定,换句话讲,如果两个亚纯1形式在某个坐标卡上的局部函数表示相同,那么这两个亚纯1形式相同.但是反过来给定单一坐标卡上的亚纯形式,它未必能延拓到整个极大图册上.
+    \item 设$f(z)$是黎曼曲面上的实光滑函数,记$z=x+yi$,其中$x,y\in\mathbb{R}$,那么$x=\frac{z+\overline{z}}{2}$和$y=\frac{z-\overline{z}}{2i}$.此时有$\mathrm{d}x=\frac{\mathrm{d}z+\mathrm{d}\overline{z}}{2}$,$\mathrm{d}y=\frac{\mathrm{d}z-\mathrm{d}\overline{z}}{2i}$.$\mathrm{d}z=\mathrm{d}x+i\mathrm{d}y$,$\mathrm{d}\overline{z}=\mathrm{d}x-i\mathrm{d}y$.并且有:
+    $$\frac{\partial f}{\partial z}=\frac{1}{2}\frac{\partial f}{\partial z}+\frac{1}{2i}\frac{\partial f}{\partial y},\frac{\partial f}{\partial\overline{z}}=\frac{1}{2}\frac{\partial f}{\partial z}-\frac{1}{2i}\frac{\partial f}{\partial y}$$
+    
+    在这个记号下,实光滑函数$f$在开集上是全纯的当且仅当$\frac{\partial f}{\partial\overline{z}}=0$.
+    \item 一个光滑1形式称为$(1,0)$型的,如果它在每个坐标卡上的表示为$f(z,\overline{z})\mathrm{d}z$;称为$(0,1)$型的,如果它在每个坐标卡上的表示为$f(z,\overline{z})\mathrm{d}\overline{z}$.特别的,全纯1形式总是$(1,0)$型的.另外注意一个光滑1形式如果在单个坐标卡上是$(1,0)$型的,那么它在每个坐标卡上都是$(1,0)$型的.
+    \item 类似的我们可以定义光滑2形式.黎曼曲面上的光滑2形式是指对每个坐标卡$\phi$上定义一个光滑2形式$f(z,\overline{z})\mathrm{d}z\wedge\mathrm{d}\overline{z}$.使得如果两个坐标卡$\phi_i,i=1,2$的定义域有交,设它们对应的光滑2形式分别为$f(z,\overline{z})\mathrm{d}z\wedge\mathrm{d}\overline{z}$和$g(w,\overline{w})\mathrm{d}w\wedge\mathrm{d}\overline{w}$,那么有$g(w,\overline{w})=f(T(w),\overline{T(w)})\Vert T'(w)\Vert^2$,其中$T=\phi_1\circ\phi_2^{-1}$.
+    \item 类似1形式的情况,黎曼曲面上定义一个光滑2形式不需要对每个坐标卡定义光滑2形式,仅需对一个图册定义即可.
+\end{enumerate}
+
+微分形式上的算子.
+\begin{enumerate}
+	\item 设$h$是黎曼曲面$X$上的光滑函数,设$\omega=f\mathrm{d}z+g\mathrm{d}\overline{z}$是$X$上的光滑1形式,定义$h\omega$为$hf\mathrm{d}z+hg\mathrm{d}\overline{z}$.那么$\omega$如果是$(0,1)$型的,$(1,0)$型的,全纯的,亚纯的,这些性质都可以传递给$h\omega$.另外如果$h,\omega$都在$p\in X$处亚纯,那么$\mathrm{ord}_p(h\omega)=\mathrm{ord}_p(h)+\mathrm{ord}_p(\omega)$.类似课定义光滑函数乘以光滑2形式.
+	\item 光滑函数定义的光滑形式.给定黎曼曲面$X$上的光滑函数$f$,那么我们可以按照$\partial f=\frac{\partial f}{\partial z}\mathrm{d}z$,$\overline{partial}f=\frac{\partial f}{\partial\overline{f}}\mathrm{d}\overline{z}$和$\mathrm{d}f=\partial f+\overline{\partial}f$来定义$X$上三个光滑1形式.我们称开集$U$上的一个光滑1形式$\omega$是恰当的,如果存在光滑函数$f$在$U$上满足$\mathrm{d}f=\omega$.
+	\item 
+	
+\end{enumerate}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

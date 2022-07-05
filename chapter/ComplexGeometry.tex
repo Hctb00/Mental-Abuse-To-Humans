@@ -1,0 +1,992 @@
+\newpage
+\chapter{复几何}
+\section{基本工具}
+\subsection{局部理论}
+\subsubsection{多复变函数}
+
+多复变函数的全纯性和解析性.
+\begin{itemize}
+	\item 光滑函数.设$U\subset\mathbb{C}^n$是开集,记$\mathbb{C}^n$中的一个点为$z=(z_1,z_2,\cdots,z_n)$,其中$z_i=x_i+\sqrt{-1}y_i$.$U\to\mathbb{C}$的复变函数$f(z)=u(z)+\sqrt{-1}v(z)$可以视为两个以$\{x_1,x_2,\cdots,x_n,y_1,\cdots,y_n\}$为变量的实函数$u,v$.如果作为实函数它们都是光滑的(即任意阶可微),就称$f(z)$是光滑复变函数.对于闭集$E$,其上光滑函数是指存在$E$的一个开邻域$U$,存在$U$上光滑函数$g$使得在$E$上有$g=f$.开集$U$或者闭集$E$上的全体光滑函数构成的环记作$C^{\infty}(U)$和$C^{\infty}(E)$.
+	\item 微分和全微分.在同胚$\mathbb{C}^n\cong\mathbb{R}^{2n}$下,$\mathbb{C}^n$上一个点的余切空间的一组基可以取为$\{\mathrm{d}x_i,\mathrm{d}y_i,1\le i\le n\}$.换一组基表示有$\mathrm{d}z_i=\mathrm{d}x_i+\sqrt{-1}\mathrm{d}y_i$,$\mathrm{d}\overline{z_i}=\mathrm{d}x_i-\sqrt{-1}\mathrm{d}y_i$,$1\le i\le n$.它们在切空间中的对偶基为:
+	$$\frac{\partial}{\partial z_i}=\frac{1}{2}\left(\frac{\partial}{\partial x_i}-\sqrt{-1}\frac{\partial}{\partial y_i}\right),\frac{\partial}{\partial\overline{z_i}}=\frac{1}{2}\left(\frac{\partial}{\partial x_i}+\sqrt{-1}\frac{\partial}{\partial y_i}\right)$$
+	
+	在这组基下函数$f$的全微分可以表示为如下形式.第一个和式记作$\partial f$,第二个和式记作$\overline{\partial}f$.
+	$$\mathrm{d}f=\sum_{1\le i\le n}\frac{\partial f}{\partial z_i}\mathrm{d}z_i+\sum_{1\le j\le n}\frac{\partial f}{\partial\overline{z_j}}\mathrm{d}\overline{z_j}$$
+	\item 全纯函数.开集$U\subset\mathbb{C}^n$上的一个多复变光滑函数$f$称为全纯的,如果在$U$上总有$\overline{\partial}f=0$.在一元情况下这等价于$\frac{\partial f}{\partial\overline{z}}=0$.分别考虑实部和虚部,得到$u'_x=v'_y$和$u'_y=-v'_x$,此即Cauchy-Riemann方程.
+	\item 解析函数.开集$U\subset\mathbb{C}^n$上的一个多复变光滑函数$f$称为解析的,如果$f$在$U$上局部的总可以表示为关于变量$z_i$的幂级数展开:对点$a=(a_1,\cdots,a_n)$,我们用$(z-a)^{\alpha}$来记$(z_1-a_1)^{\alpha_1}\cdots (z_n-a_n)^{\alpha_n}$,其中$\alpha=(\alpha_1,\cdots,\alpha_n)$.记$|\alpha|=\sum_{1\le i\le n}\alpha_i$.$f$在点$a$附近的多元幂级数展开是指$f(z)=\sum_{N\ge0}\sum_{|\alpha|=N}c_{\alpha}(z-a)^{\alpha}$.一元情况此即对任意$z_0\in U$,总存在$\varepsilon>0$使得$B(z_0,\varepsilon)\subseteq U$,并且在$B(z_0,\varepsilon)$有幂级数展开$f(z)=\sum_{n\ge0}^{\infty}a_n(z-z_0)^n$.
+\end{itemize}
+
+全纯和解析是等价的.
+\begin{enumerate}
+	\item 光滑函数的柯西积分公式.设$\Delta\subset\mathbb{C}$是一个开圆盘,设$f\in C^{\infty}(\overline{\Delta})$(实际上$\mathrm{C}^1$就够了),那么对每个点$z\in\Delta$,都有如下等式,其中曲线积分部分的定向取为顺时针定向.
+	$$f(z)=\frac{1}{2\pi\sqrt{-1}}\int_{\partial\Delta}\frac{f(w)}{w-z}\mathrm{d}w+\frac{1}{2\pi\sqrt{-1}}\int_{\Delta}\frac{\partial f(w)/\partial\overline{w}}{w-z}\mathrm{d}w\wedge\mathrm{d}\overline{w}$$
+	
+	特别的,如果$f$是全纯的,也即$\frac{\partial f(z)}{\partial\overline{z}}=0$,那么就得到全纯函数的柯西积分公式:
+	$$f(z)=\frac{1}{2\pi\sqrt{-1}}\int_{\partial\Delta}\frac{f(w)}{w-z}\mathrm{d}w$$
+	\begin{proof}
+		
+		考虑微分形式$\eta=\frac{1}{2\pi\sqrt{-1}}\frac{f(w)\mathrm{d}w}{w-z}$,这里$\frac{1}{w-z}$解析,也即$\frac{\partial}{\partial\overline{w}}\frac{1}{w-z}=0$,于是有$\mathrm{d}\eta=-\frac{1}{2\pi\sqrt{-1}}\frac{\partial f(w)}{\partial\overline{w}}\frac{\mathrm{d}w\wedge\mathrm{d}\overline{w}}{w-z}$.
+		
+		记$B(z,\varepsilon)$为以$z$为圆心的半径为$\varepsilon$的圆盘,那么$\eta$在$\Delta-B(z,\varepsilon)$上解析,按照Stokes定理,得到:
+		$$\frac{1}{2\pi\sqrt{-1}}\int_{\partial B(z,\varepsilon)}\frac{f(w)\mathrm{d}w}{w-z}=\frac{1}{2\pi\sqrt{-1}}\int_{\partial\Delta}\frac{f(w)\mathrm{d}w}{w-z}+\frac{1}{2\pi\sqrt{-1}}\int_{\Delta-B(\delta,\varepsilon)}\frac{\partial f(w)}{\partial\overline{w}}\frac{\mathrm{d}w\wedge\mathrm{d}\overline{w}}{w-z}$$
+		
+		记$w-z=re^{i\theta}$,那么有:
+		$$\lim_{\varepsilon\to0}\frac{1}{2\pi\sqrt{-1}}\int_{\partial B(z,\varepsilon)}\frac{f(w)\mathrm{d}w}{w-z}=\lim_{\varepsilon\to0}\frac{1}{2\pi}\int_0^{2\pi}f(z+\varepsilon e^{i\theta})\mathrm{d}\theta=f(z)$$
+		
+		另一方面按照$\mathrm{d}w\wedge\mathrm{d}\overline{w}=-2\sqrt{-1}\mathrm{d}x\wedge\mathrm{d}y=-2\sqrt{-1}r\mathrm{d}r\wedge\mathrm{d}\theta$,于是有:
+		$$\left|\frac{\partial f(w)}{\partial\overline{w}}\frac{\mathrm{d}w\wedge\mathrm{d}\overline{w}}{w-z}\right|\le2\left|\frac{\partial f(w)}{\partial\overline{w}}\mathrm{d}r\wedge\mathrm{d}\theta\right|\le c|\mathrm{d}r\wedge\mathrm{d}\theta|$$
+		
+		这说明$\frac{\partial f(w)}{\partial\overline{w}}\frac{\mathrm{d}w\wedge\mathrm{d}\overline{w}}{w-z}$在$\Delta$上绝对可积,并且有极限为零,这就得证.
+		$$\lim_{\varepsilon\to0}\int_{B(z,\varepsilon)}\frac{\partial f(w)}{\partial\overline{w}}\frac{\mathrm{d}w\wedge\mathrm{d}\overline{w}}{w-z}=0$$
+	\end{proof}
+    \item 设$U\subset\mathbb{C}$是开集,设$f$是$U$上复函数,那么$f$是全纯的当且仅当它是解析的.
+    \begin{proof}
+    	
+    	如果$f$是全纯的,也即$\frac{\partial f(z)}{\partial\overline{z}}=0$,任取$z_0\in U$,任取足够小的$\varepsilon>0$,按照上面Cauchy公式有:
+    	\begin{align*}
+    	f(z)&=\frac{1}{2\pi\sqrt{-1}}\int_{\partial\Delta}\frac{f(w)\mathrm{d}w}{w-z}\\&=\frac{1}{2\pi\sqrt{-1}}\int_{\partial\Delta}\frac{f(w)\mathrm{d}w}{(w-z_0)-(z-z_0)}\\&=\frac{1}{2\pi\sqrt{-1}}\int_{\partial\Delta}\frac{f(w)\mathrm{d}w}{(w-z_0)\left(1-\frac{z-z_0}{w-z_0}\right)}\\&=\sum_{n=0}^{\infty}\left(\frac{1}{2\pi\sqrt{-1}}\int_{\partial\Delta}\frac{f(w)\mathrm{d}w}{(w-z_0)^{n+1}}\right)(z-z_0)^n
+    	\end{align*}
+    	
+    	这说明$f$是解析的.反过来如果$f$是解析的,即对任意$z_0\in U$,存在$\varepsilon>0$使得$z\in B(z_0,\varepsilon)\subseteq U$时有$f(z)=\sum_{n=0}^{\infty}a_n(z-z_0)^n$.按照$(z-z_0)^n$是解析的,说明$f(z)$的部分和满足全纯函数的Cauchy积分公式.取极限就得到:
+    	$$f(z)=\frac{1}{2\pi\sqrt{-1}}\int_{\partial\Delta}\frac{f(w)\mathrm{d}w}{w-z}$$
+    	
+    	求微分就得到:
+    	$$\frac{\partial f(z)}{\partial\overline{z}}=\frac{1}{2\pi\sqrt{-1}}\int_{\partial\Delta}\frac{\partial}{\partial\overline{z}}\left(\frac{f(w)}{w-z}\right)\mathrm{d}w=0$$
+    	
+    	这说明$f$是全纯的.
+    \end{proof}
+    \item 高维的柯西积分公式.$\mathbb{C}^n$中的polydisc是指形如$D=\{z\mid|z_i-a_i|<r_i,1\le i\le n\}$的开集.设$f$在$D$上全纯,并且$\mathrm{C}^1$延拓到$\overline{D}$,那么对任意$z\in D$都有下式成立,这里$\partial^*D=\{z\mid|z_i-a_i|=r_i,1\le i\le n\}$.
+    $$f(z)=\frac{1}{(2\pi\sqrt{-1})^n}\int_{\partial^*D}\frac{f(w)}{(w_1-z_1)\cdots(w_n-z_n)}\mathrm{d}w_1\cdots\mathrm{d}w_n$$
+    \begin{proof}
+    	
+    	以$n=2$为例.把$f$作为第一个变量的全纯函数,我们有:
+    	$$f(z_1,w_2)=\frac{1}{2\pi\sqrt{-1}}\int_{|w_1-a_1|=r_1}\frac{f(w_1,w_2)}{(w_1-z_1)}\mathrm{d}w_1$$
+    	
+    	作为第二个变量的全纯函数,得到:
+    	$$f(z_1,z_2)=\frac{1}{2\pi\sqrt{-1}}\int_{|w_2-a_2|=r_2}\frac{f(z_1,w_2)}{(w_2-z_2)}\mathrm{d}w_2$$
+    	
+    	把第一式带入第二式,就得到结论:
+    	$$f(z_1,z_2)=\frac{1}{(2\pi\sqrt{-1})^2}\int_{|w_1-a_1|=r_1}\frac{1}{w_2-z_2}\left(\int_{|w_1-a_1|=r_1}\frac{f(w_1,w_2)}{w_1-z_1}\right)\mathrm{d}w_2$$
+    \end{proof}
+    \item 设$U\subseteq\mathbb{C}^n$是开集,设$f$是$U$上的复值函数,那么$f$是全纯的等价于是解析的.
+    \begin{proof}
+    	
+    	先设$f$是全纯的,任取$U$中一个点,不妨做平移(不改变全纯性和解析性)使得这个点就是0,选取一个polydisc使得$D=\{z\mid |z_i|<r_i\}\subseteq U$,按照上一条的柯西积分公式,就有:
+    	\begin{align*}
+    		f(z)&=\frac{1}{(2\pi\sqrt{-1})^n}\int_{\partial^*D}\frac{f(w)}{(w_1-z_1)\cdots(w_n-z_n)}\mathrm{d}w_1\cdots\mathrm{d}w_n\\&=\frac{1}{(2\pi\sqrt{-1})^n}\int_{\partial^*D}\frac{f(w)}{w_1\cdots w_n}\prod\frac{1}{1-\frac{z_i}{w_i}}\mathrm{d}w_1\cdots\mathrm{d}w_n\\&=\sum_{\alpha}\left(\frac{1}{(2\pi\sqrt{-1})^n}\int_{\partial^*D}\frac{f(w)}{w_1^{\alpha_1+1}\cdots w_n^{\alpha_n+1}}\mathrm{d}w_1\cdots\mathrm{d}w_n\right)z^{\alpha}
+    	\end{align*}
+    
+        反过来如果$f$是解析的,那么它关于每个变量的单变量复函数都是解析的,一元情况我们已经证过了,于是$f$对每个变量都满足CR方程,于是$f$全纯.
+    \end{proof}
+    \item 推论.多元解析函数依旧满足零点孤立性原理和极大模原理.
+\end{enumerate}
+
+$\overline{\partial}$庞加莱引理.设$U\subseteq\mathbb{C}^n$是开集,给定$g_1,\cdots,g_n\in\mathrm{C}^1(U)$,我们期望解出$\frac{\partial f}{\partial\overline{z_i}}=g_i,1\le i\le n$.那么一个必要条件是$\frac{\partial g_i}{\partial\overline{z_j}}=\frac{\partial g_j}{\partial\overline{z_i}},\forall 1\le i,j\le n$.用微分形式的语言,记$\alpha=\sum g_i\mathrm{d}\overline{z_i}$,问题就是找复函数$f$使得$\overline{\partial}f=\alpha$.这里的必要条件就是$\overline{\partial}\alpha=0$.这件事是在说Dolbeault复形在$q=1$处是正合的,我们会在后文证明一些条件下$q\ge1$时都是正合的.
+\begin{enumerate}
+	\item 首先这样的解存在就不是唯一的,因为总可以加上一个全纯函数.
+	\item 一元情况.给定函数$g(z)\in C^{\infty}(\overline{\Delta})$,那么函数$f(z)=\frac{1}{2\pi\sqrt{-1}}\int_{\Delta}\frac{g(w)}{w-z}\mathrm{d}w\wedge\mathrm{d}\overline{w}$是$\Delta$上的光滑函数,并且满足$\frac{\partial f}{\partial\overline{z}}=g$.
+	\begin{proof}
+		
+		任取$z_0\in\Delta$,选取足够小的$\varepsilon>0$使得$B(z_0,2\varepsilon)\subset\Delta$.记$g(z)=g_1(z)+g_2(z)$,其中$g_1$在$B(z_0,2\varepsilon)$以外为零,$g_2$在$B(z_0,\varepsilon)$以内为零.那么积分$f_2(z)=\frac{1}{2\pi\sqrt{-1}}\int_{\Delta}g_2(w)\frac{\mathrm{d}w\wedge\mathrm{d}\overline{w}}{w-z}$在$B(z_0,\varepsilon)$上光滑.于是有:
+		$$\frac{\partial f_2(z)}{\partial\overline{z}}=\frac{1}{2\pi\sqrt{-1}}\int_{\Delta}\frac{\partial}{\partial\overline{z}}\left(\frac{g_2(w)}{w-z}\right)\mathrm{d}w\wedge\mathrm{d}\overline{w}=0$$
+		
+		按照$g_1(z)$具有紧支集,可记:
+		$$\frac{1}{2\pi\sqrt{-1}}\int_{\Delta}g_1(w)\frac{\mathrm{d}w\wedge\mathrm{d}\overline{w}}{w-z}=\frac{1}{2\pi\sqrt{-1}}\int_{\mathbb{C}}g_1(w)\frac{\mathrm{d}w\wedge\mathrm{d}\overline{w}}{w-z}=\frac{1}{2\pi\sqrt{-1}}\int_{\mathbb{C}}g_1(u+z)\frac{\mathrm{d}u\wedge\mathrm{d}\overline{u}}{u}$$
+		
+		其中$u=w-z$,再做极坐标变换$u=re^{i\theta}$,得到:
+		$$f_1(z)=-\frac{1}{\pi}\int_{\mathbb{C}}g_1(z+re^{i\theta})e^{-i\theta}\mathrm{d}r\wedge\mathrm{d}\theta$$
+		
+		这在$\mathbb{C}$上是光滑的,并且有:
+		$$\frac{\partial f_1(z)}{\partial\overline{z}}=-\frac{1}{\pi}\int_{\mathbb{C}}\frac{\partial g_1}{\partial\overline{z}}(z+re^{i\theta})e^{-i\theta}\mathrm{d}r\wedge\mathrm{d}\theta=\frac{1}{2\pi\sqrt{-1}}\int_{\Delta}\frac{\partial g_1(w)}{\partial\overline{w}}\frac{\mathrm{d}w\wedge\mathrm{d}\overline{w}}{w-z}$$
+		
+		最后$g_1$在$\partial\Delta$上取零,于是按照柯西积分公式得到$\frac{\partial}{\partial\overline{z}}f(z)=\frac{\partial}{\partial\overline{z}}f_1(z)=g_1(z)=g(z)$.
+	\end{proof}
+	\item 多元情况.设$g_1,\cdots,g_n$是紧支撑的光滑函数,满足$\frac{\partial g_i}{\partial\overline{z_j}}=\frac{\partial g_j}{\partial\overline{z_i}},\forall 1\le i,j\le n$.那么如下复函数是我们要找的一个解.
+	$$f(z)=\frac{1}{2\pi\sqrt{-1}}\int_{\mathbb{C}}\frac{g_1(\xi,z_2,\cdots,z_n)}{\xi-z_1}\mathrm{d}\xi\wedge\mathrm{d}\overline{\xi}$$
+	\begin{proof}
+		
+		首先$f$关于第一个变量做柯西积分公式,理应得到两项,按照紧支撑条件第一项是零,所以等式两边求$\overline{z_1}$的偏导得到$\frac{\partial f}{\partial\overline{z_1}}=g$.下面对$i\ge2$,我们有:
+		\begin{align*}
+			\frac{\partial f}{\partial\overline{z_i}}&=\frac{1}{2\pi\sqrt{-1}}\int_{\mathbb{C}}\frac{\frac{\partial g_1}{\partial\overline{z_i}}(\xi,z_2,\cdots,z_n)}{\xi-z_1}\mathrm{d}\xi\wedge\mathrm{d}\overline{\xi}\\&=\frac{1}{2\pi\sqrt{-1}}\int_{\mathbb{C}}\frac{\frac{\partial g_i}{\partial\overline{z_1}}(\xi,z_2,\cdots,z_n)}{\xi-z_1}\mathrm{d}\xi\wedge\mathrm{d}\overline{\xi}\\&=gi(z_1,z_2,\cdots,z_n)
+		\end{align*}
+	\end{proof}
+	\item 推论.设$n\ge2$,设$K\subseteq\mathbb{C}^n$是紧集,使得$\mathbb{C}^n-K$是连通的,如果$\mathrm{Supp}g_i\subseteq K$,那么存在解$f$满足$\mathrm{Supp}f\subseteq K$.
+	\begin{proof}
+		
+		按照构造$f$在$\mathbb{C}^n-K$上全纯,当$|z_2|$足够大时有$f\equiv0$,所以按照$\mathbb{C}^n-K$是连通的,由零点孤立性原理说明$\mathrm{Supp}f\subseteq K$.
+	\end{proof}
+\end{enumerate}
+
+Hartogs定理.
+\begin{enumerate}
+	\item Hartogs现象是指,在$n\ge2$时,如果开集链$U\subseteq V$满足一些条件,那么$U$上的全纯函数总能延拓到$V$上.这在一维情况是不成立的,一维时对于连通开集,总存在其上的全纯函数不能再延拓到更大开集上.
+	\item 定理内容.设$n\ge2$,设$U\subseteq\mathbb{C}^n$是开集,设$K\subseteq U$是紧集,使得$U-K$是连通的.那么对任意$U-K$上的全纯函数$f$,总可以全纯延拓到整个$U$上.
+	\begin{proof}
+		
+		首先可取被$U$支撑的光滑函数$\varphi$,使得它在$K$的某个开邻域上恒取1.记$v=(1-\varphi)f$,尽管$f$只定义在$U-K$上,但是在$K$上恒有$1-\varphi=0$,所以$v$可视为整个$U$上的光滑函数.那么$\overline{\partial}v$是$U$上的微分形式,并且它在$U$的边界上恒为零,因为$v$在$U$的边界附近恒等于$f$,是全纯的.所以$\overline{\partial}$可以零延拓到整个$\mathbb{C}^n$上.延拓后满足$\overline{\partial}^2v=0$,所以按照$\overline{\partial}$庞加莱引理,就存在整个$\mathbb{C}^n$上的光滑函数$w$,使得$\overline{\partial}w=\overline{\partial}v=-f\overline{\partial}\varphi$.我们就取$F=v-w$,那么$\overline{\partial}F=0$,于是$F$为$U$上的全纯函数.最后我们断言$U-K$上恒有$F=f$.首先我们的$w$可以要求在$\mathbb{C}^n-\mathrm{Supp}\varphi$的无界连通分支上取零(就是上面推论).这个无界连通分支一定会和$U$有交,因为$\mathrm{Supp}\varphi$是被$U$包含的紧集.于是$F$和$f$都是连通开集$U-K$上的全纯函数,使得它们在$U-K$的某个开集上一致,这就得到$F=f$.
+	\end{proof}
+    \item 推论.开集$U\subset\mathbb{C}^n,n\ge2$扣去一个点上的全纯函数总可以延拓为整个$U$上的全纯函数.这就没有奇点概念了.
+\end{enumerate}
+
+Weierstrass准备定理.
+\begin{enumerate}
+	\item 设$f(z_1,\cdots,z_n)$是$\mathbb{C}^n$某个开集上的全纯函数,记$w=(z_2,\cdots,z_n)$,用$f_w(z_1)$来表示$f(z_1,\cdots,z_n)$.一个关于$z_1$的Weierstrass多项式指的是形如$g(z_1,w)=z_1^d+\alpha_1(w)z_1^{d-1}+\cdots+\alpha_d(w)$的多项式,其中$\alpha_i(w)$定义在$\mathbb{C}^{n-1}$原点附近.
+	\item Weierstrass准备定理.设$f$是定义在$\mathbb{C}^n$原点附近的全纯函数,满足$f(0)=0$,并且$f$在$z_1$轴上不恒为零(按照上一条的记号,也即$f_0(z_1)\not\equiv0$).那么存在一个Weierstrass多项式$g(z_1,w)=g_w(z_1)$和一个定义在$\mathbb{C}^n$原点附近的全纯函数$h$,满足在原点附近有$f=gh$,并且有$h(0)\not=0$.另外满足这个性质的Weierstrass多项式$g$是唯一的.
+	\begin{proof}
+		
+		按照$f_0(z_1)$不恒为零,可以找到正数$\varepsilon_1$,使得$f_0(z_1)$在$\overline{B(0,\varepsilon_1)}$上的零点只有$z_1=0$.再按照连续性取正数$\varepsilon_2,\cdots,\varepsilon_n>0$,使得在$|z_1|=\varepsilon_1$和$|z_i|<\varepsilon_i,2\le i\le n$时总有$f(z_1,\cdots,z_n)\not=0$.
+		
+		\qquad
+		
+		固定$w$,用$a_1(w),\cdots,a_d(w)$表示$f_w(z_1)$在$B(0,\varepsilon_1)$的全部根,我们下面会证明这个$d$不依赖于$w$的选取,但是暂时我们假设$d$是关于$w$的变量.而且我们知道在$w=0$时有$a_1(0)=\cdots=a_d(0)=0$.下面记$g_w(z_1)=\prod_{i=1}^d(z_1-a_i(w))$,那么固定$w$的时候$f_w(z_1)$和$g_w(z_1)$具有相同的零点集,于是$h_w(z_1)=f_w(z_1)/g_w(z_1)$是关于$z_1$全纯的,并且$h(0)\not=0$.我们接下来只要证明$d$是不随$w$变化的,并且$g(z_1,w)=g_w(z_1)$和$h(z_1,w)=h_w(z_1)$都是关于$w$全纯的.
+		
+		\qquad
+		
+		我们知道$g_w(z_1)$做展开后的系数都是关于初等对称多项式$\sum_{i=1}^da_i(w)^k,k=1,\cdots,d$的多项式,所以问题归结为证明每个$\sum_{i=1}^da_i(w)^k,k=1,\cdots,d$是关于$w$全纯的.设$a$是$f_w(z_1)$的一个零点,那么$f_w(z_1)=\sum_{j=m}^{\infty}\alpha_j(z_1-a)^j$,于是$f'_w(z_1)=\sum_{j=m}^{\infty}j\alpha_j(z_1-a)^{j-1}$.结合$z_1^k=a^k+ka^{k-1}(z_1-a)+\cdots$,我们得到$\mathrm{Res}_{z_1=a}z_1^k\frac{f'_w(z_1)}{f_w(z_1)}=ma^k$,进而有:
+		$$\sum_{i=1}^da_i(w)^k=\frac{1}{2\pi i}\int_{|z_1|=\varepsilon_1}z_1^k\frac{f'_w(z_1)}{f_w(z_1)}\mathrm{d}z_1$$
+		
+		右侧被积函数是全纯的,所以积分函数是全纯的,这就说明$g(z_1,w)=g_w(z_1)$是关于$z_1,\cdots,z_n$的全纯函数.特别的,取$k=0$,那么这个等式左侧就是$d$本身,于是$f_w(z_1)$在$B(0,\varepsilon_1)$中的零点个数恒为$d$.再按照柯西积分公式有$h(z_1,w)=\frac{1}{2\pi i}\int_{|\xi|=\varepsilon_1}\frac{h(\xi,w)}{(\xi-z_1)}\mathrm{d}\xi$得到$h(z_1,w)$的全纯性.
+		
+		\qquad
+		
+		最后我们要解释$g$的唯一性:因为$h(0)\not=0$,我们不妨考虑原点的使得$h$恒不为零的附近.那么此时$f_w$和$g_w$总是具有相同的零点集,但是此时$g$必须是上面等式构造的形式.
+	\end{proof}
+\end{enumerate}
+
+黎曼存在性定理.
+\begin{enumerate}
+	\item 黎曼存在性定理.设$f$是某个开集$U\subseteq\mathbb{C}^n$上的全纯函数,记$Z(f)=\{z\in U\mid f(z)=0\}$.如果$g:U-Z(f)\to\mathbb{C}$是全纯的,并且在$Z(f)$上是局部有界的,那么$g$总可以唯一的延拓为$\widetilde{g}:U\to\mathbb{C}$.这件事在$n=1$的情况下就是说如果全纯函数在奇点附近是有界的,那么这是可去奇点.
+	\begin{proof}
+		
+		不妨设$U=B(0,\varepsilon)$,不妨设$Z(f)$不包含$U\cap\{(z_1,0,\cdots,0)\mid z_1\in\mathbb{C}\}$,否则我们可以适当做一个旋转变换.进而我们可以通过适当缩小$U$要求$f_0$限制在$U\cap\{(z_1,0,\cdots,0)\mid z_1\in\mathbb{C}\}$上的零点只有$z_1=0$.此时在$|z_1|=\varepsilon_1/2=\varepsilon/2$时就有$f_0(z_1)\not=0$.适当选取$\varepsilon_2,\cdots,\varepsilon_n>0$,我们可以要求在$|z_1|=\varepsilon_1/2$和$|z_i|<\varepsilon_i/2,2\le i\le n$的时候有$f(z)\not=0$.换句话讲,只要$w=(z_2,\cdots,z_n)$满足$|z_i|<\varepsilon_i/2,2\le i\le n$,那么$f_w(z_1)$在$B(0,\varepsilon_1/2)$的边界上就没有零点.
+		
+		\qquad
+		
+		按照条件,固定$w$时$g_w(z_1)$在$B(0,\varepsilon_1/2)-Z(f_w)$上的限制是有界的,于是$g_w$可以延拓为$B(0,\varepsilon_1/2)$上的全纯函数$\widetilde{g}_w$.但是按照柯西积分公式就有:
+		$$\widetilde{g}_w(z_1)=\frac{1}{2\pi i}\int_{\partial B(0,\varepsilon_1/2)}\frac{g_w(\xi)}{\xi-z_1}\mathrm{d}\xi$$
+		
+		在这个被积分的边界上$f_w(\xi)\not\equiv0$,于是被积分函数是全纯的,于是得到的积分函数也是全纯的,于是我们证明了$\widetilde{g}_w(z_1)=\widetilde{g}(z_1,w)$的全纯性.
+	\end{proof}
+    \item 我们称一个子集是薄子集(thin subset),如果他局部上包含在一个非平凡全纯函数的零点集中.于是上一条证明了定义在一个薄子集的补集上的局部有界的全纯函数总可以延拓到这个薄子集上.
+\end{enumerate}
+
+反函数定理和隐函数定理.
+\begin{enumerate}
+	\item 设$U\subseteq\mathbb{C}^m$是开子集,一个映射$f:U\to V\mathbb{C}^n$称为全纯映射或者解析映射,如果它的分量函数$f_1,\cdots,f_n$都是全纯函数.如果一个全纯映射$f:U\to V$是双射,并且逆映射也是全纯的,就称$f$是全纯等价(biholomorphic).
+	\item 设$U\subseteq\mathbb{C}^n$是开集,设$F:U\to\mathbb{C}^n$是$\mathrm{C}^1$的映射,那么可记$F(z)=(f_1(z),\cdots,f_m(z))$.那么$F$是全纯映射定义为每个$f_i$是$U$上的全纯函数.定义$F$的复Jacobian矩阵为$\left(\frac{\partial f_i}{\partial z_j}\right)$.一个点$p\in U$称为正则的,如果$\det\left(\frac{\partial f_i}{\partial z_j}\right)(p)\not=0$.如果把$f$视为实映射,在实坐标$(x^i,y^j)$下的Jacobian矩阵称为实Jacboian矩阵.需要加以区分时我们用$J_{\mathbb{C}}(f)$和$J_{\mathbb{R}}(f)$分别表示复Jacobian矩阵和实Jacobian矩阵.如果不加以说明,$J(f)$总表示复Jacobian矩阵.
+	\item 引理.设$f:U\subseteq\mathbb{C}^n\to\mathbb{C}^n$是全纯映射,我们断言$J_{\mathbb{R}}(f)=|J_{\mathbb{C}}(f)|^2$.
+	\begin{proof}
+		
+		如果直接考虑矩阵,记$f_i=u_i+\sqrt{-1}v_i$得到:
+		$$\left|\begin{array}{cc}\left(\frac{\partial u_i}{\partial x_j}\right)&\left(\frac{\partial u_i}{\partial y_j}\right)\\\left(\frac{\partial v_i}{\partial x_j}\right)&\left(\frac{\partial v_i}{\partial y_j}\right)\end{array}\right|=\left|\begin{array}{cc}A&-B\\B&A\end{array}\right|=|\det(A+\sqrt{-1}B)|^2=\left|\det\left(\frac{\partial f_i}{\partial z_j}\right)\right|^2$$
+		
+		如果从微分形式的角度看,取$\Omega=\mathrm{d}x^1\wedge\mathrm{d}y^1\wedge\cdots\wedge\mathrm{d}x^n\wedge\mathrm{d}y^n=\left(\frac{\sqrt{-1}}{2}\right)^n\mathrm{d}z_1\wedge\mathrm{d}\overline{z_1}\wedge\cdots\wedge\mathrm{d}z_n\wedge\mathrm{d}\overline{z_n}$.考虑回拉$f^*$,按照定义有:
+		\begin{align*}
+			J_{\mathbb{R}}(f)\Omega=f^*\omega&=\pm\left(\frac{\sqrt{-1}}{2}\right)^nf^*(\mathrm{d}z_1\wedge\cdots\wedge\mathrm{d}z_n)\wedge f^*(\mathrm{d}\overline{z_1}\wedge\cdots\wedge\mathrm{d}\overline{z_n})\\&=\left(\frac{\sqrt{-1}}{2}\right)^n(\mathrm{d}f_1\wedge\cdots\wedge\mathrm{d}f_n)\wedge(\mathrm{d}\overline{f_1}\wedge\cdots\wedge\mathrm{d}\overline{f_n})\\&=\pm\left(\frac{\sqrt{-1}}{2}\right)^nJ_{\mathbb{C}}(f)\overline{J_{\mathbb{C}}(f)}\mathrm{d}z_1\wedge\cdots\wedge\mathrm{d}z_n\wedge\mathrm{d}\overline{z_1}\wedge\cdots\wedge\mathrm{d}\overline{z_n}\\&=\left(\frac{\sqrt{-1}}{2}\right)^n|J_{\mathbb{C}}(f)|^2\mathrm{d}z_1\wedge\mathrm{d}\overline{z_1}\wedge\cdots\wedge\mathrm{d}z_n\wedge\mathrm{d}\overline{z_n}\\&=|J_{\mathbb{C}}(f)|^2\Omega
+		\end{align*}
+	\end{proof}
+	\item 反函数定理.设$F:U\subseteq\mathbb{C}^n\to\mathbb{C}^n$是全纯映射,设$p\in U$是$F$的正则点(此为Jacobian非零的点),那么存在$p$的开邻域$V$和$F(p)$的开邻域$W$使得$F$限制为$V\to W$的映射是一个全纯等价(也即$F^{-1}$也是全纯的).
+	\begin{proof}
+		
+		按照引理,$F$在点$p$的实Jacobian行列式也非零,所以按照实版本的反函数定理,局部上存在光滑的逆映射$F^{-1}$.最后只需验证它是全纯的.设$G=F^{-1}$,那么$F(G(z))=z$,如果记$G=(g_1,\cdots,g_n)$,那么$f_i(g_1(z),\cdots,g_n(z))=z_i$,两边求$\overline{z_i}$的导数,得到$\frac{\partial f_i}{\partial z_k}\frac{\partial g_k}{\partial\overline{z_k}}=0$,这说明矩阵相乘是零矩阵:$\left(\frac{\partial f_i}{\partial z_k}\right)\left(\frac{\partial g_k}{\partial\overline{z_j}}\right)=0$,但是前一个矩阵在$p$附近是可逆矩阵,所以后一个矩阵恒为零,也即每个$g_k$都是全纯的,于是$G$是全纯的.
+	\end{proof}
+    \item 隐函数定理.设$f:U\subseteq\mathbb{C}^m\to\mathbb{C}^n$的全纯映射.设$m\ge n$,记坐标$\mathbb{C}^m=\{(\xi,\eta)\mid\xi\in\mathbb{C}^n,\eta\in\mathbb{C}^{m-n}\}$.设$n\times m$矩阵$\left(\frac{\partial f_i}{\partial z_j}\right)$在点$p=(a,b)\in\mathbb{C}^m$是行满秩的,不失一般性可设$\left(\frac{\partial f_i}{\partial z_j}\right)_{1\le i,j\le n}(p)$是满秩的.那么存在$a\in\mathbb{C}^n$的开邻域$V$和$b\in\mathbb{C}^{m-n}$的开邻域$W$,以及一个全纯映射$g:W\to V$,使得如果$(\xi,\eta)\in V\times W$,那么$f(\xi,\eta)=0$当且仅当$\eta=g(\xi)$.
+    \item 我们知道实情况下一个双射微分同胚的逆映射未必是微分同胚,但是对于复情况这种情况总不会发生:如果$f:U\to V$是$\mathbb{C}^n$的两个开子集之间的双射全纯映射,那么对任意$z\in U$都有$J_{\mathbb{C}}(f)(z)\not=0$.特别的,结合反函数定理就得到$f$是全纯等价映射.
+    \begin{proof}
+    	
+    	我们来对$n$归纳.对于$n=1$,设$f'$存在零点$z_0$,用$f(z+z_0)-f(z_0)$替代$f$,我们可以不妨设$f(0)=f'(0)=0$.于是$f$的幂级数展开为$f(z)=z^dh(z)$,其中$d\ge2$并且$h(0)\not=0$.因为这里$h(z)$在$z=0$附近不为零,所以在$z=0$的足够小的开邻域上我们可以选取一个$d$次根分支$g(z)=\sqrt[d]{h(z)}$.记$\varphi(z)=zg(z)$,于是在$z=0$附近有$f(z)=\varphi(z)^d$.按照开映射定理,存在$\varepsilon>0$使得$\varphi(B(0,\varepsilon))$是开集,所以它包含了某个$B(0,2\delta)$.于是我们可以找到$z_1,z_2\in B(0,\varepsilon)$使得$\varphi(z_1)=\delta$和$\varphi(z_2)=\delta\exp\left(\frac{2\pi i}{k}\right)$,于是$f(z_2)=f(z_1)$,但是$z_1\not=z_2$,这和双射矛盾.
+    	
+    	\qquad
+    	
+    	下面设$n\ge2$,假设对$k<n$命题都已经得证.假设有$z\in U$使得$\det J(f)(z)=0$,我们断言这导致$J(f)(z)=0$:如果$\mathrm{rank}J(f)(z)=k\ge1$,可以不妨设$\left(\frac{\partial f_i}{\partial z_j}(z)\right)_{1\le i,j\le k}$是可逆的.按照反函数定理,在$z$的附近有$\widetilde{z}_i=f_i(z),1\le i\le k$,$\widetilde{z}_i=z_i,k+1\le i\le n$就构成了局部坐标卡.于是$f$把$U'=\{\overline{z}\mid\overline{z}_i=0,\forall1\le i\le k\}\cap U$双射的映射到$\{w\mid w_i=0,\forall1\le i\le k\}\cap V$.但是按照Jacobian矩阵的秩约定为$k$,这个限制映射理应在$z\in U'$处奇异,这就和归纳假设的$n-k$的情况矛盾.于是$J(f)(z)$是零矩阵,完成断言的证明.
+    	
+    	\qquad
+    	
+    	设$\det J(f)(z)=0$,考虑全纯函数$g=\det J(f):U\to\mathbb{C}$,我们来证明存在$\mathbb{C}^{n-1}$的开子集$W$满足$W\subseteq Z(g)$,一旦这成立,上一段的断言告诉我们$f\mid_W:W\to\mathbb{C}^n$的Jacobian矩阵处处为零,导致它是常值函数,这和$f$是单射矛盾.
+    	
+    	\qquad
+    	
+    	证明这件事要用一点下文的定理.首先$g$可以视为$\mathscr{O}_{\mathbb{C}^n,0}$中的元,而这个环是UFD,于是有唯一分解$g=\prod_ig_i^{n_i}$,于是$Z(g)=\cup_iZ(g_i)$.按照$g_i$是不可约的,下文会证明$Z(g_i)$包含了一个非奇异点,于是按照隐函数定义,$Z(g_i)$就包含了$\mathbb{C}^{n-1}$的一个开集$W$,进而有$W\subseteq Z(g_i)\subseteq Z(g)$.    	
+    \end{proof}
+\end{enumerate}
+
+解析层.我们用$\mathscr{O}_{\mathbb{C}^n}$表示$\mathbb{C}^n$上的全纯函数层.对于$z\in\mathbb{C}^n$,用$\mathscr{O}_{\mathbb{C}^n,z}$表示对应的局部环.
+\begin{enumerate}
+	\item 按照定义,$\mathscr{O}_{\mathbb{C}^n,z}$表示全体$(U,f)$的等价类,其中$U$是$z$的开邻域$f$是$U$上的全纯函数.所以做平移就能看出不同点的局部环总是同构的.另外$\mathscr{O}_{\mathbb{C}^n,z}$一定是局部环,它的唯一极大理想由满足$f(0)=0$的全纯函数$f$构成.
+	\item 引理.用我们这里的概念,Weierstrass准备定理就是在讲,在适当选取局部坐标后,$f\in\mathscr{O}_{\mathbb{C}^n,z}$可以唯一的表示为$f=gh$,其中$h\in\mathscr{O}_{\mathbb{C}^n,z}^*$是单位,而$g\in\mathscr{O}_{\mathbb{C}^{n-},z}[z_1]$是Weierstrass多项式.
+	\item 尽管按照定义$f\in\mathscr{O}_{\mathbb{C}^n,0}$不是一个函数,而是一个函数族,但是我们仍然可以讨论它的零点集.我们称点$0\in\mathbb{C}^n$处的集合的芽(germ)是指$\mathbb{C}^n$的子集族上的等价类,两个子集$X,Y$称为等价的,如果对$0\in\mathbb{C}^n$的任意开邻域$U$都有$U\cap X=U\cap Y$.对于$f\in\mathscr{O}_{\mathbb{C}^n,0}$,我们就定义零点集$Z(f)$是$f$的任意代表元的零点集所在的关于0的芽.在这个定义下,我们仍然可以讨论集合的芽的交或者并,并且和代表元的零点集的交或者并是一致的.
+	\item $\mathscr{O}_{\mathbb{C}^n,z}$是UFD.
+	\begin{proof}
+		
+		我们只需证明$\mathscr{O}_{\mathbb{C}^n,0}$是UFD,为此来对$n$归纳.对于$n=0$,我们有$\mathscr{O}_{\mathbb{C}^n,0}=\mathbb{C}$是域,从而当然是UFD.下面假设$\mathscr{O}_{\mathbb{C}^{n-1},0}$是UFD,任取$f\in\mathscr{O}_{\mathbb{C}^n,0}$,按照Weierstrass准备定理(做旋转变换使得$f$在$z_1$轴不恒为零),就有$f=gh$,其中$g\in\mathscr{O}_{\mathbb{C}^{n-1},0}[z_1]$和$h\in\mathscr{O}_{\mathbb{C}^n,0}^*$是单位.而这里从$\mathscr{O}_{\mathbb{C}^{n-1},0}$是UFD得到$\mathscr{O}_{\mathbb{C}^{n-1},0}[z_1]$也是UFD,所以问题归结为证明$\mathscr{O}_{\mathbb{C}^{n-1},0}[z_1]$中的不可约多项式也是$\mathscr{O}_{\mathbb{C}^n,0}$中的不可约元.另外按照高斯引理,$\mathscr{O}_{\mathbb{C}^{n-1},0}[z_1]$中的不可约多项式在相差一个单位的意义下一定是首一的(也即Weierstrass多项式).
+		
+		\qquad
+		
+		设$g$是Weierstrass多项式,并且在$\mathscr{O}_{\mathbb{C}^{n-1},0}[z_1]$中不可约.假设$g$在$\mathscr{O}_{\mathbb{C}^n,0}$中是可约的,那么有$g=f_1f_2$,其中$f_1,f_2\in\mathscr{O}_{\mathbb{C}^n,0}$都不是单位.那么按照Weierstrass准备定理,就有分解$f_1=g_1h_1$和$f_2=g_2h_2$,其中$g_1,g_2$是关于$z_1$的Weierstrass多项式,而$h_1,h_2$是$\mathscr{O}_{\mathbb{C}^n,0}$的单位.进而有$g=(g_1g_2)(h_1h_2)$,按照Weierstrass准备定理中分解的唯一性,就有$g=g_1g_2$,但是这就和$g$的不可约性矛盾.
+	\end{proof}
+    \item 设$g\in\mathscr{O}_{\mathbb{C}^n,0}$是关于$z_1$的Weierstrass多项式,那么$g$是$\mathscr{O}_{\mathbb{C}^n,0}$的不可约元当且仅当它是$\mathscr{O}_{\mathbb{C}^{n-1},0}[z_1]$的不可约元.
+    \begin{proof}
+    	
+    	必要性是因为$\mathscr{O}_{\mathbb{C}^{n-1},0}[z_1]$是$\mathscr{O}_{\mathbb{C}^n,0}$的子环.对于充分性,假设$g$是不可约的Weierstrass多项式,假设$g$是$\mathscr{O}_{\mathbb{C}^n,0}$中的可约元,那么有$g=g_1g_2$,其中$g_1,g_2\in\mathscr{O}_{\mathbb{C}^n,0}$都不是单位,按照Weierstrass准备定理,有分解$g_i=\widetilde{g_i}h_i$,其中$\widetilde{g_i}$是Weierstrass多项式,而$h_i$是$\mathscr{O}_{\mathbb{C}^n,0}$中的单位元,那么按照Weierstrass准备定理中的唯一性,就有$g=\widetilde{g_1}\widetilde{g_2}$和$h_1h_2=1$,但是$g$是$\mathscr{O}_{\mathbb{C}^{n-1},0}[z_1]$中的不可约元,迫使$\widetilde{g_1}$或者$\widetilde{g_2}$是单位,从而它也是$\mathscr{O}_{\mathbb{C}^n,0}$的单位,换句话讲$g_1,g_2$中有一个是单位.
+    \end{proof}
+    \item Weierstrass带余除法.设$f\in\mathscr{O}_{\mathbb{C}^n,0}$和$g\in\mathscr{O}_{\mathbb{C}^{n-1},0}[z_1]$是$d$次Weierstrass多项式.那么存在次数$<d$的Weierstrass多项式$r\in\mathscr{O}_{\mathbb{C}^{n-1},0}[z_1]$以及$h\in\mathscr{O}_{\mathbb{C}^n,0}$满足$f=gh+r$,并且这里$h$和$r$是唯一的.
+    \begin{proof}
+    	
+    	证明唯一性:设$f=gh_1+r_1=gh_2+r_2$都满足命题中的要求,并且$h_1\not=h_2$.那么有$(r_1-r_2)=g(h_2-h_1)$.记$w=(z_2,\cdots,z_n)$,记$g_w(z_1)=g(z_1,z_2,\cdots,z_n)$.取$w=0$,那么$g_w$具有$d$个计重数意义下的零点,于是在$w=0$附近$g_w$总有$d$个计重数意义下的零点(这件事在Weierstrass准备定理的证明中解释过).于是在$w=0$附近有$(r_1-r_2)_w$总至少有$d$个零点,但是固定$w$的时候$(r_1-r_2)_w$次数$<d$,这个矛盾说明必须有$h_1=h_2$,进而$r_1=r_2$.
+    	
+    	\qquad
+    	
+    	证明存在性:设$\varepsilon_1,\cdots,\varepsilon_n>0$,满足对$|\xi|=\varepsilon_1$和$|z_i|<\varepsilon_i,2\le i\le n$时有$g_w(\xi)\not=0$.取$|z_i|<\varepsilon_i,1\le i\le n$上的函数:
+    	$$h(z_1,\cdots.z_n)=\frac{1}{2\pi i}\int_{|\xi|=\varepsilon_1}\frac{f_w(\xi)}{g_w(\xi)(\xi-z_1)}\mathrm{d}\xi$$
+    	
+    	这里被积函数是全纯的,所以积分函数是全纯的.下面只需证明$r=f-gh$是次数$<d$的关于$z_1$的Weierstrass多项式.记$g_w(z_1)=z_1^d+\alpha_1(w)z_1^{d-1}+\cdots+\alpha_d(w)$,那么有:
+    	\begin{align*}
+    		&r(z_1,\cdots,z_n)\\
+    		=&\frac{1}{2\pi i}\int_{|\xi|=\varepsilon_1}\frac{f_w(\xi)}{\xi-z_1}\mathrm{d}\xi-\frac{g_w(z_1)}{2\pi i}\int_{|\xi|=\varepsilon_1}\frac{f_w(\xi)}{g_w(\xi)(\xi-z_1)}\mathrm{d}\xi\\
+    		=&\frac{1}{2\pi i}\int_{|\xi|=\varepsilon_1}\frac{f_w(\xi)(g_w(\xi)-g_w(z_1))}{g_w(\xi)(\xi-z_1)}\\
+    		=&\frac{1}{2\pi i}\int_{|\xi|=\varepsilon_1}\frac{f_w(\xi)}{g_w(\xi)}\left(\frac{(\xi^d-z_1^d)+\alpha_1(w)(\xi^{d-1}-z_1^{d-1})+\cdots}{(\xi-z_1)}\right)\mathrm{d}\xi\\
+    		=&\frac{1}{2\pi i}\int_{|\xi|=\varepsilon_1}\frac{f_w(\xi)}{g_w(\xi)}\left(z_1^{d-1}\beta_1(\xi,w)+z_1^{d-2}\beta_2(\xi,w)\right)\mathrm{d}\xi
+    	\end{align*}
+    
+        这个积分得到次数$<d$的关于$z_1$的Weierstrass多项式.
+    \end{proof}
+    \item $\mathscr{O}_{\mathbb{C}^n,z}$是诺特环.
+    \begin{proof}
+    	
+    	我们要证明的是$\mathscr{O}_{\mathbb{C}^n,0}$的每个理想都是有限生成的,为此我们来对$n$归纳.对于$n=1$这个环就是$\mathbb{C}$,域当然是诺特的.下面设$\mathscr{O}_{\mathbb{C}^{n-1},0}$是诺特环,于是希尔伯特基定理告诉我们$\mathscr{O}_{\mathbb{C}^{n-1},0}[z_1]$也是诺特环.任取非零理想$I\subseteq\mathscr{O}_{\mathbb{C}^n,0}$,任取$0\not=f\in I$,按照Weierstrass准备定理(做旋转变换使得定理条件满足),就有$f=gh$,其中$g\in\mathscr{O}_{\mathbb{C}^{n-1},0}[z_1]$是Weierstrass多项式,而$h\in\mathscr{O}_{\mathbb{C}^n,0}^*$是单位.那么$g\in I$.按照归纳假设有$I\cap\mathscr{O}_{\mathbb{C}^{n-1},0}[z_1]$是$\mathscr{O}_{\mathbb{C}^{n-1},0}[z_1]$的有限生成理想,记$\{g_1,\cdots,g_k\}$是一组生成元.
+    	
+    	\qquad
+    	
+    	下面任取$\widetilde{f}\in I$,按照Weierstrass带余除法,就存在$\widetilde{h}\in\mathscr{O}_{\mathbb{C}^n,0}$和次数$<d$的关于$z_1$的Weierstrass多项式$r$满足$\widetilde{f}=g\widetilde{h}+r$.那么$r\in I$,进而$r\in I\cap\mathscr{O}_{\mathbb{C}^{n-1},0}[z_1]$,于是存在$a_i\in\mathscr{O}_{\mathbb{C}^{n-1},0}[z_1]\subseteq\mathscr{O}_{\mathbb{C}^n,0}$满足$\widetilde{f}=g\widetilde{h}+\sum_{i=1}^ka_ig_i$,于是$I$被$\{g,g_1,\cdots,g_k\}$生成,完成证明.
+    \end{proof}
+    \item 推论.设$g\in\mathscr{O}_{\mathbb{C}^n,0}$是不可约元,设$f\in\mathscr{O}_{\mathbb{C}^n,0}$在$Z(g)$上恒取零,那么有$g\mid f$,也即存在$h\in\mathscr{O}_{\mathbb{C}^n,0}$满足$f=gh$.
+    \begin{proof}
+    	
+    	按照Weierstrass准备定理,我们可以设$g$是关于$z_1$的$d$次Weierstrass多项式.再按照Weierstrass带余除法,存在$h\in\mathscr{O}_{\mathbb{C}^n,0}$和次数$<d$的关于$z_1$的Weierstrass多项式$r$满足$f=gh+r$.按照条件就有$r_w$在$g_w$的零点集上取零.所以如果对每个$w$都有$g_w$的零点的重数都是1,那么$r_w$就有$d$个不同零点,迫使$r_w\equiv0$,从而结论得证.下面设$S$由点$w\in\mathbb{C}^{n-1}$构成,使得$g_w$存在零点的重数$>1$.一旦我们证明存在非平凡的全纯函数$\gamma\in\mathscr{O}_{\mathbb{C}^n,0}$使得$S$包含在$\gamma$的零点集中,按照非平凡全纯函数的零点集的补集一定是稠密的,就得到$r_w$在$w$取一个稠密集的时候$\equiv0$,这就得到总有$r_w\equiv0$.
+    	
+    	\qquad
+    	
+    	按照$g$是不可约元,并且$\frac{\partial g}{\partial z_1}$的次数是$d-1$,我们可以找到$h_1,h_2\in\mathscr{O}_{\mathbb{C}^{n-1},0}[z_1]$使得$h_1g+h_2\frac{\partial g}{\partial z_1}$不含$z_1$(或者说它是$\mathscr{O}_{\mathbb{C}^{n-1},0}[z_1]$中的非零常数),把它记作$\gamma$,那么如果$w\in\mathbb{C}^{n-1}$满足$g_w$的零点$\xi$的重数$>1$,那么有$\gamma(w)=h_1(\xi,w)g_w(\xi)+h_2(\xi,w)\frac{\partial g}{\partial z_1}(\xi)=0$,于是$S$落在非常值全纯函数$\gamma$的零点集中,完成证明.
+    \end{proof}
+    \item 推论.设$g\in\mathscr{O}_{\mathbb{C}^n,0}$是不可约元,我们断言$Z(g)=g^{-1}(0)$中存在$g$的非奇异点.特别的,如果$g\in\mathscr{O}_{\mathbb{C}^n,0}$不要求是不可约的,设它有唯一分解$g=\prod_ig_i^{n_i}$,其中$g_i$是两两互素的不可约元,此时$Z(g)$中未必存在$g$非奇异点,但是每个$Z(g_i)$中都存在$g_i$非奇异点.
+    \begin{proof}
+    	
+    	做Weierstrass准备定理的展开$g=\widetilde{g}h$,其中$\widetilde{g}$是次数$d$的关于$z_1$的Weierstrass多项式,而$h$是$\mathscr{O}_{\mathbb{C}^n,0}$中的单位.于是有$Z(g)=Z(\widetilde{g})$.另外按照$\frac{\partial g}{\partial z_i}(z)=\frac{\partial\widetilde{g}}{\partial z_i}(z)h(z),\forall z\in Z(g)$,于是$Z(g)=Z(\widetilde{g})$中的$g$非奇异点和$\widetilde{g}$非奇异点是一致的.综上我们不妨设$g$本身是一个不可约的Weierstrass多项式.那么按照$\frac{\partial g}{\partial z_1}$不整除$g$,上一条告诉我们$\frac{\partial g}{\partial z_1}$不会在整个$Z(g)$上取零,这就导致$Z(g)$中存在$g$非奇异点.
+    \end{proof}
+\end{enumerate}
+
+解析簇.设$U\subseteq\mathbb{C}^n$是开子集,一个闭子集$X\subseteq U$称为解析簇,如果对任意$x\in X$,都存在它在$U$中的开邻域$V$以及全纯函数$f_1,\cdots,f_k:V\to\mathbb{C}$,使得$X\cap V=Z(f_1,\cdots,f_k)$.
+\begin{enumerate}
+	\item 一个关于$0\in\mathbb{C}^n$的集合的芽$X$称为解析芽,如果存在$f_1,\cdots,f_k\in\mathscr{O}_{\mathbb{C}^n,0}$使得$X=Z(f_1,\cdots,f_k)$(我们解释过局部环中的函数的零点集定义为集合的芽).于是如果$X$是解析簇,那么对任意$x\in X$,都有$X$是关于$x\in\mathbb{C}^n$的解析芽.
+	\item 映射$I(-)$.设$X\subseteq\mathbb{C}^n$是原点处的集合芽,那么$I(X)=\{f\in\mathscr{O}_{\mathbb{C}^n,0}\mid X\subseteq Z(f)\}$构成了$\mathscr{O}_{\mathbb{C}^n,0}$的理想.我们有$I(X)=I(\overline{X})$.并且这个映射是反序的:如果$X_1\subseteq X_2$,那么$I(X_2)\subseteq I(X_1)$.
+	\item 映射$Z(-)$.设$S\subseteq\mathscr{O}_{\mathbb{C}^n,0}$是子集,那么$Z(S)$是解析簇.并且如果记$S$生成的理想是$\mathfrak{a}$,那么$Z(S)=Z(\mathfrak{a})$.并且这个映射是反序的:如果$\mathfrak{a}_1\subseteq\mathfrak{a}_2$,那么$Z(\mathfrak{a}_2)\subseteq Z(\mathfrak{a}_1)$.另外如果$\mathfrak{a}_1,\mathfrak{a}_2$是$\mathscr{O}_{\mathbb{C}^n,0}$的理想,那么$Z(\mathfrak{a}_1\mathfrak{a}_2)=Z(\mathfrak{a}_1)\cup Z(\mathfrak{a}_2)$和$Z(\mathfrak{a}_1+\mathfrak{a}_2)=Z(\mathfrak{a}_1)\cap Z(\mathfrak{a}_2)$.
+	\item 这两个映射满足二次复合都使得点集变大:如果$X$是原点处的集合芽,那么$X\subseteq Z(I(X))$;如果$S\subseteq\mathscr{O}_{\mathbb{C}^n,0}$是子集,那么$S\subseteq I(Z(S))$.
+	\item 如果$X$是原点的解析芽,那么$Z(I(X))=X$.
+	\begin{proof}
+		
+		按照定义存在$f_1,\cdots,f_k\in\mathscr{O}_{\mathbb{C}^n,0}$使得$X=Z(f_1,\cdots,f_k)$,于是$f_1,\cdots,f_k\in I(X)$,于是$Z(I(X))\subseteq Z(f_1,\cdots,f_k)=X$.
+	\end{proof}
+    \item 一个解析芽$X$称为不可约的,如果从$X=X_1\cup X_2$,其中$X_1,X_2$是解析芽,总能推出$X=X_1$或者$X=X_2$.那么一个解析芽$X$是不可约的当且仅当$I(X)\subseteq\mathscr{O}_{\mathbb{C}^n,0}$是素理想.
+    \begin{proof}
+    	
+    	一方面如果$X$是不可约的,设$f_1f_2\in I(X)$,那么有$X=(X\cap Z(f_1))\cup(X\cap Z(f_2))$,于是有$X=X\cap Z(f_1)$或者$X=X\cap Z(f_2)$,于是$f_1$或者$f_2$在$I(X)$中,于是$I(X)$是素理想.
+    	
+    	\qquad
+    	
+    	反过来设$I(X)$是素理想,设$X=X_1\cup X_2$,其中$X_1,X_2$是解析芽,假设$X\not=X_1$且$X\not=X_2$,那么$I(X)\subsetneqq I(X_1)$和$I(X)\subsetneqq I(X_2)$,于是可以取$f_1\in I(X_1)-I(X)$和$f_2\in I(X_2)-I(X)$.但是$f_1f_2\in I(X)$,这就和$I(X)$是素理想矛盾.
+    \end{proof}
+    \item 推论.设$f\in\mathscr{O}_{\mathbb{C}^n,0}$,那么$Z(f)$是不可约的当且仅当存在不可约的$g\in\mathscr{O}_{\mathbb{C}^n,0}$使得$f=g^k$.
+    \begin{proof}
+    	
+    	充分性是因为从$f=g^k$得到$Z(f)=Z(g)$,于是归结为证明$I(Z(g))$是素理想.但是如果$h\in I(Z(g))$,我们解释过这导致$g\mid h$,于是$I(Z(g))=(g)$是素理想.必要性是因为如果记唯一分解$f=\prod_ig_i^{n_i}$,那么$Z(f)=\cup_iZ(g_i)$,这是不可约的只可能有$f=g^k$.
+    \end{proof}
+    \item 为了证明解析版本的零点定理,我们需要如下定理:设$X\subseteq\mathbb{C}^n$是关于零点的不可约解析芽,记素理想$I(X)$为$\mathfrak{p}$.那么存在局部坐标$\{z_1,\cdots,z_n\}$,存在一个正整数$1\le d\le n$,使得投影映射$(z_1,\cdots,z_n)\mapsto(z_{n-d+1},\cdots,z_n)$诱导了集合芽之间的满射$\pi:X\to\mathbb{C}^d$(芽之间的满射只要求在原点足够小附近它是满射),并且诱导的环同态$\mathscr{O}_{\mathbb{C}^d,0}\to\mathscr{O}_{\mathbb{C}^n,0}/\mathfrak{p}$是有限的整的环扩张.
+    \item 我们不证明这个定理,但是我们来解释下在$\mathfrak{p}$是主的素理想并且$d=n-1$时这件事基本上就是Weierstrass准备定理.记$\mathfrak{p}=(g)$,那么$g\in\mathscr{O}_{\mathbb{C}^n,0}$是不可约元,此时$X=Z(g)$.按照Weierstrass准备定理,我们不妨设$g$是$d$次的Weierstrass多项式.任取$f\in\mathscr{O}_{\mathbb{C}^n,0}$,那么有带余除法$f=gh+r$,其中$h\in\mathscr{O}_{\mathbb{C}^n,0}$,而$r$是次数为$e<d$的Weierstrass多项式.于是在$\mathrm{mod}\mathfrak{p}$下就有$f\in\sum_{i=0}^ez_1^i\mathscr{O}_{\mathbb{C}^{n-1},0}/\mathfrak{p}$.这件事说明$\mathscr{O}_{\mathbb{C}^n,0}/\mathfrak{p}$是有限$\mathscr{O}_{\mathbb{C}^{n-1},0}$模,并且这个环扩张是整的.最后$Z(g)\to\mathbb{C}^{n-1}$是作为芽的满射是因为在$w$足够靠近原点的时候$g_w$总有零点.
+    \item 解析版本的零点定理.设$\mathfrak{a}\subseteq\mathscr{O}_{\mathbb{C}^n,0}$是理想,那么$I(Z(\mathfrak{a}))=\sqrt{a}$.
+    \begin{proof}
+    	
+    	一方面必然有$\sqrt{a}\subseteq I(Z(\mathfrak{a}))$,于是我们只需证明$I(Z(\mathfrak{a}))\subseteq\sqrt{\mathfrak{a}}$.但是我们知道一个理想的根理想就是包含这个理想的所有素理想的交,于是归结为证明对任意$\mathfrak{a}\subseteq\mathfrak{p}$的素理想$\mathfrak{p}$,都有$I(Z(\mathfrak{a}))\subseteq\mathfrak{p}$.于是一旦我们证明了对素理想$\mathfrak{p}$总有$\mathfrak{p}=\sqrt{\mathfrak{p}}=I(Z(\mathfrak{p}))$,那么得到$I(Z(\mathfrak{a}))\subseteq I(Z(\mathfrak{p}))=\mathfrak{p}$.综上我们归结为证明如果$\mathfrak{p}\subseteq\mathscr{O}_{\mathbb{C}^n,0}$是素理想,那么$I(Z(\mathfrak{p}))\subseteq\mathfrak{p}$.
+    	
+    	\qquad
+    	
+    	任取$f\in I(Z(\mathfrak{p}))$,我们要证明的是$f\in\mathfrak{p}$.按照上面提到的定理,在适当选取坐标之后(换句话讲在做一个全纯等价之后),可以要求$f$在$\mathscr{O}_{\mathbb{C}^n,0}/\mathfrak{p}$中的像$\widetilde{f}$满足一个$\mathscr{O}_{\mathbb{C}^d,0}$系数的不可约首一多项式$\widetilde{f}^k+a_1(w)\widetilde{f}^{k-1}+\cdots+a_k(w)=0$,其中$w=(z_{n-d+1},\cdots,z_n)$.由于$f$在$Z(\mathfrak{p})$上处处取零,于是这里$a_k(w)$也在$Z(\mathfrak{p})$上处处取零,但是按照上面定理有$Z(\mathfrak{p})\to\mathbb{C}^d$是芽的满射,所以在原点足够小的附近有$a_k(w)\equiv0$.在$k\ge2$时这件事和$\widetilde{f}$满足不可约首一多项式矛盾,所以只能有$k=1$,也即$\widetilde{f}=0$,也即$f\in\mathfrak{p}$.
+    \end{proof}
+    \item 关于维数.设$X$是原点处的不可约解析芽,它的维数定义为它的不可约解析子芽的严格包含链的长度的上确界,这等价于Krull维数$\dim(\mathscr{O}_{\mathbb{C}^n,0}/I(X))$.
+    \begin{enumerate}[(1)]
+    	\item 这里的维数就是我们在证明解析版本的零点定理时候给出的定理中的$d$.【证明$\dim\mathscr{O}_{\mathbb{C}^n,z}=n$】
+    	\item 我们知道UFD的高度1素理想总是主理想,于是原点处的解析芽$\mathbb{C}^n$的余维数1的不可约解析芽一定是$\mathscr{O}_{\mathbb{C}^n,0}$的某个不可约全纯函数的零点集(不可约超曲面).
+    \end{enumerate}
+    \item 关于亚纯函数.我们知道一元情况下,开集$U\subseteq\mathbb{C}$上的一个亚纯函数$f$,指的是存在一个离散子集$S\subseteq U$,使得$f$是定义在$U-S$的全纯函数,并且$f$在$S$的每个点都是有限阶极点.于是在$S$的每个点的附近,$f$都可以表示为两个全纯函数的商.下面设$U\subseteq\mathbb{C}^n$是开集,$U$上的一个亚纯函数指的是一个复函数$f:U-S\to\mathbb{C}$,其中$S\subseteq U$是一个无处稠密集,满足$U$的每个点都存在一个开邻域$V\subseteq U$,使得存在$V$上的两个全纯函数$g,h$,满足在$V-S$上有$f=g/h$.
+    \begin{enumerate}[(1)]
+    	\item 用$K(X)$表示$X$上所有亚纯函数构成的环,那么如果$X$是连通的,则$K(X)$是域.【】
+    	\item 设$f\in K(X)$,那么对任意$z\in X$,有$f$在$z$的附近可以表示为$g/h$,其中$g,h\in\mathscr{O}_{\mathbb{C}^n,z}$.设$g,h$互素,否则可以约去公因子,此时称$g$的零点集和$h$的零点集分别为$f$在$z$处的零点集和极点集,这都是集合芽.
+    	\item 设$f\in\mathscr{O}_{\mathbb{C}^n,0}$是不可约元,那么存在足够小的$\varepsilon>0$,使得对任意$z\in B(0,\varepsilon)$有$f\in\mathscr{O}_{\mathbb{C}^n,z}$也是不可约元.
+    	\begin{proof}
+    		
+    		按照Weierstrass多项式,不妨设$f\in\mathscr{O}_{\mathbb{C}^{n-1},0}[z_1]$是Weierstrass多项式.假设$f$作为$\mathscr{O}_{\mathbb{C}^n,z}$中的元是可约的,那么有分解$f=f_1f_2$,其中$f_1,f_2$都是$\mathscr{O}_{\mathbb{C}^n,z}$中的非单位,换句话讲有$f_1(z)=f_2(z)=0$.那么有$\frac{\partial f}{\partial z_1}(z)=0$.于是$B(0,\varepsilon)$中满足$f$在$\mathscr{O}_{\mathbb{C}^n,z}$中可约的点$z$构成的集合是落在$Z(f,\frac{\partial f}{\partial z_1})$中.这是一个不包含原点的闭子集,于是可以找到原点的开邻域和它不交,于是在这个开邻域上的$z$总有$f\in\mathscr{O}_{\mathbb{C}^n,z}$是不可约的.
+    	\end{proof}
+        \item 如果$f,g\in\mathscr{O}_{\mathbb{C}^n,0}$是互素的,那么存在足够小的$\varepsilon>0$,使得对任意$z\in B(0,\varepsilon)$有$f,g$在$\mathscr{O}_{\mathbb{C}^n,z}$中也是互素的.
+        \begin{proof}
+        	
+        	我们不妨按照Weierstrass准备定理设$f,g$都是Weierstrass多项式.那么它们在$\mathscr{O}_{\mathbb{C}^n,0}$中互素当且仅当在$\mathscr{O}_{\mathbb{C}^{n-1},0}[z_1]$中互素(对公因子用Weierstrass准备定理).于是可以找到$h_1,h_2\in\mathscr{O}_{\mathbb{C}^{n-1},0}[z_1]$满足$h_1f+h_2g=\gamma\in\mathscr{O}_{\mathbb{C}^{n-1},0}$.于是我们只要取$0\in\mathbb{C}^n$的开邻域使得这些$h_1,h_2,f,g$有定义并且$\gamma$没有零点,则在这个开邻域上就总有$f_z,g_z$是互素的.
+        \end{proof}
+    \end{enumerate}
+\end{enumerate}
+\newpage
+\subsubsection{补充线性代数}
+\begin{enumerate}
+	\item 近复结构.我们总设$V$是一个有限维实线性空间,其上的一个近复结构指的是一个线性自同态(满足下面等式的自同态一定是自同构)$J:V\to V$,满足$J^2=-\mathrm{id}_V$.
+	\begin{enumerate}[(1)]
+		\item 如果$V$上具有近复结构,那么它作为实空间的维数一定是偶数维.
+		\item 如果实空间$V$可以延拓为一个复空间,那么$J(v)=iv$构成一个近复结构.反过来如果$J:V\to V$是近复结构,那么定义$iv=J(v)$使得$V$延拓为一个复空间.于是对于线性空间,复结构和近复结构是一致的.
+		\item 如果$V$具有近复结构,那么它存在在$\mathbb{C}$线性自同构不变的定向.这件事是因为对于具备近复结构的$V$,我们可以不妨设它就是实空间$\mathbb{C}^n$,此时取基$\{1,i,\cdots,1,i\}$就是一组在$\mathbb{C}$自同构下不变的定向.
+	\end{enumerate}
+    \item 设$V$是实空间,它的复化记作$V_{\mathbb{C}}=V\otimes_{\mathbb{R}}\mathbb{C}$.设$J$是$V$上的近复结构,那么它可以典范延拓为$V\otimes_{\mathbb{R}}\mathbb{C}$上的复线性映射,依旧记作$J$,那么$J$的特征值只有$\{\pm i\}$.它们的特征子空间记作:
+    $$V^{1,0}=\{v\in V_{\mathbb{C}}\mid J(v)=iv\},V^{0,1}=\{v\in V_{\mathbb{C}}\mid J(v)=-iv\}$$
+    \begin{enumerate}[(1)]
+    	\item 我们强调一下,$V_{\mathbb{C}}$作为实空间,以$J$和$i$都能延拓为复空间,并且$V^{1,0}$和$V^{0,1}$都总是它的复子空间.这两个复结构在子群$V^{1,0}$上一致,但是在$V^{0,1}$上不同.我们总约定$V_{\mathbb{C}}$的复结构是被$i$诱导的.
+    	\item 典范单射$v\mapsto v\otimes1$使得$V$视为$V_{\mathbb{C}}$的加法子群.如果考虑$V_{\mathbb{C}}$上的共轭运算为$\overline{v\otimes\lambda}=v\otimes\overline{\lambda}$,那么$V$恰好是$V_{\mathbb{C}}$的在共轭运输下不变的元构成的子群.
+    	\item 我们有复线性空间的分解$V_{\mathbb{C}}=V^{1,0}\oplus V^{0,1}$.另外共轭映射$v\otimes\lambda\mapsto v\otimes\overline{\lambda}$是$V^{1,0}$和$V^{0,1}$作为复空间之间的同构,于是它们作为复空间的维数相同.
+    	\item 关于对偶空间.设$V$是实空间,设$J$是一个近复结构,那么对偶空间$V^*=\mathrm{Hom}_{\mathbb{R}}(V,\mathbb{R})=\mathrm{Hom}_{\mathbb{C}}(V_{\mathbb{C}},\mathbb{C})$上具备一个近复结构为$I(f)(v)=f(I(v))$.并且我们有:
+    	$$(V^*)^{1,0}=\{f\in V^*\mid f(I(v))=if(v)\}=(V^{1,0})^*$$
+    	$$(V^*)^{0,1}=\{f\in V^*\mid f(I(v))=-if(v)\}=(V^{0,1})^*$$
+    \end{enumerate}
+    \item 外代数.设$V$是$d$维实空间,它的外代数定义为$\bigwedge^{\bullet}V=\bigoplus_{k=0}^d\bigwedge^kV$.类似的复空间$V_{\mathbb{C}}$的外代数定义为$\bigwedge^{\bullet}V_{\mathbb{C}}=\bigoplus_{k=0}^d\bigwedge^kV_{\mathbb{C}}$.再给$V$赋予近复结构$J$,对自然数$p,q$,我们做如下定义,称其中的元为次数是$(p,q)$的元,这里$V^{1,0}$和$V^{0,1}$视为复空间.
+    $$\bigwedge\nolimits^{p,q}V=\bigwedge\nolimits^pV^{1,0}\otimes_{\mathbb{C}}\bigwedge\nolimits^qV^{0,1}$$
+    \begin{enumerate}[(1)]
+    	\item 我们有$\bigwedge^{\bullet}V_{\mathbb{C}}=\bigwedge^{\bullet}V\otimes_{\mathbb{R}}\mathbb{C}$,并且$\bigwedge^{\bullet}V$典范的视为$\bigwedge^{\bullet}V_{\mathbb{C}}$的实子空间就是在共轭下不变的子集.
+    	\item 我们有$\bigwedge^{p,q}V$可以典范的视为$\bigwedge^{p+q}V_{\mathbb{C}}$的复子空间,并且有$\bigwedge^kV_{\mathbb{C}}=\oplus_{p+q=k}\bigwedge^{p,q}V$.
+    	\begin{proof}
+    		
+    		记$v_1,\cdots,v_n\in\bigwedge^{1,0}V=V^{1,0}$和$w_1,\cdots,w_n\in\bigwedge^{0,1}V=V^{0,1}$分别是一组复基.那么$v_{J_1}\otimes w_{J_2}$,其中$J_1$和$J_2$分别跑遍严格递增的重指标,构成了$\bigwedge^{p,q}V$的一组基
+    	\end{proof}
+        \item 复共轭诱导了复空间之间的同构$\bigwedge^{p,q}V\cong\bigwedge^{q,p}V$.特别的有$\overline{\bigwedge^{p,q}V}=\bigwedge^{q,p}V$.
+        \begin{proof}
+        	
+        	这件事就是因为$\overline{w_1\wedge w_2}=\overline{w_1}\wedge\overline{w_2}$以及取共轭诱导了$V^{1,0}\cong V^{0,1}$.
+        \end{proof}
+        \item 我们有外积同态$\bigwedge^{p,q}V\times\bigwedge^{r,s}V\to\bigwedge^{p+r,q+s}V$为$(\alpha,\beta)\mapsto\alpha\wedge\beta$.
+        \item 关于基.我们知道$V_{\mathbb{C}}$中的向量可以表示为$x+yi$其中$x,y\in V$,于是可设$\{z_k=\frac{1}{2}(x_k-iy_k)\mid1\le k\le n\}$构成了$V^{1,0}$的一组基,其中$x_k,y_k\in V$.按照$J(z_k)=iz_k$,于是有$y_k=J(x_k)$和$x_k=-J(y_k)$.进而$\{x_k,y_k\mid1\le k\le n\}$构成了$V$的一组基,并且$V^{0,1}$的一组基可以表示为$\{\overline{z_k}=\frac{1}{2}(x_k+iy_k)\}$.反过来如果$\{x_k,y_k=J(x_k)\mid1\le k\le n\}$构成$V$的一组实基,那么$\{z_k=\frac{1}{2}(x_k-iy_k)\mid1\le k\le n\}$构成$V^{1,0}$的一组复基,$\{\overline{z_k}=\frac{1}{2}(x_k+iy_k)\mid1\le k\le n\}$构成$V^{0,1}$的一组复基.
+        \item 如果记$n=\dim_{\mathbb{C}}V^{1,0}$,做上一条相同的记号,那么有如下等式,并且这定义了实空间$V$上的典范体积形式.
+        $$(-2i)^n(z_1\wedge\overline{z_1})\wedge\cdots\wedge(z_n\wedge\overline{z_n})=(x_1\wedge y_1)\wedge\cdots\wedge(x_n\wedge y_n)$$
+        \item 关于对偶.我们有典范同构$\bigwedge^kV^*\cong\left(\bigwedge^kV\right)^*$为:
+        $$(\alpha_1\wedge\cdots\wedge\alpha_k)(v_1\wedge\cdots\wedge v_k)=\det\left(\alpha_j(v_i)\right)_{i,j}$$
+    \end{enumerate}
+    \item 内积.设$V$是有限维实空间,设$\langle-,-\rangle$是$V$上的一个内积(此为正定对称双线性型),称它和近复结构$J$是兼容的,如果$J$是保内积的线性映射,也即对任意$v,w\in V$有$\langle v,w\rangle=\langle J(v),J(w)\rangle$.如果内积和近复结构是兼容的,我们记$\omega(v,w)=-\langle v,I(w)\rangle=\langle I(v),w\rangle$,称这个反对称的形式$\omega$为$V,\langle-,-\rangle,J$对应的基本形式.
+    \begin{enumerate}[(1)]
+    	\item $\omega,\langle-,-\rangle,J$中任意两个都能决定第三个.
+    	\item 关于共形结构.实空间$V$上的两个内积$\langle-,-\rangle$和$\langle-,-\rangle'$称为共形等价的,如果它们相差一个正实数$\lambda$,即$\langle-,-\rangle=\lambda\langle-,-\rangle'$.称$V$上全体内积在共形等价的等价类为共形结构.我们来解释如果$V$是二维定向实空间,那么其上共形结构和保定向的近复结构是一一对应的:我们把$V$上的定向称为逆时针旋转,任取非零向量$v\in V$,记$J(v)$表示$v$逆时针旋转$90^{\circ}$得到的向量(这件事严格说就是$J(v)$是唯一满足$\langle v,J(v)\rangle=0$,$|J(v)|=|v|$且$\{v,J(v)\}$正定向的向量).这个$J$称为该内积诱导的典范近复结构,这里$J$必然是保定向的.那么明显的两个内积共形等价当且仅当它们诱导了相同的近复结构.
+    	\item 设$V$是和近复结构$J$兼容的内积空间,那么有$\omega\in\bigwedge^2V^*\cap\bigwedge^{1,1}V^*$.
+    	\begin{proof}
+    		
+    		明显的$\omega$是实交错二次型.而$\omega\in\bigwedge^{1,1}V^*$只要选取一组基算一下.
+    	\end{proof}
+    	\item 设$V$是内积空间,和近复结构$J$兼容,那么$(-,-)=\langle(-,-)-i\omega$是$(V,J)$上的正定Hermitian形式,这里$(V,J)$表示$V$上赋予$J$诱导的复结构.
+    	\begin{proof}
+    		
+    		明显的$(-,-)$是实二次型,并且$(v,v)=\langle v,v\rangle\ge0$,取等当且仅当$v=0$.另外有$\overline{(w,v)}=(v,w)$.最后只要验证:
+    		\begin{align*}
+    			(I(v),w)&=\langle I(v),w\rangle-i\omega(I(v),w)\\
+    			&=\langle I(I(v)),I(w)\rangle+i\langle v,w\rangle\\
+    			&=i\left(i\langle v,I(w)\rangle+\langle v,w\rangle\right)\\
+    			&=i(v,w)
+    		\end{align*}
+    	\end{proof}
+        \item $V$上的内积$\langle-,-\rangle$可以延拓到$V_{\mathbb{C}}$上,记作$\langle-,-\rangle_{\mathbb{C}}$,即$\langle v\otimes\lambda,w\otimes\mu\rangle_{\mathbb{C}}=(\lambda\overline{\mu})\langle v,w\rangle$.
+        \item $V_{\mathbb{C}}=V^{1,0}\oplus V^{0,1}$是关于内积$\langle-,-\rangle_{\mathbb{C}}$的正交分解.
+        \begin{proof}
+        	
+        	因为$V^{1,0}$中的向量总可以表示为$v-iJ(v),v\in V$,而$V^{0,1}$中的向量总可以表示为$w+iJ(w),w\in V$.并且有$\langle v-iJ(w),w+iJ(w)\rangle_{\mathbb{C}}=0$.
+        \end{proof}
+        \item 设内积空间$V$和近复结构$J$兼容.在典范同构$(V,J)\cong(V^{1,0},i)$下(这个典范同构是$v\mapsto\frac{1}{2}(v-iJ(v))$),我们有$\frac{1}{2}(-,-)=\langle-,-\rangle_{\mathbb{C}}\mid_{V^{1,0}}$.
+        \begin{proof}
+        	\begin{align*}
+        		&\langle v-iJ(v),w-iJ(w)\rangle_{\mathbb{C}}\\
+        		=&\langle v,w\rangle+i\langle v,J(w)\rangle-i\langle J(v),w\rangle+\langle J(v),J(w)\rangle\\
+        		=&2\langle v,w\rangle+2i\langle v,J(w)\rangle=2(v,w)
+        	\end{align*}
+        \end{proof}
+        \item 设$z_1,\cdots,z_n$是$V^{1,0}$的一组复基,记$z_k=\frac{1}{2}(x_k-iJ(x_k))$,其中$x_k\in V$,记$y_k=J(x_k)$,那么$\{x_k,y_k,1\le k\le n\}$构成了$V$的一组实基,并且$\{x_k,1\le k\le n\}$构成了$(V,J)$的一组复基.把$V^{1,0}$上的Hermitian形式$\langle-,-\rangle_{\mathbb{C}}$关于基$\{z_k,1\le k\le n\}$的矩阵记作$\frac{1}{2}\left(h_{st}\right)$,换句话讲$\langle z_s,z_t\rangle=\frac{1}{2}h_{st}$,结合上一条得到$(x_s,x_t)=h_{st}$.进而按照$(-,-)$是$(V,J)$上的Hermitian内积,就得到$(x_s,y_t)=-ih_{st}$和$(y_s,y_t)=h_{st}$.
+    \end{enumerate}
+    \item Lefschetz算子.设$V$是内积空间,和近复结构$J$兼容,设$\omega$是对应的基本形式,定义关于$V$的实Lefschetz算子为$L:\bigwedge^{\bullet}V^*\to\bigwedge^{\bullet}V^*$,$\alpha\mapsto\omega\wedge\alpha$.类似的定义复Lefschetz算子为$L:\bigwedge^{\bullet}V_{\mathbb{C}}^*\to\bigwedge^{\bullet}V_{\mathbb{C}}^*$,$\alpha\mapsto\omega\wedge\alpha$.
+    \begin{enumerate}[(1)]
+    	\item 复Lefschetz算子就是实Lefschetz算子的延拓.
+    	\item Lefschetz算子是(1,1)次的,也即$L\left(\bigwedge^{p,q}V^*\right)\subseteq\bigwedge^{p+1,q+1}V^*$.
+    	\item 如果记$\dim_{\mathbb{R}}V=2n$,对$k\le n$,总有同构$L^k:\bigwedge^kV^*\cong\bigwedge^{2n-k}V^*$.这个证明可以初等的做,后文给出更简单的证明.
+    \end{enumerate}
+    \item $\bigwedge^kV$上的诱导内积.设$V$是内积空间,取一组标准正交基$\{e_1,\cdots,e_n\}$约定为正定向的.记对偶基$\{e^1,\cdots,e^n\}$.记体积形式$\Omega=e^1\wedge\cdots\wedge e^n$.考虑交错多重线性函数空间$\bigwedge^k(V)$,它的元素可以表示为$\alpha=\frac{1}{k!}\sum_I\alpha_Ie^I$,其中$I=(i_1,i_2,\cdots,i_k)$取遍长度$k$的重指标.也可以表示为$\sum_I'\alpha_Ie^I$,其中$I=(i_1,\cdots,i_k)$取遍长度$k$的递增重指标$i_1<i_2<\cdots<i_k$,$\alpha_I=\alpha(e_{i_1},\cdots,e_{i_k})$,$e^I=e^{i_1}\wedge\cdots\wedge e^{i_k}$.定义$V$上内积在$\bigwedge^k(V)$上的诱导内积为$\langle\alpha,\beta\rangle=\frac{1}{k!}\sum_I\alpha_I\beta_I=\sum'_I\alpha_I\beta_I$.
+    \begin{enumerate}[(1)]
+    	\item 验证这个内积和最开始的正交基的选取无关:
+    	\begin{proof}
+    		
+    		再选取一个正定向的标准正交基$\{\widetilde{e_1},\cdots,\widetilde{e_n}\}$,记$\widetilde{e_i}=a_i^je_j$.那么有:
+    		\begin{align*}
+    			\sum'_I\alpha(\widetilde{e_{i_1}},\cdots,\widetilde{e_{i_k}})\beta(\widetilde{e_{i_1}},\cdots,\widetilde{e_{i_k}})&=\sum' a_{i_1}^{j_1}a_{i_2}^{j_2}\cdots a_{i_k}^{j_k}a_{i_1}^{l_1}\cdots a_{i_k}^{l_k}\alpha(e_{j_1},\cdots,e_{j_k})\beta(e_{l_1},\cdots,e_{l_k})\\&=\sum'\delta_{j_1,l_1}\cdots\delta_{j_k,l_k}\alpha(e_{j_1},\cdots,e_{j_k})\beta(e_{l_1},\cdots,e_{l_k})\\&=\sum'\alpha(e_{i_1},\cdots,e_{i_k})\beta(e_{i_1},\cdots,e_{i_k})
+    		\end{align*}
+    	\end{proof}
+    	\item $\{e^I\mid i_1<\cdots<i_k\}$是$\bigwedge^k(V)$上诱导内积的一组标准正交基.于是特别的$\bigwedge^{\bullet}V=\oplus_k\bigwedge^kV$是关于$\langle-,-\rangle$的正交分解.
+    \end{enumerate}
+    \item 线性空间上的Hodge$\star$映射$\bigwedge^k(V)\to\bigwedge^{n-k}(V)$.设$V$是$n$维定向内积空间,取定一组正定向正交基$\{e_1,\cdots,e_n\}$,记$\Omega=e_1\wedge\cdots\wedge e_n$是体积形式.对任意$\alpha\in\bigwedge^k(V)$,定义线性映射$l_{\alpha}:\bigwedge^{n-k}(V)\to\mathbb{R}$为$l_{\alpha}(\varphi)=\frac{\alpha\wedge\varphi}{\Omega}$.这个商的含义是,$\alpha\wedge\varphi$是最高次的微分形式,所以它和体积形式$\Omega$只差了一个常数倍,就定义这个倍数是这个商.按照$\bigwedge^{n-k}(V)$是一个内积空间,存在唯一的向量$\star\alpha\in\bigwedge^{n-k}(V)$,使得$l_{\alpha}(\varphi)=\langle\star\alpha,\varphi\rangle$.换句话讲$\alpha\wedge\varphi=\langle\star\alpha,\varphi\rangle\Omega,\forall\varphi\in\bigwedge^{n-k}(V)$.
+    \begin{enumerate}[(1)]
+    	\item $\star(e^{i_1}\wedge\cdots\wedge e^{i_k})=(-1)^{\tau(i_1,\cdots,i_n)}e^{i_{k+1}}\wedge\cdots\wedge e^{i_n}$,其中$i_{k+1},\cdots,i_n$是$1,\cdots,n$挖去$i_1,\cdots,i_k$后剩下的序列.于是特别的$\star$是等距映射.还有$\star1=\Omega$.
+    	\item $\forall\alpha,\beta\in\wedge^k(V)$,有$\alpha\wedge\star\beta=\langle\alpha,\beta\rangle\Omega$.
+    	\item $\star_{n-k}\circ\star_k=(-1)^{k(n-k)}$.进而对$\alpha\in\bigwedge^kV$和$\beta\in\bigwedge^{n-k}V$就有$\langle\alpha,\star\beta\rangle=(-1)^{k(n-k)}\langle\star\alpha,\beta\rangle$.
+    \end{enumerate}
+    \item 对偶Lefschetz算子.首先如果$V$是内积空间,那么我们有典范的不依赖于基选取的同构映射$V\to V^*$为$v\mapsto\left(w\mapsto(v,w)\right)$.这个典范同构允许我们把$V$上的内积延拓到$V^*$上.今后谈及$V^*$或者$V^*_{\mathbb{C}}$或者$\bigwedge^{\bullet}V^*$或者$\bigwedge^{\bullet}V^*_{\mathbb{C}}$上的内积就都是原本空间的内积在对偶空间中的诱导内积.
+    
+    \qquad
+    
+    称$\bigwedge^{\bullet}V_{\mathbb{C}}^*$上的Lefschetz算子$L$关于内积$\langle-,-\rangle$的对偶算子为对偶Lefschetz算子,记作$\Lambda$,换句话讲对任意$\alpha\in\bigwedge^{\bullet}V_{\mathbb{C}}^*$,有$\Lambda\alpha$是唯一的使得对任意$\beta\in\bigwedge^{\bullet}V_{\mathbb{C}}^*$总有下式成立.类似的可以定义复Lefschetz算子的对偶算子,依旧记作$\Lambda$.
+    $$\langle\Lambda\alpha,\beta\rangle=\langle\alpha,L\beta\rangle$$
+    \begin{enumerate}[(1)]
+    	\item 对偶Lefschetz算子$\Lambda$是次数为$-2$的,也即$\Lambda\left(\bigwedge^kV^*\right)\subseteq\bigwedge^{k-2}V^*$.另外我们有$\Lambda=\star^{-1}\circ L\circ\star$.
+    	\begin{proof}
+    		
+    		第一件事是因为$L$的次数是$+2$,并且$\bigwedge^{\bullet}V^*=\oplus_k\bigwedge^kV^*$关于$\langle-,-\rangle$是正交分解.第二件事是因为:
+    		\begin{align*}
+    			\langle\alpha,L\beta\rangle\Omega&=\langle L\beta,\alpha\rangle\Omega\\
+    			&=L\beta\wedge\star\alpha\\
+    			&=\omega\wedge\beta\wedge\star\alpha\\
+    			&=\beta\wedge\omega\wedge\star\alpha\\
+    			&=\langle\beta,\star^{-1}\circ L\circ\star(\alpha)\rangle\Omega
+    		\end{align*}
+    	\end{proof}
+        \item 我们之前解释了实内积空间上的内积可以延拓为外代数上的内积,这件事对复Hermitian空间也成立,即对$\alpha=\sum'\alpha_Ie^I$和$\beta=\sum'\beta_Ie^I$,定义$\langle\alpha,\beta\rangle=\sum'\alpha_I\overline{\beta_I}$.我们之前解释过$V$上的内积$\langle-,-\rangle$可以延拓为$V_{\mathbb{C}}$上的Hermitian形式.进而这个Hermitian形式还可以延拓为$\bigwedge^{\bullet}V_{\mathbb{C}}^*$上的Hermitian形式.这依旧记作$\langle-,-\rangle_{\mathbb{C}}$.
+        \item 我们可以把Hodge$\star$映射$\bigwedge^kV^*\to\bigwedge^{n-k}V^*$延拓为$\star_k:\bigwedge^kV^*_{\mathbb{C}}\to\bigwedge^{n-k}V^*_{\mathbb{C}}$.于是对$\alpha,\beta\in\wedge^{\bullet}V_{\mathbb{C}}^*$就有:
+        $$\alpha\wedge\star\overline{\beta}=\langle\alpha,\beta\rangle_{\mathbb{C}}\Omega$$
+        
+        那么$\bigwedge^{\bullet}V^*_{\mathbb{C}}$上的算子$\Lambda$和$L$同样是关于$\langle-,-\rangle_{\mathbb{C}}$是对偶的,并且同样满足$\Lambda=\star^{-1}\circ L\circ\star$.
+        \item 直和分解$\wedge^kV_{\mathbb{C}}^*=\bigoplus_{p+q=k}\bigwedge^{p,q}V^*$是关于$\langle-,-\rangle_{\mathbb{C}}$的正交分解.换句话讲如果$\alpha\in\bigwedge^{p,q}(V)$和$\beta\in\bigwedge^{p',q'}(V)$,其中$p+q=p'+q'$,那么只要$p\not=p'$和$q\not=q'$,就有$\langle\alpha,\beta\rangle_{\mathbb{C}}=0$.进而对偶Lefschetz算子$\Lambda$的次数是$(-1,-1)$,也即它把$\bigwedge^{p,q}V^*$映入$\bigwedge^{p-1,q-1}V^*$.
+        \begin{proof}
+        	
+        	这件事是因为我们解释过$V_{\mathbb{C}}=V^{1,0}\oplus V^{0,1}$是关于$\langle-,-\rangle_{\mathbb{C}}$的正交分解.
+        \end{proof}
+        \item 记$\dim_{\mathbb{R}}V=2n$,那么Hodge$\star$映射把$\bigwedge^{p,q}V^*$映入$\bigwedge^{n-q,n-p}V^*$.
+        \begin{proof}
+        	
+        	任取$\beta\in\wedge^{p,q}(V)$,$p+q=k$,取$\alpha\in\wedge_{\mathbb{C}}^{2n-k}(V)$,按照定义有:$$\langle\alpha,\star\beta\rangle_{\mathbb{C}}=\langle\alpha,\overline{\star\beta}\rangle=\frac{\alpha\wedge\star\overline{\star\beta}}{\Omega}=\frac{\alpha\wedge\star\star\overline{\beta}}{\Omega}=\pm\frac{\alpha\wedge\overline{\beta}}{\Omega}$$
+        	
+        	如果$\alpha\in\wedge^{p',q'}(V)$,其中$p'+q'=0$,那么这里只要$p'\not=n-q$和$q'\not=n-p$,就得到$\langle\alpha,\star\beta\rangle_{\mathbb{C}}=0$.换句话讲如果$(p',q')\not=(n-q,n-p)$,就有$\star\beta\perp\wedge^{p',q'}(V)$.也即必须有$\star\beta\in\wedge^{n-q,n-p}(V)$.
+        \end{proof}
+    \end{enumerate}
+    \item 计数算子.记投影映射$\pi_k:\bigwedge^{\bullet}V$,定义计数算子(counting operator)为$H=\sum_{k=0}^{2n}(k-n)\pi_k:\bigwedge^{\bullet}V\to\bigwedge^{\bullet}V$.
+    \begin{enumerate}[(1)]
+    	\item 把$H,L,\Lambda$都视为$\bigwedge^{\bullet}V^*$上的算子,我们用换位子记号$[A,B]=A\circ B-B\circ A$,那么有:
+    	$$[H,L]=2L,[H,\Lambda]=-2\Lambda,[L,\Lambda]=H$$
+    	\begin{proof}
+    		
+    		前两个等式是容易的,取$\alpha\in\bigwedge^kV^*$,有$[H,L](\alpha)=(k+2-n)(\omega\wedge\alpha)-\omega\wedge((k-n)\alpha)=2\omega\wedge\alpha=2L(\alpha)$;也有$[H,\Lambda](\alpha)=(k-2-n)(\Lambda\alpha)-\Lambda((k-n)\alpha)=-2\Lambda\alpha$.
+    		
+    		\qquad
+    		
+    		下面证明第三个等式.我们来对$\dim V$做归纳.假设有直和分解$V=W_1\oplus W_2$是关于近复结构$J$的不变子空间分解,也是关于内积$\langle-,-\rangle$的正交分解,那么我们有$\bigwedge^{\bullet}V^*=\bigwedge^{\bullet}W_1^*\otimes\bigwedge^{\bullet}W_2^*$.特别的有$\bigwedge^2V^*=\bigwedge^2W_1^*\oplus\bigwedge^2W_2^*\oplus\left(W_1^*\otimes W_2^*\right)$.于是基本形式$\omega$要经这个直和分解为$\omega_1\oplus\omega_2$,其中$\omega_i$是$W_i$上的基本性质(分支$W_1^*\otimes W_2^*$上没有分解).于是$\bigwedge^{\bullet}V^*$上的Lefschetz算子$L$就是$\bigwedge^{\bullet}W_1^*$和$\bigwedge^{\bullet}W_2^*$上LEfschetz算子$L_1$和$L_2$的直和.于是如果记$\bigwedge^{\bullet}W_1^*\otimes\bigwedge^{\bullet}W_2^*$上的算子$L_1\otimes1$和$1\otimes L_2$分别替代$L_1,L_2$,那么有$L=L_1+L_2$.
+    		
+    		\qquad
+    		
+    		我们知道内积空间的张量积上的内积满足乘法,具体地讲:任取$\alpha,\beta\in\bigwedge^{\bullet}V^*$,设有$\alpha=\alpha_1\otimes\alpha_2$和$\beta=\beta_1\otimes\beta_2$,其中$\alpha_i,\beta_i\in\bigwedge^{\bullet}W_i^*$.那么有$\langle\alpha,\beta\rangle=\langle\alpha_1,\beta_1\rangle\cdot\langle\alpha_2,\beta_2\rangle$.于是有:
+    		\begin{align*}
+    			\langle\alpha,L\beta\rangle&=\langle\alpha,L_1(\beta_1)\otimes\beta_2\rangle+\langle\alpha,\beta_1\otimes L_2(\beta_2)\rangle\\
+    			&=\langle\alpha_1,L_1\beta_1\rangle\cdot\langle\alpha_2,\beta_2\rangle+\langle\alpha_1,\beta_1\rangle\cdot\langle\alpha_2,L_2\beta_2\rangle\\
+    			&=\langle\Lambda_1\alpha_1,\beta_1\rangle\cdot\langle\alpha_2,\beta_2\rangle+\langle\alpha_1,\beta_1\rangle\cdot\langle\Lambda_2\alpha_2,\beta_2\rangle\\
+    			&=\langle\Lambda_1(\alpha_1)\otimes\alpha_2+\alpha_1\otimes\Lambda(\alpha_2),\beta_1\otimes\beta_2\rangle
+    		\end{align*}
+    	
+    	    于是我们证明了$\Lambda=\Lambda_1+\Lambda_2$,其中$\Lambda_i$是$\bigwedge^{\bullet}W_i^*$.于是按照归纳假设的$[L_i,\Lambda_i]=H_i$,再记$n_i=\dim_{\mathbb{C}}(W_i,J_i)$和$\alpha_i\in\bigwedge^{k_i}W_i^*$,得到:
+    	    \begin{align*}
+    	    	[L,\Lambda](\alpha_1\otimes\alpha_2)&=(L_1+L_2)(\Lambda_1(\alpha_1)\otimes\alpha_2+\alpha_1\otimes\Lambda_2(\alpha_2))\\&\quad-(\Lambda_1+\Lambda_2)(L_1(\alpha_1)\otimes\alpha_2+\alpha_1\otimes L_2(\alpha_2))\\&=[L_1,\Lambda_1](\alpha_1)\otimes\alpha_2+\alpha_1\otimes[L_2,\Lambda_2](\alpha_2)\\&=H_1(\alpha_1)\otimes\alpha_2+\alpha_1\otimes H_2(\alpha_2)\\&=(k_1-n_1)(\alpha_1\otimes\alpha_2)+(k_2-n_2)(\alpha_1\otimes\alpha_2)\\&=(k_1+k_2-n_1-n_2)(\alpha_1\otimes\alpha_2)
+            \end{align*}
+        
+            【上述操作就是在说如果$V$可以分解为关于$J$的非平凡的不变子空间分解,那么问题转化为在这些维数更小的子空间上,所以对维数做归纳就归结到一维的,但是为什么总存在非平凡的不变子空间分解?】
+    		
+    	\end{proof}
+        \item 推论.设$V$是内积空间,和近复结构$J$兼容.那么$L,\Lambda,H$定义了$\bigwedge^{\bullet}V^*$上的$\mathfrak{sl}(2)$表示.类似的$\bigwedge^{\bullet}V^*_{\mathbb{C}}$上的$L,\lambda,H$定义了其上的$\mathfrak{sl}(2,\mathbb{C})$表示.
+        \begin{proof}
+        	
+        	我们知道$\mathfrak{sl}(2)$是$\mathbb{R}$或者$\mathbb{C}$上由迹零的2阶矩阵构成的李代数,它的一组基为$X=\left(\begin{array}{cc}0&1\\0&0\end{array}\right)$,$Y=\left(\begin{array}{cc}0&0\\1&0\end{array}\right)$和$Z=\left(\begin{array}{cc}1&0\\0&-1\end{array}\right)$,它们满足$[Z,X]=2X$,$[Z,Y]=-2Y$和$[X,Y]=Z$.所以映射$X\mapsto L$,$Y\mapsto\Lambda$,$Z\mapsto H$提供了一个李代数同态$\mathfrak{sl}(2)\to\mathrm{End}(\bigwedge^{\bullet}V^*)$.张量$\mathbb{C}$得到复空间上的结论.
+        \end{proof}
+        \item 推论.对任意$\alpha\in\bigwedge^kV^*$有$[L^i,\Lambda](\alpha)=i(k-n+i-1)L^{i-1}(\alpha)$.这件事对$i$归纳就行.
+    \end{enumerate}
+    \item 设$V$是内积空间,设$J$是和它兼容的近复结构,$\Lambda$是对偶Lefschetz算子.一个元$\alpha\in\bigwedge^kV^*$称为本原的(primitive),如果$\Lambda\alpha=0$.全体本原元$\alpha\in\bigwedge^kV^*$构成的线性子空间记作$P^k$.类似的我们可以定义$\alpha\in\bigwedge^kV^*_{\mathbb{C}}$是本原的,如果$\Lambda\alpha=0$,于是全体复本原的元构成的子空间就是之前定义的$P^k$的复化.
+    \begin{enumerate}[(1)]
+    	\item 我们有如下直和分解,这称为Lefschetz分解,它是关于$\langle-,-\rangle$的正交分解.
+    	$$\bigwedge^kV^*=\bigoplus_{i\ge0}L^i(P^{k-2i})$$
+    	
+    	例如$\bigwedge^0V^*=P^0=\mathbb{R}$,$\bigwedge^1V^*=P^1$,$\bigwedge^2V^*=\omega\mathbb{R}\oplus P^2$和$\bigwedge^4V^*=\omega^2\mathbb{R}\oplus L(P^2)\oplus P^4$.
+    	\begin{proof}
+    		
+    		我们要用一点表示论.我们解释过$\bigwedge^{\bullet}V^*$是有限维的$\mathfrak{sl}(2)$表示,所以它可以表示为有限个不可约子表示的直和.任取一个非平凡的不可约子表示,任取一个非零元$v$,那么$\Lambda^iv$的次数是$\deg v-2i$,所以在$i$足够大的时候有$\Lambda^iv=0$,把$i$替换为最小的使得这个等式成立的正整数,那么$v$替换为$\Lambda^{i-1}v$使得$v$仍在这个不可约子表示中,并且有$v$是本原的.换句话讲,我们证明了非平凡的不可约子表示中总存在本原元$v$.
+    		
+    		\qquad
+    		
+    		考虑子空间$\langle v,Lv,L^2v,\cdots\rangle$,按照我们之前证明的$[L^i,\Lambda](\alpha)=i(k-n+i-1)L^{i-1}(\alpha)$,得到这个子空间关于$\Lambda$不变,它当然也是关于$L$不变的,又从$[L,\Lambda]=H$得到$Hv=-\Lambda Lv$在这个子空间中,进而从$HL-LH=2L$归纳得到$HL^iv$也在这个子空间中,综上我们证明了子空间$\langle v,Lv,L^2v,\cdots\rangle$是关于$\mathfrak{sl}(2)$不变的,结合上一段就说明$\bigwedge^{\bullet}V^*$的不可约表示一定具有这个形式.于是如果记$P^{k-2i}$的一组实基为$\alpha_{ij},j\in J_i$,那么有$\bigwedge^kV^*=\oplus \langle L^i(\alpha_{ij})\rangle=\bigoplus_{i\ge0}L^i(P^{k-2i})$.
+    	\end{proof}
+        \item 如果$k>n$,那么$P^k=0$.
+        \begin{proof}
+        	
+        	对$k>n$取$\alpha\in P^k$,因为$L^i\alpha$的次数是$2i+\deg\alpha$,如果这个次数超过$2n$则这个元变成零,所以我们可以设$i$是最小的正整数使得$L^i\alpha=0$.那么我们有$0=[L^i,\Lambda](\alpha)=i(k-n+i-1)L^{i-1}\alpha$,由于$k>n$,这迫使$i=0$,于是$\alpha=0$,于是$P^k=0$.
+        \end{proof}
+        \item 如果$k\le n$,那么$L^{n-k}:P^k\to\bigwedge^{2n-k}V^*$是单射,并且有$L^{n-k+1}(P^k)=0$.
+        \begin{proof}
+        	
+        	设$0\not=\alpha\in P^k$,其中$k\le n$,和上一条中证明一样的理由,我们可以取最小的正整数$i$使得$L^i\alpha=0$.于是有$0=[L^i,\Lambda](\alpha)=i(k-n+i-1)L^{i-1}(\alpha)$,这迫使$k-n+i-1=0$,于是$L^{n-k}(\alpha)\not=0$和$L^{n-k+1}(\alpha)=0$.
+        \end{proof}
+        \item 如果$k\le n$,那么$L^{n-k}:\bigwedge^kV^*\to\bigwedge^{2n-k}V^*$是双射.
+        \begin{proof}
+        	
+        	(1)和(3)告诉我们这是单射,(1)中把$k$替换为$2n-k$得到这还是满射.
+        \end{proof}
+        \item 如果$k\le n$,那么$P^k=\{\alpha\in\bigwedge^kV^*\mid L^{n-k+1}\alpha=0\}$.
+        \begin{proof}
+        	
+        	在(3)中我们证明了$P^k\subseteq\ker(L^{n-k+1})$.反过来如果$\alpha\in\bigwedge^kV^*$使得$L^{n-k+1}\alpha=0$,那么有$L^{n-k+2}\Lambda\alpha=L^{n-k+2}\Lambda\alpha-\Lambda L^{n-k+2}\alpha=(n-k+2)L^{n-k+1}\alpha=0$.但是(4)告诉我们$L^{n-k+2}$在$\bigwedge^{k-2}V^*$上是单射,于是$\Lambda\alpha=0$.
+        \end{proof}
+    \end{enumerate}
+
+    【Huybrechts的1.2.31】
+\end{enumerate}
+
+
+
+
+
+\newpage
+\subsubsection{微分形式}
+
+我们把上一节的框架用在切空间上.设$U\subseteq\mathbb{C}^n$是开子集.
+\begin{enumerate}
+	\item 记标准坐标是$z_k=x_k+iy_k,1\le k\le n$.那么把$U$视为$\mathbb{R}^{2n}$的开子集后,切向量场$\frac{\partial}{\partial x_k},\frac{\partial}{\partial y_k},1\le k\le n$就构成$\mathrm{T}U$的一组标架.
+	\item 标准近复结构.对任意$x\in U$,我们就有$\mathrm{T}_xU$上的标准近复结构为$J:\mathrm{T}_xU\to\mathrm{T}_xU$,$\frac{\partial}{\partial x_k}\mapsto\frac{\partial}{\partial y_k}$,$\frac{\partial}{\partial y_k}\mapsto-\frac{\partial}{\partial x_k}$.如果记$\mathrm{T}^*_xU$的对偶基为$\mathrm{d}x_k,\mathrm{d}y_k,1\le k\le n$,那么诱导的标准近复结构就是$J(\mathrm{d}x_k)=\mathrm{d}y_k$,$J(\mathrm{d}y_k)=-\mathrm{d}x_k$.
+	\item 标准分解.记切丛的复化为$\mathrm{T}_{\mathbb{C}}U=\mathrm{T}U\otimes\mathbb{C}$.设$\mathrm{T}^{1,0}U$是由切向量场$\frac{\partial}{\partial z_k}=\frac{1}{2}\left(\frac{\partial}{\partial x_k}-i\frac{\partial}{\partial y_k}\right),1\le k\le n$生成的子丛,再设$\mathrm{T}^{0,1}U$是由切向量场$\frac{\partial}{\partial\overline{z_k}}=\frac{1}{2}\left(\frac{\partial}{\partial x_k}+i\frac{\partial}{\partial y_k}\right),1\le k\le n$生成的子丛.那么有$\mathrm{T}_{\mathbb{C}}U=\mathrm{T}^{1,0}U\oplus\mathrm{T}^{0,1}U$.并且标准近复结构$J$限制在$T^{1,0}U$上就是数乘$i$,限制在$T^{0,1}U$上就是数乘$-i$.
+	\item 设$f:U\subseteq\mathbb{C}^m\to V\subseteq\mathbb{C}^n$是全纯映射,那么微分映射$\mathrm{d}f$是经上述直和分解而分解的,换句话讲有$\mathrm{d}f(\mathrm{T}_x^{1,0}U)\subseteq\mathrm{T}_{f(x)}^{1,0}V$和$\mathrm{d}f(\mathrm{T}_x^{0,1}U)\subseteq\mathrm{T}_{f(x)}^{0,1}V$.
+	\item 对自然数$p,q$,定义$\bigwedge^{p,q}U=\bigwedge^p\left((\mathrm{T}^*U)^{1,0}\right)\otimes\bigwedge^q\left((\mathrm{T}^*U)^{0,1}\right)$.再定义$\bigwedge^k_{\mathbb{C}}U=\bigwedge^k\mathrm{T}_{\mathbb{C}}^*U$.它和上一条中的丛的截面空间分别记作$\mathscr{A}^{p,q}(U)$和$\mathscr{A}^k_{\mathbb{C}}(U)$,其中的元素分别称为$(p,q)$形式和$k$形式.换句话讲$\mathscr{A}^{p,q}(U)$表示由$p$个$\mathrm{d}z_i$和$q$个$\mathrm{d}\overline{z_j}$构成的$k=p+q$形式(生成的子空间).它的元素可以表示为$\alpha=\sum'_{|I|=p,|J|=q}f_{IJ}\mathrm{d}z^I\wedge\mathrm{d}\overline{z}^J$.这里我们的求和号$\sum'$是约定这里$I$和$J$都取递增的重指标,也即如果$I=(i_1,\cdots,i_p)$,那么要求$i_1<i_2<\cdots<i_p$.那么明显有:
+	$$\bigwedge_{\mathbb{C}}^kU=\bigoplus_{p+q=k}\bigwedge^{p,q}U$$
+	$$\mathscr{A}^k_{\mathbb{C}}(U)=\bigoplus_{p+q=k}\mathscr{A}^{p,q}(U)$$
+	\item 记典范的微分映射$\mathrm{d}:\mathscr{A}^k(U)\to\mathscr{A}^{k+1}(U)$为:
+	$$\mathrm{d}\left(\sum\nolimits'f_{I,J}\mathrm{d}z^I\wedge\mathrm{d}\overline{z^J}\right)=\sum\nolimits'\mathrm{d}f_{I,J}\wedge\mathrm{d}z^I\wedge\mathrm{d}\overline{z^J}$$
+	
+	我们有如下复空间的复形,它的上同调称为Dolbeault上同调,即$\mathrm{H}^k(U)=\ker\mathrm{d}/\mathrm{Im}\mathrm{d}=\{\alpha\in\mathscr{A}^k(U)\mid\mathrm{d}\alpha=0\}/\{d\beta\mid\beta\in\mathscr{A}^{k-1}(U)\}$.
+	$$\xymatrix{0\ar[r]&\mathscr{A}^0(U)\ar[r]^{\mathrm{d}}&\mathscr{A}^1(U)\ar[r]^{\mathrm{d}}&\cdots\ar[r]&\mathscr{A}^{2n}(U)\ar[r]&0}$$
+	\item 更精细的我们有:
+	\begin{align*}
+		\mathrm{d}\alpha&=\sum\nolimits'\mathrm{d}f_{IJ}\wedge\mathrm{d}z^I\wedge\mathrm{d}\overline{z}^J\\&=\sum\nolimits'\left(\frac{\partial f_{IJ}}{\partial z_l}\mathrm{d}z_l\wedge\mathrm{d}z^I\wedge\mathrm{d}\overline{z}^J\right)+\sum\nolimits'\left(\frac{\partial f_{IJ}}{\partial\overline{z_l}}\mathrm{d}\overline{z_l}\wedge\mathrm{d}z^I\wedge\mathrm{d}\overline{z}^J\right)\\&=\partial\alpha+\overline{\partial}\alpha
+	\end{align*}
+	
+	把最后这两个和式分别记作$\partial\alpha$和$\overline{\partial}\alpha$.那么有$\mathrm{d}=\partial+\overline{\partial}$,其中$\partial:\mathscr{A}^{p,q}(U)\to\mathscr{A}^{(p+1,q)}(U)$和$\overline{\partial}:\mathscr{A}^{p,q}(U)\to\mathscr{A}^{(p,q+1)}(U)$.按照$\mathrm{d}^2=0$,得到$\partial^2+\partial\overline{\partial}+\overline{\partial}\partial+\overline{\partial}^2=0$,其中$\partial^2$是$(p+2,q)$的形式,$\partial\overline{\partial}+\overline{\partial}\partial$是$(p+1,q+1)$的形式,$\overline{\partial}^2$是$(p,q+2)$的形式,这就迫使这三项都是零,也即$(\mathscr{A}^{p,q}(U),\partial,\overline{\partial})$构成一个双复形.我们记关于$\overline{\partial}$的复形的上同调为$\mathrm{H}^{p,q}(U)=\{\alpha\in\mathscr{A}^{p,q}(U)\mid\overline{\partial}\alpha=0\}/\{\overline{\partial}\beta\mid\beta\in\mathscr{A}^{p,q-1}(U)\}$.
+	$$\xymatrix{0\ar[r]&\mathscr{A}^{p,0}\ar[r]^{\overline{\partial}}&\mathscr{A}^{p,1}\ar[r]^{\overline{\partial}}&\cdots\ar[r]&\mathscr{A}^{p,n}(U)\ar[r]&0}$$
+\end{enumerate}
+
+($\mathbb{C}^n$上的)Dolbeault上同调的庞加莱引理.
+\begin{enumerate}
+	\item $\overline{\partial}$庞加莱引理.设$\Delta\subseteq\mathbb{C}^n$是polydisc,那么对$q\ge1$总有$\mathrm{H}^{p,q}(\Delta)=0$.换句话讲,对$\Delta$上的每个$\overline{\partial}$-闭$(p,q)$形式$\alpha$,总存在$\beta\in\mathscr{A}^{p,q-1}$使得$\alpha=\overline{\partial}\beta$.
+	\begin{proof}
+		
+		第一步,我们先把问题归结为$p=0$的情况.对$(p,q)$形式$\alpha=\sum'_{|I|=p,|J|=q}f_{IJ}\mathrm{d}z^I\wedge\mathrm{d}\overline{z}^J$,它可以重新记作$\sum'_{|I|=p}\mathrm{d}z^I\wedge\alpha_I$,其中$\alpha_I=\sum'_{|J|=q}f_{IJ}\mathrm{d}\overline{z}^J$,那么有$\overline{\partial}\alpha=\sum'_{|I|=p}(-1)^p\mathrm{d}z^I\wedge\overline{\partial}\alpha_I$.于是$\overline{\partial}\alpha=0$当且仅当$\overline{\partial}\alpha_I=0$对每个$I$成立,所以一旦$p=0$的情况得证,那么对每个$I$就有$\beta_I$使得$\alpha_I=\overline{\partial}\beta_I$,那么取$\beta=(-1)^p\sum'_{|I|=p}\mathrm{d}z^I\wedge\beta_I$就有$\alpha=\overline{\partial}\beta$.
+		
+		\qquad
+		
+		第二步,我们证明对开集$U$,至少缩成polydisc上是可以解的.具体地讲,设$\alpha\in\mathscr{A}^{0,q}(U)$,其中$q\ge1$,是一个$\overline{\partial}$闭形式,设$\overline{\Delta}\subseteq U$是一个闭polydisc,我们断言存在$\beta\in\mathscr{A}^{0,q-1}(\Delta)$,使得在$\Delta$上有$\overline{\partial}\beta=\alpha$.对每个$0\le k\le n$,记$\mathscr{A}^{0,q}(U)_k$表示的是$U$上的$(0,q)$形式,使得不包含$\mathrm{d}\overline{z^{k+1}},\cdots,\mathrm{d}\overline{z^n}$.也即这样的$\alpha=\sum_Jf_J\mathrm{d}\overline{z}^J$,如果记$J=(i_1,\cdots,i_q)$,那么$0\le i_1,\cdots,i_q\le k$.于是我们得到如下滤过:
+		$$\{0\}=\mathscr{A}^{0,q}(U)_0\subseteq\mathscr{A}^{0,q}(U)_1\subseteq\cdots\subseteq\mathscr{A}^{0,q}(U)_n=\mathscr{A}^{0,q}(U)$$
+		
+		我们来对$k$归纳.如果$\alpha\in\mathscr{A}^{0,q}(U)_k$,可记$\alpha=\sum'_{J\subset\{1,\cdots,k\}}g_J\mathrm{d}\overline{z}^J$,那么
+		\begin{align*}
+			\overline{\partial}\alpha&=\sum'\frac{\partial g_J}{\partial\overline{z_l}}\mathrm{d}\overline{z_l}\wedge\mathrm{d}\overline{z}^J\\&\in\sum'\sum_{l=k+1}^n\frac{\partial g_J}{\partial\overline{z_l}}\mathrm{d}\overline{z_l}\wedge\mathrm{d}\overline{z}^J+\mathscr{A}^{0,q}(U)_k
+		\end{align*}
+		
+		于是$\overline{\partial}\alpha=0$推出$\frac{\partial g_J}{\partial\overline{z_l}}=0,\forall l=k+1,\cdots,n$.假设对$k-1$的情况已经得证(具体讲,如果$\alpha$是$\mathscr{A}^{0,q}(U)_{k-1}$中的闭形式,那么$\overline{\partial}\beta=\alpha$在$\Delta$上有解),我们记$\Delta=\Delta_1\times\cdots\times\Delta_n$,在$\Delta$上我们取$f_J(z)=\frac{1}{2\pi\sqrt{-1}}\int_{\Delta_k}\frac{g(z_1,\cdots,z_{k-1},w,z_{k+1},\cdots,z_n)}{w-z_k}\mathrm{d}w\wedge\mathrm{d}\overline{w}$.按照一元情况的$\overline{\Delta}$庞加莱引理,可取一个polydisc记作$\Delta'$满足$\Delta\subseteq\Delta\subseteq U$,使得在$\Delta'$上$\frac{\partial f_J}{\partial\overline{z_k}}=g_J$和$\frac{\partial f_J}{\partial\overline{z_l}}=0,\forall l\ge k+1$.现在定义$\beta=\sum'(\pm f_J\mathrm{d}\overline{z}^{J-\{k\}})$.那么有:
+		\begin{align*}
+			\overline{\partial}\beta&=\sum'(\pm\sum_{l\le k}\frac{\partial f_J}{\partial\overline{z_l}}\mathrm{d}\overline{z_l}\wedge\mathrm{d}\overline{z}^{J-\{k\}})\\&\in\sum'(\pm\frac{\partial f_J}{\partial\overline{z_k}}\mathrm{d}\overline{z_k}\wedge\mathrm{d}\overline{z}^{J-\{k\}})+\mathrm{A}^{0,q}(U)_{k-1}\\&=\sum\pm g_J\mathrm{d}\overline{z_k}\wedge\mathrm{d}\overline{z}^{J-\{k\}}+\mathscr{A}^{0,q}(U)_{k-1}\\&=\alpha+\mathscr{A}^{0,q}(U)_{k-1}
+		\end{align*}
+		
+		按照归纳假设有$\alpha-\overline{\partial}\beta$能在$\Delta$上写成某个$\overline{\partial}(\gamma)$,这就完成归纳.于是我们证明了断言.
+		
+		\qquad
+		
+		第三步,设$V,W$是两个polydisc,使得$\overline{V}\subseteq W$,设$\alpha\in\mathscr{A}^{0,q}(W)$,其中$q\ge1$,是一个$\overline{\partial}$闭形式,第二步只说明了在$W$内的小polydisc上我们的问题有解.这里断言能找到整个$W$上的一个$(0,q)$形式$\beta$,(但缺陷的是)方程$\alpha=\overline{\partial}\beta$只在$V$上成立.这件事是容易证明的,取polydisc记作$U$,使得$\overline{V}\subseteq U\subseteq\overline{U}\subseteq W$,那么按照上一步,存在$\gamma\in\mathscr{A}^{0,q}(U)$使得在$U$上有$\overline{\partial}\gamma=\alpha$.取$\beta=\chi\gamma$,其中光滑函数$\chi$取为在$\overline{V}$的附近恒为1,但被$U$支撑.那么$\beta$定义在整个$W$上,并且在$V$上有$\overline{\partial}\beta=\alpha$.
+		
+		\qquad
+		
+		第四步,完成证明.设$\alpha\in\mathscr{A}^{0,q}(\Delta)$使得$\overline{\partial}\alpha=0$,$q\ge1$.当$q=1$时,我们先取一列子polydisc,它们的中心都和$\Delta$的中心相同,满足$\Delta_0\subseteq\Delta_1\subseteq\cdots\subseteq\Delta$,使得$\overline{\Delta}_i\subseteq\Delta_{i+1}$,并且有$\cup_i\Delta_i=\Delta$.那么按照第三步,存在$g_i\in\mathrm{C}^{\infty}(\Delta)$使得$\overline{\partial}g_i=\alpha$在$\Delta_i$上成立.我们断言可以重新选取这样的$\{g_i\}$,使得在每个$\Delta_{i-1}$上总有$|g_{i+1}-g_i|\le2^{-i}$.一旦这成立,则函数列$\{g_i\}$的极限$g$满足在整个$\Delta$上有$\overline{\partial}g=\alpha$.首先按照$\overline{\partial}(g_2-g_1)$在$\Delta_1$上为零,说明$g_2-g_1$是$\Delta_1$上的全纯函数,那么有Taylor展开,取展开中足够多有限项$p_N(z)$使得$|g_2-g_1-p_N|<2^{-1}$在$\Delta_0$上一致成立(因为$\Delta_0$闭包紧),我们用$g_2-p_N$重新记作$g_2$,那么$\overline{\partial}g_2=0$在$\Delta_2$上依旧成立,并且有$|g_2-g_1|<2^{-1}$在$\Delta_0$上一致成立.接着考虑$g_3-g_2$,类似的用某个$g_3-p_N$代替$g_3$,归纳构造下去即可.
+		
+		\qquad
+		
+		设$q\ge2$,依旧取$\Delta$的子polydisc构成的上述滤过$\{\Delta_i\}$.首先第二步说明存在$\beta_i\in\mathscr{A}^{0,q-1}(\Delta_i)$使得$\overline{\partial}\beta_i=\alpha$在$\Delta_i$上成立.于是$\overline{\partial}(\beta_{i+1}-\beta_i)=0$在$\Delta_i$上成立,这里$\beta_{i+1}-\beta_i$是一个$(0,q-1)$形式,其中$q-1\ge1$,所以再用一次第三步,可取$\gamma_i\in\mathscr{A}^{0,q-2}(\Delta_i)$使得$\beta_{i+1}-\beta_i=\overline{\partial}\gamma_i$在$\Delta_{i-1}$上成立.我们用$\beta_{i+1}-\overline{\partial}\gamma_i$代替$\beta_{i+1}$,就导致$\beta_{i+1}=\beta_i$在$\Delta_{i-1}$上成立.所以取$\beta$是这些$\beta_i$的并,那么它定义在整个$\Delta$上并且有$\overline{\partial}\beta=\alpha$.
+	\end{proof}
+	\item 推论.$\partial\overline{\partial}$-引理:如果$\theta\in\mathscr{A}^{1,1}(\Delta)$,满足$\mathrm{d}\theta=0$,那么存在$\varphi\in\mathrm{C}^{\infty}(\Delta)$使得$\theta=\partial\overline{\partial}\varphi$.换句话讲如果$\theta=a_{ij}\mathrm{d}z^i\wedge\mathrm{d}\overline{z^j}$(爱森斯坦求和),那么存在光滑函数$\varphi$使得$a_{ij}=\frac{\partial^2\varphi}{\partial z_i\partial\overline{z_j}}$.
+	\begin{proof}
+		
+		按照实数域上的庞加莱引理,从$\mathrm{d}\theta=0$得到存在$\alpha\in\mathscr{A}^1(\Delta)$,使得$\theta=\mathrm{d}\alpha$.我们记$\alpha=\alpha^{1,0}+\alpha^{0,1}$,其中$\alpha^{1,0}\in\mathscr{A}^{1,0}(\Delta)$,而$\alpha^{0,1}\in\mathscr{A}^{0,1}$.于是有$\theta=\mathrm{d}\alpha=\partial\alpha^{1,0}+\partial\alpha^{0,1}+\overline{\partial}\alpha^{1,0}+\overline{\partial}\alpha^{0,1}$.其中$\partial\alpha^{1,0}\in\mathscr{A}^{2,0}$,而$\partial\alpha^{0,1}+\overline{\partial}\alpha^{1,0}\in\mathscr{A}^{1,1}$,且$\overline{\partial}\alpha^{0,1}\in\mathscr{A}^{0,2}$.但是我们的$\theta\in\mathscr{A}^{1,1}$,于是有$\partial\alpha^{1,0}=0$和$\overline{\partial}\alpha^{0,1}=0$.于是按照上一条结论,有光滑函数$f,g$使得$\alpha^{0,1}=\overline{\partial f}$和$\alpha^{1,0}=\partial g$(把$\overline{\partial}$庞加莱引理取共轭就得到关于$\partial$的命题).于是带入得到$\theta=\partial\alpha^{0,1}+\overline{\partial}\alpha^{1,0}=\partial\overline{\partial}(f-g)$.
+	\end{proof}
+\end{enumerate}
+
+设$U\subseteq\mathbb{C}^n$是开集,设$g$是$U$上的一个黎曼度量,称$g$和$U$上的标准近复结构兼容,如果对任意$x\in U$有$g_x$和标准近复结构$J$是兼容的,也即对任意$v,w\in\mathrm{T}_xU$有$g_x(v,w)=g_x(J(v),J(w))$.此时定义$g$的基本形式为$\omega=g(J(-),-)$.
+\begin{enumerate}
+	\item 我们解释过有$\omega\in\mathscr{A}^{1,1}(U)\cap\mathscr{A}^2(U)$.
+	\item 另外如果记$h=g-i\omega$,那么我们解释过这是$\mathrm{T}_xU$上的正定Hermitian形式.
+	\item 取$g$是标准度量,也即约定$\frac{\partial}{\partial x_k},\frac{\partial}{\partial y_k},1\le k\le n$是$\mathrm{T}_xU$的标准正交基.此时$g$和标准近复结构是兼容的.此时有$\omega=\frac{i}{2}\sum_k\mathrm{d}z_k\wedge\mathrm{d}\overline{z_k}$.一般的如果记$g(\frac{\partial}{\partial} x_s,\frac{\partial}{\partial} x_t)=h_{st}(z)$,那么有$\omega=\frac{i}{2}\sum_{s,t}h_{st}\mathrm{d}z_k\wedge\mathrm{d}\overline{z_k}$.
+\end{enumerate}
+\newpage
+\subsection{复流形}
+\subsubsection{定义和例子}
+
+复流形的定义.
+\begin{itemize}
+	\item 复坐标卡.拓扑空间$X$上的一个复坐标卡$(U,\varphi)$是指一个同胚$\varphi:U\to V$,其中$U$是$X$的一个开集,$V\subset\mathbb{C}^n$是复空间中的一个开集.如果$p\in U$满足$\varphi(p)=0$,就称$\varphi$以$p$为中心.
+	\item 给定空间$X$上的两个复坐标卡$\varphi_i:U_i\to V_i,i=1,2$,称它们是相容的,如果要么$U_1\cap U_2$是空集,要么$\varphi_2\circ\varphi_1^{-1}:\varphi_1(U_1\cap U_2)\to\varphi_2(U_1\cap U_2)$是全纯等价映射.它称为这两个坐标卡之间的坐标变换.
+	\item 图册.空间$X$上的一个图册是指一族两两相容的坐标卡$\{\varphi_i:U_i\to V_i\}$,使得$X=\cup_iU_i$.
+	\item 两个图册称为等价的,如果各取出一个坐标卡都是相容的.容易验证这是一个等价关系.并且两个图册是等价的当且仅当它们的并构成一个图册.于是每个图册的等价类中存在唯一的极大图册.称空间$X$上的一个复结构是指一个复图册的等价类,或者等价的讲,是指一个极大复图册.
+	\item 一个复流形是指赋予了复结构的Hausdorff,第二可数的拓扑空间.如果这个复结构中每个复坐标卡映入的是同一个维数$n$的复空间,就称这个复流形是$n$维的,用记号$M^n$表示复流形$M$是$n$维的.称一维复流形为黎曼曲面,这里称为曲面是因为复一维就是实二维的.
+\end{itemize}
+\begin{enumerate}
+	\item 复结构使得黎曼曲面是局部道路连通的,此时连通性等价于道路连通性.
+	\item 全纯函数可视为$\mathbb{R}^2\to\mathbb{R}^2$的映射,此时该映射是光滑的.于是$n$维复流形可视为$2n$维实光滑流形.特别的黎曼曲面总是一个2维实光滑流形.
+	\item 复流形总是可定向的,因为坐标卡之间的坐标变换总是一个全纯等价映射,我们解释过一个复解析映射如果视为实光滑映射,它的实雅各比行列式是它复雅各比行列式模长的平方,于是特别的由于全纯等价映射雅各比行列式不为零,就导致它的实雅各比行列式为正,换句话讲这些坐标卡视为实的之后两两保定向,所以复流形总是可定向的.
+\end{enumerate}
+
+映射.
+\begin{itemize}
+	\item 全纯函数.设$M$是复流形,开集$U$上的复变函数$f$称为全纯函数,如果对每个坐标卡$(U_i,\varphi_i:U\to\mathbb{C}^n)$,都有$f\circ\varphi_i^{-1}$是$\varphi_i(U\cap U_i)\subset\mathbb{C}^n$上的全纯函数.我们用$\mathscr{O}_M(U)$或者$\mathscr{O}(U)$表示$U$上全体全纯函数构成的环.
+	\item 全纯映射.复流形之间的映射$f:M\to N$称为全纯映射,如果对$M$上任意的坐标卡$(U,\varphi)$和$N$上任意的坐标卡$(V,\psi)$,有$\psi\circ f\circ\varphi^{-1}$是$\varphi(U\cap f^{-1}(V))\to\psi(V)$的全纯映射.称全纯映射$f$是复流形的同构,如果它是双射,并且逆映射也是全纯的.
+\end{itemize}
+
+构造新的复流形.
+\begin{enumerate}
+	\item 子流形.称子集$S\subseteq M^n$是$k$维子流形,如果对每个$p\in S$,存在覆盖它的$M$上的坐标卡$(U,\varphi)$,使得$\varphi(S\cap U)=\{z\in\varphi(U)\mid z_{k+1}=\cdots=z_n=0\}$.此时$S$本身的确是一个$k$维复流形,并且包含映射$S\subseteq M$是一个全纯映射.
+	\item 轨道空间.设$X$是复流形,设$G$是离散群,全纯的作用在$X$上,换句话讲对每个$g\in G$有全纯等价$\varphi_g:X\to X$,使得对任意$g_1,g_2\in G$有$\varphi_{g_1}\circ\varphi_{g_2}=\varphi_{g_1g_2}$.我们就记$\varphi_g(x)=gx$.如果这个群作用满足如下条件,那么轨道空间$X/G$自然的成为一个复流形,并且典范映射$\pi:X\to X/G$是全纯映射.
+	\begin{enumerate}
+		\item 对任意$x\in X$,存在它的开邻域$U_x$,使得只要$g\not=\mathrm{id}$,就有$g(U_x)\cap U_x=\emptyset$.
+		\item 如果$x,y\in X$满足$x\not\in Gy$,那么存在$x,y$分别的开邻域$U_x,U_y$使得$U_x\cap g(U_y)=\emptyset,\forall g\in G$.
+	\end{enumerate}
+    \item 粘合.设有一族$\mathbb{C}^n$的开子集$\{U_i\}$,每个$U_i$有开子集$U_{ij},j\not=i$(可能是空集),每对不同的指标$i,j$存在全纯映射$\varphi_{ij}:U_{ij}\to U_{ji}$,使得$\varphi_{ij}$和$\varphi_{ji}$互为逆映射,并且对互不相同的指标$i,j,k$,有$\varphi_{jk}\circ\varphi_{ij}=\varphi_{ik}$.这样粘合出来的空间的Hausdorff条件等价于验证每个$\varphi_{ij}$的图像都是对应积空间的闭子集.
+\end{enumerate}
+
+复流形的例子.
+\begin{enumerate}
+	\item $\mathbb{C}^n$,或者它的任意开子集.此时取整体坐标卡即可.
+	\item 复射影空间$\mathbb{CP}^n$.
+	\begin{itemize}
+		\item 集合层面.它作为集合定义为$\mathbb{C}^{n+1}$的全部一维子空间.换句话讲,在$\mathbb{C}^{n+1}-\{0\}$上定义一个等价关系$\sim$,满足$u\sim v$当且仅当存在非零复数$z$使得$u=zv$.于是存在典范的映射$\pi:\mathbb{C}^{n+1}-\{0\}\to\mathbb{CP}^n$,它把点$v\not=0$映射为所在的一维子空间,记作$[v]=[z_0:z_1:\cdots:z_n]$.
+		\item 拓扑层面.约定$\mathbb{CP}^n$上的拓扑是由$\pi$诱导的商拓扑,换句话讲它的拓扑是使得$\pi$连续的最细拓扑.
+		\item 复结构.取复坐标卡为$U_i=\{[z_0:z_1:\cdots:z_n]\mid z_i\not=0\}$,其中$i=0,1,\cdots,n$.构造同胚映射$\phi_i:U_i\to\mathbb{C}^n$为$[z_0:z_1:\cdots:z_n]\mapsto\left(\frac{z_0}{z_i},\cdots,\frac{z_{i-1}}{z_i},\frac{z_{i+1}}{z_i},\cdots,\frac{z_n}{z_i}\right)$.此时$\phi_j\circ\phi_i^{-1}$(不妨设$j<i$)是$\phi_i(U_i\cap U_j)\to\phi_j(U_i\cap U_j)$的映射:
+		\begin{align*}
+			\varphi_j\circ\varphi_i^{-1}(z_1,\cdots,z_n)&=\varphi_j([z_1,\cdots,z_{i-1},1,z_{i+1},\cdots,z_n])\\&=\left(\frac{z_1}{z_j},\cdots,\frac{z_{j-1}}{z_j},\frac{z_{j+1}}{z_j},\cdots,\frac{z_{i-1}}{z_j},\frac{1}{z_j},\frac{z_{i+1}}{z_j},\cdots,\frac{z_n}{z_j}\right)
+		\end{align*}
+		
+		这是全纯映射.于是$\mathbb{CP}^n$是一个$n$维复流形,并且可验证$\pi$是全纯映射.
+	\end{itemize}
+    \item 复射影代数簇.设$P(z_0,\cdots,z_n)$是$d$次齐次多项式.考虑$S=\{[z]\in\mathbb{CP}^n\mid P(z)=0\}$.那么$S$是射影空间的子流形当且仅当0是正则值,即如果把$P$视为$\mathbb{C}^{n+1}\to\mathbb{C}$的映射,那么$n+1$个方程$\frac{\partial P}{\partial z_i}=0$的公共解只有0.此时$S$是$n-1$维子流形.
+    \item 复环面.取定$\mathbb{C}^n$的一个完全格$X$,此即存在$\{v_1,v_2,\cdots,v_{2n}\}\subset\mathbb{C}^n$使得它构成了$\mathbb{C}^n$作为$\mathbb{R}$模的基,使得$X=\mathbb{Z}v_1+\mathbb{Z}v_2+\cdots+\mathbb{Z}v_{2n}$.复坐标卡取为,对$U\subseteq\mathbb{C}^n$,使得不存在$z,w\in U$使得$z-w\in X$.记$\pi:\mathbb{C}^n\to\mathbb{C}^n/X$是典范的商映射.那么$\pi:U\to\pi(U)\subseteq\mathbb{C}^n/X$是一个同胚.我们就定义它对应一个复坐标卡.称$\mathbb{C}^n/X$为一个$n$维复环面.例如$n=1$的时候此即把$\mathbb{C}$中的一个正方形两组对边粘合.这是轨道空间的例子.
+    \item Hopf复流形.这是一个轨道空间的例子.设$0<\lambda<1$,考虑$\mathbb{Z}$在$\mathbb{C}^m-\{0\}$上的作用为$kz=\lambda^kz,\forall k\in\mathbb{Z},z\in\mathbb{C}^m$.此时轨道空间为$\{z\in\mathbb{C}^m\mid\lambda\le|z|\le1\}/\sim$,这里等价关系取为如果$z$的模长是1,那么它粘合于点$\lambda z$.它在拓扑层面就是$\mathbb{S}^{2m-1}\times\mathbb{S}^1$.
+\end{enumerate}
+
+近复结构(almost complex structure).
+\begin{enumerate}
+	\item 线性空间上.设$V$是实线性空间,它上面的一个近复结构指的是一个线性映射$J:V\to V$,使得$J^2=-\mathrm{id}$.当然此时$V$的实维数必须是偶数.$V$的复化是指复线性空间$V\otimes_{\mathbb{R}}\mathbb{C}$,可表示为$\{X+\sqrt{-1}Y\mid X,Y\in V\}$,数乘就是$(a+ib)(X+iY)=(aX-bY)+i(aY+bX)$.有分解$V\otimes_{\mathbb{R}}\mathbb{C}=V^{1,0}\oplus V^{0,1}$.其中$V^{1,0}=\{X-\sqrt{-1}JX\mid X\in V\}$和$V^{0,1}=\{X+\sqrt{-1}JX\mid X\in V\}$.于是$J$限制在$V^{1,0}$上是$\sqrt{-1}\mathrm{id}$,$J$限制在$V^{0,1}$上是$-\sqrt{-1}\mathrm{id}$.
+	\item 流形上.设$M$是光滑实流形,$M$上的一个近复结构是指赋予一个自同态$J:\mathrm{T}M\to\mathrm{T}M$,使得$J^2=-\mathrm{id}$.
+	\item 复流形上的典范近复结构.取复坐标卡$(U,\varphi)$,那么在$U$上切丛被$\{\partial x_1,\cdots\partial x_n,\partial y_1,\cdots,\partial y_n\}$张成.定义$J$是$\partial x_i\mapsto\partial y_i$和$\partial y_i\mapsto-\partial x_i$.容易验证这个定义不依赖坐标卡的选取,于是得到一个整体的$J$.
+	\item 反过来我们关心光滑流形上赋予近复结构后何时会成为一个复流形,如果一个近复结构的确能被某个复结构典范诱导,就称它是可积的.记$\mathrm{T}_{\mathbb{C}}M=\mathrm{T}M\otimes_{\mathbb{R}}\mathbb{C}$.把它分解为$\mathrm{T}^{1,0}M\oplus\mathrm{T}^{0,1}M$.其中$\mathrm{T}^{1,0}M$和$\mathrm{T}^{0,1}M$是$M$上的两个复向量丛.接下来我们期望有$[\mathrm{T}^{1,0}M,\mathrm{T}^{1,0}M]\subseteq\mathrm{T}^{1,0}M$.取两个向量场$X-\sqrt{-1}JX,Y-\sqrt{-1}JY\in\mathrm{T}^{1,0}M$,那么有:
+	$$[X-\sqrt{-1}JX,Y-\sqrt{-1}JY]=[X,Y]-[JX,JY]-\sqrt{-1}\left([X,JY]+JX,Y\right)$$
+	
+	考虑$\tau(X,Y)=[X,JY]+[JX,Y]-J\left([X,Y]-[JX,JY]\right)$,那么$\tau(X,Y)=0$等价于$[X-\sqrt{-1}JX,Y-\sqrt{-1}JY]\in\mathrm{T}^{1,0}M$.我们断言:
+	\begin{enumerate}
+		\item $\tau$是张量.称为扭(torsion)张量.
+		\item $\tau(X,Y)=-\tau(Y,X)$.
+		\item $\tau(JX,Y)=-J\tau(X,Y)=\tau(X,JY)$.
+		\item Newlander-Nirenberg定理.$\tau=0$当且仅当存在$M$上的复结构使得$J$是典范近复结构(即$J$是可积的).这件事的充分性是容易的,此时$\mathrm{T}^{1,0}M=\langle\frac{\partial}{\partial z_i}\rangle$和$\mathrm{T}^{0,1}M=\langle\frac{\partial}{\partial\overline{z_i}}\rangle$.必要性相对复杂,要在每个点附近构造全纯的坐标卡,这里一个光滑函数$f$全纯指的是对每个$X\in\mathrm{T}^{1,0}M$都有$\overline{X}f=0$.
+	\end{enumerate}
+    \item 设$f:M\to N$是两个复流形之间的光滑映射,记$M,N$上典范的近复结构分别是$J_M$和$J_N$,那么$f$是全纯的当且仅当$f_*\circ J_M=J_N\circ f_*$.
+    \begin{proof}
+    	
+    	在$M$上取复坐标卡$(U,z_i)$,在$N$上取复坐标卡$(V,w_i)$,问题变成局部的,就设$f$是复空间开子集之间的光滑映射,设$f=(u_1+iv_1,\cdots,u_n+iv_n)$,有$f_*J_M\partial x_i=f_*\partial y_i=\frac{\partial u_k}{\partial y_i}\frac{\partial}{\partial u_k}+\frac{\partial v_k}{\partial y_i}\frac{\partial}{\partial v_k}$和$J_Nf_*(\partial x_i)=J_N\left(\frac{\partial u_k}{\partial x_i}\frac{\partial}{\partial u_k}+\frac{\partial v_k}{\partial x_i}\frac{\partial}{\partial v_k}\right)=-\frac{\partial v_k}{\partial x_i}\frac{\partial}{\partial u_k}+\frac{\partial u_k}{\partial x_i}\frac{\partial}{\partial v_k}$.比较系数得到$f$满足CR方程.
+    \end{proof}
+    \item 二维实光滑流形上近复结构总是可积的.这是因为对实二维光滑流形,任取点$p$的非零切向量$X$,那么$JX$和$X$必然线性无关,于是$\tau=0$只需验证$\tau(X,JX)=0$,但是$\tau(X,JX)=-J\tau(X,X)$,反对称性导致$J(X,X)=0$.对于二维实定向光滑流形,它的近复结构可以取逆时针旋转90度,于是我们证明了二维实定向光滑流形总是复流形.
+    \item 但是最后这件事的推导有点高射炮打蚊子的意思.我们有更简单的做法:设$M$是定向2维黎曼流形,考虑等温坐标卡$(U,x,y)$,即在$U$上度量可表示为$g=\rho(\mathrm{d}x^2+\mathrm{d}y^2)$,其中$\rho:U\to\mathbb{R}^+$是光滑的.不妨设$\{x,y\}$是正定向的.现在取第二个等温坐标卡$(V,u,v)$,设度量可以表示为$\widetilde{\rho}(\mathrm{d}u^2+\mathrm{d}v^2)$,也设$\{u,v\}$是正定向的,坐标变换设为$\psi\circ\varphi^{-1}:\varphi(U\cap V)\to\psi(U\cap V)$.于是在相交的部分就有$g=\rho(\mathrm{d}x^2+\mathrm{d}y^2)=\widetilde{\rho}(\mathrm{d}u^2+\mathrm{d}v^2)$.接下来展开$\mathrm{d}u=\frac{\partial u}{\partial x}\mathrm{d}x+\frac{\partial u}{\partial y}\mathrm{d}y$和$\mathrm{d}v=\frac{\partial v}{\partial x}\mathrm{d}x+\frac{\partial v}{\partial y}\mathrm{d}y$得到:
+    $$\left(\frac{\partial u}{\partial x}\right)^2+\left(\frac{\partial v}{\partial x}\right)^2=\left(\frac{\partial u}{\partial y}\right)^2+\left(\frac{\partial v}{\partial y}\right)^2=0$$
+    $$\frac{\partial u}{\partial x}\frac{\partial u}{\partial y}+\frac{\partial v}{\partial x}\frac{\partial v}{\partial y}=0$$
+    
+    结合雅各比行列式为正就能得到$u,v$满足CR方程,于是坐标变换是全纯的.
+    \item 再进一步我们可以证明2维实光滑流形上共形结构和复结构是等价的,共形结构是光滑流形上全部度量在相差一个正光滑函数意义下的等价类.上一条实际是把共形结构对应到复结构,反过来给定复结构,取典范近复结构$J$,一个度量$g$称为Hermitian的,如果总有$g(JX,JY)=g(X,Y)$.那么对任意度量$g$,取平均$\frac{1}{2}(g+g(J,J))$就得到一个Hermitian度量.可以证明两个Hermitian度量相差一个正光滑函数,也就对应一个共形结构.
+\end{enumerate}
+
+
+
+复流形上的De Rham上同调和Dolbeault上同调.
+\begin{enumerate}
+	\item 设$M$是$m$维复流形,我们有De Rham复形:
+	$$\xymatrix{0\ar[r]&\mathscr{A}^0(M)\ar[r]^{\mathrm{d}}&\mathscr{A}^1(M)\ar[r]&\cdots\ar[r]^{\mathrm{d}}&\mathscr{A}^{2m}&}$$
+	
+	它的同调群记作$\mathrm{H}^k(M)$,是复线性空间.有分解$\mathscr{A}^k(M)=\oplus_{p+q=k}\mathscr{A}^{p,q}(M)$.其中$\mathscr{A}^{p,q}(M)$中的元素局部上可以表示为$\alpha=\sum_{|I|=p,|J|=q}f_{IJ}\mathrm{d}z^I\wedge\mathrm{d}\overline{z}^J$,并且不依赖于坐标选取.我们有算子$\partial:\mathscr{A}^{p,q}\to\mathscr{A}^{p,q+1}$和$\overline{\partial}:\mathscr{A}^{p,q}\to\mathscr{A}^{p+1,q}$,满足$\mathrm{d}=\partial+\overline{\partial}$.由于$\mathrm{d}^2=0$.我们依旧可以得到$\partial^2=0$,$\overline{\partial}^2=0$,$\partial\overline{\partial}+\overline{\partial}\partial=0$.于是我们得到Dolbeault复形为:
+	$$\xymatrix{0\ar[r]&\mathscr{A}^{p,0}(M)\ar[r]^{\overline{\partial}}&\mathscr{A}^{p,1}(M)\ar[r]&\cdots\ar[r]^{\overline{\partial}}&\mathscr{A}^{p,m}\ar[r]&0}$$
+	
+	它的同调群$\mathrm{H}^{p,q}(M)=\{\alpha\in\mathscr{A}^{p,q}(M)\mid\overline{\partial}\alpha=0\}/\{\overline{\partial}\beta\mid\beta\in\mathscr{A}^{p,q-1}(M)\}$.
+\end{enumerate}
+
+
+
+
+
+\newpage
+\subsection{相交理论}
+
+
+
+
+\newpage
+\subsection{复向量丛上的微分几何}
+
+设$M^m$是复流形,典范近复结构记作$J$,$M$上的黎曼度量$g$称为Hermitian的,如果总有$g(J,J)=g$.这样的度量总是存在的,因为任取黎曼度量$h$,取平均$g(X,Y)=\frac{1}{2}\left(h(X,Y)+h(JX,JY)\right)$就是Hermitian的.如果$g$是Hermitian度量,取$\omega(X,Y)=g(JX,Y)$称为和它伴随的K\"ahler形式,这是一个反对称的形式.一个Hermitian度量称为K\"ahler的,如果它伴随的K\"ahler形式$\omega$是$\mathrm{d}$-闭的,也即$\mathrm{d}\omega=0$.
+\begin{enumerate}
+	\item 设$g$是Hermitian度量,如果$\xi,\eta$同时在$\mathrm{T}^{1,0}(M)$或者$\mathrm{T}^{0,1}(M)$中,那么有$g(\xi,\eta)=0$.
+	\begin{proof}
+		
+		记$\xi=X-\sqrt{-1}JX$和$\eta=Y-\sqrt{-1}JY$.明显有:
+		$$g(X-\sqrt{-1}JX,Y-\sqrt{-1}JY)=g(X,Y)-g(JX,JY)-\sqrt{-1}\left(g(X,JY)+g(JX,Y)\right)=0$$
+	\end{proof}
+    \item 所以对于Hermitian度量,我们只要考虑$(1,0)$型切向量和$(0,1)$型切向量的内积.取一个局部坐标$(U,z)$.记$g_{i\overline{j}}=g\left(\frac{\partial}{\partial z_i},\frac{\partial}{\partial\overline{z_j}}\right)$.那么$\left(g_{i\overline{j}}\right)$是一个正定Hermitian矩阵.并且有$g=g_{i\overline{j}}\left(\mathrm{d}z^i\otimes\mathrm{d}\overline{z^j}+\mathrm{d}\overline{z^j}\otimes\mathrm{d}z^i\right)$.于是有$\omega=g(J-,-)=\sqrt{-1}g_{i\overline{j}}\left(\mathrm{d}z^i\otimes\mathrm{d}\overline{z^j}-\mathrm{d}\overline{z^j}\otimes\mathrm{d}z^i\right)=\sqrt{-1}g_{i\overline{j}}\mathrm{d}z^i\wedge\mathrm{d}\overline{z^j}\in\mathscr{A}^{1,1}(M)$.
+\end{enumerate}
+
+K\"ahler度量的例子.
+\begin{enumerate}
+	\item $\mathbb{C}^n$上取$\omega=\sqrt{-1}\mathrm{d}z^i\wedge\mathrm{d}\overline{z^i}$.此为欧氏度量的二倍.
+	\item $\mathbb{B}^m=\{z\in\mathbb{C}^m\mid |z|<1\}$,取$\omega=-\sqrt{-1}\partial\overline{\partial}\log(1-|z|^2)$.计算有($|z|^2=\sum z_i\overline{z_i}$):
+	\begin{align*}
+		\omega&=\sqrt{-1}\partial\left(\frac{z_i\mathrm{d}\overline{z^i}}{1-|z|^2}\right)\\&=\sqrt{-1}\left(\frac{\delta_{ij}\mathrm{d}z^i\wedge\mathrm{d}\overline{z^j}}{1-|z|^2}+\frac{\overline{z_i}z_j\mathrm{d}z^i\wedge\mathrm{d}\overline{z^j}}{(1-|z|^2)^2}\right)
+	\end{align*}
+
+    于是$g_{i\overline{j}}=\frac{1}{1-|z|^2}(\delta_{ij}+\frac{\overline{z_i}z_j}{1-|z|^2})$.这明显是Hermitian矩阵,它是正定的因为它是可逆对角矩阵加上一个秩1矩阵.
+    \item $\mathbb{P}^m=\{[z_0,z_1,\cdots,z_m]\mid z\in\mathbb{C}^{m+1}-\{0\}\}$.取开子集$U_0=\{z_0\not=0\}=\{[1,z_1,\cdots,z_m]\mid z=(z_1,\cdots,z_m)\in\mathbb{C}^m\}$.定义$U$上的形式$\omega=\partial\overline{\partial}\log(1+|z|^2)=\partial\overline{\partial}\log\varphi_0=\sqrt{-1}\frac{1}{1+|z|^2}\left(\delta_{ij}-\frac{\overline{z_i}z_j}{1+|z|^2}\right)\mathrm{d}z^i\wedge\mathrm{d}\overline{z^j}$.这样得到的$g_{i\overline{j}}=\frac{1}{1+|z|^2}\left(\delta_{ij}-\frac{\overline{z_i}z_j}{1+|z|^2}\right)$也是一个正定Hermitian矩阵.于是我们在$U_0$上定义了$\omega$,但是在每个$U_i$上可以做相同的事情,相交的部分有$\varphi_i=\varphi_j|f|^2$,其中$f$全纯(比方说设$i<j$,那么$\varphi_i=|z_1|^2+\cdots+|z_{i-1}|^2+1+|z_{i+1}|^2+\cdots+|z_m|^2=|z_{j-1}|^2\left(\left|\frac{z_1}{z_{j-1}}\right|^2+\cdots+\left|\frac{z_m}{z_{j-1}}\right|^2\right)=|z_{j-1}|^2\varphi_j$,).按照$\partial\overline{\partial}|f|^2=0$,所以这些所有$U_i$上的$\omega$可以粘合为整个$\mathbb{P}^m$上的光滑形式.这个度量有个名字叫Fubini-Study度量.
+\end{enumerate}
+
+\begin{enumerate}
+	\item 设$\varphi:M\to N$是两个复流形之间的全纯浸入,如果$g$是$N$上的K\"ahler度量,那么$\varphi^*g$是$M$上的K\"ahler度量.
+	\begin{proof}
+		
+		浸入条件保证了回拉$\varphi^*g$是$M$上的黎曼度量.$\varphi^*g$是Hermitian度量是因为$\varphi^*g(J_M,J_M)=g(\varphi_*J_M,\varphi_*J_M)=g(J_N\varphi_*,J_N\varphi_*)=g(\varphi_*,\varphi_*)=\varphi^*g$.设和$g$相伴的K\"ahler形式是$\omega$,那么$\varphi^*\omega$是和$\varphi^*g$相伴的K\"ahler形式:$\varphi^*g(J_M-,-)=g(J_N\varphi_*,\varphi_*)=\omega(\varphi_*,\varphi_*)=\varphi^*\omega$.最后按照$\mathrm{d}$和回拉可交换得到$\mathrm{d}\varphi^*\omega=\varphi^*\mathrm{d}\omega=0$,于是$\varphi^*\omega$是闭的.
+	\end{proof}
+    \item 射影复流形指的是能嵌入到复射影空间的复流形,所以上一条说明射影复流形都是K\"ahler的.
+    \item 如果$M^m$是紧的K\"ahler复流形,那么$\mathrm{H}^{2k}\not=0$对任意$k=1,\cdots,m$成立.于是特别的,比方说$m>1$维的Hopf复流形,拓扑上看是$\mathbb{S}^1\times\mathbb{S}^{2m-1}$,它的同调群$\mathrm{H}^2=0$,所以它不是K\"ahler复流形.
+    \begin{proof}
+    	
+    	取K\"ahler形式$\omega$,这是一个闭2形式,所以$[\omega^k]\in\mathrm{H}^{2k}(M)$.记$\omega=\sqrt{-1}g_{i\overline{j}}\mathrm{d}z^i\wedge\mathrm{d}\overline{z^j}$.那么有$\omega^m/m!=\det\left(g_{i\overline{j}}\right)\prod_{i=1}^m\sqrt{-1}\mathrm{d}z^i\wedge\mathrm{d}\overline{z^i}$.所以$\omega^m/m!$就是体积形式,所以$\int\omega^m>0$.所以每个$[\omega^k],1\le k\le m$都不能是平凡的.
+    \end{proof}
+    \item 如果取正交基$\{e_1,\cdots,e_m,f_1=Je_1,\cdots,f_m=Je_m\}$,那么$\omega$可以表示为$e^1\wedge f^1+\cdots+e^m\wedge f^m$.此时有$\omega^m/m!=e^1\wedge f^1\wedge\cdots\wedge e^m\wedge f^m$.
+\end{enumerate}
+
+
+
+
+\newpage
+\subsection{Hodge理论}
+
+
+
+
+
+
+流形上的Hodge$\star$映射.
+\begin{enumerate}
+	\item 设$(M^n,g)$是紧定向黎曼流形.那么$\bigwedge^k(M)$是向量丛,$\mathscr{A}^k(M)$是截面.定义$\star:\mathscr{A}^k(M)\to\mathscr{A}^{n-k}(M)$是,取点$p$切空间的正定向的标准正交基$\{e_1,\cdots,e_n\}$,逐点的定义$\star(e^{i_1}\wedge\cdots\wedge e^{i_k})=(-1)^{\tau(i_1,\cdots,i_m)}e^{i_{k+1}}\wedge\cdots\wedge e^{i_n}$.另外在$\mathscr{A}^k(M)$上可以定义内积$\langle\alpha,\beta\rangle_0=\int_M\alpha\wedge\star\beta=\int_M\langle\alpha,\beta\rangle\Omega$.
+	\item 我们有微分映射$\mathrm{d}:\mathscr{A}^k(M)\to\mathscr{A}^{k+1}(M)$.它关于内积$\langle-,-\rangle_0$的对偶映射$\mathrm{d}^*:\mathscr{A}^{k+1}(M)\to\mathscr{A}^k(M)$,定义为$\langle\mathrm{d}^*\alpha,\varphi\rangle_0=\langle\alpha,\mathrm{d}\varphi\rangle_0$.
+	\begin{align*}
+		\langle\mathrm{d}\varphi,\alpha\rangle_0&=\int_M\mathrm{d}\varphi\wedge\star\alpha\\&=\int_M\mathrm{d}(\varphi\wedge\star\alpha)+(-1)^{k-1}\varphi\wedge\mathrm{d}\star\alpha\\&=(-1)^{k-1}\int_M\varphi\wedge\star\star\mathrm{d}\star\alpha(-1)^{k(n-k)}\\&=(-1)^{kn-1}\langle\varphi,\star\mathrm{d}\star\alpha\rangle_0
+	\end{align*}
+	
+	于是得到$\mathrm{d}^*=(-1)^{kn-1}\star\mathrm{d}\star$.
+	\item Hodge Laplacian定义为$\square=\mathrm{d}\mathrm{d}^*+\mathrm{d}^*\mathrm{d}:\mathscr{A}^k(M)\to\mathscr{A}^k(M)$.它满足:
+	\begin{itemize}
+		\item $\langle\square\alpha,\beta\rangle_0=\langle\mathrm{d}\alpha,\mathrm{d}\beta\rangle_0+\langle\mathrm{d}^*\alpha,\mathrm{d}^*\beta\rangle_0=\langle\alpha,\square\beta\rangle_0$.
+		\item 特别的$\langle\square\alpha,\alpha\rangle_0=|\mathrm{d}\alpha|^2+|\mathrm{d}^*\alpha|^2$.
+	\end{itemize}
+    \item 定义$M$上的调和$k$形式集合为:
+    \begin{align*}
+    	\mathscr{H}^k(M)&=\{\alpha\in\mathscr{A}^k(M)\mid\square\alpha=0\}\\&=\{\alpha\in\mathscr{A}^k(M)\mid\mathrm{d}\alpha=0,\mathrm{d}^*\alpha=0\}\\&=\{\alpha\in\mathscr{A}^k(M)\mid\mathrm{d}\alpha=0,\mathrm{d}\star\alpha=0\}
+    \end{align*}
+\end{enumerate}
+
+Hodge理论基本定理.
+\begin{enumerate}
+	\item $\mathscr{H}^k(M)$都是有限维空间.
+	\item $\mathscr{A}^k(M)=\mathscr{H}^k(M)\oplus\mathrm{d}\left(\mathscr{A}^{k-1}(M)\right)\oplus\mathrm{d}^*\left(\mathscr{A}^{k+1}(M)\right)$.
+	
+	并且这是一个正交分解.
+\end{enumerate}
+
+推论.
+\begin{enumerate}
+	\item $\mathscr{H}^k(M)$自然同构于德拉姆上同调$\mathrm{H}^k(M)$,即把$\varphi$映射为它的同调类$[\varphi]$.也即德拉姆上同调的每个上同调类存在唯一的调和提升.
+	\begin{proof}
+		
+		先证单射,如果调和$k$形式$\varphi$满足同调类$[\varphi]=0$,也即$\varphi$是恰当的,也即$\alpha=\mathrm{d}\beta$,那么$|\alpha|^2=\langle\mathrm{d}\beta,\alpha\rangle=\langle\beta,\mathrm{d}^*\alpha\rangle=0$,于是有$\alpha=0$.
+		
+		\qquad
+		
+		再证满射,设$\alpha$是闭形式,按照Hodge分解有$\alpha=\alpha_H+\mathrm{d}\beta+\mathrm{d}^*\gamma$,其中$\alpha_H$是调和形式.但是这里$|\mathrm{d}^*\gamma|^2=\langle\alpha-\alpha_H-\mathrm{d}\beta,\mathrm{d}^*\gamma\rangle=\langle\mathrm{d}\alpha-\mathrm{d}\alpha_H-\mathrm{d}^2\beta,\gamma\rangle=0$,于是$\mathrm{d}^*\gamma=0$,于是$\alpha=\alpha_H+\mathrm{d}\beta$,于是$\alpha$和$\alpha_H$相差一个恰当形式.
+	\end{proof}
+	\item 给定$\psi$,那么$\square\varphi=\psi$有解$\varphi$当且仅当$\psi$和$\mathscr{H}^k(M)$正交.
+	\item $\star\circ\square=\square\circ\star$.于是$\star$可以限制为$\mathscr{H}^k(M)\to\mathscr{H}^{n-k}(M)$的同构.
+\end{enumerate}
+
+黎曼曲面上的Hodge理论.
+\begin{enumerate}
+	\item 设$\Sigma^2$是一个黎曼曲面,设$h$是一个Hermitian度量,在局部坐标卡$(U,z)$上,$h$就可以表示为$h=\rho(\mathrm{d}x^2+\mathrm{d}y^2)$,其中$\rho\in\mathrm{C}^{\infty}(U)$是正的光滑函数.那么和$h$伴随的K\"ahler形式就是$\omega=\rho\mathrm{d}x\wedge\mathrm{d}y=\frac{\sqrt{-1}}{2}\rho\mathrm{d}z\wedge\mathrm{d}\overline{z}$.
+	\item Hodge$\star$.取切空间的标准正交基$e_1=\frac{1}{\sqrt{\rho}}\frac{\partial}{\partial x}$和$e_2=\frac{1}{\sqrt{\rho}}\frac{\partial}{\partial y}$.对偶基是$e^1=\sqrt{\rho}\mathrm{d}x$和$e^2=\sqrt{\rho}\mathrm{d}y$.按照定义有$\star e^1=e^2$和$\star e^2=-e^1$.于是有$\star\mathrm{d}x=\mathrm{d}y$和$\star\mathrm{d}y=-\mathrm{d}x$.进而有$\star\mathrm{d}z=\mathrm{d}y-\sqrt{-1}\mathrm{d}x=-\sqrt{-1}\mathrm{d}z$和$\star\mathrm{d}\overline{z}=\sqrt{-1}\mathrm{d}\overline{z}$.
+	\item Hodge分解.
+	\begin{enumerate}
+		\item 如果$\theta$是调和1形式,那么它可以表示为$\theta=\alpha+\overline{\beta}$,其中$\alpha$和$\beta$都是全纯1形式.换句话讲有$\mathscr{H}^1(\Sigma)=\Omega(\Sigma)\oplus\overline{\Omega(\Sigma)}$.其中$\Omega(\Sigma)$是全纯1形式构成的空间.于是特别的这里$\Omega(\Sigma)$的维数有限,这个维数其实就是$\Sigma$的亏格.
+		\begin{proof}
+			
+			一个一般的光滑1形式总可以写成$\theta=f\mathrm{d}z+g\mathrm{d}\overline{z}$,其中$f,g$是光滑函数.那么$\star\theta=-\sqrt{-1}(f\mathrm{d}z-g\mathrm{d}\overline{z})$.于是$\mathrm{d}\theta=0$推出$\frac{\partial g}{\partial z}=\frac{\partial f}{\partial\overline{z}}$;从$\mathrm{d}\star\theta=0$推出$\frac{\partial g}{\partial z}=-\frac{\partial f}{\partial\overline{z}}$.于是$\theta$是调和1形式推出$\frac{\partial g}{\partial z}=\frac{\partial f}{\partial\overline{z}}=0$,此即$f$和$\overline{g}$都是全纯的.
+		\end{proof}
+		\item $\mathrm{A}^{1,0}(\Sigma)=\Omega(\Sigma)\oplus\partial\mathscr{A}^0(\Sigma)$,$\mathscr{A}^{0,1}(\Sigma)=\overline{\Omega(\Sigma)}\oplus\overline{\partial}\mathscr{A}^0(\Sigma)$.
+		\begin{proof}
+			
+			按照Hodge分解,有$\mathscr{A}^1(\Sigma)=\mathscr{H}^1(\Sigma)\oplus\mathrm{d}\mathscr{A}^0(\Sigma)\oplus\mathrm{d}^*\mathscr{A}^2(\Sigma)$.其中$\mathscr{A}^2(\Sigma)=\mathscr{A}^0(\Sigma)\omega$.而$\mathrm{d}^*(f\omega)=-\star\mathrm{d}\star(f\omega)=-\star\mathrm{d}f=-\star\star(\partial f+\overline{\partial}f)=\sqrt{-1}(\partial f-\overline{\partial}f)$.于是一个光滑1形式就可以表示为:
+			\begin{align*}
+				\theta&=\alpha+\overline{\beta}+\mathrm{d}u+\mathrm{d}^*(v\omega)\\&=\alpha+\overline{\beta}+\partial u+\overline{\partial}u+\sqrt{-1}(\partial v-\overline{\partial}v)\\&=\alpha+\partial(u+\sqrt{-1}v)+\overline{\beta}+\overline{\partial}(u-\sqrt{-1}v)
+			\end{align*}
+		\end{proof}
+	\end{enumerate}
+\end{enumerate}
+
+黎曼曲面上的亚纯函数.
+\begin{enumerate}
+	\item 复球面$\widehat{\mathbb{C}}\cong\mathbb{CP}^1$.它的亚纯函数就是有理函数.
+	\item 复环面$\mathbb{C}/X$,其中$X$是一个完全格.它的亚纯函数是双周期函数,也即椭圆函数.例如带单个2阶极点的亚纯函数:
+	$$p(z)=\frac{1}{z^2}+\sum_{\omega\in X-\{0\}}\left(\frac{1}{(z-w)^2}-\frac{1}{w^2}\right)$$
+	\item 黎曼曲面$\Sigma$上的亚纯函数实际上就是$\Sigma\to\widehat{\mathbb{C}}$的全纯映射.
+	\item 设$f:\Sigma\to\widehat{\mathbb{C}}$是非常值的全纯映射,那么$f$的零点个数与极点个数相同(都在计重数意义下).更一般的任取$c\in\widehat{\mathbb{C}}$,那么$f^{-1}(c)$中的元素个数和$c$的选取无关.此为$f$的次数.
+	\item 如果$f:\Sigma_1\to\Sigma_2$是连通黎曼曲面之间的非常值的全纯映射,那么$f^{-1}(q)$的元素个数不依赖于$q\in\Sigma_2$的选取.
+	\item 类似多元微积分中的秩定理,一个常秩光滑映射局部上可以看作坐标投影映射.对于全纯映射,适当取坐标卡可以保证局部上它就是$z\mapsto z^k$的映射,这里$k$称为这个点的次数.
+	\item 给定$\theta\in\mathscr{A}^{0,1}(\Sigma)$,那么$\overline{\partial}f=\theta$有光滑解$f$当且仅当$\int_{\Sigma}\alpha\wedge\theta=0$,$\forall\alpha\in\Omega(\Sigma)$.
+	\begin{proof}
+		
+		充分性.按照Hodge分解,就有$\theta=\overline{\beta}+\overline{\partial}f$,其中$\beta$是全纯的,于是有$0=\int_{\Sigma}\beta\wedge\theta=\int_{\Sigma}\beta\wedge\overline{\beta}+\beta\wedge\overline{\partial}f=\int_{\Sigma}\beta\wedge\overline{\beta}$.但是如果记$\beta=u\mathrm{d}z$,则$\sqrt{-1}\beta\wedge\overline{\beta}=2|u|^2\mathrm{d}x\wedge\mathrm{d}y=\rho^{-1}|u|^2\omega$,所以它的积分是零只能得到$u=0$,也即$\beta=0$,于是$\theta=\overline{\partial}f$.
+	\end{proof}
+    \item 构造非平凡的亚纯函数.设$\Sigma$是黎曼曲面,任取点$p\in\Sigma$,取$p$为中心的坐标邻域$(U,\varphi)$,那么在$\varphi(U)$上我们可以取函数$R_c=\chi(z)\left(c_1/z+c_2/z^2+\cdots+c_m/z^m\right)$,其中$\chi\in\mathrm{C}_c^{\infty}(U)$满足在$p$的附近恒为1,$c_1,\cdots,c_m$是待定的参数.那么$R_c$就是$\Sigma-\{p\}$上的光滑函数.记$\theta_c=-\overline{\partial}R_c$,那么$\theta_c$首先是$\Sigma-\{p\}$上定义良性的$(0,1)$形式,但是在点$p$的附近$\chi\equiv1$,而$c_1/z+\cdots+c_m/z^m$是亚纯函数,它在$\overline{\partial}$下是零,所以这里$\theta_c$是$\Sigma$上的$(0,1)$形式(尽管$R_c$只定义在$\Sigma-\{p\}$上).核心问题是是否存在$f\in\mathrm{C}^{\infty}(\Sigma)$,使得$\overline{\partial}f=\theta$.一旦这存在,那么$f+R$就是$\Sigma-\{p\}$上的全纯函数,而在点$p$的附近有$\theta\equiv0$,导致$f$在点$p$附近是全纯的,而$\chi$在点$p$附近$\equiv1$,就导致在点$p$附近$f+R$表示为一个全纯函数加上$c_1/z+\cdots+c_m/z^m$,于是$f+R$是以点$p$为唯一极点的亚纯函数,并且极点$p$的阶数最多是$m$.只要$c_1,c_2,\cdots,c_m$不全为零,我们构造的亚纯函数就是非平凡的.
+    \item 于是问题归结为什么时候$\overline{\partial}f=\theta$存在光滑解$f$.按照第七条给出的等价描述,如果记$\Omega(\Sigma)$的维数是$g$,取它的一组基$\alpha_1,\cdots,\alpha_g$,那么这里$f$存在当且仅当$\int_{\Sigma}\alpha_i\wedge\theta_c=0,\forall i=1,\cdots,g$成立.但是这是关于$m$个变量$c_1,\cdots,c_m$的齐次线性方程组,所以只要$m\ge g+1$就一定有非零解.换句话讲我们证明了:任取黎曼曲面$\Sigma$上的点$p$,那么存在$\Sigma$上的非平凡的亚纯函数$f$,它只在点$p$为极点,并且极点的阶数$\le g+1$.
+    \item 推论.亏格为零的黎曼曲面$\Sigma$是双全纯等价于黎曼球面$\widehat{\mathbb{C}}$的.因为按照上一条结论,$\Sigma$上存在亚纯函数$f$,使得它存在单极点$p$,并且阶数为1.我们之前解释过$\forall c\in\widehat{C}$,全纯映射$f:\Sigma\to\widehat{\mathbb{C}}$,那么$f^{-1}(c)$中元素个数和$c$的选取无关,所以这里$f$是双射.但是双射全纯映射的逆也是全纯的.
+\end{enumerate}
+\subsection{除子}
+
+黎曼曲面$\Sigma$上的一个除子是指一个函数$D:\Sigma\to\mathbb{Z}$,使得$D$只在有限个点上不取零.或者等价的讲除子是$\Sigma$上的点作为基生成的自由阿贝尔群中的元素.如果$f:\Sigma\to\widehat{\mathbb{C}}$是不恒为零的亚纯函数,那么它定义了一个主除子$(f)$为,$p\in\Sigma\mapsto\mathrm{ord}_p(f)$.这里$\mathrm{ord}_p(f)$是$p$作为$f$的零点或者极点的次数,如果是零点符号则取正,如果是极点符号则取负,如果都不是则取零.另外我们约定恒取零的映射,它在每个点的阶数都是$+\infty$.如果一个除子$D$的所有取值都是$\ge0$的,就记作$D\ge0$,也称$D$是有效除子(effective).如果$D_1,D_2$满足$D_1-D_2\ge0$,我们也记作$D_1\ge D_2$.
+\begin{enumerate}
+	\item 一个除子$D=m_1P_1+\cdots+m_rP_r$的次数记作$\deg D=m_1+\cdots+m_r$.于是对主除子总有$\deg(f)=0$,因为我们解释过亚纯函数的零点和极点在计重数意义下个数是相同的.
+	\item 黎曼曲面上的亚纯1形式指的是在复坐标卡$(U,z)$上总可以表示为$\theta=f(z)\mathrm{d}z$,其中$f(z)$是$U$上的亚纯函数.并且如果复坐标卡$(V,w)$和$(U,z)$有交,那么这两个表示$f(z)\mathrm{d}z$和$g(w)\mathrm{d}w$要在相交的部分满足$g(w)w'(z)=f(z)$.
+	\item 于是对亚纯1形式$\theta$,对每个点$p\in\Sigma$,可以定义$\mathrm{ord}_p(\theta)$为,记$\theta$在点$p$附近的表示是$f(z)\mathrm{d}z$,就定义为$f(z)$关于点$p$的次数,这个定义不依赖于局部表示的选取(因为不同表示相差的$w'(z)$是过渡映射的导数,当然不是零).我们定义$\theta$生成的除子是$p\mapsto\mathrm{ord}_p(\theta)$.后面会证明有$\deg(\theta)=2g-2$,其中$g$是$\Sigma$的亏格.
+\end{enumerate}
+
+Riemann-Roch定理.设$D$是除子.定义如下两个复线性空间.
+\begin{itemize}
+	\item 记$L(D)=\{f\text{是亚纯函数}\mid (f)\ge -D\}$.按照我们的约定这个集合包含了恒取零的映射.
+	\item 记$\Omega(D)=\{\theta\text{是亚纯1形式}\mid (\theta)\ge D\}$.
+\end{itemize}
+\begin{enumerate}
+	\item 如果两个除子$D_1\sim D_2$,此即存在亚纯函数$f$使得$D_1-D_2=(f)$.那么有$L(D_1)\cong L(D_2)$和$\Omega(D_1)\cong\Omega(D_2)$,就是对$L(D_1)$或者$\Omega(D_1)$中的元素乘以$f$.
+	\item 如果$K=(\theta)$,其中$\theta$是亚纯1形式(这样的$K$称为典范除子),那么有$L(D)\cong\Omega(K-D)$和$\Omega(D)\cong L(K-D)$.第一个同构就是把亚纯函数$f$映射为亚纯1形式$f\theta$,第二个同构是把亚纯1形式$\alpha$映射为$\alpha/\theta$.
+	\item 对有效除子$D$总有:
+	$$\dim L(D)-\dim\Omega(D)=1-g+\deg D$$
+	\begin{proof}
+		
+		如果$D=0$,那么$L(D)$由常值函数构成,于是$\dim L(D)=1$.而$\Omega(D)$就由全纯函数构成,于是$\dim\Omega(D)=g$.此时等式成立.
+		
+		\qquad
+		
+		设$D$是有效除子,有$D=m_1P_1+\cdots+m_kP_k$,其中$m_1,\cdots,m_k>0$,记$d=\deg D$.在每个点$p_i$处取坐标邻域$(U_i,z_i)$.构造$R_i=\chi_i(z_i)\left(c_1^{(i)}/z_i+\cdots+c_{m_i}^{(i)}/z_i^{m_i}\right)$,那么$R_i\in\mathrm{C}^{\infty}(\Sigma-\{p_i\})$.那么每个$-\overline{\partial}R_i$都是$\Sigma$上的$(0,1)$形式(在每个$p_i$都有定义,因为取零,尽管$R_i$在$p_i$上没有定义),记$\theta_c=\sum_i(-\overline{\partial}R_i)\in\mathscr{A}^{(0,1)}(\Sigma)$.那么存在光滑解$f$使得$\overline{\partial}f=\theta$当且仅当$f+\sum_iR_i\in L(D)$.于是有$\dim L(D)=1+\dim\{c\in\mathbb{C}^d\mid\int_{\Sigma}\alpha_i\wedge\theta_c=0.,i=1,\cdots,g\}$.
+		
+		\qquad
+		
+		我们有$\int_{\Sigma}\alpha\wedge\theta_c=-\sum_i\int_{\Sigma}\alpha\wedge\overline{\partial}R_i=\sum_i\int_{\Sigma}\mathrm{d}(R_i\alpha)=-\sum_i\int_{B_i}R_i\alpha$.其中$B_i$是$p_i$的足够小的附近,那么$R_i=c_1^{(i)}/z+\cdots+c_{m_i}^{(i)}/z^{m_i}$,并且$\alpha$是一个全纯1形式,可记作$\alpha=(s_0+s_1z+\cdots+\cdots)\mathrm{d}z$.于是上式$=-\sum_i(c_1^{(i)}s_0+c_2^{(i)}s_1+\cdots+c_{m_i}^{(i)}s_{m_i-1})$,把这个结果记作$\mathrm{Res}(\alpha R_c)$.下面构造$\varphi:\mathbb{C}^d\to\mathbb{C}^g$为$c\mapsto\left(\mathrm{Res}(R_c\alpha_1),\cdots,\mathrm{Res}(R_c\alpha_g)\right)$.于是我们之前的$\dim\{c\in\mathbb{C}^d\mid\int_{\Sigma}\alpha_i\wedge\theta_c=0.,i=1,\cdots,g\}=\dim\ker\varphi$.于是$\dim L(D)=1+\dim\ker\varphi=1+d-\dim\mathrm{im}\varphi$.进一步有$\dim\mathrm{im}\varphi=g-\dim(\mathrm{im}\varphi)^{\perp}$,这里是取$\mathbb{C}^g$上的典范Hermitian内积定义的正交补.最后唯一要说明的是$\mathrm{im}\varphi^{\perp}\cong\Omega(D)$.但是$\mathrm{im}\varphi^{\perp}$中的元素要满足$\sum_i(s_0c_1^{(i)}+s_1c_2^{(i)}+\cdots+s_{m_i-1}c_{m_i}^{(i)})$对任意的$c_{j}^{(i)}$都要为零,这迫使$s_0=s_1=\cdots=s_{m_i-1}=0$,也即$\alpha$在$p_i$处的阶数$\ge m_i$.于是$\dim(\mathrm{im}\varphi)^{\perp}=\dim\{\alpha\mid\mathrm{ord}_{p_i}\alpha\ge m_i,\forall i\}=\dim\Omega(D)$.这就完成证明.
+	\end{proof}
+    \item 推论.如果$\theta$是亚纯1形式,那么$\deg\theta=2g-2$.
+    \begin{proof}
+    	
+    	如果$g=0$,黎曼曲面就是$\widehat{\mathbb{C}}$,其上的亚纯函数就只是有理函数.任取一个亚纯1形式$\theta$,取$\widehat{\mathbb{C}}$的两个坐标卡为$U_1=\mathbb{C}$,$U_2=(\widehat{\mathbb{C}}-\{0\})\cup\{\infty\}$.记$\theta$在$U_1$和$U_2$上分别可以表示为$f(z)\mathrm{d}z$和$g(w)\mathrm{d}w$,这两个坐标卡的坐标变换是$w=1/z$.并且$f,g$都是有理函数,那么有$f(z)=g(w)\left(-1/z^2\right)$,$f$在0处的阶数是$\deg f$,$g$在$\infty$处的阶数是$-\deg g$,于是$\deg f+\deg g=-2$得到$\theta$的次数是-2.
+    	
+    	\qquad
+    	
+    	下面设$g\ge1$,由于$g$是$\Omega(\Sigma)$的维数,此时$\Sigma$上就存在非平凡的全纯1形式$\alpha$,于是$\theta/\alpha$是亚纯函数,它的次数就是零,于是$0=\deg(\theta/\alpha)=\deg(\theta)-\deg(\alpha)$.所以问题归结为对全纯1形式$\alpha$有$\deg(\alpha)=2g-2$.此时$K=(\alpha)$是有效除子,由RR定理就有$\dim L(K)-\dim\Omega(K)=1-g+\dim K$.按照第二条,这里$\Omega(K)=L(0)$只由常值函数构成所以维数是1,$L(K)=\Omega(0)$由全纯函数构成所以维数是$g$,于是得到$\deg K=2g-2$.
+    \end{proof}
+    \item 如果$D$等价于一个有效除子,那么$D$满足RR定理.如果存在一个典范除子$K$使得$K-D$是有效的,那么$D$满足RR定理.第二件事是因为:
+    \begin{align*}
+        \dim L(D)-\dim\Omega(D)&=\dim\Omega(K-D)-\dim L(K-D)\\&=-(1-g+\deg(K-D))\\&=-1+g-\deg K+\deg D\\&=1-g+\deg D
+    \end{align*}
+    \item Riemann-Roch定理.对黎曼曲面$\Sigma$上的任意除子$D$,总有:
+    $$\dim L(D)-\dim\Omega(D)=1-g+\deg D$$
+    \begin{proof}
+    	
+    	仅剩的情况是对任意典范除子$K$,如果$D$和$K-D$都不等价于有效除子.那么此时$L(D)=\{0\}$,因为$L(D)$中如果存在非平凡的$f$,那么$(f)+D\ge0$,就导致$D$和某个有效除子等价.同理的$\Omega(D)=\{0\}$,因为如果$\Omega(D)$中存在非平凡的$K=(\theta)\ge D$,那么$K-D$也是有效除子.所以为证明Riemann-Roch定理,归结为证明条件下有$\deg D=g-1$.我们记$D=D_1-D_2$,其中$D_1,D_2$都是有效除子.那么$\deg D=\deg D_1-\deg D_2$.
+    	
+    	\qquad
+    	
+    	我们先证明$\deg D\le g-1$,若否可设$\deg D\ge g$,则$\deg D_1=\deg D+\deg D_2\ge g+\deg D_2$.按照$D_1$满足RR定理,有$\dim L(D_1)=\dim\Omega(D_1)+1-g+\dim D_1\ge1-g+g+\deg D_2$.于是我们可以选取$f\in L(D_1)$非零,使得如果记$D_2=\sum n_jP_j$,那么$\mathrm{ord}_{P_j}(f)\ge n$.于是有$(f)\ge -D$(因为$D_1$和$D_2$包含的系数非零的点是不交的,所以从$(f)\ge -D_1$和$(f)\ge D_2$可推出$(f)\ge -D$).进而有$D$等价于某个有效除子.这个矛盾导致$\deg D\le g-1$.
+    	
+    	\qquad
+    	
+    	再把上述结论用在$K-D$上,就得到$\deg(K-D)\le g-1$,但是$\deg K=2g-2$,就得到$\deg D\ge g-1$.于是有$\deg D=g-1$.完成证明.
+    \end{proof}
+\end{enumerate}
+
+\subsection{title}
+
+\begin{enumerate}
+	\item 设$V$是欧氏空间,取它的一个近复结构$J$,定义和它伴随的2形式为$\omega=\langle J-.-\rangle$.我们有复化$V\otimes_{\mathbb{R}}\mathbb{C}$的分解为$V^{1,0}\oplus V^{0,1}$,其中$V^{1,0}=\{X-\sqrt{-1}JX\mid X\in V\}$和$V^{0,1}=\{X+\sqrt{-1}X\mid X\in V\}$.并且$J$在$V^{1,0}$上的限制就是$\sqrt{-1}$,在$V^{0,1}$上的限制就是$-\sqrt{-1}$.我们再把交错形式做复化$\wedge_{\mathbb{C}}^k(V)=\wedge^k(V)\otimes_{\mathbb{R}}\mathbb{C}$.那么$\wedge_{\mathbb{C}}^k(V)$中的元$\alpha$就可以复线性延拓到$V\otimes_{\mathbb{R}}\mathbb{C}$上,也即$\alpha(X+\sqrt{-1}Y,Z)=\alpha(X,Z)+\sqrt{-1}\alpha(Y,Z)$.
+	\item 我们之前在$\wedge^k(V)$上定义过一个内积.它诱导的在复化$\wedge_{\mathbb{C}}^k(V)$上的Hermitian内积为$\langle\alpha,\beta\rangle_{\mathbb{C}}=\langle\alpha,\overline{\beta}\rangle=\frac{\alpha\wedge\star\overline{\beta}}{\Omega}$.
+	\item 我们可以选取实空间$V$上的正交基为$\{e_1,f_1=Je_1,\cdots,e_m,f_m=Je_m\}$.如果记$X_i=\frac{e_i-\sqrt{-1}f_i}{\sqrt{2}}$和$\overline{X_i}=\frac{e_i+\sqrt{-1}f_i}{\sqrt{2}}$.那么$\{X_1,\cdots,X_m\}$是$V^{1,0}$的一组基,而$\{\overline{X_1},\cdots,\overline{X_m}\}$是$V^{0,1}$的一组基.此时有$\omega=\sum_{i=1}^ne^i\wedge f^i$,体积形式是$\Omega=e^1\wedge f^1\wedge\cdots\wedge e^m\wedge f^m$.
+	\item 设$\alpha,\beta\in\wedge_{\mathbb{C}}^k(V)$,那么$\langle\alpha,\beta\rangle_{\mathbb{C}}=\frac{1}{k!}\sum_{i_1,\cdots,i_k\in\{1,\cdots,m,\overline{1},\cdots,\overline{m}\}}\alpha(X_{i_1},\cdots,X_{i_k})\overline{\beta(X_{i_1},\cdots,X_{i_k})}$.
+	\begin{proof}
+		
+		如果约定$f_1=e_{m+1},\cdots,f_m=e_{2m}$,结合$e_i=\frac{X_i+\overline{X_i}}{\sqrt{2}}$和$f_i=\frac{\sqrt{-1}(X_i-\overline{X_i})}{\sqrt{2}}$,那么有:
+		\begin{align*}
+			\langle\alpha,\beta\rangle_{\mathbb{C}}&=\langle\alpha,\overline{\beta}\rangle\\&=\frac{1}{k!}\sum_{1\le A_1,\cdots,A_k\le 2m}\alpha_{A_1,\cdots,A_k}\overline{\beta_{A_1,\cdots,A_k}}\\&=\frac{1}{k!}\sum_{1\le A_2,\cdots,A_k\le 2m}\sum_{i=1}^m\left(\alpha(e_i,e_{A_2},\cdots,e_{A_k})\overline{\beta(e_i,e_{A_2},\cdots,e_{A_k})}\right.\\&+\left.\alpha(f_i,e_{A_2},\cdots,e_{A_k})\overline{\beta(f_i,e_{A_2},\cdots,e_{A_k})}\right)\\&=\frac{1}{2k!}\sum_{1\le A_2,\cdots,A_k\le 2m}\sum_{i=1}^m\left(\alpha(X_i+\overline{X_i},e_{A_2},\cdots,e_{A_k})\overline{\beta(X_i+\overline{X_i},e_{A_2},\cdots,e_{A_k})}\right.\\&+\left.\alpha(X_i-\overline{X_i},e_{A_2},\cdots,e_{A_k})\overline{\beta(X_i-\overline{X_i},e_{A_2},\cdots,e_{A_k})}\right)\\&=\frac{1}{k!}\sum_{1\le A_2,\cdots,A_k\le 2m}\sum_{i=1}^m\left(\alpha(X_i,e_{A_2},\cdots,e_{A_k})\overline{\beta(X_i,e_{A_2},\cdots,e_{A_k})}\right.\\&+\left.\alpha(\overline{X_i},e_{A_2},\cdots,e_{A_k})\overline{\beta(\overline{X_i},e_{A_2},\cdots,e_{A_k})}\right)\\&=\cdots\\&=\frac{1}{k!}\sum_{i_1,\cdots,i_k\in\{1,\cdots,m,\overline{1},\cdots,\overline{m}\}}\alpha(X_{i_1},\cdots,X_{i_k})\overline{\beta(X_{i_1},\cdots,X_{i_k})}
+		\end{align*}
+	\end{proof}
+    \item 我们有$\wedge_{\mathbb{C}}^k=\oplus_{p+q=k}\wedge^{p,q}(V)$.如果记$\theta^i=\frac{e^i+\sqrt{-1}f^i}{\sqrt{2}}$和$\overline{\theta^i}=\frac{e^i-\sqrt{-1}f^i}{\sqrt{2}}$.那么$\alpha\in\wedge^{p,q}(V)$当且仅当$\alpha=\sum_{|I|=p,|J|=q}c_{IJ}\theta^I\wedge\overline{\theta}^J$.
+    \item 推论.如果$\alpha\in\wedge^{p,q}(V)$,那么:
+    $$\langle\alpha,\beta\rangle_{\mathbb{C}}=\sum_{\substack{i_1<\cdots<i_p\\j_1<\cdots<j_q}}\alpha(X_{i_1},\cdots,X_{i_p},\overline{X_{j_1}},\cdots,\overline{X_{j_q}})\overline{\beta(X_{i_1},\cdots,X_{i_p},\overline{X_{j_1}},\cdots,\overline{X_{j_q}})}$$
+
+
+    
+    \item 给定$k$形式$\alpha$,对切向量$X$,定义收缩$X\downarrow\alpha$是一个$k-1$形式,为$(X_1,\cdots,X_{k-1})\mapsto\alpha(X,X_1,\cdots,X_{k-1})$,它是外积的对偶映射,即$\langle \mathrm{d}X\wedge\alpha,\beta\rangle_{\mathbb{C}}=\langle\alpha,X\downarrow\beta\rangle_{\mathbb{C}}$.那么有$\Lambda(\alpha)=-\sqrt{-1}\overline{X_i}\downarrow(X_i\downarrow\alpha)$.
+    \begin{proof}
+    	\begin{align*}
+    		\langle L\alpha,\beta\rangle_{\mathbb{C}}&=\langle\omega\wedge\alpha,\beta\rangle_{\mathbb{C}}\\&=\langle\sqrt{-1}\theta^i\wedge\overline{\theta^i}\wedge\alpha,\beta\rangle_{\mathbb{C}}\\&=\sqrt{-1}\langle\overline{\theta^i}\wedge\alpha,X_i\downarrow\beta\rangle_{\mathbb{C}}\\&=\sqrt{-1}\langle\alpha,\overline{X_i}\downarrow(X_i\downarrow\beta)\rangle_{\mathbb{C}}\\&=\langle\alpha,-\sqrt{-1}\overline{X_i}\downarrow(X_i\downarrow\beta)\rangle_{\mathbb{C}}
+    	\end{align*}
+    \end{proof}
+    \item 定义$H:\wedge_{\mathbb{C}}^k(V)\to\wedge_{\mathbb{C}}^k(V)$为$(k-m)\mathrm{id}$.断言$[H,L]=2L$,$[H,\Lambda]=-2\Lambda$和$[L,\Lambda]=H$.这里$[-,-]$是李括号.
+\end{enumerate}
+
+复流形上的Hodge理论.
+\begin{enumerate}
+	\item 设$(M^m,J)$是复流形,其中$J$是典范近复结构,记$g$是Hermitian度量,记$\omega=g(J-,-)$是伴随的2形式.有$\mathscr{A}_{\mathbb{C}}^k(M)=\oplus_{p+q=k}\mathscr{A}^{p,q}(M)$.依旧在$\mathscr{A}_{\mathbb{C}}^k(M)$上定义内积$\langle\alpha,\beta\rangle_0=\int_M\langle\alpha,\beta\rangle_{\mathbb{C}}\Omega=\int_M\alpha\wedge\star\overline{\beta}$.记$\overline{\partial}:\mathscr{A}^{p,q}(M)\to\mathscr{A}^{p,q+1}(M)$和$\partial:\mathscr{A}^{p,q}(M)\to\mathscr{A}^{p+1,q}(M)$.它们关于内积$\langle-,-\rangle_0$的对偶映射分别为$\partial^*$和$\overline{\partial}^*$.进而定义$\square_{\overline{\partial}}=\overline{\partial}\overline{\partial}^*+\overline{\partial}^*\overline{\partial}:\mathscr{A}^{p,q}(M)\to\mathscr{A}^{p,q}(M)$.进而定义调和形式$\mathscr{H}^{p,q}_{\overline{\partial}}(M)=\{\alpha\in\mathscr{A}^{p,q}(M)\mid\square_{\overline{\partial}}\alpha=0\}=\{\alpha\in\mathscr{A}^{p,q}\mid\overline{\partial}\alpha=0,\overline{\partial}^*\alpha=0\}$.
+	\item 我们有Hodge理论基本定理:
+	\begin{enumerate}
+		\item $\mathscr{H}_{\overline{\partial}}^{p,q}(M)$是有限维空间.
+		\item $\mathscr{A}^{p,q}(M)=\mathscr{H}_{\overline{\partial}}^{p,q}(M)\oplus\overline{\partial}\mathscr{A}^{p,q-1}(M)\oplus\overline{\partial}^*\mathscr{A}^{p,q+1}(M)$
+	\end{enumerate}
+    \item 推论.有$\mathrm{H}^{p,q}(M)\cong\mathscr{H}_{\overline{\partial}}^{p,q}(M)$,其中左侧是Dolbeault上同调.换句话讲Dolbeault上同调中每个同调类中唯一存在一个调和形式.
+    \item 在一般情况下复流形的拓扑和上同调看不出联系,如果考虑K\"ahler情况则有很好的联系.
+\end{enumerate}
+
+设$(M,J)$是近复流形,设$g$是一个Hermitian度量.那么$g$就会诱导Levi-Civita联络,它是$\mathrm{T}M$上的唯一的联络,满足$\nabla_XY-\nabla_YX=[X,Y]$,并且$X\langle Y,Z\rangle=\langle\nabla_XY,Z\rangle+\langle Y,\nabla_XZ\rangle$.
+\begin{enumerate}
+	\item 对任意向量场$X,Y,Z$,有$2\langle(\nabla_XJ)Y,Z\rangle=\mathrm{d}\omega(X,Y,Z)-\mathrm{d}\omega(X,JY,JZ)-\omega(X,\tau(Y,Z))$,这里$\tau$是挠张量,即$\tau(Y,Z)=[JY,JZ]-[Y,Z]-J[Y,JZ]-J[JY,Z]$.
+\end{enumerate}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
