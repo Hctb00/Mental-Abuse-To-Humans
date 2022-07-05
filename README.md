@@ -1,2 +1,2 @@
 # Mental-Abuse-To-Humans
-This is personal notes for mathematics
+This is a personal math note.
